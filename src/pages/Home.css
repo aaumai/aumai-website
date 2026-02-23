@@ -1,0 +1,96 @@
+/* ==================== AI-Accelerated Engineering Section ==================== */
+
+.home-ai-section {
+  background: var(--slate-50);
+}
+
+.home-advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.home-advantage-card {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--slate-200);
+  border-top: 3px solid var(--adv-color);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.home-advantage-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.home-advantage-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--adv-color) 12%, transparent);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+}
+
+.home-advantage-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--adv-color);
+}
+
+.home-advantage-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  font-family: var(--font-display);
+  margin: 0 0 0.75rem;
+}
+
+.home-advantage-desc {
+  font-size: 0.95rem;
+  color: var(--slate-500);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.home-ai-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.home-ai-cta .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-ai-cta .btn svg {
+  transition: transform var(--transition-base);
+}
+
+.home-ai-cta .btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 1024px) {
+  .home-advantages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-advantages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-advantage-card {
+    padding: 2rem 1.5rem;
+  }
+}

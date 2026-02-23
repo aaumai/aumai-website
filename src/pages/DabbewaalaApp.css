@@ -1,0 +1,476 @@
+/* Dabbewaala Landing Page Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+.dw-page {
+  font-family: 'Poppins', sans-serif;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.dw-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header */
+.dw-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.dw-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.dw-nav-logo {
+  height: 60px;
+  width: auto;
+}
+
+.dw-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.dw-nav-links a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.dw-nav-links a:hover {
+  color: #FF6B00;
+}
+
+/* Buttons */
+.dw-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.dw-btn-primary {
+  background: #FF6B00;
+  color: white;
+}
+
+.dw-btn-primary:hover {
+  background: #e65c00;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.3);
+}
+
+.dw-btn-secondary {
+  background: #1a1a1a;
+  color: white;
+}
+
+.dw-btn-secondary:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.dw-btn-large {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+.dw-btn-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Hero Section */
+.dw-hero {
+  padding: 140px 24px 80px;
+  background: linear-gradient(135deg, #FFF5EB 0%, #FFE8D6 100%);
+}
+
+.dw-hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.dw-hero-text h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.dw-highlight {
+  color: #FF6B00;
+}
+
+.dw-hero-text p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+.dw-hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dw-hero-image img {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Features Section */
+.dw-features {
+  padding: 100px 24px;
+  background: white;
+}
+
+.dw-section-title {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.dw-features-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.dw-feature-card {
+  text-align: center;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background: #f9f9f9;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dw-feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.dw-feature-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #FF6B00, #FF8C00);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dw-feature-icon svg {
+  width: 32px;
+  height: 32px;
+  fill: white;
+}
+
+.dw-feature-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.dw-feature-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* How It Works */
+.dw-how-it-works {
+  padding: 100px 24px;
+  background: #FFF5EB;
+}
+
+.dw-steps {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.dw-step {
+  text-align: center;
+  padding: 40px 32px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  flex: 1;
+  max-width: 280px;
+}
+
+.dw-step-number {
+  width: 56px;
+  height: 56px;
+  background: #FF6B00;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.dw-step h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dw-step p {
+  font-size: 14px;
+  color: #666;
+}
+
+.dw-step-arrow {
+  display: flex;
+  align-items: center;
+}
+
+.dw-step-arrow svg {
+  width: 32px;
+  height: 32px;
+  fill: #FF6B00;
+}
+
+/* Download Section */
+.dw-download {
+  padding: 100px 24px;
+  background: linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%);
+  color: white;
+}
+
+.dw-download-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dw-download-content h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.dw-download-content p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.dw-download-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.dw-store-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  background: white;
+  color: #1a1a1a;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dw-store-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.dw-store-btn-icon {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
+.dw-store-btn-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.dw-store-btn-text small {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+}
+
+.dw-store-btn-text strong {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Footer */
+.dw-footer {
+  padding: 60px 24px 24px;
+  background: #1a1a1a;
+  color: white;
+}
+
+.dw-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.dw-footer-logo {
+  height: 48px;
+  width: auto;
+  margin-bottom: 16px;
+}
+
+.dw-footer-brand p {
+  color: #999;
+  font-size: 14px;
+}
+
+.dw-footer-links h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.dw-footer-links a,
+.dw-footer-links p {
+  display: block;
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+
+.dw-footer-links a:hover {
+  color: #FF6B00;
+}
+
+.dw-footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid #333;
+  color: #666;
+  font-size: 14px;
+}
+
+.dw-footer-bottom a {
+  color: #FF6B00;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .dw-hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .dw-hero-text h1 {
+    font-size: 36px;
+  }
+
+  .dw-hero-buttons {
+    justify-content: center;
+  }
+
+  .dw-hero-image {
+    order: -1;
+  }
+
+  .dw-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dw-steps {
+    flex-direction: column;
+  }
+
+  .dw-step-arrow {
+    transform: rotate(90deg);
+  }
+
+  .dw-footer-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .dw-footer-logo {
+    margin: 0 auto 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dw-nav-links {
+    display: none;
+  }
+
+  .dw-hero {
+    padding: 100px 24px 60px;
+  }
+
+  .dw-hero-text h1 {
+    font-size: 28px;
+  }
+
+  .dw-hero-text p {
+    font-size: 16px;
+  }
+
+  .dw-section-title {
+    font-size: 28px;
+  }
+
+  .dw-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-download-content h2 {
+    font-size: 28px;
+  }
+}

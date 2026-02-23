@@ -1,0 +1,56 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import ServicesPage from './pages/ServicesPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import ProjectsPage from './pages/ProjectsPage';
+import CaseStudiesPage from './pages/CaseStudiesPage';
+import CaseStudyDetail from './pages/CaseStudyDetail';
+import InsightsPage from './pages/InsightsPage';
+import InsightDetail from './pages/InsightDetail';
+import ShippingPolicy from './pages/ShippingPolicy';
+import TermsConditions from './pages/TermsConditions';
+import CancellationRefund from './pages/CancellationRefund';
+import DabbewaalaApp from './pages/DabbewaalaApp';
+import './App.css';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* Standalone page without header/footer */}
+        <Route path="/dabbewaala" element={<DabbewaalaApp />} />
+
+        {/* Main site with header/footer */}
+        <Route
+          path="*"
+          element={
+            <div className="App">
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/case-studies" element={<CaseStudiesPage />} />
+                <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+                <Route path="/insights" element={<InsightsPage />} />
+                <Route path="/insights/:slug" element={<InsightDetail />} />
+                <Route path="/shipping" element={<ShippingPolicy />} />
+                <Route path="/terms" element={<TermsConditions />} />
+                <Route path="/refund" element={<CancellationRefund />} />
+              </Routes>
+              <Footer />
+            </div>
+          }
+        />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
