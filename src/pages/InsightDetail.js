@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import blogPosts from '../data/blogPosts';
+import BlogComments from '../components/BlogComments';
 import './Page.css';
 import './InsightsPage.css';
 
@@ -216,6 +217,9 @@ const InsightDetail = () => {
               </span>
             ))}
           </div>
+
+          {/* Comments */}
+          <BlogComments slug={slug} />
         </div>
       </article>
 
