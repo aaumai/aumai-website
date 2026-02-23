@@ -15,20 +15,24 @@ import ShippingPolicy from './pages/ShippingPolicy';
 import TermsConditions from './pages/TermsConditions';
 import CancellationRefund from './pages/CancellationRefund';
 import DabbewaalaApp from './pages/DabbewaalaApp';
+import AumaiAnalytics from './pages/AumaiAnalytics';
+import Analytics from './components/Analytics';
 import './App.css';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Standalone page without header/footer */}
+        {/* Standalone pages without header/footer */}
         <Route path="/dabbewaala" element={<DabbewaalaApp />} />
+        <Route path="/aumaianalytics" element={<AumaiAnalytics />} />
 
         {/* Main site with header/footer */}
         <Route
           path="*"
           element={
             <div className="App">
+              <Analytics />
               <Header />
               <Routes>
                 <Route path="/" element={<Home />} />
