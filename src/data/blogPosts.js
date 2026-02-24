@@ -12,13 +12,14 @@ export const BLOG_CATEGORIES = [
 const blogPosts = [
   {
     slug: '837-to-fhir-r4-mapping-definitive-guide',
-    title: 'From X12 837 to FHIR R4: The Definitive Mapping Guide for Payer Engineering Teams',
+    title: 'From X12 837 & 835 to FHIR R4: The Definitive Mapping Guide for Payer Engineering Teams',
     date: '2026-02-24',
     author: 'Jayesh Chaudhari',
     authorRole: 'Founder & CTO',
     category: 'FHIR & Interoperability',
     tags: [
       '837P',
+      '835 ERA',
       'FHIR R4',
       'X12 EDI',
       'CARIN C4BB',
@@ -29,22 +30,24 @@ const blogPosts = [
       'Payer Engineering',
       'DaVinci',
       'Clinical Data Warehouse',
+      'CAS Adjustments',
+      'Payment Posting',
     ],
     excerpt:
-      'A complete technical mapping from X12 837P segments and loops to FHIR R4 resources. Covers the 837 file structure, every key segment, and shows exactly how each element maps to FHIR Claim, Patient, Practitioner, Coverage, and Condition resources — with real code examples.',
-    readingTime: '30 min read',
+      'The complete technical mapping from X12 837P claim submission AND 835 remittance adjudication to FHIR R4. Covers every segment — CLM, SV1, HI for claims and CLP, SVC, CAS for payments, copay, coinsurance, deductible, and denials — with real code examples showing the full 837+835 to C4BB ExplanationOfBenefit transformation.',
+    readingTime: '45 min read',
     content: [
       // === OPENING ===
       {
         type: 'paragraph',
-        text: 'The X12 837 Professional claim is the single most important electronic transaction in US healthcare billing. Every payer in the country receives millions of them. With CMS-0057-F now requiring payers to expose claims data as FHIR R4, the transformation layer — mapping X12 837 loops, segments, and elements to FHIR resources — is where most implementations hit the wall. This guide gives you the complete mapping, segment by segment, element by element, for free.',
+        text: 'The X12 837 Professional claim is the single most important electronic transaction in US healthcare billing, and the 835 Electronic Remittance Advice is how payers respond with adjudication results — payments, denials, copay, coinsurance, deductible, and every adjustment reason. With CMS-0057-F now requiring payers to expose claims data as FHIR R4, the transformation layer — mapping both 837 submission data AND 835 remittance data to FHIR resources — is where most implementations hit the wall. This guide gives you the complete mapping for both transactions, segment by segment, element by element, for free.',
       },
       {
         type: 'stats',
         items: [
           { value: '4B+', label: '837 Claims Filed Annually in the US', color: '#3b82f6' },
           { value: '130+', label: 'Segments in a Single 837P Transaction', color: '#f43f5e' },
-          { value: '9', label: 'FHIR R4 Resources Mapped', color: '#10b981' },
+          { value: '837+835', label: 'Both Transactions Mapped', color: '#10b981' },
           { value: 'Jan 2027', label: 'CMS-0057-F Compliance Deadline', color: '#f59e0b' },
         ],
       },
@@ -56,7 +59,7 @@ const blogPosts = [
         type: 'callout',
         variant: 'info',
         title: 'About the Author',
-        text: 'Jayesh Chaudhari is an ex-X12 EDI specialist with hands-on production experience across 837I, 837P, 835, 270, 271, 277, and more. He has built a complete 837P video course on YouTube with element-level breakdowns of every loop and segment. Watch the full playlist for deep-dive walkthroughs alongside this mapping guide.',
+        text: 'Jayesh Chaudhari is an ex-X12 EDI specialist with hands-on production experience across 837I, 837P, 835, 270, 271, 277, and more — including building electronic remittance (835) import and payment posting systems that processed millions of transactions at the service level. He has built a complete 837P video course on YouTube with element-level breakdowns of every loop and segment. Watch the full playlist for deep-dive walkthroughs alongside this mapping guide.',
       },
 
       // === WHY THIS MATTERS ===
@@ -328,6 +331,185 @@ const blogPosts = [
           { title: '837 + 835 Merged', desc: 'ETL pipeline joins claim submission data (837) with adjudication results (835) by claim ID / patient control number.', color: '#f43f5e' },
           { title: 'FHIR EOB Created', desc: 'Merged data transformed into C4BB ExplanationOfBenefit with both claim line items and adjudication detail per line.', color: '#10b981' },
           { title: 'Served via Patient Access API', desc: 'EOB available through FHIR R4 API for patient apps, Provider Access bulk export, and Payer-to-Payer exchange.', color: '#06b6d4' },
+        ],
+      },
+
+      // === 835 REMITTANCE DEEP DIVE ===
+      { type: 'heading', text: 'The 835 Remittance: Understanding What the Payer Sends Back' },
+      {
+        type: 'paragraph',
+        text: 'The 837 tells you what was billed. The 835 (Electronic Remittance Advice / ERA) tells you what the payer actually paid, denied, and adjusted — at the service line level. Every EOB data point your patients see (copay, coinsurance, deductible, allowed amount, paid amount, denial reasons) comes from the 835. If the 837 is the claim submission, the 835 is the adjudication response. You cannot build a compliant C4BB ExplanationOfBenefit without mapping the 835.',
+      },
+      {
+        type: 'callout',
+        variant: 'info',
+        title: 'About This Section',
+        text: 'This 835 mapping section is based on our hands-on production experience building electronic remittance import systems — parsing every CLP, SVC, CAS, and AMT segment, handling payment posting at the service level, coordinating primary/secondary/tertiary payments, and managing the edge cases that break implementations. The Allscripts HealthMatics platform processed millions of 835 transactions using this exact segment structure.',
+      },
+
+      // === 835 FILE STRUCTURE ===
+      { type: 'subheading', text: '835 File Structure: The Loop Hierarchy' },
+      {
+        type: 'diagram',
+        title: '835 ERA Loop Hierarchy — From Envelope to Service Adjustment',
+        layers: [
+          { label: 'ISA / IEA', desc: 'Interchange envelope — same structure as 837. Payer is the sender, provider/clearinghouse is the receiver.', color: '#06b6d4' },
+          { label: 'GS / GE', desc: 'Functional group — transaction type HP (Health Care Claim Payment/Advice), version 005010X221A1', color: '#3b82f6' },
+          { label: 'ST / SE', desc: 'Transaction set header — 835 document boundary', color: '#8b5cf6' },
+          { label: 'Loop 1000A/B', desc: 'Payer Identification (N1-PR) and Payee Identification (N1-PE) — who paid and who received', color: '#10b981' },
+          { label: 'Loop 2000', desc: 'Header Number — BPR (payment info: amount, method, bank routing), TRN (check/EFT trace number)', color: '#f59e0b' },
+          { label: 'Loop 2100 (CLP)', desc: 'Claim Payment Information — claim-level status, charged amount, paid amount, patient responsibility, claim ID, filing indicator', color: '#f43f5e' },
+          { label: 'Loop 2110 (SVC)', desc: 'Service Payment Information — service-level procedure code, charged, paid, units. CAS segments here carry adjustments (CO, PR, OA, PI).', color: '#f43f5e' },
+          { label: 'PLB', desc: 'Provider-level balance adjustments — withholdings, interest, late filing fees, capitation. NOT claim-specific.', color: '#ec4899' },
+        ],
+      },
+
+      // === KEY 835 SEGMENTS ===
+      { type: 'subheading', text: 'Key 835 Segments and What They Carry' },
+      {
+        type: 'table',
+        headers: ['Segment', 'Name', 'Loop', 'Key Data', 'FHIR EOB Target'],
+        rows: [
+          ['BPR', 'Financial Information', 'Header', 'Total payment amount, payment method (CHK/ACH/NON), bank routing, account number, payment date', 'EOB.payment.amount, EOB.payment.type, EOB.payment.date'],
+          ['TRN', 'Reassociation Trace', 'Header', 'Check number or EFT trace number — links payment to bank transaction', 'EOB.payment.identifier'],
+          ['N1 (PR)', 'Payer Identification', '1000A', 'Payer name, payer ID — who adjudicated and paid the claim', 'EOB.insurer \u2192 Organization'],
+          ['N1 (PE)', 'Payee Identification', '1000B', 'Provider/payee name, NPI, Tax ID — who received the payment', 'EOB.provider \u2192 Organization / Practitioner'],
+          ['CLP', 'Claim Payment', '2100', 'Claim ID, claim status (1=primary, 2=secondary, 4=denied), total charged, total paid, patient responsibility, payer claim control number, facility type', 'EOB.identifier, EOB.outcome, EOB.total, EOB.payment'],
+          ['CAS (Claim)', 'Claim-Level Adjustments', '2100', 'Group code (CO/PR/OA/PI) + reason code + amount. Applied at claim level when no service detail.', 'EOB.adjudication (claim-level)'],
+          ['NM1 (QC)', 'Patient Name', '2100', 'Patient last/first name, member ID — who the claim is for', 'EOB.patient \u2192 Patient'],
+          ['SVC', 'Service Payment', '2110', 'Procedure code (CPT/HCPCS), charged amount, paid amount, units, revenue code (for institutional)', 'EOB.item.adjudication'],
+          ['CAS (Service)', 'Service-Level Adjustments', '2110', 'Group code + reason code + amount per service line. This is where copay, coinsurance, deductible, denials live.', 'EOB.item.adjudication (by category)'],
+          ['DTP (472)', 'Service Date', '2110', 'Date of service for the line item', 'EOB.item.servicedDate'],
+          ['AMT (B6)', 'Allowed Amount', '2110', 'The payer-determined allowed amount for the service', 'EOB.item.adjudication (category: eligible)'],
+          ['AMT (T)', 'Sales Tax Amount', '2100', 'Tax amount if applicable', 'EOB.adjudication'],
+          ['LQ', 'Remark Codes', '2110', 'CARC/RARC remark codes providing additional explanation for adjustments', 'EOB.item.adjudication.reason'],
+          ['PLB', 'Provider Adjustment', 'Trailer', 'Provider-level adjustments: withholdings, interest penalties, capitation, bonus, late charges. Not claim-specific.', 'EOB.payment.adjustment (provider level)'],
+        ],
+      },
+
+      // === CAS ADJUSTMENT GROUP CODES ===
+      { type: 'subheading', text: 'The CAS Segment: Claim Adjustment Group Codes' },
+      {
+        type: 'paragraph',
+        text: 'The CAS (Claim Adjustment Segment) is the heart of the 835 — it tells you WHY an amount was adjusted and WHO is responsible. Every CAS segment starts with a Group Code that categorizes the adjustment, followed by pairs of reason codes and amounts. Understanding the group codes is critical because they determine which FHIR EOB adjudication category each adjustment maps to.',
+      },
+      {
+        type: 'table',
+        headers: ['Group Code', 'Name', 'Meaning', 'FHIR EOB Adjudication Category', 'Common Reason Codes'],
+        rows: [
+          ['CO', 'Contractual Obligation', 'Adjustment per provider-payer contract. Patient does NOT owe this amount. This is the write-off.', 'adjudication.category = noncovered / denied', 'CO-45 (charges exceed fee schedule), CO-97 (bundled), CO-4 (modifier)'],
+          ['PR', 'Patient Responsibility', 'The patient owes this amount. Includes copay, coinsurance, and deductible.', 'adjudication.category = copay / deductible / coinsurance', 'PR-1 (deductible), PR-2 (coinsurance), PR-3 (copay)'],
+          ['OA', 'Other Adjustment', 'Adjustments not attributable to contractual or patient responsibility.', 'adjudication.category = noncovered', 'OA-23 (authorization), OA-18 (duplicate)'],
+          ['PI', 'Payor Initiated Reduction', 'Payer reduced payment but it is not the patient\'s responsibility and there is no contract supporting it.', 'adjudication.category = noncovered', 'PI-45 (fee schedule), PI-97 (bundled procedure)'],
+          ['CR', 'Correction/Reversal', 'Corrections to prior claim payments. Used when CLP02 = 22 (reversal).', 'EOB with reversed status', 'Used with claim status 22 (reversal of previous payment)'],
+        ],
+      },
+
+      // === 835 to FHIR EOB MAPPING ===
+      { type: 'heading', text: 'The 835 \u2192 FHIR ExplanationOfBenefit Mapping' },
+      {
+        type: 'paragraph',
+        text: 'The C4BB ExplanationOfBenefit is the single most important FHIR resource for CMS-0057-F. It merges 837 claim submission data with 835 adjudication results into one resource. Below is the complete mapping showing exactly which 835 segments and elements populate which EOB fields.',
+      },
+      { type: 'subheading', text: 'EOB Header (from CLP Segment + BPR)' },
+      {
+        type: 'table',
+        headers: ['835 Element', 'Segment', 'Position', 'FHIR EOB Path', 'Notes'],
+        rows: [
+          ['Patient Control Number', 'CLP', 'CLP01', 'EOB.identifier', 'Links back to the original 837 CLM01 — this is how you join 837 + 835'],
+          ['Claim Status', 'CLP', 'CLP02', 'EOB.outcome', '1/19=complete, 2/20=complete (secondary), 4=error (denied), 22=cancelled (reversal)'],
+          ['Total Charged Amount', 'CLP', 'CLP03', 'EOB.total (submitted)', 'Original billed amount from the 837'],
+          ['Total Paid Amount', 'CLP', 'CLP04', 'EOB.total (benefit) / EOB.payment.amount', 'What the payer actually paid on this claim'],
+          ['Patient Responsibility', 'CLP', 'CLP05', 'EOB.total (patientpay)', 'Total amount the patient owes (copay + coinsurance + deductible)'],
+          ['Claim Filing Indicator', 'CLP', 'CLP06', 'EOB.type', '12=Medicare, 13=Medicaid, CI=Commercial, BL=BCBS, MB=Medicare Part B, MC=Medicaid'],
+          ['Payer Claim Control Number', 'CLP', 'CLP07', 'EOB.identifier (payer assigned)', 'The payer\'s internal claim number — critical for appeals and inquiries'],
+          ['Facility Type', 'CLP', 'CLP08', 'EOB.facility.type', 'Place of service code (matches CLM05 from 837)'],
+          ['Payment Amount', 'BPR', 'BPR02', 'EOB.payment.amount', 'Total payment for the entire remittance batch (not per-claim)'],
+          ['Payment Method', 'BPR', 'BPR04', 'EOB.payment.type', 'CHK=check, ACH=electronic funds transfer, NON=non-payment (denial)'],
+          ['Payment Date', 'BPR', 'BPR16', 'EOB.payment.date', 'Date funds were issued — CCYYMMDD format'],
+          ['Check/EFT Number', 'TRN', 'TRN02', 'EOB.payment.identifier', 'Trace number to match payment to bank deposit'],
+        ],
+      },
+      { type: 'subheading', text: 'EOB Service Line Adjudication (from SVC + CAS + AMT)' },
+      {
+        type: 'table',
+        headers: ['835 Element', 'Segment', 'Position', 'FHIR EOB Path', 'Notes'],
+        rows: [
+          ['Procedure Code', 'SVC', 'SVC01-2', 'EOB.item.productOrService', 'CPT/HCPCS code — must match the code billed in 837 SV1'],
+          ['Charged Amount', 'SVC', 'SVC02', 'EOB.item.adjudication (submitted)', 'Original billed amount for this service line'],
+          ['Paid Amount', 'SVC', 'SVC03', 'EOB.item.adjudication (benefit)', 'What the payer paid for this specific service line'],
+          ['Units Paid', 'SVC', 'SVC05', 'EOB.item.quantity', 'Number of units the payer recognized (may differ from billed)'],
+          ['Allowed Amount', 'AMT (B6)', 'AMT02', 'EOB.item.adjudication (eligible)', 'Payer-allowed amount for the service — the basis for payment calculation'],
+          ['Deductible', 'CAS (PR-1)', 'CAS03', 'EOB.item.adjudication (deductible)', 'PR group, reason code 1 = deductible amount applied to this line'],
+          ['Coinsurance', 'CAS (PR-2)', 'CAS03', 'EOB.item.adjudication (coinsurance)', 'PR group, reason code 2 = coinsurance amount patient owes'],
+          ['Copay', 'CAS (PR-3)', 'CAS03', 'EOB.item.adjudication (copay)', 'PR group, reason code 3 = copay amount patient owes'],
+          ['Contractual Adjustment', 'CAS (CO-45)', 'CAS03', 'EOB.item.adjudication (noncovered)', 'CO group, reason 45 = charges exceed fee schedule/maximum allowable'],
+          ['Non-Covered Amount', 'CAS (CO-96)', 'CAS03', 'EOB.item.adjudication (noncovered)', 'CO group, reason 96 = non-covered charge(s). The write-off.'],
+          ['Denial Reason', 'CAS (CO/OA/PI)', 'CAS01-03', 'EOB.item.adjudication (denied) + reason', 'When paid=$0 and full amount is in CAS — service was denied. Reason code explains why.'],
+          ['Remark Code', 'LQ', 'LQ02', 'EOB.item.adjudication.reason', 'CARC/RARC codes providing human-readable explanation. Maps to EOB processNote.'],
+        ],
+      },
+
+      // === 835 CODE EXAMPLE ===
+      { type: 'heading', text: 'Real Example: 835 Raw File \u2192 FHIR EOB Adjudication' },
+      {
+        type: 'paragraph',
+        text: 'Here is a real 835 remittance file for the same claim we showed in the 837 example above. The payer adjudicated the two service lines: office visit (99213) was paid at $33.00 with $7.00 patient copay, and lab (87070) was paid at $12.00 with $3.00 non-covered contractual write-off.',
+      },
+      {
+        type: 'code',
+        text: '// Raw 835 ERA Sample (for Claim 26463774 from our 837 example)\nISA*00*          *00*          *ZZ*RECEIVERS.ID   *ZZ*SUBMITTERS.ID  *030301*1253*^*00501*000000907*0*T*:~\nGS*HP*RECEIVER CODE*SENDER CODE*20061015*0900*1*X*005010X221A1~\nST*835*0001~\nBPR*I*45.00*C*ACH*CCP*01*999999999*DA*1234567890*1232343560**01*111111111*DA*9876543210*20061020~\nTRN*1*12345678*1512345678~\nDTM*405*20061015~\nN1*PR*KEY INSURANCE COMPANY*XV*999996666~\nN1*PE*BEN KILDARE SERVICE*XX*1232343560~\nCLP*26463774*1*100*45*10*12*PAYERCLM001*11~\nNM1*QC*1*SMITH*JANE****MI*JS00111223333~\nSVC*HC:99213*40*33**1~\nDTM*472*20061003~\nCAS*CO*45*7.00~\nCAS*PR*3*7.00~\nAMT*B6*40.00~\nSVC*HC:87070*15*12**1~\nDTM*472*20061003~\nCAS*CO*45*3.00~\nAMT*B6*12.00~\nSE*20*0001~\nGE*1*1~\nIEA*1*000000907~',
+      },
+      {
+        type: 'code',
+        text: '// Resulting FHIR R4 C4BB ExplanationOfBenefit (merged 837 + 835)\n{\n  "resourceType": "ExplanationOfBenefit",\n  "identifier": [\n    { "value": "26463774" },                                   // CLP01 = CLM01\n    { "type": { "coding": [{ "code": "payerclaimnumber" }] },\n      "value": "PAYERCLM001" }                                  // CLP07\n  ],\n  "status": "active",\n  "type": {\n    "coding": [{\n      "system": "http://terminology.hl7.org/CodeSystem/claim-type",\n      "code": "professional"\n    }]\n  },\n  "use": "claim",\n  "patient": { "reference": "Patient/js00111223333" },\n  "insurer": { "reference": "Organization/key-ins-999996666" },  // N1(PR)\n  "provider": { "reference": "Organization/ben-kildare-1232343560" },\n  "outcome": "complete",                                        // CLP02=1 (processed as primary)\n  "total": [\n    {\n      "category": { "coding": [{ "code": "submitted" }] },\n      "amount": { "value": 100.00, "currency": "USD" }           // CLP03\n    },\n    {\n      "category": { "coding": [{ "code": "benefit" }] },\n      "amount": { "value": 45.00, "currency": "USD" }            // CLP04\n    },\n    {\n      "category": { "coding": [{ "code": "patientpay" }] },\n      "amount": { "value": 10.00, "currency": "USD" }            // CLP05 (copay+coinsurance+deductible)\n    }\n  ],\n  "payment": {\n    "type": { "coding": [{ "code": "complete" }] },\n    "date": "2006-10-20",                                        // BPR16\n    "amount": { "value": 45.00, "currency": "USD" },             // BPR02\n    "identifier": { "value": "12345678" }                        // TRN02\n  },\n  "item": [\n    {\n      "sequence": 1,\n      "productOrService": {\n        "coding": [{ "system": "http://www.ama-assn.org/go/cpt", "code": "99213" }]\n      },\n      "servicedDate": "2006-10-03",\n      "adjudication": [\n        {\n          "category": { "coding": [{ "code": "submitted" }] },\n          "amount": { "value": 40.00 }                           // SVC02\n        },\n        {\n          "category": { "coding": [{ "code": "eligible" }] },\n          "amount": { "value": 40.00 }                           // AMT B6\n        },\n        {\n          "category": { "coding": [{ "code": "benefit" }] },\n          "amount": { "value": 33.00 }                           // SVC03 (payer paid)\n        },\n        {\n          "category": { "coding": [{ "code": "copay" }] },\n          "amount": { "value": 7.00 }                            // CAS PR*3*7.00\n        },\n        {\n          "category": { "coding": [{ "code": "noncovered" }] },\n          "amount": { "value": 7.00 },                           // CAS CO*45*7.00\n          "reason": { "coding": [{ "code": "45" }] }             // Charges exceed fee schedule\n        }\n      ]\n    },\n    {\n      "sequence": 2,\n      "productOrService": {\n        "coding": [{ "system": "http://www.ama-assn.org/go/cpt", "code": "87070" }]\n      },\n      "servicedDate": "2006-10-03",\n      "adjudication": [\n        {\n          "category": { "coding": [{ "code": "submitted" }] },\n          "amount": { "value": 15.00 }                           // SVC02\n        },\n        {\n          "category": { "coding": [{ "code": "eligible" }] },\n          "amount": { "value": 12.00 }                           // AMT B6\n        },\n        {\n          "category": { "coding": [{ "code": "benefit" }] },\n          "amount": { "value": 12.00 }                           // SVC03\n        },\n        {\n          "category": { "coding": [{ "code": "noncovered" }] },\n          "amount": { "value": 3.00 },                           // CAS CO*45*3.00\n          "reason": { "coding": [{ "code": "45" }] }\n        }\n      ]\n    }\n  ]\n}',
+      },
+
+      // === 835 COMMON PITFALLS ===
+      { type: 'heading', text: '835 Mapping Traps (From Production Remittance Processing)' },
+      {
+        type: 'list',
+        items: [
+          'CAS Group Code Determines Who Pays: CO (Contractual Obligation) = provider write-off, patient does NOT owe. PR (Patient Responsibility) = patient owes. Getting this wrong means incorrect patient bills or provider write-offs.',
+          'Multiple CAS Segments Per Service: A single SVC line can have multiple CAS segments with different group codes. Example: CO*45*20.00 (contractual write-off) AND PR*1*15.00 (deductible) AND PR*2*5.00 (coinsurance) — all on the same service line. You must process ALL of them.',
+          'Claim-Level vs Service-Level Amounts: Some payers report adjustments only at the CLP level (Loop 2100) without SVC detail (Loop 2110). When no service detail exists, you must prorate the claim-level amounts across service lines. This is especially common with institutional/UB claims.',
+          'CLP04 vs Sum of SVC03: The claim-level paid amount (CLP04) should equal the sum of all service-level paid amounts (SVC03). When they do not match, you have a data integrity issue — do NOT assume one is correct. Log it and investigate.',
+          'Secondary/Tertiary Payment Coordination: CLP02 values 2/20 = secondary, 3/21 = tertiary. The 835 for a secondary payment will reference the primary payer\'s adjudication in CAS segments. You must track which payer is which to build correct EOB.insurance ordering.',
+          'Non-Payment Remittances: BPR04 = "NON" means this is a zero-payment remittance (denial). The 835 still contains full CAS detail explaining WHY nothing was paid. Do not skip these — they generate denied EOBs.',
+          'PLB Adjustments Are Not Claim-Specific: The PLB segment carries provider-level balance adjustments (withholdings, interest, capitation) that apply across all claims in the batch, not to any single claim. Map these separately from claim adjudication.',
+        ],
+      },
+      {
+        type: 'callout',
+        variant: 'warning',
+        title: 'The CAS Proration Trap',
+        text: 'When an 835 reports payments and adjustments ONLY at the claim level (CLP/CAS in Loop 2100) with no service detail (no SVC in Loop 2110), you must prorate the amounts across the services from the original 837. But how you prorate matters: by charge ratio, by allowed amount ratio, or by units? Each method produces different per-line amounts. Production systems at major payers have spent weeks debugging proration logic. If your payer sends claim-level-only remittances, nail down the proration rules early.',
+      },
+
+      // === 835 MASTER REFERENCE ===
+      { type: 'subheading', text: '835 Segment \u2192 FHIR EOB: Quick Reference' },
+      {
+        type: 'table',
+        headers: ['835 Segment', 'Loop', 'FHIR EOB Field', 'Adjudication Category'],
+        rows: [
+          ['BPR02 (Total Payment)', 'Header', 'EOB.payment.amount', '\u2014'],
+          ['BPR04 (Payment Method)', 'Header', 'EOB.payment.type', 'CHK/ACH/NON'],
+          ['TRN02 (Trace Number)', 'Header', 'EOB.payment.identifier', '\u2014'],
+          ['CLP01 (Claim ID)', '2100', 'EOB.identifier', 'Links to 837 CLM01'],
+          ['CLP02 (Claim Status)', '2100', 'EOB.outcome', '1=complete, 4=error, 22=cancelled'],
+          ['CLP03 (Total Charged)', '2100', 'EOB.total', 'submitted'],
+          ['CLP04 (Total Paid)', '2100', 'EOB.total', 'benefit'],
+          ['CLP05 (Patient Resp)', '2100', 'EOB.total', 'patientpay'],
+          ['SVC02 (Line Charged)', '2110', 'EOB.item.adjudication', 'submitted'],
+          ['SVC03 (Line Paid)', '2110', 'EOB.item.adjudication', 'benefit'],
+          ['AMT B6 (Allowed)', '2110', 'EOB.item.adjudication', 'eligible'],
+          ['CAS PR*1 (Deductible)', '2110', 'EOB.item.adjudication', 'deductible'],
+          ['CAS PR*2 (Coinsurance)', '2110', 'EOB.item.adjudication', 'coinsurance'],
+          ['CAS PR*3 (Copay)', '2110', 'EOB.item.adjudication', 'copay'],
+          ['CAS CO*45 (Fee Sched)', '2110', 'EOB.item.adjudication', 'noncovered'],
+          ['CAS CO*96 (Non-Covered)', '2110', 'EOB.item.adjudication', 'noncovered'],
+          ['LQ (Remark Codes)', '2110', 'EOB.processNote / adjudication.reason', 'CARC/RARC'],
+          ['PLB (Provider Adj)', 'Trailer', 'EOB.payment.adjustment', 'withholding/interest/bonus'],
         ],
       },
 
