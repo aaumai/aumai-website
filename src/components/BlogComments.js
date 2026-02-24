@@ -6,8 +6,11 @@ const BlogComments = ({ slug }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [notifyMe, setNotifyMe] = useState(false);
   const [text, setText] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [subscribeMsg, setSubscribeMsg] = useState('');
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyText, setReplyText] = useState('');
   const [replySubmitting, setReplySubmitting] = useState(false);
@@ -35,6 +38,7 @@ const BlogComments = ({ slug }) => {
     e.preventDefault();
     if (!text.trim()) return;
     setSubmitting(true);
+    setSubscribeMsg('');
     try {
       const res = await fetch(`${API_BASE}/${slug}`, {
         method: 'POST',
@@ -48,6 +52,26 @@ const BlogComments = ({ slug }) => {
       if (newComment.id) {
         setComments((prev) => [...prev, { ...newComment, replies: [] }]);
         setText('');
+
+        // Subscribe if checkbox is checked and email is provided
+        if (notifyMe && email.trim()) {
+          try {
+            await fetch(`${API_BASE}/subscribe`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: email.trim(),
+                author_name: name.trim() || null,
+              }),
+            });
+            setSubscribeMsg('Subscribed! We will notify you when new posts are published.');
+            setEmail('');
+            setNotifyMe(false);
+          } catch {
+            // silent
+          }
+        }
+
         setName('');
       }
     } catch {
@@ -123,14 +147,37 @@ const BlogComments = ({ slug }) => {
 
       {/* Comment Form */}
       <form className="blog-comment-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="blog-comment-name"
-          placeholder="Your name (optional)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          maxLength={100}
-        />
+        <div className="blog-comment-form-row">
+          <input
+            type="text"
+            className="blog-comment-name"
+            placeholder="Your name (optional)"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            maxLength={100}
+          />
+          <input
+            type="email"
+            className="blog-comment-email"
+            placeholder="Your email (optional)"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (e.target.value.trim()) setNotifyMe(true);
+            }}
+            maxLength={255}
+          />
+        </div>
+        {email.trim() && (
+          <label className="blog-comment-notify">
+            <input
+              type="checkbox"
+              checked={notifyMe}
+              onChange={(e) => setNotifyMe(e.target.checked)}
+            />
+            <span>Notify me when new blog posts are published</span>
+          </label>
+        )}
         <textarea
           className="blog-comment-textarea"
           placeholder="Share your thoughts..."
@@ -152,6 +199,9 @@ const BlogComments = ({ slug }) => {
             {submitting ? 'Posting...' : 'Post Comment'}
           </button>
         </div>
+        {subscribeMsg && (
+          <p className="blog-comment-subscribe-msg">{subscribeMsg}</p>
+        )}
       </form>
 
       {/* Comments List */}
