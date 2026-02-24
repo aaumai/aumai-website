@@ -11,6 +11,361 @@ export const BLOG_CATEGORIES = [
 
 const blogPosts = [
   {
+    slug: '837-to-fhir-r4-mapping-definitive-guide',
+    title: 'From X12 837 to FHIR R4: The Definitive Mapping Guide for Payer Engineering Teams',
+    date: '2026-02-24',
+    author: 'Jayesh Chaudhari',
+    authorRole: 'Founder & CTO',
+    category: 'FHIR & Interoperability',
+    tags: [
+      '837P',
+      'FHIR R4',
+      'X12 EDI',
+      'CARIN C4BB',
+      'Claim Resource',
+      'ExplanationOfBenefit',
+      'CMS-0057-F',
+      'Interoperability',
+      'Payer Engineering',
+      'DaVinci',
+      'Clinical Data Warehouse',
+    ],
+    excerpt:
+      'A complete technical mapping from X12 837P segments and loops to FHIR R4 resources. Covers the 837 file structure, every key segment, and shows exactly how each element maps to FHIR Claim, Patient, Practitioner, Coverage, and Condition resources — with real code examples.',
+    readingTime: '30 min read',
+    content: [
+      // === OPENING ===
+      {
+        type: 'paragraph',
+        text: 'The X12 837 Professional claim is the single most important electronic transaction in US healthcare billing. Every payer in the country receives millions of them. With CMS-0057-F now requiring payers to expose claims data as FHIR R4, the transformation layer — mapping X12 837 loops, segments, and elements to FHIR resources — is where most implementations hit the wall. This guide gives you the complete mapping, segment by segment, element by element, for free.',
+      },
+      {
+        type: 'stats',
+        items: [
+          { value: '4B+', label: '837 Claims Filed Annually in the US', color: '#3b82f6' },
+          { value: '130+', label: 'Segments in a Single 837P Transaction', color: '#f43f5e' },
+          { value: '9', label: 'FHIR R4 Resources Mapped', color: '#10b981' },
+          { value: 'Jan 2027', label: 'CMS-0057-F Compliance Deadline', color: '#f59e0b' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'This guide is for payer engineering teams building FHIR APIs, architects designing ETL pipelines, and anyone who needs to understand how X12 EDI maps to FHIR R4. We are publishing this because we believe the industry moves faster when knowledge is shared openly. The devil is in the details — and this guide gives you the details.',
+      },
+      {
+        type: 'callout',
+        variant: 'info',
+        title: 'About the Author',
+        text: 'Jayesh Chaudhari is an ex-X12 EDI specialist with hands-on production experience across 837I, 837P, 835, 270, 271, 277, and more. He has built a complete 837P video course on YouTube with element-level breakdowns of every loop and segment. Watch the full playlist for deep-dive walkthroughs alongside this mapping guide.',
+      },
+
+      // === WHY THIS MATTERS ===
+      { type: 'heading', text: 'Why 837-to-FHIR Mapping Is the Hardest Part of CMS-0057-F' },
+      {
+        type: 'paragraph',
+        text: 'CMS-0057-F mandates that payers expose claims data through FHIR APIs. The Patient Access API (CARIN C4BB) requires converting 837 claim submission data and 835 remittance data into FHIR ExplanationOfBenefit resources. The Provider Access API (DaVinci PDex) requires the same data shared with treating providers. The Payer-to-Payer API needs it for member transitions. In every case, the transformation layer — converting X12 837 into FHIR R4 — is the heaviest lift. It accounts for roughly 80% of the implementation effort.',
+      },
+      {
+        type: 'callout',
+        variant: 'warning',
+        title: 'This Is Not a Theoretical Exercise',
+        text: 'Most payers store claims in proprietary relational schemas derived from X12 837 structure. The FHIR transformation must handle every loop, segment, and element in the 837 to produce compliant C4BB ExplanationOfBenefit and FHIR Claim resources. Missing a single mapping — like the diagnosis pointer resolution in SV1 — will produce invalid FHIR resources that fail profile validation.',
+      },
+
+      // === 837P STRUCTURE ===
+      { type: 'heading', text: 'The 837P File Structure: Complete Loop Hierarchy' },
+      {
+        type: 'paragraph',
+        text: 'The 837 Professional (837P) transaction follows a strict hierarchical structure defined by ASC X12 version 5010 (Implementation Guide 005010X222A1). Understanding this hierarchy is the prerequisite for any FHIR mapping. The 837 is an envelope-based format where each level nests inside the one above it.',
+      },
+      {
+        type: 'diagram',
+        title: '837P Loop Hierarchy — From Envelope to Service Line',
+        layers: [
+          { label: 'ISA / IEA', desc: 'Interchange envelope — sender/receiver IDs, control numbers, delimiters, usage indicator (T=test, P=production)', color: '#06b6d4' },
+          { label: 'GS / GE', desc: 'Functional group — transaction type (HC = healthcare claim), version (005010X222A1)', color: '#3b82f6' },
+          { label: 'ST / SE', desc: 'Transaction set — 837P document boundary, transaction control number', color: '#8b5cf6' },
+          { label: 'Loop 1000A/B', desc: 'Submitter (NM1-41) and Receiver (NM1-40) identification', color: '#10b981' },
+          { label: 'Loop 2000A', desc: 'Billing Provider hierarchical level — taxonomy code (PRV), NPI, Tax ID, address', color: '#f59e0b' },
+          { label: 'Loop 2000B', desc: 'Subscriber hierarchical level — insurance info (SBR), member ID, demographics', color: '#f59e0b' },
+          { label: 'Loop 2000C', desc: 'Patient hierarchical level — conditional: only when patient differs from subscriber', color: '#f59e0b' },
+          { label: 'Loop 2300', desc: 'Claim information — CLM (charges, facility type), HI (diagnoses), DTP (dates), referring/rendering providers', color: '#f43f5e' },
+          { label: 'Loop 2400', desc: 'Service line detail — LX (line number), SV1 (CPT/HCPCS, charges, units, diagnosis pointers), DTP (service date)', color: '#f43f5e' },
+        ],
+      },
+
+      // === KEY SEGMENTS ===
+      { type: 'heading', text: 'Key 837P Segments: What Data Lives Where' },
+      {
+        type: 'table',
+        headers: ['Segment', 'Name', 'Loop', 'Key Elements', 'FHIR Target'],
+        rows: [
+          ['ISA', 'Interchange Control Header', 'Envelope', 'Sender/Receiver IDs, Control Number, Date/Time', 'Bundle.identifier'],
+          ['GS', 'Functional Group Header', 'Envelope', 'Sender Code, Receiver Code, Version 005010X222', 'Bundle.identifier'],
+          ['ST / BHT', 'Transaction Set Header', 'Header', 'Transaction ID, Creation Date/Time, Claim or Encounter', 'Claim.identifier, Claim.created'],
+          ['NM1 (85)', 'Billing Provider Name', '2010AA', 'Org/Person Name, NPI (XX qualifier), Tax ID', 'Claim.provider \u2192 Practitioner / Organization'],
+          ['NM1 (IL)', 'Subscriber Name', '2010BA', 'Last/First Name, Member ID (MI qualifier)', 'Claim.patient \u2192 Patient'],
+          ['NM1 (QC)', 'Patient Name', '2010CA', 'Last/First Name (when patient \u2260 subscriber)', 'Claim.patient \u2192 Patient'],
+          ['NM1 (PR)', 'Payer Name', '2010BB', 'Payer Name, Payer ID (PI qualifier)', 'Claim.insurer \u2192 Organization'],
+          ['SBR', 'Subscriber Information', '2000B', 'Payer Responsibility (P/S/T), Group Number, Filing Indicator', 'Coverage'],
+          ['DMG', 'Demographics', '2010BA/CA', 'Date of Birth (D8 format), Gender (M/F)', 'Patient.birthDate, Patient.gender'],
+          ['PRV', 'Provider Information', '2000A', 'Provider Code (BI=billing), Taxonomy Code (PXC)', 'Practitioner.qualification'],
+          ['CLM', 'Claim Information', '2300', 'Claim ID, Total Charge, Facility Type (CLM05), Signatures', 'Claim (core fields)'],
+          ['HI', 'Diagnosis Codes', '2300', 'BK = principal ICD-10, BF = secondary ICD-10 diagnoses', 'Claim.diagnosis \u2192 Condition'],
+          ['LX', 'Service Line Number', '2400', 'Sequential line counter', 'Claim.item.sequence'],
+          ['SV1', 'Professional Service', '2400', 'CPT/HCPCS code, Charge amount, Units, Diagnosis Pointers', 'Claim.item (productOrService, unitPrice, quantity)'],
+          ['DTP (472)', 'Service Date', '2400', 'Date of service (CCYYMMDD format)', 'Claim.item.servicedDate'],
+          ['N3 / N4', 'Address', 'Multiple', 'Street, City, State, ZIP', 'Patient.address / Organization.address'],
+          ['REF (EI)', 'Tax ID Reference', '2010AA', 'Employer Identification Number', 'Organization.identifier (Tax)'],
+        ],
+      },
+
+      // === FHIR TARGET RESOURCES ===
+      { type: 'heading', text: '9 FHIR R4 Resources You Will Map To' },
+      {
+        type: 'paragraph',
+        text: 'The 837P maps to 9 primary FHIR R4 resources. In a CMS-0057-F context, these follow the CARIN Blue Button (C4BB) and US Core 6.1.0 profiles. Each resource captures a specific domain of the claim data.',
+      },
+      {
+        type: 'comparison',
+        items: [
+          { num: '1', title: 'Claim', subtitle: 'Core Transaction', desc: 'The primary mapping target. Contains the complete claim with line items, diagnoses, providers, and charges. Maps directly from CLM, SV1, HI, and DTP segments.', color: '#3b82f6', tags: ['CLM', 'SV1', 'HI', 'DTP'] },
+          { num: '2', title: 'ExplanationOfBenefit', subtitle: 'C4BB EOB (Post-Adjudication)', desc: 'Merges 837 claim data with 835 adjudication results. The resource required by the Patient Access API. Contains both submission and payment details.', color: '#8b5cf6', tags: ['837 + 835', 'Patient Access API'] },
+          { num: '3', title: 'Patient', subtitle: 'Member / Subscriber', desc: 'Demographics from NM1 (IL/QC), DMG, and N3/N4 segments. Name, date of birth, gender, address, and member ID.', color: '#10b981', tags: ['NM1-IL', 'NM1-QC', 'DMG', 'N3/N4'] },
+          { num: '4', title: 'Practitioner', subtitle: 'Providers', desc: 'Billing, rendering, referring, and supervising providers from NM1 (85/82/DN/DQ) loops. NPI, name, and taxonomy code.', color: '#f59e0b', tags: ['NM1-85', 'NM1-82', 'PRV'] },
+          { num: '5', title: 'Organization', subtitle: 'Payer & Billing Org', desc: 'Payer organization (NM1-PR) and billing organization (NM1-85 when entity type = 2). Tax ID, name, and address.', color: '#06b6d4', tags: ['NM1-PR', 'NM1-85', 'REF-EI'] },
+          { num: '6', title: 'Coverage', subtitle: 'Insurance Information', desc: 'From SBR (subscriber info) and Loop 2010BB (payer). Group number, plan ID, payer responsibility order, and subscriber relationship.', color: '#a78bfa', tags: ['SBR', 'NM1-PR', 'Loop 2010BB'] },
+          { num: '7', title: 'Condition', subtitle: 'Diagnoses', desc: 'ICD-10 codes from the HI segment. BK qualifier = principal diagnosis (sequence 1), BF qualifier = other diagnoses (sequence 2+).', color: '#f43f5e', tags: ['HI', 'BK', 'BF', 'ICD-10'] },
+          { num: '8', title: 'Procedure', subtitle: 'Service Lines', desc: 'CPT/HCPCS codes from SV1 segment. Procedure code, up to 4 modifiers, place of service, and units.', color: '#ec4899', tags: ['SV1', 'CPT', 'HCPCS'] },
+        ],
+      },
+
+      // === CORE MAPPING TABLES ===
+      { type: 'heading', text: 'The Mapping: 837P \u2192 FHIR Claim Resource' },
+      {
+        type: 'paragraph',
+        text: 'The FHIR Claim resource is the direct mapping target for an 837P transaction. Below are the field-level mappings broken down by section — claim header, service lines, patient/subscriber, and providers.',
+      },
+      { type: 'subheading', text: 'Claim Header Fields (from CLM Segment)' },
+      {
+        type: 'table',
+        headers: ['837 Element', 'Segment', 'Position', 'FHIR Path', 'Notes'],
+        rows: [
+          ['Claim ID', 'CLM', 'CLM01', 'Claim.identifier', 'Patient control number — unique per claim'],
+          ['Total Charge Amount', 'CLM', 'CLM02', 'Claim.total.value', 'Total claimed amount in USD'],
+          ['Facility Type Code', 'CLM', 'CLM05-1', 'Claim.facility.type', 'Maps to CMS Place of Service code (11=office, 21=inpatient, etc.)'],
+          ['Claim Frequency Code', 'CLM', 'CLM05-3', 'Claim.subType', '1=original, 7=replacement, 8=void'],
+          ['Provider Signature', 'CLM', 'CLM06', 'Claim extension', 'Y=provider signed, N=not signed'],
+          ['Assignment of Benefits', 'CLM', 'CLM07', 'Claim extension', 'A=assigned, B=not assigned'],
+          ['Release of Info Code', 'CLM', 'CLM09', 'Claim extension', 'I=informed consent given'],
+          ['Principal Diagnosis', 'HI', 'HI01 (BK:)', 'Claim.diagnosis[0]', 'ICD-10 code, sequence=1, type=principal'],
+          ['Other Diagnoses', 'HI', 'HI02+ (BF:)', 'Claim.diagnosis[1+]', 'ICD-10 codes, sequence=2+, type=secondary'],
+          ['Statement Dates', 'DTP', 'DTP03 (434)', 'Claim.billablePeriod', 'Statement from/to date range'],
+          ['Onset of Illness', 'DTP', 'DTP03 (431)', 'Claim.supportingInfo', 'Date of current illness or symptom'],
+        ],
+      },
+      { type: 'subheading', text: 'Service Line Items (SV1 Segment / Loop 2400)' },
+      {
+        type: 'table',
+        headers: ['837 Element', 'Segment', 'Position', 'FHIR Path', 'Notes'],
+        rows: [
+          ['Line Counter', 'LX', 'LX01', 'Claim.item.sequence', 'Sequential line number (1, 2, 3...)'],
+          ['CPT/HCPCS Code', 'SV1', 'SV101-2', 'Claim.item.productOrService.coding.code', 'Procedure code — system: CPT or HCPCS Level II'],
+          ['Modifier 1', 'SV1', 'SV101-3', 'Claim.item.modifier[0]', 'First modifier (e.g., 25, 59, TC, 26)'],
+          ['Modifier 2-4', 'SV1', 'SV101-4 to 6', 'Claim.item.modifier[1-3]', 'Up to 4 modifiers per line'],
+          ['Line Charge', 'SV1', 'SV102', 'Claim.item.unitPrice', 'Charge amount for this service line'],
+          ['Unit Code', 'SV1', 'SV103', 'Claim.item.quantity.unit', 'UN=units, MJ=minutes, DA=days'],
+          ['Quantity', 'SV1', 'SV104', 'Claim.item.quantity.value', 'Number of units billed'],
+          ['Diagnosis Pointers', 'SV1', 'SV107', 'Claim.item.diagnosisSequence', 'Positional pointers into HI segment (1=first dx, 2=second, etc.)'],
+          ['Service Date', 'DTP (472)', 'DTP03', 'Claim.item.servicedDate', 'Date of service — convert CCYYMMDD to YYYY-MM-DD'],
+        ],
+      },
+      { type: 'subheading', text: 'Patient & Subscriber (Loops 2000B / 2000C)' },
+      {
+        type: 'table',
+        headers: ['837 Element', 'Segment / Loop', 'FHIR Resource', 'FHIR Path'],
+        rows: [
+          ['Subscriber Last Name', 'NM1 (IL) / NM103', 'Patient', 'Patient.name.family'],
+          ['Subscriber First Name', 'NM1 (IL) / NM104', 'Patient', 'Patient.name.given'],
+          ['Subscriber Member ID', 'NM1 (IL) / NM109 (MI)', 'Patient', 'Patient.identifier (type: MB)'],
+          ['Patient Last Name', 'NM1 (QC) / NM103', 'Patient', 'Patient.name.family'],
+          ['Patient First Name', 'NM1 (QC) / NM104', 'Patient', 'Patient.name.given'],
+          ['Date of Birth', 'DMG / DMG02', 'Patient', 'Patient.birthDate (CCYYMMDD \u2192 YYYY-MM-DD)'],
+          ['Gender', 'DMG / DMG03', 'Patient', 'Patient.gender (M\u2192male, F\u2192female, U\u2192unknown)'],
+          ['Street Address', 'N3 / N301', 'Patient', 'Patient.address.line'],
+          ['City / State / ZIP', 'N4 / N401-N403', 'Patient', 'Patient.address (city, state, postalCode)'],
+          ['Payer Responsibility', 'SBR / SBR01', 'Coverage', 'Coverage.order (P=1, S=2, T=3)'],
+          ['Group Number', 'SBR / SBR03', 'Coverage', 'Coverage.class (type: group)'],
+          ['Subscriber Relationship', 'SBR / SBR02', 'Coverage', 'Coverage.relationship (18=self, 01=spouse, 19=child)'],
+        ],
+      },
+      { type: 'subheading', text: 'Provider Loops \u2192 FHIR Practitioner & Organization' },
+      {
+        type: 'table',
+        headers: ['837 Loop', 'NM1 Code', 'Provider Role', 'FHIR Resource', 'FHIR Claim Path'],
+        rows: [
+          ['2010AA', '85', 'Billing Provider', 'Practitioner or Organization', 'Claim.provider'],
+          ['2310A', 'DN', 'Referring Provider', 'Practitioner', 'Claim.referral'],
+          ['2310B', '82', 'Rendering Provider', 'Practitioner', 'Claim.careTeam (role=rendering)'],
+          ['2310C', '77', 'Service Facility', 'Location', 'Claim.facility'],
+          ['2310D', 'DQ', 'Supervising Provider', 'Practitioner', 'Claim.careTeam (role=supervising)'],
+          ['2420A', '82', 'Line-Level Rendering', 'Practitioner', 'Claim.item \u2192 careTeam reference'],
+          ['2420E', 'DK', 'Ordering Provider', 'Practitioner', 'Claim.careTeam (role=ordering)'],
+        ],
+      },
+
+      // === CODE EXAMPLE ===
+      { type: 'heading', text: 'Real Example: 837P Raw File \u2192 FHIR R4 Bundle' },
+      {
+        type: 'paragraph',
+        text: 'Below is a concrete example. We take a real 837P file and show the resulting FHIR R4 Claim Bundle. Every value in the FHIR output is annotated with its 837 source element.',
+      },
+      {
+        type: 'code',
+        text: '// Raw 837P Sample\nISA*00*          *01*SECRET    *ZZ*SUBMITTERS.ID  *ZZ*RECEIVERS.ID   *030101*1253*^*00501*000000905*1*T*:~\nGS*HC*SENDER CODE*RECEIVER CODE*19991231*0802*1*X*005010X222~\nST*837*0021*005010X222~\nBHT*0019*00*244579*20061015*1023*CH~\nNM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~\nNM1*40*2*KEY INSURANCE COMPANY*****46*66783JJT~\nHL*1**20*1~\nPRV*BI*PXC*207VG0400X~\nNM1*85*2*BEN KILDARE SERVICE*****XX*1232343560~\nN3*234 SEAWAY ST~\nN4*MIAMI*FL*331112341~\nREF*EI*587654321~\nHL*2*1*22*0~\nSBR*P*18*12312-A******CI~\nNM1*IL*1*SMITH*JANE****MI*JS00111223333~\nN3*1234 OAK STREET~\nN4*MIAMI*FL*33111~\nDMG*D8*19430501*F~\nNM1*PR*2*KEY INSURANCE COMPANY*****PI*999996666~\nCLM*26463774*100***11:B:1*Y*A*Y*I~\nHI*BK:0340*BF:V7389~\nLX*1~\nSV1*HC:99213*40*UN*1***1~\nDTP*472*D8*20061003~\nLX*2~\nSV1*HC:87070*15*UN*1***1~\nDTP*472*D8*20061003~\nSE*29*0021~\nGE*1*1~\nIEA*1*000000905~',
+      },
+      {
+        type: 'code',
+        text: '// Resulting FHIR R4 Bundle\n{\n  "resourceType": "Bundle",\n  "type": "transaction",\n  "entry": [\n    {\n      "resource": {\n        "resourceType": "Claim",\n        "identifier": [{ "value": "26463774" }],                // CLM01\n        "status": "active",\n        "type": {\n          "coding": [{\n            "system": "http://terminology.hl7.org/CodeSystem/claim-type",\n            "code": "professional"\n          }]\n        },\n        "use": "claim",\n        "patient": { "reference": "Patient/js00111223333" },     // NM1(IL)-NM109\n        "created": "2006-10-15",                                  // BHT04\n        "insurer": { "reference": "Organization/key-ins-999996666" },\n        "provider": { "reference": "Organization/ben-kildare-1232343560" },\n        "facility": {\n          "type": {\n            "coding": [{ "code": "11" }]                         // CLM05-1 (Office)\n          }\n        },\n        "total": { "value": 100.00, "currency": "USD" },         // CLM02\n        "diagnosis": [\n          {\n            "sequence": 1,\n            "diagnosisCodeableConcept": {\n              "coding": [{\n                "system": "http://hl7.org/fhir/sid/icd-10-cm",\n                "code": "O34.0"                                  // HI01 BK:0340\n              }]\n            },\n            "type": [{ "coding": [{ "code": "principal" }] }]\n          },\n          {\n            "sequence": 2,\n            "diagnosisCodeableConcept": {\n              "coding": [{\n                "system": "http://hl7.org/fhir/sid/icd-10-cm",\n                "code": "V73.89"                                 // HI02 BF:V7389\n              }]\n            },\n            "type": [{ "coding": [{ "code": "secondary" }] }]\n          }\n        ],\n        "insurance": [{\n          "sequence": 1,\n          "focal": true,\n          "coverage": { "reference": "Coverage/sbr-12312a" }\n        }],\n        "item": [\n          {\n            "sequence": 1,                                        // LX01\n            "diagnosisSequence": [1],                             // SV107 pointer -> HI01\n            "productOrService": {\n              "coding": [{\n                "system": "http://www.ama-assn.org/go/cpt",\n                "code": "99213"                                   // SV101-2\n              }]\n            },\n            "servicedDate": "2006-10-03",                         // DTP 472\n            "unitPrice": { "value": 40.00, "currency": "USD" },   // SV102\n            "quantity": { "value": 1, "unit": "UN" }              // SV103 + SV104\n          },\n          {\n            "sequence": 2,\n            "diagnosisSequence": [1],\n            "productOrService": {\n              "coding": [{\n                "system": "http://www.ama-assn.org/go/cpt",\n                "code": "87070"\n              }]\n            },\n            "servicedDate": "2006-10-03",\n            "unitPrice": { "value": 15.00, "currency": "USD" },\n            "quantity": { "value": 1, "unit": "UN" }\n          }\n        ]\n      }\n    },\n    {\n      "resource": {\n        "resourceType": "Patient",\n        "identifier": [{\n          "type": { "coding": [{ "code": "MB" }] },\n          "value": "JS00111223333"                                // NM1(IL)-NM109\n        }],\n        "name": [{ "family": "SMITH", "given": ["JANE"] }],       // NM103, NM104\n        "gender": "female",                                       // DMG03 F->female\n        "birthDate": "1943-05-01",                                // DMG02\n        "address": [{\n          "line": ["1234 OAK STREET"],                            // N301\n          "city": "MIAMI", "state": "FL", "postalCode": "33111"   // N401-N403\n        }]\n      }\n    },\n    {\n      "resource": {\n        "resourceType": "Organization",\n        "identifier": [\n          { "system": "http://hl7.org/fhir/sid/us-npi", "value": "1232343560" },\n          { "type": { "coding": [{ "code": "TAX" }] }, "value": "587654321" }\n        ],\n        "name": "BEN KILDARE SERVICE",                            // NM1(85)-NM103\n        "address": [{\n          "line": ["234 SEAWAY ST"],\n          "city": "MIAMI", "state": "FL", "postalCode": "331112341"\n        }]\n      }\n    },\n    {\n      "resource": {\n        "resourceType": "Coverage",\n        "subscriberId": "JS00111223333",\n        "relationship": {\n          "coding": [{ "code": "self" }]                          // SBR02=18 -> self\n        },\n        "order": 1,                                               // SBR01=P -> primary\n        "class": [{\n          "type": { "coding": [{ "code": "group" }] },\n          "value": "12312-A"                                      // SBR03\n        }],\n        "payor": [{ "reference": "Organization/key-ins-999996666" }]\n      }\n    }\n  ]\n}',
+      },
+
+      // === CLINICAL DATA WAREHOUSE MAPPING ===
+      { type: 'heading', text: '837 \u2192 Clinical Data Warehouse: Where the Data Lands' },
+      {
+        type: 'paragraph',
+        text: 'Before data reaches FHIR, most payers parse 837 files into a clinical data warehouse — a relational database with normalized tables. Understanding this intermediate layer is critical because your FHIR transformation will typically read from the warehouse, not from raw X12. Below is a standard clinical data warehouse schema and how 837 loops map to each table.',
+      },
+      {
+        type: 'table',
+        headers: ['837 Loop / Segment', 'CDW Table', 'Key Columns Populated', 'Notes'],
+        rows: [
+          ['Loop 2000B/C + NM1 (IL/QC) + DMG + N3/N4', 'patients', 'patient_id, first_name, last_name, date_of_birth, gender_text, city, state_code, zip_code', 'Subscriber or patient demographics — one row per unique member'],
+          ['Loop 2300 (CLM + DTP)', 'encounters', 'encounter_key, patient_id, encounter_type, encounter_start_date, service_provider_npi, service_location_name, encounter_tin', 'One encounter per claim — CLM01 becomes encounter_key'],
+          ['Loop 2300 HI (BK/BF)', 'diagnosis', 'encounter_key, encounter_diagnosis_code, encounter_diagnosis_text, list_order', 'BK\u2192list_order=1, BF\u2192list_order=2+ — ICD-10 codes linked to encounter'],
+          ['Loop 2400 SV1', 'procedures', 'encounter_key, procedure_code, procedure_text, modifier1-4, service_provider_npi, insurance', 'One row per service line — CPT/HCPCS codes with modifiers'],
+          ['Loop 2010BB + SBR', 'payers', 'patient_id, insurance_company, insurance_plan, insurance_group, insurance_order, payer_id', 'Insurance coverage info — P=Primary, S=Secondary'],
+          ['Loop 2010AA + 2310B + PRV', 'service_providers', 'npi, first_name, last_name, taxonomy_code, tin, city, state', 'Billing, rendering, referring providers with NPI and taxonomy'],
+          ['Loop 2310C', 'service_locations', 'service_location_id, service_location_name, address, city, state, zip_code', 'Where the service was performed'],
+        ],
+      },
+      {
+        type: 'callout',
+        variant: 'tip',
+        title: 'Video Demo: 837 to Clinical Data Warehouse Live Walkthrough',
+        text: 'We recorded a live video demonstration showing exactly how data flows from a raw 837P file into a clinical data warehouse, table by table. Watch the video above to see the mapping in action with real SQL queries and data.',
+      },
+
+      // === COMMON PITFALLS ===
+      { type: 'heading', text: 'Common Mapping Traps (From Production Experience)' },
+      {
+        type: 'list',
+        items: [
+          'NM1 Entity Type (NM102): 1 = person, 2 = organization. This determines whether you create a Practitioner or Organization FHIR resource. Getting this wrong breaks the reference chain.',
+          'Diagnosis Pointer Resolution: SV107 contains positional indices (1, 2, 3) that reference positions in the HI segment, NOT the ICD-10 codes themselves. Pointer "1" means the FIRST diagnosis in HI (HI01), not ICD-10 code "1".',
+          'Multiple Payers (Loop 2320): The Other Subscriber Information loop creates additional Coverage resources with correct ordering — SBR01 values: P=primary (order 1), S=secondary (order 2), T=tertiary (order 3).',
+          'CLM05 Composite Element: Facility type is in position 1, frequency code is in position 3. You must split the composite "11:B:1" correctly — delimiter is colon, not asterisk.',
+          'Taxonomy Code (PRV segment): Maps to Practitioner.qualification, NOT Practitioner.specialty. The PXC qualifier in PRV02 indicates the code set is the Healthcare Provider Taxonomy.',
+          'Date Format Conversion: X12 uses CCYYMMDD (e.g., 20061003). FHIR uses YYYY-MM-DD (2006-10-03). Simple but easy to miss in batch processing.',
+          'Conditional Loop 2000C: The Patient loop only exists when the patient is different from the subscriber. Check SBR02 — if it is 18 (self), there is no Loop 2000C and the subscriber IS the patient.',
+        ],
+      },
+      {
+        type: 'callout',
+        variant: 'warning',
+        title: 'The Diagnosis Pointer Trap',
+        text: 'This is the most common mapping bug we see in production. SV107 contains numbers like "1" or "1:2" — these are positional pointers into the HI segment. Pointer "1" means the FIRST diagnosis code listed in HI01. You must resolve these to the actual ICD-10 code from the HI segment before setting Claim.item.diagnosisSequence. If you pass the pointer value directly, your FHIR resource will reference non-existent diagnosis entries.',
+      },
+
+      // === MASTER REFERENCE MAP ===
+      { type: 'heading', text: '837 Loop \u2192 FHIR Resource: Complete Reference Map' },
+      {
+        type: 'table',
+        headers: ['837 Loop', 'Loop Name', 'FHIR Resource(s)', 'Key Mapping Notes'],
+        rows: [
+          ['1000A', 'Submitter', 'Organization (submitter)', 'NM1-41 entity — typically the clearinghouse or billing service'],
+          ['1000B', 'Receiver', 'Organization (receiver)', 'NM1-40 entity — the payer receiving the claim'],
+          ['2000A / 2010AA', 'Billing Provider', 'Practitioner or Organization', 'NM1-85; NPI from NM109 (XX qualifier); Tax ID from REF-EI segment'],
+          ['2000A / 2010AB', 'Pay-To Address', 'Organization.address', 'Where payment should be sent — may differ from billing provider address'],
+          ['2000B / 2010BA', 'Subscriber', 'Patient + Coverage', 'NM1-IL for member ID; SBR for insurance details; DMG for demographics'],
+          ['2000B / 2010BB', 'Payer', 'Organization (insurer)', 'NM1-PR; payer ID from NM109 (PI qualifier)'],
+          ['2000C / 2010CA', 'Patient', 'Patient', 'NM1-QC; only present when patient is not the subscriber'],
+          ['2300', 'Claim', 'Claim (header)', 'CLM segment = core claim; HI = diagnoses; DTP = dates'],
+          ['2310A', 'Referring Provider', 'Practitioner', 'NM1-DN; maps to Claim.referral reference'],
+          ['2310B', 'Rendering Provider', 'Practitioner', 'NM1-82; Claim.careTeam with role = rendering'],
+          ['2310C', 'Service Facility', 'Location', 'NM1-77; Claim.facility reference'],
+          ['2320', 'Other Subscriber', 'Coverage (secondary)', 'Creates additional Coverage for coordination of benefits'],
+          ['2400', 'Service Line', 'Claim.item', 'LX + SV1 + DTP; one Claim.item per line'],
+          ['2410', 'Drug Identification', 'Claim.item.detail', 'NDC drug code for pharmaceutical claims'],
+          ['2430', 'Line Adjudication', 'Claim.item.adjudication', 'Prior payer adjudication info for secondary claims'],
+        ],
+      },
+
+      // === YOUTUBE DEEP DIVE ===
+      { type: 'heading', text: 'Watch the Full 837P Breakdown \u2014 Free Video Course' },
+      {
+        type: 'paragraph',
+        text: 'For an element-by-element walkthrough of every 837P loop and segment with real file examples, watch the complete YouTube playlist below. Each video covers a specific loop in detail — from ISA/GS envelopes to CLM and SV1 service lines. This is the companion resource to this mapping guide: the blog gives you the reference tables, the videos give you the deep understanding of WHY each element exists and how to parse it.',
+      },
+      {
+        type: 'video',
+        title: '837P Complete Video Course \u2014 Element-Level Breakdown',
+        url: 'https://www.youtube.com/embed/videoseries?list=PLFfwKKiOle9CBBpW-bD_amIjsAbkdItp2',
+      },
+
+      // === 837 to EOB PIPELINE ===
+      { type: 'heading', text: 'From 837 Claim to C4BB ExplanationOfBenefit' },
+      {
+        type: 'paragraph',
+        text: 'In the CMS-0057-F context, the 837 Claim is only half the story. After adjudication, the 837 submission data merges with 835 remittance data to form the CARIN C4BB ExplanationOfBenefit — the resource patients see through the Patient Access API. Here is how the complete pipeline works.',
+      },
+      {
+        type: 'flow',
+        title: '837 Claim \u2192 C4BB EOB Pipeline',
+        steps: [
+          { title: '837P Received', desc: 'Payer ingests the 837P claim via EDI clearinghouse. Parsed into relational schema (clinical data warehouse).', color: '#3b82f6' },
+          { title: 'Claims Adjudication', desc: 'Payer adjudication engine processes the claim — applies fee schedules, benefits, medical policies, COB rules.', color: '#f59e0b' },
+          { title: '835 Remittance Generated', desc: 'Adjudication produces 835 ERA with allowed amounts, paid amounts, adjustments (CARCs/RARCs), and check/EFT info.', color: '#8b5cf6' },
+          { title: '837 + 835 Merged', desc: 'ETL pipeline joins claim submission data (837) with adjudication results (835) by claim ID / patient control number.', color: '#f43f5e' },
+          { title: 'FHIR EOB Created', desc: 'Merged data transformed into C4BB ExplanationOfBenefit with both claim line items and adjudication detail per line.', color: '#10b981' },
+          { title: 'Served via Patient Access API', desc: 'EOB available through FHIR R4 API for patient apps, Provider Access bulk export, and Payer-to-Payer exchange.', color: '#06b6d4' },
+        ],
+      },
+
+      // === IMPLEMENTATION RECOMMENDATIONS ===
+      { type: 'heading', text: 'Implementation Recommendations' },
+      {
+        type: 'list',
+        items: [
+          'Start with 837P (professional) mapping. It covers the most common claim type and the patterns transfer to 837I (institutional) with modifications for revenue codes and UB-04 fields.',
+          'Build a segment-level parser first. Do not try to go straight from raw X12 to FHIR. Parse into an intermediate relational model (clinical data warehouse), then transform to FHIR from there.',
+          'Use FHIR profiles for validation. The C4BB Implementation Guide provides StructureDefinitions that validate your output against the required profile.',
+          'Handle terminology mappings carefully. X12 place-of-service codes, claim filing indicators, and provider taxonomy codes all need proper CodeSystem URIs in FHIR.',
+          'Test with real 837 files from your claims adjudication system. Synthetic data misses the edge cases that break production pipelines.',
+          'Build idempotent transforms. The same 837 input should always produce the same FHIR output — critical for data reconciliation and debugging.',
+        ],
+      },
+
+      // === 837I HOOK + CTA ===
+      {
+        type: 'callout',
+        variant: 'info',
+        title: 'What About 837I (Institutional Claims)?',
+        text: 'This guide covers 837P (Professional claims) only. Institutional claims (837I) follow a different loop structure with revenue codes, UB-04 form fields, occurrence codes, and value codes that do not exist in 837P. If you need 837I-to-FHIR mapping help, leave a comment below or email us at jayesh.chaudhari@aumai.co.in — we will help directly or publish a follow-up guide based on demand.',
+      },
+      {
+        type: 'callout',
+        variant: 'tip',
+        title: 'Download the Full Mapping Resources',
+        text: 'The mapping tables in this blog are based on our detailed 837P specification documents with every element mapped. We also have the complete 837P video course on YouTube for visual learners. Contact us at jayesh.chaudhari@aumai.co.in to get the full mapping spreadsheet, or watch the YouTube playlist linked above for deep-dive walkthroughs.',
+      },
+      { type: 'heading', text: 'How AUM AI Can Help' },
+      {
+        type: 'paragraph',
+        text: 'At AUM AI Healthcare Solutions, we bring deep X12 EDI expertise combined with FHIR R4 implementation experience. Our founder built the 837P video course that has helped hundreds of engineers understand X12 at the element level. We have parsed 837s, mapped 835s, built clinical data warehouse ETL pipelines, and developed the FHIR transformation layers that power CMS-0057-F compliance. Whether you are starting your implementation or optimizing an existing pipeline — we are here to help. Reach out at jayesh.chaudhari@aumai.co.in or leave a comment below.',
+      },
+    ],
+  },
+  {
     slug: 'cms-0057-f-four-fhir-apis-payers-must-build-by-2027',
     title: 'CMS-0057-F: The 4 FHIR APIs Every Payer Must Build by January 2027',
     date: '2026-02-23',

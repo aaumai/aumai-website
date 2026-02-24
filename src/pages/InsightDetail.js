@@ -147,6 +147,21 @@ const renderContentBlock = (block, index) => {
           ))}
         </div>
       );
+    case 'video':
+      return (
+        <div key={index} className="insight-video-wrap">
+          {block.title && <div className="insight-video-title">{block.title}</div>}
+          <div className="insight-video-container">
+            <iframe
+              src={block.url}
+              title={block.title || 'Video'}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      );
     default:
       return null;
   }

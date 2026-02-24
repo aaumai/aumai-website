@@ -605,6 +605,39 @@
   font-weight: 500;
 }
 
+/* ==================== Video Embed ==================== */
+
+.insight-video-wrap {
+  margin: 2rem 0;
+}
+
+.insight-video-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  font-family: var(--font-display);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.insight-video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--slate-200);
+}
+
+.insight-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ==================== Blog Comments ==================== */
 
 .blog-comments {
