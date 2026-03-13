@@ -77,10 +77,158 @@
   transform: translateX(4px);
 }
 
+/* ==================== What We Build Section ==================== */
+
+.home-capabilities-section {
+  background: #fff;
+}
+
+.home-capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.home-capability-card {
+  background: var(--slate-50);
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--slate-200);
+  border-left: 4px solid var(--cap-color);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.home-capability-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-left-color: var(--cap-color);
+}
+
+.home-capability-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--cap-color) 12%, transparent);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.25rem;
+}
+
+.home-capability-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--cap-color);
+}
+
+.home-capability-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  font-family: var(--font-display);
+  margin: 0 0 0.625rem;
+}
+
+.home-capability-desc {
+  font-size: 0.9rem;
+  color: var(--slate-500);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==================== Trust Section ==================== */
+
+.home-trust-section {
+  background: var(--slate-50);
+}
+
+.home-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.home-trust-card {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 1px solid var(--slate-200);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.home-trust-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.home-trust-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--trust-color) 12%, transparent);
+  border-radius: 50%;
+  margin: 0 auto 1.25rem;
+}
+
+.home-trust-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--trust-color);
+}
+
+.home-trust-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  font-family: var(--font-display);
+  margin: 0 0 0.5rem;
+}
+
+.home-trust-desc {
+  font-size: 0.875rem;
+  color: var(--slate-500);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.home-trust-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.home-trust-cta .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-trust-cta .btn svg {
+  transition: transform var(--transition-base);
+}
+
+.home-trust-cta .btn:hover svg {
+  transform: translateX(4px);
+}
+
 /* ==================== Responsive ==================== */
 
 @media (max-width: 1024px) {
   .home-advantages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-capabilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-trust-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -92,5 +240,18 @@
 
   .home-advantage-card {
     padding: 2rem 1.5rem;
+  }
+
+  .home-capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-trust-cta {
+    flex-direction: column;
+    align-items: center;
   }
 }

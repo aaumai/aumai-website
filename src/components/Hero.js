@@ -15,9 +15,9 @@ const Hero = () => {
   ];
 
   const stats = [
-    { value: '50+', label: 'Healthcare Projects' },
-    { value: '25+', label: 'EHR Integrations' },
-    { value: '100%', label: 'HIPAA Compliant' },
+    { value: '6+', label: 'EHR Integrations' },
+    { value: '100+', label: 'Quality Measures Automated' },
+    { value: '95%+', label: 'AI Accuracy' },
   ];
 
   return (
@@ -37,19 +37,19 @@ const Hero = () => {
           <div className="hero-text">
             <div className="hero-badge">
               <span className="badge-dot"></span>
-              Healthcare Engineering & Consulting
+              AI-Powered Healthcare Technology
             </div>
 
             <h1 className="hero-title">
-              Your US Healthcare
-              <span className="hero-title-highlight"> Engineering Partner</span>
+              Turn Clinical Data
+              <span className="hero-title-highlight"> Into Intelligence</span>
             </h1>
 
             <p className="hero-description">
-              We use AI-accelerated engineering to build healthcare technology platforms faster and at a
-              fraction of the cost. From RPM platforms to Risk Adjustment analytics, FHIR integrations
-              to AI automation — a lean expert team powered by AI delivering what used to take large
-              engineering departments.
+              We build AI-powered healthcare platforms that transform how organizations manage clinical
+              data, measure quality, and optimize outcomes. From clinical NLP pipelines to EHR
+              integrations, quality measure engines to AI automation — we deliver production-grade
+              systems at a fraction of the cost.
             </p>
 
             <div className="hero-cta">
