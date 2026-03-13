@@ -36,7 +36,7 @@ const blogPosts = [
       // === OPENING ===
       {
         type: 'paragraph',
-        text: 'The average physician spends nearly 2 hours on documentation for every 1 hour of patient care. Across the US healthcare system, clinicians spend 40% of their time on administrative tasks that have nothing to do with treating patients. This is not a technology gap — it is a data architecture problem. And generative AI is about to change the equation.',
+        text: 'A primary care visit averages 30 minutes. Time the physician spends on the EHR for that visit? 36 minutes. According to the American Medical Association, physicians now spend more time on documentation than with patients — and 22.5% of physicians log over 8 hours of EHR time outside normal work hours every week. This is not a technology gap — it is a data architecture problem. And generative AI is about to change the equation.',
       },
       {
         type: 'paragraph',
@@ -47,8 +47,8 @@ const blogPosts = [
         items: [
           { value: '$504B', label: 'Projected AI Healthcare Market by 2032', color: '#3b82f6' },
           { value: '80%', label: 'Of Clinical Data Is Unstructured', color: '#f43f5e' },
-          { value: '2 Hours', label: 'Documentation Per Hour of Patient Care', color: '#f59e0b' },
-          { value: '40%', label: 'Physician Time on Administrative Tasks', color: '#10b981' },
+          { value: '36 Min', label: 'EHR Time Per 30-Min Patient Visit', color: '#f59e0b' },
+          { value: '22.5%', label: 'Physicians Logging 8+ Hrs EHR After Hours', color: '#10b981' },
         ],
       },
 
