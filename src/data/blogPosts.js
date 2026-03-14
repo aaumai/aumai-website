@@ -217,7 +217,7 @@ const blogPosts = [
       },
       {
         type: 'paragraph',
-        text: 'The measurement challenge for RHTP is conceptually similar to other healthcare quality programs — you need to ingest clinical data from multiple sources, calculate standardized measures, generate provider and program-level scorecards, and produce reports that decision-makers can act on. Healthcare organizations have been doing this for programs like HEDIS and MIPS for years. The difference with RHTP is the data sources (rural providers, RPM devices, telehealth encounters), the measures (program-specific outcome metrics), and the reporting audience (state health agencies and CMS rather than health plans).',
+        text: 'Measuring program outcomes across dozens of rural providers — each with different EHR systems, data formats, and reporting capabilities — is a significant infrastructure challenge. States will need analytics platforms that can aggregate clinical data from multiple sources, track chronic disease outcomes from RPM and telehealth encounters, monitor program utilization across their rural health network, and generate the structured reports that CMS requires. Building this measurement infrastructure is not optional — it is the mechanism through which states demonstrate accountability and justify continued funding.',
       },
       {
         type: 'paragraph',
