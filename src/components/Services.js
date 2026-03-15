@@ -4,26 +4,26 @@ import './Services.css';
 const Services = () => {
   const serviceCategories = [
     {
-      id: 'consulting',
-      category: 'Healthcare Consulting',
-      description: 'Strategic advisory for healthcare technology decisions and digital transformation',
+      id: 'platform-engineering',
+      category: 'Healthcare Platform Engineering',
+      description: 'End-to-end product development and maintenance for healthcare technology platforms',
       icon: 'M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z',
       color: '#f59e0b',
       services: [
         {
-          title: 'Healthcare IT Strategy',
-          description: 'Technology roadmap and architecture consulting for healthcare organizations.',
-          features: ['Digital Transformation', 'Technology Assessment', 'Vendor Evaluation', 'Roadmap Planning']
+          title: 'Healthcare Product Development',
+          description: 'Build and maintain healthcare platforms from architecture to deployment.',
+          features: ['Platform Architecture', 'Full-Stack Development', 'DevOps & CI/CD', 'Ongoing Maintenance']
         },
         {
-          title: 'Compliance & Regulatory',
-          description: 'Navigate HIPAA, CMS regulations, and healthcare compliance requirements.',
-          features: ['HIPAA Readiness', 'CMS Compliance', 'Security Audits', 'Risk Assessment']
+          title: 'Compliance-Ready Engineering',
+          description: 'Build HIPAA-compliant, CMS-ready systems with security built in from day one.',
+          features: ['HIPAA Compliance', 'CMS Readiness', 'Security Engineering', 'Audit Support']
         },
         {
-          title: 'Value-Based Care Advisory',
-          description: 'Strategy and technology for transitioning to value-based care models.',
-          features: ['VBC Strategy', 'Quality Measures', 'Risk Adjustment', 'Population Health']
+          title: 'Value-Based Care Platforms',
+          description: 'Engineering solutions for quality reporting, risk adjustment, and population health.',
+          features: ['Quality Measures Engines', 'Risk Adjustment Systems', 'Population Health Platforms', 'Care Gap Analytics']
         }
       ]
     },
@@ -131,11 +131,11 @@ const Services = () => {
         <div className="section-header">
           <span className="section-label">What We Do</span>
           <h2 className="section-title">
-            Healthcare Engineering <span className="section-title-gradient">& Consulting</span>
+            Healthcare <span className="section-title-gradient">Engineering & Development</span>
           </h2>
           <p className="section-subtitle">
-            End-to-end healthcare technology engineering and strategic consulting for US healthcare organizations.
-            From platform development to compliance advisory — we help you build and scale.
+            End-to-end healthcare technology engineering for US healthcare organizations.
+            From platform development to EHR integrations — we help you build, deploy, and scale.
           </p>
         </div>
 

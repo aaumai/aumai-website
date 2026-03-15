@@ -62,7 +62,7 @@ const About = () => {
         <div className="section-header">
           <span className="section-label">About Us</span>
           <h2 className="section-title">
-            Your Healthcare <span className="section-title-gradient">Engineering & Consulting Partner</span>
+            Your Healthcare <span className="section-title-gradient">Engineering Partner</span>
           </h2>
           <p className="section-subtitle">
             We combine deep US healthcare domain expertise with engineering excellence

@@ -58,8 +58,8 @@ const Contact = () => {
   };
 
   const services = [
-    'Healthcare Consulting',
-    'Healthcare Strategy & Advisory',
+    'Healthcare Platform Engineering',
+    'Healthcare Product Development',
     'EHR Integrations',
     'Custom EHR Development',
     'RCM Software Development',

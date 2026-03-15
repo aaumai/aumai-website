@@ -62,7 +62,7 @@ const CancellationRefund = () => {
               Different services may have specific cancellation and refund terms:
             </p>
             <ul style={{ marginLeft: '30px', marginBottom: '15px' }}>
-              <li>Consultation services: Subject to cancellation notice requirements</li>
+              <li>Discovery and scoping engagements: Subject to cancellation notice requirements</li>
               <li>Development projects: Based on milestone completion and deliverables</li>
               <li>Ongoing support services: May require 30-day notice for cancellation</li>
             </ul>

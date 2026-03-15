@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const services = [
-    'Healthcare Consulting',
+    'Healthcare Platform Engineering',
     'EHR Integrations',
     'Custom EHR Development',
     'FHIR & HL7 Implementation',
@@ -38,7 +38,7 @@ const Footer = () => {
               <img src="/PNG-01-01.png" alt="AUM AI Healthcare Solutions" />
             </Link>
             <p className="footer-tagline">
-              Healthcare software engineering and consulting for the US healthcare industry.
+              Healthcare software engineering and product development for the US healthcare industry.
               Specialized in RPM platforms, EHR integrations, Risk Adjustment, FHIR implementations,
               and AI automation.
             </p>

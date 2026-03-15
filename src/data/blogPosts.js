@@ -12,6 +12,355 @@ export const BLOG_CATEGORIES = [
 
 const blogPosts = [
   {
+    slug: 'cds-hooks-quality-measures-real-time-gap-closure',
+    title: 'Closing Quality Gaps at the Point of Care: A CDS Hooks Architecture for Real-Time Measure Evaluation',
+    date: '2026-03-15',
+    author: 'Jayesh Chaudhari',
+    authorRole: 'Founder & CTO',
+    category: 'Value-Based Care',
+    tags: [
+      'CDS Hooks',
+      'Quality Measures',
+      'FHIR',
+      'Clinical NLP',
+      'HEDIS',
+      'MIPS',
+      'CMS',
+      'EHR Integration',
+      'Clinical Decision Support',
+      'Care Gap Closure',
+      'HL7',
+      'SMART on FHIR',
+    ],
+    excerpt:
+      'Quality gaps are identified retrospectively — days or weeks after a visit where the gap could have been closed. This article walks through an architecture that uses CDS Hooks to evaluate quality measures in real time against a patient\'s FHIR Bundle at the point of care, with an NLP layer to reduce false gaps from incomplete structured data.',
+    readingTime: '14 min read',
+    content: [
+      // === OPENING ===
+      {
+        type: 'paragraph',
+        text: 'Quality measure platforms identify care gaps — missing screenings, overdue tests, lapsed preventive care. Most of these platforms run in batch mode: they ingest claims and clinical data overnight, evaluate patients against measure logic, and produce reports for care coordinators.',
+      },
+      {
+        type: 'paragraph',
+        text: 'The limitation is timing. A diabetic patient visits their endocrinologist, and two weeks later a care coordinator calls to schedule an HbA1c test that could have been ordered during that visit. The data existed. The measure logic existed. It just was not available to the clinician at the point of care.',
+      },
+
+      // === LIMITATIONS OF CURRENT APPROACHES ===
+      { type: 'heading', text: 'Limitations of Current Approaches' },
+      {
+        type: 'paragraph',
+        text: 'Some EHR vendors have built-in care gap alerts. In practice, two problems limit their effectiveness:',
+      },
+      {
+        type: 'paragraph',
+        text: 'Alert fatigue. Gaps fire at every visit regardless of specialty. A dermatologist sees diabetes screening gaps. An orthopedic surgeon sees colorectal cancer screening reminders. When alerts are not relevant to the visit, clinicians stop reading them.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Incomplete structured data. Built-in alerts evaluate coded data within that specific EHR system — diagnoses, procedures, lab results. If a patient had a colonoscopy at an outside facility and it only exists as a mention in a referral note, the alert system does not account for it. The doctor sees a gap that is not real, the patient corrects them, and the tool loses trust.',
+      },
+
+      // === THE ARCHITECTURE ===
+      { type: 'heading', text: 'The Architecture: CDS Hooks + In-Memory Measure Evaluation + NLP' },
+      {
+        type: 'paragraph',
+        text: 'CDS Hooks is an HL7 standard that allows EHR systems to call external decision support services in real time. When a clinician performs an action — opening a chart, prescribing a medication, booking an appointment — the EHR fires an HTTP request to an external service, which responds with recommendation cards displayed in the EHR.',
+      },
+      {
+        type: 'paragraph',
+        text: 'This article walks through an architecture that combines three components:',
+      },
+      {
+        type: 'list',
+        items: [
+          'CDS Hooks as the delivery mechanism — triggered by appointment booking and chart open events',
+          'An in-memory quality measures engine — that evaluates the patient\'s FHIR Bundle against relevant measures in real time',
+          'A clinical NLP layer — that extracts clinical facts from unstructured notes to reduce false gaps',
+        ],
+      },
+
+      // === TWO-TRIGGER DESIGN ===
+      { type: 'subheading', text: 'The Two-Trigger Design' },
+      {
+        type: 'paragraph',
+        text: 'The system fires at two points:',
+      },
+      {
+        type: 'paragraph',
+        text: 'Trigger 1: Appointment Booking. When a patient books an appointment, the EHR sends a FHIR Bundle containing the patient\'s clinical data along with the appointment type and provider specialty. The CDS service evaluates relevant measures, computes any gaps, and caches the results. This is the heavy computation step — it can tolerate slightly higher latency because the appointment is days or weeks away.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Trigger 2: Chart Open (patient-view). When the clinician opens the patient\'s chart before the visit, the EHR fires the standard patient-view hook. The CDS service serves the pre-computed gap cards instantly from cache. The doctor sees actionable recommendations with zero wait time. If no cached result exists (e.g., a walk-in patient), the service computes gaps on demand against the incoming FHIR Bundle.',
+      },
+
+      // === SPECIALTY ROUTING ===
+      { type: 'subheading', text: 'Specialty-Aware Measure Routing' },
+      {
+        type: 'paragraph',
+        text: 'A common problem with care gap alerts is that they evaluate all measures for all patients at all visits. The result is noise. This architecture routes through a specialty filter:',
+      },
+      {
+        type: 'code',
+        text: 'Appointment Type / Provider Specialty\n            │\n            ▼\n    MEASURE SELECTOR\n\n    Primary Care\n    → CMS130 (Colorectal Screening)\n    → CMS122 (Diabetes: HbA1c)\n    → CMS165 (Blood Pressure)\n    → CMS127 (Pneumococcal Vaccine)\n\n    Endocrinology\n    → CMS122 (Diabetes: HbA1c)\n    → CMS134 (Diabetes: Nephropathy)\n\n    Cardiology\n    → CMS347 (Statin Therapy)\n    → CMS165 (Blood Pressure)\n\n    OB/GYN\n    → CMS124 (Cervical Cancer)\n    → CMS153 (Chlamydia Screening)',
+      },
+      {
+        type: 'paragraph',
+        text: 'A cardiologist sees statin and blood pressure gaps. An OB/GYN sees cervical cancer screening gaps. Nobody sees gaps they cannot act on. This is not just a UI filter — it determines which measures the engine even evaluates, reducing computation time and keeping the response focused.',
+      },
+
+      // === MEASURES ENGINE ===
+      { type: 'subheading', text: 'The Measures Engine: In-Memory Evaluation Against FHIR Bundles' },
+      {
+        type: 'paragraph',
+        text: 'Traditional quality measure engines run SQL against claims databases. This approach evaluates measure logic directly against the FHIR Bundle the EHR provides. For each relevant measure, the engine performs three checks:',
+      },
+      {
+        type: 'paragraph',
+        text: 'Step 1: Denominator Qualification. Does this patient belong in the measure\'s denominator? For CMS130 (Colorectal Cancer Screening), is the patient between 45-75 years old? If the patient does not qualify, skip this measure entirely.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Step 2: Numerator Evaluation. Has the required action been completed? For CMS130, is there a completed colonoscopy within the last 10 years, or a FIT/FOBT within the last year? If the numerator is satisfied, no gap. If the numerator is not satisfied, gap identified.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Step 3: Exclusion Check. Does the patient have a valid medical exclusion? For CMS130, does the patient have a history of total colectomy or colorectal cancer? If excluded, suppress the gap.',
+      },
+      {
+        type: 'code',
+        text: 'FHIR Bundle\n    │\n    ▼\nMEASURE EVALUATOR (per measure)\n\n  Parse Bundle:\n  ├─ Patient resource → age, gender\n  ├─ Condition resources → active diagnoses\n  ├─ Procedure resources → completed procedures\n  ├─ Observation resources → lab results\n  └─ MedicationRequest → active medications\n\n  Match against measure value sets:\n  ├─ ICD-10 codes for denominator/exclusion\n  ├─ CPT codes for numerator procedures\n  ├─ LOINC codes for numerator lab results\n  └─ RxNorm codes for medication checks\n\n  Result: GAP / NO GAP / EXCLUDED\n  If GAP → reason + suggested action',
+      },
+
+      // === NLP LAYER ===
+      { type: 'heading', text: 'The NLP Layer: Addressing Incomplete Structured Data' },
+      {
+        type: 'paragraph',
+        text: 'Structured data in any single EHR system is inherently incomplete. Patients receive care across multiple facilities. A colonoscopy done at Hospital B may only exist in Hospital A\'s system as a sentence in a referral note: "Patient underwent screening colonoscopy at City Hospital in March 2024, findings normal."',
+      },
+      {
+        type: 'paragraph',
+        text: 'A traditional measures engine evaluating only structured FHIR resources would flag this patient as having a screening gap. The doctor would see the alert, the patient would say "I already had that done," and the tool would lose credibility.',
+      },
+      {
+        type: 'paragraph',
+        text: 'This architecture adds an NLP extraction layer that processes unstructured clinical documents included in the FHIR Bundle — progress notes, discharge summaries, referral letters, consultation notes.',
+      },
+      {
+        type: 'code',
+        text: 'FHIR Bundle\n    │\n    ├── Structured Resources ──────────────┐\n    │   (Condition, Procedure,             │\n    │    Observation, Medication)           │\n    │                                      │\n    └── DocumentReference / DiagnosticReport\n        (Clinical Notes)                   │\n            │                              │\n            ▼                              │\n        NLP ENGINE                         │\n        Extract:                           │\n        • Procedures at outside facilities │\n        • Lab results mentioned in notes   │\n        • Screenings reported by patient   │\n        • Referral outcomes                │\n                                           │\n        Output:                            │\n        Normalized clinical facts          │\n        with SNOMED/CPT codes +            │\n        confidence scores                  │\n            │                              │\n            ▼                              ▼\n        MERGED CLINICAL PICTURE\n        Structured facts\n        + NLP-extracted facts (with confidence)\n        Deduplicated and code-normalized\n            │\n            ▼\n        MEASURES ENGINE',
+      },
+
+      // === CONFIDENCE-AWARE REPORTING ===
+      { type: 'subheading', text: 'Confidence-Aware Gap Reporting' },
+      {
+        type: 'paragraph',
+        text: 'NLP extraction is not binary. The system assigns confidence scores to extracted facts and adjusts the CDS card accordingly:',
+      },
+      {
+        type: 'paragraph',
+        text: 'High confidence extraction (e.g., "Colonoscopy performed 03/2024 at City Hospital, no polyps found"): Gap is marked as likely closed. Card displays: "Based on clinical notes, colonoscopy may have been completed at an outside facility (March 2024). Please verify."',
+      },
+      {
+        type: 'paragraph',
+        text: 'Low confidence extraction (e.g., "Patient reports prior screening"): Gap is flagged normally but with context. Card displays: "Colorectal screening gap identified. Note: patient may have reported prior screening — please confirm."',
+      },
+      {
+        type: 'paragraph',
+        text: 'No mention found: Gap is flagged normally with full suggested action.',
+      },
+      {
+        type: 'callout',
+        variant: 'info',
+        title: 'Key Design Principle',
+        text: 'The system never silently suppresses a gap based on NLP alone. It shifts the card from "you need to do this" to "this might already be done — please verify." The clinician remains in control, but they have more context to work with.',
+      },
+
+      // === CDS CARD RESPONSE ===
+      { type: 'subheading', text: 'The CDS Card Response' },
+      {
+        type: 'paragraph',
+        text: 'When gaps are identified, the service returns CDS Hooks cards formatted per the HL7 specification:',
+      },
+      {
+        type: 'code',
+        text: '{\n  "cards": [\n    {\n      "uuid": "gap-cms130-patient-12345",\n      "summary": "Colorectal Cancer Screening Gap",\n      "detail": "Patient is 52 years old and has no documented\n        colonoscopy in the past 10 years or FIT/FOBT in the\n        past year. This visit is an opportunity to order\n        screening or discuss with the patient.",\n      "indicator": "warning",\n      "source": {\n        "label": "Quality Measures Engine",\n        "topic": {\n          "code": "CMS130v12",\n          "display": "Colorectal Cancer Screening"\n        }\n      },\n      "suggestions": [\n        {\n          "label": "Order Colonoscopy Screening",\n          "actions": [\n            {\n              "type": "create",\n              "description": "Order colonoscopy referral",\n              "resource": {\n                "resourceType": "ServiceRequest",\n                "code": {\n                  "coding": [\n                    {\n                      "system": "http://www.ama-assn.org/go/cpt",\n                      "code": "45378",\n                      "display": "Diagnostic colonoscopy"\n                    }\n                  ]\n                }\n              }\n            }\n          ]\n        }\n      ],\n      "links": [\n        {\n          "label": "View Full Gap Analysis",\n          "url": "https://measures.example.com/launch",\n          "type": "smart"\n        }\n      ]\n    }\n  ]\n}',
+      },
+      {
+        type: 'list',
+        items: [
+          'Actionable suggestions: The card does not just inform — it offers a one-click order action',
+          'SMART on FHIR link: For complex cases, the clinician can launch a full gap analysis app within the EHR',
+          'Clear language: Written for clinicians, not quality analysts',
+        ],
+      },
+
+      // === COMPLETE ARCHITECTURE ===
+      { type: 'heading', text: 'Complete Architecture Overview' },
+      {
+        type: 'code',
+        text: '┌─────────────────────────────────────────────────────────┐\n│                        EHR SYSTEM                       │\n│                                                         │\n│  TRIGGER 1                      TRIGGER 2               │\n│  Appointment booked             Doctor opens chart       │\n│  (hours/days before visit)      (at time of visit)      │\n│         │                              │                │\n│         │ Patient FHIR Bundle          │ patient-view   │\n│         │ + Appointment context        │ hook           │\n└─────────┼──────────────────────────────┼────────────────┘\n          │                              │\n          ▼                              ▼\n┌─────────────────────────────────────────────────────────┐\n│                  CDS HOOKS SERVICE                      │\n│                                                         │\n│  SPECIALTY ROUTER                                       │\n│  Maps appointment type → relevant measure set           │\n│         │                                               │\n│         ▼                                               │\n│  FHIR BUNDLE PARSER                                     │\n│  ├─ Structured Data → Measures Engine                   │\n│  └─ Clinical Notes → NLP Engine → Merged Clinical       │\n│                       Picture → Measures Engine          │\n│         │                                               │\n│         ▼                                               │\n│  IN-MEMORY MEASURES ENGINE                              │\n│  Denominator → Numerator → Exclusion                    │\n│  Result: GAP (with reason) / NO GAP / EXCLUDED          │\n│         │                                               │\n│         ▼                                               │\n│  CARD BUILDER                                           │\n│  Confidence-aware messaging + order suggestions         │\n│         │                                               │\n│         ▼                                               │\n│  CACHE LAYER                                            │\n│  Computed at booking → served instantly at chart open    │\n└─────────────────────────────────────────────────────────┘',
+      },
+
+      // === ENGINEERING CHALLENGES ===
+      { type: 'heading', text: 'Engineering Challenges and How to Address Them' },
+      {
+        type: 'paragraph',
+        text: 'Any architecture like this has real engineering constraints. Below are the ones that matter most, with concrete examples and approaches to handle them.',
+      },
+
+      // Challenge 1
+      { type: 'subheading', text: '1. FHIR Bundle Completeness Varies by EHR' },
+      {
+        type: 'paragraph',
+        text: 'The quality of your output is only as good as the data the EHR sends. Different EHR systems include different levels of detail in their FHIR Bundles.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: Epic may send a comprehensive Bundle with Conditions, Procedures, Observations, MedicationRequests, and DocumentReference resources. Another EHR might send only coded diagnoses and skip clinical notes entirely. If you are evaluating CMS122 (Diabetes HbA1c Control) and the Bundle does not include Observation resources for lab results, you cannot determine whether the patient had a recent HbA1c test — even if the result exists in the EHR\'s database.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: Use FHIR prefetch templates in your CDS service discovery endpoint to explicitly request the resources you need. The CDS Hooks spec allows this — you tell the EHR exactly which FHIR queries to run and include in the request. Design the measures engine to track which resources were available vs. absent. If a measure requires lab results and none were provided, do not flag a gap — instead return a card with indicator "info" stating: "Unable to evaluate HbA1c status — lab results not available in clinical context." The NLP layer provides a partial fallback here. Even when structured lab data is missing, clinical notes may contain statements like "HbA1c 6.8% drawn 01/2026" that the NLP engine can extract.',
+      },
+
+      // Challenge 2
+      { type: 'subheading', text: '2. Clinical Notes May Not Be in the Bundle' },
+      {
+        type: 'paragraph',
+        text: 'The NLP layer depends on clinical notes being included in the FHIR Bundle as DocumentReference or DiagnosticReport resources. Not all EHRs include these by default.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: A patient had a colonoscopy at an outside facility. The referring physician\'s note in the current EHR says "Patient underwent screening colonoscopy at City Hospital in March 2024, findings normal." If the EHR does not include this note in the Bundle, the NLP layer has nothing to process, and the system flags a false gap.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: Request DocumentReference resources in your prefetch template. Some EHRs will honor this, others will not. When notes are unavailable, the system falls back to structured-data-only evaluation. This should be the default behavior — the NLP layer is additive, not required. Be transparent about this in the card. If the system can only evaluate structured data, it can note: "This evaluation is based on coded clinical data. Procedures documented only in clinical notes may not be reflected."',
+      },
+
+      // Challenge 3
+      { type: 'subheading', text: '3. NLP Confidence and False Negatives' },
+      {
+        type: 'paragraph',
+        text: 'NLP extraction from clinical notes is probabilistic. Extracting the wrong information — or missing relevant information — can lead to incorrect gap suppression or false gaps.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: A clinical note states: "Patient\'s mother had a colonoscopy which revealed polyps." A poorly tuned NLP model might extract "colonoscopy" and associate it with the patient rather than a family member. If the system treats this as evidence that the patient had a colonoscopy, it would incorrectly suppress a real gap.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Another example: "Discussed colonoscopy screening with patient. Patient declined at this time." The mention of colonoscopy is present but it was not performed — it was refused.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: NLP extraction must account for negation ("patient declined"), family history context ("mother had"), and temporal relevance ("colonoscopy 15 years ago" may be outside the measure window). Assign confidence scores to every extraction. Only high-confidence extractions with clear procedure dates and patient attribution should influence the gap evaluation. Never silently suppress a gap based on NLP alone.',
+      },
+
+      // Challenge 4
+      { type: 'subheading', text: '4. Hook Availability Across EHR Systems' },
+      {
+        type: 'paragraph',
+        text: 'The CDS Hooks specification defines standard hooks: patient-view, order-select, order-sign, medication-prescribe. An appointment booking hook is not universally standardized.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: The two-trigger design described above assumes the EHR fires a hook when an appointment is booked. Epic supports custom hooks and may support this. Cerner may not. Smaller EHR systems may only support patient-view.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: Design the system to work with patient-view alone as the baseline. When the chart opens, compute gaps on demand against the incoming Bundle. Where the EHR supports an appointment booking trigger (standard or custom), use it for pre-computation and caching. This is an optimization, not a requirement. For walk-in patients or EHRs without booking hooks, the on-demand path must meet performance targets — structured-data evaluation should respond within 500ms per the CDS Hooks specification recommendation.',
+      },
+
+      // Challenge 5
+      { type: 'subheading', text: '5. NLP Latency at Point of Care' },
+      {
+        type: 'paragraph',
+        text: 'Running NLP on clinical notes takes time. If a doctor opens a chart and the system needs to parse notes, run NLP extraction, merge with structured data, and evaluate measures — all within 500ms — that may not be feasible.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: A primary care patient has 30 clinical notes across 5 years of visits. Running NLP across all of them to check for mentions of colonoscopy, HbA1c results, blood pressure readings, and vaccination records could take several seconds.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: With cache (appointment booking trigger), NLP runs at booking time when latency is not a constraint. By the time the doctor opens the chart, results are pre-computed. Without cache (walk-in / patient-view only), return structured-data results immediately within the 500ms target. Optionally trigger NLP processing asynchronously. Scope the NLP to recent notes (last 12-24 months) and note types most likely to contain relevant information — referral letters, discharge summaries, annual wellness visit notes.',
+      },
+
+      // Challenge 6
+      { type: 'subheading', text: '6. Value Set Maintenance and Measure Updates' },
+      {
+        type: 'paragraph',
+        text: 'Quality measures reference specific code sets (ICD-10, CPT, LOINC, SNOMED, RxNorm) that define which diagnoses, procedures, and lab tests count for each measure. CMS updates these annually, and sometimes mid-year.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: CMS130 (Colorectal Cancer Screening) defines a value set for qualifying screening procedures. If CMS adds a new procedure code to the value set and your engine does not include it, you will flag gaps for patients who had a qualifying screening under the new code.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: Value sets should be externalized from measure logic — stored as configuration, not hardcoded. The VSAC (Value Set Authority Center) maintained by NLM provides downloadable value sets in standard formats. Implement a value set update pipeline that pulls from VSAC on a scheduled basis and validates changes before deployment. Version your measure logic alongside the measurement period.',
+      },
+
+      // Challenge 7
+      { type: 'subheading', text: '7. Specialty-to-Measure Mapping Is Not Standardized' },
+      {
+        type: 'paragraph',
+        text: 'There is no universal standard that maps medical specialties to relevant quality measures. Different health systems may want different mappings based on their quality programs, payer contracts, and clinical workflows.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: A health system participating in an ACO may want all primary care visits to surface HEDIS measures. Another system focused on MIPS reporting may want a different subset. A cardiologist at one organization may be responsible for blood pressure screening; at another, that may be handled only by primary care.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: Make the specialty-to-measure mapping configurable per organization. Provide sensible defaults based on common quality programs (MIPS, HEDIS, ACO), but allow each health system to customize which measures appear for which specialties. This is a configuration challenge, not an engineering one.',
+      },
+
+      // Challenge 8
+      { type: 'subheading', text: '8. Clinician Workflow Disruption' },
+      {
+        type: 'paragraph',
+        text: 'Even well-designed CDS cards add cognitive load. If a primary care doctor sees 25 patients a day and each patient has 2-3 gap cards, that is 50-75 additional decision points.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Example: A doctor opens a chart and sees: colorectal screening gap, diabetes HbA1c gap, blood pressure control gap, and pneumococcal vaccine gap — all for the same patient. The doctor is here for a 15-minute follow-up about the patient\'s knee pain. These gaps are clinically relevant but not relevant to this visit\'s purpose.',
+      },
+      {
+        type: 'paragraph',
+        text: 'How to address it: Limit the number of cards returned per patient. Prioritize by clinical urgency and gap age (how long the gap has been open). Use the indicator field appropriately: critical for safety-related gaps, warning for standard gaps, info for informational items. Consider the visit reason when available. Annual wellness visits are where comprehensive gap review makes sense; a focused follow-up may warrant showing only the highest-priority gap.',
+      },
+
+      // === APPLICABLE USE CASES ===
+      { type: 'heading', text: 'Applicable Use Cases Beyond Quality Measures' },
+      {
+        type: 'paragraph',
+        text: 'The same architectural pattern — CDS Hooks service receiving a FHIR Bundle, evaluating it against rule sets, and returning cards — is applicable to other clinical decision support domains:',
+      },
+      {
+        type: 'list',
+        items: [
+          'Clinical trial matching: Evaluating eligibility criteria against the patient bundle when a chart opens. The measure engine is replaced by a trial criteria engine, but the FHIR parsing, specialty routing, and card building layers remain the same.',
+          'Guideline adherence checking: Comparing a treatment plan against clinical practice guidelines at order-sign. The evaluation logic changes but the integration pattern is identical.',
+          'Prior authorization pre-check: Before an order is signed, checking against known payer rules to flag likely authorization requirements. This uses the order-select hook.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'These are not speculative extensions — they use the same hooks, the same FHIR data, and the same card response format. Organizations building a CDS Hooks service for quality measures are building infrastructure that supports these use cases with relatively incremental effort.',
+      },
+
+      // === CLOSING ===
+      {
+        type: 'quote',
+        text: 'This article describes an architecture for real-time quality measure gap detection using CDS Hooks, in-memory measure evaluation, and clinical NLP. It addresses specific engineering challenges: FHIR Bundle completeness, NLP confidence handling, hook availability across EHR systems, latency constraints, and value set maintenance.',
+      },
+    ],
+  },
+  {
     slug: 'rural-health-transformation-program-50-billion-guide',
     title: 'The $50 Billion Rural Health Transformation Program: What You Need to Know',
     date: '2026-03-14',

@@ -169,7 +169,7 @@ const CaseStudyDetail = () => {
             healthcare organization.
           </p>
           <Link to="/contact" className="btn btn-primary">
-            Schedule a Consultation
+            Start a Conversation
           </Link>
         </div>
       </section>

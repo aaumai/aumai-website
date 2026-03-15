@@ -89,7 +89,7 @@ const Projects = () => {
             Featured <span className="section-title-gradient">Projects</span>
           </h2>
           <p className="section-subtitle">
-            Deep expertise in US healthcare engineering and consulting. We deliver scalable,
+            Deep expertise in US healthcare engineering and product development. We deliver scalable,
             HIPAA-compliant platforms that drive real clinical and business outcomes.
           </p>
         </div>
@@ -187,7 +187,7 @@ const Projects = () => {
             <h3>Ready to Build Your Healthcare Platform?</h3>
             <p>Let's discuss how we can engineer the right solution for your healthcare business.</p>
             <Link to="/contact" className="btn btn-primary">
-              Schedule a Consultation
+              Start a Conversation
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
