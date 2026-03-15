@@ -1929,7 +1929,7 @@ const blogPosts = [
       },
       {
         type: 'paragraph',
-        text: 'At AUM AI, we have integrated GPT-4o into our Quality Measures Platform for two critical workflows: clinical concept extraction from unstructured notes, and intelligent gap closure recommendations.',
+        text: 'At AUM AI, we have integrated LLM-powered NLP into our Quality Measures Platform for two critical workflows: clinical concept extraction from unstructured notes, and intelligent gap closure recommendations. Our NLP engine is model-agnostic and deployable on any cloud provider — Azure OpenAI, Amazon Bedrock, or self-hosted infrastructure — so patient data stays within the client\'s security boundary.',
       },
       {
         type: 'subheading',
@@ -1937,11 +1937,11 @@ const blogPosts = [
       },
       {
         type: 'paragraph',
-        text: 'When processing clinical notes, GPT-4o extracts structured clinical concepts including diagnoses, medications, procedures, and lab results and maps them to standard code systems like ICD-10, SNOMED CT, and LOINC. This powers our gap closure engine by identifying conditions documented in notes but missing from the problem list.',
+        text: 'When processing clinical notes, the LLM engine extracts structured clinical concepts including diagnoses, medications, procedures, and lab results and maps them to standard code systems like ICD-10, SNOMED CT, and LOINC. This powers our gap closure engine by identifying conditions documented in notes but missing from the problem list.',
       },
       {
         type: 'code',
-        text: '// Simplified example of our GPT-4o clinical extraction pipeline\nconst extractClinicalConcepts = async (clinicalNote) => {\n  const response = await openai.chat.completions.create({\n    model: "gpt-4o",\n    messages: [\n      {\n        role: "system",\n        content: `Extract clinical concepts from this note.\n          Return structured JSON with:\n          - conditions: [{name, icd10, snomed, status}]\n          - medications: [{name, rxnorm, dosage, frequency}]\n          - procedures: [{name, cpt, date}]\n          - labResults: [{name, loinc, value, unit, date}]`\n      },\n      { role: "user", content: clinicalNote }\n    ],\n    response_format: { type: "json_object" }\n  });\n  return JSON.parse(response.choices[0].message.content);\n};',
+        text: '// Simplified example of our LLM clinical extraction pipeline\n// Model-agnostic: works with Azure OpenAI, Amazon Bedrock, or self-hosted\nconst extractClinicalConcepts = async (clinicalNote) => {\n  const response = await llmClient.chat({\n    messages: [\n      {\n        role: "system",\n        content: `Extract clinical concepts from this note.\n          Return structured JSON with:\n          - conditions: [{name, icd10, snomed, status}]\n          - medications: [{name, rxnorm, dosage, frequency}]\n          - procedures: [{name, cpt, date}]\n          - labResults: [{name, loinc, value, unit, date}]`\n      },\n      { role: "user", content: clinicalNote }\n    ],\n    responseFormat: "json"\n  });\n  return JSON.parse(response.content);\n};',
       },
       {
         type: 'subheading',
@@ -1949,7 +1949,7 @@ const blogPosts = [
       },
       {
         type: 'paragraph',
-        text: 'The real power comes when we combine extraction with quality measure logic. For every patient, we compare extracted clinical concepts against open quality measure gaps. GPT-4o then generates specific, actionable recommendations for closing each gap, complete with suggested documentation language and applicable codes.',
+        text: 'The real power comes when we combine extraction with quality measure logic. For every patient, we compare extracted clinical concepts against open quality measure gaps. The LLM engine then generates specific, actionable recommendations for closing each gap, complete with suggested documentation language and applicable codes.',
       },
       {
         type: 'heading',
@@ -1957,7 +1957,7 @@ const blogPosts = [
       },
       {
         type: 'paragraph',
-        text: 'Using AI in clinical workflows requires rigorous validation. We run every GPT-4o output through a validation pipeline that checks extracted codes against reference terminologies, flags low-confidence extractions for human review, and maintains a complete audit trail. Our accuracy rates exceed 95% on structured extraction tasks, validated against physician-reviewed gold standards.',
+        text: 'Using AI in clinical workflows requires rigorous validation. We run every LLM output through a validation pipeline that checks extracted codes against reference terminologies, flags low-confidence extractions for human review, and maintains a complete audit trail. Our accuracy rates exceed 95% on structured extraction tasks, validated against physician-reviewed gold standards.',
       },
       {
         type: 'quote',

@@ -6,16 +6,16 @@ const caseStudies = [
     category: 'Value-Based Care',
     color: '#10b981',
     summary:
-      'Built an enterprise-grade clinical quality measurement platform that integrates with 6+ EHR systems, automates HEDIS and MIPS measure calculation using Apache Spark, and leverages GPT-4o for intelligent gap closure recommendations.',
+      'Built an enterprise-grade clinical quality measurement platform that integrates with 6+ EHR systems, automates HEDIS and MIPS measure calculation using Apache Spark, and leverages an LLM-powered NLP engine for intelligent gap closure recommendations.',
     stats: [
       { value: '6+', label: 'EHR Integrations' },
       { value: '100+', label: 'Quality Measures' },
-      { value: 'GPT-4o', label: 'NLP Engine' },
+      { value: 'LLM', label: 'Powered NLP Engine' },
     ],
     problem:
       'Healthcare organizations managing value-based care contracts struggled with fragmented clinical data across multiple EHR systems, manual quality measure calculation prone to errors, and inability to identify care gaps in real time. Existing solutions required months of implementation per EHR and could not scale to handle millions of patient records efficiently.',
     solution:
-      'We designed and built an end-to-end quality measurement platform with a universal EHR integration layer, Apache Spark-powered batch processing for measure calculation, and a GPT-4o-driven NLP engine for automated gap closure analysis. The platform supports HEDIS, MIPS, and custom quality programs with multi-level scorecards from health plan down to individual provider.',
+      'We designed and built an end-to-end quality measurement platform with a universal EHR integration layer, Apache Spark-powered batch processing for measure calculation, and an LLM-powered NLP engine (deployable on any cloud provider) for automated gap closure analysis. The platform supports HEDIS, MIPS, and custom quality programs with multi-level scorecards from health plan down to individual provider.',
     architecture: {
       layers: [
         {
@@ -36,7 +36,7 @@ const caseStudies = [
         {
           name: 'NLP & AI Layer',
           description: 'Intelligent gap closure recommendations and unstructured data extraction',
-          tech: 'GPT-4o, LangChain, Clinical NLP Pipelines',
+          tech: 'LLM-Powered NLP (deployable on Azure OpenAI, Amazon Bedrock, or self-hosted), LangChain',
         },
         {
           name: 'Reporting & Analytics',
@@ -47,7 +47,7 @@ const caseStudies = [
     },
     techStack: [
       { category: 'Backend', items: ['Python', 'Apache Spark', 'Apache Airflow', 'PostgreSQL'] },
-      { category: 'AI / NLP', items: ['GPT-4o', 'LangChain', 'Clinical NLP'] },
+      { category: 'AI / NLP', items: ['LLM-Powered NLP', 'LangChain', 'Azure OpenAI / Amazon Bedrock'] },
       { category: 'Integrations', items: ['FHIR R4', 'HL7v2', 'CCDA', 'QRDA'] },
       { category: 'EHR Systems', items: ['Epic', 'Cerner', 'Athena', 'AllScripts', 'eClinicalWorks', 'NextGen'] },
       { category: 'Frontend', items: ['React', 'D3.js', 'Material UI'] },
@@ -56,7 +56,7 @@ const caseStudies = [
     features: [
       'Universal EHR integration supporting 6+ systems with a single adapter framework',
       'Automated HEDIS and MIPS measure calculation across 100+ quality measures',
-      'GPT-4o-powered NLP for extracting clinical concepts from unstructured notes',
+      'LLM-powered NLP engine (deployable on any cloud provider) for extracting clinical concepts from unstructured notes',
       'Master Data Management with probabilistic patient matching across sources',
       'Multi-level scorecards: health plan, provider group, practice, and individual provider',
       'Real-time care gap identification and closure recommendations',
@@ -80,7 +80,7 @@ const caseStudies = [
       },
       {
         metric: '95%+',
-        description: 'Accuracy in automated gap closure recommendations using GPT-4o',
+        description: 'Accuracy in automated gap closure recommendations using LLM-powered NLP',
       },
     ],
   },
@@ -91,7 +91,7 @@ const caseStudies = [
     category: 'Clinical Trials',
     color: '#3b82f6',
     summary:
-      'Developed an AI-driven platform that matches patients to eligible clinical trials in real time by analyzing 14 FHIR resource types, processing complex eligibility criteria through GPT-4 NLP, and integrating directly into EHR workflows via SMART on FHIR.',
+      'Developed an AI-driven platform that matches patients to eligible clinical trials in real time by analyzing 14 FHIR resource types, processing complex eligibility criteria through LLM-powered NLP, and integrating directly into EHR workflows via SMART on FHIR.',
     stats: [
       { value: '100x', label: 'Faster Recruitment' },
       { value: '99%', label: 'Cost Reduction' },
@@ -100,7 +100,7 @@ const caseStudies = [
     problem:
       'Clinical trial recruitment is one of the biggest bottlenecks in drug development. Over 80% of trials fail to meet enrollment timelines, and manual screening takes an average of 2 hours per patient. Eligibility criteria are complex, spanning demographics, diagnoses, medications, lab results, and procedures, making automated matching extremely difficult.',
     solution:
-      'We built a comprehensive clinical trial matching platform that launches as a SMART on FHIR app directly within the EHR. It pulls patient data across 14 FHIR resource types, uses GPT-4 to parse and normalize complex eligibility criteria from ClinicalTrials.gov, and generates ranked match scores with detailed explanations for each criterion.',
+      'We built a comprehensive clinical trial matching platform that launches as a SMART on FHIR app directly within the EHR. It pulls patient data across 14 FHIR resource types, uses LLM-powered NLP to parse and normalize complex eligibility criteria from ClinicalTrials.gov, and generates ranked match scores with detailed explanations for each criterion.',
     architecture: {
       layers: [
         {
@@ -116,12 +116,12 @@ const caseStudies = [
         {
           name: 'Trial Ingestion Pipeline',
           description: 'Automated import and NLP parsing of trials from ClinicalTrials.gov',
-          tech: 'Python, GPT-4, ClinicalTrials.gov API',
+          tech: 'Python, LLM NLP Engine, ClinicalTrials.gov API',
         },
         {
           name: 'Matching Engine',
           description: 'Multi-dimensional scoring across demographics, conditions, meds, labs, and procedures',
-          tech: 'Node.js/TypeScript, GPT-4, Custom Scoring Algorithms',
+          tech: 'Node.js/TypeScript, LLM-Powered Matching, Custom Scoring Algorithms',
         },
         {
           name: 'Provider Interface',
@@ -132,7 +132,7 @@ const caseStudies = [
     },
     techStack: [
       { category: 'Backend', items: ['Node.js', 'TypeScript', 'Express', 'PostgreSQL'] },
-      { category: 'AI / NLP', items: ['GPT-4', 'Python NLP', 'Clinical NER'] },
+      { category: 'AI / NLP', items: ['LLM-Powered NLP', 'Python NLP', 'Clinical NER'] },
       { category: 'FHIR & Standards', items: ['SMART on FHIR', 'FHIR R4', 'OAuth2', 'CDS Hooks'] },
       { category: 'Code Systems', items: ['SNOMED CT', 'ICD-10', 'LOINC', 'RxNorm', 'CPT', 'NDC'] },
       { category: 'Frontend', items: ['React', 'React Native', 'Material UI'] },
@@ -141,7 +141,7 @@ const caseStudies = [
     features: [
       'SMART on FHIR launch enabling one-click access from within the EHR',
       'Extraction and normalization of 14 FHIR resource types per patient',
-      'GPT-4-powered parsing of complex eligibility criteria into structured rules',
+      'LLM-powered parsing of complex eligibility criteria into structured rules',
       'Multi-dimensional matching across demographics, conditions, medications, labs, and procedures',
       'Mapping across 18+ medical code systems (SNOMED CT, ICD-10, LOINC, RxNorm, CPT, NDC)',
       'Ranked match results with per-criterion explanations and confidence scores',
@@ -261,7 +261,7 @@ const caseStudies = [
     category: 'AI in Healthcare',
     color: '#06b6d4',
     summary:
-      'Developed a production-grade clinical NLP pipeline that uses GPT-4 and custom NER models to extract structured clinical concepts from unstructured physician notes, enabling automated quality measure gap detection and risk adjustment coding.',
+      'Developed a production-grade clinical NLP pipeline that uses LLM-powered AI and custom NER models to extract structured clinical concepts from unstructured physician notes, enabling automated quality measure gap detection and risk adjustment coding.',
     stats: [
       { value: '95%+', label: 'Extraction Accuracy' },
       { value: '50+', label: 'Clinical Concepts' },
@@ -270,7 +270,7 @@ const caseStudies = [
     problem:
       'Over 80% of clinical data exists in unstructured formats — physician notes, discharge summaries, radiology reports, and pathology reports. This data is invisible to quality reporting systems, risk adjustment engines, and population health analytics. Manual chart abstraction is expensive ($15-25 per chart), slow, and error-prone, creating a massive bottleneck in value-based care operations.',
     solution:
-      'We built an end-to-end clinical NLP pipeline that combines custom Named Entity Recognition (NER) models with GPT-4 for context-aware extraction. The system processes clinical notes in real-time, identifies 50+ clinical concept types, maps them to standard terminologies (ICD-10, SNOMED CT, RxNorm, LOINC), and feeds structured data directly into quality measure and risk adjustment engines.',
+      'We built an end-to-end clinical NLP pipeline that combines custom Named Entity Recognition (NER) models with LLM-powered reasoning (deployable on any cloud provider) for context-aware extraction. The system processes clinical notes in real-time, identifies 50+ clinical concept types, maps them to standard terminologies (ICD-10, SNOMED CT, RxNorm, LOINC), and feeds structured data directly into quality measure and risk adjustment engines.',
     architecture: {
       layers: [
         {
@@ -290,8 +290,8 @@ const caseStudies = [
         },
         {
           name: 'Context & Reasoning Layer',
-          description: 'GPT-4 for complex reasoning: assessment vs history, confirmed vs suspected, attributed provider',
-          tech: 'GPT-4, LangChain, Prompt Engineering',
+          description: 'LLM-powered reasoning for complex clinical context: assessment vs history, confirmed vs suspected, attributed provider',
+          tech: 'LLM (Azure OpenAI / Amazon Bedrock / Self-hosted), LangChain, Prompt Engineering',
         },
         {
           name: 'Terminology Mapping & Output',
@@ -302,7 +302,7 @@ const caseStudies = [
     },
     techStack: [
       { category: 'Backend', items: ['Python', 'FastAPI', 'Apache Kafka', 'PostgreSQL'] },
-      { category: 'AI / NLP', items: ['GPT-4', 'SpaCy', 'BioBERT', 'Sentence Transformers', 'LangChain'] },
+      { category: 'AI / NLP', items: ['LLM-Powered NLP', 'SpaCy', 'BioBERT', 'Sentence Transformers', 'LangChain'] },
       { category: 'Standards', items: ['FHIR R4', 'ICD-10', 'SNOMED CT', 'RxNorm', 'LOINC', 'UMLS'] },
       { category: 'Processing', items: ['Apache Spark', 'Redis', 'Celery'] },
       { category: 'Frontend', items: ['React', 'D3.js Visualization'] },
