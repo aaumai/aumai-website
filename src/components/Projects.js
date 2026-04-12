@@ -3,26 +3,28 @@ import { Link } from 'react-router-dom';
 import './Projects.css';
 
 const Projects = () => {
-  // Featured project - RPM Platform
+  // Featured product - AUMY / AUM AI HealthSystem
   const featuredProject = {
-    title: 'Remote Patient Monitoring Platform',
-    category: 'Healthcare Engineering',
-    description: 'End-to-end RPM platform enabling real-time vitals monitoring, clinical alerts, and care coordination for chronic disease management. Integrated with major EHR systems via FHIR R4 APIs, supporting Value-Based Care models.',
+    title: 'AUMY · AUM AI HealthSystem',
+    category: 'Flagship Product · In Production',
+    description: 'A voice-first AI operating system powering a production multi-tenant EHR. Ambient scribing, ICD-10 coding, medication reconciliation, and care-gap evaluation run behind a single voice interface on every screen. Click Start. Talk to the patient. Click Stop. 47 seconds later AUMY returns a signed, coded, care-gap-aware encounter.',
     features: [
-      'Real-time vitals ingestion from 20+ device types',
-      'Clinical alert engine with configurable thresholds',
-      'FHIR R4 integration with Epic & Cerner',
-      'Care team dashboard with risk stratification',
-      'Patient mobile app with medication reminders',
-      'CMS RTM & RPM billing code automation'
+      'Ambient scribe with structured SOAP, HPI, and vitals extraction',
+      'ICD-10 + CPT + RxNorm coding validated against reference sets',
+      'Voice-command care-gap evaluation (multi-agent eCQM engine)',
+      'Visual DAG workflow engine for clinical orchestration',
+      'FHIR R4 native data model with ABDM/ABHA integration',
+      'Multi-tenant PostgreSQL with row-level security from day one'
     ],
-    technologies: ['React.js', 'Node.js', 'Python', 'FHIR R4', 'AWS', 'PostgreSQL', 'HL7'],
+    technologies: ['TypeScript', 'Next.js', 'React Native', 'PostgreSQL + RLS', 'FHIR R4', 'ABDM', 'AWS', 'Claude API', 'pgvector'],
     stats: [
-      { value: '50K+', label: 'Patients Monitored' },
-      { value: '20+', label: 'Device Integrations' },
-      { value: '99.9%', label: 'Uptime SLA' }
+      { value: '47s', label: 'Conversation to Signed Encounter' },
+      { value: '1,000+', label: 'Medical Codes Pre-loaded' },
+      { value: 'FHIR R4', label: 'Native Data Model' }
     ],
-    color: '#3b82f6'
+    color: '#8b5cf6',
+    link: '/aumy',
+    linkLabel: 'Explore AUMY'
   };
 
   const projects = [
@@ -131,6 +133,17 @@ const Projects = () => {
                   ))}
                 </div>
               </div>
+
+              {featuredProject.link && (
+                <div className="featured-cta">
+                  <Link to={featuredProject.link} className="btn btn-primary">
+                    {featuredProject.linkLabel}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="featured-visual">

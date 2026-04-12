@@ -16,6 +16,7 @@ import TermsConditions from './pages/TermsConditions';
 import CancellationRefund from './pages/CancellationRefund';
 import DabbewaalaApp from './pages/DabbewaalaApp';
 import AumaiAnalytics from './pages/AumaiAnalytics';
+import AumyProduct from './pages/AumyProduct';
 import Analytics from './components/Analytics';
 import './App.css';
 
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/aumy" element={<AumyProduct />} />
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/case-studies" element={<CaseStudiesPage />} />
                 <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />

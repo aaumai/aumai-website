@@ -437,3 +437,13 @@
     font-size: 1.5rem;
   }
 }
+
+.featured-cta {
+  margin-top: 1.75rem;
+}
+
+.featured-cta .btn svg {
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+}

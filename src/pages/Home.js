@@ -32,6 +32,89 @@ const Home = () => {
     <div className="home-page">
       <Hero />
 
+      {/* Flagship Product: AUMY */}
+      <section className="section home-product-section">
+        <div className="container">
+          <div className="home-product-card">
+            <div className="home-product-info">
+              <span className="home-product-badge">
+                <span className="home-product-badge-dot"></span>
+                Flagship Product · In Production
+              </span>
+              <h2 className="home-product-title">
+                Meet <span className="home-product-title-gradient">AUMY</span>.
+              </h2>
+              <p className="home-product-tagline">
+                The voice-first AI operating system powering AUM AI HealthSystem.
+              </p>
+              <p className="home-product-description">
+                A production multi-tenant EHR where ambient scribing, ICD-10 coding, medication
+                reconciliation, and care-gap evaluation all run behind a single voice interface.
+                Click Start. Talk to the patient. Click Stop. 47 seconds later AUMY returns a signed,
+                coded, care-gap-aware encounter.
+              </p>
+              <ul className="home-product-features">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  Ambient scribe with structured SOAP, HPI, and vitals
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  ICD-10 + CPT + RxNorm coding validated against reference sets
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  Multi-agent care gap evaluation from a voice command
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  FHIR R4 + ABDM ready, multi-tenant from day one
+                </li>
+              </ul>
+              <div className="home-product-cta">
+                <Link to="/aumy" className="btn btn-primary">
+                  Explore AUMY
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link to="/insights/introducing-aumy-ai-operating-system-for-healthcare" className="btn btn-secondary">
+                  Read the Launch
+                </Link>
+              </div>
+            </div>
+
+            <div className="home-product-visual">
+              <div className="home-product-stat-card home-product-stat-1">
+                <span className="home-product-stat-value">47s</span>
+                <span className="home-product-stat-label">Conversation to signed encounter</span>
+              </div>
+              <div className="home-product-stat-card home-product-stat-2">
+                <span className="home-product-stat-value">2 hrs</span>
+                <span className="home-product-stat-label">Charting time saved per visit</span>
+              </div>
+              <div className="home-product-stat-card home-product-stat-3">
+                <span className="home-product-stat-value">1,000+</span>
+                <span className="home-product-stat-label">Medical codes pre-loaded</span>
+              </div>
+              <div className="home-product-stat-card home-product-stat-4">
+                <span className="home-product-stat-value">FHIR R4</span>
+                <span className="home-product-stat-label">Native data model</span>
+              </div>
+              <div className="home-product-glow"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* AI-Accelerated Engineering Section */}
       <section className="section home-ai-section">
         <div className="container">

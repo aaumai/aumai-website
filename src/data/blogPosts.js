@@ -1,5 +1,6 @@
 export const BLOG_CATEGORIES = [
   'All',
+  'Product',
   'AI in Healthcare',
   'FHIR & Interoperability',
   'Value-Based Care',
@@ -11,6 +12,247 @@ export const BLOG_CATEGORIES = [
 ];
 
 const blogPosts = [
+  {
+    slug: 'introducing-aumy-ai-operating-system-for-healthcare',
+    title: 'Introducing AUMY: The Voice-First AI Operating System for Modern Health Systems',
+    date: '2026-04-12',
+    author: 'Jayesh Chaudhari',
+    authorRole: 'Founder & CTO',
+    category: 'Product',
+    tags: [
+      'AUMY',
+      'AUM AI HealthSystem',
+      'Ambient Scribe',
+      'Voice AI',
+      'EHR',
+      'FHIR R4',
+      'ABDM',
+      'Multi-Agent',
+      'Clinical Decision Support',
+      'Physician Burnout',
+      'Product Launch',
+    ],
+    excerpt:
+      'We just saved a doctor two hours of charting in forty-seven seconds. Meet AUMY — the voice-first AI operating system powering AUM AI HealthSystem. A production multi-tenant EHR that turns a patient conversation into a coded, billable, care-gap-aware encounter before the clinician stands up.',
+    readingTime: '13 min read',
+    content: [
+      // === OPENING ===
+      {
+        type: 'callout',
+        variant: 'tip',
+        title: 'This is not a deck. Not a roadmap.',
+        text: 'AUM AI HealthSystem is a production multi-tenant EHR platform with AUMY — a voice-first AI operating system — running on every screen. Ambient scribe, structured SOAP notes, ICD-10 + CPT + RxNorm coding, and multi-agent care gap evaluation. Built on FHIR R4 and ABDM from day one.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Physicians spend roughly two hours on documentation for every one hour of patient care. That is not a productivity number. That is the reason half the physicians in the country are burned out, the reason revenue leaks through under-coded encounters, and the reason care gaps sit open for months after the visit where they could have been closed.',
+      },
+      {
+        type: 'paragraph',
+        text: 'We have been building a health system from the ground up to attack that problem — not with a chatbot bolted onto an old EHR, but with a voice-first AI layer that is native to every workflow. We call it AUMY, and it powers AUM AI HealthSystem.',
+      },
+      {
+        type: 'paragraph',
+        text: 'This article walks through what AUMY does, the 47-second encounter that made us stare at our screens, the architecture that makes it possible, and where the product is going next.',
+      },
+
+      // === THE 47 SECOND DEMO ===
+      { type: 'heading', text: 'The 47-Second Encounter' },
+      {
+        type: 'paragraph',
+        text: 'A physician finishes a patient visit. Historically, the next twenty minutes would be spent writing a SOAP note, picking ICD-10 codes, reconciling medications, entering vitals, and checking care gaps. Instead, here is what the clinician did:',
+      },
+      {
+        type: 'list',
+        items: [
+          'Clicked Start Ambient at the beginning of the visit.',
+          'Talked to the patient like a human being — no scripted prompts, no keyboard.',
+          'Clicked Stop when the visit ended.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'Forty-seven seconds later, AUMY returned a complete encounter ready for review:',
+      },
+      {
+        type: 'list',
+        items: [
+          'Chief complaint and history of present illness, written in clinical voice, not transcript voice.',
+          'A fully structured SOAP note — subjective, objective, assessment, plan.',
+          'ICD-10-coded primary and secondary diagnoses mapped to the assessment.',
+          'Medications reconciled against RxNorm with dose, route, frequency, and sig.',
+          'Vitals parsed out of the conversation and written into discrete observation fields.',
+          'Allergy cross-check against the active problem list and new prescriptions.',
+          'CPT procedure codes identified and queued for the billing worklist.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'Every item is reviewable, editable, and approved with a single click. Nothing is saved to the chart until the physician signs off. The structured output is not decorative — every ICD, RxNorm, LOINC, and CPT code is validated against its reference set before it ever reaches the screen.',
+      },
+      {
+        type: 'callout',
+        variant: 'info',
+        title: 'The part that made us stare at the screen',
+        text: 'The physician asked out loud: "Hey AUMY, any open care gaps on this patient?" A multi-agent workflow spun up, pulled eCQM measures, ran denominator, exclusion, and numerator checks in parallel, and came back with: "Three open care gaps. HbA1c overdue by four months. Annual retinal screening missed. Blood pressure uncontrolled on current therapy. Here is the evidence." All from a voice command. No clicking. No hunting.',
+      },
+
+      // === WHAT AUMY ACTUALLY IS ===
+      { type: 'heading', text: 'What AUMY Actually Is' },
+      {
+        type: 'paragraph',
+        text: 'AUMY is not a chatbot. It is not a single LLM call. It is a voice-first AI operating system that lives inside AUM AI HealthSystem, with a consistent interface on every screen and a different set of tools depending on where the clinician is standing in the workflow.',
+      },
+      {
+        type: 'paragraph',
+        text: 'If you are on a patient chart, AUMY can summarize the history, pull care gaps, or draft a referral letter. If you are on the scheduling screen, AUMY can find the next available slot and book it. If you are in the middle of an encounter, AUMY runs as an ambient scribe. Same AI surface, different tools.',
+      },
+      {
+        type: 'subheading', text: 'Four Things Under the Hood',
+      },
+      {
+        type: 'list',
+        items: [
+          'AUMY — the voice, chat, and image-input interface on every screen. Knows the current page context, the current patient, the current facility, and the current user.',
+          'A workflow engine — a visual DAG editor where clinical workflows are composed as graphs of nodes. Each node can be a deterministic step, an API call, or a sub-agent.',
+          'Specialized sub-agents — focused experts (scribe, coder, care-gap evaluator, prior-auth drafter, referral writer) that can be composed into any workflow.',
+          'A structured FHIR R4 data model underneath everything — so every AI output lands in a place that can be queried, audited, and exchanged.',
+        ],
+      },
+
+      // === ARCHITECTURE ===
+      { type: 'heading', text: 'Architecture: A Multi-Tenant EHR with AI on the Inside' },
+      {
+        type: 'paragraph',
+        text: 'The most important architectural decision we made is that AI is not a bolt-on. It sits inside the data model, inside the permission layer, and inside the workflow engine. A sub-agent that drafts a prescription is bound by the same RBAC rules as the clinician using it. A scribe that writes a SOAP note writes it into the same structured tables that human documentation would write into.',
+      },
+      {
+        type: 'code',
+        text: '┌────────────────────────────────────────────────────────────┐\n│                     AUM AI HEALTHSYSTEM                    │\n│                                                            │\n│  ┌──────────────────────────────────────────────────────┐  │\n│  │                  AUMY (Voice + Chat)                 │  │\n│  │          Every screen. Context-aware.                │  │\n│  │   ┌─────────────────────────────────────────────┐    │  │\n│  │   │              ROUTER / ORCHESTRATOR          │    │  │\n│  │   │   intent → workflow → sub-agents → tools    │    │  │\n│  │   └─────────────────────────────────────────────┘    │  │\n│  └──────────────────────────────────────────────────────┘  │\n│          │                │                │              │\n│          ▼                ▼                ▼              │\n│   ┌────────────┐   ┌────────────┐   ┌────────────┐         │\n│   │  SCRIBE    │   │  CODER     │   │ CARE-GAP   │         │\n│   │  AGENT     │   │  AGENT     │   │ AGENT      │         │\n│   │  (SOAP,    │   │  (ICD-10,  │   │ (eCQM      │         │\n│   │   HPI,     │   │   CPT,     │   │  engine)   │         │\n│   │   vitals)  │   │   RxNorm)  │   │            │         │\n│   └─────┬──────┘   └─────┬──────┘   └─────┬──────┘         │\n│         │                │                │                │\n│         ▼                ▼                ▼                │\n│  ┌──────────────────────────────────────────────────────┐  │\n│  │              WORKFLOW ENGINE (DAG)                   │  │\n│  │   Deterministic steps + API calls + sub-agents       │  │\n│  └──────────────────────────────────────────────────────┘  │\n│                          │                                 │\n│                          ▼                                 │\n│  ┌──────────────────────────────────────────────────────┐  │\n│  │         FHIR R4 DATA MODEL (PostgreSQL + RLS)        │  │\n│  │  Patient · Encounter · Condition · Medication ·      │  │\n│  │  Observation · Procedure · DocumentReference · …     │  │\n│  └──────────────────────────────────────────────────────┘  │\n│                          │                                 │\n│                          ▼                                 │\n│  ┌──────────────────────────────────────────────────────┐  │\n│  │    REFERENCE SETS (1,000+ medical codes pre-loaded)  │  │\n│  │  ICD-10 · CPT · LOINC · RxNorm · SNOMED CT · CVX     │  │\n│  └──────────────────────────────────────────────────────┘  │\n└────────────────────────────────────────────────────────────┘',
+      },
+
+      // === MULTI-TENANCY ===
+      { type: 'subheading', text: 'Multi-Tenant from Day One' },
+      {
+        type: 'paragraph',
+        text: 'Every table in the database carries a tenant_id, and PostgreSQL row-level security enforces isolation at the query layer. A tenant is an organization — for example, a hospital group — and each tenant has one or more facilities underneath it. The application layer also applies a facility scope on top of the tenant scope, so a receptionist assigned to the Hadapsar branch cannot accidentally see schedules from the Baner branch.',
+      },
+      {
+        type: 'paragraph',
+        text: 'This matters for AI. Every AUMY invocation carries the tenant context and facility context forward into every sub-agent, every tool call, and every database read. A care gap agent cannot accidentally pull data from a patient belonging to a different tenant, because the underlying query would be blocked by RLS before the agent ever saw the data.',
+      },
+
+      // === STANDARDS ===
+      { type: 'subheading', text: 'FHIR R4 and ABDM Ready' },
+      {
+        type: 'paragraph',
+        text: 'Clinical data is stored in relational tables mapped to FHIR R4 resources. That means a SOAP note AUMY writes is persisted as structured sections in a DocumentReference-shaped record, diagnoses land in a Condition-shaped record, medications in MedicationRequest, vitals in Observation, and so on. Any of it can be serialized out as a FHIR Bundle on request.',
+      },
+      {
+        type: 'paragraph',
+        text: 'For India, this unlocks ABDM — the Ayushman Bharat Digital Mission — as a first-class integration. Patients can link an ABHA ID, health records can be exchanged through the consent manager, and the health system is interoperable with other ABDM-compliant providers without a separate integration project.',
+      },
+
+      // === MODULAR ===
+      { type: 'subheading', text: 'Modular and Sellable' },
+      {
+        type: 'paragraph',
+        text: 'Every module is independently gated. A small clinic that only needs appointments, encounters, and basic billing can buy exactly that. A multi-specialty hospital that wants telehealth, remote patient monitoring, and ambient scribe can turn those modules on without migrating. Module access is enforced in the service layer, not just hidden from the UI, so there is no "demo lock" to pick. The economics match the scale of the customer.',
+      },
+
+      // === SUB AGENTS ===
+      { type: 'heading', text: 'Why Specialized Sub-Agents Beat One Giant Prompt' },
+      {
+        type: 'paragraph',
+        text: 'It is tempting to build a single enormous prompt that does everything. We tried it. It is the wrong answer for clinical AI for three reasons.',
+      },
+      {
+        type: 'paragraph',
+        text: 'First, clinical tasks have different correctness criteria. An ambient scribe is judged on fidelity to the conversation. A coder is judged on validity against CMS coding rules and whether the codes map to documented findings. A care gap agent is judged on adherence to CMS eCQM specifications. Mixing those criteria into one prompt forces the model to average across them and loses on all three.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Second, auditability. When a care gap is flagged, a compliance officer has to be able to point at the inputs, the measure logic, the value sets, and the decision. A specialized care-gap sub-agent leaves a clean trail. A general-purpose agent leaves "the model decided."',
+      },
+      {
+        type: 'paragraph',
+        text: 'Third, composability. A workflow built out of small sub-agents can swap one out without rewriting the rest. We can upgrade the coder without touching the scribe. We can run the care-gap agent on its own schedule for population-health outreach without reusing any encounter-time code.',
+      },
+      {
+        type: 'callout',
+        variant: 'tip',
+        title: 'The mental model',
+        text: 'Think of AUMY as the conductor and the sub-agents as a section of specialists. The conductor knows what the clinician wants. The specialists know how to do one thing well. The workflow engine is the sheet music that tells them when to play.',
+      },
+
+      // === WORKFLOW ENGINE ===
+      { type: 'heading', text: 'The Workflow Engine: Clinical DAGs You Can Actually See' },
+      {
+        type: 'paragraph',
+        text: 'Clinical workflows are not linear. A diabetic patient encounter might branch on vitals, pull a prior HbA1c, check medication adherence, and escalate to an endocrinologist referral — all in parallel, all conditionally. Hard-coding this in application code makes every new workflow a deployment.',
+      },
+      {
+        type: 'paragraph',
+        text: 'AUMY uses a visual DAG editor where each node is either a deterministic step (an API call, a database write, a form submission), or a sub-agent invocation. Edges carry typed data between nodes. Conditional branches are first-class. The output of one node is the input to the next, and the whole graph is versioned alongside the tenant configuration.',
+      },
+      {
+        type: 'paragraph',
+        text: 'A clinical informaticist can design a "new diabetic visit" workflow without writing code. The ambient scribe runs first, its structured output flows into a care-gap evaluator for diabetes-specific measures, that output branches into either a medication adjustment node or a referral node, and the whole thing posts back to the chart through the FHIR data layer. If the workflow needs to change because a measure specification changed, the change is a graph edit, not a release.',
+      },
+
+      // === STATS ===
+      { type: 'heading', text: 'The Math That Keeps Us Up at Night' },
+      {
+        type: 'stats',
+        items: [
+          { value: '2 hrs', label: 'Charting per hour of patient care', color: '#f43f5e' },
+          { value: '12,000', label: 'Hours/year lost in a 30-bed practice', color: '#f59e0b' },
+          { value: '$3.6M', label: 'Physician time burned on documentation', color: '#8b5cf6' },
+          { value: '47 sec', label: 'What AUMY returns the note in', color: '#10b981' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'The documentation ratio comes from published NEJM and AMA studies of ambulatory care. A mid-sized practice multiplies that ratio by its clinical FTE count and arrives at roughly twelve thousand hours a year of physician time spent on keyboards instead of patients. Valued at ambulatory physician time, that is on the order of three and a half million dollars before you even count burnout, attrition, or missed billing.',
+      },
+      {
+        type: 'paragraph',
+        text: 'AUMY is designed to give that time back — not by squeezing physicians harder, but by removing the work that should not have required a physician in the first place. A trained model can write a SOAP note from a conversation. A trained model can pick the right ICD-10 code from the assessment. A trained model can check a patient against a quality measure specification. None of those are the valuable part of being a doctor. The conversation is.',
+      },
+
+      // === WHATS NEXT ===
+      { type: 'heading', text: 'What Is Next' },
+      {
+        type: 'paragraph',
+        text: 'Ambient scribe, coding, and care gaps are shipping in the current release. The roadmap from here is focused on moving AI from "documents the visit" to "shapes the visit."',
+      },
+      {
+        type: 'list',
+        items: [
+          'Clinical Decision Support on every encounter — drug interaction checks, dose range warnings, contraindication alerts, and guideline-based nudges rendered in the same AUMY surface as the scribe.',
+          'Predictive risk scoring — readmission risk, clinical deterioration early warnings, and no-show prediction for scheduling, trained on de-identified tenant data with opt-in consent.',
+          'Remote patient monitoring with AI triage — BP monitors, glucometers, and pulse oximeters feeding a triage agent that escalates only what needs a human.',
+          'Multi-language ambient scribe — Hindi, Marathi, and English-plus-Hindi code-switching, because that is how patient conversations actually happen in India.',
+          'Prior authorization automation — an agent that drafts the PA packet from the encounter and the payer rules.',
+        ],
+      },
+
+      // === CTA ===
+      { type: 'heading', text: 'Talk to Us' },
+      {
+        type: 'paragraph',
+        text: 'If you are a hospital CEO, a health system leader, or an investor who believes healthcare deserves software that works for clinicians, we would like to show you AUMY live. Not a demo video. The real product, on a real tenant, with a real patient chart.',
+      },
+      {
+        type: 'paragraph',
+        text: 'AUM AI HealthSystem is in active deployment. Our first clinics are going live this quarter. If you want to be on the list for an early pilot, or you just want to see the 47-second encounter in person, reach out through the contact page on this site.',
+      },
+      {
+        type: 'quote',
+        text: 'We are not building another EHR. We are building the operating system that every future health system will run on — one where AI is native, voice is the default interface, and the clinician\'s most valuable hour goes back to the patient.',
+      },
+    ],
+  },
   {
     slug: 'cds-hooks-quality-measures-real-time-gap-closure',
     title: 'Closing Quality Gaps at the Point of Care: A CDS Hooks Architecture for Real-Time Measure Evaluation',
