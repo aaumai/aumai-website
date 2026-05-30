@@ -219,6 +219,85 @@
   .rev-how-index { flex-direction: row; align-items: center; }
 }
 
+/* ================= BONUS: LIGHT CLINICAL (small, last) ================= */
+.rev-bonus-section { padding-top: 0; }
+
+.rev-bonus {
+  max-width: 940px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 1.75rem 2rem;
+}
+
+.rev-bonus-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.rev-bonus-pill {
+  margin-bottom: 0;
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.28);
+  color: #cbd5e1;
+}
+
+.rev-bonus-note {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.55;
+  flex: 1 1 320px;
+}
+
+.rev-bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.rev-bonus-item {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.rev-bonus-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+}
+
+.rev-bonus-icon svg { width: 21px; height: 21px; }
+
+.rev-bonus-item h4 {
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.rev-bonus-item p {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .rev-bonus-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+}
+
 /* ================= ROI TILES ================= */
 .rev-roi-tiles {
   border-top: none;

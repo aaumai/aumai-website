@@ -28,7 +28,7 @@ const AumyRevenueGenerator = () => {
 
   const engineSteps = [
     { number: '01', title: 'Catch every lead — any source', text: 'Instagram DMs, WhatsApp, a missed call, a walk-in, a referral, Google, or a paid ad — every enquiry instantly opens a WhatsApp conversation. Nothing slips past a busy front desk.' },
-    { number: '02', title: 'Book it — and keep the slot', text: 'AUMY answers questions, qualifies, and books in seconds, 24/7. Then it reminds and confirms — so the appointments you win actually show up, and no-shows fall away.' },
+    { number: '02', title: 'Book it — and keep the slot', text: 'AUMY answers questions, qualifies, and books in seconds, 24/7. Then it reminds and confirms — and automatically rebooks the few who still miss — so the appointments you win actually show up.' },
     { number: '03', title: 'Revive patients you already have', text: 'Overdue and dormant patients are re-engaged automatically on WhatsApp — reactivating revenue you already paid to acquire, at near-zero marginal cost.' },
     { number: '04', title: 'Keep them for life', text: 'Recall cadences, treatment-plan follow-ups, and review requests turn one visit into years of repeat appointments, accepted treatments, and referrals.' },
   ];
@@ -47,8 +47,14 @@ const AumyRevenueGenerator = () => {
       icon: 'M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z',
     },
     {
-      title: 'Fewer No-Shows',
-      description: 'Timed WhatsApp reminders and confirmations turn booked slots into kept appointments. Every recovered no-show is a slot you have already sold — now actually filled. Pure margin, zero extra effort.',
+      title: 'Cold Lead Retry',
+      description: 'Most enquiries never reply to the first message — so AUMY does not stop at one. It follows up cold and unconverted leads with a polite, well-timed sequence until they book or clearly opt out. Leads your front desk would have written off quietly turn into appointments.',
+      color: '#ec4899',
+      icon: 'M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5',
+    },
+    {
+      title: 'No-Show Prevention & Rebooking',
+      description: 'Timed reminders and confirmations keep booked slots filled — and when a patient still misses, AUMY automatically reaches out to rebook them into the next open slot. Every recovered no-show is a chair you had already sold, now actually earning.',
       color: '#0ea5e9',
       icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008z',
     },
@@ -65,8 +71,8 @@ const AumyRevenueGenerator = () => {
       icon: 'M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z',
     },
     {
-      title: 'Reviews & Reputation',
-      description: 'Automated, well-timed review requests turn happy patients into 5-star social proof — which lowers your acquisition cost and wins the next patient before they even call.',
+      title: 'Google Reviews & Local SEO',
+      description: 'After a good visit, AUMY asks happy patients for a Google review at exactly the right moment. More 5-star reviews push you up local search and Google Maps — so new patients find you first — while the social proof wins them before they even call.',
       color: '#34d399',
       icon: 'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z',
     },
@@ -106,12 +112,12 @@ const AumyRevenueGenerator = () => {
     {
       tag: 'Capture',
       title: 'Every lead, every channel — caught and booked',
-      text: 'Most clinics lose patients in the gap between "they enquired" and "someone called back." Instagram DMs, WhatsApp messages, missed calls, walk-ins, referrals, Google, paid ads — AUMY answers the instant any of them arrives, qualifies, checks availability, and books the slot. Day or night, with no one sitting by the phone. The front desk stops being the bottleneck, and leads that would have gone cold become appointments on the calendar.',
+      text: 'Most clinics lose patients in the gap between "they enquired" and "someone called back." Instagram DMs, WhatsApp messages, missed calls, walk-ins, referrals, Google, paid ads — AUMY answers the instant any of them arrives, qualifies, checks availability, and books the slot. Day or night, with no one sitting by the phone. And the leads who don’t reply right away aren’t written off: AUMY retries them with a polite, well-timed sequence until they book or opt out. The front desk stops being the bottleneck, and leads that would have gone cold become appointments on the calendar.',
     },
     {
       tag: 'No-shows',
       title: 'Booked slots become kept appointments',
-      text: 'A booking you never keep is worse than no booking — it blocks a chair and earns nothing. AUMY sends timed reminders and confirmations on WhatsApp, lets patients reschedule in a tap, and quietly fills the gaps. Each recovered no-show is revenue you had already sold, now actually collected — and one of the fastest wins a clinic sees.',
+      text: 'A booking you never keep is worse than no booking — it blocks a chair and earns nothing. AUMY sends timed reminders and confirmations on WhatsApp, lets patients reschedule in a tap, and when someone still misses, automatically reaches out to rebook them into the next open slot. Each recovered no-show is revenue you had already sold, now actually collected — one of the fastest wins a clinic sees.',
     },
     {
       tag: 'Reactivation',
@@ -176,6 +182,14 @@ const AumyRevenueGenerator = () => {
     },
   ];
 
+  // Optional light-clinical add-ons. Kept deliberately small + last so they
+  // never dilute the revenue-generation story, which is the point of the page.
+  const clinicalBonus = [
+    { title: 'Telehealth', text: 'Run secure video consults right inside AUMY — no separate tool to set up or pay for.', icon: 'M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z' },
+    { title: 'Auto Documentation', text: 'AUMY listens and writes the clinical note for you — accurate, structured, saved to the record. Doctors stop typing and get their time back.', icon: 'M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z' },
+    { title: 'Billing & Invoicing', text: 'Invoices, payments, and receipts in the same app — one source of truth, no extra billing software.', icon: 'M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z' },
+  ];
+
   return (
     <div className="aumy-page rev-page">
       {/* Hero */}
@@ -204,9 +218,10 @@ const AumyRevenueGenerator = () => {
             <p className="aumy-hero-subtitle">
               AUMY is the revenue engine behind your clinic. It catches every enquiry — from Instagram,
               WhatsApp, a missed call, a walk-in, a referral, Google, or a paid ad — books it on WhatsApp in
-              seconds, cuts no-shows, wins back dormant patients, lifts treatment acceptance, and earns more
-              5-star reviews. And when you do run ads, Meta CAPI makes every rupee work harder. Not more
-              software to run — more patients, more kept, more revenue.
+              seconds, chases down cold leads, prevents and rebooks no-shows, wins back dormant patients, lifts
+              treatment acceptance, and earns more 5-star Google reviews that push you up local search. And when
+              you do run ads, Meta CAPI makes every rupee work harder. Not more software to run — more patients,
+              more kept, more revenue.
             </p>
 
             <div className="aumy-hero-cta">
@@ -473,6 +488,37 @@ const AumyRevenueGenerator = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bonus: light clinical, for clinics that want one system. Kept small and
+          last on purpose so it never competes with the revenue story above. */}
+      <section className="section aumy-demo-section rev-bonus-section" id="bonus-clinical">
+        <div className="container">
+          <div className="rev-bonus">
+            <div className="rev-bonus-head">
+              <span className="section-label rev-bonus-pill">Bonus · One System</span>
+              <span className="rev-bonus-note">
+                Optional and opt-in. Prefer to run your whole clinic in one app? AUMY includes a light
+                clinical layer too — so you are not stitching five tools together.
+              </span>
+            </div>
+            <div className="rev-bonus-grid">
+              {clinicalBonus.map((b, i) => (
+                <div key={i} className="rev-bonus-item">
+                  <div className="rev-bonus-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+                      <path d={b.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4>{b.title}</h4>
+                    <p>{b.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
