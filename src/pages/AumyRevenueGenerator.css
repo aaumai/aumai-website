@@ -14,6 +14,120 @@
   line-height: 1.5;
 }
 
+/* ================= THE HIDDEN LEAK (cost of the problem) ================= */
+.rev-leak-label-pill {
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.3);
+  color: #fda4af;
+}
+
+.rev-leak-card {
+  max-width: 880px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 1.5rem 1.75rem;
+  overflow: hidden;
+}
+
+.rev-leak-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.rev-leak-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.15rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.rev-leak-row:last-child { border-bottom: none; }
+
+.rev-leak-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.rev-leak-row-label {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.rev-leak-row-note {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.rev-leak-row-range {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fda4af;
+  white-space: nowrap;
+}
+
+.rev-leak-row-permo {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-left: 0.25rem;
+}
+
+.rev-leak-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+  padding: 1.5rem 1.5rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.rev-leak-total-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.rev-leak-total-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #34d399, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rev-leak-total-sub {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+}
+
+.rev-leak-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .rev-leak-row { flex-direction: row; align-items: flex-start; gap: 1rem; }
+  .rev-leak-total { flex-direction: column; align-items: flex-start; }
+  .rev-leak-cta { width: 100%; justify-content: center; }
+}
+
 /* CAPI mini-flow: 3 cards, not 4 */
 .rev-capi-steps {
   grid-template-columns: repeat(3, 1fr);
@@ -122,9 +236,16 @@
   font-size: 1.4rem;
 }
 
-/* ================= TESTIMONIAL ================= */
+/* ================= TESTIMONIALS ================= */
+.rev-testimonials {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .rev-testimonial {
   max-width: 920px;
+  width: 100%;
   margin: 0 auto;
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.08));
   border: 1px solid rgba(16, 185, 129, 0.25);
@@ -164,6 +285,30 @@
   max-width: 220px;
   max-height: 100%;
   object-fit: contain;
+}
+
+/* Text wordmark fallback when a clinic logo image isn't available yet */
+.rev-client-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  padding: 14px 24px;
+  white-space: nowrap;
+}
+
+/* Monogram avatar fallback when a clinician portrait isn't available yet */
+.rev-portrait-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  letter-spacing: 0.02em;
 }
 
 /* Quote + dentist portrait */
