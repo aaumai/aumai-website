@@ -42,6 +42,90 @@ const Home = () => {
     <div className="home-page">
       <Hero />
 
+      {/* Lead product: Clinic Revenue Generator — the focus of the site */}
+      <section className="section home-product-section home-rev-lead">
+        <div className="container">
+          <div className="home-product-card">
+            <div className="home-product-info">
+              <span className="home-product-badge">
+                <span className="home-product-badge-dot"></span>
+                Clinic Growth Engine · In Production
+              </span>
+              <h2 className="home-product-title">
+                Fill the calendar.{' '}
+                <span className="home-product-title-gradient">Recover lost revenue.</span>
+              </h2>
+              <p className="home-product-tagline">
+                WhatsApp-first growth automation for dental &amp; aesthetic clinics.
+              </p>
+              <p className="home-product-description">
+                AUMY is the revenue engine behind your clinic. It catches every enquiry — Instagram, WhatsApp,
+                a missed call, a walk-in, Google or a paid ad — books it on WhatsApp in seconds, chases cold
+                leads, prevents and rebooks no-shows, wins back dormant patients, lifts treatment acceptance,
+                and earns more 5-star reviews. Every booking and rupee is proven on a live ROI dashboard.
+              </p>
+              <ul className="home-product-features">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  AI receptionist that books every lead 24/7 on WhatsApp
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  No-show rebooking, recalls &amp; dormant-patient reactivation
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  Meta &amp; Google Conversion API — every ad spend buys a patient
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  Live ROI dashboard — 100% of bookings &amp; revenue attributed
+                </li>
+              </ul>
+              <div className="home-product-cta">
+                <Link to="/revenue-generator" className="btn btn-primary">
+                  Explore the Revenue Generator
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link to="/contact" className="btn btn-secondary">
+                  Request a Demo
+                </Link>
+              </div>
+            </div>
+
+            <div className="home-product-visual">
+              <div className="home-product-stat-card home-product-stat-1">
+                <span className="home-product-stat-value">+25%</span>
+                <span className="home-product-stat-label">Revenue in 60 days</span>
+              </div>
+              <div className="home-product-stat-card home-product-stat-2">
+                <span className="home-product-stat-value">2–3×</span>
+                <span className="home-product-stat-label">More enquiries converted</span>
+              </div>
+              <div className="home-product-stat-card home-product-stat-3">
+                <span className="home-product-stat-value">20–40%</span>
+                <span className="home-product-stat-label">Lost revenue recovered</span>
+              </div>
+              <div className="home-product-stat-card home-product-stat-4">
+                <span className="home-product-stat-value">100%</span>
+                <span className="home-product-stat-label">Bookings attributed</span>
+              </div>
+              <div className="home-product-glow"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Flagship Product: AUMY */}
       <section className="section home-product-section">
         <div className="container">
