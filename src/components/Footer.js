@@ -26,6 +26,7 @@ const Footer = () => {
 
   const legal = [
     { label: 'Privacy Policy', path: '/privacy' },
+    { label: 'Compliance', path: '/compliance' },
     { label: 'Terms of Service', path: '/terms' },
     { label: 'Shipping Policy', path: '/shipping' },
     { label: 'Cancellation & Refund', path: '/refund' }

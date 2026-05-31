@@ -205,6 +205,17 @@ const AumyRevenueGenerator = () => {
     { title: 'Billing & Invoicing', text: 'Invoices, payments, and receipts in the same app — one source of truth, no extra billing software.', icon: 'M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z' },
   ];
 
+  // Security & Compliance trust cards. Copy is accuracy-checked against
+  // PROJECT_INFO.md — only built capabilities are claimed. Lock/shield Heroicons.
+  const trustCards = [
+    { title: 'Patient Data Isolation', color: '#10b981', description: "Every clinic's data lives in a fully isolated tenant — Row-Level Security at the database layer. One clinic can never see another's records.", icon: 'M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z' },
+    { title: 'End-to-End Encryption', color: '#3b82f6', description: 'All data encrypted at rest (AES-256, AWS KMS) and in transit (TLS 1.3). Patient records never travel unprotected.', icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z' },
+    { title: 'Complete Audit Trail', color: '#8b5cf6', description: 'Every record access, edit, and deletion is logged in an append-only audit trail. Nothing is silently changed or deleted.', icon: 'M10.125 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12' },
+    { title: 'ABDM & ABHA Ready', color: '#06b6d4', description: "FHIR R4-native data model with ABHA linking and consent manager built in. Ready for India's Ayushman Bharat Digital Mission from day one.", icon: 'M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244' },
+    { title: 'DPDP Act 2023 Aligned', color: '#f59e0b', description: "Patient consent, data access logs, and right-to-erasure workflows are part of the platform — not an afterthought. Built for India's Digital Personal Data Protection Act.", icon: 'M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z' },
+    { title: 'Granular Access Control', color: '#f43f5e', description: 'Role-based permissions down to individual actions (40+ permission types). Receptionists, doctors, and admins each see only what they should.', icon: 'M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z' },
+  ];
+
   return (
     <div className="aumy-page rev-page">
       {/* Hero */}
@@ -494,6 +505,44 @@ const AumyRevenueGenerator = () => {
               <figcaption>Automation console — every capability, on or off, in your control</figcaption>
             </figure>
           </div>
+        </div>
+      </section>
+
+      {/* Security & Compliance — the trust answer a healthcare buyer needs */}
+      <section className="section aumy-caps-section" id="compliance">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">Security &amp; Compliance</span>
+            <h2 className="section-title">Your patients&rsquo; data is safe. Your clinic is covered.</h2>
+            <p className="section-subtitle">
+              Built on healthcare-grade infrastructure from the ground up — not retrofitted.
+            </p>
+          </div>
+
+          <div className="aumy-caps-grid">
+            {trustCards.map((c, i) => (
+              <div key={i} className="aumy-cap-card" style={{ '--cap-color': c.color }}>
+                <div className="aumy-cap-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d={c.icon} />
+                  </svg>
+                </div>
+                <h3>{c.title}</h3>
+                <p>{c.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="rev-footnote" style={{ marginTop: '1.5rem' }}>
+            AUMY is designed for ABDM and DPDP Act 2023 compliance. Healthcare providers are
+            responsible for their own regulatory obligations. Consult your compliance team for
+            jurisdiction-specific requirements.
+          </p>
+          <p className="rev-footnote" style={{ marginTop: '0.5rem' }}>
+            <Link to="/compliance" className="aumy-gradient" style={{ fontWeight: 600 }}>
+              Read the full security &amp; compliance overview →
+            </Link>
+          </p>
         </div>
       </section>
 
