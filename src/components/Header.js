@@ -41,6 +41,8 @@ const Header = () => {
     { path: '/', label: 'Home' },
     { path: '/aumy', label: 'AUMY' },
     { path: '/revenue-generator', label: 'Revenue Generator' },
+    { path: '/dental', label: 'Dental' },
+    { path: '/aesthetics', label: 'Aesthetics' },
     { path: '/services', label: 'Services' },
     { path: '/case-studies', label: 'Case Studies' },
     { path: '/insights', label: 'Insights' },
