@@ -161,9 +161,9 @@ const AumyRevenueGenerator = () => {
       quote: `“AUM AI brought us a steady stream of new patients, woke up our dormant list, and kept our regulars coming back. Our revenue grew about 25% in just two months — and we didn’t hire a single extra person to make it happen.”`,
       chips: [
         { value: '+25%', label: 'Revenue in 2 months' },
-        { value: 'New', label: 'Leads generated' },
-        { value: 'Dormant', label: 'Patients reactivated' },
-        { value: 'Existing', label: 'Patients retained' },
+        { value: '80+', label: 'New patient leads' },
+        { value: '50+', label: 'Dormant reactivated' },
+        { value: '90%', label: 'Patients retained' },
       ],
     },
     {
@@ -174,10 +174,10 @@ const AumyRevenueGenerator = () => {
       initials: 'VD',
       quote: `“AUMY quietly went to work on the patients we already had — waking up our dormant list, sending recall reminders right on time, and following up after every appointment. Patients feel genuinely looked after, our Google reviews keep climbing, and we’re earning more from the same chairs without anyone chasing follow-ups by hand.”`,
       chips: [
-        { value: 'Dormant', label: 'Patients reactivated' },
-        { value: 'Recalls', label: 'Sent automatically' },
-        { value: 'Post-visit', label: 'Follow-ups on autopilot' },
-        { value: '5★', label: 'More Google reviews' },
+        { value: '60+', label: 'Dormant reactivated' },
+        { value: '300+', label: 'Recalls sent' },
+        { value: '100%', label: 'Post-visit follow-ups' },
+        { value: '4.9★', label: 'Google rating' },
       ],
     },
   ];
