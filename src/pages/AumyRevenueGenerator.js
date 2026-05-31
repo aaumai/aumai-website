@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { setPageSeo } from '../utils/seo';
 import './AumyProduct.css';
 import './AumyRevenueGenerator.css';
 import './Page.css';
 
 const AumyRevenueGenerator = () => {
   useEffect(() => {
-    document.title = 'AUMY Revenue Generator · AUM AI | Recover Lost Revenue, Book Every Lead, Keep Patients for Life';
+    setPageSeo({
+      title: 'Revenue Recovery & Growth Automation for Dental & Aesthetic Clinics | AUMY',
+      description: 'Recover lost revenue and book every lead: AUMY runs WhatsApp automation, Meta/Google Conversion API, recalls, no-show rebooking and dormant-patient reactivation — with a live ROI dashboard. Built for dental and aesthetic clinics.',
+      canonical: 'https://aumai.co.in/revenue-generator',
+      image: 'https://aumai.co.in/screenshots/roi-preview.png',
+    });
   }, []);
 
   // Illustrative (*) ranges + one real, attributed result (†).

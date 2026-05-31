@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { setPageSeo } from '../utils/seo';
 import './AumyProduct.css';
 import './Page.css';
 
 const AumyProduct = () => {
   useEffect(() => {
-    document.title = 'AUMY · AUM AI HealthSystem | Voice-First AI for Healthcare';
+    setPageSeo({
+      title: 'AUMY — Voice-First AI Assistant for Clinics: AI Scribe & Receptionist | AUM AI',
+      description: 'AUMY is the voice-first AI for clinics: an ambient AI scribe that drafts clinical notes, an AI WhatsApp receptionist that books appointments, and an assistant on every screen — for dental, aesthetic and healthcare clinics.',
+      canonical: 'https://aumai.co.in/aumy',
+      image: 'https://aumai.co.in/screenshots/automation.png',
+    });
   }, []);
 
   const capabilities = [

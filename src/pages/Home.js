@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import { setPageSeo } from '../utils/seo';
 import './Home.css';
 
 const Home = () => {
+  useEffect(() => {
+    setPageSeo({
+      title: 'AUM AI — AI Clinic Growth & Automation Platform for Dental & Aesthetic Clinics',
+      description: 'AUM AI builds AI-native growth and automation for dental and aesthetic clinics — lower ad costs with Conversion API, an AI WhatsApp receptionist, automated recalls and reactivation, and a live ROI dashboard, on a built-in EHR.',
+      canonical: 'https://aumai.co.in/',
+      image: 'https://aumai.co.in/screenshots/roi-preview.png',
+    });
+  }, []);
+
   const advantages = [
     {
       icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z',
