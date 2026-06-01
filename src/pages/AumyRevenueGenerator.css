@@ -481,6 +481,11 @@
 .rev-shot {
   margin: 0;
 }
+/* Featured full-width dashboard shot above the two-up grid. */
+.rev-shot-wide {
+  max-width: 960px;
+  margin: 2.5rem auto 0;
+}
 .rev-shot-frame {
   border-radius: 16px;
   overflow: hidden;

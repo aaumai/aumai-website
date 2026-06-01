@@ -489,6 +489,14 @@ const AumyRevenueGenerator = () => {
             </p>
           </div>
 
+          <figure className="rev-shot rev-shot-wide">
+            <div className="rev-shot-frame">
+              <div className="rev-shot-bar"><span></span><span></span><span></span></div>
+              <img src="/screenshots/dashboard.png" alt="AUMY clinic dashboard — revenue attributed, patients booked, surfaced and replied, open operator tasks, hours saved, and per-capability performance, all on one screen" loading="lazy" />
+            </div>
+            <figcaption>Your clinic dashboard — every automation outcome and the revenue it drives, on one screen</figcaption>
+          </figure>
+
           <div className="rev-showcase-grid">
             <figure className="rev-shot">
               <div className="rev-shot-frame">
