@@ -36,7 +36,7 @@ const AumyRevenueGenerator = () => {
     { number: '01', title: 'Catch every lead — any source', text: 'Instagram DMs, WhatsApp, a missed call, a walk-in, a referral, Google, or a paid ad — every enquiry instantly opens a WhatsApp conversation. Nothing slips past a busy front desk.' },
     { number: '02', title: 'Book it — and keep the slot', text: 'AUMY answers questions, qualifies, and books in seconds, 24/7. Then it reminds and confirms — and automatically rebooks the few who still miss — so the appointments you win actually show up.' },
     { number: '03', title: 'Revive patients you already have', text: 'Overdue and dormant patients are re-engaged automatically on WhatsApp — reactivating revenue you already paid to acquire, at near-zero marginal cost.' },
-    { number: '04', title: 'Keep them for life', text: 'Recall cadences, treatment-plan follow-ups, and review requests turn one visit into years of repeat appointments, accepted treatments, and referrals.' },
+    { number: '04', title: 'Be the clinic they never want to leave', text: 'Most clinics disappear the moment a patient walks out. AUMY keeps your clinic present — educational health tips in your name, sophisticated post-treatment follow-ups, feedback requests that show patients you listen, and well-timed review prompts. Patients feel genuinely cared for between visits. They return. They refer. And when someone asks them which clinic to go to, they answer without hesitating.' },
   ];
 
   const capiSteps = [
@@ -89,10 +89,22 @@ const AumyRevenueGenerator = () => {
       icon: 'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z',
     },
     {
-      title: 'Retention & Lifetime Value',
-      description: 'Follow-ups, recall cadences, and review requests keep patients coming back. One acquired patient becomes years of repeat visits and referrals — the cheapest revenue a clinic ever earns.',
+      title: 'Sophisticated Patient Communication',
+      description: 'Not generic blasts — curated, thoughtful messages that reflect the standard of your clinic. Post-treatment follow-ups that feel personal. Care reminders that show patients you are thinking about them. Every message your clinic sends should say: we are different here, and we genuinely care about you beyond the appointment. This is what separates a premium clinic from the one next door.',
       color: '#f43f5e',
       icon: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z',
+    },
+    {
+      title: 'Educational Content — Your Voice, Your Name',
+      description: 'Biweekly health tips, care guides, and treatment education sent to your patients in your name — not promotions, actual value. The clinic that teaches is the clinic patients trust. Patients who learn from you never comparison-shop. They send their family. They leave the reviews that say "Dr. [Name] actually cares." Educational content is the most powerful loyalty tool a clinic has — and almost no clinic uses it.',
+      color: '#0ea5e9',
+      icon: 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25',
+    },
+    {
+      title: 'Patient Feedback — Know Before Google Does',
+      description: 'After every visit, AUMY asks patients how they felt — structured feedback that reaches you before it reaches a public review. You find out what patients love, what surprised them, and what could be better — and you act on it. The clinic that listens and improves is the clinic patients stay loyal to. Closing the feedback loop is also what turns a 4-star clinic into a 4.9-star clinic over time.',
+      color: '#ec4899',
+      icon: 'M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V20.25a.75.75 0 001.035.69l4.5-2.25a.75.75 0 00.465-.69v-1.861a48.61 48.61 0 002.993-.349',
     },
     {
       title: 'Meta CAPI Ad Optimization',
@@ -135,6 +147,11 @@ const AumyRevenueGenerator = () => {
       tag: 'Reactivation',
       title: 'Dormant patients become revenue you already paid for',
       text: 'Every clinic is sitting on a list of patients who drifted away. AUMY automatically identifies overdue and dormant patients and re-engages them on WhatsApp with timely, personal recall messages. You reactivate revenue from patients you already spent money to acquire — at near-zero marginal cost.',
+    },
+    {
+      tag: 'Premium experience',
+      title: 'The relationship that makes your clinic the obvious choice',
+      text: 'Most clinics disappear the moment a patient walks out the door. AUMY keeps your clinic present in their lives — biweekly health education in your name, sophisticated post-treatment check-ins, structured feedback that reaches you before it reaches Google, and well-timed review prompts that build your reputation one genuine 5-star at a time. Patients who feel cared for between visits do not compare prices. They do not try another clinic when something comes up. They send their family. This is the difference between a clinic patients visit and a clinic patients belong to.',
     },
     {
       tag: 'Treatment value',
@@ -237,23 +254,23 @@ const AumyRevenueGenerator = () => {
           <div className="aumy-hero-content">
             <div className="aumy-hero-badge">
               <span className="aumy-badge-dot"></span>
-              AUM AI · A Clinic That Never Sleeps
+              AUM AI · The Clinic Your Patients Choose, Return to, and Recommend
             </div>
 
             <h1 className="aumy-hero-title">
-              Stop losing patients after they enquire.
+              Every clinic in your area delivers good care.
               <br />
-              Book every lead, prevent no-shows, revive dormant patients — and keep them for{' '}
-              <span className="aumy-gradient">life</span>.
+              Only one is the clinic patients call first, return to, and{' '}
+              <span className="aumy-gradient">never stop recommending</span>.
             </h1>
 
             <p className="aumy-hero-subtitle">
-              AUMY is the revenue engine behind your clinic. It catches every enquiry — from Instagram,
-              WhatsApp, a missed call, a walk-in, a referral, Google, or a paid ad — books it on WhatsApp in
-              seconds, chases down cold leads, prevents and rebooks no-shows, wins back dormant patients, lifts
-              treatment acceptance, and earns more 5-star Google reviews that push you up local search. And when
-              you do run ads, Meta CAPI makes every ad spend work harder. Not more software to run — more patients,
-              more kept, more revenue.
+              The difference is not the treatment. It is what your clinic does in the 90 days between visits —
+              the follow-up that felt personal, the health tip that surprised them, the check-in that no other
+              clinic bothered to send. AUMY makes every one of those moments happen automatically — while also
+              catching every enquiry, booking it on WhatsApp in seconds, preventing no-shows, winning back
+              dormant patients, lifting treatment acceptance, and earning 5-star reviews that push you up local
+              search. Not more software to run — a clinic that is present, sophisticated, and trusted.
             </p>
 
             <div className="aumy-hero-cta">
@@ -342,6 +359,44 @@ const AumyRevenueGenerator = () => {
         </div>
       </section>
 
+      {/* Premium Clinic — Identity / Emotional section */}
+      <section className="section aumy-demo-section" id="premium-clinic">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">The Premium Clinic</span>
+            <h2 className="section-title">Revenue is what your business earns. Loyalty is what your clinic builds.</h2>
+            <p className="section-subtitle">
+              Patients choose a clinic for the first visit. They return — and refer — because of how they felt
+              between visits. The most trusted clinics in any city are not the ones with the biggest ad budgets.
+              They are the ones that show up in their patients' lives with education, care, and consistency.
+            </p>
+          </div>
+
+          <div className="aumy-demo-steps">
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>✦</span>
+              <h3>You become the health authority in their life</h3>
+              <p>Biweekly health tips, care reminders, and treatment guides — sent in your name, not a brand's. The clinic that educates is the clinic patients trust. Trust converts to loyalty faster than any discount ever will.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #10b981, #0ea5e9)' }}>✦</span>
+              <h3>Sophisticated communication — not generic blasts</h3>
+              <p>Post-treatment follow-ups that feel personal. Check-ins that show patients you are thinking about them. Every message reflects your standard of care — not a template. The patients who feel remembered between visits are the ones who never quietly leave for a competitor.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #ec4899, #f59e0b)' }}>✦</span>
+              <h3>You know what patients feel — before Google does</h3>
+              <p>Structured feedback after every visit reaches you first. You find out what patients love, what surprised them, and what to improve — and you act on it. The clinic that listens and responds is the clinic that earns 4.9 stars and keeps them.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #f43f5e, #8b5cf6)' }}>✦</span>
+              <h3>Your Google presence reflects your actual standard</h3>
+              <p>Automated review prompts go out at the right moment — after a great visit, when the patient is most likely to share how they felt. Happy patients leave honest 5-star reviews. Your Google profile climbs. New patients choose you before they have even called — because of what your existing patients said.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Revenue Engine flow */}
       <section className="section aumy-demo-section" id="revenue-engine">
         <div className="container">
@@ -370,11 +425,12 @@ const AumyRevenueGenerator = () => {
       <section className="section aumy-caps-section" id="capabilities">
         <div className="container">
           <div className="section-header">
-            <span className="section-label">What Drives the Revenue</span>
-            <h2 className="section-title">Every capability earns its place in money terms.</h2>
+            <span className="section-label">What Drives the Revenue — and the Reputation</span>
+            <h2 className="section-title">Every capability builds a clinic patients trust and return to.</h2>
             <p className="section-subtitle">
-              No feature list for its own sake. Each capability either brings a patient in, books them faster,
-              keeps the slot, revives one you lost, gets more treatments accepted, or proves what your clinic returns.
+              Revenue follows reputation. Each capability either brings a patient in, keeps the appointment,
+              wins them back, deepens the relationship — or proves, on a live dashboard, exactly what your
+              clinic is returning.
             </p>
           </div>
 
@@ -709,11 +765,12 @@ const AumyRevenueGenerator = () => {
       <section className="section aumy-cta-section">
         <div className="container">
           <div className="aumy-cta-card">
-            <h2>See your clinic&rsquo;s revenue potential</h2>
+            <h2>Be the clinic patients choose — and never want to leave</h2>
             <p>
-              Bring your patient list and your goals — ad spend optional. We will show you, on real numbers,
-              how AUMY books the leads you are losing today, fills the no-show gaps, wins back dormant patients,
-              gets more treatments accepted, and turns one visit into a lifetime of revenue.
+              Bring your patient list and your goals. We will show you, on your real numbers, exactly how much
+              revenue is sitting unrecovered in your own data — and how AUMY builds the patient relationship
+              that turns a one-time visit into years of loyalty, referrals, and a reputation that no ad budget
+              can buy.
             </p>
             <div className="aumy-cta-buttons">
               <Link to="/contact" className="btn btn-primary btn-lg">
