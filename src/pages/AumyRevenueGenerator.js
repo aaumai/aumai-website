@@ -71,8 +71,8 @@ const AumyRevenueGenerator = () => {
       icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008z',
     },
     {
-      title: 'AI Recall & Reactivation',
-      description: 'Dormant and overdue patients are automatically re-engaged on WhatsApp with the right message at the right time — reviving revenue you already paid to acquire.',
+      title: 'AI Recall & Reactivation — Personalised, Not Generic',
+      description: 'Most clinics send "We miss you!" to every dormant patient. AUMY reads each patient\'s last treatment record and sends something that proves you remember them specifically. A patient who had a root canal 14 months ago gets: "Just checking in on your root canal — and reminding you that your 6-month cleaning is due, as we discussed." They do not feel like a number on a list. They feel remembered. That is what brings them back — and keeps them.',
       color: '#8b5cf6',
       icon: 'M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99',
     },
@@ -146,7 +146,7 @@ const AumyRevenueGenerator = () => {
     {
       tag: 'Reactivation',
       title: 'Dormant patients become revenue you already paid for',
-      text: 'Every clinic is sitting on a list of patients who drifted away. AUMY automatically identifies overdue and dormant patients and re-engages them on WhatsApp with timely, personal recall messages. You reactivate revenue from patients you already spent money to acquire — at near-zero marginal cost.',
+      text: 'Every clinic is sitting on a list of patients who drifted away. Most clinics send the same "We miss you!" message to all of them. AUMY does not. It reads each patient\'s last treatment record and sends something that proves the clinic actually remembers them. A patient who had a root canal 14 months ago receives: "Hi [Name], you had your root canal with Dr. [Name] last year — just checking in to see how everything is feeling. Also wanted to remind you that as discussed, a cleaning session every 6 months is really important to protect your gum health and the work done. Would love to see you back soon." That patient does not feel like a number on a reactivation list. They feel remembered. That is what brings them back.',
     },
     {
       tag: 'Premium experience',
