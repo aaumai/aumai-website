@@ -8,8 +8,8 @@ import './Page.css';
 const AumyRevenueGenerator = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'Revenue Recovery & Growth Automation for Dental & Aesthetic Clinics | AUMY',
-      description: 'Recover lost revenue and book every lead: AUMY runs WhatsApp automation, Meta/Google Conversion API, recalls, no-show rebooking and dormant-patient reactivation — with a live ROI dashboard. Built for dental and aesthetic clinics.',
+      title: 'The Clinic Patients Choose, Return to, and Recommend | AUMY by AUM AI',
+      description: 'AUMY helps dental and aesthetic clinics build genuine patient loyalty — through emotional, personalised WhatsApp communication that makes patients feel cared for between visits. Not a chatbot. Not templates. The clinic that nurtures wins for life.',
       canonical: 'https://aumai.co.in/revenue-generator',
       image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
@@ -89,8 +89,8 @@ const AumyRevenueGenerator = () => {
       icon: 'M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z',
     },
     {
-      title: 'Sophisticated Patient Communication',
-      description: 'Not generic blasts — curated, thoughtful messages that reflect the standard of your clinic. Post-treatment follow-ups that feel personal. Care reminders that show patients you are thinking about them. Every message your clinic sends should say: we are different here, and we genuinely care about you beyond the appointment. This is what separates a premium clinic from the one next door.',
+      title: 'Emotional Patient Communication — Not Templates',
+      description: 'Two days after fixing a patient\'s cap, AUMY messages them: "Are you eating comfortably? Any sensitivity?" That one message does more for loyalty than any ad campaign. AUMY reads each patient\'s history and sends something that feels personal — because it is. Not a broadcast. Not a template. The kind of message that makes a patient think: my clinic actually remembered me. You cannot fake care. But you can make it scale.',
       color: '#f43f5e',
       icon: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z',
     },
@@ -392,6 +392,54 @@ const AumyRevenueGenerator = () => {
               <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #f43f5e, #8b5cf6)' }}>✦</span>
               <h3>Your Google presence reflects your actual standard</h3>
               <p>Automated review prompts go out at the right moment — after a great visit, when the patient is most likely to share how they felt. Happy patients leave honest 5-star reviews. Your Google profile climbs. New patients choose you before they have even called — because of what your existing patients said.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* You Cannot Fake Care — the emotional intelligence section */}
+      <section className="section aumy-demo-section" id="care">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">The Moment That Changes Everything</span>
+            <h2 className="section-title">You cannot fake care. But you can make it scale.</h2>
+            <p className="section-subtitle">
+              Two days after fixing a patient's dental cap — has your clinic ever messaged them and asked:
+              <br /><br />
+              <em style={{ color: 'var(--text-primary)', fontStyle: 'italic', fontSize: '1.1rem' }}>
+                "Hey, how are you doing? Are you able to eat comfortably? Any sensitivity?"
+              </em>
+              <br /><br />
+              Take a moment and imagine what that patient feels when they receive that message.
+              Not a reminder. Not a promotion. Not "book your next appointment."
+              Just — <strong>we were thinking about you.</strong>
+              <br /><br />
+              That patient does not just come back. They bring their family. They leave a review that says
+              "this clinic actually cares." They never once Google "clinic near me" again — because the answer
+              is already in their heart.
+            </p>
+          </div>
+
+          <div className="aumy-demo-steps">
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number">01</span>
+              <h3>Almost no clinic does this — and that is the entire opportunity</h3>
+              <p>Most doctors know this kind of care builds loyalty. Almost none do it consistently — because it does not scale. You cannot personally follow up with 200 patients every week. So clinics gave up and turned to automation. The same WhatsApp template sent to everyone. "Dear Patient, your appointment is due." Patients feel it immediately. They know. The moment something feels automated, the emotional value drops to zero.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number">02</span>
+              <h3>AUMY is not a chatbot. It is emotional intelligence at scale.</h3>
+              <p>AUMY reads each patient's history — their treatment, their last visit, how long since they came in — and sends something that feels like it came from their doctor personally. The two-day check-in after a cap. The biweekly health tip that feels written for them. The feedback message that says their experience matters. Not because it was scheduled. Because the timing was right for that patient, and that patient only.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number">03</span>
+              <h3>The clinics that do this are not building a patient list. They are building a tribe.</h3>
+              <p>A cohort of people who belong to them for life. Who send their parents, their colleagues, their friends — not because of a referral programme, but because of how the clinic made them feel. These clinics are not the ones with the best equipment or the best location. They are the ones that showed up when they had nothing to gain from it.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number">04</span>
+              <h3>The revenue? That is just the side effect.</h3>
+              <p>When patients feel genuinely cared for, they return more often, accept more treatments, refer more people, and leave more reviews. Not because you pushed them to. Because they wanted to. The clinics that lead with care do not chase revenue — revenue follows them.</p>
             </div>
           </div>
         </div>
