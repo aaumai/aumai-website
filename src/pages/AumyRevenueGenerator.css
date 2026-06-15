@@ -128,6 +128,128 @@
   .rev-leak-cta { width: 100%; justify-content: center; }
 }
 
+/* ===== Recoverable-revenue calculator (visitor computes their own number) ===== */
+.rev-calc {
+  max-width: 880px;
+  margin: 1.5rem auto 0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 1.75rem;
+}
+
+.rev-calc-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.35rem;
+}
+
+.rev-calc-sub {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0 0 1.5rem;
+  line-height: 1.55;
+}
+
+.rev-calc-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.rev-calc-field { display: flex; flex-direction: column; gap: 0.45rem; }
+
+.rev-calc-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+
+.rev-calc-field input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  width: 100%;
+}
+
+.rev-calc-field input:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+.rev-calc-output {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.rev-calc-output-main { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.rev-calc-output-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #34d399, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rev-calc-output-sub { font-size: 0.9rem; color: #cbd5e1; line-height: 1.55; max-width: 540px; }
+
+@media (max-width: 640px) {
+  .rev-calc-inputs { grid-template-columns: 1fr; }
+  .rev-calc-output { flex-direction: column; align-items: flex-start; }
+  .rev-calc-cta { width: 100%; justify-content: center; }
+}
+
+/* ===== Capability problem-buckets (SPIN grouping) ===== */
+.rev-cap-group { margin-bottom: 2.75rem; }
+.rev-cap-group:last-child { margin-bottom: 0; }
+
+.rev-cap-group-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.rev-cap-group-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  border-radius: 999px;
+  padding: 5px 12px;
+  flex-shrink: 0;
+}
+
+.rev-cap-group-problem {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
 /* CAPI mini-flow: 3 cards, not 4 */
 .rev-capi-steps {
   grid-template-columns: repeat(3, 1fr);

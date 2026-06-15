@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import './AumyProduct.css';
@@ -14,6 +14,24 @@ const AumyRevenueGenerator = () => {
       image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
   }, []);
+
+  // Recoverable-revenue calculator — lets the visitor compute their OWN number
+  // (the strongest implication is the one the buyer works out themselves).
+  // Deliberately conservative (15–30% of billing) so it under-claims and stays defensible.
+  const [ppw, setPpw] = useState(40);
+  const [ticket, setTicket] = useState(3000);
+  const monthlyBilling = ppw * 4.3 * ticket;
+  const leakLow = monthlyBilling * 0.15;
+  const leakHigh = monthlyBilling * 0.30;
+  const leakLowYear = leakLow * 12;
+  const leakHighYear = leakHigh * 12;
+  const recoverHalf = ((leakLow + leakHigh) / 2) * 0.5 * 12;
+  const fmt = (n) => {
+    if (!n || n < 0) return '₹0';
+    if (n >= 100000) return `₹${(n / 100000).toFixed(1)}L`;
+    if (n >= 1000) return `₹${Math.round(n / 1000)}k`;
+    return `₹${Math.round(n)}`;
+  };
 
   // Illustrative (*) ranges + one real, attributed result (†).
   const heroStats = [
@@ -129,6 +147,41 @@ const AumyRevenueGenerator = () => {
       description: 'A clinic owner’s view of attributed revenue, cost per lead, patients booked, and lifetime value — the clear answer to "what is my clinic actually returning?"',
       color: '#a78bfa',
       icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605',
+    },
+  ];
+
+  // SPIN grouping: each capability maps to a specific leak it plugs, so the section
+  // reads as "problems solved", not a flat 14-feature dump. Titles must match `capabilities`.
+  const capabilityGroups = [
+    {
+      bucket: 'Capture',
+      problem: 'Stop losing the patients already trying to reach you',
+      titles: ['AI Receptionist — Always On', 'Lead Capture from Every Channel', 'Cold Lead Retry'],
+    },
+    {
+      bucket: 'Keep',
+      problem: 'Keep the appointments and treatments you have already won',
+      titles: ['No-Show Prevention & Rebooking', 'Treatment-Plan Conversion'],
+    },
+    {
+      bucket: 'Win Back',
+      problem: 'Win back the patients you already paid to acquire',
+      titles: ['AI Recall & Reactivation — Personalised, Not Generic'],
+    },
+    {
+      bucket: 'Loyalty',
+      problem: 'Become the clinic they never want to leave',
+      titles: [
+        'Emotional Patient Communication — Not Templates',
+        'Educational Content — Your Voice, Your Name',
+        'Patient Feedback — Know Before Google Does',
+        'Google Reviews & Local SEO',
+      ],
+    },
+    {
+      bucket: 'Prove & Control',
+      problem: 'See every rupee — and run the whole engine',
+      titles: ['Meta CAPI Ad Optimization', 'Conversion Attribution', 'Operator Inbox (Human-in-the-Loop)', 'ROI Dashboards'],
     },
   ];
 
@@ -265,12 +318,11 @@ const AumyRevenueGenerator = () => {
             </h1>
 
             <p className="aumy-hero-subtitle">
-              The difference is not the treatment. It is what your clinic does in the 90 days between visits —
-              the follow-up that felt personal, the health tip that surprised them, the check-in that no other
-              clinic bothered to send. AUMY makes every one of those moments happen automatically — while also
-              catching every enquiry, booking it on WhatsApp in seconds, preventing no-shows, winning back
-              dormant patients, lifting treatment acceptance, and earning 5-star reviews that push you up local
-              search. Not more software to run — a clinic that is present, sophisticated, and trusted.
+              The difference is not the treatment — every good clinic delivers that. It is what happens in the
+              silence between visits: the follow-up that never went out, the enquiry no one called back, the
+              patient who quietly drifted to another clinic. That silence is where your revenue leaks — and
+              where loyalty is won or lost. AUMY closes every one of those gaps automatically, so the patients
+              you have already earned actually stay, return, and recommend you.
             </p>
 
             <div className="aumy-hero-cta">
@@ -344,6 +396,52 @@ const AumyRevenueGenerator = () => {
               </div>
               <Link to="/contact" className="btn btn-primary rev-leak-cta">
                 Recover it
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Let the visitor compute their OWN number — the strongest implication */}
+          <div className="rev-calc">
+            <p className="rev-calc-title">Now run it on your clinic</p>
+            <p className="rev-calc-sub">
+              Two numbers you already know. We keep the recovery estimate deliberately conservative — your real
+              figure is almost always higher.
+            </p>
+            <div className="rev-calc-inputs">
+              <div className="rev-calc-field">
+                <label htmlFor="calc-ppw">Patients you see per week</label>
+                <input
+                  id="calc-ppw"
+                  type="number"
+                  min="0"
+                  value={ppw}
+                  onChange={(e) => setPpw(Math.max(0, parseInt(e.target.value, 10) || 0))}
+                />
+              </div>
+              <div className="rev-calc-field">
+                <label htmlFor="calc-ticket">Average value per patient (₹)</label>
+                <input
+                  id="calc-ticket"
+                  type="number"
+                  min="0"
+                  value={ticket}
+                  onChange={(e) => setTicket(Math.max(0, parseInt(e.target.value, 10) || 0))}
+                />
+              </div>
+            </div>
+            <div className="rev-calc-output">
+              <div className="rev-calc-output-main">
+                <span className="rev-calc-output-value">{fmt(leakLow)} – {fmt(leakHigh)} / month</span>
+                <span className="rev-calc-output-sub">
+                  sitting unrecovered in patients you have already earned — roughly {fmt(leakLowYear)} – {fmt(leakHighYear)} a
+                  year. Even if you win back just half, that is about {fmt(recoverHalf)} a year.
+                </span>
+              </div>
+              <Link to="/contact" className="btn btn-primary rev-leak-cta">
+                See it on my real data
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -473,28 +571,38 @@ const AumyRevenueGenerator = () => {
       <section className="section aumy-caps-section" id="capabilities">
         <div className="container">
           <div className="section-header">
-            <span className="section-label">What Drives the Revenue — and the Reputation</span>
-            <h2 className="section-title">Every capability builds a clinic patients trust and return to.</h2>
+            <span className="section-label">How Every Leak Gets Plugged</span>
+            <h2 className="section-title">Not a feature list — a fix for each way clinics lose money.</h2>
             <p className="section-subtitle">
-              Revenue follows reputation. Each capability either brings a patient in, keeps the appointment,
-              wins them back, deepens the relationship — or proves, on a live dashboard, exactly what your
-              clinic is returning.
+              Every capability maps to a specific gap: the patients who can’t reach you, the appointments that
+              slip, the patients who drift away, and the loyalty that’s never built — plus the dashboard that
+              proves what each one returns.
             </p>
           </div>
 
-          <div className="aumy-caps-grid">
-            {capabilities.map((cap, i) => (
-              <div key={i} className="aumy-cap-card" style={{ '--cap-color': cap.color }}>
-                <div className="aumy-cap-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d={cap.icon} />
-                  </svg>
-                </div>
-                <h3>{cap.title}</h3>
-                <p>{cap.description}</p>
+          {capabilityGroups.map((group, gi) => (
+            <div key={gi} className="rev-cap-group">
+              <div className="rev-cap-group-head">
+                <span className="rev-cap-group-tag">{group.bucket}</span>
+                <h3 className="rev-cap-group-problem">{group.problem}</h3>
               </div>
-            ))}
-          </div>
+              <div className="aumy-caps-grid">
+                {capabilities
+                  .filter((cap) => group.titles.includes(cap.title))
+                  .map((cap, i) => (
+                    <div key={i} className="aumy-cap-card" style={{ '--cap-color': cap.color }}>
+                      <div className="aumy-cap-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <path d={cap.icon} />
+                        </svg>
+                      </div>
+                      <h3>{cap.title}</h3>
+                      <p>{cap.description}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
