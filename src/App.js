@@ -14,6 +14,7 @@ import InsightDetail from './pages/InsightDetail';
 import ShippingPolicy from './pages/ShippingPolicy';
 import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import DataDeletion from './pages/DataDeletion';
 import CancellationRefund from './pages/CancellationRefund';
 import DabbewaalaApp from './pages/DabbewaalaApp';
 import AumaiAnalytics from './pages/AumaiAnalytics';
@@ -57,6 +58,8 @@ function App() {
                 <Route path="/terms" element={<TermsConditions />} />
                 <Route path="/refund" element={<CancellationRefund />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/data-deletion" element={<DataDeletion />} />
+                <Route path="/delete-account" element={<DataDeletion />} />
               </Routes>
               <Footer />
             </div>
