@@ -83,6 +83,20 @@ const PrivacyPolicy = () => {
               WhatsApp Business Accounts owned by our Aaumai Meta Business Manager.
             </p>
             <p style={{ marginBottom: '10px' }}>
+              <strong>Instagram &amp; Facebook Messenger data (when the clinic uses our
+              social-DM lead capture):</strong> when a person sends a direct message to a
+              clinic's connected Instagram or Facebook Page, Meta delivers that message to us
+              via webhook. We process the message content, the sender's Meta-scoped identifier
+              (Page-Scoped ID / Instagram-Scoped ID), and — where the person's privacy settings
+              allow and we hold a valid Page access token — the sender's public display name,
+              Instagram @username, and profile-picture URL (retrieved via Meta's Messenger /
+              Instagram User Profile API). We use this to reply on the clinic's behalf through
+              our AI receptionist and to record the enquiry as a lead for the clinic. We do NOT
+              receive a phone number through these channels; if the person decides to book, we
+              ask them to share a phone or WhatsApp number, which is then used for appointment
+              confirmation and reminders.
+            </p>
+            <p style={{ marginBottom: '10px' }}>
               <strong>What we do NOT collect:</strong> we do not run third-party advertising
               trackers or build profiles of website visitors for advertising. We do not sell
               personal data. We do not use patient data to train AI models other than our own
@@ -101,6 +115,9 @@ const PrivacyPolicy = () => {
               <li>Send transactional WhatsApp messages (appointment reminders, recall
                 reminders, post-visit follow-ups) when the clinic has enabled the corresponding
                 automation capability and the patient has not opted out.</li>
+              <li>Reply to inbound Instagram and Facebook Page direct messages on the clinic's
+                behalf through the AI receptionist, and capture each enquiry as a lead for the
+                clinic to follow up.</li>
               <li>Generate AI drafts and recommendations (ambient SOAP notes, care-gap alerts,
                 drug-interaction checks, churn-risk scoring) for the clinic's clinicians to
                 review. AI outputs are always reviewable; the clinician is the decision-maker.</li>
@@ -165,6 +182,15 @@ const PrivacyPolicy = () => {
                 sends us webhook events (template approval status) for those WABAs. We do not
                 send messages directly through Meta's WhatsApp Cloud API; outbound messaging
                 continues through MSG91.</li>
+              <li><strong>Meta Platforms (Instagram &amp; Messenger Platform):</strong> when a
+                clinic connects its Facebook Page and linked Instagram professional account to
+                our app, Meta delivers direct-message webhook events to us and we send replies
+                through the Messenger Send API (graph.facebook.com) and Instagram messaging API
+                (graph.instagram.com) using that Page's access token. We also call Meta's User
+                Profile API to resolve the sender's public name / Instagram @username so the
+                clinic sees a recognisable lead. We receive and store only the data described in
+                Section 2; we do not post content, manage ads, or read a connected account's
+                media, friends, or followers.</li>
               <li><strong>Google Maps Platform:</strong> directions and place-lookup APIs for
                 delivery-window estimation.</li>
               <li><strong>EmailJS / SES:</strong> transactional email delivery (account
@@ -178,31 +204,59 @@ const PrivacyPolicy = () => {
           </section>
 
           <section style={{ marginBottom: '30px' }}>
-            <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>6. WhatsApp Business Platform — specific disclosures</h2>
+            <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>6. Meta Platforms — WhatsApp, Instagram &amp; Facebook Messenger disclosures</h2>
             <p style={{ marginBottom: '15px' }}>
-              Our AUM AI Platform Meta App (App ID 2067787743777563) integrates with Meta's
-              WhatsApp Business Platform for message-template management on the WhatsApp
-              Business Accounts owned by our Aaumai Meta Business Manager (Business ID
-              1216026913963369). Specifically:
+              Our AUM AI Platform Meta App (App ID 2067787743777563) integrates with Meta in two
+              ways, both in service of our healthcare clinic customers:
+            </p>
+            <p style={{ marginBottom: '10px' }}>
+              <strong>(a) WhatsApp Business Platform — template management.</strong> Our Aaumai
+              Meta Business Manager (Business ID 1216026913963369) hosts the WhatsApp Business
+              Accounts (WABAs) that serve our clinics. Specifically:
             </p>
             <ul style={{ marginLeft: '30px', marginBottom: '15px' }}>
               <li>We create, update, list, and delete message templates on the WABAs through
                 Meta's Business Management API.</li>
-              <li>We receive webhook events from Meta about template approval status
+              <li>We receive webhook events about template approval status
                 (<code>message_template_status_update</code>) so the clinic-facing composer
                 shows whether a submitted template has been approved or rejected in real
                 time.</li>
-              <li>We do not access, post, message, comment, like, follow, or modify any
-                non-WhatsApp Facebook or Instagram surface. We hold no Meta permissions beyond
-                <code>whatsapp_business_management</code> and
-                <code>business_management</code> (read-only WABA metadata).</li>
-              <li>We do not store any data about Facebook or Instagram user accounts.</li>
-              <li>We do not perform Embedded Signup or one-click onboarding; clinic WABAs are
-                onboarded via our Business Solution Provider (MSG91) using standard MSG91
-                onboarding, and the resulting WABAs sit under Aaumai's Business Manager.</li>
-              <li>A clinic can request that we cease template management on their WABA at any
-                time — we will soft-delete the corresponding credentials and stop calling
-                Meta's API on their behalf.</li>
+              <li>We do not send messages directly through Meta's WhatsApp Cloud API; outbound
+                WhatsApp messaging is delivered by our Business Solution Provider (MSG91).</li>
+              <li>We do not perform WhatsApp Embedded Signup; clinic WABAs are onboarded via
+                MSG91 and sit under Aaumai's Business Manager.</li>
+            </ul>
+            <p style={{ marginBottom: '10px' }}>
+              <strong>(b) Instagram &amp; Facebook Messenger — direct-message lead capture and
+              AI receptionist.</strong> When a clinic explicitly connects its Facebook Page and
+              linked Instagram professional account through Facebook Login for Business, we
+              request only the permissions needed to receive and reply to direct messages:
+              <code>pages_show_list</code>, <code>pages_messaging</code>,
+              <code>pages_manage_metadata</code>, <code>business_management</code>,
+              <code>instagram_basic</code>, and <code>instagram_manage_messages</code>.
+              Specifically:
+            </p>
+            <ul style={{ marginLeft: '30px', marginBottom: '15px' }}>
+              <li>We receive a webhook event for each inbound direct message to a connected
+                Page or Instagram account (the <code>messages</code> and
+                <code>messaging_postbacks</code> fields on the <code>page</code> and
+                <code>instagram</code> objects), and we verify every webhook payload's
+                <code>X-Hub-Signature-256</code> signature against our app secret.</li>
+              <li>We send replies on the clinic's behalf through the Messenger Send API and the
+                Instagram messaging API, using that Page's access token, within Meta's standard
+                messaging window.</li>
+              <li>We call Meta's User Profile API to resolve the sender's public display name,
+                Instagram @username, and profile-picture URL so the clinic recognises the lead.</li>
+              <li>We store only the message content, the sender's Meta-scoped identifier, and the
+                profile fields above (see Section 2). We do not post content, run or read ads,
+                or access a connected account's media, comments, friends, or followers.</li>
+              <li>The Page access tokens we hold are encrypted at rest (AES-256-GCM). A clinic
+                can disconnect at any time from within our app; we then soft-delete the stored
+                credentials and stop receiving or sending messages for that Page.</li>
+              <li>If a person removes our app, Meta calls our <strong>deauthorize callback</strong>;
+                a person may request deletion of their data via our <strong>data-deletion
+                request</strong> endpoint, after which we erase the lead and conversation records
+                associated with their Meta-scoped identifier.</li>
             </ul>
           </section>
 
