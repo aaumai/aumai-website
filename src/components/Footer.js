@@ -16,6 +16,7 @@ const Footer = () => {
 
   const company = [
     { label: 'Revenue Generator', path: '/revenue-generator' },
+    { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Platform Partners', path: '/platform-partner' },
     { label: 'About', path: '/about' },
     { label: 'Services', path: '/services' },

@@ -21,6 +21,7 @@ import AumaiAnalytics from './pages/AumaiAnalytics';
 import AumyProduct from './pages/AumyProduct';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import PlatformPartner from './pages/PlatformPartner';
+import SocialMessaging from './pages/SocialMessaging';
 import Compliance from './pages/Compliance';
 import Analytics from './components/Analytics';
 import './App.css';
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/aumy" element={<AumyProduct />} />
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/platform-partner" element={<PlatformPartner />} />
+                <Route path="/facebook-instagram" element={<SocialMessaging />} />
                 <Route path="/compliance" element={<Compliance />} />
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/case-studies" element={<CaseStudiesPage />} />
