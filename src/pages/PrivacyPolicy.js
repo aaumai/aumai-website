@@ -161,10 +161,18 @@ const PrivacyPolicy = () => {
               <li><strong>Amazon Web Services (AWS):</strong> infrastructure hosting in the
                 ap-south-1 (Mumbai) region for in-country data residency, plus object storage
                 (S3) for clinical documents and call recordings.</li>
-              <li><strong>Anthropic and / or AWS Bedrock:</strong> large-language-model
-                inference for AUMY's clinical assistant, draft generation, and natural-language
-                report queries. Patient identifiers are de-identified before any prompt that
-                leaves our infrastructure where the use case permits.</li>
+              <li><strong>Anthropic (Claude AI):</strong> our primary large-language-model
+                provider, used for AUMY's clinical assistant, draft generation, and
+                natural-language report queries. When you use AUMY in our mobile or web apps,
+                the messages, voice and documents you share with it — together with the relevant
+                clinic / patient context needed to answer — are sent to Anthropic through our
+                servers to generate a response. The apps disclose this and ask for your consent
+                before any data is sent to the AI, and you can withdraw that consent at any time
+                in the app. Patient identifiers are de-identified before any prompt that leaves
+                our infrastructure where the use case permits. Anthropic processes this data only
+                to return a response and does not use it to train its models. (For specific
+                tenant configurations the same inference may run via AWS Bedrock under equivalent
+                terms.)</li>
               <li><strong>OpenAI:</strong> alternative LLM provider used for specific extractor
                 pipelines (e.g. ambient documentation) when configured for a tenant.</li>
               <li><strong>Deepgram:</strong> speech-to-text transcription for telehealth calls
@@ -197,9 +205,12 @@ const PrivacyPolicy = () => {
                 invites, password resets, alerts).</li>
             </ul>
             <p style={{ marginBottom: '15px' }}>
-              Each sub-processor is contractually bound to confidentiality and to processing
-              data only on documented instructions. A current list is available on request to
-              the contact email at the bottom of this page.
+              Each sub-processor is bound by a written data-processing agreement to
+              confidentiality, to processing data only on our documented instructions, and to
+              maintaining data-protection safeguards equivalent to those described in this
+              policy. We do not use any third-party AI service that trains its models on your
+              data. A current list of sub-processors is available on request to the contact
+              email at the bottom of this page.
             </p>
           </section>
 
