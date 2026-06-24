@@ -359,46 +359,6 @@ const AumyRevenueGenerator = () => {
         </div>
       </section>
 
-      {/* Facebook & Instagram messaging service (named for Meta App Review;
-          full detail at /facebook-instagram). */}
-      <section className="section" id="facebook-instagram" style={{ background: '#ffffff' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #f8faff 0%, #eef2ff 100%)',
-            border: '1px solid #e2e8f0',
-            borderRadius: '16px',
-            padding: '40px',
-          }}>
-            <span style={{
-              display: 'inline-block', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.04em',
-              textTransform: 'uppercase', color: '#4f46e5', marginBottom: '12px',
-            }}>
-              Facebook &amp; Instagram
-            </span>
-            <h2 style={{ color: '#0f172a', fontSize: '1.8rem', marginBottom: '14px', lineHeight: 1.25 }}>
-              An AI receptionist for your Facebook Page &amp; Instagram messages
-            </h2>
-            <p style={{ color: '#334155', lineHeight: 1.8, marginBottom: '16px' }}>
-              A clinic connects its own <strong>Facebook Page</strong> and linked{' '}
-              <strong>Instagram account</strong> to AUM AI. When a patient sends a direct message,
-              we receive it, show the clinic who is asking (the sender&rsquo;s public name or
-              Instagram username), and our AI prepares a reply the clinic reviews and sends back
-              through that same inbox. Every enquiry is saved as a lead for follow-up — so the front
-              desk never misses a message on social media.
-            </p>
-            <ul style={{ color: '#334155', lineHeight: 1.9, marginLeft: '22px', marginBottom: '20px' }}>
-              <li>Receive and reply to Facebook Page and Instagram direct messages in one place.</li>
-              <li>Capture every social enquiry as a lead, alongside WhatsApp, calls and walk-ins.</li>
-              <li>The clinic stays in control and owns its Page, Instagram account and patients.</li>
-              <li>Data is used only to run this service for that clinic — never sold or used for ads.</li>
-            </ul>
-            <Link to="/facebook-instagram" className="btn btn-primary">
-              See how the Facebook &amp; Instagram service works →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* The hidden leak — cost of the problem, in ROI terms */}
       <section className="section aumy-caps-section rev-leak-section" id="leak">
         <div className="container">
@@ -927,6 +887,42 @@ const AumyRevenueGenerator = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* One capability among many: Facebook & Instagram messaging. Kept low on
+          the page so it doesn't read as the primary offering, but present for
+          Meta App Review (which lands on /revenue-generator). Full detail at
+          /facebook-instagram. */}
+      <section className="section" id="facebook-instagram" style={{ background: '#ffffff' }}>
+        <div className="container" style={{ maxWidth: '900px' }}>
+          <div style={{
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
+            borderRadius: '14px',
+            padding: '28px 32px',
+          }}>
+            <span style={{
+              display: 'inline-block', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.04em',
+              textTransform: 'uppercase', color: '#64748b', marginBottom: '8px',
+            }}>
+              Also included · Social channels
+            </span>
+            <h3 style={{ color: '#0f172a', fontSize: '1.35rem', marginBottom: '10px', lineHeight: 1.3 }}>
+              AUMY also answers your Facebook &amp; Instagram messages
+            </h3>
+            <p style={{ color: '#475569', lineHeight: 1.75, marginBottom: '14px', fontSize: '0.97rem' }}>
+              Alongside WhatsApp, calls and walk-ins, AUMY captures enquiries from your clinic&rsquo;s
+              own Facebook Page and Instagram account. When a patient sends a direct message, we
+              receive it, show you who is asking, draft a reply for you to review and send from that
+              same inbox, and save every enquiry as a lead. Your clinic stays in control of its Page,
+              Instagram account and patients, and the data is used only to run this service for you —
+              never sold or used for ads.
+            </p>
+            <Link to="/facebook-instagram" style={{ color: '#4f46e5', fontWeight: 600, fontSize: '0.95rem' }}>
+              How the Facebook &amp; Instagram service works →
+            </Link>
           </div>
         </div>
       </section>
