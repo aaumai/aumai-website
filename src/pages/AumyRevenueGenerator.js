@@ -58,9 +58,9 @@ const AumyRevenueGenerator = () => {
   ];
 
   const capiSteps = [
-    { number: '01', title: 'Signal real conversions', text: 'When a lead books or pays, AUMY sends that conversion server-side to Meta — the outcome that matters, not a page view.' },
-    { number: '02', title: 'Meta optimizes for patients', text: 'The ad algorithm learns who actually books and spends more of your budget finding more of them. Junk leads fall away.' },
-    { number: '03', title: 'It compounds every month', text: 'Lookalike audiences built from your real patients get sharper over time — cost per genuine lead keeps falling as the system learns.' },
+    { number: '01', title: 'Capture the real signal — the instant it happens', text: 'The moment a lead books or pays, AUMY captures that real conversion and feeds it server-side to Meta & Google in real time — the outcome that actually matters, not a page view a pixel guessed at.' },
+    { number: '02', title: 'Your ads train on real patients, not clicks', text: 'Fed a live stream of genuine bookings, the ad platforms learn exactly who becomes a patient and spend more of your budget finding more of them. Tyre-kickers fall away — so your cost per genuine lead drops and lead quality climbs.' },
+    { number: '03', title: 'It gets smarter — and cheaper — every month', text: 'Lookalike audiences built from your actual patients sharpen with every new signal AUMY sends. The longer it runs, the lower your acquisition cost falls and the higher conversion climbs — privacy-safe, server-side, no patient data exposed. The system compounds.' },
   ];
 
   const capabilities = [
@@ -631,6 +631,67 @@ const AumyRevenueGenerator = () => {
         </div>
       </section>
 
+      {/* The Magic — one connected platform. The synthesis: every capability above
+          shares one data spine, so the whole compounds and runs on autopilot forever. */}
+      <section className="section aumy-demo-section" id="one-platform">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">Where The Magic Is</span>
+            <h2 className="section-title">
+              Four tools can each do their job. One platform makes them{' '}
+              <span className="aumy-gradient">multiply</span>.
+            </h2>
+            <p className="section-subtitle">
+              Every capability above is powerful on its own. But the real magic isn’t any single one — it’s
+              that they all run on <strong>one shared spine of patient, booking, and revenue data</strong>.
+              Each part makes the others smarter. Four separate vendors, four logins, and four data silos can
+              never do this — because their data never talks to each other.
+            </p>
+          </div>
+
+          <div className="aumy-demo-steps">
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #34d399, #10b981)' }}>→</span>
+              <h3>Reviews feed your visibility</h3>
+              <p>Every 5-star review and timely reply pushes you higher on Google — so more new patients find you first.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #10b981, #0ea5e9)' }}>→</span>
+              <h3>Visibility feeds your leads</h3>
+              <p>Higher rankings and an active profile bring more enquiries — which AUMY captures and books the instant they arrive.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #0ea5e9, #6366f1)' }}>→</span>
+              <h3>Bookings feed your ads</h3>
+              <p>Every real booking flows back to Meta &amp; Google, so your ad spend gets cheaper and sharper the longer it runs.</p>
+            </div>
+            <div className="aumy-demo-step">
+              <span className="aumy-demo-number" style={{ background: 'linear-gradient(135deg, #8b5cf6, #ec4899)' }}>→</span>
+              <h3>Records feed your loyalty</h3>
+              <p>Each patient’s history powers the recall, the reactivation, and the personal check-in that brings them back — and keeps them.</p>
+            </div>
+          </div>
+
+          <div className="aumy-demo-callout">
+            <div className="aumy-demo-callout-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+            </div>
+            <div className="aumy-demo-callout-body">
+              <strong>Set it once. It runs forever — and compounds.</strong>
+              <p>
+                This isn’t a campaign you switch on and off. Every lead followed up, every recall sent, every
+                dormant patient reached, every review answered, every booking attributed — automatically, every
+                day, whether you’re in the chair or asleep. And because each patient who returns and refers makes
+                the next month easier than the last, your revenue doesn’t spike and fade. It climbs — and stays
+                climbed. That is the difference between renting growth and owning it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Meta CAPI deep-dive — optional accelerant for clinics that advertise */}
       <section className="section aumy-caps-section" id="capi">
         <div className="container">
@@ -638,10 +699,12 @@ const AumyRevenueGenerator = () => {
             <span className="section-label">If You Advertise · Meta Conversion API (CAPI)</span>
             <h2 className="section-title">Running ads? Make every ad spend buy a patient, not a click.</h2>
             <p className="section-subtitle">
-              Optional, and powerful. If you run Meta or Instagram ads, CAPI tells Meta who actually became a
-              patient — so your budget stops chasing curiosity and starts buying revenue. No ad budget? Skip
-              this part — every other engine on this page still recovers revenue from the patients and leads
-              you already have.
+              Optional, and powerful. If you run Meta, Instagram, or Google ads, AUMY feeds the ad platforms a
+              live stream of <strong>real-time conversion signals</strong> — every booking and payment, the
+              moment it happens — so your ads train on who actually becomes a patient, not who clicks. Your
+              budget stops chasing curiosity and starts buying revenue: lower cost per lead, better-qualified
+              enquiries, and acquisition that gets cheaper the longer it runs. No ad budget? Skip this part —
+              every other engine on this page still recovers revenue from the patients and leads you already have.
             </p>
           </div>
 
