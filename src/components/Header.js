@@ -39,11 +39,7 @@ const Header = () => {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/aumy', label: 'AUMY' },
-    { path: '/revenue-generator', label: 'Revenue Generator' },
-    { path: '/platform-partner', label: 'Partners' },
-    { path: '/services', label: 'Services' },
-    { path: '/case-studies', label: 'Case Studies' },
+    { path: '/revenue-generator', label: 'How it works' },
     { path: '/insights', label: 'Insights' },
     { path: '/about', label: 'About' },
   ];
@@ -86,7 +82,7 @@ const Header = () => {
             </ul>
             <div className="nav-cta">
               <Link to="/contact" className="btn btn-primary" onClick={closeMobileMenu}>
-                Get in Touch
+                Free Clinic Audit
               </Link>
             </div>
           </nav>

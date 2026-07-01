@@ -18,6 +18,7 @@ const Footer = () => {
     { label: 'Revenue Generator', path: '/revenue-generator' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Platform Partners', path: '/platform-partner' },
+    { label: 'For Consultants & Partners', path: '/engineering-partner' },
     { label: 'About', path: '/about' },
     { label: 'Services', path: '/services' },
     { label: 'Case Studies', path: '/case-studies' },
