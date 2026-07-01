@@ -213,6 +213,13 @@
 .ch-founder { font-size: 19px; font-style: italic; color: var(--c-ink); max-width: 680px; margin: 0 auto 28px; border-left: 3px solid var(--c-accent); padding-left: 22px; text-align: left; }
 .ch-founder cite { display: block; margin-top: 14px; font-style: normal; font-weight: 700; font-size: 15px; color: var(--c-accent-dark); }
 
+/* Stat chips (revenue-generator hero) */
+.ch-stats { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 32px; }
+.ch-stat { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: 16px; padding: 16px 22px; box-shadow: var(--c-shadow); text-align: center; min-width: 132px; }
+.ch-stat-value { display: block; font-size: 26px; font-weight: 800; color: var(--c-accent-dark); line-height: 1.1; }
+.ch-stat-label { font-size: 12.5px; color: var(--c-ink-soft); }
+.ch-fineprint { margin-top: 18px; font-size: 12.5px; color: var(--c-ink-soft); }
+
 /* Responsive */
 @media (max-width: 920px) {
   .ch-hero-grid { grid-template-columns: 1fr; gap: 40px; }
