@@ -34,8 +34,7 @@ const InsightsPage = () => {
         <div className="container">
           <h1 className="page-title">Insights</h1>
           <p className="page-subtitle">
-            Technical deep dives, industry analysis, and engineering perspectives
-            on US healthcare technology
+            Ideas and perspectives on clinic growth, patient experience, and healthcare technology
           </p>
         </div>
       </div>

@@ -6,12 +6,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const services = [
-    'Healthcare Platform Engineering',
-    'EHR Integrations',
-    'Custom EHR Development',
-    'FHIR & HL7 Implementation',
-    'Clinical Data Warehouses',
-    'AI Automation'
+    'AI Receptionist — 24/7 Booking',
+    'Lead Capture — Every Channel',
+    'No-show Recovery & Recalls',
+    'Dormant-Patient Reactivation',
+    'Reviews & Local SEO',
+    'Smarter Ads (Conversion API)'
   ];
 
   const company = [
@@ -44,9 +44,9 @@ const Footer = () => {
               <img src="/PNG-01-01.png" alt="AUM AI Healthcare Solutions" />
             </Link>
             <p className="footer-tagline">
-              Healthcare software engineering and product development for the US healthcare industry.
-              Specialized in RPM platforms, EHR integrations, Risk Adjustment, FHIR implementations,
-              and AI automation.
+              The growth partner for dental &amp; aesthetic clinics. AUMY captures every enquiry, books
+              it like a human, wins back patients who drift away, and makes your ad spend work harder —
+              all connected, all automatic.
             </p>
             <div className="footer-social">
               <a href="https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
@@ -54,17 +54,12 @@ const Footer = () => {
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
               </a>
-              <a href="https://www.youtube.com/@AUMAI_Healthcare_Solutions" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-              </a>
             </div>
           </div>
 
           {/* Services Column */}
           <div className="footer-column">
-            <h4>Services</h4>
+            <h4>What AUMY Does</h4>
             <ul>
               {services.map((service, index) => (
                 <li key={index}>{service}</li>
@@ -104,7 +99,7 @@ const Footer = () => {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-                <span>India (Serving US Healthcare)</span>
+                <span>Serving dental &amp; aesthetic clinics</span>
               </div>
             </div>
           </div>

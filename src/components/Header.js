@@ -40,8 +40,7 @@ const Header = () => {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/revenue-generator', label: 'How it works' },
-    { path: '/insights', label: 'Insights' },
-    { path: '/about', label: 'About' },
+    { path: '/contact', label: 'Contact' },
   ];
 
   return (

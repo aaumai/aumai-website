@@ -16,19 +16,19 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(251, 250, 248, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(22, 50, 79, 0.08);
   transition: background var(--transition-base);
 }
 
 .header.scrolled::before {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .header.scrolled {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 24px rgba(22, 50, 79, 0.08);
 }
 
 .header-content {
@@ -57,7 +57,7 @@
   height: 55px;
   width: auto;
   transition: all var(--transition-base);
-  filter: brightness(1.1);
+  filter: none;
 }
 
 .header.scrolled .logo-image {
@@ -88,7 +88,7 @@
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(22, 50, 79, 0.78);
   font-weight: 500;
   font-size: 0.95rem;
   text-decoration: none;
@@ -101,7 +101,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--gradient-primary);
+  background: rgba(42, 157, 143, 0.12);
   opacity: 0;
   border-radius: var(--radius-lg);
   transition: opacity var(--transition-base);
@@ -109,12 +109,12 @@
 
 .nav-link:hover,
 .nav-link.active {
-  color: white;
+  color: #218779;
 }
 
 .nav-link:hover::before,
 .nav-link.active::before {
-  opacity: 0.15;
+  opacity: 1;
 }
 
 .nav-link.active {
@@ -130,7 +130,7 @@
   transform: translateX(-50%) scaleX(0);
   width: 24px;
   height: 3px;
-  background: var(--gradient-primary);
+  background: #2a9d8f;
   border-radius: var(--radius-full);
   transition: transform var(--transition-base);
 }
@@ -157,8 +157,8 @@
   align-items: center;
   width: 44px;
   height: 44px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(22, 50, 79, 0.05);
+  border: 1px solid rgba(22, 50, 79, 0.12);
   border-radius: var(--radius-lg);
   cursor: pointer;
   gap: 5px;
@@ -166,15 +166,15 @@
 }
 
 .mobile-menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(22, 50, 79, 0.1);
+  border-color: rgba(22, 50, 79, 0.2);
 }
 
 .mobile-menu-toggle span {
   display: block;
   width: 20px;
   height: 2px;
-  background: white;
+  background: #16324f;
   border-radius: 2px;
   transition: all var(--transition-base);
 }
@@ -203,7 +203,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(15, 23, 42, 0.98);
+    background: rgba(251, 250, 248, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
