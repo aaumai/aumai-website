@@ -77,7 +77,7 @@ const Home = () => {
       description:
         'AUMY is the AI growth system for dental & aesthetic clinics — capture every enquiry, book it like a human, win back patients who drift away, and make your ad spend work harder. Your growth partner, not just software.',
       canonical: 'https://aumai.co.in/',
-      image: 'https://aumai.co.in/images/clinic-ambiance.png',
+      image: 'https://aumai.co.in/images/clinic-ambiance.jpg',
     });
   }, []);
 
@@ -114,7 +114,7 @@ const Home = () => {
           <div className="ch-hero-visual">
             <div className="ch-hero-photo">
               <img
-                src="/images/hero-clinic.png"
+                src="/images/hero-clinic.webp"
                 alt="A friendly dentist smiling in a bright, calm, modern dental clinic"
               />
             </div>
