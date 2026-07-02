@@ -114,8 +114,8 @@ const Home = () => {
           <div className="ch-hero-visual">
             <div className="ch-hero-photo">
               <img
-                src="/images/hero-clinic.webp"
-                alt="A friendly dentist smiling in a bright, calm, modern dental clinic"
+                src="/images/clinic-ambiance.jpg"
+                alt="A calm, premium clinic reception in warm light — soft teal and off-white interior"
               />
             </div>
           </div>
