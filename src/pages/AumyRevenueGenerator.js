@@ -64,7 +64,7 @@ const AumyRevenueGenerator = () => {
       description:
         'AUMY is the growth system we run for dental & aesthetic clinics — it captures every enquiry, books it, wins back patients who drift, and makes your ad spend work harder, with the recovered revenue proven on a live dashboard.',
       canonical: 'https://aumai.co.in/revenue-generator',
-      image: 'https://aumai.co.in/images/clinic-ambiance.jpg',
+      image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
   }, []);
 
