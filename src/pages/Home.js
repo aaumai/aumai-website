@@ -156,6 +156,9 @@ const Home = () => {
             invoice. Add it up across a year, and it is the biggest number in your practice: the one
             you cannot see.
           </p>
+          <Link to="/leak-calculator" className="ch-btn ch-btn-ghost">
+            Do the math for your clinic — 60-second leak check
+          </Link>
         </div>
       </section>
 
