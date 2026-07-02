@@ -235,19 +235,38 @@ const Home = () => {
       <section className="ch-section">
         <div className="ch-container ch-center">
           <h2 className="ch-h2">Clinics are already growing with us.</h2>
-          {testimonials.length > 0 && (
-            <div className="ch-testimonials">
-              {testimonials.map((t, i) => (
-                <figure key={i} className="ch-testimonial">
-                  <blockquote>{t.quote}</blockquote>
-                  <figcaption>
-                    <strong>{t.name}</strong> · {t.clinic}
-                    {t.result ? <span className="ch-result"> — {t.result}</span> : null}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          )}
+          <p className="ch-lead ch-center-lead">
+            Hear it from a clinic owner — 37 seconds, in his own words.
+          </p>
+          <div className="ch-proof-grid">
+            <figure className="ch-video-card">
+              <video
+                controls
+                preload="none"
+                playsInline
+                poster="/videos/dr-ronak-poster.jpg"
+              >
+                <source src="/videos/dr-ronak-vinayaka.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <strong>Dr. Ronak</strong> · Vinayaka Dental Care
+                <span className="ch-result"> — fewer no-shows, recalls coming back, up 20–25% in 2–3 months</span>
+              </figcaption>
+            </figure>
+            {testimonials.length > 0 && (
+              <div className="ch-testimonials ch-testimonials-col">
+                {testimonials.map((t, i) => (
+                  <figure key={i} className="ch-testimonial">
+                    <blockquote>{t.quote}</blockquote>
+                    <figcaption>
+                      <strong>{t.name}</strong> · {t.clinic}
+                      {t.result ? <span className="ch-result"> — {t.result}</span> : null}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="ch-badges">
             <span className="ch-badge">NVIDIA Inception member</span>
             <span className="ch-badge">Built by healthcare technologists</span>

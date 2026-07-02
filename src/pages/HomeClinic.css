@@ -191,6 +191,37 @@
 .ch-testimonial figcaption { font-size: 14px; color: var(--c-ink-soft); }
 .ch-result { color: var(--c-accent-dark); font-weight: 600; }
 
+/* PROOF — video testimonial */
+.ch-proof-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: start;
+  margin-top: 34px;
+  text-align: left;
+}
+.ch-video-card {
+  margin: 0;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow-lg);
+  overflow: hidden;
+}
+.ch-video-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #10131c;
+}
+.ch-video-card figcaption {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--c-ink-soft);
+}
+.ch-video-card figcaption strong { color: var(--c-ink); }
+.ch-testimonials-col { grid-template-columns: 1fr; margin: 0; }
+
 /* WHY US */
 .ch-why { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 900px; margin: 0 auto; }
 .ch-why-card { display: flex; gap: 14px; background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 24px; box-shadow: var(--c-shadow); }
@@ -340,6 +371,8 @@
   .ch-audit-grid { grid-template-columns: 1fr; gap: 36px; }
   .ch-calc-grid { grid-template-columns: 1fr; gap: 28px; }
   .ch-calc-result { position: static; }
+  .ch-proof-grid { grid-template-columns: 1fr; }
+  .ch-video-card { max-width: 340px; margin: 0 auto; }
 }
 @media (max-width: 560px) {
   .ch-section { padding: 60px 0; }
