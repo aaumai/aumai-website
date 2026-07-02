@@ -281,7 +281,7 @@ const Home = () => {
           <p className="ch-offer-sub">
             In minutes, get a free Clinic Growth Audit: where you rank on Google versus the clinics near
             you, how visible you are to new patients, and the specific gaps quietly costing you bookings.
-            No obligation. No sales pitch. Just a clear picture of what is on the table.
+            No obligation. Just a clear picture of what is on the table.
           </p>
           <div className="ch-hero-cta ch-center-cta">
             <Link to="/contact" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
@@ -308,7 +308,7 @@ const Home = () => {
       {/* FINAL CTA + FOUNDER */}
       <section className="ch-section ch-tint">
         <div className="ch-container ch-narrow ch-center">
-          <h2 className="ch-h2">This is not a sales pitch. It is a look at what you are leaving on the table.</h2>
+          <h2 className="ch-h2">A clear look at what you are leaving on the table.</h2>
           <blockquote className="ch-founder">
             &ldquo;I built AUMY because good clinics lose patients they have already earned — for no
             reason other than no one had time to follow up. If that is you, let me show you exactly

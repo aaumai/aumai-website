@@ -196,7 +196,7 @@ const AumyRevenueGenerator = () => {
           <h2 className="ch-offer-title">See what your clinic is leaving on the table — free.</h2>
           <p className="ch-offer-sub">
             A free Clinic Growth Audit shows exactly where your clinic is leaking revenue — no
-            obligation, no sales pitch.
+            obligation.
           </p>
           <div className="ch-hero-cta ch-center-cta">
             <Link to="/contact" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
