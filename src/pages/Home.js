@@ -89,7 +89,7 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">For dental &amp; aesthetic clinics</span>
             <h1 className="ch-hero-title">
-              Your clinic is leaking patients — and revenue you never see.
+              Your clinic is leaking patients — and revenue you never&nbsp;see.
             </h1>
             <p className="ch-hero-sub">
               We are the growth partner for dental &amp; aesthetic clinics. Powered by AUMY — our AI
@@ -98,7 +98,7 @@ const Home = () => {
               all automatic.
             </p>
             <div className="ch-hero-cta">
-              <Link to="/contact" className="ch-btn ch-btn-primary">
+              <Link to="/growth-audit" className="ch-btn ch-btn-primary">
                 Get my free Clinic Growth Audit
               </Link>
               <a href="#how-it-works" className="ch-btn ch-btn-ghost">
@@ -279,12 +279,13 @@ const Home = () => {
         <div className="ch-container ch-center">
           <h2 className="ch-offer-title">See exactly where your clinic is leaking — free.</h2>
           <p className="ch-offer-sub">
-            In minutes, get a free Clinic Growth Audit: where you rank on Google versus the clinics near
-            you, how visible you are to new patients, and the specific gaps quietly costing you bookings.
-            No obligation. Just a clear picture of what is on the table.
+            Get a free Clinic Growth Audit, prepared for your clinic: where you rank on Google versus
+            the clinics near you, how visible you are to new patients, and the specific gaps quietly
+            costing you bookings — on your WhatsApp within 24 hours. No obligation. Just a clear
+            picture of what is on the table.
           </p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/contact" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
             <Link to="/contact" className="ch-btn ch-btn-ghost ch-ghost-light">Book a free growth strategy call</Link>
           </div>
         </div>
@@ -315,7 +316,7 @@ const Home = () => {
             where. Free.&rdquo;
             <cite>— Jayesh, Founder, AUM AI</cite>
           </blockquote>
-          <Link to="/contact" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
+          <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
         </div>
       </section>
     </div>

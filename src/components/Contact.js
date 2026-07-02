@@ -58,6 +58,8 @@ const Contact = () => {
   };
 
   const services = [
+    'Clinic Growth Strategy Call',
+    'Free Clinic Growth Audit',
     'Healthcare Platform Engineering',
     'Healthcare Product Development',
     'EHR Integrations',
@@ -103,8 +105,8 @@ const Contact = () => {
             Let's Start <span className="section-title-gradient">a Conversation</span>
           </h2>
           <p className="section-subtitle">
-            Ready to transform your healthcare technology? Tell us about your project
-            and let's explore how we can help.
+            Whether it is growth for your clinic or engineering for your product — tell us
+            where you are and we will take it from there.
           </p>
         </div>
 
@@ -217,7 +219,7 @@ const Contact = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="message">Project Details *</label>
+              <label htmlFor="message">How can we help? *</label>
               <textarea
                 id="message"
                 name="message"
@@ -225,7 +227,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 rows="5"
-                placeholder="Tell us about your project requirements, timeline, and any specific challenges you're facing..."
+                placeholder="Tell us a little about your clinic or your product, and what you'd like to solve..."
               />
             </div>
 

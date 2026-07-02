@@ -80,7 +80,7 @@ const Header = () => {
               ))}
             </ul>
             <div className="nav-cta">
-              <Link to="/contact" className="btn btn-primary" onClick={closeMobileMenu}>
+              <Link to="/growth-audit" className="btn btn-primary" onClick={closeMobileMenu}>
                 Free Clinic Audit
               </Link>
             </div>

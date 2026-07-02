@@ -113,17 +113,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--slate-900);
+  background: var(--slate-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary-500), var(--accent-purple));
+  background: var(--slate-400);
   border-radius: var(--radius-full);
-  border: 2px solid var(--slate-900);
+  border: 2px solid var(--slate-100);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--primary-400), var(--accent-violet));
+  background: var(--slate-500);
 }
 
 /* Global Styles */

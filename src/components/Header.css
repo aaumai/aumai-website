@@ -57,7 +57,8 @@
   height: 55px;
   width: auto;
   transition: all var(--transition-base);
-  filter: none;
+  /* deepen the gold so the wordmark holds contrast on the light glass header */
+  filter: brightness(0.82) saturate(1.25);
 }
 
 .header.scrolled .logo-image {
@@ -66,7 +67,7 @@
 
 .logo a:hover .logo-image {
   transform: scale(1.05);
-  filter: brightness(1.2);
+  filter: brightness(0.95) saturate(1.25);
 }
 
 /* Navigation */
@@ -147,6 +148,17 @@
 .nav-cta .btn {
   padding: 10px 24px;
   font-size: 0.9rem;
+}
+
+/* Brand accent: teal CTA (overrides the legacy blue/purple gradient .btn-primary) */
+.nav-cta .btn-primary {
+  background: #2a9d8f;
+  box-shadow: 0 4px 16px rgba(42, 157, 143, 0.32);
+}
+
+.nav-cta .btn-primary:hover {
+  background: #218779;
+  box-shadow: 0 8px 22px rgba(42, 157, 143, 0.4);
 }
 
 /* Mobile Menu Toggle */

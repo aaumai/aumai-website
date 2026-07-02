@@ -81,7 +81,7 @@ const AumyRevenueGenerator = () => {
             with the recovered revenue proven on a live dashboard.
           </p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/contact" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
             <Link to="/contact" className="ch-btn ch-btn-ghost">Talk to us</Link>
           </div>
           <div className="ch-stats">
@@ -199,7 +199,7 @@ const AumyRevenueGenerator = () => {
             obligation.
           </p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/contact" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
           </div>
         </div>
       </section>

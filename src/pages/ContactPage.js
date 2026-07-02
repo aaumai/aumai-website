@@ -9,7 +9,8 @@ const ContactPage = () => {
         <div className="container">
           <h1 className="page-title">Get In Touch</h1>
           <p className="page-subtitle">
-            Ready to transform your healthcare technology? Let's discuss your project requirements.
+            Tell us what you need — a growth strategy call for your clinic, or a build partner for
+            your product. We reply within 24 hours.
           </p>
         </div>
       </div>
