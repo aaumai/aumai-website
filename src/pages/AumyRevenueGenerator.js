@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import { WatchButton, VideoLightbox } from '../components/FeatureVideo';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -24,15 +25,15 @@ const steps = [
 ];
 
 const capabilities = [
-  { t: 'AI receptionist', d: 'Books every lead 24/7 on WhatsApp.' },
-  { t: 'Lead capture, every channel', d: 'Instagram, WhatsApp, calls, ads, walk-ins.' },
-  { t: 'Cold-lead follow-up', d: 'Polite retries until they book or opt out.' },
-  { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.' },
-  { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.' },
-  { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.' },
-  { t: 'Reviews & local SEO', d: 'More 5-star reviews, auto-replies, higher ranking.' },
-  { t: 'Educational content, in your name', d: 'Stay top-of-mind between visits.' },
-  { t: 'ROI dashboard', d: 'Every booking and rupee attributed.' },
+  { t: 'AI receptionist', d: 'Books every lead 24/7 on WhatsApp.', video: 'ai-receptionist' },
+  { t: 'Lead capture, every channel', d: 'Instagram, WhatsApp, calls, ads, walk-ins.', video: 'ai-receptionist' },
+  { t: 'Cold-lead follow-up', d: 'Polite retries until they book or opt out.', video: 'cold-lead-followup' },
+  { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.', video: 'no-show-prevention' },
+  { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.', video: 'recall-reactivation' },
+  { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.', video: 'treatment-plan-followup' },
+  { t: 'Reviews & local SEO', d: 'More 5-star reviews, auto-replies, higher ranking.', video: 'reviews-local-seo' },
+  { t: 'Educational content, in your name', d: 'Stay top-of-mind between visits.', video: 'education-content' },
+  { t: 'ROI dashboard', d: 'Every booking and rupee attributed.', video: 'roi-dashboard' },
 ];
 
 const workingModel = [
@@ -58,6 +59,7 @@ const testimonials = [
 ];
 
 const AumyRevenueGenerator = () => {
+  const [video, setVideo] = useState(null);
   useEffect(() => {
     setPageSeo({
       title: 'How AUMY Works — Recover Lost Revenue for Your Clinic | AUM AI',
@@ -129,6 +131,9 @@ const AumyRevenueGenerator = () => {
             <li><Check /> Cost per genuine lead drops as lead quality climbs</li>
             <li><Check /> It compounds every month — privacy-safe, no patient data exposed</li>
           </ul>
+          <div>
+            <WatchButton onClick={() => setVideo({ file: 'smarter-ads', title: 'Smarter ads — how the loop works' })} />
+          </div>
         </div>
       </section>
 
@@ -146,6 +151,9 @@ const AumyRevenueGenerator = () => {
                 <div>
                   <h3 className="ch-why-title">{c.t}</h3>
                   <p className="ch-why-body">{c.d}</p>
+                  {c.video && (
+                    <WatchButton onClick={() => setVideo({ file: c.video, title: c.t })} />
+                  )}
                 </div>
               </div>
             ))}
@@ -203,6 +211,8 @@ const AumyRevenueGenerator = () => {
           </div>
         </div>
       </section>
+
+      <VideoLightbox video={video} onClose={() => setVideo(null)} />
     </div>
   );
 };
