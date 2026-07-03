@@ -189,12 +189,21 @@ const routes = [
   },
 ];
 
+// Write each route to BOTH <slug>.html and <slug>/index.html so it serves
+// correctly regardless of nginx config:
+//   - current `try_files $uri $uri/ /index.html`   -> serves <slug>/index.html (301 adds slash)
+//   - upgraded `try_files $uri $uri.html $uri/ ...` -> serves <slug>.html directly (no redirect,
+//     so the served URL matches the slashless canonical + internal links)
 let written = 0;
 for (const r of routes) {
   const html = apply(template, r);
-  const dir = r.slug ? path.join(BUILD, r.slug) : BUILD;
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'index.html'), html);
+  if (!r.slug) {
+    fs.writeFileSync(path.join(BUILD, 'index.html'), html);
+  } else {
+    fs.writeFileSync(path.join(BUILD, `${r.slug}.html`), html);
+    fs.mkdirSync(path.join(BUILD, r.slug), { recursive: true });
+    fs.writeFileSync(path.join(BUILD, r.slug, 'index.html'), html);
+  }
   written += 1;
   console.log(`prerendered /${r.slug}`);
 }
