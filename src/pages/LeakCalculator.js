@@ -5,9 +5,9 @@ import './HomeClinic.css';
 
 // Deliberately conservative constants — shown to the user, not hidden.
 const WEEKS_PER_YEAR = 48; // working weeks, holidays excluded
-const MISSED_WOULD_BOOK = 0.3; // only 30% of unanswered enquiries would have booked
+const MISSED_WOULD_BOOK = 0.35; // only 35% of unanswered enquiries would have booked
 const NOSHOW_NEVER_REBOOK = 0.5; // only half of no-shows are counted as lost
-const LOST_VISITS_PER_LAPSED = 1; // one lost visit per lapsed patient (real LTV is far higher)
+const LOST_VISITS_PER_LAPSED = 3; // three visits per lapsed patient — still conservative vs true lifetime value (repeat visits + referrals)
 
 const segments = {
   dental: { label: 'Dental clinic', avgValue: 2000 },
@@ -135,10 +135,10 @@ const LeakCalculator = () => {
               </ul>
 
               <p className="ch-calc-fine">
-                How we undercount: only {MISSED_WOULD_BOOK * 100}% of missed enquiries counted as
-                lost bookings · only {NOSHOW_NEVER_REBOOK * 100}% of no-shows counted ·
-                just {LOST_VISITS_PER_LAPSED} lost visit per lapsed patient (their future visits and
-                referrals aren't counted) · {WEEKS_PER_YEAR} working weeks.
+                How we undercount: only {Math.round(MISSED_WOULD_BOOK * 100)}% of missed enquiries
+                counted as lost bookings · only {Math.round(NOSHOW_NEVER_REBOOK * 100)}% of no-shows
+                counted · just {LOST_VISITS_PER_LAPSED} visits per lapsed patient (their full lifetime
+                value and referrals aren't counted) · {WEEKS_PER_YEAR} working weeks.
               </p>
 
               <Link to="/growth-audit" className="ch-btn ch-btn-primary ch-audit-submit">
