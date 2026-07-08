@@ -139,6 +139,20 @@
 
 /* PILLARS */
 .ch-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.ch-pillars-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* QUALIFICATION GATE — fit checklist card */
+.ch-fit-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow);
+  padding: 26px 28px;
+  max-width: 560px;
+  margin: 28px auto 4px;
+  text-align: left;
+}
+.ch-fit-card .ch-mini { margin: 0; }
 .ch-pillar {
   background: var(--c-surface);
   border: 1px solid var(--c-line);

@@ -20,20 +20,16 @@ const leaks = [
 
 const pillars = [
   {
-    title: 'Capture & book',
-    body: 'Every enquiry — WhatsApp, website, Instagram, a phone call — answered instantly by an AI receptionist that talks like a human and actually books the appointment. 24/7.',
+    title: 'More patients through the door',
+    body: 'Every enquiry — WhatsApp, Instagram, a missed call, your website — answered in seconds and booked by an AI receptionist that talks like a human. Your ad spend learns who actually booked and paid, so it stops buying clicks and starts finding patients like your best ones.',
   },
   {
-    title: 'Nurture & retain',
-    body: 'No-shows recovered, cold leads revived, recalls kept, dormant patients won back — automatically, in a real conversation, not a dead-end text.',
+    title: 'The clinic patients find — and trust',
+    body: 'Manage your Google Business Profile, Instagram and Facebook from one place — and create and publish content to every channel in a few clicks with our Content Studio. Climb Google above the clinic down the road and earn a steady stream of real 5-star reviews, each with a reply.',
   },
   {
-    title: 'Smarter ads',
-    body: 'We tell your ads who actually booked and paid, so Meta stops wasting budget on clicks and starts finding patients like your best ones.',
-  },
-  {
-    title: 'Get found',
-    body: 'More 5-star reviews from real patients, a reply to every one, and a Google profile that climbs — so new patients find you first.',
+    title: 'A front desk that never clocks out',
+    body: 'A 24/7 AI receptionist that answers, reschedules, recovers no-shows and quietly wins back patients who have drifted away — the way your sharpest receptionist would, at any hour, without another hire.',
   },
 ];
 
@@ -87,15 +83,15 @@ const Home = () => {
       <section className="ch-hero">
         <div className="ch-container ch-hero-grid">
           <div className="ch-hero-text">
-            <span className="ch-eyebrow">For dental &amp; aesthetic clinics</span>
+            <span className="ch-eyebrow">For established dental &amp; aesthetic clinics</span>
             <h1 className="ch-hero-title">
-              Your clinic is leaking patients — and revenue you never&nbsp;see.
+              You run a premium clinic. Your growth should feel like&nbsp;it.
             </h1>
             <p className="ch-hero-sub">
-              We are the growth partner for dental &amp; aesthetic clinics. Powered by AUMY — our AI
-              growth system, tailored to your clinic — we capture every enquiry, book it like a human,
-              win back the patients who drift away, and make your ad spend work harder. All connected,
-              all automatic.
+              AUMY is the growth system we run for dental and aesthetic clinics. It brings more patients
+              through your door, makes yours the clinic they find and trust online, and gives you a front
+              desk that never clocks out — all connected, all automatic, and built to compound month
+              after&nbsp;month.
             </p>
             <div className="ch-hero-cta">
               <Link to="/growth-audit" className="ch-btn ch-btn-primary">
@@ -166,15 +162,15 @@ const Home = () => {
       <section className="ch-section" id="how-it-works">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">The connected system</span>
-            <h2 className="ch-h2">One connected system, run by a partner who tailors it to you.</h2>
+            <span className="ch-eyebrow">What you actually get</span>
+            <h2 className="ch-h2">Three outcomes, one connected system — tuned to your clinic.</h2>
             <p className="ch-lead ch-center-lead">
-              Most clinics bolt together four tools that do not talk to each other. We bring them onto
-              one platform — AUMY — and tune it to your clinic&apos;s specific leaks. That connection
-              is what changes everything.
+              Most clinics stitch together four tools that never talk to each other. We bring them onto
+              one platform — AUMY — and point it at your clinic&apos;s specific gaps. Here is what that
+              delivers.
             </p>
           </div>
-          <div className="ch-pillars">
+          <div className="ch-pillars ch-pillars-3">
             {pillars.map((p, i) => (
               <div key={i} className="ch-pillar">
                 <span className="ch-pillar-num">{i + 1}</span>
@@ -184,8 +180,8 @@ const Home = () => {
             ))}
           </div>
           <p className="ch-note ch-center">
-            Alone, each plugs a leak. Together, they compound — every part making the others work
-            better. That is the magic.
+            None of this is a one-off push. Every patient captured, review earned and slot saved feeds
+            the next — organic growth that builds on itself, month after month.
           </p>
         </div>
       </section>
@@ -293,6 +289,30 @@ const Home = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* QUALIFICATION GATE — honest fit, premium positioning */}
+      <section className="ch-section">
+        <div className="ch-container ch-narrow ch-center">
+          <span className="ch-eyebrow">A fit, or not</span>
+          <h2 className="ch-h2">We take on a handful of clinics at a time — and we&apos;re honest about fit.</h2>
+          <p className="ch-lead ch-center-lead">
+            AUMY works best for established clinics with real patient volume and the ambition to compound
+            it. It is built for you if:
+          </p>
+          <div className="ch-fit-card">
+            <ul className="ch-mini">
+              <li><Check /> You are a dental, dermatology or aesthetics clinic</li>
+              <li><Check /> You collect upwards of ₹5 lakh a month</li>
+              <li><Check /> You are the founder or owner — the one who makes the growth calls</li>
+              <li><Check /> You would rather grow with a system than by hiring more front-desk staff</li>
+            </ul>
+          </div>
+          <p className="ch-note">
+            This is not built for every clinic, and that is deliberate. If it is not the right fit yet,
+            we will tell you plainly rather than take you on. When it is, we should talk.
+          </p>
         </div>
       </section>
 
