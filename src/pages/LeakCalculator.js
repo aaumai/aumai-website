@@ -17,6 +17,30 @@ const segments = {
 const inr = (n) =>
   '₹' + Math.round(n).toLocaleString('en-IN');
 
+// Defined at module scope (NOT inside LeakCalculator): a component defined
+// inside another is a new function reference every render, so React unmounts
+// and remounts the <input> on each value change — which interrupts the native
+// range drag and makes the thumb jump one step at a time instead of sliding.
+const Slider = ({ label, value, onChange, min, max, step = 1, suffix = '' }) => (
+  <div className="ch-calc-field">
+    <div className="ch-calc-label">
+      <label>{label}</label>
+      <span className="ch-calc-value">
+        {value.toLocaleString('en-IN')}
+        {suffix}
+      </span>
+    </div>
+    <input
+      type="range"
+      min={min}
+      max={max}
+      step={step}
+      value={value}
+      onChange={(e) => onChange(Number(e.target.value))}
+    />
+  </div>
+);
+
 const LeakCalculator = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -53,26 +77,6 @@ const LeakCalculator = () => {
     const total = missed + noshows + lapsed;
     return { missed, noshows, lapsed, total };
   }, [enquiries, missedPct, appointments, noshowPct, lapsePct, avgValue]);
-
-  const Slider = ({ label, value, onChange, min, max, step = 1, suffix = '' }) => (
-    <div className="ch-calc-field">
-      <div className="ch-calc-label">
-        <label>{label}</label>
-        <span className="ch-calc-value">
-          {value.toLocaleString('en-IN')}
-          {suffix}
-        </span>
-      </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-      />
-    </div>
-  );
 
   return (
     <div className="ch-home">
