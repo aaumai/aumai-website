@@ -97,12 +97,12 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h2>You are working harder than ever. So why does growth feel stuck?</h2>
         <ul>
-          <li>You spend on ads every month — shown to the same people — with no idea which ones become patients.</li>
           <li>The phone rings while your team is with a patient, or after hours. That caller books somewhere else.</li>
           <li>A patient no-shows. The chair sits empty. No one had time to fill it.</li>
           <li>An enquiry asks a question, gets no reply, and quietly disappears.</li>
           <li>Patients you treated once never come back — and no one reminds them.</li>
           <li>On Google, the clinic down the road shows up above you.</li>
+          <li>You spend on ads every month — shown to the same people — with no idea which ones become patients.</li>
         </ul>
         <h2>Three outcomes, one connected system — tuned to your clinic.</h2>
         <ul>

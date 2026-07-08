@@ -10,12 +10,12 @@ const Check = () => (
 );
 
 const leaks = [
-  'You spend on ads every month — shown to the same people — with no idea which ones become patients.',
   'The phone rings while your team is with a patient. Or after hours. That caller books somewhere else.',
   'A patient no-shows. The chair sits empty. No one had time to fill it.',
   'An enquiry asks a question, gets no reply, and quietly disappears.',
   'Patients you treated once never come back — and no one reminds them.',
   'On Google, the clinic down the road shows up above you.',
+  'You spend on ads every month — shown to the same people — with no idea which ones become patients.',
 ];
 
 const pillars = [
