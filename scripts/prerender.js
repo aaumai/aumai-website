@@ -89,9 +89,9 @@ const routes = [
     jsonld: [faqLd, videoLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">For dental &amp; aesthetic clinics</p>
-        <h1 class="ch-hero-title">Your clinic is leaking patients — and revenue you never see.</h1>
-        <p class="ch-hero-sub">We are the growth partner for dental &amp; aesthetic clinics. Powered by AUMY — our AI growth system, tailored to your clinic — we capture every enquiry, book it like a human, win back the patients who drift away, and make your ad spend work harder. All connected, all automatic.</p>
+        <p class="ch-eyebrow">For established dental &amp; aesthetic clinics</p>
+        <h1 class="ch-hero-title">You run a premium clinic. Your growth should feel like it.</h1>
+        <p class="ch-hero-sub">AUMY is the growth system we run for dental and aesthetic clinics. It brings more patients through your door, makes yours the clinic they find and trust online, and gives you a front desk that never clocks out — all connected, all automatic, and built to compound month after month.</p>
         <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
@@ -104,8 +104,15 @@ const routes = [
           <li>Patients you treated once never come back — and no one reminds them.</li>
           <li>On Google, the clinic down the road shows up above you.</li>
         </ul>
-        <h2>One connected system, run by a partner who tailors it to you.</h2>
-        <p>Most clinics bolt together four tools that do not talk to each other. We bring them onto one platform — AUMY — and tune it to your clinic's specific leaks: capture &amp; book every enquiry 24/7, nurture &amp; retain patients who drift, make your ads smarter by feeding real bookings back to Meta, and get found on Google with more reviews and higher ranking.</p>
+        <h2>Three outcomes, one connected system — tuned to your clinic.</h2>
+        <ul>
+          <li><strong>More patients through the door</strong> — every enquiry from WhatsApp, Instagram, a missed call or your website answered in seconds and booked by an AI receptionist, with ad spend that learns who actually books and paid.</li>
+          <li><strong>The clinic patients find and trust</strong> — manage your Google Business Profile, Instagram and Facebook from one place, and create and publish content to every channel in a few clicks with our Content Studio; climb Google and earn a steady stream of real 5-star reviews.</li>
+          <li><strong>A front desk that never clocks out</strong> — a 24/7 AI receptionist that answers, reschedules, recovers no-shows and wins back dormant patients, without another hire.</li>
+        </ul>
+        <p>None of this is a one-off push. Every patient captured, review earned and slot saved feeds the next — organic growth that builds on itself, month after month.</p>
+        <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
+        <p>AUMY works best for established dental, dermatology and aesthetics clinics collecting upwards of ₹5 lakh a month, led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
         <h2>Clinics are already growing with us.</h2>
         <p>Vinayaka Dental Care grew revenue about 25% in two months without hiring a single extra person. Vinayaka Derma keeps a 4.9-star Google rating with recalls and follow-ups running automatically. AUM AI is an NVIDIA Inception member.</p>
         <h2>Questions clinic owners ask</h2>
