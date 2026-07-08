@@ -89,6 +89,9 @@ const routes = [
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [faqLd, videoLd],
     content: `
+      <section><div class="ch-container ch-narrow">
+        <p><strong>See it for yourself — live.</strong> Message our AI receptionist for a demo dental clinic on WhatsApp at +91 80071 89868 and watch it answer, book, reschedule and cancel appointments, 24/7. No sign-up — just say hello.</p>
+      </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">For established dental &amp; aesthetic clinics</p>
         <h1 class="ch-hero-title">You run a premium clinic. Your growth should feel like it.</h1>
