@@ -173,6 +173,19 @@
 
 /* SPLIT (how it works) */
 .ch-split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+
+/* GROWTH EXPERT card */
+.ch-expert-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 22px;
+  box-shadow: var(--c-shadow-lg);
+  overflow: hidden;
+}
+.ch-expert-list { margin: 0; padding: 20px 22px 24px; }
 .ch-mini { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
 .ch-mini li { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; color: var(--c-ink); }
 .ch-check { width: 22px; height: 22px; flex: 0 0 22px; color: var(--c-accent); margin-top: 1px; }

@@ -65,6 +65,7 @@ const faqLd = {
     ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
     ['Will my staff have to learn something complicated?', 'No. AUMY runs in the background; your team does less, not more.'],
     ['Is this a product or a service?', 'Both — you get a proven system (AUMY), run and tailored for you by a partner. You are getting a growth partner, not software to figure out alone.'],
+    ['Who actually runs all this?', 'A dedicated growth expert is assigned to your clinic on a permanent basis — they strategise, set up and operate the entire system on your behalf, and review results with you every week.'],
   ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 };
 const videoLd = {
@@ -111,6 +112,8 @@ const routes = [
           <li><strong>A front desk that never clocks out</strong> — a 24/7 AI receptionist that answers, reschedules, recovers no-shows and wins back dormant patients, without another hire.</li>
         </ul>
         <p>None of this is a one-off push. Every patient captured, review earned and slot saved feeds the next — organic growth that builds on itself, month after month.</p>
+        <h2>A dedicated growth expert runs it for you.</h2>
+        <p>You are never handed a login and left to work it out. A growth expert is assigned to your clinic on a permanent basis — they learn how your practice runs, build the strategy, operate the entire system on your behalf, and review results with you every week. You get the outcome; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
         <p>AUMY works best for established dental, dermatology and aesthetics clinics collecting upwards of ₹5 lakh a month, led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
         <h2>Clinics are already growing with us.</h2>

@@ -34,7 +34,7 @@ const pillars = [
 ];
 
 const whyUs = [
-  { title: 'We run it for you', body: 'You do not buy software and figure it out — we tailor AUMY to your clinic and operate it alongside you.' },
+  { title: 'A dedicated growth expert runs it', body: 'A growth expert is assigned to your clinic — they build the strategy, operate AUMY end-to-end, and own the outcome with you. You are never left to figure out software alone.' },
   { title: 'No rip-and-replace', body: 'It works on top of the systems you already use.' },
   { title: 'One source of truth', body: 'Your marketing, front desk, and reputation — finally connected.' },
   { title: 'Your data, secured', body: 'Encrypted, access-controlled, and private by design.' },
@@ -46,6 +46,7 @@ const faqs = [
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
   { q: 'Will my staff have to learn something complicated?', a: 'No. AUMY runs in the background; your team does less, not more.' },
   { q: 'Is this a product or a service?', a: 'Both — you get a proven system (AUMY), run and tailored for you by a partner. You are not buying software to figure out alone; you are getting a growth partner.' },
+  { q: 'Who actually runs all this?', a: 'A dedicated growth expert is assigned to your clinic on a permanent basis. They strategise, set up and operate the entire system on your behalf, and review results with you every week — you are never left to run software yourself.' },
 ];
 
 // Real, attributed partner-clinic testimonials (sourced from the revenue-generator page).
@@ -222,6 +223,42 @@ const Home = () => {
                 <div className="ch-bubble ch-out">Reserved for Tue 4 PM. See you then! ✅</div>
               </div>
               <div className="ch-chat-foot">Booked — no staff lifted a finger.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GROWTH EXPERT — the human partner who runs it */}
+      <section className="ch-section">
+        <div className="ch-container ch-split">
+          <div className="ch-split-text">
+            <span className="ch-eyebrow">Not just software</span>
+            <h2 className="ch-h2">A dedicated growth expert — assigned to your clinic, for good.</h2>
+            <p className="ch-lead">
+              You are never handed a login and left to work it out. A growth expert is assigned to your
+              clinic and stays with you — they learn how your practice runs, build the strategy, and
+              operate the entire system on your behalf.
+            </p>
+            <p className="ch-lead">
+              You get the outcome; they carry the work — a permanent partner who owns your growth
+              alongside you, not another tool for your front desk to manage.
+            </p>
+          </div>
+          <div className="ch-split-visual">
+            <div className="ch-expert-card">
+              <div className="ch-chat-head">
+                <span className="ch-chat-avatar">✦</span>
+                <div>
+                  <div className="ch-chat-name">Your growth expert</div>
+                  <div className="ch-chat-status">Assigned to your clinic · permanent</div>
+                </div>
+              </div>
+              <ul className="ch-mini ch-expert-list">
+                <li><Check /> Builds your growth plan around your goals</li>
+                <li><Check /> Sets up and runs the whole system for you</li>
+                <li><Check /> Wins back dormant patients and fills the calendar</li>
+                <li><Check /> Reviews the numbers that matter with you, weekly</li>
+              </ul>
             </div>
           </div>
         </div>
