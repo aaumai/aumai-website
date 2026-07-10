@@ -94,12 +94,13 @@ const routes = [
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">For established dental &amp; aesthetic clinics</p>
-        <h1 class="ch-hero-title">You run a premium clinic. Your growth should feel like it.</h1>
-        <p class="ch-hero-sub">AUMY is the growth system we run for dental and aesthetic clinics. It brings more patients through your door, makes yours the clinic they find and trust online, and gives you a front desk that never clocks out — all connected, all automatic, and built to compound month after month.</p>
+        <h1 class="ch-hero-title">Your patient chooses a clinic before they ever meet you.</h1>
+        <p class="ch-hero-sub">Today that choice happens online — in the ads they see, the reviews they read, and whether anyone answers when they reach out. AUMY is the growth system we run for your clinic, so the choice keeps going your way — more patients through your door, and the ones you have already earned coming back.</p>
         <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
-        <h2>You are working harder than ever. So why does growth feel stuck?</h2>
+        <h2>Dentistry changed. Great work and a good location are no longer enough.</h2>
+        <p>Before a patient ever sits in your chair, an ad reaches them first, they check your Google reviews, and they call or message your clinic — and if no one answers, they move to the next name in the results. Winning patients now runs on systems, not skill alone.</p>
         <ul>
           <li>The phone rings while your team is with a patient, or after hours. That caller books somewhere else.</li>
           <li>A patient no-shows. The chair sits empty. No one had time to fill it.</li>
