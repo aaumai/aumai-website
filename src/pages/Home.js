@@ -114,13 +114,13 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">For established dental &amp; aesthetic clinics</span>
             <h1 className="ch-hero-title">
-              You run a premium clinic. Your growth should feel like&nbsp;it.
+              Your patient chooses a clinic before they ever meet&nbsp;you.
             </h1>
             <p className="ch-hero-sub">
-              AUMY is the growth system we run for dental and aesthetic clinics. It brings more patients
-              through your door, makes yours the clinic they find and trust online, and gives you a front
-              desk that never clocks out — all connected, all automatic, and built to compound month
-              after&nbsp;month.
+              Today that choice happens online — in the ads they see, the reviews they read, and whether
+              anyone answers when they reach out. AUMY is the growth system we run for your clinic, so the
+              choice keeps going your way — more patients through your door, and the ones you have already
+              earned coming&nbsp;back.
             </p>
             <div className="ch-hero-cta">
               <Link to="/growth-audit" className="ch-btn ch-btn-primary">
@@ -150,11 +150,13 @@ const Home = () => {
       {/* PROBLEM */}
       <section className="ch-section">
         <div className="ch-container ch-narrow">
-          <h2 className="ch-h2">You are working harder than ever. So why does growth feel stuck?</h2>
+          <h2 className="ch-h2">Dentistry changed. Great work and a good location are no longer enough.</h2>
           <p className="ch-lead">
-            It is rarely your dentistry. It is the quiet gaps between your marketing and your front
-            desk — where patients and money slip away, one at a time, in the places no report ever
-            shows you:
+            Before a patient ever sits in your chair, an ad reaches them first, they check your Google
+            reviews, and they call or message your clinic — and if no one answers, they move to the next
+            name in the results. Winning patients now runs on systems, not skill alone. And that is where
+            it slips: the quiet gaps between your marketing and your front desk, where patients and money
+            leak away, one at a time, in the places no report ever shows you:
           </p>
           <ul className="ch-leaks">
             {leaks.map((leak, i) => (
