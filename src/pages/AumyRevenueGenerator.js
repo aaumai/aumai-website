@@ -31,6 +31,7 @@ const capabilities = [
   { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.', video: 'no-show-prevention' },
   { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.', video: 'recall-reactivation' },
   { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.', video: 'treatment-plan-followup' },
+  { t: 'Lab work automation', d: 'Chases your dental lab; rebooks the patient the moment the crown is ready.' },
   { t: 'Reviews & local SEO', d: 'More 5-star reviews, auto-replies, higher ranking.', video: 'reviews-local-seo' },
   { t: 'Educational content, in your name', d: 'Stay top-of-mind between visits.', video: 'education-content' },
   { t: 'ROI dashboard', d: 'Every booking and rupee attributed.', video: 'roi-dashboard' },
@@ -39,8 +40,8 @@ const capabilities = [
 const workingModel = [
   { n: '01', t: 'We audit your data', d: 'From your software — or even paper registers. No work for your team.' },
   { n: '02', t: 'We show you the money first', d: 'Exactly how much revenue is sitting unrecovered, on your real numbers.' },
-  { n: '03', t: 'We run a 30-day managed pilot', d: 'Real bookings on your calendar, tracked live on a dashboard.' },
-  { n: '04', t: 'You continue only if it pays', d: 'See the attributed results. No lock-in, no long contract, no risk.' },
+  { n: '03', t: 'We build it around your clinic', d: 'A dedicated growth expert sets up AUMY on your data and runs it end-to-end — you don’t lift a finger.' },
+  { n: '04', t: 'We own the outcome with you', d: 'Every booking and rupee tracked live and reviewed with you every week — a partner accountable for real results.' },
 ];
 
 const testimonials = [
@@ -184,7 +185,7 @@ const AumyRevenueGenerator = () => {
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">How we work with you</span>
-            <h2 className="ch-h2">We prove the ROI before you commit.</h2>
+            <h2 className="ch-h2">We lead with your numbers — then we get to work.</h2>
           </div>
           <div className="ch-pillars">
             {workingModel.map((s, i) => (

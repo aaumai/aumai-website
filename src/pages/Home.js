@@ -20,6 +20,7 @@ const leaks = [
   'A patient no-shows. The chair sits empty. No one had time to fill it.',
   'An enquiry asks a question, gets no reply, and quietly disappears.',
   'Patients you treated once never come back — and no one reminds them.',
+  'The crown comes back from the lab, but no one rebooks the patient — and the case just stalls.',
   'On Google, the clinic down the road shows up above you.',
   'You spend on ads every month — shown to the same people — with no idea which ones become patients.',
 ];
@@ -35,7 +36,7 @@ const pillars = [
   },
   {
     title: 'A front desk that never clocks out',
-    body: 'A 24/7 AI receptionist that answers, reschedules, recovers no-shows and quietly wins back patients who have drifted away — the way your sharpest receptionist would, at any hour, without another hire.',
+    body: 'A 24/7 AI receptionist that answers, reschedules, recovers no-shows, sends recall reminders on time and quietly wins back patients who have drifted away — it even chases your dental lab and rebooks the patient the moment their crown is ready. The way your sharpest receptionist would, at any hour, without another hire.',
   },
 ];
 
@@ -230,8 +231,10 @@ const Home = () => {
               works.
             </p>
             <ul className="ch-mini">
+              <li><Check /> Captures every enquiry and follows up until it books — no lead goes cold</li>
               <li><Check /> Confirms, reschedules and cancels — so a would-be no-show reopens the slot</li>
-              <li><Check /> Recovers no-shows, revives cold leads, reactivates dormant patients</li>
+              <li><Check /> Sends recall reminders on time and reactivates patients who drifted away</li>
+              <li><Check /> Chases your dental lab and rebooks the patient the moment the crown is ready</li>
               <li><Check /> Every booking and rupee attributed — so you see exactly what is working</li>
             </ul>
           </div>
