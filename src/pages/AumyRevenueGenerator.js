@@ -25,7 +25,6 @@ const steps = [
 ];
 
 const capabilities = [
-  { t: 'AI receptionist', d: 'Books every lead 24/7 on WhatsApp.' },
   { t: 'Lead capture, every channel', d: 'Instagram, WhatsApp, calls, ads, walk-ins.' },
   { t: 'Cold-lead follow-up', d: 'Polite retries until they book or opt out.' },
   { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.' },
@@ -142,8 +141,12 @@ const AumyRevenueGenerator = () => {
       <section className="ch-section ch-tint">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">What AUMY does</span>
-            <h2 className="ch-h2">Everything the front desk never has time for.</h2>
+            <span className="ch-eyebrow">Your AI receptionist</span>
+            <h2 className="ch-h2">One AI receptionist. Everything the front desk never has time for.</h2>
+            <p className="ch-lead ch-center-lead">
+              AUMY isn&rsquo;t ten separate tools — it&rsquo;s one AI receptionist on WhatsApp that
+              books every lead 24/7 and quietly handles all of this for your clinic:
+            </p>
           </div>
           <div className="ch-why">
             {capabilities.map((c, i) => (
