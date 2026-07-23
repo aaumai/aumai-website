@@ -31,9 +31,12 @@ const capabilities = [
   { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.' },
   { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.' },
   { t: 'Lab work automation', d: 'Chases your dental lab; rebooks the patient the moment the crown is ready.' },
-  { t: 'Reviews & local SEO', d: 'More 5-star reviews, auto-replies, higher ranking.' },
-  { t: 'Educational content, in your name', d: 'Stay top-of-mind between visits.' },
   { t: 'ROI dashboard', d: 'Every booking and rupee attributed.' },
+];
+
+const extras = [
+  { t: 'Reviews & Google profile', d: 'Review replies, 5-star prompts, and Google Business posts — automatic.' },
+  { t: 'Social & educational content', d: 'Posts in your name that keep you top-of-mind between visits.' },
 ];
 
 const workingModel = [
@@ -144,12 +147,27 @@ const AumyRevenueGenerator = () => {
             <span className="ch-eyebrow">Your AI receptionist</span>
             <h2 className="ch-h2">One AI receptionist. Everything the front desk never has time for.</h2>
             <p className="ch-lead ch-center-lead">
-              AUMY isn&rsquo;t ten separate tools — it&rsquo;s one AI receptionist on WhatsApp that
-              books every lead 24/7 and quietly handles all of this for your clinic:
+              AUMY isn&rsquo;t a bundle of separate tools — it&rsquo;s one AI receptionist on WhatsApp
+              that books every lead 24/7 and quietly handles all of this for your clinic:
             </p>
           </div>
           <div className="ch-why">
             {capabilities.map((c, i) => (
+              <div key={i} className="ch-why-card">
+                <Check />
+                <div>
+                  <h3 className="ch-why-title">{c.t}</h3>
+                  <p className="ch-why-body">{c.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="ch-head" style={{ marginTop: 56 }}>
+            <span className="ch-eyebrow">Good to have</span>
+            <h2 className="ch-h2">And it keeps you visible, too.</h2>
+          </div>
+          <div className="ch-why">
+            {extras.map((c, i) => (
               <div key={i} className="ch-why-card">
                 <Check />
                 <div>
