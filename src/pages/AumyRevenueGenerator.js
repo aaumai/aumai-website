@@ -30,13 +30,18 @@ const capabilities = [
   { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.' },
   { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.' },
   { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.' },
-  { t: 'Lab work automation', d: 'Chases your dental lab; rebooks the patient the moment the crown is ready.' },
+  { t: 'Lab work follow-up automation', d: 'Chases your dental lab on WhatsApp, tracks every case, and rebooks the patient the moment the crown is ready. No other platform does this.', badge: 'Only us' },
   { t: 'ROI dashboard', d: 'Every booking and rupee attributed.' },
 ];
 
-const extras = [
-  { t: 'Reviews & Google profile', d: 'Review replies, 5-star prompts, and Google Business posts — automatic.' },
-  { t: 'Social & educational content', d: 'Posts in your name that keep you top-of-mind between visits.' },
+const platform = [
+  { t: 'Reviews & Google profile', d: 'Asks happy patients for a review at the right moment, follows up, auto-replies to every review — and your local ranking climbs.' },
+  { t: 'One-click social posting', d: 'The AI drafts the post; one tap publishes to Google Business, Instagram and Facebook together.' },
+  { t: 'AI Creative Studio', d: 'Branded photos and short videos for your clinic, generated from a single snapshot — always ready to post or run as an ad.' },
+  { t: 'Patient education, in your name', d: 'Helpful health content sent between visits — branded to your clinic, never repeated.' },
+  { t: 'Ambient Scribe', d: 'You talk to your patient; the AI writes the visit note. Every consultation documented automatically — no typing after hours.' },
+  { t: 'Telehealth', d: 'Secure video consultations built in — follow-ups, second opinions and out-of-town patients without the travel.' },
+  { t: 'X-ray AI review', d: 'AI highlights observations on dental X-rays for your review — you stay the diagnostician. Early access.', badge: 'Early access' },
 ];
 
 const workingModel = [
@@ -145,10 +150,11 @@ const AumyRevenueGenerator = () => {
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">Your AI receptionist</span>
-            <h2 className="ch-h2">One AI receptionist. Everything the front desk never has time for.</h2>
+            <h2 className="ch-h2">One AI receptionist. The work of ten.</h2>
             <p className="ch-lead ch-center-lead">
               AUMY isn&rsquo;t a bundle of separate tools — it&rsquo;s one AI receptionist on WhatsApp
-              that books every lead 24/7 and quietly handles all of this for your clinic:
+              doing what would take a team of ten humans: answering every lead in seconds, 24/7,
+              never sick, never on leave — and quietly handling all of this for your clinic:
             </p>
           </div>
           <div className="ch-why">
@@ -156,22 +162,46 @@ const AumyRevenueGenerator = () => {
               <div key={i} className="ch-why-card">
                 <Check />
                 <div>
-                  <h3 className="ch-why-title">{c.t}</h3>
+                  <h3 className="ch-why-title">
+                    {c.t}
+                    {c.badge && (
+                      <span style={{
+                        marginLeft: 8, padding: '2px 8px', borderRadius: 999,
+                        background: '#312e81', color: '#fff',
+                        fontSize: 11, fontWeight: 700, verticalAlign: 'middle',
+                        whiteSpace: 'nowrap',
+                      }}>{c.badge}</span>
+                    )}
+                  </h3>
                   <p className="ch-why-body">{c.d}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="ch-head" style={{ marginTop: 56 }}>
-            <span className="ch-eyebrow">Good to have</span>
-            <h2 className="ch-h2">And it keeps you visible, too.</h2>
+            <span className="ch-eyebrow">The full platform</span>
+            <h2 className="ch-h2">And it goes far beyond the receptionist.</h2>
+            <p className="ch-lead ch-center-lead">
+              These aren&rsquo;t bolt-ons from five different vendors — one platform, one dashboard,
+              one login. The receptionist is the hero; this breadth is the moat:
+            </p>
           </div>
           <div className="ch-why">
-            {extras.map((c, i) => (
+            {platform.map((c, i) => (
               <div key={i} className="ch-why-card">
                 <Check />
                 <div>
-                  <h3 className="ch-why-title">{c.t}</h3>
+                  <h3 className="ch-why-title">
+                    {c.t}
+                    {c.badge && (
+                      <span style={{
+                        marginLeft: 8, padding: '2px 8px', borderRadius: 999,
+                        background: '#eef2ff', color: '#312e81',
+                        fontSize: 11, fontWeight: 700, verticalAlign: 'middle',
+                        whiteSpace: 'nowrap',
+                      }}>{c.badge}</span>
+                    )}
+                  </h3>
                   <p className="ch-why-body">{c.d}</p>
                 </div>
               </div>
