@@ -25,23 +25,29 @@ const steps = [
 ];
 
 const capabilities = [
-  { t: 'Lead capture, every channel', d: 'Instagram, WhatsApp, calls, ads, walk-ins.' },
+  { t: 'Lead capture, every channel', d: 'Instagram, WhatsApp, calls, ads, walk-ins — every enquiry answered in seconds.' },
+  { t: '24/7 appointment booking', d: 'Patients book a real slot in a natural WhatsApp chat — straight into your calendar.' },
+  { t: 'Voice AI for missed calls', d: 'The call you couldn’t pick up — answered naturally, in their language, and booked.' },
   { t: 'Cold-lead follow-up', d: 'Polite retries until they book or opt out.' },
   { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.' },
   { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.' },
   { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.' },
   { t: 'Lab work follow-up automation', d: 'Chases your dental lab on WhatsApp, tracks every case, and rebooks the patient the moment the crown is ready. No other platform does this.', badge: 'Only us' },
+  { t: 'Products & upsells, in the chat', d: 'Sells your packages and products right inside the conversation.' },
   { t: 'ROI dashboard', d: 'Every booking and rupee attributed.' },
 ];
 
 const platform = [
   { t: 'Reviews & Google profile', d: 'Asks happy patients for a review at the right moment, follows up, auto-replies to every review — and your local ranking climbs.' },
+  { t: 'Local SEO & AI search visibility', d: 'Get found on Google Maps — and recommended when patients ask ChatGPT or Gemini for a clinic.' },
   { t: 'One-click social posting', d: 'The AI drafts the post; one tap publishes to Google Business, Instagram and Facebook together.' },
   { t: 'AI Creative Studio', d: 'Branded photos and short videos for your clinic, generated from a single snapshot — always ready to post or run as an ad.' },
   { t: 'Patient education, in your name', d: 'Helpful health content sent between visits — branded to your clinic, never repeated.' },
   { t: 'Ambient Scribe', d: 'You talk to your patient; the AI writes the visit note. Every consultation documented automatically — no typing after hours.' },
   { t: 'Telehealth', d: 'Secure video consultations built in — follow-ups, second opinions and out-of-town patients without the travel.' },
-  { t: 'X-ray AI review', d: 'AI highlights observations on dental X-rays for your review — you stay the diagnostician. Early access.', badge: 'Early access' },
+  { t: 'Predictive retention AI', d: 'Machine learning flags your best patients before they drift — so a 5-minute call saves a lifetime patient.' },
+  { t: 'Ask-anything reports', d: 'Ask a question in plain English — get the report. No spreadsheets, no analyst.' },
+  { t: 'Clinic records (light EHR)', d: 'A clean, modern patient record — appointments, plans, prescriptions — for clinics that want one system, not five.' },
 ];
 
 const workingModel = [
