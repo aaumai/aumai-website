@@ -159,7 +159,9 @@ const HomeUS = () => {
             Ambient Scribe that writes your clinical notes while you talk · built-in telehealth · patient
             billing &amp; invoicing · managed Google Business &amp; social posting · AI Creative Studio ·
             patient education in your name · predictive retention AI · ask-anything reports. Every module
-            opt-in — one dashboard, one login.
+            opt-in — one dashboard, one login. And no rip-and-replace: your practice software stays — we
+            sync patients &amp; appointments in via <strong>FHIR&nbsp;R4</strong> (for FHIR-enabled systems)
+            or guided import.
           </p>
         </div>
       </section>
