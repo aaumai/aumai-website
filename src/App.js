@@ -27,9 +27,27 @@ import EngineeringPartner from './pages/EngineeringPartner';
 import SocialMessaging from './pages/SocialMessaging';
 import Compliance from './pages/Compliance';
 import Analytics from './components/Analytics';
+import HomeUS from './pages/HomeUS';
 import './App.css';
 
+// US-market build (aumyai.com): react-scripts build with REACT_APP_MARKET=us.
+// Serves the standalone US landing page for every route except legal pages.
+// The India build (aumai.co.in) is completely unaffected.
+const IS_US = process.env.REACT_APP_MARKET === 'us';
+
 function App() {
+  if (IS_US) {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/privacy" element={<div className="App"><PrivacyPolicy /></div>} />
+          <Route path="/terms" element={<div className="App"><TermsConditions /></div>} />
+          <Route path="/data-deletion" element={<div className="App"><DataDeletion /></div>} />
+          <Route path="*" element={<HomeUS />} />
+        </Routes>
+      </Router>
+    );
+  }
   return (
     <Router>
       <Routes>

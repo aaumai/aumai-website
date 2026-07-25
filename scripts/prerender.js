@@ -18,7 +18,10 @@ const fs = require('fs');
 const path = require('path');
 
 const BUILD = path.join(__dirname, '..', 'build');
-const ORIGIN = 'https://aumai.co.in';
+// US-market build (REACT_APP_MARKET=us → aumyai.com) prerenders only the US
+// landing route with US metadata; default is the India site unchanged.
+const MARKET = process.env.REACT_APP_MARKET || 'in';
+const ORIGIN = MARKET === 'us' ? 'https://aumyai.com' : 'https://aumai.co.in';
 const template = fs.readFileSync(path.join(BUILD, 'index.html'), 'utf8');
 
 const esc = (s) =>
@@ -208,8 +211,29 @@ const routes = [
 //   - current `try_files $uri $uri/ /index.html`   -> serves <slug>/index.html (301 adds slash)
 //   - upgraded `try_files $uri $uri.html $uri/ ...` -> serves <slug>.html directly (no redirect,
 //     so the served URL matches the slashless canonical + internal links)
+// US build: single landing route with US metadata + crawler-visible US copy.
+const usRoutes = [
+  {
+    slug: '',
+    title: 'AI Receptionist for Dental Practices — Every Call & Text Answered | AUM AI',
+    description:
+      'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and chases your lab — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
+    canonical: `${ORIGIN}/`,
+    ogImage: `${ORIGIN}/images/hero-dental.jpg`,
+    jsonld: [],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">AI receptionist for US dental practices</p>
+        <h1 class="ch-hero-title">Your dentistry isn't the problem. The 90 minutes around every chair is.</h1>
+        <p class="ch-hero-sub">An AI receptionist that answers every call and text 24/7 — books the patient, recovers no-shows, runs hygiene recall, follows up every treatment plan, and even chases your lab. For a typical $1M practice, that's $120,000+ a year quietly recovered. HIPAA-compliant by design: we sign a BAA with your practice, host data in US data centers, and log every access.</p>
+        <p>Book a 30-minute call: https://calendar.app.google/tecaeebTBEWSoJnV7 &middot; jayesh@aumyai.com</p>
+      </div></section>`,
+  },
+];
+
+const activeRoutes = MARKET === 'us' ? usRoutes : routes;
 let written = 0;
-for (const r of routes) {
+for (const r of activeRoutes) {
   const html = apply(template, r);
   if (!r.slug) {
     fs.writeFileSync(path.join(BUILD, 'index.html'), html);
