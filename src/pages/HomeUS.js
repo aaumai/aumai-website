@@ -61,7 +61,7 @@ const HomeUS = () => {
     <div className="ch-home us-home">
       {/* Top bar */}
       <header className="us-topbar">
-        <span className="us-brand">AUM <span className="us-brand-ai">AI</span></span>
+        <img src="/PNG-01-01.png" alt="AUM AI" className="us-logo" />
         <a className="ch-btn ch-btn-primary us-topbar-cta" href={CAL_URL} target="_blank" rel="noopener noreferrer">
           Book a 30-minute call
         </a>
@@ -172,7 +172,7 @@ const HomeUS = () => {
 
       {/* Footer */}
       <footer className="us-footer">
-        <span className="us-brand">AUM <span className="us-brand-ai">AI</span></span>
+        <img src="/PNG-01-01.png" alt="AUM AI" className="us-logo us-logo-footer" />
         <p className="us-footer-line">
           AI receptionist &amp; clinic automation · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a>
         </p>
