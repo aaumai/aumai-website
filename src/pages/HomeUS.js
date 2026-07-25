@@ -61,10 +61,17 @@ const HomeUS = () => {
     <div className="ch-home us-home">
       {/* Top bar */}
       <header className="us-topbar">
-        <img src="/PNG-01-01.png" alt="AUM AI" className="us-logo" />
-        <a className="ch-btn ch-btn-primary us-topbar-cta" href={CAL_URL} target="_blank" rel="noopener noreferrer">
-          Book a 30-minute call
-        </a>
+        <div className="us-topbar-inner">
+          <img src="/PNG-01-01.png" alt="AUM AI" className="us-logo" />
+          <nav className="us-topnav">
+            <a href="#what-it-does">How it works</a>
+            <a href="#hipaa">Security &amp; HIPAA</a>
+            <a href="#platform">Platform</a>
+          </nav>
+          <a className="ch-btn ch-btn-primary us-topbar-cta" href={CAL_URL} target="_blank" rel="noopener noreferrer">
+            Book a 30-minute call
+          </a>
+        </div>
       </header>
 
       {/* HERO */}
@@ -94,7 +101,7 @@ const HomeUS = () => {
       </section>
 
       {/* CAPABILITIES */}
-      <section className="ch-section ch-tint">
+      <section className="ch-section ch-tint" id="what-it-does">
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">What it does</span>
@@ -122,7 +129,7 @@ const HomeUS = () => {
       </section>
 
       {/* HIPAA */}
-      <section className="ch-section us-dark">
+      <section className="ch-section us-dark" id="hipaa">
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow us-dark-eyebrow">Security &amp; HIPAA</span>
@@ -143,7 +150,7 @@ const HomeUS = () => {
       </section>
 
       {/* BEYOND */}
-      <section className="ch-section">
+      <section className="ch-section" id="platform">
         <div className="ch-container ch-narrow ch-center">
           <span className="ch-eyebrow">Beyond the receptionist</span>
           <h2 className="ch-h2">One platform, when you’re ready for more.</h2>
