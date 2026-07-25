@@ -27,7 +27,7 @@ const heroStats = [
 
 const capabilities = [
   { t: 'Every call answered', d: 'Voice AI picks up when your team can’t — and books, right on the call.' },
-  { t: 'Every text answered in seconds', d: 'SMS, web chat, Instagram & Facebook DMs — 24/7, in your practice’s voice.' },
+  { t: 'Every text answered in seconds', d: 'SMS and web chat — the receptionist plugs into your current website — 24/7, in your practice’s voice.' },
   { t: 'Lead follow-up that never forgets', d: 'Polite, well-spaced nudges until they book — or opt out.' },
   { t: '24/7 self-booking by text', d: 'Patients book a real slot in a natural conversation — no app, no portal.' },
   { t: 'No-show recovery', d: 'Confirmation cascade, instant rescheduling, smart waitlist.' },
