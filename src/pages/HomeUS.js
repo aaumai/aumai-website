@@ -44,7 +44,7 @@ const hipaa = [
   { t: 'Every access logged', d: 'Immutable audit trails of who saw what, when — with role-based access and MFA.' },
   { t: 'Your data is yours', d: 'Never sold, never used to train shared AI models. Export or delete anytime.' },
   { t: 'Consent-first texting', d: 'Opt-in messaging with automatic STOP/HELP handling — TCPA-aware by design.' },
-  { t: 'BAAs down the chain', d: 'Every AI and telecom subprocessor we use operates under a signed BAA.' },
+  { t: 'BAAs down the chain', d: 'No patient data flows to any AI or telecom subprocessor until its BAA is signed. Subprocessor list available on request.' },
 ];
 
 const HomeUS = () => {
@@ -155,9 +155,10 @@ const HomeUS = () => {
           <span className="ch-eyebrow">Beyond the receptionist</span>
           <h2 className="ch-h2">One platform, when you’re ready for more.</h2>
           <p className="ch-lead ch-center-lead">
-            Ambient Scribe that writes your clinical notes while you talk · built-in telehealth · managed
-            Google Business &amp; social posting · AI Creative Studio · patient education in your name ·
-            predictive retention AI · ask-anything reports. Every module opt-in — one dashboard, one login.
+            Ambient Scribe that writes your clinical notes while you talk · built-in telehealth · patient
+            billing &amp; invoicing · managed Google Business &amp; social posting · AI Creative Studio ·
+            patient education in your name · predictive retention AI · ask-anything reports. Every module
+            opt-in — one dashboard, one login.
           </p>
         </div>
       </section>
