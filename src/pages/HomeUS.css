@@ -52,6 +52,25 @@ html { scroll-behavior: smooth; }
 .us-dark-title { color: #fff; }
 .us-dark-body { color: rgba(255, 255, 255, 0.78); }
 
+/* Pricing */
+.us-price-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(22, 50, 79, 0.08);
+  padding: 34px 30px 30px;
+  max-width: 520px;
+  margin: 22px auto 18px;
+}
+.us-price-main { display: flex; align-items: baseline; justify-content: center; gap: 8px; }
+.us-price-value { font-size: 52px; font-weight: 800; color: #16324f; letter-spacing: -0.02em; }
+.us-price-unit { font-size: 17px; color: #64748b; font-weight: 600; }
+.us-price-setup { margin: 6px 0 18px; color: #475569; font-size: 15px; }
+.us-price-points { list-style: none; padding: 0; margin: 0 0 22px; text-align: left; }
+.us-price-points li { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0; color: #334155; font-size: 15px; }
+.us-price-compare { max-width: 640px; margin: 8px auto 0; color: #64748b; font-size: 14px; }
+.us-price-enterprise { max-width: 640px; margin: 14px auto 0; color: #334155; font-size: 15px; }
+
 /* Footer */
 .us-footer {
   text-align: center;

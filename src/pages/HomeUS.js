@@ -40,11 +40,11 @@ const capabilities = [
 
 const hipaa = [
   { t: 'We sign a BAA with your practice', d: 'We operate as your business associate, in writing, from day one.' },
-  { t: 'US data hosting', d: 'Your patients’ data lives in US data centers, encrypted at rest and in transit.' },
+  { t: 'US data hosting on AWS', d: 'Your patients’ data lives in US AWS data centers (SOC 2 / ISO 27001 audited infrastructure), encrypted at rest and in transit.' },
   { t: 'Every access logged', d: 'Immutable audit trails of who saw what, when — with role-based access and MFA.' },
   { t: 'Your data is yours', d: 'Never sold, never used to train shared AI models. Export or delete anytime.' },
   { t: 'Consent-first texting', d: 'Opt-in messaging with automatic STOP/HELP handling — TCPA-aware by design.' },
-  { t: 'BAAs down the chain', d: 'No patient data flows to any AI or telecom subprocessor until its BAA is signed. Subprocessor list available on request.' },
+  { t: 'BAAs down the chain', d: 'No patient data flows to any AI or telecom subprocessor until its BAA is signed. Subprocessor list available on request. Independent SOC 2 audit is on our security roadmap.' },
 ];
 
 const HomeUS = () => {
@@ -67,6 +67,7 @@ const HomeUS = () => {
             <a href="#what-it-does">How it works</a>
             <a href="#hipaa">Security &amp; HIPAA</a>
             <a href="#platform">Platform</a>
+            <a href="#pricing">Pricing</a>
           </nav>
           <a className="ch-btn ch-btn-primary us-topbar-cta" href={CAL_URL} target="_blank" rel="noopener noreferrer">
             Book a 30-minute call
@@ -159,6 +160,37 @@ const HomeUS = () => {
             billing &amp; invoicing · managed Google Business &amp; social posting · AI Creative Studio ·
             patient education in your name · predictive retention AI · ask-anything reports. Every module
             opt-in — one dashboard, one login.
+          </p>
+        </div>
+      </section>
+
+      {/* PRICING */}
+      <section className="ch-section ch-tint" id="pricing">
+        <div className="ch-container ch-narrow ch-center">
+          <span className="ch-eyebrow">Pricing</span>
+          <h2 className="ch-h2">Simple, honest pricing.</h2>
+          <div className="us-price-card">
+            <div className="us-price-main">
+              <span className="us-price-value">$450</span>
+              <span className="us-price-unit">/ month per location</span>
+            </div>
+            <p className="us-price-setup">+ $600 one-time white-glove setup — configured on your data, with you</p>
+            <ul className="us-price-points">
+              <li><Check /> Everything on this page included — no feature tiers, no surprise add-ons</li>
+              <li><Check /> Month-to-month. Cancel anytime. No long-term contract</li>
+              <li><Check /> Founding-practice rate for our first US partners — locked in for as long as you stay</li>
+            </ul>
+            <a className="ch-btn ch-btn-primary" href={CAL_URL} target="_blank" rel="noopener noreferrer">Book a 30-minute call</a>
+          </div>
+          <p className="us-price-compare">
+            For comparison: practices typically pay $400–900/month for patient communication alone, plus
+            $200–500/month for a separate AI phone product — and neither chases your lab or your
+            unscheduled treatment.
+          </p>
+          <p className="us-price-enterprise">
+            <strong>Multi-location group or DSO?</strong> Dedicated single-tenant instances (your own
+            database, your choice of US region), centralized multi-location reporting, and full
+            security-review support — available on request, priced per group.
           </p>
         </div>
       </section>
