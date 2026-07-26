@@ -1,17 +1,26 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const API_BASE = 'https://dabbewaala.aumai.co.in/api/aumai/analytics';
+const API_BASE = 'https://site-api.aumai.co.in/api/aumai/analytics';
+
+// Site selector options. '' = all sites combined.
+const SITES = [
+  { value: '', label: 'All sites' },
+  { value: 'aumai.co.in', label: '🇮🇳 India (aumai.co.in)' },
+  { value: 'aumyai.com', label: '🇺🇸 US (aumyai.com)' },
+];
 
 const AumaiAnalytics = () => {
   const [data, setData] = useState(null);
   const [days, setDays] = useState(7);
+  const [site, setSite] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/dashboard?days=${days}`);
+      const qs = `days=${days}${site ? `&site=${encodeURIComponent(site)}` : ''}`;
+      const res = await fetch(`${API_BASE}/dashboard?${qs}`);
       const json = await res.json();
       setData(json);
       setError(null);
@@ -19,7 +28,7 @@ const AumaiAnalytics = () => {
       setError('Failed to load analytics');
     }
     setLoading(false);
-  }, [days]);
+  }, [days, site]);
 
   useEffect(() => {
     document.title = 'Analytics | AUM AI';
@@ -39,6 +48,16 @@ const AumaiAnalytics = () => {
         <div style={styles.header}>
           <h1 style={styles.title}>AUM AI Analytics</h1>
           <div style={styles.controls}>
+            {SITES.map((s) => (
+              <button
+                key={s.value}
+                onClick={() => setSite(s.value)}
+                style={{ ...styles.btn, ...(site === s.value ? styles.btnActive : {}) }}
+              >
+                {s.label}
+              </button>
+            ))}
+            <span style={{ width: '1px', background: '#334155', margin: '0 0.25rem' }} />
             {[1, 7, 14, 30, 90].map((d) => (
               <button
                 key={d}
@@ -216,6 +235,86 @@ const AumaiAnalytics = () => {
                   </tbody>
                 </table>
               </div>
+            </div>
+
+            {/* Geolocation: states/regions + cities + countries */}
+            <div style={styles.twoCol}>
+              <div style={styles.section}>
+                <h2 style={styles.sectionTitle}>Top States / Regions</h2>
+                <table style={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={styles.th}>Region</th>
+                      <th style={styles.th}>Country</th>
+                      <th style={styles.th}>Sessions</th>
+                      <th style={styles.th}>Visitors</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.top_regions?.map((row, i) => (
+                      <tr key={i} style={i % 2 === 0 ? styles.trEven : {}}>
+                        <td style={{ ...styles.td, fontWeight: 600 }}>{row.region}</td>
+                        <td style={styles.td}>{row.country || '?'}</td>
+                        <td style={styles.td}>{row.sessions}</td>
+                        <td style={styles.td}>{row.visitors}</td>
+                      </tr>
+                    ))}
+                    {(!data.top_regions || data.top_regions.length === 0) && (
+                      <tr><td style={styles.td} colSpan={4}>No location data yet</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              <div style={styles.section}>
+                <h2 style={styles.sectionTitle}>Top Cities</h2>
+                <table style={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={styles.th}>City</th>
+                      <th style={styles.th}>Region</th>
+                      <th style={styles.th}>Country</th>
+                      <th style={styles.th}>Sessions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.top_cities?.map((row, i) => (
+                      <tr key={i} style={i % 2 === 0 ? styles.trEven : {}}>
+                        <td style={{ ...styles.td, fontWeight: 600 }}>{row.city}</td>
+                        <td style={styles.td}>{row.region || '?'}</td>
+                        <td style={styles.td}>{row.country || '?'}</td>
+                        <td style={styles.td}>{row.sessions}</td>
+                      </tr>
+                    ))}
+                    {(!data.top_cities || data.top_cities.length === 0) && (
+                      <tr><td style={styles.td} colSpan={4}>No location data yet</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Per-site split (helps confirm US vs India capture) */}
+            <div style={styles.section}>
+              <h2 style={styles.sectionTitle}>Traffic by Site</h2>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    <th style={styles.th}>Site</th>
+                    <th style={styles.th}>Sessions</th>
+                    <th style={styles.th}>Visitors</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.sites?.map((row, i) => (
+                    <tr key={i} style={i % 2 === 0 ? styles.trEven : {}}>
+                      <td style={{ ...styles.td, fontWeight: 600 }}>{row.site}</td>
+                      <td style={styles.td}>{row.sessions}</td>
+                      <td style={styles.td}>{row.visitors}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </>
         )}

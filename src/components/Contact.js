@@ -26,7 +26,7 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('https://dabbewaala.aumai.co.in/api/aumai/contact', {
+      const response = await fetch('https://site-api.aumai.co.in/api/aumai/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

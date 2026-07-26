@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const API_BASE = 'https://dabbewaala.aumai.co.in/api/aumai/analytics';
+const API_BASE = 'https://site-api.aumai.co.in/api/aumai/analytics';
 
 // Generate or retrieve persistent visitor ID
 const getVisitorId = () => {
@@ -44,7 +44,9 @@ const getUtmParams = () => {
 // Fire-and-forget beacon
 const send = (endpoint, data) => {
   try {
-    const body = JSON.stringify(data);
+    // Tag every event with the site it came from (aumai.co.in vs aumyai.com) so
+    // the dashboard can separate India and US traffic.
+    const body = JSON.stringify({ ...data, site: window.location.hostname });
     // Use sendBeacon for reliability (survives page unload)
     if (navigator.sendBeacon) {
       navigator.sendBeacon(`${API_BASE}/${endpoint}`, new Blob([body], { type: 'application/json' }));
