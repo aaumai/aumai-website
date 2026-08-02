@@ -68,6 +68,7 @@ const HomeUS = () => {
             <a href="#hipaa">Security &amp; HIPAA</a>
             <a href="#platform">Platform</a>
             <a href="#pricing">Pricing</a>
+            <a href="/business-manager">For every business →</a>
           </nav>
           <a className="ch-btn ch-btn-primary us-topbar-cta" href={CAL_URL} target="_blank" rel="noopener noreferrer">
             Book a 30-minute call
@@ -219,7 +220,7 @@ const HomeUS = () => {
           AI receptionist &amp; clinic automation · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a>
         </p>
         <p className="us-footer-links">
-          <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="https://aumai.co.in" target="_blank" rel="noopener noreferrer">Global site</a>
+          <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/business-manager">Aumy Business Manager</a> · <a href="https://aumai.co.in" target="_blank" rel="noopener noreferrer">Global site</a>
         </p>
         <p className="us-footer-fine">© {new Date().getFullYear()} AUM AI. Product &amp; engineering: Pune, India. US entity in formation.</p>
       </footer>

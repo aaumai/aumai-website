@@ -28,6 +28,7 @@ import SocialMessaging from './pages/SocialMessaging';
 import Compliance from './pages/Compliance';
 import Analytics from './components/Analytics';
 import HomeUS from './pages/HomeUS';
+import BusinessManagerUS from './pages/BusinessManagerUS';
 import './App.css';
 
 // US-market build (aumyai.com): react-scripts build with REACT_APP_MARKET=us.
@@ -43,6 +44,7 @@ function App() {
           <Route path="/privacy" element={<div className="App"><PrivacyPolicy /></div>} />
           <Route path="/terms" element={<div className="App"><TermsConditions /></div>} />
           <Route path="/data-deletion" element={<div className="App"><DataDeletion /></div>} />
+          <Route path="/business-manager" element={<BusinessManagerUS />} />
           <Route path="*" element={<HomeUS />} />
         </Routes>
       </Router>
