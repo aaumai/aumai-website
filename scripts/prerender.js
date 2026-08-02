@@ -63,6 +63,7 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
+    ['How does the 10-day free trial work?', 'We set AUMY up on your clinic and you watch it work for 10 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.'],
     ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
     ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
@@ -87,7 +88,7 @@ const routes = [
     slug: '',
     title: 'Grow Your Dental or Aesthetic Clinic with AI | AUMY by AUM AI',
     description:
-      'AUMY is the AI growth system for dental & aesthetic clinics — capture every enquiry, book it like a human, win back patients who drift away, and make your ad spend work harder. Live in clinics; one grew 20–25% in 2–3 months.',
+      'AUMY is the AI growth system for dental & aesthetic clinics — capture every enquiry, book it like a human, win back patients who drift away, and make your ad spend work harder. Try it free for 10 days, no obligation. Live in clinics; one grew 20–25% in 2–3 months.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [faqLd, videoLd],
@@ -99,7 +100,7 @@ const routes = [
         <p class="ch-eyebrow">For established dental &amp; aesthetic clinics</p>
         <h1 class="ch-hero-title">Your patient chooses a clinic before they ever meet you.</h1>
         <p class="ch-hero-sub">Today that choice happens online — in the ads they see, the reviews they read, and whether anyone answers when they reach out. AUMY is the growth system we run for your clinic, so the choice keeps going your way — more patients through your door, and the ones you have already earned coming back.</p>
-        <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
+        <p><a href="/contact">Start my 10-day free trial</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>Dentistry changed. Great work and a good location are no longer enough.</h2>
@@ -125,7 +126,10 @@ const routes = [
         <p>AUMY works best for established dental, dermatology and aesthetics clinics collecting upwards of ₹5 lakh a month, led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
         <h2>Clinics are already growing with us.</h2>
         <p>Vinayaka Dental Care grew revenue about 25% in two months without hiring a single extra person. Vinayaka Derma keeps a 4.9-star Google rating with recalls and follow-ups running automatically. AUM AI is an NVIDIA Inception member.</p>
+        <h2>Try AUMY free for 10 days — see the difference yourself.</h2>
+        <p>We set AUMY up on your clinic and you watch it work for 10 days alongside everything you use today — real enquiries answered, real bookings made. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
         <h2>Questions clinic owners ask</h2>
+        <p><strong>How does the 10-day free trial work?</strong> We set AUMY up on your clinic and you watch it work for 10 days. Continue only if you see the difference — no charges, no lock-in, and your data stays yours.</p>
         <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use.</p>
         <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>
         <p><strong>Is this a product or a service?</strong> Both — a proven system (AUMY), run and tailored for you by a partner.</p>
