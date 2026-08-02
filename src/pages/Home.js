@@ -48,6 +48,7 @@ const whyUs = [
 ];
 
 const faqs = [
+  { q: 'How does the 10-day free trial work?', a: 'We set AUMY up on your clinic and you watch it work for 10 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.' },
   { q: 'Do I have to replace my current software?', a: 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
@@ -124,16 +125,16 @@ const Home = () => {
               earned coming&nbsp;back.
             </p>
             <div className="ch-hero-cta">
-              <Link to="/growth-audit" className="ch-btn ch-btn-primary">
+              <Link to="/contact" className="ch-btn ch-btn-primary">
+                Start my 10-day free trial
+              </Link>
+              <Link to="/growth-audit" className="ch-btn ch-btn-ghost">
                 Get my free Clinic Growth Audit
               </Link>
-              <a href="#how-it-works" className="ch-btn ch-btn-ghost">
-                See how it works
-              </a>
             </div>
             <p className="ch-hero-trust">
-              Built for dental &amp; aesthetic clinics · NVIDIA Inception member · works with your
-              existing systems
+              10 days free · no obligation · we set everything up for you · built for dental &amp;
+              aesthetic clinics · NVIDIA Inception member
             </p>
           </div>
 
@@ -389,16 +390,18 @@ const Home = () => {
       {/* OFFER — dark accent band */}
       <section className="ch-offer">
         <div className="ch-container ch-center">
-          <h2 className="ch-offer-title">See exactly where your clinic is leaking — free.</h2>
+          <h2 className="ch-offer-title">Try AUMY free for 10 days — see the difference yourself.</h2>
           <p className="ch-offer-sub">
-            Get a free Clinic Growth Audit, prepared for your clinic: where you rank on Google versus
-            the clinics near you, how visible you are to new patients, and the specific gaps quietly
-            costing you bookings — on your WhatsApp within 24 hours. No obligation. Just a clear
-            picture of what is on the table.
+            We set AUMY up on your clinic — the AI receptionist answering and booking, the follow-ups,
+            the reviews — and you watch it work for 10 days alongside everything you use today. If the
+            difference convinces you, we continue. If not, you walk away — no charges, no lock-in,
+            no obligation to stay. Prefer to start smaller? Get a free Clinic Growth Audit first:
+            where you rank on Google versus the clinics near you, and the specific gaps quietly
+            costing you bookings — on your WhatsApp within 24 hours.
           </p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
-            <Link to="/contact" className="ch-btn ch-btn-ghost ch-ghost-light">Book a free growth strategy call</Link>
+            <Link to="/contact" className="ch-btn ch-btn-primary">Start my 10-day free trial</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-ghost ch-ghost-light">Get my free Clinic Growth Audit</Link>
           </div>
         </div>
       </section>
