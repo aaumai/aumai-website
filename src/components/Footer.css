@@ -125,6 +125,27 @@
   gap: 16px;
 }
 
+.footer-office {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-office + .footer-office {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.footer-office-name {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary-400);
+}
+
 .footer-contact .contact-item {
   display: flex;
   align-items: center;

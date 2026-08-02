@@ -217,12 +217,15 @@ const HomeUS = () => {
       <footer className="us-footer">
         <img src="/PNG-01-01.png" alt="AUM AI" className="us-logo us-logo-footer" />
         <p className="us-footer-line">
-          AI receptionist &amp; clinic automation · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a>
+          AI receptionist &amp; clinic automation · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
+        </p>
+        <p className="us-footer-line">
+          AUM AI Healthcare Technology LLC · 30 N Gould St, Ste N, Sheridan, WY 82801
         </p>
         <p className="us-footer-links">
           <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/business-manager">Aumy Business Manager</a> · <a href="https://aumai.co.in" target="_blank" rel="noopener noreferrer">Global site</a>
         </p>
-        <p className="us-footer-fine">© {new Date().getFullYear()} AUM AI. Product &amp; engineering: Pune, India. US entity in formation.</p>
+        <p className="us-footer-fine">© {new Date().getFullYear()} AUM AI Healthcare Technology LLC. Product &amp; engineering: Pune, India.</p>
       </footer>
     </div>
   );

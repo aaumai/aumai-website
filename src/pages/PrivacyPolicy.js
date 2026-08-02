@@ -1,5 +1,10 @@
 import React from 'react';
+import { IS_US, PRIMARY_OFFICE } from '../config/contact';
 import './Page.css';
+
+// The registered data controller differs by market (India Pvt Ltd vs US LLC).
+const CONTROLLER_ENTITY = IS_US ? 'AUM AI Healthcare Technology LLC' : 'Aaumai Healthcare Solutions PVT LTD';
+const CONTROLLER_SITE = IS_US ? 'https://aumyai.com' : 'https://aumai.co.in';
 
 const PrivacyPolicy = () => {
   return (
@@ -366,13 +371,13 @@ const PrivacyPolicy = () => {
               applicable data-protection law, please contact:
             </p>
             <p style={{ marginBottom: '5px' }}>
-              <strong>Aaumai Healthcare Solutions PVT LTD</strong>
+              <strong>{CONTROLLER_ENTITY}</strong>
             </p>
             <p style={{ marginBottom: '5px' }}>
-              Email: <a href="mailto:jayesh.chaudhari@aumai.co.in">jayesh.chaudhari@aumai.co.in</a>
+              Email: <a href={`mailto:${PRIMARY_OFFICE.email}`}>{PRIMARY_OFFICE.email}</a>
             </p>
             <p style={{ marginBottom: '5px' }}>
-              Website: <a href="https://aumai.co.in">https://aumai.co.in</a>
+              Website: <a href={CONTROLLER_SITE}>{CONTROLLER_SITE}</a>
             </p>
           </section>
         </div>

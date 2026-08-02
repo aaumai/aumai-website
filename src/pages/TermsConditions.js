@@ -1,4 +1,5 @@
 import React from 'react';
+import { PRIMARY_OFFICE } from '../config/contact';
 import './Page.css';
 
 const TermsConditions = () => {
@@ -89,8 +90,8 @@ const TermsConditions = () => {
               For questions about these terms, please contact us:
             </p>
             <p style={{ marginBottom: '15px' }}>
-              <strong>Email:</strong> jayesh.chaudhari@aumai.co.in<br />
-              <strong>Phone:</strong> +91 800 718 9868
+              <strong>Email:</strong> {PRIMARY_OFFICE.email}<br />
+              <strong>Phone:</strong> {PRIMARY_OFFICE.phone}
             </p>
           </section>
 

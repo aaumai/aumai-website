@@ -1,7 +1,9 @@
 import React from 'react';
+import { PRIMARY_OFFICE } from '../config/contact';
 import './Page.css';
 
-const CONTACT = 'jayesh.chaudhari@aumai.co.in';
+// Renders on both the India and US builds — use the market's own contact.
+const CONTACT = PRIMARY_OFFICE.email;
 
 const DataDeletion = () => {
   return (

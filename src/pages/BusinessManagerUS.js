@@ -201,12 +201,15 @@ const BusinessManagerUS = () => {
       <footer className="us-footer">
         <img src="/PNG-01-01.png" alt="Aumy" className="us-logo us-logo-footer" />
         <p className="us-footer-line">
-          Aumy Business Manager · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a>
+          Aumy Business Manager · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
+        </p>
+        <p className="us-footer-line">
+          AUM AI Healthcare Technology LLC · 30 N Gould St, Ste N, Sheridan, WY 82801
         </p>
         <p className="us-footer-links">
           <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/">Aumy for Clinics</a>
         </p>
-        <p className="us-footer-fine">© {new Date().getFullYear()} Aumy. Product &amp; engineering: Pune, India. US entity in formation.</p>
+        <p className="us-footer-fine">© {new Date().getFullYear()} AUM AI Healthcare Technology LLC. Product &amp; engineering: Pune, India.</p>
       </footer>
     </div>
   );
