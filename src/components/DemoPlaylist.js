@@ -26,7 +26,7 @@ import './DemoPlaylist.css';
  * Leave it empty and the whole section renders nothing — so an unconfigured
  * build never shows a broken player.
  */
-export const PLAYLIST_ID = '';
+export const PLAYLIST_ID = 'PLZ8QbQSGNg1A';
 
 const DemoPlaylist = ({
   title = 'See AUMY actually doing it.',
