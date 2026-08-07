@@ -82,13 +82,24 @@ const DemoPlaylist = ({
           )}
         </div>
 
-        <p className="ch-fineprint dp-fine">
-          Prefer YouTube?{' '}
-          <a href={playlistUrl} target="_blank" rel="noopener noreferrer">
-            Open the full playlist
-          </a>
-          . Nothing loads from YouTube until you press play.
-        </p>
+        {/* A recognisable YouTube button rather than a sentence of fine print:
+            this is a destination people opt into, and the platform's own
+            visual language is what makes it read as one at a glance. */}
+        <a
+          className="dp-yt-btn"
+          href={playlistUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg className="dp-yt-icon" viewBox="0 0 28 20" aria-hidden="true">
+            <path
+              className="dp-yt-icon-bg"
+              d="M27.4 3.1c-.3-1.2-1.3-2.1-2.4-2.4C22.9 0 14 0 14 0S5.1 0 3 .6C1.8 1 .9 1.9.6 3.1.1 5.3.1 10 .1 10s0 4.7.5 6.9c.3 1.2 1.3 2.1 2.4 2.4 2.1.6 11 .6 11 .6s8.9 0 11-.6c1.2-.3 2.1-1.2 2.4-2.4.5-2.2.5-6.9.5-6.9s0-4.7-.5-6.9z"
+            />
+            <path className="dp-yt-icon-arrow" d="M11.2 14.3 18.6 10l-7.4-4.3z" />
+          </svg>
+          Watch full playlist on YouTube
+        </a>
       </div>
     </section>
   );

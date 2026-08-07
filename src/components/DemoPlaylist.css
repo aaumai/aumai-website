@@ -96,8 +96,69 @@
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
 }
 
-.dp-fine {
-  margin-top: 14px;
+/* YouTube-style destination button. Uses YouTube red so it reads as "this
+   leaves for YouTube" without needing a sentence to explain it. */
+.dp-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  background: #ff0000;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(255, 0, 0, 0.24);
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.dp-yt-btn:hover,
+.dp-yt-btn:focus-visible {
+  background: #d90000;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(255, 0, 0, 0.3);
+  color: #fff;
+  text-decoration: none;
+}
+
+.dp-yt-btn:focus-visible {
+  outline: 3px solid #35c1ad;
+  outline-offset: 3px;
+}
+
+.dp-yt-icon {
+  width: 26px;
+  height: 19px;
+  flex: none;
+}
+
+/* The glyph is knocked out of the red pill: white play mark on a white-bordered
+   body reads as the YouTube logo without importing brand assets. */
+.dp-yt-icon-bg {
+  fill: #fff;
+}
+
+.dp-yt-icon-arrow {
+  fill: #ff0000;
+}
+
+.dp-yt-btn:hover .dp-yt-icon-arrow,
+.dp-yt-btn:focus-visible .dp-yt-icon-arrow {
+  fill: #d90000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-yt-btn {
+    transition: none;
+  }
+  .dp-yt-btn:hover,
+  .dp-yt-btn:focus-visible {
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
