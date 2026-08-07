@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { setPageSeo } from '../utils/seo';
+import LeakCheck from '../components/LeakCheck';
+import DemoPlaylist from '../components/DemoPlaylist';
 import './HomeClinic.css';
 import './HomeUS.css';
 
@@ -67,8 +69,12 @@ const HomeUS = () => {
             <a href="#what-it-does">How it works</a>
             <a href="#hipaa">Security &amp; HIPAA</a>
             <a href="#platform">Platform</a>
+            <a href="#leak-check">Leak check</a>
             <a href="#pricing">Pricing</a>
             <a href="/business-manager">For every business →</a>
+            {/* Cross-market link, mirroring "For USA" on aumai.co.in. A real
+                href with no nofollow so crawlers can traverse both ways. */}
+            <a href="https://aumai.co.in/">For India</a>
           </nav>
           <a className="ch-btn ch-btn-primary us-topbar-cta" href={CAL_URL} target="_blank" rel="noopener noreferrer">
             Book a 30-minute call
@@ -102,6 +108,16 @@ const HomeUS = () => {
         </div>
       </section>
 
+      {/* LEAK CHECK — the hook. First thing after the fold, because it is the
+          only element that hands a visitor a number about their OWN practice
+          before we ask them for anything. Same component and arithmetic as
+          /leak-calculator, in USD. */}
+      <section className="ch-section" id="leak-check">
+        <div className="ch-container">
+          <LeakCheck market="us" headingLevel="h2" />
+        </div>
+      </section>
+
       {/* CAPABILITIES */}
       <section className="ch-section ch-tint" id="what-it-does">
         <div className="ch-container">
@@ -127,6 +143,62 @@ const HomeUS = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <DemoPlaylist lead="Short, unedited demos — the AI answering calls and texts, booking, recovering no-shows and running recall. No slides." />
+
+      {/* ADS — deliberately framed as "we don't replace your marketing team".
+          Practices that already run ads hear "new marketing vendor" and stop
+          listening; the actual product is a feedback loop that makes the ads
+          their existing agency runs perform better. */}
+      <section className="ch-section" id="ads">
+        <div className="ch-container ch-narrow ch-center">
+          <span className="ch-eyebrow">Your ads, made smarter</span>
+          <h2 className="ch-h2">Keep your marketing team. Give them better data.</h2>
+          <p className="ch-lead ch-center-lead">
+            We don’t run your ads and we don’t replace your agency — they keep doing what they do.
+            What we change is what the ad platforms <em>learn</em>. The moment an enquiry becomes a
+            booked, seated, paying patient, we send that real outcome back to Meta and Google. So the
+            algorithm stops optimising for whoever clicks, and starts finding more people like the
+            patients who actually show up and pay.
+          </p>
+          <div className="ch-why">
+            <div className="ch-why-card">
+              <Check />
+              <div>
+                <h3 className="ch-why-title">Higher ROAS on the same budget</h3>
+                <p className="ch-why-body">
+                  Nothing about your spend changes. The targeting gets better because it is finally
+                  being taught with revenue instead of form fills.
+                </p>
+              </div>
+            </div>
+            <div className="ch-why-card">
+              <Check />
+              <div>
+                <h3 className="ch-why-title">Lower cost per acquired patient</h3>
+                <p className="ch-why-body">
+                  As lead quality climbs, the cost of each genuine new patient falls — you stop paying
+                  for clicks that were never going to book.
+                </p>
+              </div>
+            </div>
+            <div className="ch-why-card">
+              <Check />
+              <div>
+                <h3 className="ch-why-title">Your agency finally gets proof</h3>
+                <p className="ch-why-body">
+                  Every campaign, ad set and ad traced to real production — so the reporting argument
+                  ends and the budget goes where it earns.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p className="ch-fineprint">
+            Privacy-safe: conversions are sent hashed and server-side. No patient identity is ever
+            exposed to an ad platform.
+          </p>
         </div>
       </section>
 

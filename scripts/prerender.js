@@ -72,6 +72,61 @@ const faqLd = {
     ['Who actually runs all this?', 'A dedicated growth expert is assigned to your clinic on a permanent basis — they strategise, set up and operate the entire system on your behalf, and review results with you every week.'],
   ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 };
+// Organization: ties both hosts to one legal entity and declares the
+// cross-market relationship, so Google treats aumai.co.in and aumyai.com as
+// sister sites rather than duplicate competitors.
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'AUM AI Healthcare Solutions',
+  url: `${ORIGIN}/`,
+  logo: `${ORIGIN}/PNG-01-01.png`,
+  sameAs: ['https://aumai.co.in/', 'https://aumyai.com/'],
+  address:
+    MARKET === 'us'
+      ? { '@type': 'PostalAddress', streetAddress: '30 N Gould St, Ste N', addressLocality: 'Sheridan', addressRegion: 'WY', postalCode: '82801', addressCountry: 'US' }
+      : { '@type': 'PostalAddress', addressLocality: 'Pune', addressRegion: 'Maharashtra', addressCountry: 'IN' },
+  contactPoint: [{
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: MARKET === 'us' ? 'jayesh@aumyai.com' : 'jayesh.chaudhari@aumai.co.in',
+    telephone: MARKET === 'us' ? '+1-307-263-5098' : '+91-800-718-9868',
+  }],
+};
+
+// SoftwareApplication with offers: this is what makes a product page eligible
+// for price/rating treatment in results, and what AI assistants quote when
+// asked "how much does X cost".
+const softwareLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Aumy Business Manager',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  url: `${ORIGIN}/business-manager`,
+  description:
+    'An AI Employee that answers customers on WhatsApp, Instagram, Facebook, web chat and phone, makes outbound sales calls, books meetings, recovers abandoned carts, and traces ad spend to real revenue.',
+  offers: [
+    { '@type': 'Offer', name: 'Basic', price: '77', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Growth', price: '237', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Pro', price: '397', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Scale', price: '549', priceCurrency: 'USD' },
+  ],
+};
+
+const bmFaqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    ['Does Aumy run my ads or replace my marketing agency?', 'No. Your team or agency keeps running your ads exactly as they do now. Aumy sends real revenue back to Meta and Google when a click becomes a sale, so the ad platforms learn who actually buys — which raises ROAS and lowers cost per purchase on the same budget.'],
+    ['What is an AI Employee?', 'A single AI that answers your customers on WhatsApp, Instagram, Facebook, web chat and phone — quoting from your product catalogue, handling objections and booking meetings — and also makes outbound sales calls in a human-sounding voice.'],
+    ['Does it work with Shopify or WooCommerce?', 'Yes. Orders flow in automatically, which turns on abandoned-cart recovery, delivery follow-ups and repeat-purchase campaigns.'],
+    ['How much does it cost?', 'Plans start at $77/month (Basic) and run to $549/month (Scale). Every plan includes the AI Employee, WhatsApp and in-plan voice minutes rather than selling them as add-ons. Yearly billing is two months free.'],
+    ['Is there a free trial?', 'Yes — 7 days, no card required. You can sign up, connect your channels, launch and pay entirely self-serve.'],
+    ['Can my team take over a conversation from the AI?', 'Yes. A shared inbox shows every conversation, and anyone on your team can step in mid-chat and hand it back to the AI afterwards.'],
+  ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+
 const videoLd = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
@@ -91,7 +146,7 @@ const routes = [
       'AUMY is the AI growth system for dental & aesthetic clinics — capture every enquiry, book it like a human, win back patients who drift away, and make your ad spend work harder. Try it free for 10 days, no obligation. Live in clinics; one grew 20–25% in 2–3 months.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
-    jsonld: [faqLd, videoLd],
+    jsonld: [orgLd, faqLd, videoLd],
     content: `
       <section><div class="ch-container ch-narrow">
         <p><strong>See it for yourself — live.</strong> Message our AI receptionist for a demo dental clinic on WhatsApp at +91 80071 89868 and watch it answer, book, reschedule and cancel appointments, 24/7. No sign-up — just say hello.</p>
@@ -225,7 +280,7 @@ const usRoutes = [
       'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and chases your lab — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
-    jsonld: [],
+    jsonld: [orgLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI receptionist for US dental practices</p>
@@ -236,6 +291,67 @@ const usRoutes = [
       </div></section>`,
   },
 ];
+
+// Business Manager and the leak check were NOT prerendered, so crawlers
+// received an empty <div id="root"> for both — the BM page is the URL our own
+// ads point at, and it had no indexable content at all.
+usRoutes.push(
+  {
+    slug: 'business-manager',
+    title:
+      'AI Employee for Small Business & Ecommerce — WhatsApp, Sales Calls & True ROAS | Aumy Business Manager',
+    description:
+      'An AI Employee that answers every customer on WhatsApp, Instagram, Facebook and phone, makes human-sounding outbound sales calls, books meetings, recovers abandoned carts, and traces every ad dollar to real revenue. Shopify & WooCommerce ready. 7-day free trial, no card.',
+    canonical: `${ORIGIN}/business-manager`,
+    jsonld: [softwareLd, bmFaqLd],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">Aumy Business Manager</p>
+        <h1 class="ch-hero-title">The AI that answers, calls, books - and proves what your ads really earn.</h1>
+        <p class="ch-hero-sub">One platform for any business: an AI Employee on WhatsApp, Instagram, Facebook, web chat and phone; an AI that makes outbound sales calls in a human voice; meetings booked straight onto your calendar; and ad reporting that shows the real revenue behind every dollar, not clicks. Seven-day free trial, no card.</p>
+      </div></section>
+      <section><div class="ch-container">
+        <h2>What it does</h2>
+        <ul>
+          <li><strong>An AI Employee on every channel</strong> - WhatsApp, Instagram, Facebook, web chat and phone. It answers as your business, quotes from your catalogue, handles objections and books, around the clock.</li>
+          <li><strong>Outbound calls that sound human</strong> - upload a prospect list or pick any audience; the AI calls, qualifies, works your objection playbook and puts demos on your calendar.</li>
+          <li><strong>Ad spend to real revenue</strong> - pixel and server-side tracking with an identity graph: the lifetime revenue every campaign, ad set and ad actually produced.</li>
+          <li><strong>Campaigns in plain words</strong> - "Call everyone who abandoned checkout this week." The AI builds the audience, the messages and the call script. You approve. It runs.</li>
+          <li><strong>Your store, wired in</strong> - Shopify and WooCommerce orders flow in automatically: abandoned-cart recovery, delivery follow-ups, repeat-purchase campaigns.</li>
+          <li><strong>Your catalogue, quoted correctly</strong> - products, prices and packages in one place, so the AI answers "how much?" from real data. Orders and invoices follow.</li>
+          <li><strong>Content Studio</strong> - turn one photo into a caption, a post and a story in your brand voice, published to Instagram, Facebook and Google.</li>
+          <li><strong>Get Found on Google</strong> - manage your Google Business Profile, publish posts automatically and earn a steady stream of real reviews, so you climb the local map pack.</li>
+          <li><strong>A sales pipeline that fills itself</strong> - every enquiry becomes a tracked lead with its source, conversation and value.</li>
+          <li><strong>Human takeover</strong> - a shared inbox where your team can step into any conversation mid-chat and hand it back.</li>
+          <li><strong>Ask your data anything</strong> - live dashboards for revenue, channels and campaigns, plus plain-English questions answered from your own numbers.</li>
+        </ul>
+        <h2>Keep your marketing team. Give them better data.</h2>
+        <p>We do not run your ads and we do not replace your agency. What changes is what Meta and Google learn: the moment a click turns into a real sale, we send that revenue back to the ad platform. It stops optimising for whoever clicks and starts finding more people like the customers who actually buy - higher ROAS on the same spend, lower cost per purchase, and every campaign traced to real revenue. Conversions are sent hashed and server-side with event de-duplication, so your existing pixel and ours run side by side without double-counting.</p>
+        <h2>Who it is for</h2>
+        <ul>
+          <li><strong>Ecommerce and D2C brands</strong> - Shopify and WooCommerce stores running Meta ads.</li>
+          <li><strong>Local and service businesses</strong> - salons, gyms and studios, clinics, restaurants, real estate and home services.</li>
+          <li><strong>B2B and high-ticket sales teams</strong> - coaches, consultants, education and SaaS.</li>
+          <li><strong>Marketing agencies</strong> - run every client from one workspace, priced per managed client.</li>
+        </ul>
+        <h2>Pricing</h2>
+        <p>Basic $77/mo - ads and pixel, AI Employee, campaigns, CRM and meetings (1,100 messages, 33 voice minutes). Growth $237/mo - adds AI voice campaigns with playbooks (3,300 messages, 132 voice minutes). Pro $397/mo (11,000 messages, 330 voice minutes). Scale $549/mo (unlimited messages under fair use, 1,100 voice minutes). Around 20% less than comparable platforms, with the AI Employee, WhatsApp and in-plan voice minutes included rather than sold as add-ons. Yearly billing is two months free. Every plan starts with a 7-day free trial, no card required.</p>
+      </div></section>`,
+  },
+  {
+    slug: 'leak-calculator',
+    title: 'Dental Revenue Leak Calculator - What Missed Calls & No-Shows Cost You | AUM AI',
+    description:
+      'A 60-second, deliberately conservative estimate of the revenue leaking from your dental practice or med spa - unanswered calls, no-shows, and patients who never reappoint. Free, no sign-up.',
+    canonical: `${ORIGIN}/leak-calculator`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">60-second leak check</p>
+        <h1 class="ch-hero-title">Do the math for your practice.</h1>
+        <p class="ch-hero-sub">Answer six honest questions about your practice - new patient enquiries per week, how many never get a reply, appointments per week, no-show rate, patients who never reappoint, and average production per visit - and see an estimate of the revenue leaking every year. Deliberately conservative: only 35% of missed enquiries are counted as lost bookings, only half of no-shows are counted, just three visits per lapsed patient, and 48 working weeks. Your real number is almost certainly higher.</p>
+      </div></section>`,
+  }
+);
 
 const activeRoutes = MARKET === 'us' ? usRoutes : routes;
 let written = 0;

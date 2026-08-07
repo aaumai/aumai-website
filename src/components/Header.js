@@ -37,10 +37,14 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // `external: true` renders a plain <a> — react-router's <Link> would treat an
+  // absolute URL as an in-app path and route to a 404 instead of leaving the site.
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/revenue-generator', label: 'How it works' },
+    { path: '/leak-calculator', label: 'Leak check' },
     { path: '/contact', label: 'Contact' },
+    { path: 'https://aumyai.com/', label: 'For USA', external: true },
   ];
 
   return (
@@ -59,25 +63,35 @@ const Header = () => {
 
           <nav className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}>
             <ul className="nav-list">
-              {navLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className={`nav-link ${
-                      link.path === '/'
-                        ? location.pathname === '/'
-                          ? 'active'
-                          : ''
-                        : location.pathname.startsWith(link.path)
-                          ? 'active'
-                          : ''
-                    }`}
-                    onClick={closeMobileMenu}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {navLinks.map((link) =>
+                link.external ? (
+                  <li key={link.path}>
+                    {/* Crawlable cross-market link: a real href, no rel="nofollow",
+                        so Google can follow aumai.co.in -> aumyai.com and back. */}
+                    <a href={link.path} className="nav-link" onClick={closeMobileMenu}>
+                      {link.label}
+                    </a>
+                  </li>
+                ) : (
+                  <li key={link.path}>
+                    <Link
+                      to={link.path}
+                      className={`nav-link ${
+                        link.path === '/'
+                          ? location.pathname === '/'
+                            ? 'active'
+                            : ''
+                          : location.pathname.startsWith(link.path)
+                            ? 'active'
+                            : ''
+                      }`}
+                      onClick={closeMobileMenu}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
             <div className="nav-cta">
               <Link to="/growth-audit" className="btn btn-primary" onClick={closeMobileMenu}>

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import LeakCheck from '../components/LeakCheck';
+import DemoPlaylist from '../components/DemoPlaylist';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -148,6 +150,20 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* LEAK CHECK — the hook.
+          Placed immediately below the hero on purpose: it is the one thing on
+          this page that gives a visitor a number about their OWN clinic before
+          we ask them for anything. It has to be the first thing after the fold,
+          not a link they may never scroll to. Same component and same
+          arithmetic as /leak-calculator. */}
+      <section className="ch-section ch-tint" id="leak-check">
+        <div className="ch-container">
+          <LeakCheck market="in" headingLevel="h2" />
+        </div>
+      </section>
+
+      <DemoPlaylist />
 
       {/* PROBLEM */}
       <section className="ch-section">

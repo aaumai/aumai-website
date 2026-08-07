@@ -45,6 +45,10 @@ function App() {
           <Route path="/terms" element={<div className="App"><TermsConditions /></div>} />
           <Route path="/data-deletion" element={<div className="App"><DataDeletion /></div>} />
           <Route path="/business-manager" element={<BusinessManagerUS />} />
+          {/* The leak check is a standalone, linkable, indexable page in both
+              markets — it is what ads and social posts point at. LeakCalculator
+              reads REACT_APP_MARKET and renders USD here. */}
+          <Route path="/leak-calculator" element={<LeakCalculator />} />
           <Route path="*" element={<HomeUS />} />
         </Routes>
       </Router>
