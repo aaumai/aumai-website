@@ -127,6 +127,23 @@ const bmFaqLd = {
   ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 };
 
+const demoVideoLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'AI Receptionist for Dental Clinics \u2014 Full Live Demo (Unedited)',
+  description:
+    'An unedited walkthrough of AUMY running a dental clinic front desk on a real WhatsApp number: answering a patient at night, verifying identity before discussing anything personal, moving an appointment earlier, following up a stalled treatment, and feeding real bookings back to Meta and Google.',
+  thumbnailUrl: 'https://i.ytimg.com/vi/MfPH7Owl9fY/maxresdefault.jpg',
+  embedUrl: 'https://www.youtube.com/embed/MfPH7Owl9fY',
+  contentUrl: 'https://www.youtube.com/watch?v=MfPH7Owl9fY',
+  uploadDate: '2026-08-08',
+  publisher: {
+    '@type': 'Organization',
+    name: 'AUM AI',
+    logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` },
+  },
+};
+
 const videoLd = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
@@ -146,7 +163,7 @@ const routes = [
       'AUMY is the AI growth system for dental & aesthetic clinics — capture every enquiry, book it like a human, win back patients who drift away, and make your ad spend work harder. Try it free for 10 days, no obligation. Live in clinics; one grew 20–25% in 2–3 months.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
-    jsonld: [orgLd, faqLd, videoLd],
+    jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
         <p><strong>See it for yourself — live.</strong> Message our AI receptionist for a demo dental clinic on WhatsApp at +91 80071 89868 and watch it answer, book, reschedule and cancel appointments, 24/7. No sign-up — just say hello.</p>
@@ -180,7 +197,7 @@ const routes = [
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
         <p>AUMY works best for established dental, dermatology and aesthetics clinics collecting upwards of ₹5 lakh a month, led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
         <h2>Watch AUMY actually doing it.</h2>
-        <p>Short, unedited demos of the live product - answering, booking, rescheduling and following up. New clip every day: <a href="https://www.youtube.com/playlist?list=PLZ8QbQSGNg1A">AUMY demo playlist on YouTube</a>.</p>
+        <p>Short, unedited demos of the live product - answering, booking, rescheduling and following up. New clip every day: <a href="https://www.youtube.com/watch?v=MfPH7Owl9fY">Watch the full 40-minute demo</a>.</p>
         <h2>Clinics are already growing with us.</h2>
         <p>Vinayaka Dental Care grew revenue about 25% in two months without hiring a single extra person. Vinayaka Derma keeps a 4.9-star Google rating with recalls and follow-ups running automatically. AUM AI is an NVIDIA Inception member.</p>
         <h2>Try AUMY free for 10 days — see the difference yourself.</h2>
@@ -282,13 +299,13 @@ const usRoutes = [
       'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and chases your lab — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
-    jsonld: [orgLd],
+    jsonld: [orgLd, demoVideoLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI receptionist for US dental practices</p>
         <h1 class="ch-hero-title">Your dentistry isn't the problem. The 90 minutes around every chair is.</h1>
         <p class="ch-hero-sub">An AI receptionist that answers every call and text 24/7 — books the patient, recovers no-shows, runs hygiene recall, follows up every treatment plan, and even chases your lab. For a typical $1M practice, that's $120,000+ a year quietly recovered. HIPAA-compliant by design: we sign a BAA with your practice, host data in US data centers, and log every access.</p>
-        <p>Watch short, unedited demos of the live product - a new clip every day: <a href="https://www.youtube.com/playlist?list=PLZ8QbQSGNg1A">AUMY demo playlist on YouTube</a>.</p>
+        <p>Watch short, unedited demos of the live product - a new clip every day: <a href="https://www.youtube.com/watch?v=MfPH7Owl9fY">Watch the full 40-minute demo</a>.</p>
         <p>Book a 30-minute call: https://calendar.app.google/tecaeebTBEWSoJnV7 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
         <p>AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801</p>
       </div></section>`,
@@ -306,7 +323,7 @@ usRoutes.push(
     description:
       'An AI Employee that answers every customer on WhatsApp, Instagram, Facebook and phone, makes human-sounding outbound sales calls, books meetings, recovers abandoned carts, and traces every ad dollar to real revenue. Shopify & WooCommerce ready. 7-day free trial, no card.',
     canonical: `${ORIGIN}/business-manager`,
-    jsonld: [softwareLd, bmFaqLd],
+    jsonld: [softwareLd, bmFaqLd, demoVideoLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Aumy Business Manager</p>
@@ -338,7 +355,7 @@ usRoutes.push(
           <li><strong>Marketing agencies</strong> - run every client from one workspace, priced per managed client.</li>
         </ul>
         <h2>See it working</h2>
-        <p>Short, unedited demos of the AI Employee answering on WhatsApp and social, quoting from a catalogue, making an outbound call and booking a meeting. New clip every day: <a href="https://www.youtube.com/playlist?list=PLZ8QbQSGNg1A">Aumy demo playlist on YouTube</a>.</p>
+        <p>Short, unedited demos of the AI Employee answering on WhatsApp and social, quoting from a catalogue, making an outbound call and booking a meeting. New clip every day: <a href="https://www.youtube.com/watch?v=MfPH7Owl9fY">Watch the full demo</a>.</p>
         <h2>Pricing</h2>
         <p>Basic $77/mo - ads and pixel, AI Employee, campaigns, CRM and meetings (1,100 messages, 33 voice minutes). Growth $237/mo - adds AI voice campaigns with playbooks (3,300 messages, 132 voice minutes). Pro $397/mo (11,000 messages, 330 voice minutes). Scale $549/mo (unlimited messages under fair use, 1,100 voice minutes). Around 20% less than comparable platforms, with the AI Employee, WhatsApp and in-plan voice minutes included rather than sold as add-ons. Yearly billing is two months free. Every plan starts with a 7-day free trial, no card required.</p>
       </div></section>`,

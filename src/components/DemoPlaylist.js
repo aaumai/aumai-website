@@ -28,9 +28,20 @@ import './DemoPlaylist.css';
  */
 export const PLAYLIST_ID = 'PLZ8QbQSGNg1A';
 
+/**
+ * The video that plays FIRST — the full unedited walkthrough. Playback then
+ * continues into the rest of the playlist.
+ *
+ * Featuring one video rather than opening on whatever the playlist happens to
+ * order first: a visitor who presses play should land on the flagship demo, not
+ * on whichever clip was uploaded most recently. Clear this to open the playlist
+ * from the top instead.
+ */
+export const FEATURED_VIDEO_ID = 'MfPH7Owl9fY';
+
 const DemoPlaylist = ({
-  title = 'See AUMY actually doing it.',
-  lead = 'Short, unedited demos — the AI answering, booking, rescheduling and following up. No slides.',
+  title = 'Watch AUMY run a clinic for 40 minutes.',
+  lead = 'The full walkthrough, unedited — answering a patient at night, verifying who they are, moving an appointment, chasing a treatment that stalled. A real clinic’s number, in real time.',
   eyebrow = 'Watch it work',
   posterSrc = '/images/hero-dental.jpg',
 }) => {
@@ -38,9 +49,11 @@ const DemoPlaylist = ({
 
   if (!PLAYLIST_ID) return null;
 
-  const embedSrc =
-    `https://www.youtube-nocookie.com/embed/videoseries?list=${PLAYLIST_ID}` +
-    `&autoplay=1&rel=0&modestbranding=1`;
+  // Featured video plays first and then runs on into the playlist; without one,
+  // open the playlist from the top.
+  const embedSrc = FEATURED_VIDEO_ID
+    ? `https://www.youtube-nocookie.com/embed/${FEATURED_VIDEO_ID}?list=${PLAYLIST_ID}&autoplay=1&rel=0&modestbranding=1`
+    : `https://www.youtube-nocookie.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=1&rel=0&modestbranding=1`;
   const playlistUrl = `https://www.youtube.com/playlist?list=${PLAYLIST_ID}`;
 
   return (
