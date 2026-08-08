@@ -36,8 +36,15 @@ export const PLAYLIST_ID = 'PLZ8QbQSGNg1A';
  * order first: a visitor who presses play should land on the flagship demo, not
  * on whichever clip was uploaded most recently. Clear this to open the playlist
  * from the top instead.
+ *
+ * WHEN CHANGING THIS, change scripts/prerender.js too — the VideoObject schema
+ * there carries the same id, and the two drifting apart hands Google structured
+ * data for a video the page doesn't play. A stale id also fails SILENTLY: the
+ * facade is our own poster image, so the section looks healthy right up until a
+ * visitor clicks and gets YouTube's "Video unavailable". That is exactly how the
+ * first upload's removal went unnoticed on both live sites.
  */
-export const FEATURED_VIDEO_ID = 'MfPH7Owl9fY';
+export const FEATURED_VIDEO_ID = '3YNUFjUPRwk';
 
 const DemoPlaylist = ({
   title = 'Watch AUMY run a clinic for 40 minutes.',
