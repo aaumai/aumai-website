@@ -54,8 +54,8 @@ const Header = () => {
           <div className="logo">
             <Link to="/" onClick={closeMobileMenu}>
               <img
-                src="/PNG-01-01.png"
-                alt="AUM AI Healthcare Solutions"
+                src="/aumy-lockup-light.png"
+                alt="Aumy by AUM AI"
                 className="logo-image"
               />
             </Link>

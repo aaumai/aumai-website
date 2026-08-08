@@ -46,7 +46,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
-              <img src="/PNG-01-01.png" alt="AUM AI Healthcare Solutions" />
+              <img src="/aumy-lockup-dark.png" alt="Aumy by AUM AI" />
             </Link>
             <p className="footer-tagline">
               The growth partner for dental &amp; aesthetic clinics. AUMY captures every enquiry, books

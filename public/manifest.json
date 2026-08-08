@@ -1,16 +1,30 @@
 {
-  "short_name": "AUM AI Healthcare",
-  "name": "AUM AI Healthcare Solutions",
+  "short_name": "Aumy",
+  "name": "Aumy by AUM AI",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "aumy-mark-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "aumy-mark-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "aumy-mark-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "aumy-mark-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#2563eb",
-  "background_color": "#ffffff"
+  "theme_color": "#0B121C",
+  "background_color": "#0B121C"
 }
-

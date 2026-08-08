@@ -80,7 +80,7 @@ const orgLd = {
   '@type': 'Organization',
   name: MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'AUM AI Healthcare Solutions',
   url: `${ORIGIN}/`,
-  logo: `${ORIGIN}/PNG-01-01.png`,
+  logo: `${ORIGIN}/aumy-mark-512.png`,
   sameAs: ['https://aumai.co.in/', 'https://aumyai.com/'],
   address:
     MARKET === 'us'

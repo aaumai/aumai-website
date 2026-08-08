@@ -75,7 +75,7 @@ const BusinessManagerUS = () => {
       {/* Top bar */}
       <header className="us-topbar">
         <div className="us-topbar-inner">
-          <a href="/"><img src="/PNG-01-01.png" alt="Aumy" className="us-logo" /></a>
+          <a href="/"><img src="/aumy-lockup-light.png" alt="Aumy" className="us-logo" /></a>
           <nav className="us-topnav">
             <a href="#what-it-does">What it does</a>
             <a href="#who-its-for">Who it’s for</a>
@@ -329,7 +329,7 @@ const BusinessManagerUS = () => {
 
       {/* Footer */}
       <footer className="us-footer">
-        <img src="/PNG-01-01.png" alt="Aumy" className="us-logo us-logo-footer" />
+        <img src="/aumy-lockup-light.png" alt="Aumy" className="us-logo us-logo-footer" />
         <p className="us-footer-line">
           Aumy Business Manager · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
         </p>

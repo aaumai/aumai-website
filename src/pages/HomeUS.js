@@ -64,7 +64,7 @@ const HomeUS = () => {
       {/* Top bar */}
       <header className="us-topbar">
         <div className="us-topbar-inner">
-          <img src="/PNG-01-01.png" alt="AUM AI" className="us-logo" />
+          <img src="/aumy-lockup-light.png" alt="Aumy" className="us-logo" />
           <nav className="us-topnav">
             <a href="#what-it-does">How it works</a>
             <a href="#hipaa">Security &amp; HIPAA</a>
@@ -287,7 +287,7 @@ const HomeUS = () => {
 
       {/* Footer */}
       <footer className="us-footer">
-        <img src="/PNG-01-01.png" alt="AUM AI" className="us-logo us-logo-footer" />
+        <img src="/aumy-lockup-light.png" alt="Aumy" className="us-logo us-logo-footer" />
         <p className="us-footer-line">
           AI receptionist &amp; clinic automation · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
         </p>
