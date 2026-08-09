@@ -1,0 +1,47 @@
+/* Floating click-to-WhatsApp button — bottom-right, every India page. */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25d366;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.wa-float:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+}
+
+.wa-float svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.wa-float-label {
+  white-space: nowrap;
+}
+
+/* On phones, collapse to a compact icon-only bubble. */
+@media (max-width: 640px) {
+  .wa-float {
+    bottom: 18px;
+    right: 18px;
+    padding: 14px;
+  }
+
+  .wa-float-label {
+    display: none;
+  }
+}

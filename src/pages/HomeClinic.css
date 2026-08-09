@@ -78,20 +78,6 @@
 .ch-tint { background: var(--c-accent-tint); }
 .ch-head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
 
-/* LIVE DEMO band — try the AI receptionist on WhatsApp (top of page) */
-.ch-trydemo { background: linear-gradient(135deg, #2a9d8f 0%, #218779 100%); color: #fff; padding: 22px 0; }
-.ch-trydemo-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-.ch-trydemo-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); margin-bottom: 6px; }
-.ch-trydemo-title { font-size: clamp(20px, 2.4vw, 26px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 4px; }
-.ch-trydemo-sub { font-size: 15px; color: rgba(255, 255, 255, 0.92); margin: 0; max-width: 640px; }
-.ch-trydemo-btn { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #146c5f; font-weight: 800; font-size: 16px; padding: 14px 22px; border-radius: 999px; text-decoration: none; white-space: nowrap; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16); transition: transform 0.15s ease, box-shadow 0.2s ease; }
-.ch-trydemo-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22); }
-.ch-trydemo-btn svg { width: 22px; height: 22px; }
-@media (max-width: 640px) {
-  .ch-trydemo-inner { flex-direction: column; align-items: flex-start; }
-  .ch-trydemo-btn { width: 100%; justify-content: center; }
-}
-
 /* HERO */
 .ch-hero { padding: 48px 0 84px; background: linear-gradient(180deg, #ffffff 0%, var(--c-bg) 100%); }
 .ch-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }

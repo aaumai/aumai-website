@@ -29,6 +29,13 @@ export const INDIA_OFFICE = {
   phoneTel: 'tel:+918007189868',
 };
 
+// Click-to-WhatsApp target for the India site (floating button on every page).
+export const INDIA_WHATSAPP = {
+  number: '918007189868',
+  display: '+91 80071 89868',
+  prefill: "Hi! I'm on the AUM AI website and would like to chat.",
+};
+
 // India build lists India first (home market), then the US office.
 export const OFFICES = IS_US ? [US_OFFICE] : [INDIA_OFFICE, US_OFFICE];
 
