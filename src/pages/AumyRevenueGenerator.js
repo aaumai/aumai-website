@@ -32,7 +32,6 @@ const capabilities = [
   { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.' },
   { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.' },
   { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.' },
-  { t: 'Lab work follow-up automation', d: 'Chases your dental lab on WhatsApp, tracks every case, and rebooks the patient the moment the crown is ready. No other platform does this.', badge: 'Only us' },
   { t: 'Products & upsells, in the chat', d: 'Sells your packages and products right inside the conversation.' },
   { t: 'ROI dashboard', d: 'Every booking and rupee attributed.' },
 ];

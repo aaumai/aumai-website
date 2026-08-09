@@ -296,7 +296,7 @@ const usRoutes = [
     slug: '',
     title: 'AI Receptionist for Dental Practices — Every Call & Text Answered | AUM AI',
     description:
-      'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and chases your lab — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
+      'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and wins back patients who drifted — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, demoVideoLd],

@@ -37,7 +37,6 @@ const capabilities = [
   { t: 'Dormant reactivation', d: 'Wins back patients who quietly drifted away.' },
   { t: 'Membership & product sales', d: 'Offers your in-house plan at the natural moment, right in the chat.' },
   { t: 'Google Reviews on autopilot', d: 'Asks happy patients, follows up, and replies to every review in your voice.' },
-  { t: 'Lab case automation', d: 'Chases your lab by text and rebooks the patient the moment the crown is ready. No other platform does this.', badge: 'Only us' },
 ];
 
 const hipaa = [
@@ -54,7 +53,7 @@ const HomeUS = () => {
     setPageSeo({
       title: 'AI Receptionist for Dental Practices — Every Call & Text Answered | AUM AI',
       description:
-        'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and chases your lab — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
+        'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and wins back patients who drifted — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
       canonical: 'https://aumyai.com/',
     });
   }, []);
@@ -261,8 +260,8 @@ const HomeUS = () => {
           </div>
           <p className="us-price-compare">
             For comparison: practices typically pay $400–900/month for patient communication alone, plus
-            $200–500/month for a separate AI phone product — and neither chases your lab or your
-            unscheduled treatment.
+            $200–500/month for a separate AI phone product — and neither chases your unscheduled
+            treatment or wins back the patients who drifted.
           </p>
           <p className="us-price-enterprise">
             <strong>Multi-location group or DSO?</strong> Dedicated single-tenant instances (your own
