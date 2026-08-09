@@ -160,7 +160,7 @@ const routes = [
     slug: '',
     title: 'Grow Your Dental or Aesthetic Clinic with AI | AUMY by AUM AI',
     description:
-      'AUMY is the AI growth system for dental & aesthetic clinics — capture every enquiry, book it like a human, win back patients who drift away, and make your ad spend work harder. Try it free for 10 days, no obligation. Live in clinics; one grew 20–25% in 2–3 months.',
+      'AUMY stops the revenue leak in dental & aesthetic clinics — every enquiry answered in seconds and booked, every recall filled, drifting patients won back, and your ad spend turned into measurable revenue. Try it free for 10 days, no obligation. Live in clinics; one grew 20–25% in 2–3 months.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
@@ -170,8 +170,8 @@ const routes = [
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">For established dental &amp; aesthetic clinics</p>
-        <h1 class="ch-hero-title">Your patient chooses a clinic before they ever meet you.</h1>
-        <p class="ch-hero-sub">Today that choice happens online — in the ads they see, the reviews they read, and whether anyone answers when they reach out. AUMY is the growth system we run for your clinic, so the choice keeps going your way — more patients through your door, and the ones you have already earned coming back.</p>
+        <h1 class="ch-hero-title">Your clinic is leaking revenue every day. AUMY stops the leak — then grows what stays.</h1>
+        <p class="ch-hero-sub">AUMY answers every message and call in seconds — 2 PM or 2 AM — books patients straight into your calendar, follows up every lead until it books, fills your chair with due recalls, and quietly brings back patients who stopped coming. Your marketing team keeps running the ads; AUMY makes sure their leads become patients — and teaches your ads to find more like them.</p>
         <p><a href="/contact">Start my 10-day free trial</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
@@ -214,14 +214,14 @@ const routes = [
     slug: 'revenue-generator',
     title: 'How AUMY Works — Recover Lost Clinic Revenue | AUM AI',
     description:
-      'AUMY is the growth system we run for dental & aesthetic clinics: it captures every enquiry, books it, wins back patients who drift, feeds real bookings back to Meta so ads get smarter, and proves recovered revenue on a live dashboard.',
+      'AUMY recovers the revenue dental & aesthetic clinics leak every day: it captures every enquiry, books it, wins back patients who drift, feeds real bookings back to Meta so ads get smarter, and proves recovered revenue on a live dashboard.',
     canonical: `${ORIGIN}/revenue-generator`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">How AUMY works</p>
         <h1 class="ch-hero-title">Recover the revenue your clinic is already leaking.</h1>
-        <p class="ch-hero-sub">AUMY is the growth system we run for dental &amp; aesthetic clinics. It captures every enquiry, books it, wins back patients who drift away, and makes your ad spend work harder — with the recovered revenue proven on a live dashboard.</p>
+        <p class="ch-hero-sub">AUMY finds where your clinic leaks revenue and closes every gap. It captures every enquiry, books it, wins back patients who drift away, and makes your ad spend work harder — with the recovered revenue proven on a live dashboard.</p>
         <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container">

@@ -90,13 +90,14 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">For established dental &amp; aesthetic clinics</span>
             <h1 className="ch-hero-title">
-              Your patient chooses a clinic before they ever meet&nbsp;you.
+              Your clinic is leaking revenue every day. AUMY stops the leak — then grows what&nbsp;stays.
             </h1>
             <p className="ch-hero-sub">
-              Today that choice happens online — in the ads they see, the reviews they read, and whether
-              anyone answers when they reach out. AUMY is the growth system we run for your clinic, so the
-              choice keeps going your way — more patients through your door, and the ones you have already
-              earned coming&nbsp;back.
+              AUMY answers every message and call in seconds — 2&nbsp;PM or 2&nbsp;AM — books patients
+              straight into your calendar, follows up every lead until it books, fills your chair with due
+              recalls, and quietly brings back patients who stopped coming. Your marketing team keeps
+              running the ads; AUMY makes sure their leads become patients — and teaches your ads to find
+              more like&nbsp;them.
             </p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
