@@ -35,7 +35,7 @@ export const MARKETS = {
     valueLabel: 'Average treatment value (₹)',
     value: { min: 500, max: 20000, step: 250 },
     segments: [
-      { key: 'dental', label: 'Dental clinic', avgValue: 2000 },
+      { key: 'dental', label: 'Dental clinic', avgValue: 4000 },
       { key: 'aesthetic', label: 'Aesthetic / derma clinic', avgValue: 4000 },
     ],
     auditHref: '/growth-audit',
@@ -98,9 +98,9 @@ const LeakCheck = ({ market = 'in', headingLevel = 'h1', showHeading = true }) =
 
   const [segment, setSegment] = useState(cfg.segments[0].key);
   const [enquiries, setEnquiries] = useState(15);
-  const [missedPct, setMissedPct] = useState(20);
+  const [missedPct, setMissedPct] = useState(50);
   const [appointments, setAppointments] = useState(50);
-  const [noshowPct, setNoshowPct] = useState(10);
+  const [noshowPct, setNoshowPct] = useState(15);
   const [lapsePct, setLapsePct] = useState(30);
   const [avgValue, setAvgValue] = useState(cfg.segments[0].avgValue);
 
