@@ -303,8 +303,8 @@ const usRoutes = [
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI receptionist for US dental practices</p>
-        <h1 class="ch-hero-title">Your dentistry isn't the problem. The 90 minutes around every chair is.</h1>
-        <p class="ch-hero-sub">An AI receptionist that answers every call and text 24/7 — books the patient, recovers no-shows, runs hygiene recall, follows up every treatment plan, and even chases your lab. For a typical $1M practice, that's $120,000+ a year quietly recovered. HIPAA-compliant by design: we sign a BAA with your practice, host data in US data centers, and log every access.</p>
+        <h1 class="ch-hero-title">Your practice is leaking revenue every day. AUMY stops the leak — then grows what stays.</h1>
+        <p class="ch-hero-sub">AUMY answers every call and text in seconds — 2 PM or 2 AM — books patients straight into your calendar, follows up every lead until it books, runs hygiene recall, recovers no-shows, and quietly brings back patients who stopped coming. Your marketing team keeps running the ads; AUMY makes sure their leads become patients. For a typical $1M practice, that's $120,000+ a year quietly recovered. HIPAA-compliant by design: we sign a BAA with your practice, host data in US data centers, and log every access.</p>
         <p>Watch short, unedited demos of the live product - a new clip every day: <a href="https://www.youtube.com/watch?v=3YNUFjUPRwk">Watch the full 40-minute demo</a>.</p>
         <p>Book a 30-minute call: https://calendar.app.google/tecaeebTBEWSoJnV7 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
         <p>AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801</p>

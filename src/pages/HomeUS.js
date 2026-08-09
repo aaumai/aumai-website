@@ -86,11 +86,13 @@ const HomeUS = () => {
       <section className="ch-hero">
         <div className="ch-container ch-narrow ch-center">
           <span className="ch-eyebrow">AI receptionist for US dental practices</span>
-          <h1 className="ch-hero-title">Your dentistry isn’t the problem. The 90 minutes around every chair is.</h1>
+          <h1 className="ch-hero-title">Your practice is leaking revenue every day. AUMY stops the leak — then grows what&nbsp;stays.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            An AI receptionist that answers <strong>every call and text, 24/7</strong> — books the patient,
-            recovers no-shows, runs hygiene recall, follows up every treatment plan, and even chases your
-            lab. For a typical $1M practice, that’s <strong>$120,000+ a year</strong> quietly recovered.
+            AUMY answers <strong>every call and text in seconds — 2&nbsp;PM or 2&nbsp;AM</strong> — books
+            patients straight into your calendar, follows up every lead until it books, runs hygiene
+            recall, recovers no-shows, and quietly brings back patients who stopped coming. Your marketing
+            team keeps running the ads; AUMY makes sure their leads become patients. For a typical $1M
+            practice, that’s <strong>$120,000+ a year</strong> quietly recovered.
           </p>
           <div className="ch-hero-cta ch-center-cta">
             <a className="ch-btn ch-btn-primary" href={CAL_URL} target="_blank" rel="noopener noreferrer">Book a 30-minute call</a>
