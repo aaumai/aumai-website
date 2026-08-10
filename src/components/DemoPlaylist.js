@@ -44,7 +44,7 @@ export const PLAYLIST_ID = 'PLZ8QbQSGNg1A';
  * visitor clicks and gets YouTube's "Video unavailable". That is exactly how the
  * first upload's removal went unnoticed on both live sites.
  */
-export const FEATURED_VIDEO_ID = 'ZFQ626k7KFc';
+export const FEATURED_VIDEO_ID = 'Jna2UXPxBmI';
 
 const DemoPlaylist = ({
   title = 'Watch AUMY run a clinic for 40 minutes.',
