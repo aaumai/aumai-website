@@ -51,9 +51,9 @@ const hipaa = [
 const HomeUS = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AI Receptionist for Dental Practices — Every Call & Text Answered | AUM AI',
+      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Revenue Recovery for Dental Practices',
       description:
-        'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and wins back patients who drifted — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
+        'AUMY is the AI Revenue Recovery System for dental practices: every call and text answered in seconds, every lead followed up until it books, no-shows and overdue hygiene recalls recovered automatically — $120,000+ a year for a typical practice. HIPAA-compliant by design.',
       canonical: 'https://aumyai.com/',
     });
   }, []);
@@ -84,14 +84,13 @@ const HomeUS = () => {
       {/* HERO */}
       <section className="ch-hero">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">AI receptionist for US dental practices</span>
-          <h1 className="ch-hero-title">Your practice is leaking revenue every day. AUMY stops the leak — then grows what&nbsp;stays.</h1>
+          <span className="ch-eyebrow">The AI Revenue Recovery System for dental practices</span>
+          <h1 className="ch-hero-title">Never lose revenue to missed calls &amp; follow-ups&nbsp;again.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            AUMY answers <strong>every call and text in seconds — 2&nbsp;PM or 2&nbsp;AM</strong> — books
-            patients straight into your calendar, follows up every lead until it books, runs hygiene
-            recall, recovers no-shows, and quietly brings back patients who stopped coming. Your marketing
-            team keeps running the ads; AUMY makes sure their leads become patients. For a typical $1M
-            practice, that’s <strong>$120,000+ a year</strong> quietly recovered.
+            Every call and text answered <strong>in seconds — 2&nbsp;PM or 2&nbsp;AM</strong>. Every lead
+            followed up until it books. Every no-show, overdue hygiene recall and drifting patient —
+            recovered, automatically. For a typical $1M practice, that&rsquo;s{' '}
+            <strong>$120,000+ a year</strong> in revenue you already earned, quietly captured.
           </p>
           <div className="ch-hero-cta ch-center-cta">
             <a className="ch-btn ch-btn-primary" href={CAL_URL} target="_blank" rel="noopener noreferrer">Book a 30-minute call</a>

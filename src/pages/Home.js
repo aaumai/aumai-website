@@ -73,9 +73,9 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY by AUM AI — The Growth Partner for Dental & Aesthetic Clinics',
+      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Revenue Recovery for Dental Clinics',
       description:
-        'AUMY is the AI growth system for dental & aesthetic clinics — capture every enquiry, book it like a human, win back patients who drift away, and make your ad spend work harder. Your growth partner, not just software.',
+        'AUMY is the AI Revenue Recovery System for dental clinics: every call and message answered in seconds, every lead followed up until it books, missed appointments and overdue patients recovered automatically. Stop losing revenue you already earned.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -87,16 +87,14 @@ const Home = () => {
       <section className="ch-hero">
         <div className="ch-container ch-hero-grid">
           <div className="ch-hero-text">
-            <span className="ch-eyebrow">For established dental &amp; aesthetic clinics</span>
+            <span className="ch-eyebrow">The AI Revenue Recovery System for dental clinics</span>
             <h1 className="ch-hero-title">
-              Your clinic is leaking revenue every day. AUMY stops the leak — then grows what&nbsp;stays.
+              Never lose revenue to missed calls &amp; follow-ups&nbsp;again.
             </h1>
             <p className="ch-hero-sub">
-              AUMY answers every message and call in seconds — 2&nbsp;PM or 2&nbsp;AM — books patients
-              straight into your calendar, follows up every lead until it books, fills your chair with due
-              recalls, and quietly brings back patients who stopped coming. Your marketing team keeps
-              running the ads; AUMY makes sure their leads become patients — and teaches your ads to find
-              more like&nbsp;them.
+              Every call and message answered in seconds. Every lead followed up until it books. Every
+              missed appointment, due recall and drifting patient — recovered, automatically. AUMY makes
+              sure the revenue your clinic already earned never slips through the&nbsp;cracks.
             </p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
