@@ -51,9 +51,9 @@ const hipaa = [
 const HomeUS = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Revenue Recovery for Dental Practices',
+      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Conversion & Revenue Recovery for Dental Practices',
       description:
-        'AUMY is the AI Revenue Recovery System for dental practices: every call and text answered in seconds, every lead followed up until it books, no-shows and overdue hygiene recalls recovered automatically — $120,000+ a year for a typical practice. HIPAA-compliant by design.',
+        'AUMY is the AI Patient Conversion & Revenue Recovery System for dental practices: every call and text answered in seconds, every lead followed up until it books, no-shows and overdue hygiene recalls recovered automatically — $120,000+ a year for a typical practice. HIPAA-compliant by design.',
       canonical: 'https://aumyai.com/',
     });
   }, []);
@@ -84,7 +84,7 @@ const HomeUS = () => {
       {/* HERO */}
       <section className="ch-hero">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">The AI Revenue Recovery System for dental practices</span>
+          <span className="ch-eyebrow">The AI Patient Conversion &amp; Revenue Recovery System for dental practices</span>
           <h1 className="ch-hero-title">Never lose revenue to missed calls &amp; follow-ups&nbsp;again.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
             Every call and text answered <strong>in seconds — 2&nbsp;PM or 2&nbsp;AM</strong>. Every lead
@@ -115,6 +115,60 @@ const HomeUS = () => {
       <section className="ch-section" id="leak-check">
         <div className="ch-container">
           <LeakCheck market="us" headingLevel="h2" />
+        </div>
+      </section>
+
+      {/* PROBLEM — five named leaks, dental-specific, $ framing. Visibility and
+          ads deliberately excluded here: they are the expansion story below. */}
+      <section className="ch-section">
+        <div className="ch-container">
+          <div className="ch-head">
+            <span className="ch-eyebrow">The enemy</span>
+            <h2 className="ch-h2">Where is your practice leaking revenue?</h2>
+          </div>
+          <div className="ch-leakgrid">
+            <div className="ch-leak-card">
+              <h3 className="ch-leak-title">Missed calls</h3>
+              <p className="ch-leak-body">Someone calls while your front desk is with a patient — or after 5 PM. That caller books at the next practice on Google.</p>
+            </div>
+            <div className="ch-leak-card">
+              <h3 className="ch-leak-title">Unanswered texts</h3>
+              <p className="ch-leak-body">Text and web-chat enquiries sit unanswered. Patients read the silence as &ldquo;they don&rsquo;t need me.&rdquo;</p>
+            </div>
+            <div className="ch-leak-card">
+              <h3 className="ch-leak-title">Unfollowed leads</h3>
+              <p className="ch-leak-body">Someone asks about implants or aligners, gets one reply, and nobody ever follows up. They were ready to book.</p>
+            </div>
+            <div className="ch-leak-card">
+              <h3 className="ch-leak-title">No-shows</h3>
+              <p className="ch-leak-body">A $500–$1,000 appointment disappears from the schedule — and the chair sits empty because nobody had time to refill it.</p>
+            </div>
+            <div className="ch-leak-card">
+              <h3 className="ch-leak-title">Dormant patients</h3>
+              <p className="ch-leak-body">Patients who already know and trust you — crowns, implants, hygiene — never return, because nobody follows up.</p>
+            </div>
+          </div>
+          <p className="ch-note ch-center">None of it is your fault. It is just more than any front desk can hold.</p>
+        </div>
+      </section>
+
+      {/* THE ANSWER — leak → AUMY, the whole product in one glance. */}
+      <section className="ch-section ch-tint">
+        <div className="ch-container ch-narrow">
+          <div className="ch-head">
+            <span className="ch-eyebrow">The answer</span>
+            <h2 className="ch-h2 ch-center">AUMY closes every leak.</h2>
+          </div>
+          <div className="ch-closetable">
+            <div className="ch-close-row"><span className="ch-close-leak">A call goes unanswered</span><span className="ch-close-arrow" aria-hidden="true">→</span><span className="ch-close-aumy">AUMY answers — in seconds, 24/7</span></div>
+            <div className="ch-close-row"><span className="ch-close-leak">A new enquiry comes in</span><span className="ch-close-arrow" aria-hidden="true">→</span><span className="ch-close-aumy">AUMY replies and holds the conversation</span></div>
+            <div className="ch-close-row"><span className="ch-close-leak">A lead doesn&rsquo;t book</span><span className="ch-close-arrow" aria-hidden="true">→</span><span className="ch-close-aumy">AUMY follows up until they do (or say no)</span></div>
+            <div className="ch-close-row"><span className="ch-close-leak">A patient no-shows</span><span className="ch-close-arrow" aria-hidden="true">→</span><span className="ch-close-aumy">AUMY recovers and refills the slot</span></div>
+            <div className="ch-close-row"><span className="ch-close-leak">A hygiene recall comes due</span><span className="ch-close-arrow" aria-hidden="true">→</span><span className="ch-close-aumy">AUMY rebooks — on time, every time</span></div>
+            <div className="ch-close-row"><span className="ch-close-leak">A patient goes quiet</span><span className="ch-close-arrow" aria-hidden="true">→</span><span className="ch-close-aumy">AUMY reactivates them, personally</span></div>
+            <div className="ch-close-row"><span className="ch-close-leak">A treatment plan stalls</span><span className="ch-close-arrow" aria-hidden="true">→</span><span className="ch-close-aumy">AUMY follows up until it books</span></div>
+          </div>
+          <p className="ch-note ch-center">Every leak points to the same destination: a booked appointment and a filled chair.</p>
         </div>
       </section>
 
@@ -289,7 +343,7 @@ const HomeUS = () => {
       <footer className="us-footer">
         <img src="/aumy-lockup-light.png" alt="Aumy" className="us-logo us-logo-footer" />
         <p className="us-footer-line">
-          AI receptionist &amp; clinic automation · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
+          AI Patient Conversion &amp; Revenue Recovery · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
         </p>
         <p className="us-footer-line">
           AUM AI Healthcare Technology LLC · 30 N Gould St, Ste N, Sheridan, WY 82801

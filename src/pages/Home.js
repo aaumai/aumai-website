@@ -11,27 +11,55 @@ const Check = () => (
   </svg>
 );
 
+// The five leaks — one problem (revenue leakage), told as the places it
+// happens. Deliberately excludes visibility/SEO and ads: those are the
+// expansion story lower on the page, not a competing story up here.
 const leaks = [
-  'The phone rings while your team is with a patient. Or after hours. That caller books somewhere else.',
-  'A patient no-shows. The chair sits empty. No one had time to fill it.',
-  'An enquiry asks a question, gets no reply, and quietly disappears.',
-  'Patients you treated once never come back — and no one reminds them.',
-  'On Google, the clinic down the road shows up above you.',
-  'You spend on ads every month — shown to the same people — with no idea which ones become patients.',
+  {
+    title: 'Missed calls',
+    body: 'Someone calls while your front desk is with a patient — or after hours. That caller books at the next clinic on Google.',
+  },
+  {
+    title: 'Unanswered messages',
+    body: 'WhatsApp and Instagram enquiries sit unread for hours. Patients read the silence as "they don’t need me."',
+  },
+  {
+    title: 'Unfollowed leads',
+    body: 'Someone asks about a root canal or aligners, gets one reply, and nobody ever follows up. They were ready to book.',
+  },
+  {
+    title: 'No-shows',
+    body: 'A ₹10,000 appointment quietly disappears from the schedule — and the chair sits empty because no one had time to refill it.',
+  },
+  {
+    title: 'Dormant patients',
+    body: 'Patients who already know and trust you — crowns, aligners, cleanings — never come back, because nobody reminds them.',
+  },
+];
+
+// Leak → what AUMY does about it. The whole product, one glance.
+const leakCloses = [
+  { leak: 'A call goes unanswered', aumy: 'AUMY answers — in seconds, 24/7' },
+  { leak: 'A new enquiry comes in', aumy: 'AUMY replies and holds the conversation' },
+  { leak: 'A lead doesn’t book', aumy: 'AUMY follows up until they do (or say no)' },
+  { leak: 'A patient no-shows', aumy: 'AUMY recovers and refills the slot' },
+  { leak: 'A recall comes due', aumy: 'AUMY reminds — on time, every time' },
+  { leak: 'A patient goes quiet', aumy: 'AUMY reactivates them, personally' },
+  { leak: 'A treatment plan stalls', aumy: 'AUMY follows up until it books' },
 ];
 
 const pillars = [
   {
-    title: 'More patients through the door',
-    body: 'Every enquiry — WhatsApp, Instagram, a missed call, your website — answered in seconds and booked by an AI receptionist that talks like a human. Your ad spend learns who actually booked and paid, so it stops buying clicks and starts finding patients like your best ones.',
+    title: 'Convert every new patient opportunity',
+    body: 'Every enquiry — WhatsApp, Instagram, a missed call, your website — answered in seconds by an AI receptionist that talks like a human, holds the conversation, and books the appointment. No lead waits, no lead goes cold.',
   },
   {
-    title: 'The clinic patients find — and trust',
-    body: 'Manage your Google Business Profile, Instagram and Facebook from one place — and create and publish content to every channel in a few clicks with our Content Studio. Climb Google above the clinic down the road and earn a steady stream of real 5-star reviews, each with a reply.',
+    title: 'Recover the patients you already have',
+    body: 'No-shows rebooked, recalls sent on time, dormant patients personally won back, presented treatment plans followed up until they book. The revenue you already earned, kept instead of leaked.',
   },
   {
     title: 'A front desk that never clocks out',
-    body: 'A 24/7 AI receptionist that answers, reschedules, recovers no-shows, sends recall reminders on time and quietly wins back patients who have drifted away. The way your sharpest receptionist would, at any hour, without another hire.',
+    body: 'It all runs 24/7 — nights, Sundays, festival weeks — the way your sharpest receptionist would, without another hire. Your team walks in to a fuller calendar, not a longer to-do list.',
   },
 ];
 
@@ -73,9 +101,9 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Revenue Recovery for Dental Clinics',
+      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Conversion & Revenue Recovery for Dental Clinics',
       description:
-        'AUMY is the AI Revenue Recovery System for dental clinics: every call and message answered in seconds, every lead followed up until it books, missed appointments and overdue patients recovered automatically. Stop losing revenue you already earned.',
+        'AUMY is the AI Patient Conversion & Revenue Recovery System for dental clinics: every call and message answered in seconds, every lead followed up until it books, no-shows recovered, dormant patients reactivated — automatically. Stop losing revenue you already earned.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -87,14 +115,15 @@ const Home = () => {
       <section className="ch-hero">
         <div className="ch-container ch-hero-grid">
           <div className="ch-hero-text">
-            <span className="ch-eyebrow">The AI Revenue Recovery System for dental clinics</span>
+            <span className="ch-eyebrow">The AI Patient Conversion &amp; Revenue Recovery System for dental clinics</span>
             <h1 className="ch-hero-title">
               Never lose revenue to missed calls &amp; follow-ups&nbsp;again.
             </h1>
             <p className="ch-hero-sub">
-              Every call and message answered in seconds. Every lead followed up until it books. Every
-              missed appointment, due recall and drifting patient — recovered, automatically. AUMY makes
-              sure the revenue your clinic already earned never slips through the&nbsp;cracks.
+              AUMY answers every call and message in seconds, follows up with every lead until it books,
+              recovers no-shows and due recalls, and reactivates patients who have gone quiet —
+              automatically. The patient opportunities your clinic already paid for, converted instead
+              of&nbsp;lost.
             </p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
@@ -135,26 +164,51 @@ const Home = () => {
 
       <DemoPlaylist />
 
-      {/* PROBLEM */}
+      {/* PROBLEM — one enemy: revenue leaking between marketing and the front
+          desk. Five named leaks, nothing else competing for attention here. */}
       <section className="ch-section">
-        <div className="ch-container ch-narrow">
-          <h2 className="ch-h2">Dentistry changed. Great work and a good location are no longer enough.</h2>
-          <p className="ch-lead">
-            Before a patient ever sits in your chair, an ad reaches them first, they check your Google
-            reviews, and they call or message your clinic — and if no one answers, they move to the next
-            name in the results. Winning patients now runs on systems, not skill alone. And that is where
-            it slips: the quiet gaps between your marketing and your front desk, where patients and money
-            leak away, one at a time, in the places no report ever shows you:
-          </p>
-          <ul className="ch-leaks">
+        <div className="ch-container">
+          <div className="ch-head">
+            <span className="ch-eyebrow">The enemy</span>
+            <h2 className="ch-h2">Where is your clinic leaking revenue?</h2>
+            <p className="ch-lead ch-center-lead">
+              It happens in the quiet gaps between your marketing and your front desk — one patient at a
+              time, in the places no report ever shows you.
+            </p>
+          </div>
+          <div className="ch-leakgrid">
             {leaks.map((leak, i) => (
-              <li key={i}>
-                <span className="ch-leak-dot" />
-                {leak}
-              </li>
+              <div key={i} className="ch-leak-card">
+                <h3 className="ch-leak-title">{leak.title}</h3>
+                <p className="ch-leak-body">{leak.body}</p>
+              </div>
             ))}
-          </ul>
-          <p className="ch-note">Sound familiar? None of it is your fault. It is just more than any front desk can hold.</p>
+          </div>
+          <p className="ch-note ch-center">
+            Sound familiar? None of it is your fault. It is just more than any front desk can hold.
+          </p>
+        </div>
+      </section>
+
+      {/* THE ANSWER — leak → AUMY, the whole product in one glance. */}
+      <section className="ch-section ch-tint">
+        <div className="ch-container ch-narrow">
+          <div className="ch-head">
+            <span className="ch-eyebrow">The answer</span>
+            <h2 className="ch-h2 ch-center">AUMY closes every leak.</h2>
+          </div>
+          <div className="ch-closetable">
+            {leakCloses.map((row, i) => (
+              <div key={i} className="ch-close-row">
+                <span className="ch-close-leak">{row.leak}</span>
+                <span className="ch-close-arrow" aria-hidden="true">→</span>
+                <span className="ch-close-aumy">{row.aumy}</span>
+              </div>
+            ))}
+          </div>
+          <p className="ch-note ch-center">
+            Every leak points to the same destination: a booked appointment and a filled chair.
+          </p>
         </div>
       </section>
 
@@ -182,11 +236,10 @@ const Home = () => {
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">What you actually get</span>
-            <h2 className="ch-h2">Three outcomes, one connected system — tuned to your clinic.</h2>
+            <h2 className="ch-h2">Two engines, one system: convert new patients, recover existing ones.</h2>
             <p className="ch-lead ch-center-lead">
-              Most clinics stitch together four tools that never talk to each other. We bring them onto
-              one platform — AUMY — and point it at your clinic&apos;s specific gaps. Here is what that
-              delivers.
+              Every mechanism points at the same destination — more booked patients from the
+              opportunities your clinic already generates. Here is what that delivers.
             </p>
           </div>
           <div className="ch-pillars ch-pillars-3">
@@ -325,6 +378,26 @@ const Home = () => {
             <span className="ch-badge">Built by healthcare technologists</span>
             <span className="ch-badge">Your data, secured</span>
           </div>
+        </div>
+      </section>
+
+      {/* EXPANSION — deliberately BELOW the core recovery story. Visibility and
+          smarter ads are what AUMY does once the leaks are closed, not a
+          competing reason to buy. */}
+      <section className="ch-section">
+        <div className="ch-container ch-narrow ch-center">
+          <span className="ch-eyebrow">Once the leaks are closed</span>
+          <h2 className="ch-h2">Then AUMY grows what stays.</h2>
+          <p className="ch-lead ch-center-lead">
+            With every call answered and every patient followed up, growth compounds. AUMY keeps your
+            Google profile, reviews and social presence working — every recovered patient becomes a
+            5-star review, and every review wins the next patient. And because AUMY connects your ads to
+            actual booked patients (not clicks), your ad budget learns who really becomes a patient —
+            so the same spend brings more of them.
+          </p>
+          <p className="ch-note">
+            That is the order that works: close the leaks first, then pour more in the top.
+          </p>
         </div>
       </section>
 

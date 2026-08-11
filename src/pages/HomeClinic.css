@@ -411,3 +411,20 @@
   .ch-hero-photo img { max-height: 300px; }
   .ch-field-row { grid-template-columns: 1fr; }
 }
+
+/* ── Leak cards (Where is your clinic leaking revenue?) ─────────────────── */
+.ch-leakgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin-top: 34px; }
+.ch-leak-card { background: #fff; border: 1px solid rgba(15, 40, 40, 0.08); border-radius: 14px; padding: 22px 20px; box-shadow: 0 6px 18px rgba(15, 40, 40, 0.05); }
+.ch-leak-card .ch-leak-title { margin: 0 0 8px; font-size: 17px; font-weight: 700; color: var(--c-ink); }
+.ch-leak-card .ch-leak-body { margin: 0; font-size: 15px; line-height: 1.55; color: var(--c-ink-soft, #4a5a5a); }
+
+/* ── Close table (AUMY closes every leak) ───────────────────────────────── */
+.ch-closetable { margin-top: 30px; display: grid; gap: 10px; }
+.ch-close-row { display: grid; grid-template-columns: 1fr 34px 1.2fr; align-items: center; background: #fff; border: 1px solid rgba(15, 40, 40, 0.08); border-radius: 12px; padding: 14px 18px; }
+.ch-close-leak { font-size: 15.5px; color: var(--c-ink-soft, #4a5a5a); }
+.ch-close-arrow { text-align: center; color: var(--c-accent); font-weight: 700; }
+.ch-close-aumy { font-size: 15.5px; font-weight: 650; color: var(--c-ink); }
+@media (max-width: 560px) {
+  .ch-close-row { grid-template-columns: 1fr; gap: 4px; }
+  .ch-close-arrow { display: none; }
+}
