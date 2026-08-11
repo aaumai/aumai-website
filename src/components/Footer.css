@@ -35,7 +35,16 @@
 
 .footer-logo {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 6px;
+}
+
+/* Parent-company attribution under the Aumy lockup ("an Alphabet company" pattern) */
+.footer-byline {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: none;
+  color: var(--slate-500, #64748b);
+  margin: 0 0 16px 0;
 }
 
 .footer-logo img {

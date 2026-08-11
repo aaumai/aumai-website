@@ -105,7 +105,7 @@ const PlatformPartner = () => {
             <p className="rev-footnote" style={{ marginTop: '1rem' }}>
               Looking for AUMY for your own clinic instead?{' '}
               <Link to="/revenue-generator" className="aumy-gradient" style={{ fontWeight: 600 }}>
-                Explore the Revenue Generator →
+                Explore Aumy →
               </Link>
             </p>
           </div>

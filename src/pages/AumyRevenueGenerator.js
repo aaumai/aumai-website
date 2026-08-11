@@ -75,9 +75,9 @@ const AumyRevenueGenerator = () => {
   const [video, setVideo] = useState(null);
   useEffect(() => {
     setPageSeo({
-      title: 'How AUMY Works — Recover Lost Revenue for Your Clinic | AUM AI',
+      title: 'Aumy — The AI Patient Conversion & Revenue Recovery System for Clinics',
       description:
-        'AUMY is the growth system we run for dental & aesthetic clinics — it captures every enquiry, books it, wins back patients who drift, and makes your ad spend work harder, with the recovered revenue proven on a live dashboard.',
+        'Aumy is the AI Patient Conversion & Revenue Recovery System we run for dental & aesthetic clinics — it captures every enquiry, books it, wins back patients who drift, and makes your ad spend work harder, with the recovered revenue proven on a live dashboard. Never lose revenue to missed calls & follow-ups again.',
       canonical: 'https://aumai.co.in/revenue-generator',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -88,7 +88,7 @@ const AumyRevenueGenerator = () => {
       {/* HERO */}
       <section className="ch-hero">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">How AUMY works</span>
+          <span className="ch-eyebrow">Aumy — how it works</span>
           <h1 className="ch-hero-title">Recover the revenue your clinic is already leaking.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
             AUMY is the growth system we run for dental &amp; aesthetic clinics. It captures every

@@ -20,7 +20,7 @@ const Footer = () => {
   ];
 
   const company = [
-    { label: 'Revenue Generator', path: '/revenue-generator' },
+    { label: 'Aumy — How It Works', path: '/revenue-generator' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Platform Partners', path: '/platform-partner' },
     { label: 'For Consultants & Partners', path: '/engineering-partner' },
@@ -48,6 +48,7 @@ const Footer = () => {
             <Link to="/" className="footer-logo">
               <img src="/aumy-lockup-dark.png" alt="Aumy by AUM AI" />
             </Link>
+            <p className="footer-byline">an AUM AI product</p>
             <p className="footer-tagline">
               The growth partner for dental &amp; aesthetic clinics. AUMY captures every enquiry, books
               it like a human, wins back patients who drift away, and makes your ad spend work harder —
