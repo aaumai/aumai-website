@@ -351,6 +351,9 @@ for (const p of growthPosts) {
     title: `${p.title} | AUMY Dental Practice Growth`,
     description: p.description,
     canonical: `${ORIGIN}/growth/${p.slug}`,
+    // Social shares of articles need an image; the dental hero is the site
+    // default until articles get their own art.
+    ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [
       {
         '@context': 'https://schema.org',

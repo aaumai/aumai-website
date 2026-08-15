@@ -44,7 +44,9 @@ const SITEMAPS = {
     ['/revenue-generator', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
     ['/growth', 0.8, 'weekly'],
-    ...growthPosts.map((p) => [`/growth/${p.slug}`, 0.7, 'monthly']),
+    // Articles carry their real publish date as lastmod — honest signals beat
+    // a blanket "everything changed today".
+    ...growthPosts.map((p) => [`/growth/${p.slug}`, 0.7, 'monthly', p.date]),
     ['/platform-partner', 0.7, 'monthly'],
     ['/facebook-instagram', 0.6, 'monthly'],
     ['/compliance', 0.7, 'monthly'],
@@ -68,10 +70,10 @@ const sitemap =
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls
     .map(
-      ([loc, priority, changefreq]) =>
+      ([loc, priority, changefreq, lastmod]) =>
         `  <url>\n` +
         `    <loc>${ORIGIN}${loc}</loc>\n` +
-        `    <lastmod>${TODAY}</lastmod>\n` +
+        `    <lastmod>${lastmod || TODAY}</lastmod>\n` +
         `    <changefreq>${changefreq}</changefreq>\n` +
         `    <priority>${priority.toFixed(1)}</priority>\n` +
         `  </url>\n`
@@ -122,12 +124,16 @@ const LLMS = {
 - ${ORIGIN}/ — overview for clinic owners
 - ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to missed enquiries, no-shows and lapsed patients
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
-- Also: lead follow-up (/lead-followup-calculator), no-show (/no-show-calculator), recall (/recall-calculator) and dormant-patient (/dormant-patient-calculator) calculators
+${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how the system works
 - ${ORIGIN}/growth-audit — free clinic growth audit
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics
 - ${ORIGIN}/compliance — security and data handling
 - https://aumyai.com/ — United States market
+
+## Dental practice growth guides (free, no sign-up, India-focused)
+${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s+/g, ' ')}`).join('\n')}
+- ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page Revenue Leak Checklist for practice managers
 
 ## Contact
 AUM AI Healthcare Solutions, Pune, Maharashtra, India — jayesh.chaudhari@aumai.co.in
