@@ -84,6 +84,23 @@ const GrowthHub = () => {
             <p className="gh-empty">Articles in this category are on the way — check back soon.</p>
           )}
 
+          <div className="gh-podcast-banner">
+            <div>
+              <span className="gh-card-category">The Dental Growth Podcast</span>
+              <h2 className="gh-card-title" style={{ marginTop: '10px' }}>
+                Are you a dentist, orthodontist, dental marketer, educator or entrepreneur with a
+                story worth telling?
+              </h2>
+              <p className="gh-card-excerpt">
+                We interview the people behind India's growing dental practices — the business side
+                nobody teaches in college.
+              </p>
+            </div>
+            <Link to="/podcast" className="ch-btn ch-btn-primary">
+              Come on the podcast
+            </Link>
+          </div>
+
           <div className="gh-tools">
             <h2>Tools &amp; downloads</h2>
             <p className="gh-tools-sub">

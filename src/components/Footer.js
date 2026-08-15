@@ -25,6 +25,7 @@ const Footer = () => {
   const company = [
     { label: 'Aumy — How It Works', path: '/revenue-generator' },
     { label: 'Dental Practice Growth Hub', path: '/growth' },
+    { label: 'Podcast — Be a Guest', path: '/podcast' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Free Clinic Growth Audit', path: '/growth-audit' },
     { label: 'Revenue Leak Calculator', path: '/leak-calculator' },

@@ -303,6 +303,21 @@ const routes = [
   },
 ];
 
+routes.push({
+  slug: 'podcast',
+  title: 'The Dental Growth Podcast — Be a Guest | Conversations on the Business of Dentistry in India',
+  description:
+    'A podcast about the business of dentistry in India: growth, patients, marketing, operations and practice economics — told by the dentists, orthodontists, dental marketers, educators and entrepreneurs living it. Apply to be a guest.',
+  canonical: `${ORIGIN}/podcast`,
+  content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">The Dental Growth Podcast</p>
+        <h1 class="ch-hero-title">The business of dentistry, told by the people living it.</h1>
+        <p class="ch-hero-sub">Honest conversations with Indian dentists and the people who help them grow — how practices actually get patients, what marketing really costs, why leads vanish, how a solo clinic becomes three chairs. No clinical lectures, no product pitches.</p>
+        <p>We're looking for guests: dentists and practice owners with a growth story, orthodontists and specialists, dental entrepreneurs (chains, labs, products), dental marketers, consultants and educators. 40 minutes, online or in person (Pune). Free — guests never pay and never get paid. Apply on this page, or WhatsApp +91 800 718 9868 with "podcast".</p>
+      </div></section>`,
+});
+
 // ---- Config-driven calculators — one crawler page per entry ---------------
 for (const c of CALCULATORS) {
   routes.push({

@@ -22,6 +22,7 @@ import AumyProduct from './pages/AumyProduct';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import GrowthAudit from './pages/GrowthAudit';
 import GrowthHub from './pages/GrowthHub';
+import PodcastPage from './pages/PodcastPage';
 import GrowthArticle from './pages/GrowthArticle';
 import LeakCalculator from './pages/LeakCalculator';
 import MissedCallCalculator from './pages/MissedCallCalculator';
@@ -83,6 +84,7 @@ function App() {
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/growth-audit" element={<GrowthAudit />} />
                 <Route path="/growth" element={<GrowthHub />} />
+                <Route path="/podcast" element={<PodcastPage />} />
                 <Route path="/growth/:slug" element={<GrowthArticle />} />
                 <Route path="/leak-calculator" element={<LeakCalculator />} />
                 <Route path="/missed-call-calculator" element={<MissedCallCalculator />} />

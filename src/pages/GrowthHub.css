@@ -121,6 +121,24 @@
   margin-top: 2px;
 }
 
+/* ---- Podcast guest banner (hub) ---- */
+.gh-podcast-banner {
+  margin-top: 48px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-accent);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow);
+}
+.gh-podcast-banner .ch-btn { flex: 0 0 auto; }
+@media (max-width: 720px) {
+  .gh-podcast-banner { flex-direction: column; align-items: flex-start; }
+}
+
 /* ---- Tools & downloads strip (hub) ---- */
 .gh-tools {
   margin-top: 48px;

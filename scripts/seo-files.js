@@ -44,6 +44,7 @@ const SITEMAPS = {
     ['/revenue-generator', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
     ['/growth', 0.8, 'weekly'],
+    ['/podcast', 0.7, 'monthly'],
     // Articles carry their real publish date as lastmod — honest signals beat
     // a blanket "everything changed today".
     ...growthPosts.map((p) => [`/growth/${p.slug}`, 0.7, 'monthly', p.date]),
