@@ -374,7 +374,7 @@ for (const p of growthPosts) {
         <p>${esc(p.author)} · ${p.date} · ${esc(p.readingTime)}</p>
         ${p.body}
         <h2>Want to know what this looks like in your clinic?</h2>
-        <p>Get a free Revenue Leak Audit: where your clinic is quietly losing enquiries, appointments and returning patients — and what each gap is worth. <a href="/growth-audit">Get my free Revenue Leak Audit</a> · <a href="/leak-calculator">Run the 60-second leak calculator</a>. Prefer to see it live? Message our AI receptionist for a demo dental clinic on WhatsApp at +91 80071 89868.</p>
+        <p>Get a free Revenue Leak Audit: where your clinic is quietly losing enquiries, appointments and returning patients — and what each gap is worth. <a href="/growth-audit">Get my free Revenue Leak Audit</a> · <a href="/leak-calculator">Run the 60-second leak calculator</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp AUMY</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
       </div></article>`,
   });
 }
