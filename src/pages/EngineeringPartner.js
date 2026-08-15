@@ -96,9 +96,6 @@ const EngineeringPartner = () => {
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <Link to="/insights/introducing-aumy-ai-operating-system-for-healthcare" className="btn btn-secondary">
-                  Read the Launch
-                </Link>
               </div>
             </div>
 

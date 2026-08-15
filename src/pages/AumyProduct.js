@@ -121,9 +121,6 @@ const AumyProduct = () => {
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link to="/insights/introducing-aumy-ai-operating-system-for-healthcare" className="btn btn-secondary btn-lg">
-                Read the Launch Article
-              </Link>
             </div>
 
             <div className="aumy-hero-stats">
@@ -353,9 +350,6 @@ const AumyProduct = () => {
             <div className="aumy-cta-buttons">
               <Link to="/contact" className="btn btn-primary btn-lg">
                 Request a Live Demo
-              </Link>
-              <Link to="/insights/introducing-aumy-ai-operating-system-for-healthcare" className="btn btn-secondary btn-lg">
-                Read the Launch Article
               </Link>
             </div>
           </div>
