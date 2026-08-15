@@ -206,6 +206,12 @@
   color: var(--c-ink);
   margin: 40px 0 14px;
 }
+.gh-article-body .gh-sec-note {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  letter-spacing: 0;
+}
 .gh-article-body h3 {
   font-size: 19px;
   font-weight: 700;

@@ -22,6 +22,7 @@
 const fs = require('fs');
 const path = require('path');
 const { growthPosts } = require('../src/data/growthPosts');
+const { CALCULATORS } = require('../src/data/calculators');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -39,6 +40,7 @@ const SITEMAPS = {
     ['/', 1.0, 'weekly'],
     ['/leak-calculator', 0.9, 'monthly'],
     ['/missed-call-calculator', 0.8, 'monthly'],
+    ...CALCULATORS.map((c) => [`/${c.slug}`, 0.8, 'monthly']),
     ['/revenue-generator', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
     ['/growth', 0.8, 'weekly'],
@@ -120,6 +122,7 @@ const LLMS = {
 - ${ORIGIN}/ — overview for clinic owners
 - ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to missed enquiries, no-shows and lapsed patients
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
+- Also: lead follow-up (/lead-followup-calculator), no-show (/no-show-calculator), recall (/recall-calculator) and dormant-patient (/dormant-patient-calculator) calculators
 - ${ORIGIN}/revenue-generator — how the system works
 - ${ORIGIN}/growth-audit — free clinic growth audit
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics

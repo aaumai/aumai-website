@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GROWTH_CATEGORIES, growthPosts } from '../data/growthPosts';
+import { CALCULATORS } from '../data/calculators';
 import './GrowthHub.css';
 
 // Hub for the dental-growth content engine (strategy doc:
@@ -89,14 +90,6 @@ const GrowthHub = () => {
               Put your own numbers in — the articles explain the leaks, these show you yours.
             </p>
             <div className="gh-grid">
-              <Link to="/missed-call-calculator" className="gh-card">
-                <span className="gh-tool-tag">Calculator</span>
-                <h2 className="gh-card-title">Missed Call Calculator</h2>
-                <p className="gh-card-excerpt">
-                  Four sliders, straight from your phone's call log — what unanswered calls cost
-                  your clinic every month.
-                </p>
-              </Link>
               <Link to="/leak-calculator" className="gh-card">
                 <span className="gh-tool-tag">Calculator</span>
                 <h2 className="gh-card-title">Revenue Leak Calculator</h2>
@@ -105,6 +98,21 @@ const GrowthHub = () => {
                   back, added up for the year.
                 </p>
               </Link>
+              <Link to="/missed-call-calculator" className="gh-card">
+                <span className="gh-tool-tag">Calculator</span>
+                <h2 className="gh-card-title">Missed Call Calculator</h2>
+                <p className="gh-card-excerpt">
+                  Four sliders, straight from your phone's call log — what unanswered calls cost
+                  your clinic every month.
+                </p>
+              </Link>
+              {CALCULATORS.map((c) => (
+                <Link key={c.slug} to={`/${c.slug}`} className="gh-card">
+                  <span className="gh-tool-tag">Calculator</span>
+                  <h2 className="gh-card-title">{c.name}</h2>
+                  <p className="gh-card-excerpt">{c.cardBlurb}</p>
+                </Link>
+              ))}
               <a
                 href="/downloads/dental-clinic-revenue-leak-checklist.pdf"
                 className="gh-card"

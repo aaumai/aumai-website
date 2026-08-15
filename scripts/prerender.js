@@ -19,6 +19,7 @@ const path = require('path');
 // Growth Hub articles: same data file the React app renders from, so the
 // crawler-visible HTML and the client-rendered article can never drift apart.
 const { growthPosts } = require('../src/data/growthPosts');
+const { CALCULATORS } = require('../src/data/calculators');
 
 const BUILD = path.join(__dirname, '..', 'build');
 // US-market build (REACT_APP_MARKET=us → aumyai.com) prerenders only the US
@@ -301,6 +302,23 @@ const routes = [
       </div></section>`,
   },
 ];
+
+// ---- Config-driven calculators — one crawler page per entry ---------------
+for (const c of CALCULATORS) {
+  routes.push({
+    slug: c.slug,
+    title: c.seoTitle,
+    description: c.seoDescription,
+    canonical: `${ORIGIN}/${c.slug}`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(c.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(c.heroTitle)}</h1>
+        <p class="ch-hero-sub">${esc(c.heroSub)}</p>
+        <p><a href="${c.relatedArticle.href}">Read ${esc(c.relatedArticle.label)}</a> · <a href="/leak-calculator">Run the complete 60-second leak check</a> · <a href="/growth-audit">Get my free Revenue Leak Audit</a></p>
+      </div></section>`,
+  });
+}
 
 // ---- Dental Practice Growth Hub — hub page + one route per article --------
 // Article bodies are already HTML strings, injected verbatim so crawlers see

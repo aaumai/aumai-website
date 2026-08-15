@@ -28,6 +28,7 @@ const GROWTH_CATEGORIES = [
   'Marketing & ROI',
   'WhatsApp for Clinics',
   'AI for Dental Clinics',
+  'Revenue Leaks',
 ];
 
 const growthPosts = [
@@ -173,7 +174,7 @@ const growthPosts = [
   <li><strong>One list.</strong> Every enquiry from every channel lands in one place with a status: new → in conversation → follow-up due → booked → parked. A spreadsheet is enough to start.</li>
   <li><strong>One owner.</strong> A named person whose job includes follow-up — with 30 blocked minutes a day, or it loses to the front desk queue every time.</li>
   <li><strong>Written touches.</strong> The day 1/3/5/7/10 messages drafted once, per treatment type, so each follow-up is a 30-second personalisation, not a composition exercise.</li>
-  <li><strong>Count one number weekly:</strong> enquiries → booked. That conversion rate is the single most improvable number in your clinic, and watching it move is what keeps the system alive.</li>
+  <li><strong>Count one number weekly:</strong> enquiries → booked. That conversion rate is the single most improvable number in your clinic, and watching it move is what keeps the system alive. (What the gap is worth today: <a href="/lead-followup-calculator">the lead follow-up calculator</a>.)</li>
 </ol>
 <p>Or automate exactly this: instant first response on every channel, the right sequence per treatment, every conversation tracked — which is, candidly, the job we built AUMY to do. But the system matters more than the tool. A clinic running this manually will beat a clinic running nothing, every month.</p>`,
   },
@@ -218,7 +219,7 @@ const growthPosts = [
 <div class="gh-box">
   <p><strong>70 patients × ₹3,000 = ₹2.1 lakh a year</strong> — from people you already paid to acquire, at essentially zero marketing cost. And that ignores the compounding part: a reactivated patient re-enters the recall cycle, refers family, and returns next year too.</p>
 </div>
-<p>The recall list is the highest-margin revenue a clinic has, because the acquisition cost was paid years ago.</p>
+<p>The recall list is the highest-margin revenue a clinic has, because the acquisition cost was paid years ago. Run your own numbers in the <a href="/recall-calculator">recall calculator</a> and the <a href="/dormant-patient-calculator">dormant patient calculator</a>.</p>
 
 <h2>What to send each group</h2>
 <p>WhatsApp is the channel — it is where Indian patients actually reply. The tone shifts with the segment:</p>
@@ -379,7 +380,7 @@ const growthPosts = [
 <p>Two options, both specific. "When would you like to come?" hands the inertia right back to them.</p>
 
 <h2>What to expect, and how to count it</h2>
-<p>Set expectations soberly: this is a patience game, and single-digit percentage response is normal on a genuinely cold list. But run the numbers — as always, illustrative assumptions, use your own: message 300 dormant patients over a quarter, get even 8% booking a visit, and that is 24 returning patients. At a conservative ₹3,000 per returning visit that's ₹72,000 — from a list you'd written off, at the cost of some front-desk time. And every one of those 24 re-enters your recall cycle for next year.</p>
+<p>Set expectations soberly: this is a patience game, and single-digit percentage response is normal on a genuinely cold list. But run the numbers — as always, illustrative assumptions, use your own: message 300 dormant patients over a quarter, get even 8% booking a visit, and that is 24 returning patients. At a conservative ₹3,000 per returning visit that's ₹72,000 — from a list you'd written off, at the cost of some front-desk time. And every one of those 24 re-enters your recall cycle for next year. (Your own database's number: <a href="/dormant-patient-calculator">the dormant patient calculator</a>.)</p>
 <p>Track three numbers per campaign: messages sent, replies, appointments kept. If replies are healthy but bookings aren't, your reply-handling is the leak. If replies are near zero, your message reads like a promotion — rewrite it warmer and more specific.</p>
 <p>Then make it a rhythm, not an event: a standing quarterly campaign, working the log from last time. Or automate the rhythm entirely — this is precisely the "important but never urgent" work that <a href="/growth/dental-recall-list-hidden-revenue">clinics never sustain manually</a>, and one of the first things AUMY takes over for a clinic: the right patients contacted at the right time, replies answered instantly, bookings made, log kept — every quarter, without anyone remembering.</p>`,
   },
@@ -510,6 +511,215 @@ const growthPosts = [
   <li><strong>Can you see what it did?</strong> Every message sent, every booking made, every escalation — visible, so trust is earned from a log, not a promise.</li>
 </ol>
 <p>The technology to do all of the repetition side well exists today — this is not a "coming soon" story. The clinics winning with AI right now are not the ones waiting for a diagnosis robot. They are the ones who quietly handed the repetitive work to a system that never sleeps, and spent the reclaimed attention where it always belonged: on the patient in the chair.</p>`,
+  },
+
+  // ------------------------------------------------------------------
+  // 8. LOSING ACQUIRED PATIENTS (Marketing & ROI)
+  // ------------------------------------------------------------------
+  {
+    slug: 'dental-clinics-lose-acquired-patients',
+    title: 'Why Dental Clinics Lose Patients After Spending Money to Acquire Them',
+    category: 'Marketing & ROI',
+    date: '2026-08-15',
+    readingTime: '7 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      'Every patient has an acquisition cost, whether you count it or not — and most clinics pay it, then leak the patient at one of five stages before the value is ever collected. The leaky-bucket walkthrough, and why fixing leaks beats buying more ads.',
+    description:
+      'Why dental clinics waste their marketing spend: the acquisition cost every patient carries, the five stages where paid-for patients leak away, first-visit economics versus lifetime value, and why fixing retention before scaling ad spend is the only order that works.',
+    body: `
+<p>Ask a clinic owner what they spend to get a new patient and the common answer is "nothing much — mostly word of mouth." Then you add it up: the ads, the listing subscriptions, the hoardings, the camps, the referral discounts, the years spent earning the reviews. Divide by the new patients who actually arrived, and every clinic has an acquisition cost. Knowing it isn't the point of this article. The point is what happens <em>after</em> you've paid it.</p>
+
+<h2>The bucket has five holes</h2>
+<p>Follow one paid-for patient through a typical clinic, and watch where the money you spent can leak back out:</p>
+<ol>
+  <li><strong>The enquiry is never answered.</strong> Your ad worked, they called at 8:50 pm — and <a href="/growth/dental-clinic-missed-calls-revenue-loss">nobody picked up</a>. You paid to generate a phone call for the clinic down the road.</li>
+  <li><strong>The conversation dies.</strong> They got one reply, said <a href="/growth/dental-patient-ill-think-about-it">"I'll think about it"</a> — and <a href="/growth/dental-lead-follow-up-system">no one ever followed up</a>. Acquisition cost paid; conversion work skipped.</li>
+  <li><strong>The appointment evaporates.</strong> They booked, life happened, they <a href="/growth/reduce-dental-appointment-no-shows">no-showed</a>, and nobody rebooked them. You paid for a patient and received an empty chair.</li>
+  <li><strong>The first visit is the last visit.</strong> They came, were treated well — and were never invited back. <a href="/growth/dental-recall-list-hidden-revenue">No recall</a>, no follow-up on the treatment plan the doctor presented.</li>
+  <li><strong>They drift into the database.</strong> Eighteen months later they're a row in your records — <a href="/growth/reactivate-dormant-dental-patients">dormant</a>, still trusting you, still never contacted.</li>
+</ol>
+<p>Here's the uncomfortable summary: <strong>most clinics don't have a marketing problem. They have a keeping problem</strong> — and they respond to it by buying more marketing, which pours more water into the same bucket.</p>
+
+<h2>First-visit economics: why the leak is worse than it looks</h2>
+<p>Now put numbers on it — illustrative as always; use your own. Suppose your blended acquisition cost works out to ₹800 per arriving new patient, and the average first visit produces ₹3,000. Profitable, yes — but modestly, once chair time, materials and staff are counted. The real return on that ₹800 was never the first visit. It is the <em>relationship</em>: the recall visits at ₹3,000 a year, the filling found at a check-up, the eventual crown, the spouse and children who follow, the review that brings the next patient at zero cost.</p>
+<p>Which means a patient lost after visit one isn't a small loss — it is the loss of everything you actually paid for, right after covering costs. The acquisition spend bought a lifetime option, and the clinic let it expire unexercised. This is why two clinics with identical ad budgets and identical dentistry end up with completely different revenue three years later: one collects the option value, the other keeps re-buying strangers.</p>
+
+<h2>The fix order: leaks first, then fuel</h2>
+<p>When growth feels slow, the instinct is to increase the inflow — more ads, more visibility. Resist it until you've checked the bucket, because the order matters enormously:</p>
+<ul>
+  <li>Fixing leaks <strong>multiplies</strong> every rupee of existing and future ad spend. Answering every enquiry and following up every lead can double what the same campaigns deliver, at no extra media cost.</li>
+  <li>Scaling spend into a leaky funnel does the opposite: your cost per <em>kept</em> patient rises even as your cost per lead looks fine, and the conclusion drawn — "ads don't work for us" — is wrong but expensive. (More on that trap in <a href="/growth/meta-ads-dental-clinics-leads-vs-patients">our Meta ads guide</a>.)</li>
+</ul>
+<p>The self-test takes one evening with last month's numbers: how many enquiries came in, how many got answered within minutes, how many booked, how many showed, how many have a next appointment or recall date on file. Wherever the biggest drop is — that's where your next rupee should go, and it is almost never "more ads." Our <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>one-page checklist</a> walks the same path, and the <a href="/growth/dental-clinic-revenue-leak-audit-25-questions">25-question audit</a> goes deeper.</p>
+<p>Marketing fills the bucket. Systems keep what it fills. A clinic that builds the systems first is the only kind for which the marketing was ever worth the money.</p>`,
+  },
+
+  // ------------------------------------------------------------------
+  // 9. NO-SHOWS DEEP-DIVE
+  // ------------------------------------------------------------------
+  {
+    slug: 'reduce-dental-appointment-no-shows',
+    title: 'How to Reduce Dental Appointment No-Shows',
+    category: 'No-shows & Appointments',
+    date: '2026-08-15',
+    readingTime: '8 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      'Patients rarely no-show because they don’t care — they forget, they fear, or they couldn’t reschedule easily so they vanished. The full stack: why no-shows happen, the prevention sequence, same-day recovery, and how to refill the chair.',
+    description:
+      'A complete no-show playbook for Indian dental clinics: the real reasons patients miss appointments, the confirmation-reminder-reschedule prevention stack with WhatsApp messages, same-day recovery, waitlist refills, booking-fee trade-offs, and what to measure.',
+    body: `
+<p>Every clinic knows the feeling: 11 am, the chair is prepped, the patient isn't coming. The cost is obvious — <a href="/no-show-calculator">run yours in the no-show calculator</a> — but the fix starts somewhere less obvious: understanding that a no-show is almost never a patient who doesn't care.</p>
+
+<h2>Why patients actually no-show</h2>
+<ul>
+  <li><strong>They forgot.</strong> The appointment was booked eleven days ago in a two-minute call. No reminder came. This is the biggest single cause and the cheapest to fix.</li>
+  <li><strong>Fear grew in the gap.</strong> Between booking and the visit, the imagination went to work — especially before extractions, root canals and first implant consultations. Nobody reassured them, so avoiding the appointment became the comfortable option.</li>
+  <li><strong>Second thoughts about money.</strong> The quoted amount felt fine in the room and heavier at home. Rather than say so, they just… don't come.</li>
+  <li><strong>Rescheduling felt harder than vanishing.</strong> Something came up, but changing the slot meant calling during work hours and possibly an awkward conversation. Silence was easier. <em>This one matters most</em>: many "no-shows" are patients who would happily have rescheduled if it took one WhatsApp reply.</li>
+  <li><strong>Life, genuinely.</strong> Sick children, office emergencies, Pune traffic. Irreducible — which is why recovery matters as much as prevention.</li>
+</ul>
+<p>Notice that four of the five are communication failures, not character flaws. That is good news: communication is fixable.</p>
+
+<h2>The prevention stack</h2>
+<p>Each layer removes a cause. The messages are from <a href="/growth/whatsapp-follow-up-dental-clinics-guide">our WhatsApp guide</a> — adapt freely.</p>
+<h3>1. Confirm at booking — and open the reschedule door immediately</h3>
+<div class="gh-msg">You're booked, Priya! 🗓️ Thursday 21st, 6:30 pm with Dr. Sharma at [clinic, location pin]. If anything changes, just reply here and we'll reschedule — no phone calls needed.</div>
+<p>"Just reply here to reschedule" is the single highest-leverage sentence in this article. Patients who can cancel easily cancel <em>instead of vanishing</em> — and a cancellation you know about is a slot you can refill.</p>
+<h3>2. Remind the day before — with a reply built in</h3>
+<div class="gh-msg">Hi Priya! Reminder — your appointment with Dr. Sharma is tomorrow at 6:30 pm. Reply 1 to confirm, or reply 2 if you'd like a different slot. See you soon!</div>
+<p>The 1/2 pattern converts silent no-shows into visible reschedules while there's still time to act. No reply by evening? That's your cue for a quick call — the silent ones are the likely no-shows.</p>
+<h3>3. For big appointments, add reassurance — not just logistics</h3>
+<div class="gh-msg">Hi Priya, looking forward to tomorrow! Quick note from Dr. Sharma — the procedure is done under full anaesthesia and most patients are surprised how comfortable it is. Any questions before you come, just ask 😊</div>
+<p>For implant consults, extractions and RCTs, the reminder should treat the fear, because the fear is what no-shows. A morning-of "See you at 6:30 today!" is worth adding for high-value slots too.</p>
+<h3>4. Consider a booking amount — carefully</h3>
+<p>For long, high-value slots (implant surgeries, full-mouth work), a modest booking amount adjusted fully against treatment changes the psychology of the commitment. Trade-offs are real in India: it adds friction, and it lands badly if introduced abruptly or for routine visits. If you use it, frame it as reserving dedicated surgical time, keep it small, keep it adjustable — and never apply it to check-ups.</p>
+
+<h2>Recovery: the same-evening message</h2>
+<p>Even a good stack leaves some no-shows. What separates clinics is what happens next. At most, the answer is a shrug and a mental note. Instead, that same evening:</p>
+<div class="gh-msg">Hi Priya, we missed you today! No problem at all — these things happen. Shall I rebook you for later this week? Dr. Sharma has Friday 7 pm or Saturday 11 am open.</div>
+<p>Zero guilt — guilt guarantees they won't return. Two concrete slots — "let us know when suits you" hands the inertia back. Sent the same day, rebooking is a small step; a week later it's a new decision, and the treatment plan attached to that appointment often dies with it.</p>
+
+<h2>Refill: the chair shouldn't wait for the patient</h2>
+<p>When a cancellation lands, the slot can still earn. Keep a live shortlist — patients who asked for earlier appointments, recall patients due anyway, treatment plans waiting to start — and message two or three of them: <em>"A 6:30 pm slot with Dr. Sharma just opened for tomorrow — would you like it?"</em> Being offered an earlier slot feels like priority treatment; the chair gets refilled; the leak becomes a service moment.</p>
+
+<h2>Measure two numbers</h2>
+<p>Weekly: your <strong>no-show rate</strong> (missed without notice ÷ scheduled) and your <strong>recovery rate</strong> (no-shows rebooked within a week). The first tells you if prevention is working, the second if recovery is. Most clinics measure neither, which is why the problem feels like weather instead of something they run. And as with <a href="/growth/dental-recall-list-hidden-revenue">recall</a>, the honest failure mode is that every step above depends on a busy human remembering — reminders, silent-patient calls, same-evening recovery, waitlist refills — which is exactly the repetitive layer <a href="/growth/ai-in-dentistry-repetitive-tasks-not-diagnosis">a system should own</a> so your team can own the patients.</p>`,
+  },
+
+  // ------------------------------------------------------------------
+  // 10. META ADS — LEADS VS PATIENTS
+  // ------------------------------------------------------------------
+  {
+    slug: 'meta-ads-dental-clinics-leads-vs-patients',
+    title: 'Meta Ads for Dental Clinics: Why Leads Don’t Always Become Patients',
+    category: 'Marketing & ROI',
+    date: '2026-08-15',
+    readingTime: '8 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      '"We got 90 leads and 4 patients" is the most common Meta ads story in dentistry — and it isn’t really an ads problem. The four places the leads die, why optimising for cheap leads buys cheap leads, and how feeding real bookings back to Meta changes what it finds you.',
+    description:
+      'Why Facebook and Instagram ads produce leads but few patients for dental clinics: instant-form intent, speed-to-lead, missing follow-up systems, and optimising for the wrong event — plus how conversion feedback (CAPI) teaches Meta to find people who actually book, and the one metric to judge ads by.',
+    body: `
+<p>The story arrives in almost the same words from every clinic that has tried Facebook or Instagram ads: <em>"We got a lot of leads. Cheap, even. Then — nothing. Wrong numbers, no answers, 'just checking prices.' Maybe four became patients. Ads don't work for dentists."</em></p>
+<p>Here's the diagnosis that actually fits: the ads worked. Meta did exactly what it was asked. The problem is what it was asked — and what happened to the leads in the twenty minutes after they arrived.</p>
+
+<h2>Where the leads die: four places</h2>
+<h3>1. The instant form asks nothing of anyone</h3>
+<p>Lead-form ads autofill name and phone; "submitting interest" costs two taps between reel-scrolls. Low friction means volume — and volume means low average intent. That isn't fraud; it's arithmetic. A two-tap lead isn't a patient, it's <em>permission to start a conversation</em>. Clinics that treat form leads as booked-patients-minus-paperwork are disappointed by design. Clinics that treat them as conversations to open — and open them well — find genuinely interested people in the pile, because ads did put your clinic in front of someone who tapped for a reason.</p>
+<h3>2. The lead cooled before anyone called</h3>
+<p>A form lead has the shortest shelf life in this business. They tapped mid-scroll; ten minutes later they're three reels past you and can't recall the clinic's name. Call within minutes and you're the clinic they just asked about; call tomorrow and you're a suspected spam call — which is exactly how "wrong number, never enquired" responses are born. <a href="/growth/dental-lead-follow-up-system">Speed-to-lead</a> matters more for ad leads than any other enquiry type, and most clinics work the day's leads in the evening, after every one has gone cold.</p>
+<h3>3. There was no system behind the ad</h3>
+<p>One call, no answer, lead discarded. But an ad lead is precisely the lead that needs the <a href="/growth/dental-patient-ill-think-about-it">multi-touch treatment</a> — they weren't looking for a dentist this morning; your ad planted the idea, and ideas need nurturing. Running paid traffic into a clinic with no follow-up system is <a href="/growth/dental-clinics-lose-acquired-patients">buying water for a leaky bucket</a> — the spend works, the keeping fails, and the ads take the blame.</p>
+<h3>4. You asked Meta for the wrong thing</h3>
+<p>This is the deep one. Meta's algorithm is a finding machine: it finds more of whatever you define as success. Optimise for leads, and it dutifully finds the people <em>most likely to fill forms</em> — serial form-fillers included — and your cost per lead falls while your cost per patient quietly rises. The machine isn't failing; it's obeying.</p>
+
+<h2>Teach the machine what a patient looks like</h2>
+<p>The fix for #4 is to change the definition of success. When a lead actually books — or actually pays — that event can be sent back to Meta (the mechanism is called the Conversions API, or CAPI; the details matter less than the principle). Now the algorithm learns from real outcomes: <em>these</em> are the people who became patients — find more like <em>them</em>, not more like the form-fillers. Cost per lead often rises when you do this. Cost per <strong>patient</strong> falls, which is the only direction that pays for chairs. Privacy note: this is done with hashed identifiers and booking events — never clinical information.</p>
+<p>Two practical upgrades sit alongside it. First, prefer <strong>click-to-WhatsApp ads</strong> over instant forms where you can: a person who opens a WhatsApp chat and types is self-selecting for intent, and the conversation — your actual conversion engine — starts instantly on <a href="/growth/whatsapp-follow-up-dental-clinics-guide">the channel Indian patients prefer</a>. Second, make the maths honest: judge every campaign on <strong>cost per booked patient</strong> (and eventually per completed treatment), never on cost per lead. Two campaigns can have identical budgets, and the one with "worse" CPL routinely wins on patients.</p>
+
+<h2>The pre-flight checklist</h2>
+<p>Before your next campaign — or before concluding ads don't work — check the machine behind the ad:</p>
+<ol>
+  <li>Every lead gets a first response <strong>within 5 minutes</strong>, including evenings — the majority of ad leads arrive outside working hours.</li>
+  <li>A written <strong>follow-up sequence</strong> exists for leads that don't book on contact — because most won't, and that's normal.</li>
+  <li>You can trace every lead to an outcome: booked, in-conversation, parked. If you can't measure lead → patient, you can't judge any campaign.</li>
+  <li>Real bookings flow back to Meta, so the algorithm optimises for patients, not forms.</li>
+  <li>The report you read weekly says <strong>cost per booked patient</strong> at the top.</li>
+</ol>
+<p>Get those five right and the same budget behaves like a different product — which is why, candidly, wiring exactly this (instant response, sequences, outcome tracking, conversion feedback) is a core part of what AUMY does for clinics that advertise. But the principle stands with or without us: <strong>ads buy attention. Systems turn attention into patients. Meta can only find you more of what you prove you can keep.</strong></p>`,
+  },
+
+  // ------------------------------------------------------------------
+  // 11. THE 25-QUESTION AUDIT
+  // ------------------------------------------------------------------
+  {
+    slug: 'dental-clinic-revenue-leak-audit-25-questions',
+    title: 'Dental Clinic Revenue Leak Audit: 25 Questions Every Practice Owner Should Ask',
+    category: 'Revenue Leaks',
+    date: '2026-08-15',
+    readingTime: '9 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      'One honest evening with these 25 questions tells you more about your clinic’s growth than any marketing proposal. Six sections, one rule: answer with evidence from last month, not with "usually."',
+    description:
+      'A self-audit for dental clinic owners: 25 questions across missed calls, lead follow-up, no-shows, recall, dormant patients and measurement — each with why it matters — to find where revenue quietly leaks. India-focused, free, with a printable one-page checklist companion.',
+    body: `
+<p>This is the audit we walk through with clinic owners, in question form so you can run it yourself. One rule makes it work: <strong>answer from evidence, not impression.</strong> "Usually" and "mostly" are how leaks hide. If the honest answer is "I don't know," write that down — every "I don't know" is a place money moves unwatched. (Prefer the tick-box version? <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>The one-page checklist</a> covers the same ground for your practice manager.)</p>
+
+<h2>Section 1 — Calls &amp; enquiries <span class="gh-sec-note">(the front door)</span></h2>
+<ol>
+  <li><strong>How many calls did your clinic miss last month?</strong> An actual number, from the phone log — lunch, evenings and Sundays included. If you've never counted, <a href="/growth/dental-clinic-missed-calls-revenue-loss">start here</a>.</li>
+  <li><strong>What happens to a missed call, every time?</strong> "We usually call back" is not a system. Is there a log, an owner, a same-day standard?</li>
+  <li><strong>How long does a WhatsApp or Instagram enquiry wait for a first reply?</strong> Check the timestamps on last week's actual conversations. Minutes wins patients; hours loses them.</li>
+  <li><strong>Who answers the 9 pm enquiry?</strong> A large share of new-patient messages arrive after hours. If the answer is "nobody until morning," that share belongs to other clinics.</li>
+  <li><strong>Did anyone ever ask the price and get no straight answer?</strong> Dodged price questions ("please visit for details") quietly kill Indian WhatsApp enquiries.</li>
+</ol>
+
+<h2>Section 2 — Lead follow-up <span class="gh-sec-note">(the conversion engine)</span></h2>
+<ol start="6">
+  <li><strong>Where do all enquiries live?</strong> One list with statuses — or scattered across a phone, an Instagram inbox and three memories?</li>
+  <li><strong>What happened to last month's "I'll think about it" patients?</strong> Name three. If you can't, <a href="/growth/dental-patient-ill-think-about-it">nobody followed up</a>.</li>
+  <li><strong>Does a written follow-up sequence exist, per treatment type?</strong> An implant lead and a cleaning lead need <a href="/growth/dental-lead-follow-up-system">different journeys</a>.</li>
+  <li><strong>Who owns follow-up — by name?</strong> "The front desk" means nobody at 1:30 pm on a busy Tuesday.</li>
+  <li><strong>What is your enquiry → booked rate?</strong> The single most improvable number in the clinic. Not knowing it is answer enough. (<a href="/lead-followup-calculator">What the gap is worth</a>.)</li>
+</ol>
+
+<h2>Section 3 — Appointments &amp; no-shows <span class="gh-sec-note">(the chair)</span></h2>
+<ol start="11">
+  <li><strong>What is your no-show rate?</strong> From the appointment book, last month. Then <a href="/no-show-calculator">price it</a>.</li>
+  <li><strong>Does every booking get a confirmation and a day-before reminder?</strong> Every booking — or the ones someone remembered?</li>
+  <li><strong>Can a patient reschedule with one WhatsApp reply?</strong> If changing a slot requires a phone call, many will <a href="/growth/reduce-dental-appointment-no-shows">vanish instead</a>.</li>
+  <li><strong>What happened after last month's no-shows — same-day rebooking attempts, or shrugs?</strong></li>
+  <li><strong>When a slot cancels, does anything refill it?</strong> A waitlist of patients wanting earlier slots turns cancellations into service moments.</li>
+</ol>
+
+<h2>Section 4 — Recall &amp; treatment plans <span class="gh-sec-note">(the return visits)</span></h2>
+<ol start="16">
+  <li><strong>How many patients are due or overdue for recall right now?</strong> A number, from your records — then <a href="/recall-calculator">what it's worth</a>.</li>
+  <li><strong>Is recall worked every week, or "when things are quiet"?</strong> "When quiet" means never — <a href="/growth/dental-recall-list-hidden-revenue">important-but-never-urgent always loses</a>.</li>
+  <li><strong>Do recall messages read like the doctor's care or like promotions?</strong> Personal and specific books; blasts train patients to mute you.</li>
+  <li><strong>What happens to a presented treatment plan that stalls?</strong> The quotes that neither booked nor refused — who follows them, and when?</li>
+  <li><strong>After major procedures, does anyone check on the patient?</strong> The day-2 message costs nothing and builds the loyalty everything else depends on.</li>
+</ol>
+
+<h2>Section 5 — The database <span class="gh-sec-note">(patients you already paid for)</span></h2>
+<ol start="21">
+  <li><strong>How many patients haven't visited in 12+ months?</strong> Most owners guess low by half. <a href="/dormant-patient-calculator">Value the real number</a>.</li>
+  <li><strong>When did those patients last hear from you — a genuine invitation, not a festival blast?</strong> If the answer is "never," <a href="/growth/reactivate-dormant-dental-patients">this playbook</a> is your highest-margin project this quarter.</li>
+</ol>
+
+<h2>Section 6 — Measurement &amp; money <span class="gh-sec-note">(the scoreboard)</span></h2>
+<ol start="23">
+  <li><strong>Do you know your average first-treatment value and average recall visit value?</strong> Every calculation in this hub — and every marketing decision — runs on these two numbers.</li>
+  <li><strong>If you advertise: do you know your cost per <em>booked patient</em> — not per lead?</strong> The distinction is <a href="/growth/meta-ads-dental-clinics-leads-vs-patients">the whole game</a>.</li>
+  <li><strong>Finally: for each section above, who owns the number — by name — and when do they review it?</strong> Unowned numbers drift. This last question decides whether anything you found tonight is different in three months.</li>
+</ol>
+
+<h2>Scoring, honestly</h2>
+<p>Count the questions you answered with evidence and were satisfied by. Twenty or more: your clinic runs on systems — growth spend will compound, and you're the exception. Twelve to nineteen: real money is leaking monthly; fix the worst section before buying any more marketing. Under twelve: the good news is your growth problem is not competition, location or ads — it's leaks, and <a href="/growth/dental-clinics-lose-acquired-patients">leaks are fixable</a>, in exactly the order this audit surfaced them.</p>`,
   },
 ];
 
