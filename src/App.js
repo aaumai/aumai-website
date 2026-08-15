@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -9,8 +9,6 @@ import ContactPage from './pages/ContactPage';
 import ProjectsPage from './pages/ProjectsPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
 import CaseStudyDetail from './pages/CaseStudyDetail';
-import InsightsPage from './pages/InsightsPage';
-import InsightDetail from './pages/InsightDetail';
 import ShippingPolicy from './pages/ShippingPolicy';
 import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -98,8 +96,10 @@ function App() {
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/case-studies" element={<CaseStudiesPage />} />
                 <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
-                <Route path="/insights" element={<InsightsPage />} />
-                <Route path="/insights/:slug" element={<InsightDetail />} />
+                {/* Insights library removed 2026-08-15 (dental-only focus).
+                    Old URLs — some indexed/bookmarked — land on the Growth Hub. */}
+                <Route path="/insights" element={<Navigate to="/growth" replace />} />
+                <Route path="/insights/:slug" element={<Navigate to="/growth" replace />} />
                 <Route path="/shipping" element={<ShippingPolicy />} />
                 <Route path="/terms" element={<TermsConditions />} />
                 <Route path="/refund" element={<CancellationRefund />} />
