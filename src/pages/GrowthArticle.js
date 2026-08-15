@@ -65,13 +65,20 @@ const GrowthArticle = () => {
               <Link to="/growth-audit" className="ch-btn ch-btn-primary">
                 Get my free Revenue Leak Audit
               </Link>
-              <Link to="/leak-calculator" className="ch-btn ch-btn-ghost">
-                Run the 60-second leak calculator
-              </Link>
+              {/* Experience beats explanation: the live demo lets a dentist see
+                  the product at 11 pm without committing to a sales call. */}
+              <a
+                href="https://wa.me/918007189868?text=Hi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ch-btn ch-btn-ghost"
+              >
+                Want to see what this actually looks like? WhatsApp AUMY
+              </a>
             </div>
             <p className="gh-cta-demo">
-              Prefer to see it live? Message our AI receptionist for a demo dental clinic on
-              WhatsApp at <strong>+91 80071 89868</strong> — just say hello. Or{' '}
+              The WhatsApp demo is a live AI receptionist for a demo dental clinic
+              (+91&nbsp;80071&nbsp;89868) — just say hello and watch it answer and book, 24/7. Or{' '}
               <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>
                 download the one-page Revenue Leak Checklist
               </a>{' '}

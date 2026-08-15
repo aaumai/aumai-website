@@ -141,6 +141,14 @@ const GrowthHub = () => {
             <Link to="/growth-audit" className="ch-btn ch-btn-primary">
               Get my free Revenue Leak Audit
             </Link>
+            <a
+              href="https://wa.me/918007189868?text=Hi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ch-btn ch-btn-ghost ch-ghost-light"
+            >
+              See it live — WhatsApp AUMY now
+            </a>
             <Link to="/leak-calculator" className="ch-btn ch-btn-ghost ch-ghost-light">
               Try the 60-second leak calculator
             </Link>
