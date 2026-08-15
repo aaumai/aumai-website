@@ -19,15 +19,15 @@ const Footer = () => {
     'Smarter Ads (Conversion API)'
   ];
 
+  // Dental-growth pages only. The legacy engineering/consulting pages (About,
+  // Services, Case Studies, Insights, Engineering Partner) keep their routes
+  // but are intentionally not linked anywhere on the AUMY site.
   const company = [
     { label: 'Aumy — How It Works', path: '/revenue-generator' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
+    { label: 'Free Clinic Growth Audit', path: '/growth-audit' },
+    { label: 'Revenue Leak Calculator', path: '/leak-calculator' },
     { label: 'Platform Partners', path: '/platform-partner' },
-    { label: 'For Consultants & Partners', path: '/engineering-partner' },
-    { label: 'About', path: '/about' },
-    { label: 'Services', path: '/services' },
-    { label: 'Case Studies', path: '/case-studies' },
-    { label: 'Insights', path: '/insights' },
     { label: 'Contact', path: '/contact' }
   ];
 

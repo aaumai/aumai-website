@@ -30,21 +30,19 @@ const TODAY = new Date().toISOString().slice(0, 10);
 // priority/changefreq reflect real intent: the pages that convert or change
 // often rank first in our own crawl budget.
 const SITEMAPS = {
+  // Dental-growth pages only. The legacy engineering/consulting pages
+  // (/about, /services, /case-studies, /insights, /engineering-partner, /aumy)
+  // stay routable but are deliberately kept out of the sitemap — the public
+  // identity of aumai.co.in is dental clinic growth, nothing else.
   in: [
     ['/', 1.0, 'weekly'],
     ['/leak-calculator', 0.9, 'monthly'],
     ['/revenue-generator', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
-    ['/aumy', 0.8, 'monthly'],
     ['/platform-partner', 0.7, 'monthly'],
-    ['/engineering-partner', 0.7, 'monthly'],
     ['/facebook-instagram', 0.6, 'monthly'],
     ['/compliance', 0.7, 'monthly'],
-    ['/services', 0.6, 'monthly'],
-    ['/case-studies', 0.6, 'monthly'],
-    ['/insights', 0.5, 'weekly'],
     ['/contact', 0.5, 'yearly'],
-    ['/about', 0.4, 'yearly'],
     ['/privacy', 0.2, 'yearly'],
     ['/terms', 0.2, 'yearly'],
   ],
