@@ -38,6 +38,7 @@ const SITEMAPS = {
   in: [
     ['/', 1.0, 'weekly'],
     ['/leak-calculator', 0.9, 'monthly'],
+    ['/missed-call-calculator', 0.8, 'monthly'],
     ['/revenue-generator', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
     ['/growth', 0.8, 'weekly'],
@@ -118,6 +119,7 @@ const LLMS = {
 ## Pages
 - ${ORIGIN}/ — overview for clinic owners
 - ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to missed enquiries, no-shows and lapsed patients
+- ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 - ${ORIGIN}/revenue-generator — how the system works
 - ${ORIGIN}/growth-audit — free clinic growth audit
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics

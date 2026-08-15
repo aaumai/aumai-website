@@ -83,6 +83,43 @@ const GrowthHub = () => {
           {sorted.length === 0 && (
             <p className="gh-empty">Articles in this category are on the way — check back soon.</p>
           )}
+
+          <div className="gh-tools">
+            <h2>Tools &amp; downloads</h2>
+            <p className="gh-tools-sub">
+              Put your own numbers in — the articles explain the leaks, these show you yours.
+            </p>
+            <div className="gh-grid">
+              <Link to="/missed-call-calculator" className="gh-card">
+                <span className="gh-tool-tag">Calculator</span>
+                <h2 className="gh-card-title">Missed Call Calculator</h2>
+                <p className="gh-card-excerpt">
+                  Four sliders, straight from your phone's call log — what unanswered calls cost
+                  your clinic every month.
+                </p>
+              </Link>
+              <Link to="/leak-calculator" className="gh-card">
+                <span className="gh-tool-tag">Calculator</span>
+                <h2 className="gh-card-title">Revenue Leak Calculator</h2>
+                <p className="gh-card-excerpt">
+                  The full 60-second check: missed enquiries, no-shows and patients who never come
+                  back, added up for the year.
+                </p>
+              </Link>
+              <a
+                href="/downloads/dental-clinic-revenue-leak-checklist.pdf"
+                className="gh-card"
+                download
+              >
+                <span className="gh-tool-tag">Free PDF</span>
+                <h2 className="gh-card-title">Revenue Leak Checklist</h2>
+                <p className="gh-card-excerpt">
+                  A one-page checklist covering all six leaks — print it and hand it to your
+                  practice manager this week.
+                </p>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

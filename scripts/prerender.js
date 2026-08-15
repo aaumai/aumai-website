@@ -273,6 +273,20 @@ const routes = [
       </div></section>`,
   },
   {
+    slug: 'missed-call-calculator',
+    title: 'Missed Call Calculator for Dental Clinics — What Unanswered Calls Cost | AUMY',
+    description:
+      'How much revenue is your dental clinic losing to missed calls? Enter your missed calls per month and average treatment value — get a deliberately conservative monthly and yearly estimate. Free, no sign-up.',
+    canonical: `${ORIGIN}/missed-call-calculator`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">Missed call calculator</p>
+        <h1 class="ch-hero-title">What is that unanswered phone costing you?</h1>
+        <p class="ch-hero-sub">Every missed call was a patient ready to talk at that exact moment. Four honest answers — missed calls per month from your phone's call log, how many were potential new patients, how many enquiries you normally convert, and your average first-treatment value — and you'll know what those calls are worth per month and per year. Deliberately conservative: first treatment only, no lifetime value, no referrals, not a single implant case counted.</p>
+        <p><a href="/growth/dental-clinic-missed-calls-revenue-loss">Read how much revenue missed calls really cost</a> · <a href="/leak-calculator">Run the complete 60-second leak check</a> · <a href="/growth-audit">Get my free Revenue Leak Audit</a></p>
+      </div></section>`,
+  },
+  {
     slug: 'contact',
     title: 'Contact AUM AI — Clinic Growth & Healthcare Engineering',
     description:

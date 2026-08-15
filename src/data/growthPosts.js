@@ -85,7 +85,7 @@ const growthPosts = [
   <p><strong>30 × 40% × 50% × ₹5,000 = ₹30,000 a month</strong> — ₹3.6 lakh a year — before counting even one implant or aligner case, and before counting the lifetime value of the family that patient would have brought with them.</p>
 </div>
 <p>One implant enquiry changes the math completely. If even two of those lost callers per year were implant or full-mouth-rehab cases, you can add a few lakh to the number.</p>
-<p>Don't take our example on faith — <a href="/leak-calculator">run your own numbers in the 60-second leak calculator</a>. It is deliberately conservative, so your real number is probably higher.</p>
+<p>Don't take our example on faith — <a href="/missed-call-calculator">run your own numbers in the missed call calculator</a> (or the <a href="/leak-calculator">full 60-second leak check</a>). Both are deliberately conservative, so your real number is probably higher.</p>
 
 <h2>How to actually check your missed calls</h2>
 <p>Before fixing anything, spend one week measuring:</p>

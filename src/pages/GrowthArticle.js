@@ -71,7 +71,11 @@ const GrowthArticle = () => {
             </div>
             <p className="gh-cta-demo">
               Prefer to see it live? Message our AI receptionist for a demo dental clinic on
-              WhatsApp at <strong>+91 80071 89868</strong> — just say hello.
+              WhatsApp at <strong>+91 80071 89868</strong> — just say hello. Or{' '}
+              <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>
+                download the one-page Revenue Leak Checklist
+              </a>{' '}
+              and hand it to your practice manager.
             </p>
           </div>
 

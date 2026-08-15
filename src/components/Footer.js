@@ -28,6 +28,7 @@ const Footer = () => {
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Free Clinic Growth Audit', path: '/growth-audit' },
     { label: 'Revenue Leak Calculator', path: '/leak-calculator' },
+    { label: 'Missed Call Calculator', path: '/missed-call-calculator' },
     { label: 'Platform Partners', path: '/platform-partner' },
     { label: 'Contact', path: '/contact' }
   ];

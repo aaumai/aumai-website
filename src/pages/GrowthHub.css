@@ -112,6 +112,46 @@
   padding: 48px 0;
 }
 
+/* ---- Missed-call calculator slider hints ---- */
+.mc-hint {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--c-ink-soft);
+  margin-top: 2px;
+}
+
+/* ---- Tools & downloads strip (hub) ---- */
+.gh-tools {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--c-line);
+}
+.gh-tools h2 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--c-ink);
+  margin: 0 0 6px;
+  text-align: center;
+}
+.gh-tools-sub {
+  text-align: center;
+  color: var(--c-ink-soft);
+  margin: 0 0 28px;
+}
+.gh-tool-tag {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--c-accent);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
 /* ---- CTA band (hub bottom) ---- */
 .gh-cta-band {
   padding: 72px 0;

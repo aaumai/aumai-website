@@ -24,6 +24,7 @@ import GrowthAudit from './pages/GrowthAudit';
 import GrowthHub from './pages/GrowthHub';
 import GrowthArticle from './pages/GrowthArticle';
 import LeakCalculator from './pages/LeakCalculator';
+import MissedCallCalculator from './pages/MissedCallCalculator';
 import PlatformPartner from './pages/PlatformPartner';
 import EngineeringPartner from './pages/EngineeringPartner';
 import SocialMessaging from './pages/SocialMessaging';
@@ -82,6 +83,7 @@ function App() {
                 <Route path="/growth" element={<GrowthHub />} />
                 <Route path="/growth/:slug" element={<GrowthArticle />} />
                 <Route path="/leak-calculator" element={<LeakCalculator />} />
+                <Route path="/missed-call-calculator" element={<MissedCallCalculator />} />
                 <Route path="/platform-partner" element={<PlatformPartner />} />
                 <Route path="/engineering-partner" element={<EngineeringPartner />} />
                 <Route path="/facebook-instagram" element={<SocialMessaging />} />
