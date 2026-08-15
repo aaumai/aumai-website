@@ -85,7 +85,7 @@ const testimonials = [
   {
     quote:
       `AUM AI brought us a steady stream of new patients, woke up our dormant list, and kept our regulars coming back. Our revenue grew about 25% in just two months — and we didn’t hire a single extra person to make it happen.`,
-    name: 'Vinaykia Dental Care',
+    name: 'Vinayaka Dental Care',
     clinic: 'Dental clinic',
     result: '+25% revenue in 2 months',
   },
