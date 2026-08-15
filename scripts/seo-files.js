@@ -130,8 +130,6 @@ ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/growth-audit — free clinic growth audit
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics
 - ${ORIGIN}/compliance — security and data handling
-- https://aumyai.com/ — United States market
-
 ## Dental practice growth guides (free, no sign-up, India-focused)
 ${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s+/g, ' ')}`).join('\n')}
 - ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page Revenue Leak Checklist for practice managers
