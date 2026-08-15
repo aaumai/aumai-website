@@ -315,7 +315,7 @@ routes.push({
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Dental Practice Growth</p>
         <h1 class="ch-hero-title">Practical answers to "why isn't my clinic growing faster?"</h1>
-        <p class="ch-hero-sub">Real numbers, real WhatsApp messages, and systems you can run this week — written from daily conversations with Indian dental clinic owners.</p>
+        <p class="ch-hero-sub">No jargon, no hype. Real numbers, real WhatsApp messages, and systems you can run this week — written from daily conversations with Indian dental clinic owners.</p>
       </div></section>
       <section><div class="ch-container ch-narrow">` +
     growthPosts

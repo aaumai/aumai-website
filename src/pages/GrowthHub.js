@@ -44,9 +44,8 @@ const GrowthHub = () => {
             <span className="gh-accent"> “why isn’t my clinic growing faster?”</span>
           </h1>
           <p className="ch-lead ch-center-lead">
-            No jargon, no “AI in dentistry” think-pieces. Real numbers, real WhatsApp messages,
-            and systems you can run this week — written from daily conversations with Indian
-            dental clinic owners.
+            No jargon, no hype. Real numbers, real WhatsApp messages, and systems you can run
+            this week — written from daily conversations with Indian dental clinic owners.
           </p>
         </div>
       </section>
