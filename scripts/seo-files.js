@@ -21,6 +21,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const { growthPosts } = require('../src/data/growthPosts');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -39,6 +40,8 @@ const SITEMAPS = {
     ['/leak-calculator', 0.9, 'monthly'],
     ['/revenue-generator', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
+    ['/growth', 0.8, 'weekly'],
+    ...growthPosts.map((p) => [`/growth/${p.slug}`, 0.7, 'monthly']),
     ['/platform-partner', 0.7, 'monthly'],
     ['/facebook-instagram', 0.6, 'monthly'],
     ['/compliance', 0.7, 'monthly'],
@@ -99,8 +102,8 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 const LLMS = {
   in: `# AUM AI — AUMY for dental & aesthetic clinics (India)
 
-> AUMY is an AI growth system for established dental, dermatology and aesthetic
-> clinics in India. It captures every patient enquiry (WhatsApp, Instagram,
+> AUMY is an AI growth system for dental, dermatology and aesthetic
+> clinics in India — from single-doctor practices to multi-chair centres. It captures every patient enquiry (WhatsApp, Instagram,
 > missed calls, website), books appointments 24/7 with an AI receptionist,
 > recovers no-shows, wins back lapsed patients, manages Google Business Profile
 > and reviews, and feeds real bookings back to Meta and Google so ad spend
@@ -117,6 +120,7 @@ const LLMS = {
 - ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to missed enquiries, no-shows and lapsed patients
 - ${ORIGIN}/revenue-generator — how the system works
 - ${ORIGIN}/growth-audit — free clinic growth audit
+- ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics
 - ${ORIGIN}/compliance — security and data handling
 - https://aumyai.com/ — United States market
 

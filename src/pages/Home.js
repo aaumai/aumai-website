@@ -428,13 +428,13 @@ const Home = () => {
           <span className="ch-eyebrow">A fit, or not</span>
           <h2 className="ch-h2">We take on a handful of clinics at a time — and we&apos;re honest about fit.</h2>
           <p className="ch-lead ch-center-lead">
-            AUMY works best for established clinics with real patient volume and the ambition to compound
-            it. It is built for you if:
+            AUMY works best for clinics serious about growth — from single-doctor practices to
+            multi-chair centres. It is built for you if:
           </p>
           <div className="ch-fit-card">
             <ul className="ch-mini">
               <li><Check /> You are a dental, dermatology or aesthetics clinic</li>
-              <li><Check /> You collect upwards of ₹5 lakh a month</li>
+              <li><Check /> You are serious about growing — not just curious about AI</li>
               <li><Check /> You are the founder or owner — the one who makes the growth calls</li>
               <li><Check /> You would rather grow with a system than by hiring more front-desk staff</li>
             </ul>

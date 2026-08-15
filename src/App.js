@@ -21,6 +21,8 @@ import AumaiAnalytics from './pages/AumaiAnalytics';
 import AumyProduct from './pages/AumyProduct';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import GrowthAudit from './pages/GrowthAudit';
+import GrowthHub from './pages/GrowthHub';
+import GrowthArticle from './pages/GrowthArticle';
 import LeakCalculator from './pages/LeakCalculator';
 import PlatformPartner from './pages/PlatformPartner';
 import EngineeringPartner from './pages/EngineeringPartner';
@@ -77,6 +79,8 @@ function App() {
                 <Route path="/aumy" element={<AumyProduct />} />
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/growth-audit" element={<GrowthAudit />} />
+                <Route path="/growth" element={<GrowthHub />} />
+                <Route path="/growth/:slug" element={<GrowthArticle />} />
                 <Route path="/leak-calculator" element={<LeakCalculator />} />
                 <Route path="/platform-partner" element={<PlatformPartner />} />
                 <Route path="/engineering-partner" element={<EngineeringPartner />} />

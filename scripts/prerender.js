@@ -16,6 +16,9 @@
  */
 const fs = require('fs');
 const path = require('path');
+// Growth Hub articles: same data file the React app renders from, so the
+// crawler-visible HTML and the client-rendered article can never drift apart.
+const { growthPosts } = require('../src/data/growthPosts');
 
 const BUILD = path.join(__dirname, '..', 'build');
 // US-market build (REACT_APP_MARKET=us → aumyai.com) prerenders only the US
@@ -195,7 +198,7 @@ const routes = [
         <h2>A dedicated growth expert runs it for you.</h2>
         <p>You are never handed a login and left to work it out. A growth expert is assigned to your clinic on a permanent basis — they learn how your practice runs, build the strategy, operate the entire system on your behalf, and review results with you every week. You get the outcome; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
-        <p>AUMY works best for established dental, dermatology and aesthetics clinics collecting upwards of ₹5 lakh a month, led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
+        <p>AUMY works best for dental, dermatology and aesthetics clinics serious about growth — from single-doctor practices to multi-chair centres — led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
         <h2>Watch AUMY actually doing it.</h2>
         <p>Short, unedited demos of the live product - answering, booking, rescheduling and following up. New clip every day: <a href="https://www.youtube.com/watch?v=Jna2UXPxBmI">Watch the full 40-minute demo</a>.</p>
         <h2>Clinics are already growing with us.</h2>
@@ -284,6 +287,65 @@ const routes = [
       </div></section>`,
   },
 ];
+
+// ---- Dental Practice Growth Hub — hub page + one route per article --------
+// Article bodies are already HTML strings, injected verbatim so crawlers see
+// the full text. BlogPosting JSON-LD makes each eligible for article treatment.
+routes.push({
+  slug: 'growth',
+  title: 'Dental Practice Growth Hub — Missed Calls, Follow-Up, Recall & More | AUMY',
+  description:
+    'Practical, India-specific guides for dental clinic owners: what missed calls really cost, how to follow up leads until they book, how much revenue sits in your recall list — with real numbers and real WhatsApp messages, no jargon.',
+  canonical: `${ORIGIN}/growth`,
+  content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">Dental Practice Growth</p>
+        <h1 class="ch-hero-title">Practical answers to "why isn't my clinic growing faster?"</h1>
+        <p class="ch-hero-sub">Real numbers, real WhatsApp messages, and systems you can run this week — written from daily conversations with Indian dental clinic owners.</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">` +
+    growthPosts
+      .map(
+        (p) =>
+          `<h2><a href="/growth/${p.slug}">${esc(p.title)}</a></h2><p>${esc(p.excerpt)}</p>`
+      )
+      .join('') +
+    `<p><a href="/growth-audit">Get my free Revenue Leak Audit</a> · <a href="/leak-calculator">Try the 60-second leak calculator</a></p>
+      </div></section>`,
+});
+for (const p of growthPosts) {
+  routes.push({
+    slug: `growth/${p.slug}`,
+    title: `${p.title} | AUMY Dental Practice Growth`,
+    description: p.description,
+    canonical: `${ORIGIN}/growth/${p.slug}`,
+    jsonld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: p.title,
+        description: p.description,
+        datePublished: p.date,
+        author: { '@type': 'Person', name: p.author },
+        publisher: {
+          '@type': 'Organization',
+          name: 'AUM AI Healthcare Solutions',
+          logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` },
+        },
+        mainEntityOfPage: `${ORIGIN}/growth/${p.slug}`,
+      },
+    ],
+    content: `
+      <article><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(p.category)}</p>
+        <h1 class="ch-hero-title">${esc(p.title)}</h1>
+        <p>${esc(p.author)} · ${p.date} · ${esc(p.readingTime)}</p>
+        ${p.body}
+        <h2>Want to know what this looks like in your clinic?</h2>
+        <p>Get a free Revenue Leak Audit: where your clinic is quietly losing enquiries, appointments and returning patients — and what each gap is worth. <a href="/growth-audit">Get my free Revenue Leak Audit</a> · <a href="/leak-calculator">Run the 60-second leak calculator</a>. Prefer to see it live? Message our AI receptionist for a demo dental clinic on WhatsApp at +91 80071 89868.</p>
+      </div></article>`,
+  });
+}
 
 // Write each route to BOTH <slug>.html and <slug>/index.html so it serves
 // correctly regardless of nginx config:
@@ -382,7 +444,11 @@ for (const r of activeRoutes) {
   if (!r.slug) {
     fs.writeFileSync(path.join(BUILD, 'index.html'), html);
   } else {
-    fs.writeFileSync(path.join(BUILD, `${r.slug}.html`), html);
+    // Nested slugs (growth/<article>) need their parent dir to exist before
+    // the flat <slug>.html write.
+    const flat = path.join(BUILD, `${r.slug}.html`);
+    fs.mkdirSync(path.dirname(flat), { recursive: true });
+    fs.writeFileSync(flat, html);
     fs.mkdirSync(path.join(BUILD, r.slug), { recursive: true });
     fs.writeFileSync(path.join(BUILD, r.slug, 'index.html'), html);
   }

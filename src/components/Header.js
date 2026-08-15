@@ -43,6 +43,7 @@ const Header = () => {
     { path: '/', label: 'Home' },
     { path: '/revenue-generator', label: 'How it works' },
     { path: '/leak-calculator', label: 'Leak check' },
+    { path: '/growth', label: 'Growth Hub' },
     { path: '/contact', label: 'Contact' },
     { path: 'https://aumyai.com/', label: 'For USA', external: true },
   ];
