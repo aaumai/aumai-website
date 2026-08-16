@@ -48,18 +48,29 @@ const leakCloses = [
   { leak: 'A treatment plan stalls', aumy: 'AUMY follows up until it books' },
 ];
 
+// The four stages of the patient journey — the product architecture
+// (Convert → Care → Retain → Reactivate). Every capability on the page is
+// machinery underneath one of these four.
 const pillars = [
   {
-    title: 'Convert every new patient opportunity',
-    body: 'Every enquiry — WhatsApp, Instagram, a missed call, your website — answered in seconds by an AI receptionist that talks like a human, holds the conversation, and books the appointment. No lead waits, no lead goes cold.',
+    stage: 'Convert',
+    title: 'Turn enquiries into booked patients',
+    body: 'Every enquiry — WhatsApp, Instagram, a missed call, your website — answered in seconds, 24/7, across chat and phone: inbound calls taken, outbound follow-up calls made. Leads are followed up until they book (or say no), and no-shows are recovered and refilled.',
   },
   {
-    title: 'Recover the patients you already have',
-    body: 'No-shows rebooked, recalls sent on time, dormant patients personally won back, presented treatment plans followed up until they book. The revenue you already earned, kept instead of leaked.',
+    stage: 'Care',
+    title: 'Look after patients beyond the chair',
+    body: 'Treatment Care Plans: your doctors define what a patient should hear after an implant, a root canal or whitening — day-1 recovery check, care tips, the one-month follow-up — and AUMY delivers it consistently, flagging any reply that needs the clinic.',
   },
   {
-    title: 'A front desk that never clocks out',
-    body: 'It all runs 24/7 — nights, Sundays, festival weeks — across WhatsApp and phone, taking your inbound calls and making the outbound ones, the way your sharpest receptionist would, without another hire. Your team walks in to a fuller calendar, not a longer to-do list.',
+    stage: 'Retain',
+    title: 'Bring patients back for ongoing care',
+    body: 'Cleaning recalls, periodic check-ups and treatment maintenance — sent personally and on time, every time, so the patients you already have keep coming back.',
+  },
+  {
+    stage: 'Reactivate',
+    title: 'Win back patients who drifted away',
+    body: 'Dormant patients, overdue recalls and stalled treatment plans are re-engaged automatically — revenue you already paid to acquire, recovered instead of written off.',
   },
 ];
 
@@ -236,17 +247,17 @@ const Home = () => {
       <section className="ch-section" id="how-it-works">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">What you actually get</span>
-            <h2 className="ch-h2">Two engines, one system: convert new patients, recover existing ones.</h2>
+            <span className="ch-eyebrow">The patient journey</span>
+            <h2 className="ch-h2">One system. The entire patient journey.</h2>
             <p className="ch-lead ch-center-lead">
-              Every mechanism points at the same destination — more booked patients from the
-              opportunities your clinic already generates. Here is what that delivers.
+              From first enquiry to ongoing care, AUMY manages the patient relationship beyond the
+              appointment — four stages, one connected engine.
             </p>
           </div>
-          <div className="ch-pillars ch-pillars-3">
+          <div className="ch-pillars">
             {pillars.map((p, i) => (
               <div key={i} className="ch-pillar">
-                <span className="ch-pillar-num">{i + 1}</span>
+                <span className="ch-eyebrow">{p.stage}</span>
                 <h3 className="ch-pillar-title">{p.title}</h3>
                 <p className="ch-pillar-body">{p.body}</p>
               </div>

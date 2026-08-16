@@ -189,12 +189,15 @@ const routes = [
           <li>On Google, the clinic down the road shows up above you.</li>
           <li>You spend on ads every month — shown to the same people — with no idea which ones become patients.</li>
         </ul>
-        <h2>Three outcomes, one connected system — tuned to your clinic.</h2>
+        <h2>One system. The entire patient journey.</h2>
+        <p>From first enquiry to ongoing care, AUMY manages the patient relationship beyond the appointment — four stages, one connected engine:</p>
         <ul>
-          <li><strong>More patients through the door</strong> — every enquiry from WhatsApp, Instagram, a missed call or your website answered in seconds and booked by an AI receptionist, with ad spend that learns who actually books and paid.</li>
-          <li><strong>The clinic patients find and trust</strong> — manage your Google Business Profile, Instagram and Facebook from one place, and create and publish content to every channel in a few clicks with our Content Studio; climb Google and earn a steady stream of real 5-star reviews.</li>
-          <li><strong>A front desk that never clocks out</strong> — a 24/7 AI receptionist that answers, reschedules, recovers no-shows and wins back dormant patients, without another hire.</li>
+          <li><strong>CONVERT — turn enquiries into booked patients.</strong> Every enquiry from WhatsApp, Instagram, a missed call or your website answered in seconds, 24/7, across chat and phone; leads followed up until they book, no-shows recovered and refilled.</li>
+          <li><strong>CARE — look after patients beyond the chair.</strong> Treatment Care Plans: your doctors define what a patient should hear after an implant, a root canal or whitening — the day-1 recovery check, care tips, the one-month follow-up — and AUMY delivers it consistently, flagging replies that need the clinic.</li>
+          <li><strong>RETAIN — bring patients back for ongoing care.</strong> Cleaning recalls, periodic check-ups and treatment maintenance, sent personally and on time.</li>
+          <li><strong>REACTIVATE — win back patients who drifted away.</strong> Dormant patients, overdue recalls and stalled treatment plans re-engaged automatically.</li>
         </ul>
+        <p>Underneath the four stages sits the machinery: the AI receptionist across WhatsApp and phone, Google Business Profile and reviews, Instagram and Facebook, the Content Studio, and ad spend that learns from real bookings via the Conversions API.</p>
         <p>None of this is a one-off push. Every patient captured, review earned and slot saved feeds the next — organic growth that builds on itself, month after month.</p>
         <h2>A dedicated growth expert runs it for you.</h2>
         <p>You are never handed a login and left to work it out. A growth expert is assigned to your clinic on a permanent basis — they learn how your practice runs, build the strategy, operate the entire system on your behalf, and review results with you every week. You get the outcome; they carry the work.</p>

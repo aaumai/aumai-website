@@ -29,6 +29,7 @@ const GROWTH_CATEGORIES = [
   'WhatsApp for Clinics',
   'AI for Dental Clinics',
   'Revenue Leaks',
+  'After-Treatment Care',
 ];
 
 const growthPosts = [
@@ -777,6 +778,69 @@ const growthPosts = [
 
 <h2>Scoring, honestly</h2>
 <p>Count the questions you answered with evidence and were satisfied by. Twenty or more: your clinic runs on systems — growth spend will compound, and you're the exception. Twelve to nineteen: real money is leaking monthly; fix the worst section before buying any more marketing. Under twelve: the good news is your growth problem is not competition, location or ads — it's leaks, and <a href="/growth/dental-clinics-lose-acquired-patients">leaks are fixable</a>, in exactly the order this audit surfaced them.</p>`,
+  },
+
+  // ------------------------------------------------------------------
+  // 12. AFTER-TREATMENT CARE (the CARE pillar's flagship)
+  // ------------------------------------------------------------------
+  {
+    slug: 'dental-after-treatment-care-follow-up-plans',
+    title: 'The Patient Journey Doesn’t End When They Leave the Chair: After-Treatment Care Plans',
+    category: 'After-Treatment Care',
+    date: '2026-08-16',
+    readingTime: '8 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      'The week after treatment is when a patient decides what they think of your clinic — and most clinics go silent exactly then. Day-by-day care plans for implants, root canals and whitening, why the doctor must own the protocol, and how consistent follow-up quietly becomes retention, reviews and referrals.',
+    description:
+      'How dental clinics should follow up after treatment: day-by-day after-care plans for implants, root canals and whitening with copyable WhatsApp messages, why the doctor defines the protocol, escalation rules for worrying replies, and how post-treatment care drives trust, reviews and retention.',
+    body: `
+<p>Think about the last big treatment your clinic delivered — an implant, a full root canal, a smile makeover. The dentistry was excellent. The patient paid, said thank you, and walked out. Then what did they hear from your clinic?</p>
+<p>For most Indian practices, the honest answer is: <em>nothing, until the next recall message months later.</em> And yet the week right after treatment is exactly when the patient is paying the most attention — noticing every sensation, wondering whether that twinge is normal, deciding quietly what they think of your clinic. Silence in that week is a strange place to go quiet.</p>
+<blockquote>The patient journey doesn't end when they leave the chair. For big treatments, the part they remember most starts there.</blockquote>
+
+<h2>Why the after-treatment week matters so much</h2>
+<ul>
+  <li><strong>Clinically:</strong> the patient at home is the one who ignores an infection sign for four days because "maybe it's normal," or panics over sensitivity that is completely expected. Guidance in their pocket changes both.</li>
+  <li><strong>Emotionally:</strong> a check-in the day after a procedure is the single strongest "this clinic actually cares" signal you can send — stronger than anything in your marketing, because it arrives when nothing is being sold.</li>
+  <li><strong>Commercially:</strong> the patient who was looked after through recovery is the one who returns for the crown after the RCT, shows up to recalls, and tells their family. And a patient who just told you they're feeling fine is the perfect person to ask, one message later, for a Google review.</li>
+</ul>
+<p>None of this requires new skills. It requires <em>consistency</em> — which is precisely what busy clinics can't produce manually, because "message Tuesday's implant patient on Wednesday" is nobody's job at 1:30 pm on a packed Thursday.</p>
+
+<h2>The shape of a Treatment Care Plan</h2>
+<p>A care plan is treatment-specific by definition — what an implant patient needs to hear on day 1 is nothing like what a whitening patient needs. The doctor defines the protocol once per treatment: what to say, when to say it, and what kind of reply should reach the clinic immediately. Three worked examples to copy and adapt:</p>
+
+<h3>Implant</h3>
+<table class="gh-table">
+  <thead><tr><th>When</th><th>What the patient hears</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Day 0</strong> (that evening)</td><td>Thank-you + what to expect tonight: swelling and mild discomfort are normal; cold compress; tonight's dos and don'ts.</td></tr>
+    <tr><td><strong>Day 1</strong></td><td>Recovery check: "How are you feeling today? Mild swelling is completely normal. Avoid hot food and the treated side today. Reply here if anything feels more than mild."</td></tr>
+    <tr><td><strong>Day 3</strong></td><td>Care tips: soft-food guidance, gentle cleaning around the site, what improving recovery normally feels like by now.</td></tr>
+    <tr><td><strong>Day 7</strong></td><td>Check-in: "One week in — how is it healing? If you notice X or Y, please contact us today."</td></tr>
+    <tr><td><strong>Day 30</strong></td><td>Follow-up: "It's been a month — Dr. would like a quick look to check the healing. Shall I find you a slot this week?"</td></tr>
+  </tbody>
+</table>
+
+<h3>Root canal</h3>
+<div class="gh-msg">Day 1 — Hi Priya, Dr. Sharma asked me to check — how is the tooth feeling after yesterday's root canal? Some sensitivity for a few days is normal. If the pain feels strong or is getting worse, reply here and we'll see you quickly.</div>
+<div class="gh-msg">Day 30 — Hi Priya! A month since your root canal — time to plan the crown that protects the tooth long-term. Dr. Sharma has Thursday evening or Saturday morning open. Which suits you?</div>
+<p>Notice the day-30 message: for an RCT, the follow-up isn't just courtesy — it's the crown conversation, the treatment completion that protects the tooth <em>and</em> the revenue that stalls at most clinics because nobody asked.</p>
+
+<h3>Whitening</h3>
+<p>Day 0: after-care instructions. Day 1: the food-and-drink list (the 48-hour "white diet" nobody remembers from the chair). Day 7: check-in + maintenance tips. Day 30: maintenance reminder. Low-drama treatment, short plan — the protocol matches the procedure, always.</p>
+
+<h2>The three rules that make care plans work</h2>
+<ol>
+  <li><strong>The doctor owns the protocol; the system owns the delivery.</strong> This division is everything. Clinical content — what's normal on day 3, what symptom needs a call — is the dentist's judgment and must come from the clinic. What a system contributes is the part humans can't sustain: sending the right message to the right patient on the right day, every single time, for every treatment. (The same <a href="/growth/ai-in-dentistry-repetitive-tasks-not-diagnosis">judgment-versus-repetition line</a> that governs everything else in this hub.)</li>
+  <li><strong>Every reply gets read — and worrying ones escalate.</strong> A care plan that asks "how are you feeling?" and then ignores the answer is worse than silence. Replies indicating pain, swelling or worry must reach the doctor the same day, flagged, not discovered in a scroll-back on Friday.</li>
+  <li><strong>Check in before you ask.</strong> The day-2 message asks how they feel — nothing else. The review request, the crown conversation, the maintenance offer come later, after the patient has told you they're fine. Care first, always; the commercial moments then arrange themselves.</li>
+</ol>
+
+<h2>Start this week, with one treatment</h2>
+<p>Don't design protocols for your whole treatment menu. Pick the one high-value treatment you do most — implants for many clinics, RCTs for others — and write its plan in 30 minutes: five messages, day 0 to day 30, in the doctor's words. Send them manually for the next ten patients if you must; a WhatsApp reminder to the front desk each morning is enough to prove it.</p>
+<p>What you'll notice first isn't revenue. It's the replies — patients answering a day-1 check-in with a relieved question they would never have called about, and thank-you messages your clinic has done nothing to earn before. The revenue effects — completed treatment plans, kept recalls, reviews, referrals — follow from there.</p>
+<p>And when you're ready to run it for every treatment and every patient without the morning reminders: this is exactly what Treatment Care Plans in AUMY do — your doctors define the protocol per treatment, the system delivers it consistently and flags the replies that need a human. The protocol stays yours. The consistency becomes automatic.</p>`,
   },
 ];
 
