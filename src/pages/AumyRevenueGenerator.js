@@ -17,11 +17,13 @@ const heroStats = [
   { value: '100%', label: 'Bookings attributed' },
 ];
 
+// The four journey pillars (Convert → Care → Retain → Reactivate) — outcome
+// first; WhatsApp/phone/Instagram are channels inside them, never the story.
 const steps = [
-  { n: '01', t: 'Catch every lead', d: 'Instagram, WhatsApp, a missed call, a walk-in, Google or an ad — every enquiry instantly opens a WhatsApp conversation.' },
-  { n: '02', t: 'Book it and keep the slot', d: 'AUMY answers, qualifies and books in seconds, 24/7 — then reminds, confirms, and rebooks the few who still miss.' },
-  { n: '03', t: 'Revive patients you have', d: 'Overdue and dormant patients are re-engaged automatically — reactivating revenue you already paid to acquire.' },
-  { n: '04', t: 'Keep them for life', d: 'Timely follow-ups, helpful content in your name, and well-timed review prompts — so patients return and refer.' },
+  { stage: 'Convert', t: 'Turn every enquiry into a booked patient', d: 'Instagram, WhatsApp, a missed call, your website, a walk-in — every enquiry answered in seconds, qualified, and followed up until it books or clearly declines. No-shows recovered, freed slots refilled.' },
+  { stage: 'Care', t: 'A structured journey after every treatment', d: 'Treatment Care Plans: your doctors define the treatment-specific follow-up — the day-1 recovery check, care tips, the one-month review — and AUMY delivers it consistently, flagging any reply that needs the clinic.' },
+  { stage: 'Retain', t: 'Keep patients engaged in ongoing care', d: 'Recalls, maintenance reminders and periodic check-ups — personal and on time, every time — with well-timed review prompts, so patients return and refer.' },
+  { stage: 'Reactivate', t: 'Bring back patients who fell out of the cycle', d: 'Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically — revenue you already paid to acquire, recovered.' },
 ];
 
 const capabilities = [
@@ -91,9 +93,10 @@ const AumyRevenueGenerator = () => {
           <span className="ch-eyebrow">Aumy — how it works</span>
           <h1 className="ch-hero-title">Recover the revenue your clinic is already leaking.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            AUMY is the growth system we run for dental clinics. It captures every
-            enquiry, books it, wins back patients who drift away, and makes your ad spend work harder —
-            with the recovered revenue proven on a live dashboard.
+            AUMY is the AI Patient Journey &amp; Revenue Operating System for dental clinics. It
+            works across the entire patient journey — from first enquiry to treatment,
+            after-treatment care, recall and reactivation — with the recovered revenue proven on a
+            live dashboard.
           </p>
           <div className="ch-hero-cta ch-center-cta">
             <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
@@ -115,13 +118,13 @@ const AumyRevenueGenerator = () => {
       <section className="ch-section ch-tint">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">The engine</span>
-            <h2 className="ch-h2">Four things, working as one.</h2>
+            <span className="ch-eyebrow">The patient journey</span>
+            <h2 className="ch-h2">Four stages, working as one.</h2>
           </div>
           <div className="ch-pillars">
             {steps.map((s, i) => (
               <div key={i} className="ch-pillar">
-                <span className="ch-pillar-num">{s.n}</span>
+                <span className="ch-eyebrow">{s.stage}</span>
                 <h3 className="ch-pillar-title">{s.t}</h3>
                 <p className="ch-pillar-body">{s.d}</p>
               </div>
@@ -133,11 +136,12 @@ const AumyRevenueGenerator = () => {
       {/* SMARTER ADS */}
       <section className="ch-section">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">Smarter ads</span>
+          <span className="ch-eyebrow">And your marketing gets smarter</span>
           <h2 className="ch-h2">Your ads learn from your real patients.</h2>
           <p className="ch-lead">
-            The moment a lead books or pays, AUMY sends that real conversion straight to Meta &amp;
-            Google — so your budget finds more people like the patients who actually show up.
+            On top of the four stages, a growth flywheel: when a lead becomes a real patient, AUMY
+            feeds that conversion back to Meta &amp; Google — so your campaigns optimise toward
+            people who actually book and show up, not people who just click.
           </p>
           <ul className="ch-mini" style={{ display: 'inline-grid', textAlign: 'left' }}>
             <li><Check /> Real bookings sent server-side — not clicks a pixel guessed at</li>
@@ -157,9 +161,10 @@ const AumyRevenueGenerator = () => {
             <span className="ch-eyebrow">Your AI receptionist</span>
             <h2 className="ch-h2">One AI receptionist. The work of ten.</h2>
             <p className="ch-lead ch-center-lead">
-              AUMY isn&rsquo;t a bundle of separate tools — it&rsquo;s one AI receptionist on WhatsApp
-              doing what would take a team of ten humans: answering every lead in seconds, 24/7,
-              never sick, never on leave — and quietly handling all of this for your clinic:
+              AUMY isn&rsquo;t a bundle of separate tools — it&rsquo;s one AI working across
+              WhatsApp, phone, Instagram and your website, doing what would take a team of ten
+              humans: answering every lead in seconds, 24/7, never sick, never on leave — and
+              quietly handling all of this for your clinic:
             </p>
           </div>
           <div className="ch-why">

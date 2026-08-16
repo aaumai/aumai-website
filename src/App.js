@@ -16,7 +16,6 @@ import DataDeletion from './pages/DataDeletion';
 import CancellationRefund from './pages/CancellationRefund';
 import DabbewaalaApp from './pages/DabbewaalaApp';
 import AumaiAnalytics from './pages/AumaiAnalytics';
-import AumyProduct from './pages/AumyProduct';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import GrowthAudit from './pages/GrowthAudit';
 import GrowthHub from './pages/GrowthHub';
@@ -78,7 +77,10 @@ function App() {
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
-                <Route path="/aumy" element={<AumyProduct />} />
+                {/* Legacy health-system-OS AUMY page (pages/AumyProduct.js stays
+                    in code) — its story conflicts with the dental positioning,
+                    so the URL lands on the dental product page instead. */}
+                <Route path="/aumy" element={<Navigate to="/revenue-generator" replace />} />
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/growth-audit" element={<GrowthAudit />} />
                 <Route path="/growth" element={<GrowthHub />} />

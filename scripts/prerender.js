@@ -232,15 +232,16 @@ const routes = [
         <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container">
-        <h2>Four things, working as one.</h2>
+        <h2>Four stages, working as one — the entire patient journey.</h2>
+        <p>AUMY is the AI Patient Journey &amp; Revenue Operating System for dental clinics: from first enquiry to treatment, after-treatment care, recall and reactivation.</p>
         <ul>
-          <li><strong>Catch every lead</strong> — Instagram, WhatsApp, a missed call, a walk-in, Google or an ad — every enquiry instantly opens a WhatsApp conversation.</li>
-          <li><strong>Book it and keep the slot</strong> — AUMY answers, qualifies and books in seconds, 24/7 — then reminds, confirms and rebooks the few who still miss.</li>
-          <li><strong>Revive patients you have</strong> — overdue and dormant patients are re-engaged automatically, reactivating revenue you already paid to acquire.</li>
-          <li><strong>Keep them for life</strong> — timely follow-ups, helpful content in your name, and well-timed review prompts, so patients return and refer.</li>
+          <li><strong>CONVERT — turn every enquiry into a booked patient.</strong> Instagram, WhatsApp, a missed call, your website, a walk-in — answered in seconds, qualified, followed up until it books or clearly declines; no-shows recovered and slots refilled.</li>
+          <li><strong>CARE — a structured journey after every treatment.</strong> Treatment Care Plans: your doctors define the treatment-specific follow-up — day-1 recovery check, care tips, the one-month review — and AUMY delivers it consistently, flagging replies that need the clinic.</li>
+          <li><strong>RETAIN — keep patients engaged in ongoing care.</strong> Recalls, maintenance reminders and periodic check-ups, personal and on time, with well-timed review prompts.</li>
+          <li><strong>REACTIVATE — bring back patients who fell out of the cycle.</strong> Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically.</li>
         </ul>
-        <h2>Your ads learn from your real patients.</h2>
-        <p>The moment a lead books or pays, AUMY sends that real conversion straight to Meta &amp; Google — so your budget finds more people like the patients who actually show up. Cost per genuine lead drops as lead quality climbs, privacy-safe, with no patient data exposed.</p>
+        <h2>And your marketing gets smarter.</h2>
+        <p>On top of the four stages, a growth flywheel: when a lead becomes a real patient, AUMY feeds that conversion back to Meta &amp; Google — so your campaigns optimise toward people who actually book and show up. Privacy-safe, no patient data exposed.</p>
       </div></section>`,
   },
   {
