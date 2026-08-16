@@ -53,9 +53,9 @@ const Footer = () => {
             </Link>
             <p className="footer-byline">an AUM AI product</p>
             <p className="footer-tagline">
-              The growth partner for dental &amp; aesthetic clinics. AUMY captures every enquiry, books
-              it like a human, wins back patients who drift away, and makes your ad spend work harder —
-              all connected, all automatic.
+              The AI Patient Journey &amp; Revenue Operating System for Dental Clinics. Turn more
+              enquiries into patients, deliver better post-treatment care, and bring patients back —
+              one system across the entire patient journey.
             </p>
             <div className="footer-social">
               <a href="https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">

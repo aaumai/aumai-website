@@ -175,7 +175,7 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">The AI Patient Journey & Revenue Operating System for Dental Clinics</p>
         <h1 class="ch-hero-title">Never lose revenue to missed calls &amp; follow-ups again.</h1>
-        <p class="ch-hero-sub">Every call and message answered in seconds. Every lead followed up until it books. Every missed appointment, due recall and drifting patient — recovered, automatically. AUMY makes sure the revenue your clinic already earned never slips through the cracks.</p>
+        <p class="ch-hero-sub">Turn more enquiries into patients. Deliver better post-treatment care. Bring patients back. AUMY runs the entire journey automatically — across WhatsApp and phone — so the patient opportunities your clinic already paid for convert instead of leak.</p>
         <p><a href="/contact">Start my 10-day free trial</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">

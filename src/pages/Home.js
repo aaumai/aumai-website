@@ -131,11 +131,10 @@ const Home = () => {
               Never lose revenue to missed calls &amp; follow-ups&nbsp;again.
             </h1>
             <p className="ch-hero-sub">
-              AUMY answers every call and message in seconds, follows up with every lead until it books,
-              recovers no-shows and due recalls, and reactivates patients who have gone quiet —
-              automatically, across both WhatsApp and phone: answering your inbound calls and messages,
-              and making the outbound calls too. The patient opportunities your clinic already paid for,
-              converted instead of&nbsp;lost.
+              <strong>Turn more enquiries into patients. Deliver better post-treatment care. Bring
+              patients back.</strong> AUMY runs the entire journey automatically — across WhatsApp and
+              phone, answering your inbound calls and messages and making the outbound ones — so the
+              patient opportunities your clinic already paid for convert instead of&nbsp;leak.
             </p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
