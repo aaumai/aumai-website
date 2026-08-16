@@ -78,7 +78,7 @@ const growthPosts = [
 </div>
 <p>A worked example — and to be clear, these are illustrative assumptions, not statistics; put in your own numbers:</p>
 <ul>
-  <li>Say your clinic misses <strong>30 calls a month</strong> — one a day, counting after-hours calls. Most owners who actually check their phone log find it is more.</li>
+  <li>Say your clinic misses <strong>30 calls a month</strong> — one a day, counting after-hours calls. Most owners we've walked through this found their phone log showed more.</li>
   <li>Say <strong>40%</strong> of those were potential patients (the rest are labs, salespeople, existing patients who will call back). That is 12 lost enquiries.</li>
   <li>Say you would normally convert <strong>half</strong> of the new-patient enquiries you do answer. That is 6 lost patients.</li>
   <li>Say your average first-treatment value is <strong>₹5,000</strong> — a conservative blended figure across consultations, cleanings, fillings and RCTs.</li>
@@ -103,7 +103,7 @@ const growthPosts = [
 <ol>
   <li><strong>A missed-call register (free).</strong> Every missed number gets a call-back the same day, logged in a notebook or sheet. This alone recovers a meaningful share — <em>if</em> someone actually owns the job. In most clinics it survives about two weeks, because the person responsible also has a queue of patients at the desk. Be honest with yourself about whether it will stick.</li>
   <li><strong>A missed-call WhatsApp message (cheap).</strong> The moment a call goes unanswered, the caller gets a WhatsApp message: <em>"Sorry we missed your call! This is [clinic name]. How can we help — would you like to book an appointment?"</em> This converts a dead end into a conversation, on the channel Indian patients actually prefer. The catch: someone still has to answer the replies, including the ones that arrive at 9 pm.</li>
-  <li><strong>24/7 answering (automatic).</strong> Every call and message gets answered in seconds, around the clock — questions handled, appointment booked into your calendar, no human required. The after-hours and lunch-hour enquiries, which are the majority of what you are losing, stop leaking entirely.</li>
+  <li><strong>24/7 answering (automatic).</strong> Every call and message gets answered in seconds, around the clock — questions handled, appointment booked into your calendar, no human required. The after-hours and lunch-hour enquiries — often the biggest share of what your one-week phone-log count reveals — stop leaking entirely.</li>
 </ol>
 <p>Whichever rung you choose, choose one this week. The register costs nothing but discipline — and even if it only survives a month, the data it produces will tell you exactly what the next rung is worth to you.</p>`,
   },
@@ -238,7 +238,7 @@ const growthPosts = [
 <p>Every clinic owner nods along to all of this — and almost none of it happens, for one reason: recall is <em>important but never urgent</em>. The front desk's day is consumed by the patients who are present. The patients who are absent have no one advocating for them. Running recall well means, every single week, pulling who is due, drafting personal messages, sending them, answering replies, booking slots, and remembering who was contacted when — forever. It is a part-time job, and clinics don't staff it.</p>
 <p>So make it systematic or make it automatic:</p>
 <ol>
-  <li><strong>This week:</strong> pull one list — every patient whose last visit was 6–12 months ago. Send twenty messages like the overdue example above, twenty per day, and book the replies. This one batch usually pays for the time tenfold and proves the list is alive.</li>
+  <li><strong>This week:</strong> pull one list — every patient whose last visit was 6–12 months ago. Send twenty messages a day for a week, like the overdue example above, and book the replies. This one batch usually pays for the time tenfold and proves the list is alive.</li>
   <li><strong>Ongoing:</strong> a standing weekly 30-minute recall block, owned by a named person, working the due and overdue lists.</li>
   <li><strong>Automatic:</strong> this is among the first things clinics automate with AUMY — every patient enters the right sequence at the right time, replies get answered instantly and booked, and the dormant list is worked steadily in the background without anyone at the desk lifting a finger.</li>
 </ol>
@@ -289,7 +289,7 @@ const growthPosts = [
 <p>Send this the same evening, while the consultation is fresh. "No hurry at all" is doing real work — it signals the follow-ups to come are help, not sales.</p>
 
 <h3>Day 3 — educate toward the unspoken worry</h3>
-<div class="gh-msg">Hi Meera! Since you were considering the implant — a lot of patients ask us how painful it really is. Short honest answer: the procedure itself is done under anaesthesia and most patients say it was easier than the extraction. Here's a short piece we wrote on what the first week actually feels like: [link]</div>
+<div class="gh-msg">Hi Meera! Since you were considering the implant — a lot of patients ask us how painful it really is. Short honest answer: the procedure itself is done under local anaesthesia — you won't feel pain while it's happening — and most patients say it was easier than the extraction. Here's a short piece we wrote on what the first week actually feels like: [link]</div>
 <p>You are answering the fear they didn't voice. If the treatment was aligners, the day-3 topic is "how visible are they really"; for full-mouth work, "how many sittings and how spread out."</p>
 
 <h3>Day 5 — a real patient's story</h3>
@@ -380,7 +380,7 @@ const growthPosts = [
 <p>Two options, both specific. "When would you like to come?" hands the inertia right back to them.</p>
 
 <h2>What to expect, and how to count it</h2>
-<p>Set expectations soberly: this is a patience game, and single-digit percentage response is normal on a genuinely cold list. But run the numbers — as always, illustrative assumptions, use your own: message 300 dormant patients over a quarter, get even 8% booking a visit, and that is 24 returning patients. At a conservative ₹3,000 per returning visit that's ₹72,000 — from a list you'd written off, at the cost of some front-desk time. And every one of those 24 re-enters your recall cycle for next year. (Your own database's number: <a href="/dormant-patient-calculator">the dormant patient calculator</a>.)</p>
+<p>Set expectations soberly: this is a patience game, and single-digit percentage response is normal on a genuinely cold list. But run the numbers — as always, illustrative assumptions, use your own: message 300 dormant patients over a quarter, get even 5% booking a visit, and that is 15 returning patients. At a conservative ₹3,000 per returning visit that's ₹45,000 — from a list you'd written off, at the cost of some front-desk time. And every one of those 15 re-enters your recall cycle for next year. (Your own database's number: <a href="/dormant-patient-calculator">the dormant patient calculator</a>.)</p>
 <p>Track three numbers per campaign: messages sent, replies, appointments kept. If replies are healthy but bookings aren't, your reply-handling is the leak. If replies are near zero, your message reads like a promotion — rewrite it warmer and more specific.</p>
 <p>Then make it a rhythm, not an event: a standing quarterly campaign, working the log from last time. Or automate the rhythm entirely — this is precisely the "important but never urgent" work that <a href="/growth/dental-recall-list-hidden-revenue">clinics never sustain manually</a>, and one of the first things AUMY takes over for a clinic: the right patients contacted at the right time, replies answered instantly, bookings made, log kept — every quarter, without anyone remembering.</p>`,
   },
@@ -542,13 +542,13 @@ const growthPosts = [
 <p>Here's the uncomfortable summary: <strong>most clinics don't have a marketing problem. They have a keeping problem</strong> — and they respond to it by buying more marketing, which pours more water into the same bucket.</p>
 
 <h2>First-visit economics: why the leak is worse than it looks</h2>
-<p>Now put numbers on it — illustrative as always; use your own. Suppose your blended acquisition cost works out to ₹800 per arriving new patient, and the average first visit produces ₹3,000. Profitable, yes — but modestly, once chair time, materials and staff are counted. The real return on that ₹800 was never the first visit. It is the <em>relationship</em>: the recall visits at ₹3,000 a year, the filling found at a check-up, the eventual crown, the spouse and children who follow, the review that brings the next patient at zero cost.</p>
+<p>Now put numbers on it — illustrative as always; use your own. Suppose your blended acquisition cost works out to ₹800 per arriving new patient, and the average first visit produces ₹3,000 (lower than the ₹5,000 first-<em>treatment</em> figure we use elsewhere in this hub, because a first visit is often just the consult and a cleaning). Profitable, yes — but modestly, once chair time, materials and staff are counted. The real return on that ₹800 was never the first visit. It is the <em>relationship</em>: the recall visits at ₹3,000 a year, the filling found at a check-up, the eventual crown, the spouse and children who follow, the review that brings the next patient at zero cost.</p>
 <p>Which means a patient lost after visit one isn't a small loss — it is the loss of everything you actually paid for, right after covering costs. The acquisition spend bought a lifetime option, and the clinic let it expire unexercised. This is why two clinics with identical ad budgets and identical dentistry end up with completely different revenue three years later: one collects the option value, the other keeps re-buying strangers.</p>
 
 <h2>The fix order: leaks first, then fuel</h2>
 <p>When growth feels slow, the instinct is to increase the inflow — more ads, more visibility. Resist it until you've checked the bucket, because the order matters enormously:</p>
 <ul>
-  <li>Fixing leaks <strong>multiplies</strong> every rupee of existing and future ad spend. Answering every enquiry and following up every lead can double what the same campaigns deliver, at no extra media cost.</li>
+  <li>Fixing leaks <strong>multiplies</strong> every rupee of existing and future ad spend. Answering every enquiry and following up every lead can dramatically increase what the same campaigns deliver, at no extra media cost.</li>
   <li>Scaling spend into a leaky funnel does the opposite: your cost per <em>kept</em> patient rises even as your cost per lead looks fine, and the conclusion drawn — "ads don't work for us" — is wrong but expensive. (More on that trap in <a href="/growth/meta-ads-dental-clinics-leads-vs-patients">our Meta ads guide</a>.)</li>
 </ul>
 <p>The self-test takes one evening with last month's numbers: how many enquiries came in, how many got answered within minutes, how many booked, how many showed, how many have a next appointment or recall date on file. Wherever the biggest drop is — that's where your next rupee should go, and it is almost never "more ads." Our <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>one-page checklist</a> walks the same path, and the <a href="/growth/dental-clinic-revenue-leak-audit-25-questions">25-question audit</a> goes deeper.</p>
@@ -574,7 +574,7 @@ const growthPosts = [
 
 <h2>Why patients actually no-show</h2>
 <ul>
-  <li><strong>They forgot.</strong> The appointment was booked eleven days ago in a two-minute call. No reminder came. This is the biggest single cause and the cheapest to fix.</li>
+  <li><strong>They forgot.</strong> The appointment was booked eleven days ago in a two-minute call. No reminder came. In the clinics we've worked with, this is usually the biggest single cause — and always the cheapest to fix.</li>
   <li><strong>Fear grew in the gap.</strong> Between booking and the visit, the imagination went to work — especially before extractions, root canals and first implant consultations. Nobody reassured them, so avoiding the appointment became the comfortable option.</li>
   <li><strong>Second thoughts about money.</strong> The quoted amount felt fine in the room and heavier at home. Rather than say so, they just… don't come.</li>
   <li><strong>Rescheduling felt harder than vanishing.</strong> Something came up, but changing the slot meant calling during work hours and possibly an awkward conversation. Silence was easier. <em>This one matters most</em>: many "no-shows" are patients who would happily have rescheduled if it took one WhatsApp reply.</li>
@@ -591,15 +591,15 @@ const growthPosts = [
 <div class="gh-msg">Hi Priya! Reminder — your appointment with Dr. Sharma is tomorrow at 6:30 pm. Reply 1 to confirm, or reply 2 if you'd like a different slot. See you soon!</div>
 <p>The 1/2 pattern converts silent no-shows into visible reschedules while there's still time to act. No reply by evening? That's your cue for a quick call — the silent ones are the likely no-shows.</p>
 <h3>3. For big appointments, add reassurance — not just logistics</h3>
-<div class="gh-msg">Hi Priya, looking forward to tomorrow! Quick note from Dr. Sharma — the procedure is done under full anaesthesia and most patients are surprised how comfortable it is. Any questions before you come, just ask 😊</div>
-<p>For implant consults, extractions and RCTs, the reminder should treat the fear, because the fear is what no-shows. A morning-of "See you at 6:30 today!" is worth adding for high-value slots too.</p>
+<div class="gh-msg">Hi Priya, looking forward to tomorrow! Quick note from Dr. Sharma — the procedure is done under local anaesthesia, so you won't feel pain while it's being done, and most patients are surprised how comfortable it is. Any questions before you come, just ask 😊</div>
+<p>For implant surgeries, extractions and RCTs, the reminder should treat the fear, because the fear is what no-shows. (For a consult with no procedure, keep it to logistics — there's nothing to reassure about yet.) A morning-of "See you at 6:30 today!" is worth adding for high-value slots too.</p>
 <h3>4. Consider a booking amount — carefully</h3>
 <p>For long, high-value slots (implant surgeries, full-mouth work), a modest booking amount adjusted fully against treatment changes the psychology of the commitment. Trade-offs are real in India: it adds friction, and it lands badly if introduced abruptly or for routine visits. If you use it, frame it as reserving dedicated surgical time, keep it small, keep it adjustable — and never apply it to check-ups.</p>
 
 <h2>Recovery: the same-evening message</h2>
 <p>Even a good stack leaves some no-shows. What separates clinics is what happens next. At most, the answer is a shrug and a mental note. Instead, that same evening:</p>
 <div class="gh-msg">Hi Priya, we missed you today! No problem at all — these things happen. Shall I rebook you for later this week? Dr. Sharma has Friday 7 pm or Saturday 11 am open.</div>
-<p>Zero guilt — guilt guarantees they won't return. Two concrete slots — "let us know when suits you" hands the inertia back. Sent the same day, rebooking is a small step; a week later it's a new decision, and the treatment plan attached to that appointment often dies with it.</p>
+<p>Zero guilt — guilt all but guarantees they won't return. Two concrete slots — "let us know when suits you" hands the inertia back. Sent the same day, rebooking is a small step; a week later it's a new decision, and the treatment plan attached to that appointment often dies with it.</p>
 
 <h2>Refill: the chair shouldn't wait for the patient</h2>
 <p>When a cancellation lands, the slot can still earn. Keep a live shortlist — patients who asked for earlier appointments, recall patients due anyway, treatment plans waiting to start — and message two or three of them: <em>"A 6:30 pm slot with Dr. Sharma just opened for tomorrow — would you like it?"</em> Being offered an earlier slot feels like priority treatment; the chair gets refilled; the leak becomes a service moment.</p>
@@ -643,7 +643,7 @@ const growthPosts = [
 <h2>The pre-flight checklist</h2>
 <p>Before your next campaign — or before concluding ads don't work — check the machine behind the ad:</p>
 <ol>
-  <li>Every lead gets a first response <strong>within 5 minutes</strong>, including evenings — the majority of ad leads arrive outside working hours.</li>
+  <li>Every lead gets a first response <strong>within 5 minutes</strong>, including evenings — check your own lead timestamps; a large share of ad leads typically arrive outside working hours, because people scroll after work.</li>
   <li>A written <strong>follow-up sequence</strong> exists for leads that don't book on contact — because most won't, and that's normal.</li>
   <li>You can trace every lead to an outcome: booked, in-conversation, parked. If you can't measure lead → patient, you can't judge any campaign.</li>
   <li>Real bookings flow back to Meta, so the algorithm optimises for patients, not forms.</li>
@@ -707,7 +707,7 @@ const growthPosts = [
 
 <h2>Section 5 — The database <span class="gh-sec-note">(patients you already paid for)</span></h2>
 <ol start="21">
-  <li><strong>How many patients haven't visited in 12+ months?</strong> Most owners guess low by half. <a href="/dormant-patient-calculator">Value the real number</a>.</li>
+  <li><strong>How many patients haven't visited in 12+ months?</strong> Most owners we've asked guessed low — often by half. <a href="/dormant-patient-calculator">Value the real number</a>.</li>
   <li><strong>When did those patients last hear from you — a genuine invitation, not a festival blast?</strong> If the answer is "never," <a href="/growth/reactivate-dormant-dental-patients">this playbook</a> is your highest-margin project this quarter.</li>
 </ol>
 
