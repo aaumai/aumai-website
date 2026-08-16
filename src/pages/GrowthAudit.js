@@ -23,7 +23,7 @@ const GrowthAudit = () => {
     setPageSeo({
       title: 'Free Clinic Growth Audit — AUMY by AUM AI',
       description:
-        'A free growth audit for dental & aesthetic clinics: where you rank on Google versus the clinics near you, how visible you are to new patients, and the specific gaps quietly costing you bookings. Prepared for your clinic within 24 hours.',
+        'A free growth audit for dental clinics: where you rank on Google versus the clinics near you, how visible you are to new patients, and the specific gaps quietly costing you bookings. Prepared for your clinic within 24 hours.',
       canonical: 'https://aumai.co.in/growth-audit',
     });
   }, []);

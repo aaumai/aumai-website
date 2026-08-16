@@ -34,9 +34,10 @@ export const MARKETS = {
     enquiryLabel: 'New enquiries per week (calls, WhatsApp, Instagram, walk-ins)',
     valueLabel: 'Average treatment value (₹)',
     value: { min: 500, max: 20000, step: 250 },
+    // Dental-only positioning (2026-08-16): the aesthetic/derma segment is
+    // gone; a single segment also hides the toggle entirely (see render).
     segments: [
       { key: 'dental', label: 'Dental clinic', avgValue: 4000 },
-      { key: 'aesthetic', label: 'Aesthetic / derma clinic', avgValue: 4000 },
     ],
     auditHref: '/growth-audit',
     auditCta: 'Find out where your number hides — free audit',
@@ -141,18 +142,20 @@ const LeakCheck = ({ market = 'in', headingLevel = 'h1', showHeading = true }) =
 
       <div className="ch-calc-grid">
         <div className="ch-calc-inputs">
-          <div className="ch-calc-toggle">
-            {cfg.segments.map((s) => (
-              <button
-                key={s.key}
-                type="button"
-                className={`ch-calc-seg ${segment === s.key ? 'active' : ''}`}
-                onClick={() => pickSegment(s.key)}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
+          {cfg.segments.length > 1 && (
+            <div className="ch-calc-toggle">
+              {cfg.segments.map((s) => (
+                <button
+                  key={s.key}
+                  type="button"
+                  className={`ch-calc-seg ${segment === s.key ? 'active' : ''}`}
+                  onClick={() => pickSegment(s.key)}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           <Slider locale={cfg.locale} label={cfg.enquiryLabel} value={enquiries} onChange={setEnquiries} min={0} max={100} />
           <Slider locale={cfg.locale} label="…of those, how many never get a proper reply or follow-up?" value={missedPct} onChange={setMissedPct} min={0} max={80} suffix="%" />

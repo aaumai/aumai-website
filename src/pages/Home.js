@@ -145,8 +145,8 @@ const Home = () => {
               </Link>
             </div>
             <p className="ch-hero-trust">
-              10 days free · no obligation · we set everything up for you · built for dental &amp;
-              aesthetic clinics · NVIDIA Inception member
+              10 days free · no obligation · we set everything up for you · built only for dental
+              clinics · NVIDIA Inception member
             </p>
           </div>
 
@@ -444,7 +444,7 @@ const Home = () => {
           </p>
           <div className="ch-fit-card">
             <ul className="ch-mini">
-              <li><Check /> You are a dental, dermatology or aesthetics clinic</li>
+              <li><Check /> You run a dental clinic</li>
               <li><Check /> You are serious about growing — not just curious about AI</li>
               <li><Check /> You are the founder or owner — the one who makes the growth calls</li>
               <li><Check /> You would rather grow with a system than by hiring more front-desk staff</li>

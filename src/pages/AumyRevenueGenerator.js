@@ -77,7 +77,7 @@ const AumyRevenueGenerator = () => {
     setPageSeo({
       title: 'Aumy — The AI Patient Journey & Revenue Operating System for Dental Clinics',
       description:
-        'Aumy is the AI Patient Journey & Revenue Operating System we run for dental & aesthetic clinics — it captures every enquiry, books it, wins back patients who drift, and makes your ad spend work harder, with the recovered revenue proven on a live dashboard. Never lose revenue to missed calls & follow-ups again.',
+        'Aumy is the AI Patient Journey & Revenue Operating System we run for dental clinics — it captures every enquiry, books it, wins back patients who drift, and makes your ad spend work harder, with the recovered revenue proven on a live dashboard. Never lose revenue to missed calls & follow-ups again.',
       canonical: 'https://aumai.co.in/revenue-generator',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -91,7 +91,7 @@ const AumyRevenueGenerator = () => {
           <span className="ch-eyebrow">Aumy — how it works</span>
           <h1 className="ch-hero-title">Recover the revenue your clinic is already leaking.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            AUMY is the growth system we run for dental &amp; aesthetic clinics. It captures every
+            AUMY is the growth system we run for dental clinics. It captures every
             enquiry, books it, wins back patients who drift away, and makes your ad spend work harder —
             with the recovered revenue proven on a live dashboard.
           </p>

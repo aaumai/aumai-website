@@ -202,7 +202,7 @@ const routes = [
         <h2>A dedicated growth expert runs it for you.</h2>
         <p>You are never handed a login and left to work it out. A growth expert is assigned to your clinic on a permanent basis — they learn how your practice runs, build the strategy, operate the entire system on your behalf, and review results with you every week. You get the outcome; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
-        <p>AUMY works best for dental, dermatology and aesthetics clinics serious about growth — from single-doctor practices to multi-chair centres — led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
+        <p>AUMY works best for dental clinics serious about growth — from single-doctor practices to multi-chair centres — led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
         <h2>Watch AUMY actually doing it.</h2>
         <p>Short, unedited demos of the live product - answering, booking, rescheduling and following up. New clip every day: <a href="https://www.youtube.com/watch?v=Jna2UXPxBmI">Watch the full 40-minute demo</a>.</p>
         <h2>Clinics are already growing with us.</h2>
@@ -221,7 +221,7 @@ const routes = [
     slug: 'revenue-generator',
     title: 'How AUMY Works — Recover Lost Clinic Revenue | AUM AI',
     description:
-      'AUMY recovers the revenue dental & aesthetic clinics leak every day: it captures every enquiry, books it, wins back patients who drift, feeds real bookings back to Meta so ads get smarter, and proves recovered revenue on a live dashboard.',
+      'AUMY recovers the revenue dental clinics leak every day: it captures every enquiry, books it, wins back patients who drift, feeds real bookings back to Meta so ads get smarter, and proves recovered revenue on a live dashboard.',
     canonical: `${ORIGIN}/revenue-generator`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     content: `
@@ -245,9 +245,9 @@ const routes = [
   },
   {
     slug: 'growth-audit',
-    title: 'Free Clinic Growth Audit for Dental & Aesthetic Clinics | AUM AI',
+    title: 'Free Clinic Growth Audit for Dental Clinics | AUM AI',
     description:
-      'A free growth audit for your dental or aesthetic clinic: where you rank on Google versus the clinics near you, how visible you are to new patients, and the specific gaps quietly costing you bookings. Prepared for your clinic within 24 hours.',
+      'A free growth audit for your dental clinic: where you rank on Google versus the clinics near you, how visible you are to new patients, and the specific gaps quietly costing you bookings. Prepared for your clinic within 24 hours.',
     canonical: `${ORIGIN}/growth-audit`,
     content: `
       <section class="ch-hero"><div class="ch-container">
@@ -264,9 +264,9 @@ const routes = [
   },
   {
     slug: 'leak-calculator',
-    title: 'Clinic Revenue Leak Calculator — Dental & Aesthetic | AUM AI',
+    title: 'Clinic Revenue Leak Calculator — Dental | AUM AI',
     description:
-      'A 60-second, deliberately conservative estimate of the revenue quietly leaking from your dental or aesthetic clinic — missed enquiries, no-shows, and patients who never come back.',
+      'A 60-second, deliberately conservative estimate of the revenue quietly leaking from your dental clinic — missed enquiries, no-shows, and patients who never come back.',
     canonical: `${ORIGIN}/leak-calculator`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
@@ -294,7 +294,7 @@ const routes = [
     slug: 'contact',
     title: 'Contact AUM AI — Clinic Growth & Healthcare Engineering',
     description:
-      'Talk to AUM AI: a growth strategy call for your dental or aesthetic clinic, or a build partner for your healthcare product. We reply within 24 hours.',
+      'Talk to AUM AI: a growth strategy call for your dental clinic, or a build partner for your healthcare product. We reply within 24 hours.',
     canonical: `${ORIGIN}/contact`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">

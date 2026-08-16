@@ -27,9 +27,9 @@ const LeakCalculator = () => {
             canonical: `${ORIGIN}/leak-calculator`,
           }
         : {
-            title: 'Clinic Revenue Leak Calculator — Dental & Aesthetic | AUM AI',
+            title: 'Clinic Revenue Leak Calculator — Dental | AUM AI',
             description:
-              'A 60-second, deliberately conservative estimate of the revenue quietly leaking from your dental or aesthetic clinic — missed enquiries, no-shows, and patients who never come back. Free, no sign-up.',
+              'A 60-second, deliberately conservative estimate of the revenue quietly leaking from your dental clinic — missed enquiries, no-shows, and patients who never come back. Free, no sign-up.',
             canonical: `${ORIGIN}/leak-calculator`,
           }
     );
