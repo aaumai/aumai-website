@@ -19,11 +19,13 @@ const heroStats = [
 
 // The four journey pillars (Convert → Care → Retain → Reactivate) — outcome
 // first; WhatsApp/phone/Instagram are channels inside them, never the story.
+// The pillars are the JOURNEY; `m` is the machinery underneath each — named
+// capabilities, so the page keeps up with what the product actually ships.
 const steps = [
-  { stage: 'Convert', t: 'Turn every enquiry into a booked patient', d: 'Instagram, WhatsApp, a missed call, your website, a walk-in — every enquiry answered in seconds, qualified, and followed up until it books or clearly declines. No-shows recovered, freed slots refilled.' },
-  { stage: 'Care', t: 'A structured journey after every treatment', d: 'Treatment Care Plans: your doctors define the treatment-specific follow-up — the day-1 recovery check, care tips, the one-month review — and AUMY delivers it consistently, flagging any reply that needs the clinic.' },
-  { stage: 'Retain', t: 'Keep patients engaged in ongoing care', d: 'Recalls, maintenance reminders and periodic check-ups — personal and on time, every time — with well-timed review prompts, so patients return and refer.' },
-  { stage: 'Reactivate', t: 'Bring back patients who fell out of the cycle', d: 'Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically — revenue you already paid to acquire, recovered.' },
+  { stage: 'Convert', t: 'Turn every enquiry into a booked patient', d: 'Instagram, WhatsApp, a missed call, your website, a walk-in — every enquiry answered in seconds, qualified, and followed up until it books or clearly declines.', m: 'AI Receptionist · Lead Nurture · Missed-Call Recovery · WhatsApp Booking' },
+  { stage: 'Care', t: 'A structured journey after every treatment', d: 'Your doctors define the treatment-specific follow-up — the day-1 recovery check, care tips, the one-month review — and AUMY delivers it consistently, flagging any reply that needs the clinic.', m: 'Treatment Care Plans · Day-by-Day Follow-up · Patient Check-ins' },
+  { stage: 'Retain', t: 'Keep patients engaged — before they drift', d: 'Recalls and maintenance on time, every time — and AUMY knows which patients are at risk of disappearing, so your clinic can intervene before they go dormant.', m: 'No-Show Reduction · Recall Automation · Predictive Retention' },
+  { stage: 'Reactivate', t: 'Bring back patients who already went quiet', d: 'Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically — revenue you already paid to acquire, recovered.', m: 'Dormant Reactivation · Overdue Recalls · Stalled Treatment Plans' },
 ];
 
 const capabilities = [
@@ -34,6 +36,8 @@ const capabilities = [
   { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.' },
   { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.' },
   { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.' },
+  { t: 'After-treatment care plans', d: 'Treatment-specific follow-up your doctors define — day-by-day guidance and scheduled check-ins after every major treatment.' },
+  { t: 'Predictive retention', d: 'Knows which patients are at risk of disappearing — churn risk and revenue-at-risk per patient — so you intervene before they go dormant.' },
   { t: 'Products & upsells, in the chat', d: 'Sells your packages and products right inside the conversation.' },
   { t: 'ROI dashboard', d: 'Every booking and rupee attributed.' },
 ];
@@ -127,9 +131,11 @@ const AumyRevenueGenerator = () => {
                 <span className="ch-eyebrow">{s.stage}</span>
                 <h3 className="ch-pillar-title">{s.t}</h3>
                 <p className="ch-pillar-body">{s.d}</p>
+                <p className="ch-pillar-machinery">{s.m}</p>
               </div>
             ))}
           </div>
+          <p className="ch-note ch-center">One patient journey. One operating system.</p>
         </div>
       </section>
 

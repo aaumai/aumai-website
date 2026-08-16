@@ -235,11 +235,12 @@ const routes = [
         <h2>Four stages, working as one — the entire patient journey.</h2>
         <p>AUMY is the AI Patient Journey &amp; Revenue Operating System for dental clinics: from first enquiry to treatment, after-treatment care, recall and reactivation.</p>
         <ul>
-          <li><strong>CONVERT — turn every enquiry into a booked patient.</strong> Instagram, WhatsApp, a missed call, your website, a walk-in — answered in seconds, qualified, followed up until it books or clearly declines; no-shows recovered and slots refilled.</li>
-          <li><strong>CARE — a structured journey after every treatment.</strong> Treatment Care Plans: your doctors define the treatment-specific follow-up — day-1 recovery check, care tips, the one-month review — and AUMY delivers it consistently, flagging replies that need the clinic.</li>
-          <li><strong>RETAIN — keep patients engaged in ongoing care.</strong> Recalls, maintenance reminders and periodic check-ups, personal and on time, with well-timed review prompts.</li>
-          <li><strong>REACTIVATE — bring back patients who fell out of the cycle.</strong> Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically.</li>
+          <li><strong>CONVERT — turn every enquiry into a booked patient.</strong> Instagram, WhatsApp, a missed call, your website, a walk-in — answered in seconds, qualified, followed up until it books or clearly declines. (AI Receptionist · Lead Nurture · Missed-Call Recovery · WhatsApp Booking)</li>
+          <li><strong>CARE — a structured journey after every treatment.</strong> Your doctors define the treatment-specific follow-up — day-1 recovery check, care tips, the one-month review — and AUMY delivers it consistently, flagging replies that need the clinic. (Treatment Care Plans · Day-by-Day Follow-up · Patient Check-ins)</li>
+          <li><strong>RETAIN — keep patients engaged before they drift.</strong> Recalls and maintenance on time — and AUMY knows which patients are at risk of disappearing, so the clinic intervenes before they go dormant. (No-Show Reduction · Recall Automation · Predictive Retention)</li>
+          <li><strong>REACTIVATE — bring back patients who already went quiet.</strong> Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically. (Dormant Reactivation · Overdue Recalls · Stalled Treatment Plans)</li>
         </ul>
+        <p><strong>One patient journey. One operating system.</strong> Retention prevents the patient from disappearing; reactivation brings them back after they have.</p>
         <h2>And your marketing gets smarter.</h2>
         <p>On top of the four stages, a growth flywheel: when a lead becomes a real patient, AUMY feeds that conversion back to Meta &amp; Google — so your campaigns optimise toward people who actually book and show up. Privacy-safe, no patient data exposed.</p>
       </div></section>`,
