@@ -112,9 +112,9 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Conversion & Revenue Recovery for Dental Clinics',
+      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Journey & Revenue OS for Dental Clinics',
       description:
-        'AUMY is the AI Patient Conversion & Revenue Recovery System for dental clinics: every call and message answered in seconds, every lead followed up until it books, no-shows recovered, dormant patients reactivated — automatically. Stop losing revenue you already earned.',
+        'AUMY is the AI Patient Journey & Revenue Operating System for Dental Clinics: every call and message answered in seconds, every lead followed up until it books, no-shows recovered, dormant patients reactivated — automatically. Stop losing revenue you already earned.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -126,7 +126,7 @@ const Home = () => {
       <section className="ch-hero">
         <div className="ch-container ch-hero-grid">
           <div className="ch-hero-text">
-            <span className="ch-eyebrow">The AI Patient Conversion &amp; Revenue Recovery System for dental clinics</span>
+            <span className="ch-eyebrow">The AI Patient Journey &amp; Revenue Operating System for Dental Clinics</span>
             <h1 className="ch-hero-title">
               Never lose revenue to missed calls &amp; follow-ups&nbsp;again.
             </h1>

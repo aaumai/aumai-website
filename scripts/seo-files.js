@@ -108,8 +108,10 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 const LLMS = {
   in: `# AUM AI — AUMY for dental & aesthetic clinics (India)
 
-> AUMY is an AI growth system for dental, dermatology and aesthetic
-> clinics in India — from single-doctor practices to multi-chair centres. It captures every patient enquiry (WhatsApp, Instagram,
+> AUMY — The AI Patient Journey & Revenue Operating System for Dental
+> Clinics. One system across the whole patient journey (Convert → Care →
+> Retain → Reactivate) for dental, dermatology and aesthetic clinics in
+> India — from single-doctor practices to multi-chair centres. It captures every patient enquiry (WhatsApp, Instagram,
 > missed calls, website), books appointments 24/7 with an AI receptionist,
 > recovers no-shows, wins back lapsed patients, manages Google Business Profile
 > and reviews, and feeds real bookings back to Meta and Google so ad spend

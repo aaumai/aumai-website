@@ -51,9 +51,9 @@ const hipaa = [
 const HomeUS = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Conversion & Revenue Recovery for Dental Practices',
+      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Journey & Revenue OS for Dental Practices',
       description:
-        'AUMY is the AI Patient Conversion & Revenue Recovery System for dental practices: every call and text answered in seconds, every lead followed up until it books, no-shows and overdue hygiene recalls recovered automatically — $120,000+ a year for a typical practice. HIPAA-compliant by design.',
+        'AUMY is the AI Patient Journey & Revenue Operating System for Dental Practices: every call and text answered in seconds, every lead followed up until it books, no-shows and overdue hygiene recalls recovered automatically — $120,000+ a year for a typical practice. HIPAA-compliant by design.',
       canonical: 'https://aumyai.com/',
     });
   }, []);
@@ -84,7 +84,7 @@ const HomeUS = () => {
       {/* HERO */}
       <section className="ch-hero">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">The AI Patient Conversion &amp; Revenue Recovery System for dental practices</span>
+          <span className="ch-eyebrow">The AI Patient Journey &amp; Revenue Operating System for Dental Practices</span>
           <h1 className="ch-hero-title">Never lose revenue to missed calls &amp; follow-ups&nbsp;again.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
             Every call and text answered <strong>in seconds — 2&nbsp;PM or 2&nbsp;AM</strong>. Every lead
@@ -343,7 +343,7 @@ const HomeUS = () => {
       <footer className="us-footer">
         <img src="/aumy-lockup-light.png" alt="Aumy" className="us-logo us-logo-footer" />
         <p className="us-footer-line">
-          AI Patient Conversion &amp; Revenue Recovery · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
+          AI Patient Journey &amp; Revenue OS · <a href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a> · <a href="tel:+13072635098">+1 (307) 263-5098</a>
         </p>
         <p className="us-footer-line">
           AUM AI Healthcare Technology LLC · 30 N Gould St, Ste N, Sheridan, WY 82801
