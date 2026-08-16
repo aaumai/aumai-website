@@ -59,7 +59,7 @@ const pillars = [
   },
   {
     title: 'A front desk that never clocks out',
-    body: 'It all runs 24/7 — nights, Sundays, festival weeks — the way your sharpest receptionist would, without another hire. Your team walks in to a fuller calendar, not a longer to-do list.',
+    body: 'It all runs 24/7 — nights, Sundays, festival weeks — across WhatsApp and phone, taking your inbound calls and making the outbound ones, the way your sharpest receptionist would, without another hire. Your team walks in to a fuller calendar, not a longer to-do list.',
   },
 ];
 
@@ -122,8 +122,9 @@ const Home = () => {
             <p className="ch-hero-sub">
               AUMY answers every call and message in seconds, follows up with every lead until it books,
               recovers no-shows and due recalls, and reactivates patients who have gone quiet —
-              automatically. The patient opportunities your clinic already paid for, converted instead
-              of&nbsp;lost.
+              automatically, across both WhatsApp and phone: answering your inbound calls and messages,
+              and making the outbound calls too. The patient opportunities your clinic already paid for,
+              converted instead of&nbsp;lost.
             </p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
