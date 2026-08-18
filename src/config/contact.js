@@ -33,7 +33,7 @@ export const INDIA_OFFICE = {
 export const INDIA_WHATSAPP = {
   number: '918007189868',
   display: '+91 80071 89868',
-  prefill: "Hi! I'm on the AUM AI website and would like to chat.",
+  prefill: "Hi, I'd like to see how AUMY can help grow my dental practice.",
 };
 
 // India build lists India first (home market), then the US office.

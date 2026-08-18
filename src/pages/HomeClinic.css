@@ -81,6 +81,8 @@
 /* HERO */
 .ch-hero { padding: 48px 0 84px; background: linear-gradient(180deg, #ffffff 0%, var(--c-bg) 100%); }
 .ch-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+.ch-hero-accent { color: var(--c-accent-dark); }
+
 .ch-hero-title {
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.08;

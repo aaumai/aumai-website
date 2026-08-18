@@ -48,9 +48,9 @@ const leakCloses = [
   { leak: 'A treatment plan stalls', aumy: 'AUMY follows up until it books' },
 ];
 
-// The four stages of the patient journey — the product architecture
-// (Convert → Care → Retain → Reactivate). Every capability on the page is
-// machinery underneath one of these four.
+// The five stages of the patient journey — the product architecture
+// (Convert → Care → Retain → Reactivate → Grow). Every capability on the
+// page is machinery underneath one of these five.
 const pillars = [
   {
     stage: 'Convert',
@@ -72,6 +72,11 @@ const pillars = [
     title: 'Win back patients who drifted away',
     body: 'Dormant patients, overdue recalls and stalled treatment plans are re-engaged automatically — revenue you already paid to acquire, recovered instead of written off.',
   },
+  {
+    stage: 'Grow',
+    title: 'Grow your reputation and reach',
+    body: 'Happy patients become Google reviews — asked at the right moment, and every review answered in your voice. Your profile climbs, your Instagram and YouTube presence compounds, and the next patient finds you first.',
+  },
 ];
 
 const whyUs = [
@@ -82,7 +87,7 @@ const whyUs = [
 ];
 
 const faqs = [
-  { q: 'How does the 10-day free trial work?', a: 'We set AUMY up on your clinic and you watch it work for 10 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.' },
+  { q: 'How does the 30-day free trial work?', a: 'We set AUMY up on your clinic and you watch it work for 30 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.' },
   { q: 'Do I have to replace my current software?', a: 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
@@ -112,9 +117,9 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Journey & Revenue OS for Dental Clinics',
+      title: 'AUMY — The Next-Generation Dental Platform | AI Patient Journey & Revenue OS for Dental Clinics',
       description:
-        'AUMY is the AI Patient Journey & Revenue Operating System for Dental Clinics: every call and message answered in seconds, every lead followed up until it books, no-shows recovered, dormant patients reactivated — automatically. Stop losing revenue you already earned.',
+        'Your dental software keeps records. AUMY grows your practice: enquiries converted, patients cared for after treatment, recalls kept, dormant patients reactivated, reviews and reach growing — automatically, even while you sleep. The AI Patient Journey & Revenue Operating System for Dental Clinics.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -128,25 +133,24 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">The AI Patient Journey &amp; Revenue Operating System for Dental Clinics</span>
             <h1 className="ch-hero-title">
-              Never lose revenue to missed calls &amp; follow-ups&nbsp;again.
+              Your software keeps records. <span className="ch-hero-accent">AUMY grows your practice.</span>
             </h1>
             <p className="ch-hero-sub">
-              <strong>Turn more enquiries into patients. Deliver better post-treatment care. Bring
-              patients back.</strong> AUMY runs the entire journey automatically — across WhatsApp and
-              phone, answering your inbound calls and messages and making the outbound ones — so the
-              patient opportunities your clinic already paid for convert instead of&nbsp;leak.
+              <strong>Welcome to the next generation of dentistry.</strong> AUMY converts your
+              enquiries, cares for patients after treatment, brings them back on time, wins back the
+              ones who drifted, and grows your reviews and reach — automatically, across WhatsApp and
+              phone. Your practice grows even while you&nbsp;sleep.
             </p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
-                Start my 10-day free trial
+                Start my 30-day free trial
               </Link>
               <Link to="/growth-audit" className="ch-btn ch-btn-ghost">
                 Get my free Clinic Growth Audit
               </Link>
             </div>
             <p className="ch-hero-trust">
-              10 days free · no obligation · we set everything up for you · built only for dental
-              clinics · NVIDIA Inception member
+              30 days free · no obligation · we set everything up for you · limited implementation capacity · built only for dental clinics · NVIDIA Inception member
             </p>
           </div>
 
@@ -460,17 +464,17 @@ const Home = () => {
       {/* OFFER — dark accent band */}
       <section className="ch-offer">
         <div className="ch-container ch-center">
-          <h2 className="ch-offer-title">Try AUMY free for 10 days — see the difference yourself.</h2>
+          <h2 className="ch-offer-title">Try AUMY free for 30 days — see the difference yourself.</h2>
           <p className="ch-offer-sub">
             We set AUMY up on your clinic — the AI receptionist answering and booking, the follow-ups,
-            the reviews — and you watch it work for 10 days alongside everything you use today. If the
+            the reviews — and you watch it work for 30 days alongside everything you use today. If the
             difference convinces you, we continue. If not, you walk away — no charges, no lock-in,
             no obligation to stay. Prefer to start smaller? Get a free Clinic Growth Audit first:
             where you rank on Google versus the clinics near you, and the specific gaps quietly
             costing you bookings — on your WhatsApp within 24 hours.
           </p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/contact" className="ch-btn ch-btn-primary">Start my 10-day free trial</Link>
+            <Link to="/contact" className="ch-btn ch-btn-primary">Start my 30-day free trial</Link>
             <Link to="/growth-audit" className="ch-btn ch-btn-ghost ch-ghost-light">Get my free Clinic Growth Audit</Link>
           </div>
         </div>
