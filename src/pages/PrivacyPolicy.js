@@ -277,6 +277,37 @@ const PrivacyPolicy = () => {
           </section>
 
           <section style={{ marginBottom: '30px' }}>
+            <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>6A. Google user data — Business Profile disclosures</h2>
+            <p style={{ marginBottom: '15px' }}>
+              Clinics can connect their own <strong>Google Business Profile</strong> to AUMY via
+              Google sign-in (OAuth). When a clinic does this, our use of information received
+              from Google APIs adheres to the{' '}
+              <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noreferrer">
+                Google API Services User Data Policy
+              </a>, including the Limited Use requirements. Specifically:
+            </p>
+            <ul style={{ marginLeft: '20px', marginBottom: '15px' }}>
+              <li><strong>What we access:</strong> the list of Business Profile accounts and
+                locations the signed-in user manages (used once, at connection time, so the
+                clinic can pick its own listing); profile performance metrics (views, calls,
+                direction requests, website clicks); the listing&apos;s reviews; and the ability
+                to publish owner replies and local posts on that listing.</li>
+              <li><strong>How we use it:</strong> solely to power the clinic&apos;s own dashboard —
+                showing performance and reviews, posting the review replies and updates the
+                clinic composes or approves. Google user data is never used for advertising,
+                never sold, never shared with other customers or third parties, and never used
+                to train AI models.</li>
+              <li><strong>Storage:</strong> OAuth tokens are stored encrypted, scoped to one
+                clinic and one listing. Review content and metrics are stored to power that
+                clinic&apos;s dashboard and reply history only.</li>
+              <li><strong>Deletion:</strong> the clinic can disconnect Google Business Profile at
+                any time from within the app; stored Google tokens are deleted immediately.
+                Clinics may also request full deletion of associated data via our{' '}
+                <a href="/data-deletion">data-deletion process</a>.</li>
+            </ul>
+          </section>
+
+          <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>7. Data location and transfers</h2>
             <p style={{ marginBottom: '15px' }}>
               Our primary database and application servers run in AWS ap-south-1 (Mumbai) for
