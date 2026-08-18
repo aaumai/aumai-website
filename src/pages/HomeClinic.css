@@ -83,6 +83,14 @@
 .ch-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
 .ch-hero-accent { color: var(--c-accent-dark); }
 
+.ch-hero-chain {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--c-accent-dark);
+  margin: 0 0 26px;
+}
+
 .ch-hero-title {
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.08;

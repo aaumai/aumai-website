@@ -117,9 +117,9 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY — The Next-Generation Dental Platform | AI Patient Journey & Revenue OS for Dental Clinics',
+      title: 'AUMY — The Next-Gen Dental Platform | Convert · Care · Retain · Reactivate · Grow',
       description:
-        'Your dental software keeps records. AUMY grows your practice: enquiries converted, patients cared for after treatment, recalls kept, dormant patients reactivated, reviews and reach growing — automatically, even while you sleep. The AI Patient Journey & Revenue Operating System for Dental Clinics.',
+        'AUMY — The Next-Gen Dental Platform. AI-powered patient engagement and practice growth: convert more enquiries, deliver personalised after-treatment care, keep patients coming back, reactivate the ones who drifted, and grow your practice — even while you sleep.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -131,16 +131,17 @@ const Home = () => {
       <section className="ch-hero">
         <div className="ch-container ch-hero-grid">
           <div className="ch-hero-text">
-            <span className="ch-eyebrow">The AI Patient Journey &amp; Revenue Operating System for Dental Clinics</span>
+            <span className="ch-eyebrow">The Next-Gen Dental Platform</span>
             <h1 className="ch-hero-title">
               Your software keeps records. <span className="ch-hero-accent">AUMY grows your practice.</span>
             </h1>
             <p className="ch-hero-sub">
-              <strong>Welcome to the next generation of dentistry.</strong> AUMY converts your
+              <strong>AI-powered patient engagement and practice growth.</strong> AUMY converts your
               enquiries, cares for patients after treatment, brings them back on time, wins back the
-              ones who drifted, and grows your reviews and reach — automatically, across WhatsApp and
-              phone. Your practice grows even while you&nbsp;sleep.
+              ones who drifted — and grows your reviews, reach and revenue. Automatically, even while
+              you&nbsp;sleep.
             </p>
+            <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE → GROW</p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
                 Start my 30-day free trial
