@@ -67,7 +67,7 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    ['How does the 10-day free trial work?', 'We set AUMY up on your clinic and you watch it work for 10 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.'],
+    ['How does the 30-day free trial work?', 'We set AUMY up on your clinic and you watch it work for 30 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.'],
     ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
     ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
@@ -162,9 +162,9 @@ const videoLd = {
 const routes = [
   {
     slug: '',
-    title: 'AUMY — Never Lose Revenue to Missed Calls & Follow-Ups | AI Patient Journey & Revenue OS for Dental Clinics',
+    title: 'AUMY — The Next-Gen Dental Platform | Convert · Care · Retain · Reactivate · Grow',
     description:
-      'AUMY is the AI Patient Journey & Revenue Operating System for Dental Clinics — every call and message answered in seconds, every lead followed up until it books, missed appointments, due recalls and dormant patients recovered automatically. Live in clinics; one grew 20–25% in 2–3 months.',
+      'AUMY — The Next-Gen Dental Platform. AI-powered patient engagement and practice growth: convert more enquiries, deliver personalised after-treatment care, keep patients coming back, reactivate the ones who drifted, and grow your practice — even while you sleep.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
@@ -173,10 +173,10 @@ const routes = [
         <p><strong>See it for yourself — live.</strong> Message our AI receptionist for a demo dental clinic on WhatsApp at +91 80071 89868 and watch it answer, book, reschedule and cancel appointments, 24/7. No sign-up — just say hello.</p>
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">The AI Patient Journey & Revenue Operating System for Dental Clinics</p>
-        <h1 class="ch-hero-title">Never lose revenue to missed calls &amp; follow-ups again.</h1>
-        <p class="ch-hero-sub">Turn more enquiries into patients. Deliver better post-treatment care. Bring patients back. AUMY runs the entire journey automatically — across WhatsApp and phone — so the patient opportunities your clinic already paid for convert instead of leak.</p>
-        <p><a href="/contact">Start my 10-day free trial</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
+        <p class="ch-eyebrow">The Next-Gen Dental Platform</p>
+        <h1 class="ch-hero-title">Your software keeps records. AUMY grows your practice.</h1>
+        <p class="ch-hero-sub">AI-powered patient engagement and practice growth. AUMY converts your enquiries, cares for patients after treatment, brings them back on time, wins back the ones who drifted — and grows your reviews, reach and revenue. Automatically, even while you sleep. CONVERT → CARE → RETAIN → REACTIVATE → GROW.</p>
+        <p><a href="/contact">Start my 30-day free trial</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>Dentistry changed. Great work and a good location are no longer enough.</h2>
@@ -190,14 +190,15 @@ const routes = [
           <li>You spend on ads every month — shown to the same people — with no idea which ones become patients.</li>
         </ul>
         <h2>One system. The entire patient journey.</h2>
-        <p>From first enquiry to ongoing care, AUMY manages the patient relationship beyond the appointment — four stages, one connected engine:</p>
+        <p>From first enquiry to ongoing care, AUMY manages the patient relationship beyond the appointment — five stages, one connected engine:</p>
         <ul>
           <li><strong>CONVERT — turn enquiries into booked patients.</strong> Every enquiry from WhatsApp, Instagram, a missed call or your website answered in seconds, 24/7, across chat and phone; leads followed up until they book, no-shows recovered and refilled.</li>
           <li><strong>CARE — look after patients beyond the chair.</strong> Treatment Care Plans: your doctors define what a patient should hear after an implant, a root canal or whitening — the day-1 recovery check, care tips, the one-month follow-up — and AUMY delivers it consistently, flagging replies that need the clinic.</li>
           <li><strong>RETAIN — bring patients back for ongoing care.</strong> Cleaning recalls, periodic check-ups and treatment maintenance, sent personally and on time.</li>
           <li><strong>REACTIVATE — win back patients who drifted away.</strong> Dormant patients, overdue recalls and stalled treatment plans re-engaged automatically.</li>
+          <li><strong>GROW — reputation and reach that compound.</strong> Happy patients become Google reviews, every review gets a reply, and your Instagram and YouTube presence grows — so the next patient finds you first.</li>
         </ul>
-        <p>Underneath the four stages sits the machinery: the AI receptionist across WhatsApp and phone, Google Business Profile and reviews, Instagram and Facebook, the Content Studio, and ad spend that learns from real bookings via the Conversions API.</p>
+        <p>Underneath the five stages sits the machinery: the AI receptionist across WhatsApp and phone, Google Business Profile and reviews, Instagram and Facebook, the Content Studio, and ad spend that learns from real bookings via the Conversions API.</p>
         <p>None of this is a one-off push. Every patient captured, review earned and slot saved feeds the next — organic growth that builds on itself, month after month.</p>
         <h2>A dedicated growth expert runs it for you.</h2>
         <p>You are never handed a login and left to work it out. A growth expert is assigned to your clinic on a permanent basis — they learn how your practice runs, build the strategy, operate the entire system on your behalf, and review results with you every week. You get the outcome; they carry the work.</p>
@@ -207,10 +208,10 @@ const routes = [
         <p>Short, unedited demos of the live product - answering, booking, rescheduling and following up. New clip every day: <a href="https://www.youtube.com/watch?v=Jna2UXPxBmI">Watch the full 40-minute demo</a>.</p>
         <h2>Clinics are already growing with us.</h2>
         <p>Vinayaka Dental Care grew revenue about 25% in two months without hiring a single extra person. Vinayaka Derma keeps a 4.9-star Google rating with recalls and follow-ups running automatically. AUM AI is an NVIDIA Inception member.</p>
-        <h2>Try AUMY free for 10 days — see the difference yourself.</h2>
-        <p>We set AUMY up on your clinic and you watch it work for 10 days alongside everything you use today — real enquiries answered, real bookings made. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
+        <h2>Try AUMY free for 30 days — see the difference yourself.</h2>
+        <p>We set AUMY up on your clinic and you watch it work for 30 days alongside everything you use today — real enquiries answered, real bookings made. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
         <h2>Questions clinic owners ask</h2>
-        <p><strong>How does the 10-day free trial work?</strong> We set AUMY up on your clinic and you watch it work for 10 days. Continue only if you see the difference — no charges, no lock-in, and your data stays yours.</p>
+        <p><strong>How does the 30-day free trial work?</strong> We set AUMY up on your clinic and you watch it work for 30 days. Continue only if you see the difference — no charges, no lock-in, and your data stays yours.</p>
         <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use.</p>
         <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>
         <p><strong>Is this a product or a service?</strong> Both — a proven system (AUMY), run and tailored for you by a partner.</p>
