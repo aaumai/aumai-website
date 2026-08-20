@@ -24,6 +24,7 @@ const Footer = () => {
   // but are intentionally not linked anywhere on the AUMY site.
   const company = [
     { label: 'Aumy — How It Works', path: '/revenue-generator' },
+    { label: 'Watch Demo Videos', path: '/demos' },
     { label: 'Dental Practice Growth Hub', path: '/growth' },
     { label: 'Podcast — Be a Guest', path: '/podcast' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },

@@ -42,6 +42,7 @@ const SITEMAPS = {
     ['/missed-call-calculator', 0.8, 'monthly'],
     ...CALCULATORS.map((c) => [`/${c.slug}`, 0.8, 'monthly']),
     ['/revenue-generator', 0.9, 'weekly'],
+    ['/demos', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
     ['/growth', 0.8, 'weekly'],
     ['/podcast', 0.7, 'monthly'],
