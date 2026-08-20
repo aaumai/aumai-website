@@ -36,10 +36,20 @@
   .dv-card-large .dv-body { align-self: center; }
 }
 
+/* Strict 2-across grid (3 rows: 5 videos + the CTA cell); single column on phones. */
 .dv-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+}
+@media (max-width: 760px) {
+  .dv-grid { grid-template-columns: 1fr; }
+}
+.dv-cta-cell {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .dv-frame {

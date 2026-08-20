@@ -92,9 +92,6 @@ const DemosPage = () => {
     document.title = 'Watch Aumy in Action — Demo Videos | AUMY by AUM AI';
   }, []);
 
-  const featured = VIDEOS.find((v) => v.featured);
-  const rest = VIDEOS.filter((v) => !v.featured);
-
   return (
     <div className="ch-home dv-page">
       <section className="dv-hero">
@@ -113,22 +110,21 @@ const DemosPage = () => {
 
       <section className="dv-list-section">
         <div className="ch-container">
-          {featured && <VideoCard video={featured} large />}
+          {/* 2 × 3 grid: all five videos, CTA card fills the sixth cell. */}
           <div className="dv-grid">
-            {rest.map((v) => (
+            {VIDEOS.map((v) => (
               <VideoCard key={v.id} video={v} />
             ))}
-          </div>
-
-          <div className="dv-cta">
-            <h2 className="dv-cta-title">Want this running in your clinic?</h2>
-            <p className="dv-cta-sub">
-              Start with the free Revenue Leak Audit — we’ll show you exactly how much your
-              clinic loses to missed calls, no-shows and silent patients, before you spend a rupee.
-            </p>
-            <div className="dv-cta-row">
-              <Link to="/growth-audit" className="dv-btn dv-btn-primary">Get my free Leak Audit</Link>
-              <Link to="/contact" className="dv-btn dv-btn-ghost">Book a live demo</Link>
+            <div className="dv-cta dv-cta-cell">
+              <h2 className="dv-cta-title">Want this running in your clinic?</h2>
+              <p className="dv-cta-sub">
+                Start with the free Revenue Leak Audit — we’ll show you exactly how much your
+                clinic loses to missed calls, no-shows and silent patients, before you spend a rupee.
+              </p>
+              <div className="dv-cta-row">
+                <Link to="/growth-audit" className="dv-btn dv-btn-primary">Get my free Leak Audit</Link>
+                <Link to="/contact" className="dv-btn dv-btn-ghost">Book a live demo</Link>
+              </div>
             </div>
           </div>
         </div>
