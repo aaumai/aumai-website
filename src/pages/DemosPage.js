@@ -47,6 +47,20 @@ const VIDEOS = [
     blurb:
       'An AI before/after of the patient’s own smile, right in the consultation — watch case acceptance change.',
   },
+  {
+    id: 'j8QNTdVCdBM',
+    tag: 'WhatsApp booking',
+    title: 'A patient books at 8 pm. Nobody was at the desk.',
+    blurb:
+      'A real WhatsApp enquiry after hours — answered, offered slots and booked by Aumy while the clinic was closed.',
+  },
+  {
+    id: 'tc9tHwcvtXI',
+    tag: 'Voice agent',
+    title: 'The AI receptionist that answers the phone',
+    blurb:
+      'A live call: Aumy answers, checks availability, books the appointment and confirms — in the caller’s own language.',
+  },
 ];
 
 function VideoCard({ video, large }) {
@@ -101,7 +115,7 @@ const DemosPage = () => {
             Watch Aumy run a clinic — <span className="dv-accent">live, unscripted</span>
           </h1>
           <p className="ch-lead ch-center-lead">
-            Real screens, real WhatsApp messages, real bookings. Five short videos that show
+            Real screens, real WhatsApp messages, real bookings. A growing set of short videos that shows
             exactly what your clinic gets — from the first patient enquiry to the campaign
             that brings sleeping patients back.
           </p>
@@ -110,7 +124,7 @@ const DemosPage = () => {
 
       <section className="dv-list-section">
         <div className="ch-container">
-          {/* 2 × 3 grid: all five videos, CTA card fills the sixth cell. */}
+          {/* 3-across grid: every demo video, CTA card fills the last cell. */}
           <div className="dv-grid">
             {VIDEOS.map((v) => (
               <VideoCard key={v.id} video={v} />
