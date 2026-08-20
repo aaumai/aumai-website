@@ -13,18 +13,11 @@ import './DemosPage.css';
 
 const VIDEOS = [
   {
-    id: '3YNUFjUPRwk',
-    tag: 'Full demo',
-    title: 'The complete platform — one unedited take',
+    id: 'ggKaTSgI1RY',
+    tag: 'Campaigns',
+    title: 'A patient campaign, built in one sentence',
     blurb:
-      'Enquiry answered and booked by AI, a visit documented by voice — chart, prescription and all — and a re-engagement campaign built in one sentence. No cuts, because the product doesn’t need them.',
-    featured: true,
-  },
-  {
-    id: 'Jna2UXPxBmI',
-    tag: 'Quick tour',
-    title: 'The 3-minute version',
-    blurb: 'What a clinic day looks like when the busywork runs itself.',
+      '“Bring back patients who haven’t visited in 6 months with a ₹499 package.” Audience, message and schedule — generated, approved, sent.',
   },
   {
     id: 'oPEfQT9iDww',
@@ -34,11 +27,10 @@ const VIDEOS = [
       'One dictation becomes the SOAP note, diagnosis, prescription, tooth-marked dental chart and the follow-up visit — reviewed and signed by the doctor.',
   },
   {
-    id: 'ggKaTSgI1RY',
-    tag: 'Campaigns',
-    title: 'A patient campaign, built in one sentence',
-    blurb:
-      '“Bring back patients who haven’t visited in 6 months with a ₹499 package.” Audience, message and schedule — generated, approved, sent.',
+    id: 'Jna2UXPxBmI',
+    tag: 'Quick tour',
+    title: 'The 3-minute version',
+    blurb: 'What a clinic day looks like when the busywork runs itself.',
   },
   {
     id: '7nAyyKgOtKg',
@@ -60,6 +52,14 @@ const VIDEOS = [
     title: 'The AI receptionist that answers the phone',
     blurb:
       'A live call: Aumy answers, checks availability, books the appointment and confirms — in the caller’s own language.',
+  },
+  {
+    id: '3YNUFjUPRwk',
+    tag: 'Full demo',
+    title: 'The complete platform — one unedited take',
+    blurb:
+      'Enquiry answered and booked by AI, a visit documented by voice — chart, prescription and all — and a re-engagement campaign built in one sentence. No cuts, because the product doesn’t need them.',
+    featured: true,
   },
 ];
 
