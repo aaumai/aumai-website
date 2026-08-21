@@ -13,6 +13,14 @@ import './DemosPage.css';
 
 const VIDEOS = [
   {
+    id: 'ogdXmK0CuqM',
+    tag: 'Day in the life',
+    title: 'A day in your clinic, run on AI',
+    blurb:
+      'From the first missed call to the patient you almost lost — watch Aumy convert, care, retain, reactivate and grow across one full clinic day.',
+    featured: true,
+  },
+  {
     id: 'ggKaTSgI1RY',
     tag: 'Campaigns',
     title: 'A patient campaign, built in one sentence',
