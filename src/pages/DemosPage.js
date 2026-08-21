@@ -13,12 +13,18 @@ import './DemosPage.css';
 
 const VIDEOS = [
   {
-    id: 'ogdXmK0CuqM',
-    tag: 'Day in the life',
-    title: 'A day in your clinic, run on AI',
+    id: 'tc9tHwcvtXI',
+    tag: 'Voice agent',
+    title: 'The AI receptionist that answers the phone',
     blurb:
-      'From the first missed call to the patient you almost lost — watch Aumy convert, care, retain, reactivate and grow across one full clinic day.',
-    featured: true,
+      'A live call: Aumy answers, checks availability, books the appointment and confirms — in the caller’s own language.',
+  },
+  {
+    id: 'j8QNTdVCdBM',
+    tag: 'WhatsApp booking',
+    title: 'A patient books at 8 pm. Nobody was at the desk.',
+    blurb:
+      'A real WhatsApp enquiry after hours — answered, offered slots and booked by Aumy while the clinic was closed.',
   },
   {
     id: 'ggKaTSgI1RY',
@@ -26,6 +32,14 @@ const VIDEOS = [
     title: 'A patient campaign, built in one sentence',
     blurb:
       '“Bring back patients who haven’t visited in 6 months with a ₹499 package.” Audience, message and schedule — generated, approved, sent.',
+  },
+  {
+    id: 'ogdXmK0CuqM',
+    tag: 'Day in the life',
+    title: 'A day in your clinic, run on AI',
+    blurb:
+      'From the first missed call to the patient you almost lost — watch Aumy convert, care, retain, reactivate and grow across one full clinic day.',
+    featured: true,
   },
   {
     id: 'oPEfQT9iDww',
@@ -46,20 +60,6 @@ const VIDEOS = [
     title: 'Show the new smile before the treatment',
     blurb:
       'An AI before/after of the patient’s own smile, right in the consultation — watch case acceptance change.',
-  },
-  {
-    id: 'j8QNTdVCdBM',
-    tag: 'WhatsApp booking',
-    title: 'A patient books at 8 pm. Nobody was at the desk.',
-    blurb:
-      'A real WhatsApp enquiry after hours — answered, offered slots and booked by Aumy while the clinic was closed.',
-  },
-  {
-    id: 'tc9tHwcvtXI',
-    tag: 'Voice agent',
-    title: 'The AI receptionist that answers the phone',
-    blurb:
-      'A live call: Aumy answers, checks availability, books the appointment and confirms — in the caller’s own language.',
   },
   {
     id: '3YNUFjUPRwk',
