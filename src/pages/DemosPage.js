@@ -15,13 +15,21 @@ const VIDEOS = [
   // Revenue + patient-journey demos only (owner directive 2026-08-23): the
   // clinical clips (documentation, smile simulation, charting) are deliberately
   // NOT here — we are known for revenue recovery and the patient journey.
+  // The hero demo leads everywhere (site, deck, AI employee).
+  {
+    id: '-qw1sp7Ub4k',
+    tag: 'The patient journey',
+    title: 'One patient, five stages, zero typing.',
+    blurb:
+      'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the recall, an eight-month-dormant patient won back with a ₹499 package, and the review ask that listens first. Convert → Care → Retain → Reactivate → Grow.',
+    featured: true,
+  },
   {
     id: 'ggKaTSgI1RY',
     tag: 'Reactivate',
     title: 'Tell Aumy what you want. It builds and runs the campaign.',
     blurb:
       '“Bring back patients who haven’t visited in 6–12 months for cleaning, X-ray and consultation.” Audience, messages, AI calls, follow-ups and tracking — generated and executed from one sentence.',
-    featured: true,
   },
   {
     id: 'Jna2UXPxBmI',
@@ -36,7 +44,6 @@ const VIDEOS = [
     title: 'A real clinic’s WhatsApp number. One unedited take.',
     blurb:
       'No edits, no staged messages, no slides — the whole patient journey on a live number, from first enquiry to the revenue going back to Meta and Google.',
-    featured: true,
   },
 ];
 
