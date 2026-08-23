@@ -12,61 +12,30 @@ import './DemosPage.css';
  */
 
 const VIDEOS = [
-  {
-    id: 'tc9tHwcvtXI',
-    tag: 'Voice agent',
-    title: 'The AI receptionist that answers the phone',
-    blurb:
-      'A live call: Aumy answers, checks availability, books the appointment and confirms — in the caller’s own language.',
-  },
-  {
-    id: 'j8QNTdVCdBM',
-    tag: 'WhatsApp booking',
-    title: 'A patient books at 8 pm. Nobody was at the desk.',
-    blurb:
-      'A real WhatsApp enquiry after hours — answered, offered slots and booked by Aumy while the clinic was closed.',
-  },
+  // Revenue + patient-journey demos only (owner directive 2026-08-23): the
+  // clinical clips (documentation, smile simulation, charting) are deliberately
+  // NOT here — we are known for revenue recovery and the patient journey.
   {
     id: 'ggKaTSgI1RY',
-    tag: 'Campaigns',
-    title: 'A patient campaign, built in one sentence',
+    tag: 'Reactivate',
+    title: 'Tell Aumy what you want. It builds and runs the campaign.',
     blurb:
-      '“Bring back patients who haven’t visited in 6 months with a ₹499 package.” Audience, message and schedule — generated, approved, sent.',
-  },
-  {
-    id: 'ogdXmK0CuqM',
-    tag: 'Day in the life',
-    title: 'A day in your clinic, run on AI',
-    blurb:
-      'From the first missed call to the patient you almost lost — watch Aumy convert, care, retain, reactivate and grow across one full clinic day.',
+      '“Bring back patients who haven’t visited in 6–12 months for cleaning, X-ray and consultation.” Audience, messages, AI calls, follow-ups and tracking — generated and executed from one sentence.',
     featured: true,
-  },
-  {
-    id: 'oPEfQT9iDww',
-    tag: 'AI documentation',
-    title: 'The dentist talks. Aumy documents.',
-    blurb:
-      'One dictation becomes the SOAP note, diagnosis, prescription, tooth-marked dental chart and the follow-up visit — reviewed and signed by the doctor.',
   },
   {
     id: 'Jna2UXPxBmI',
     tag: 'Quick tour',
-    title: 'The 3-minute version',
-    blurb: 'What a clinic day looks like when the busywork runs itself.',
-  },
-  {
-    id: '7nAyyKgOtKg',
-    tag: 'Smile simulation',
-    title: 'Show the new smile before the treatment',
+    title: 'A patient in pain messages at night. Nobody is at the clinic.',
     blurb:
-      'An AI before/after of the patient’s own smile, right in the consultation — watch case acceptance change.',
+      'Verified, rescheduled and confirmed before anyone opens the door — plus quoting prices, catching a hesitating patient, following up days later and bringing back an overdue one.',
   },
   {
     id: '3YNUFjUPRwk',
     tag: 'Full demo',
-    title: 'The complete platform — one unedited take',
+    title: 'A real clinic’s WhatsApp number. One unedited take.',
     blurb:
-      'Enquiry answered and booked by AI, a visit documented by voice — chart, prescription and all — and a re-engagement campaign built in one sentence. No cuts, because the product doesn’t need them.',
+      'No edits, no staged messages, no slides — the whole patient journey on a live number, from first enquiry to the revenue going back to Meta and Google.',
     featured: true,
   },
 ];

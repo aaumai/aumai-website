@@ -44,11 +44,11 @@ export const PLAYLIST_ID = 'PLZ8QbQSGNg1A';
  * visitor clicks and gets YouTube's "Video unavailable". That is exactly how the
  * first upload's removal went unnoticed on both live sites.
  */
-export const FEATURED_VIDEO_ID = 'Jna2UXPxBmI';
+export const FEATURED_VIDEO_ID = 'ggKaTSgI1RY';
 
 const DemoPlaylist = ({
-  title = 'Watch AUMY run a clinic for 40 minutes.',
-  lead = 'The full walkthrough, unedited — answering a patient at night, verifying who they are, moving an appointment, chasing a treatment that stalled. A real clinic’s number, in real time.',
+  title = 'Tell AUMY what you want. Watch it build and run the campaign.',
+  lead = 'One sentence — “bring back patients who haven’t visited in 6–12 months” — becomes the audience, the messages, the AI calls, the follow-ups and the tracking. Then the unedited live demos on a real clinic’s number.',
   eyebrow = 'Watch it work',
   posterSrc = '/images/hero-dental.jpg',
 }) => {
