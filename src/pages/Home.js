@@ -407,9 +407,10 @@ const Home = () => {
           <p className="ch-lead ch-center-lead">
             With every call answered and every patient followed up, growth compounds. AUMY keeps your
             Google profile, reviews and social presence working — every recovered patient becomes a
-            5-star review, and every review wins the next patient. And because AUMY connects your ads to
-            actual booked patients (not clicks), your ad budget learns who really becomes a patient —
-            so the same spend brings more of them.
+            5-star review, and every review wins the next patient. And your ads get a teacher: every
+            ad-clicked patient who books and pays is reported back to Meta with the treatment and the
+            value — so your ads graduate from finding people who click to finding people who pay, and
+            get smarter every month. Ads without that feedback loop stay dumb forever.
           </p>
           <p className="ch-note">
             That is the order that works: close the leaks first, then pour more in the top.
