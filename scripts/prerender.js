@@ -136,7 +136,7 @@ const demoVideoLd = {
   '@type': 'VideoObject',
   name: 'One Patient, Five Stages, Zero Typing \u2014 AUMY runs the whole dental patient journey on WhatsApp (live, unedited)',
   description:
-    'A live, unedited demo on a real dental clinic\u2019s WhatsApp number: a lead from an ad who says \u201clet me think about it\u201d, the unprompted follow-up and booking, day-one aligner aftercare, the tracking recall, an eight-month-dormant patient won back with a \u20b9499 wellness package, and a review ask that listens before asking. Convert, Care, Retain, Reactivate, Grow.',
+    'A live, unedited demo on a real dental clinic\u2019s WhatsApp number: a lead from an ad who says \u201clet me think about it\u201d, the unprompted follow-up and booking, day-one aligner aftercare, the tracking recall, an eight-month-dormant patient won back with a \u20b9999 wellness package, and a review ask that listens before asking. Convert, Care, Retain, Reactivate, Grow.',
   thumbnailUrl: 'https://i.ytimg.com/vi/-qw1sp7Ub4k/maxresdefault.jpg',
   embedUrl: 'https://www.youtube.com/embed/-qw1sp7Ub4k',
   contentUrl: 'https://www.youtube.com/watch?v=-qw1sp7Ub4k',

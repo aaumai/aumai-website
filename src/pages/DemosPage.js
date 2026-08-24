@@ -21,7 +21,7 @@ const VIDEOS = [
     tag: 'The patient journey',
     title: 'One patient, five stages, zero typing.',
     blurb:
-      'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the recall, an eight-month-dormant patient won back with a ₹499 package, and the review ask that listens first. Convert → Care → Retain → Reactivate → Grow.',
+      'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the recall, an eight-month-dormant patient won back with a ₹999 package, and the review ask that listens first. Convert → Care → Retain → Reactivate → Grow.',
     featured: true,
   },
   {
