@@ -43,7 +43,7 @@ const VIDEOS = [
     tag: 'Full demo',
     title: 'A real clinic’s WhatsApp number. One unedited take.',
     blurb:
-      'No edits, no staged messages, no slides — the whole patient journey on a live number, from first enquiry to the revenue going back to Meta and Google.',
+      'No edits, no staged messages, no slides — the whole patient journey on a live number, from first enquiry to the revenue showing up in the clinic dashboard, tied to the exact ad it came from.',
   },
 ];
 

@@ -145,12 +145,13 @@ const AumyRevenueGenerator = () => {
           <span className="ch-eyebrow">And your marketing gets smarter</span>
           <h2 className="ch-h2">Your ads learn from your real patients.</h2>
           <p className="ch-lead">
-            On top of the four stages, a growth flywheel: when a lead becomes a real patient, AUMY
-            feeds that conversion back to Meta &amp; Google — so your campaigns optimise toward
-            people who actually book and show up, not people who just click.
+            On top of the four stages, a growth flywheel: when a lead becomes a real patient, AUMY&rsquo;s
+            private attribution ties that revenue to the exact ad and audience — so you put budget
+            where paying patients come from. Meta &amp; Google only ever see anonymous lead
+            signals: treatment and health details never leave the clinic.
           </p>
           <ul className="ch-mini" style={{ display: 'inline-grid', textAlign: 'left' }}>
-            <li><Check /> Real bookings sent server-side — not clicks a pixel guessed at</li>
+            <li><Check /> Revenue tracked per ad inside AUMY — not clicks a pixel guessed at</li>
             <li><Check /> Cost per genuine lead drops as lead quality climbs</li>
             <li><Check /> It compounds every month — privacy-safe, no patient data exposed</li>
           </ul>

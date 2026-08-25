@@ -407,10 +407,11 @@ const Home = () => {
           <p className="ch-lead ch-center-lead">
             With every call answered and every patient followed up, growth compounds. AUMY keeps your
             Google profile, reviews and social presence working — every recovered patient becomes a
-            5-star review, and every review wins the next patient. And your ads get a teacher: every
-            ad-clicked patient who books and pays is reported back to Meta with the treatment and the
-            value — so your ads graduate from finding people who click to finding people who pay, and
-            get smarter every month. Ads without that feedback loop stay dumb forever.
+            5-star review, and every review wins the next patient. And your ads get a teacher: AUMY
+            privately tracks every ad-clicked patient through booking and payment — which ad, which
+            treatment, what revenue — and shows you exactly which campaigns produce paying patients,
+            not just clicks. Meta only ever receives an anonymous lead signal: your patients’ health
+            data never leaves the clinic, exactly as Meta’s health-data rules and India’s DPDP Act demand.
           </p>
           <p className="ch-note">
             That is the order that works: close the leaks first, then pour more in the top.

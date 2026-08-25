@@ -677,7 +677,7 @@ const growthPosts = [
     readingTime: '8 min read',
     author: 'Jayesh Chaudhari',
     excerpt:
-      '"We got 90 leads and 4 patients" is the most common Meta ads story in dentistry — and it isn’t really an ads problem. The four places the leads die, why optimising for cheap leads buys cheap leads, and how feeding real bookings back to Meta changes what it finds you.',
+      '"We got 90 leads and 4 patients" is the most common Meta ads story in dentistry — and it isn’t really an ads problem. The four places the leads die, why optimising for cheap leads buys cheap leads, and how measuring real bookings per campaign — privately, without handing patient data to Meta — changes where your budget goes.',
     description:
       'Why Facebook and Instagram ads produce leads but few patients for dental clinics: instant-form intent, speed-to-lead, missing follow-up systems, and optimising for the wrong event — plus how conversion feedback (CAPI) teaches Meta to find people who actually book, and the one metric to judge ads by.',
     body: `
@@ -695,7 +695,7 @@ const growthPosts = [
 <p>This is the deep one. Meta's algorithm is a finding machine: it finds more of whatever you define as success. Optimise for leads, and it dutifully finds the people <em>most likely to fill forms</em> — serial form-fillers included — and your cost per lead falls while your cost per patient quietly rises. The machine isn't failing; it's obeying.</p>
 
 <h2>Teach the machine what a patient looks like</h2>
-<p>The fix for #4 is to change the definition of success. When a lead actually books — or actually pays — that event can be sent back to Meta (the mechanism is called the Conversions API, or CAPI; the details matter less than the principle). Now the algorithm learns from real outcomes: <em>these</em> are the people who became patients — find more like <em>them</em>, not more like the form-fillers. Cost per lead often rises when you do this. Cost per <strong>patient</strong> falls, which is the only direction that pays for chairs. Privacy note: this is done with hashed identifiers and booking events — never clinical information.</p>
+<p>The fix for #4 is to change the definition of success. When a lead actually books — or actually pays — tie that outcome to the ad it came from inside your own system. (One caution: Meta restricts health information, so a dental clinic should never push treatment or payment events into the pixel — send at most a minimal, anonymous lead signal and keep the revenue picture in your own attribution.) Now YOU learn from real outcomes: <em>these</em> are the people who became patients — find more like <em>them</em>, not more like the form-fillers. Cost per lead often rises when you do this. Cost per <strong>patient</strong> falls, which is the only direction that pays for chairs. Privacy note: this is done with hashed identifiers and booking events — never clinical information.</p>
 <p>Two practical upgrades sit alongside it. First, prefer <strong>click-to-WhatsApp ads</strong> over instant forms where you can: a person who opens a WhatsApp chat and types is self-selecting for intent, and the conversation — your actual conversion engine — starts instantly on <a href="/growth/whatsapp-follow-up-dental-clinics-guide">the channel Indian patients prefer</a>. Second, make the maths honest: judge every campaign on <strong>cost per booked patient</strong> (and eventually per completed treatment), never on cost per lead. Two campaigns can have identical budgets, and the one with "worse" CPL routinely wins on patients.</p>
 
 <h2>The pre-flight checklist</h2>
@@ -704,7 +704,7 @@ const growthPosts = [
   <li>Every lead gets a first response <strong>within 5 minutes</strong>, including evenings — check your own lead timestamps; a large share of ad leads typically arrive outside working hours, because people scroll after work.</li>
   <li>A written <strong>follow-up sequence</strong> exists for leads that don't book on contact — because most won't, and that's normal.</li>
   <li>You can trace every lead to an outcome: booked, in-conversation, parked. If you can't measure lead → patient, you can't judge any campaign.</li>
-  <li>Real bookings flow back to Meta, so the algorithm optimises for patients, not forms.</li>
+  <li>Real bookings are tied to campaigns in your own attribution — Meta gets only compliant lead signals, never health data.</li>
   <li>The report you read weekly says <strong>cost per booked patient</strong> at the top.</li>
 </ol>
 <p>Get those five right and the same budget behaves like a different product — which is why, candidly, wiring exactly this (instant response, sequences, outcome tracking, conversion feedback) is a core part of what AUMY does for clinics that advertise. But the principle stands with or without us: <strong>ads buy attention. Systems turn attention into patients. Meta can only find you more of what you prove you can keep.</strong></p>`,

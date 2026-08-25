@@ -212,10 +212,10 @@ const HomeUS = () => {
           <h2 className="ch-h2">Keep your marketing team. Give them better data.</h2>
           <p className="ch-lead ch-center-lead">
             We don’t run your ads and we don’t replace your agency — they keep doing what they do.
-            What we change is what the ad platforms <em>learn</em>. The moment an enquiry becomes a
-            booked, seated, paying patient, we send that real outcome back to Meta and Google. So the
-            algorithm stops optimising for whoever clicks, and starts finding more people like the
-            patients who actually show up and pay.
+            What we change is what <em>you</em> learn. The moment an enquiry becomes a
+            booked, seated, paying patient, AUMY’s private attribution ties that revenue to the exact
+            ad and audience — so budget goes where paying patients actually come from. Ad platforms
+            receive only minimal, compliant lead signals — never treatment or health details.
           </p>
           <div className="ch-why">
             <div className="ch-why-card">
