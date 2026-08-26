@@ -87,7 +87,7 @@ const whyUs = [
 ];
 
 const faqs = [
-  { q: 'How does the 30-day free trial work?', a: 'We set AUMY up on your clinic and you watch it work for 30 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.' },
+  { q: 'How does the 60-day money-back guarantee work?', a: 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real recalls filled. If it doesn\u2019t meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.' },
   { q: 'Do I have to replace my current software?', a: 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
@@ -144,7 +144,7 @@ const Home = () => {
             <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE → GROW</p>
             <div className="ch-hero-cta">
               <Link to="/contact" className="ch-btn ch-btn-primary">
-                Start my 30-day free trial
+                Get started — risk-free
               </Link>
               <Link to="/growth-audit" className="ch-btn ch-btn-ghost">
                 Get my free Clinic Growth Audit
@@ -167,7 +167,7 @@ const Home = () => {
               Try it live — WhatsApp us like a patient would
             </a>
             <p className="ch-hero-trust">
-              30 days free · no obligation · we set everything up for you · limited implementation capacity · built only for dental clinics · NVIDIA Inception member
+              60-day money-back guarantee · no lock-in · we set everything up for you · limited implementation capacity · built only for dental clinics · NVIDIA Inception member
             </p>
           </div>
 
@@ -524,7 +524,7 @@ const Home = () => {
             costing you bookings — on your WhatsApp within 24 hours.
           </p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/contact" className="ch-btn ch-btn-primary">Start my 30-day free trial</Link>
+            <Link to="/contact" className="ch-btn ch-btn-primary">Get started — risk-free</Link>
             <Link to="/growth-audit" className="ch-btn ch-btn-ghost ch-ghost-light">Get my free Clinic Growth Audit</Link>
           </div>
         </div>

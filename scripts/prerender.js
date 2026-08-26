@@ -67,7 +67,7 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    ['How does the 30-day free trial work?', 'We set AUMY up on your clinic and you watch it work for 30 days — real enquiries answered, real bookings made. Continue only if you see the difference. If not, you walk away: no charges, no lock-in, and your data stays yours.'],
+    ['How does the 60-day money-back guarantee work?', 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real recalls filled. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.'],
     ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
     ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
