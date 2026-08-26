@@ -246,7 +246,7 @@ const routes = [
         <p class="ch-eyebrow">The Next-Gen Dental Platform</p>
         <h1 class="ch-hero-title">Your software keeps records. AUMY grows your practice.</h1>
         <p class="ch-hero-sub">AI-powered patient engagement and practice growth. AUMY converts your enquiries, cares for patients after treatment, brings them back on time, wins back the ones who drifted — and grows your reviews, reach and revenue. Automatically, even while you sleep. CONVERT → CARE → RETAIN → REACTIVATE → GROW.</p>
-        <p><a href="/contact">Start my 30-day free trial</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
+        <p><a href="/contact">Get started — risk-free</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>Dentistry changed. Great work and a good location are no longer enough.</h2>
@@ -281,7 +281,7 @@ const routes = [
         <h2>Try AUMY free for 30 days — see the difference yourself.</h2>
         <p>We set AUMY up on your clinic and you watch it work for 30 days alongside everything you use today — real enquiries answered, real bookings made. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
         <h2>Questions clinic owners ask</h2>
-        <p><strong>How does the 30-day free trial work?</strong> We set AUMY up on your clinic and you watch it work for 30 days. Continue only if you see the difference — no charges, no lock-in, and your data stays yours.</p>
+        <p><strong>How does the 60-day money-back guarantee work?</strong> We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.</p>
         <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use.</p>
         <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>
         <p><strong>Is this a product or a service?</strong> Both — a proven system (AUMY), run and tailored for you by a partner.</p>
