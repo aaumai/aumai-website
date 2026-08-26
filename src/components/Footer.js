@@ -125,7 +125,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} AUM AI Healthcare Solutions. All rights reserved.</p>
+          <p>&copy; {currentYear} AUM AI Healthcare Solutions. All rights reserved. Aumy™ and Convert. Care. Retain. Reactivate. Grow.™ are trademarks of AAUMAI Healthcare Solution Pvt Ltd.</p>
           <div className="footer-legal">
             {legal.map((item, index) => (
               <Link key={index} to={item.path}>{item.label}</Link>
