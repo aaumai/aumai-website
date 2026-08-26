@@ -44,6 +44,7 @@ const SITEMAPS = {
     ['/revenue-generator', 0.9, 'weekly'],
     ['/demos', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
+    ['/pricing', 0.9, 'monthly'],
     ['/growth', 0.8, 'weekly'],
     ['/podcast', 0.7, 'monthly'],
     // Articles carry their real publish date as lastmod — honest signals beat
@@ -131,6 +132,7 @@ const LLMS = {
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how the system works
 - ${ORIGIN}/growth-audit — free clinic growth audit
+- ${ORIGIN}/pricing — AUMY pricing: ₹20,000/month full suite, custom multi-clinic plans
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics
 - ${ORIGIN}/compliance — security and data handling
 ## Dental practice growth guides (free, no sign-up, India-focused)
