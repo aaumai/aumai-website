@@ -178,6 +178,37 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── Be the patient: live hands-on demo ─────────────────────────── */}
+      <section className="ch-section" id="be-the-patient">
+        <div className="ch-container">
+          <div className="ch-head">
+            <span className="ch-eyebrow">Don&rsquo;t watch a demo</span>
+            <h2 className="ch-h2">Be the patient.</h2>
+            <p className="ch-sub">
+              WhatsApp our live demo clinic and experience exactly what your patients would —
+              the same AI, the same follow-ups, the real product.
+            </p>
+          </div>
+          <div className="ch-why-card" style={{ display: 'block', maxWidth: 720, margin: '0 auto', padding: 28 }}>
+            <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', marginTop: 0 }}>
+              📱 WhatsApp <a href="https://wa.me/919022312554?text=Hi%2C%20I%20wanted%20to%20ask%20about%20aligners" style={{ whiteSpace: 'nowrap' }}>+91 90223 12554</a>
+            </p>
+            <ol style={{ lineHeight: 1.9, margin: '18px 0 0', paddingLeft: 22 }}>
+              <li><strong>Ask about aligners or implants</strong> — watch it answer instantly, like your best receptionist on her best day.</li>
+              <li><strong>Book a slot… or don&rsquo;t.</strong> Go quiet, and see the gentle follow-up arrive tomorrow.</li>
+              <li><strong>Booked? Try changing your mind</strong> — reschedule or cancel in one message, no phone queue.</li>
+              <li><strong>Skip your appointment</strong> — and watch how it wins the rebooking without nagging.</li>
+              <li><strong>After your &ldquo;visit&rdquo;</strong>, we&rsquo;ll mark it done — see how it asks for your feedback.</li>
+              <li><strong>Come back in 3 months</strong> for your recall reminder. Ghost us for 6, and AUMY will try to win you back 🙂</li>
+            </ol>
+            <p style={{ marginTop: 18, textAlign: 'center', color: '#5b6784' }}>
+              Every message you receive is the same system your patients would experience — Convert, Care, Retain, Reactivate, in real time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
       <DemoPlaylist />
 
       {/* PROBLEM — one enemy: revenue leaking between marketing and the front

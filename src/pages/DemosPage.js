@@ -98,6 +98,11 @@ const DemosPage = () => {
           <h1 className="dv-hero-title">
             Watch Aumy run a clinic — <span className="dv-accent">live, unscripted</span>
           </h1>
+          <p style={{ margin: '14px auto 0', maxWidth: 640, fontWeight: 600 }}>
+            Prefer to feel it instead of watching? WhatsApp our live demo clinic on{' '}
+            <a href="https://wa.me/919022312554?text=Hi%2C%20I%20wanted%20to%20ask%20about%20implants">+91 90223 12554</a>{' '}
+            as if you were a patient — ask about any treatment, book (or don&rsquo;t), and experience every follow-up your patients would.
+          </p>
           <p className="ch-lead ch-center-lead">
             Real screens, real WhatsApp messages, real bookings. A growing set of short videos that shows
             exactly what your clinic gets — from the first patient enquiry to the campaign
