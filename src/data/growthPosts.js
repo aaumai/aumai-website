@@ -972,6 +972,59 @@ const growthPosts = [
 <h2>The honest summary</h2>
 <p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> AUMY automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. That's the GROW pillar, working with the other four.</p>`,
   },
+  {
+    slug: "ai-software-for-dentists-india-cost-comparison",
+    title: "AI Software for Dentists in India: What US Tools Cost vs What Actually Works Here",
+    category: "AI for Dental Clinics",
+    date: "2026-08-26",
+    readingTime: "7 min read",
+    author: "Jayesh Chaudhari",
+    excerpt:
+      "Search \"AI software for dentists\" and Google shows you US tools charging $399\u2013$1,499 a month \u2014 for an AI phone receptionist alone. Here is an honest comparison of what those tools do, what they cost in rupees, and what an Indian clinic actually needs.",
+    description:
+      "An honest 2026 comparison of AI software for dental clinics: US tools like Dentina AI, TensorLinks and Denti.AI vs what Indian practices actually need \u2014 WhatsApp-first patient communication, Indian languages, and rupee pricing. With a full price table.",
+    body: `
+<p>Type "AI software for dentist" into Google from India and the results are dominated by American products. They look impressive \u2014 and they are, for American practices. But before you request a demo, it is worth understanding three things: what these tools actually do, what they cost once you convert to rupees, and whether they fit how Indian patients actually behave.</p>
+
+<h2>What the US tools charge (listed pricing, August 2026)</h2>
+<div style="overflow-x:auto">
+<table>
+  <thead><tr><th>Tool</th><th>What it is</th><th>Listed price</th><th>In rupees / month*</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Dentina AI</strong></td><td>AI phone receptionist for dental practices</td><td>$499\u2013$1,499/month</td><td>\u20B942,000\u2013\u20B91,25,000</td></tr>
+    <tr><td><strong>TensorLinks</strong></td><td>AI dental receptionist, books into your PMS</td><td>$399/month + $199 setup</td><td>\u20B933,500 + setup</td></tr>
+    <tr><td><strong>Denti.AI</strong></td><td>AI charting, voice perio &amp; scribe (clinical documentation)</td><td>Pricing on request</td><td>\u2014</td></tr>
+    <tr><td><em>Market range (US)</em></td><td>AI receptionist alone</td><td>$299\u2013$1,500/month</td><td>\u20B925,000\u2013\u20B91,26,000</td></tr>
+  </tbody>
+</table>
+</div>
+<p><em>*Approximate conversion at \u20B984/$; prices are the vendors' publicly listed figures as of August 2026 \u2014 always verify current pricing on their sites.</em></p>
+
+<p>Read that table carefully. The $499/month tier \u2014 roughly <strong>\u20B942,000 a month</strong> \u2014 buys an AI that answers your <em>phone</em>. Not follow-ups. Not recalls. Not reactivation of lapsed patients. Not reviews. One job.</p>
+
+<h2>Why the US price is the US price</h2>
+<p>This is not a scam \u2014 it is a different market. A single new patient in the US is worth $600\u2013$1,200 to a practice, so a $499 tool pays for itself with one saved caller a month. The tools are also built around what US practices need: deep integrations with Dentrix, Eaglesoft and Open Dental, US phone-call culture, and English-only conversations.</p>
+
+<h2>Why that shape doesn't fit an Indian clinic</h2>
+<ul>
+  <li><strong>Indian patients live on WhatsApp, not phone calls.</strong> The enquiry that decides your month arrives as a WhatsApp message at 9 PM. A US phone-answering AI never sees it.</li>
+  <li><strong>Language.</strong> Your patients write in Hindi, Marathi, Hinglish \u2014 sometimes all three in one conversation. US tools converse in English.</li>
+  <li><strong>The leak is bigger than the phone.</strong> In every Indian clinic we have audited, unanswered enquiries are only the first leak. The bigger ones are quotes that were never followed up, recalls that never went out, and patients who quietly stopped coming. A receptionist-only tool \u2014 at any price \u2014 touches none of those.</li>
+  <li><strong>Dollar pricing compounds.</strong> \u20B942,000/month is more than many clinics' front-desk salary \u2014 for one-fifth of the job.</li>
+</ul>
+
+<h2>What to actually compare</h2>
+<p>Whatever you evaluate \u2014 US tool, Indian tool, or hiring another front-desk person \u2014 ask the same five questions:</p>
+<ol>
+  <li>Does it answer <strong>WhatsApp</strong> instantly, in the patient's own language \u2014 or only the phone?</li>
+  <li>Does it <strong>follow up</strong> on treatment plans and quotes until the patient decides?</li>
+  <li>Does it run <strong>recalls and reactivation</strong> automatically, or is that still a register nobody opens?</li>
+  <li>Does it grow your <strong>Google reviews</strong> and reply to them?</li>
+  <li>Can it <strong>show you the revenue</strong> it recovered \u2014 bookings and rupees, attributed \u2014 or just call logs?</li>
+</ol>
+
+<p>For context on where AUMY sits in that table: the full platform \u2014 24/7 AI receptionist on WhatsApp and calls, treatment-plan follow-ups, recalls, reactivation, after-treatment care and Google review growth, with every recovered rupee attributed \u2014 is <a href="/pricing">\u20B920,000 per month, everything included</a>. That is less than half the <em>entry</em> price of a US phone-only tool, for the whole patient journey: Convert, Care, Retain, Reactivate, Grow.</p>`,
+  },
 ];
 
 module.exports = { GROWTH_CATEGORIES, growthPosts };
