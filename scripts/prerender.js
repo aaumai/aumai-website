@@ -185,6 +185,52 @@ const routes = [
       </div></section>`,
   },
   {
+    slug: 'ai-receptionist',
+    title: 'AI Receptionist for Dental Clinics — 24/7 Calls & WhatsApp | AUMY',
+    description:
+      'AUMY\u2019s AI receptionist answers every call and WhatsApp enquiry for your dental clinic 24/7 — in the patient\u2019s own language — and converts enquiries into booked appointments. Works alongside your existing software.',
+    canonical: `${ORIGIN}/ai-receptionist`,
+    jsonld: [orgLd, {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: "Will an AI receptionist replace my front-desk staff?", acceptedAnswer: { '@type': 'Answer', text: "No — it covers what staff cannot: nights, Sundays, lunch rushes and simultaneous calls. Your team keeps full control and can join any conversation at any time." } },
+        { '@type': 'Question', name: "Will patients realise they are talking to AI?", acceptedAnswer: { '@type': 'Answer', text: "AUMY replies naturally in the patient's own language and hands anything sensitive to your team immediately. Patients care about getting an instant, helpful answer." } },
+        { '@type': 'Question', name: "Which languages does the AI receptionist speak?", acceptedAnswer: { '@type': 'Answer', text: "It replies in the language the patient writes in — English, Hindi, Marathi and more — switching automatically mid-conversation." } },
+        { '@type': 'Question', name: "How long does setup take?", acceptedAnswer: { '@type': 'Answer', text: "Onboarding is done for you — WhatsApp connection and your treatments configured in your doctors' own words. Most clinics are live within a week." } },
+      ],
+    }],
+    content: `
+      <section><div class="ch-container ch-narrow">
+        <h1 class="ch-hero-title">An AI receptionist that never misses a patient</h1>
+        <p>Every call and WhatsApp message answered in seconds — nights, Sundays, lunch rush — in your patient's own language, and converted into a booked appointment. A busy clinic misses 20–30% of its calls; every missed enquiry is a patient who books with the next clinic on Google.</p>
+        <p>AUMY's AI receptionist answers instantly, books appointments end-to-end, recovers missed calls over WhatsApp, follows up until patients decide, and hands over to your staff the moment they want to join. It is trained on your clinic's treatments, doctors and pricing — and it is stage one of the full AUMY journey: Convert, Care, Retain, Reactivate, Grow.</p>
+      </div></section>`,
+  },
+  {
+    slug: 'whatsapp-automation-for-clinics',
+    title: 'WhatsApp Automation for Dental Clinics — Official API | AUMY',
+    description:
+      'AUMY automates your dental clinic\u2019s WhatsApp on the official Business API — instant replies, appointment booking, recalls, reactivation and review requests — with human takeover and revenue attribution built in.',
+    canonical: `${ORIGIN}/whatsapp-automation-for-clinics`,
+    jsonld: [orgLd, {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: "Is this the official WhatsApp API?", acceptedAnswer: { '@type': 'Answer', text: "Yes — AUMY uses the official WhatsApp Business API from Meta on your clinic's own verified number, following Meta's messaging rules, which is why numbers do not get blocked." } },
+        { '@type': 'Question', name: "Is automated WhatsApp messaging spam?", acceptedAnswer: { '@type': 'Answer', text: "No — AUMY sends each patient the message relevant to them at the right moment: their recall when due, after-care on the day of treatment, follow-ups while a plan is pending. Opt-outs are honoured instantly." } },
+        { '@type': 'Question', name: "Can staff still use the WhatsApp number normally?", acceptedAnswer: { '@type': 'Answer', text: "Yes. The team sees every conversation and can take over any chat with one tap; the AI steps back the moment a human joins." } },
+        { '@type': 'Question', name: "Do I need a new number or new software?", acceptedAnswer: { '@type': 'Answer', text: "No. AUMY connects to your existing WhatsApp number and runs alongside your existing practice software." } },
+      ],
+    }],
+    content: `
+      <section><div class="ch-container ch-narrow">
+        <h1 class="ch-hero-title">WhatsApp automation built for dental clinics</h1>
+        <p>India's patients live on WhatsApp. AUMY turns your clinic's number into a system that answers, books, follows up, recalls and reactivates — on the official WhatsApp Business API, across all five stages of the patient journey: Convert, Care, Retain, Reactivate, Grow.</p>
+        <p>Unlike broadcast tools, every message is a conversation the AI actually continues: enquiries are nurtured until they book, after-treatment care goes out day by day, recalls fill the chair, lapsed patients get win-back journeys, and happy patients are guided to leave Google reviews. Campaigns run with start/end dates, daily caps and instant opt-out handling — and every booking is attributed back to the message that produced it.</p>
+      </div></section>`,
+  },
+  {
     slug: '',
     title: 'AUMY — AI Receptionist & Practice Growth Platform for Dental Clinics',
     description:

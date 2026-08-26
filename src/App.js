@@ -19,6 +19,8 @@ import AumaiAnalytics from './pages/AumaiAnalytics';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import GrowthAudit from './pages/GrowthAudit';
 import PricingPage from './pages/PricingPage';
+import AIReceptionistPage from './pages/AIReceptionistPage';
+import WhatsAppAutomationPage from './pages/WhatsAppAutomationPage';
 import GrowthHub from './pages/GrowthHub';
 import DemosPage from './pages/DemosPage';
 import PodcastPage from './pages/PodcastPage';
@@ -86,6 +88,8 @@ function App() {
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/growth-audit" element={<GrowthAudit />} />
                 <Route path="/pricing" element={<PricingPage />} />
+                <Route path="/ai-receptionist" element={<AIReceptionistPage />} />
+                <Route path="/whatsapp-automation-for-clinics" element={<WhatsAppAutomationPage />} />
                 <Route path="/growth" element={<GrowthHub />} />
                 <Route path="/demos" element={<DemosPage />} />
                 <Route path="/podcast" element={<PodcastPage />} />
