@@ -842,6 +842,136 @@ const growthPosts = [
 <p>What you'll notice first isn't revenue. It's the replies — patients answering a day-1 check-in with a relieved question they would never have called about, and thank-you messages your clinic has done nothing to earn before. The revenue effects — completed treatment plans, kept recalls, reviews, referrals — follow from there.</p>
 <p>And when you're ready to run it for every treatment and every patient without the morning reminders: this is exactly what Treatment Care Plans in AUMY do — your doctors define the protocol per treatment, the system delivers it consistently and flags the replies that need a human. The protocol stays yours. The consistency becomes automatic.</p>`,
   },
+  {
+    slug: "ai-receptionist-dental-clinic",
+    title: "The AI Receptionist for Dental Clinics: What It Actually Does All Day",
+    category: "AI for Dental Clinics",
+    date: "2026-08-26",
+    readingTime: "6 min read",
+    author: "Jayesh Chaudhari",
+    excerpt: "An AI receptionist is not a chatbot with a dental logo. Here is an honest hour-by-hour picture of what one actually handles in an Indian dental clinic — and the three jobs that should always stay human.",
+    description: "What an AI receptionist really does in a dental clinic: answering every call and WhatsApp enquiry 24/7, booking appointments, following up on quotes, and handing over to humans at the right moment. An honest breakdown for Indian practice owners.",
+    body: `
+<p>Every dental clinic owner has heard the phrase "AI receptionist" by now. Most imagine one of two wrong things: a robotic phone voice that infuriates patients, or a website chatbot that answers three canned questions. Neither is what a working AI receptionist actually is — so here is an honest, hour-by-hour picture of what one does in a real Indian dental practice.</p>
+
+<h2>8:47 PM on a Tuesday: the moment that matters</h2>
+<p>A woman in Kothrud has had tooth pain since lunch. She finally sits down after dinner, searches "dentist near me", opens three clinics, and messages all three on WhatsApp. Two clinics will reply tomorrow between patients. One replies in four seconds — asks where the pain is, how long it's been hurting, reassures her, and offers 10:30 AM tomorrow. She books. The other two clinics never hear from her again, and never know why.</p>
+<p>That is the entire case for an AI receptionist in one paragraph. Not that it is smarter than your front desk — it isn't. It is simply <em>present</em> for the 60–70% of enquiries that arrive when your front desk is busy, chairside-assisting, at lunch, or asleep.</p>
+
+<h2>What it handles without help</h2>
+<ul>
+  <li><strong>Every first response, instantly.</strong> WhatsApp, Instagram, website, missed calls — answered in seconds, in the patient's language, at any hour.</li>
+  <li><strong>Appointment booking.</strong> It reads the actual calendar, offers real slots, books, confirms, and sends reminders. No "we'll call you back".</li>
+  <li><strong>The questions that eat your receptionist's day.</strong> Timings, location, whether you do RCT, what a cleaning broadly involves, do you take that insurance. Sixty percent of inbound messages are these five questions.</li>
+  <li><strong>Follow-up that never gets forgotten.</strong> The patient who asked about aligners and went quiet gets a gentle nudge in three days, another in a week — until they book or clearly decline. A human front desk simply cannot track forty of these threads.</li>
+</ul>
+
+<h2>The three jobs that stay human — always</h2>
+<p><strong>Clinical judgement.</strong> A well-built AI receptionist never diagnoses, never quotes treatment specifics it wasn't given, and never overrides a doctor. It carries the clinic's approved answers — nothing more.</p>
+<p><strong>The upset patient.</strong> Complaint, billing dispute, a patient in real distress — the right behaviour is a fast, graceful handover to a human, with the full conversation attached so the patient never repeats themselves.</p>
+<p><strong>The judgment call.</strong> "Can you adjust the price?" "Can the doctor see my X-ray first?" These route to the owner or front desk, flagged and waiting — answered by a human, on human time, without the patient having been ignored in the meantime.</p>
+
+<h2>What changes in the numbers</h2>
+<p>Clinics measure the difference in three places: enquiry-to-booking conversion (because speed-to-reply decides who wins the patient), front-desk hours recovered (the repetitive 60% disappears from their day), and after-hours bookings that previously did not exist at all. If you run ads, there's a fourth: every ad rupee finally gets a same-minute response, which is the single biggest determinant of ad ROI for clinics.</p>
+
+<p>This is exactly what AUMY's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's the CONVERT pillar of the five-stage AUMY journey, and it works its first night on the job.</p>`,
+  },
+  {
+    slug: "patient-follow-up-automation-dental",
+    title: "Patient Follow-Up Automation: The System That Never Forgets a Patient",
+    category: "Lead Conversion & Follow-up",
+    date: "2026-08-26",
+    readingTime: "6 min read",
+    author: "Jayesh Chaudhari",
+    excerpt: "Manual follow-up dies after two attempts. Automated follow-up runs four to six touchpoints, at the hours patients actually reply, and never drops a pending treatment plan. Here is how to build it.",
+    description: "How patient follow up automation works in a dental clinic: sequenced WhatsApp and call touchpoints for enquiries, pending treatment plans, recalls and post-treatment care — and the revenue difference it makes for Indian practices.",
+    body: `
+<p>Ask any front desk how many times they follow up with a patient who didn't book, and the honest answer is: once, maybe twice, when things are quiet. Then the sticky note is buried, the day takes over, and the patient — who was never a "no", just a "not yet" — quietly books somewhere else.</p>
+<p>Patient follow-up automation exists because follow-up is not a talent problem. It is a memory and timing problem, and software is better at both.</p>
+
+<h2>The four follow-up streams every clinic has (and usually runs zero of)</h2>
+<ul>
+  <li><strong>Enquiry follow-up.</strong> The person who asked about aligners and vanished. Touchpoints at day 1, 3, 7, 14 — each answering a likely unspoken question (cost, pain, duration, EMI) rather than repeating "any update?".</li>
+  <li><strong>Pending treatment plans.</strong> The patient whose ₹40,000 plan was advised but never scheduled. This is the highest-value follow-up in dentistry, and the least performed — the trust is already built; only the follow-through is missing.</li>
+  <li><strong>Recalls.</strong> Cleanings, check-ups, next sittings — triggered by the calendar, not by anyone remembering.</li>
+  <li><strong>After-treatment care.</strong> Day-by-day care instructions after an extraction or implant. Not revenue on its own — but the reason patients come back and refer.</li>
+</ul>
+
+<h2>Why automation outperforms even a diligent human</h2>
+<p><strong>It doesn't stop at two attempts.</strong> Response curves in clinic data are stubborn: a meaningful share of bookings come from the fourth, fifth, even sixth touch — attempts no human team consistently makes.</p>
+<p><strong>It works at 8 PM.</strong> Patients reply after dinner and on Sunday mornings. Automation is on duty precisely when your clinic isn't.</p>
+<p><strong>It never confuses politeness with completion.</strong> A human hears "I'll think about it" and closes the file. A sequence hears it and schedules a respectful check-in for three weeks later — the moment "thinking" typically ends.</p>
+<p><strong>It knows when to hand over.</strong> The moment a patient replies with a real question, automation's job is to stop and put a human (or a well-briefed AI receptionist) into the conversation. Follow-up automation that keeps talking past a live reply is spam; done right, it is a relay race.</p>
+
+<h2>The guardrails that keep it welcome</h2>
+<p>Frequency caps, quiet hours, instant opt-out honoured forever, and messages written in the doctor's voice rather than a marketer's. The test for every automated message: would the front desk be comfortable saying this sentence aloud to the patient's face? If yes, send. If no, rewrite.</p>
+
+<p>Inside AUMY, these four streams run as configured journeys — per treatment, per patient, with rate limits and human-handover built in, and every recovered booking traced back to the exact follow-up that produced it. Clinics rarely believe the "pending treatment plan" number until they see their own: it is usually the largest pile of recoverable revenue in the building.</p>`,
+  },
+  {
+    slug: "dental-practice-management-software-vs-growth",
+    title: "Dental Practice Management Software Manages Your Clinic. What Grows It?",
+    category: "AI for Dental Clinics",
+    date: "2026-08-26",
+    readingTime: "5 min read",
+    author: "Jayesh Chaudhari",
+    excerpt: "Your PMS is a system of record: appointments, charts, billing. Growth lives in a different layer — enquiries, follow-ups, recalls, reviews. You need both, and you should not confuse one for the other.",
+    description: "Dental practice management software (PMS) vs a practice growth layer: what each does, why clinics need both, and how to add AI-powered patient engagement on top of the PMS you already use — without migrating anything.",
+    body: `
+<p>Every serious dental clinic in India runs some kind of practice management software — appointments, patient records, billing, maybe inventory. And almost every owner who searches "dental practice management software" is actually trying to solve a problem their PMS was never designed for: <em>more patients, fewer no-shows, better retention.</em></p>
+<p>It helps to name the difference plainly.</p>
+
+<h2>A PMS is a system of record</h2>
+<p>It remembers. Who came, what was done, what was billed, what the X-ray showed. A good PMS is the clinic's memory, and switching one is genuinely painful — which is why we tell clinics: <strong>keep yours.</strong> Whatever you run — a modern cloud PMS or a decade-old desktop one — it is doing a job that does not need re-doing.</p>
+
+<h2>Growth is a system of action</h2>
+<p>Growth happens in the moments your PMS never sees: the WhatsApp enquiry at 9 PM, the quote that was never followed up, the recall that nobody called, the lapsed patient nobody noticed, the happy patient nobody asked for a review. None of these live in patient records. All of them live in conversations — and conversations need something that acts, not something that records.</p>
+<p>That action layer is what has recently become possible with AI: answering every enquiry instantly, running follow-up sequences that never forget, filling recall books automatically, reactivating dormant patients with a well-timed offer, and turning finished treatments into five-star Google reviews.</p>
+
+<h2>The test: where does your revenue actually leak?</h2>
+<ul>
+  <li>If appointments get double-booked and bills go missing — that's a PMS problem.</li>
+  <li>If enquiries go unanswered for hours, quotes die silently, and your recall list is a graveyard — no PMS upgrade will fix that. That's the growth layer, and it's missing.</li>
+</ul>
+<p>Most clinics that go shopping for a "better PMS" are feeling the second list. They migrate everything, endure three months of pain, and discover the leaks are exactly where they were — because the leaks were never in the records.</p>
+
+<h2>The both/and answer</h2>
+<p>The architecture that works: your PMS stays the system of record; a growth layer like AUMY sits alongside it and works the patient journey — CONVERT, CARE, RETAIN, REACTIVATE, GROW — over WhatsApp, calls and your Google profile. No migration, no retraining the front desk on new billing screens, live in days. Your software keeps managing the clinic. Something finally starts growing the practice.</p>`,
+  },
+  {
+    slug: "digital-marketing-for-dental-clinics",
+    title: "Digital Marketing for Dental Clinics: What Actually Produces Patients",
+    category: "Marketing & ROI",
+    date: "2026-08-26",
+    readingTime: "7 min read",
+    author: "Jayesh Chaudhari",
+    excerpt: "Most dental marketing advice is a list of channels. This is a hierarchy instead: what to fix first, what compounds, and why advertising is the LAST step — not the first.",
+    description: "A practical digital marketing guide for Indian dental clinics: Google Business Profile, reviews, website basics, WhatsApp response speed, and when advertising a dental clinic actually makes sense — in the right order.",
+    body: `
+<p>Search "digital marketing for dental clinic" and you'll drown in channel lists: do SEO, do Instagram, do ads, do email. Channel lists are useless without an order of operations — because in dentistry, some channels multiply each other and some quietly burn money until the others are fixed. Here is the hierarchy we see work, in sequence.</p>
+
+<h2>1. Google Business Profile — the front door (free)</h2>
+<p>For a local clinic, your GBP listing outranks your website in every way that matters: it's what "dentist near me" actually shows. Complete every field, add real photos, post weekly, and answer every review. Clinics are shocked by how few competitors do even this — which is precisely the opportunity.</p>
+
+<h2>2. Reviews — the multiplier (free, compounding)</h2>
+<p>Between two clinics 500 metres apart, the one with 400 reviews at 4.9 wins against the one with 60 at 4.3 — before either spends a rupee on ads. The system that matters: ask <em>every</em> happy patient, at the right moment (soon after a good visit), with a one-tap link. Asking manually gets forgotten; this is the single most automatable step in dental marketing.</p>
+
+<h2>3. Response speed — the silent filter</h2>
+<p>Every channel above and below funnels into the same bottleneck: what happens in the first five minutes after a patient enquires. If the answer is "nothing until the front desk is free", every marketing rupee upstream is discounted by the share of enquiries that go cold. Fix response speed before scaling any traffic source — it is the highest-ROI "marketing" investment a clinic can make, and it isn't even marketing.</p>
+
+<h2>4. Content that answers real questions</h2>
+<p>Patients search their fears: does RCT hurt, how much do braces cost, is teeth whitening safe. A clinic that publishes honest, local answers earns search traffic and — more importantly — walks into consultations pre-trusted. One good article a week beats a viral reel a quarter.</p>
+
+<h2>5. Advertising — last, and only on top of the above</h2>
+<p>Now, and only now, does advertising a dental clinic make sense: the profile converts, reviews reassure, replies are instant. Two rules keep ad money honest:</p>
+<ul>
+  <li><strong>Judge ads by cost per booked patient, not cost per lead.</strong> Cheap leads that never book are the most expensive thing in marketing. Your tracking must connect every ad to the patients (and revenue) it actually produced — privately, in your own system.</li>
+  <li><strong>Respect health-data rules.</strong> Patient details and treatment information do not belong in ad-platform pixels — Meta's own policies restrict health data, and clinics that pump treatment events into ad platforms risk their ad accounts. Send platforms only the minimal, anonymous signals they need; keep the revenue picture on your side.</li>
+</ul>
+
+<h2>The honest summary</h2>
+<p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> AUMY automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. That's the GROW pillar, working with the other four.</p>`,
+  },
 ];
 
 module.exports = { GROWTH_CATEGORIES, growthPosts };
