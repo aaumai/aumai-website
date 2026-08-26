@@ -1023,7 +1023,64 @@ const growthPosts = [
   <li>Can it <strong>show you the revenue</strong> it recovered \u2014 bookings and rupees, attributed \u2014 or just call logs?</li>
 </ol>
 
-<p>For context on where AUMY sits in that table: the full platform \u2014 24/7 AI receptionist on WhatsApp and calls, treatment-plan follow-ups, recalls, reactivation, after-treatment care and Google review growth, with every recovered rupee attributed \u2014 is <a href="/pricing">\u20B920,000 per month, everything included</a>. That is less than half the <em>entry</em> price of a US phone-only tool, for the whole patient journey: Convert, Care, Retain, Reactivate, Grow.</p>`,
+<p>For context on where AUMY sits in that table: the full platform \u2014 24/7 AI receptionist on WhatsApp and calls, treatment-plan follow-ups, recalls, reactivation, after-treatment care and Google review growth, with every recovered rupee attributed \u2014 is <a href="/pricing">\u20B920,000 per month, everything included</a>. That is less than half the <em>entry</em> price of a US phone-only tool, for the whole patient journey: Convert, Care, Retain, Reactivate, Grow.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>.</p>`,
+  },
+  {
+    slug: "dental-clinic-software-stack-india-comparison",
+    title: "The Stitched-Together Stack: What Running a Dental Clinic's Growth Really Costs in India",
+    category: "AI for Dental Clinics",
+    date: "2026-08-26",
+    readingTime: "8 min read",
+    author: "Jayesh Chaudhari",
+    excerpt:
+      "In India today, a clinic that wants WhatsApp automation, a voice agent, review management and Google posting has to buy four or five separate tools \u2014 plus an agency \u2014 and none of them talk to each other. Here is the honest math, tool by tool.",
+    description:
+      "What it actually costs an Indian dental clinic to assemble patient communication from separate tools \u2014 WhatsApp platforms like WATI/AiSensy, AI receptionists, voice agents, review tools like Famepilot, and a marketing agency \u2014 versus one integrated system. With listed prices.",
+    body: `
+<p>Most Indian dental clinics that get serious about patient communication end up with the same shopping list: something for WhatsApp, something for calls, something for Google reviews, someone for Google posting and ads. Each tool is individually cheap. The combination is where the trouble \u2014 and the real cost \u2014 hides.</p>
+
+<h2>The typical stack, priced (listed pricing, August 2026)</h2>
+<div style="overflow-x:auto">
+<table>
+  <thead><tr><th>Job</th><th>Typical tools in India</th><th>Listed price</th></tr></thead>
+  <tbody>
+    <tr><td>WhatsApp campaigns &amp; chatbot</td><td>WATI, AiSensy, Interakt</td><td>\u20B9999\u2013\u20B916,999/mo + per-message fees</td></tr>
+    <tr><td>AI receptionist (chat)</td><td>Various new startups</td><td>\u20B9800\u2013\u20B92,500/mo + usage</td></tr>
+    <tr><td>Voice agent / call handling</td><td>IVR &amp; AI-voice platforms</td><td>\u20B93,000\u2013\u20B98,000/mo or per-minute</td></tr>
+    <tr><td>Review requests &amp; replies</td><td>Famepilot, FiveNudge</td><td>\u20B9499/mo to quote-based</td></tr>
+    <tr><td>Google profile posting, ads &amp; SEO</td><td>A freelancer or agency</td><td>\u20B910,000\u2013\u20B925,000/mo</td></tr>
+    <tr><td>Practice management (records, billing)</td><td>Practo Ray, Clinicia, DocPulse</td><td>\u20B91,000\u2013\u20B92,000/mo</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>5\u20136 vendors</strong></td><td><strong>\u20B920,000\u2013\u20B940,000+/mo</strong></td></tr>
+  </tbody>
+</table>
+</div>
+<p><em>Prices are the vendors' publicly listed figures or common market rates as of August 2026 \u2014 verify current pricing with each vendor. All of these are respectable tools at what they individually do.</em></p>
+
+<h2>The real cost isn't the money \u2014 it's the gaps between the tools</h2>
+<p>Watch what happens to one patient inside a stitched stack:</p>
+<ul>
+  <li>She messages the clinic on WhatsApp at 9 PM. The WhatsApp platform's chatbot answers from a script \u2014 <strong>it cannot see the appointment calendar</strong>, so it says "our team will call you back".</li>
+  <li>Next day she calls. The voice agent answers \u2014 but <strong>it has never seen her WhatsApp conversation</strong>, so she explains everything again.</li>
+  <li>She visits, has a cleaning, goes home. The review tool doesn't know she visited \u2014 <strong>it works off a list someone at the desk must upload</strong> \u2014 so no review request goes out.</li>
+  <li>Six months later her recall is due. That lives in the PMS \u2014 <strong>which doesn't talk to the WhatsApp tool</strong> \u2014 so the recall register stays a register.</li>
+  <li>The owner asks the obvious question: "What did all this produce?" <strong>Five dashboards, five different answers, none in rupees.</strong></li>
+</ul>
+<p>Every gap between two tools is a place where a patient falls through. And every vendor can honestly say "our part worked".</p>
+
+<h2>The five questions that expose the gaps</h2>
+<ol>
+  <li>When a patient messages at night, does the reply come from something that can <strong>actually book into the calendar</strong>?</li>
+  <li>Does the call channel and the WhatsApp channel share <strong>one memory</strong> of the patient?</li>
+  <li>Do review requests fire <strong>automatically after a real visit</strong> \u2014 or from an uploaded list?</li>
+  <li>Do recalls and reactivation run from your <strong>actual patient records</strong>, without anyone exporting a spreadsheet?</li>
+  <li>Can anyone show you \u2014 in one place, in rupees \u2014 <strong>what the whole system recovered</strong> this month?</li>
+</ol>
+<p>A stitched stack fails at least three of these five. Not because the tools are bad \u2014 because they were never designed to know about each other.</p>
+
+<h2>The integrated alternative</h2>
+<p>This is the reason AUMY is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, runs recalls and reactivation from real records, posts to your Google profile \u2014 and attributes every recovered rupee in one dashboard. The full suite is <a href="/pricing">\u20B920,000/month, everything included</a> \u2014 the bottom of the stitched-stack range, with none of the gaps. That's the whole journey \u2014 Convert, Care, Retain, Reactivate, Grow \u2014 as one machine instead of five.</p>
+
+<p>Comparing us with the US tools instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">That comparison is here</a>.</p>`,
   },
 ];
 
