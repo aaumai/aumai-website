@@ -162,9 +162,9 @@ const videoLd = {
 const routes = [
   {
     slug: '',
-    title: 'AUMY — The Next-Gen Dental Platform | Convert · Care · Retain · Reactivate · Grow',
+    title: 'AUMY — AI Receptionist & Practice Growth Platform for Dental Clinics',
     description:
-      'AUMY — The Next-Gen Dental Platform. AI-powered patient engagement and practice growth: convert more enquiries, deliver personalised after-treatment care, keep patients coming back, reactivate the ones who drifted, and grow your practice — even while you sleep.',
+      'AUMY — the Next-Gen Dental Platform: a 24/7 AI receptionist for dental clinics, patient follow-up automation, recalls, reactivation and Google review growth. Works alongside your dental practice management software — convert every enquiry, retain every patient.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
