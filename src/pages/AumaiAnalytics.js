@@ -13,13 +13,15 @@ const AumaiAnalytics = () => {
   const [data, setData] = useState(null);
   const [days, setDays] = useState(7);
   const [site, setSite] = useState('');
+  // Default to India — the market we sell in. 'All' shows the raw world.
+  const [country, setCountry] = useState('IN');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const qs = `days=${days}${site ? `&site=${encodeURIComponent(site)}` : ''}`;
+      const qs = `days=${days}${site ? `&site=${encodeURIComponent(site)}` : ''}${country ? `&country=${country}` : ''}`;
       const res = await fetch(`${API_BASE}/dashboard?${qs}`);
       const json = await res.json();
       setData(json);
@@ -28,7 +30,7 @@ const AumaiAnalytics = () => {
       setError('Failed to load analytics');
     }
     setLoading(false);
-  }, [days, site]);
+  }, [days, site, country]);
 
   useEffect(() => {
     document.title = 'Analytics | AUM AI';
@@ -55,6 +57,16 @@ const AumaiAnalytics = () => {
                 style={{ ...styles.btn, ...(site === s.value ? styles.btnActive : {}) }}
               >
                 {s.label}
+              </button>
+            ))}
+            <span style={{ width: '1px', background: '#334155', margin: '0 0.25rem' }} />
+            {['IN', ''].map((c) => (
+              <button
+                key={c || 'all'}
+                onClick={() => setCountry(c)}
+                style={{ ...styles.btn, ...(country === c ? styles.btnActive : {}) }}
+              >
+                {c === 'IN' ? '🇮🇳 India' : '🌍 All'}
               </button>
             ))}
             <span style={{ width: '1px', background: '#334155', margin: '0 0.25rem' }} />
