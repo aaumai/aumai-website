@@ -60,7 +60,7 @@ const pillars = [
   {
     stage: 'Care',
     title: 'Look after patients beyond the chair',
-    body: 'Treatment Care Plans: your doctors define what a patient should hear after an implant, a root canal or whitening — day-1 recovery check, care tips, the one-month follow-up — and AUMY delivers it consistently, flagging any reply that needs the clinic.',
+    body: 'Care before and after every visit. The moment an appointment is booked, AUMY sends doctor-approved pre-visit instructions and a smart intake form — so the patient arrives prepared and the doctor sees allergies and red flags before they sit down. After the visit, Treatment Care Plans take over: day-1 recovery check, care tips, the one-month follow-up — delivered consistently, flagging any reply that needs the clinic.',
   },
   {
     stage: 'Retain',
