@@ -55,7 +55,7 @@ const pillars = [
   {
     stage: 'Convert',
     title: 'Turn enquiries into booked patients',
-    body: 'Every enquiry — WhatsApp, Instagram, a missed call, your website — answered in seconds, 24/7, across chat and phone: inbound calls taken, outbound follow-up calls made. Leads are followed up until they book (or say no), and no-shows are recovered and refilled.',
+    body: 'Every enquiry — WhatsApp, Instagram, a missed call, your website — answered in seconds, 24/7, across chat and phone: inbound calls taken, outbound follow-up calls made — every call recorded and quality-checked, so no enquiry is ever fumbled on the phone. Leads are followed up until they book (or say no), and no-shows are recovered and refilled.',
   },
   {
     stage: 'Care',
@@ -65,7 +65,7 @@ const pillars = [
   {
     stage: 'Retain',
     title: 'Bring patients back for ongoing care',
-    body: 'Cleaning recalls, periodic check-ups and treatment maintenance — sent personally and on time, every time, so the patients you already have keep coming back.',
+    body: 'Cleaning recalls, periodic check-ups and treatment maintenance — messaged and called personally and on time, every time. Recall calls are recorded and quality-checked so your team keeps getting better, and the patients you already have keep coming back.',
   },
   {
     stage: 'Reactivate',
@@ -75,7 +75,7 @@ const pillars = [
   {
     stage: 'Grow',
     title: 'Grow your reputation and reach',
-    body: 'Happy patients become Google reviews — asked at the right moment, and every review answered in your voice. Your profile climbs, your Instagram and YouTube presence compounds, and the next patient finds you first.',
+    body: 'Happy patients become Google reviews — asked at the right moment, and every review answered in your voice. Your profile climbs, your Instagram and YouTube presence compounds, and the next patient finds you first. And you see all of it on one operations dashboard — how every part of the clinic is performing, where revenue is leaking, and what to fix today — so you run the practice with real efficiency.',
   },
 ];
 
