@@ -68,7 +68,8 @@ const faqLd = {
   '@type': 'FAQPage',
   mainEntity: [
     ['How does the 60-day money-back guarantee work?', 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real recalls filled. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.'],
-    ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.'],
+    ['Do you have your own dental software (PMS)?', 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on AUMY, at the same price.'],
+    ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top. You can move onto AUMY’s full PMS later, whenever you choose.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
     ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
     ['Will my staff have to learn something complicated?', 'No. AUMY runs in the background; your team does less, not more.'],
@@ -172,7 +173,7 @@ const routes = [
       mainEntity: [
         { '@type': 'Question', name: 'What does AUMY cost?', acceptedAnswer: { '@type': 'Answer', text: 'AUMY Full Suite is Rs 20,000 per month per clinic, plus a one-time onboarding and setup fee of Rs 50,000. The subscription includes WhatsApp/messaging charges, AI usage, support and updates.' } },
         { '@type': 'Question', name: 'Is there a free trial?', acceptedAnswer: { '@type': 'Answer', text: 'Instead of a trial, AUMY offers a live demo on a real clinic and a 60-day money-back guarantee.' } },
-        { '@type': 'Question', name: 'Do I have to replace my practice management software?', acceptedAnswer: { '@type': 'Answer', text: 'No. AUMY works alongside your existing PMS as the growth layer. No migration is needed.' } },
+        { '@type': 'Question', name: 'Do I have to replace my practice management software?', acceptedAnswer: { '@type': 'Answer', text: 'No. AUMY works alongside your existing PMS as the growth layer — no migration needed. And if you want one platform, AUMY includes a complete Dental PMS (records, charting, prescriptions, treatment plans, billing & accounts) at the same price.' } },
         { '@type': 'Question', name: 'What about multi-clinic groups?', acceptedAnswer: { '@type': 'Answer', text: 'Dental groups get custom per-clinic pricing with one consolidated billing account and group-level analytics.' } },
       ],
     }],
@@ -234,7 +235,7 @@ const routes = [
     slug: '',
     title: 'AUMY — AI Receptionist & Practice Growth Platform for Dental Clinics',
     description:
-      'AUMY — the Next-Gen Dental Platform: a 24/7 AI receptionist for dental clinics, patient follow-up automation, recalls, reactivation and Google review growth. Works alongside your dental practice management software — convert every enquiry, retain every patient.',
+      'AUMY — the Next-Gen Dental Platform: a complete dental PMS (records, charting, prescriptions, billing) plus a 24/7 AI receptionist, patient follow-up automation, recalls, reactivation and Google review growth. Use it as your full clinic software, or run it alongside the PMS you already have.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
@@ -270,6 +271,9 @@ const routes = [
         </ul>
         <p>Underneath the five stages sits the machinery: the AI receptionist across WhatsApp and phone, Google Business Profile and reviews, Instagram and Facebook, the Content Studio, and ad spend that learns from real bookings via the Conversions API.</p>
         <p>None of this is a one-off push. Every patient captured, review earned and slot saved feeds the next — organic growth that builds on itself, month after month.</p>
+        <h2>Full dental software included — or keep the one you have.</h2>
+        <p><strong>Want one complete platform?</strong> AUMY includes a full Dental PMS: patient records &amp; appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and complete billing, invoicing &amp; accounts — plus voice-powered charting where you talk and AUMY charts.</p>
+        <p><strong>Happy with your current PMS?</strong> Keep it. AUMY runs on top as the growth layer — Convert, Care, Retain, Reactivate, Grow — with no migration and no retraining. Move onto the full platform later, whenever you choose. Same price either way.</p>
         <h2>A dedicated growth expert runs it for you.</h2>
         <p>You are never handed a login and left to work it out. A growth expert is assigned to your clinic on a permanent basis — they learn how your practice runs, build the strategy, operate the entire system on your behalf, and review results with you every week. You get the outcome; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
@@ -282,7 +286,8 @@ const routes = [
         <p>We set AUMY up on your clinic and you watch it work for 30 days alongside everything you use today — real enquiries answered, real bookings made. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
         <h2>Questions clinic owners ask</h2>
         <p><strong>How does the 60-day money-back guarantee work?</strong> We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.</p>
-        <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use.</p>
+        <p><strong>Do you have your own dental software (PMS)?</strong> Yes — a complete Dental PMS is included: records, appointments, charting, prescriptions, treatment plans and full billing &amp; accounts.</p>
+        <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use, and you can move onto its full PMS whenever you choose.</p>
         <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>
         <p><strong>Is this a product or a service?</strong> Both — a proven system (AUMY), run and tailored for you by a partner.</p>
         <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
