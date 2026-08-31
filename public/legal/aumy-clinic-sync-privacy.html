@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aumy Clinic Sync — Privacy Policy</title>
+  <meta name="robots" content="index,follow" />
+  <style>
+    :root { --navy:#0b1b33; --royal:#2563EB; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 40px 22px 72px; }
+    header { display:flex; align-items:center; gap:14px; padding-bottom:22px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+    header .badge { width:48px; height:48px; border-radius:12px; background:linear-gradient(160deg,#12233f,#0b1b33); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(11,27,51,.25); flex:0 0 auto; }
+    header .badge svg { width:30px; height:30px; }
+    header h1 { margin:0; font-size:21px; letter-spacing:-.01em; }
+    header p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+    h2 { font-size:16px; margin:30px 0 8px; color:var(--navy); }
+    p, li { color:#334155; }
+    a { color:var(--royal); }
+    ul { padding-left:20px; }
+    .updated { color:var(--muted); font-size:13px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 1px 3px rgba(15,23,42,.04); }
+    footer { margin-top:34px; color:var(--muted); font-size:13px; text-align:center; }
+    strong { color:var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 40c14-12 24-12 38 0s24 12 38 0" stroke="#cfe0ff" stroke-width="7" stroke-linecap="round"/>
+          <path d="M8 56c14-12 24-12 38 0s24 12 38 0" stroke="#8fb4ff" stroke-width="7" stroke-linecap="round"/>
+          <path d="M8 72c14-12 24-12 38 0s24 12 38 0" stroke="#5c8dfb" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div>
+        <h1>Aumy Clinic Sync — Privacy Policy</h1>
+        <p class="updated">Last updated: 31 August 2026</p>
+      </div>
+    </header>
+
+    <div class="card">
+      <p>Aumy Clinic Sync (&ldquo;the extension&rdquo;) is a tool a dental or medical clinic installs in its own browser to keep its Aumy account up to date with its own records held in Practo Ray.</p>
+
+      <h2>What the extension accesses</h2>
+      <p>While the clinic&rsquo;s staff are signed in to Practo Ray (<code>ray.practo.com</code>), the extension reads the clinic&rsquo;s own <strong>appointments, treatments/procedures, invoices, and treatment categories</strong> — the same data the staff already see on screen. It reads only the recent window needed for syncing.</p>
+
+      <h2>What it does with that data</h2>
+      <p>The extension sends the read data to the clinic&rsquo;s own <strong>Aumy</strong> account (<code>aumy.aumai.co.in</code>) over an encrypted connection, authenticated by a per-clinic key the clinic pastes into the extension. This keeps the clinic&rsquo;s Aumy records in sync with Practo. The data belongs to the clinic; Aumy processes it on the clinic&rsquo;s behalf.</p>
+
+      <h2>What it does NOT do</h2>
+      <ul>
+        <li>It does <strong>not</strong> store, transmit, or read the clinic&rsquo;s Practo password. It uses the staff&rsquo;s existing Practo session; it never logs in.</li>
+        <li>It does <strong>not</strong> sell, share, or use the data for advertising or any purpose other than syncing to the clinic&rsquo;s own Aumy account.</li>
+        <li>It does <strong>not</strong> send data to any third party other than the clinic&rsquo;s Aumy server.</li>
+        <li>It does <strong>not</strong> modify anything in Practo.</li>
+      </ul>
+
+      <h2>Storage</h2>
+      <p>The extension stores only its own settings (the Aumy server URL, the sync key, and sync-window preferences) locally in the browser. No patient data is retained by the extension after a sync.</p>
+
+      <h2>Contact</h2>
+      <p>For questions about this policy or data handling, contact Aumy at <a href="mailto:support@aumai.co.in">support@aumai.co.in</a>.</p>
+    </div>
+
+    <footer>Aumy · aumai.co.in</footer>
+  </div>
+</body>
+</html>
