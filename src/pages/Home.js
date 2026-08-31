@@ -88,7 +88,8 @@ const whyUs = [
 
 const faqs = [
   { q: 'How does the 60-day money-back guarantee work?', a: 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real recalls filled. If it doesn\u2019t meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.' },
-  { q: 'Do I have to replace my current software?', a: 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top.' },
+  { q: 'Do you have your own dental software (PMS)?', a: 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on AUMY, at the same price.' },
+  { q: 'Do I have to replace my current software?', a: 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top. You can move onto AUMY’s full PMS later, whenever you choose.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
   { q: 'Will my staff have to learn something complicated?', a: 'No. AUMY runs in the background; your team does less, not more.' },
@@ -119,7 +120,7 @@ const Home = () => {
     setPageSeo({
       title: 'AUMY — AI Receptionist & Practice Growth Platform for Dental Clinics',
       description:
-        'AUMY — the Next-Gen Dental Platform: a 24/7 AI receptionist for dental clinics, patient follow-up automation, recalls, reactivation and Google review growth. Works alongside your dental practice management software — convert every enquiry, retain every patient.',
+        'AUMY — the Next-Gen Dental Platform: a complete dental PMS (records, charting, prescriptions, billing) plus a 24/7 AI receptionist, patient follow-up automation, recalls, reactivation and Google review growth. Use it as your full clinic software, or run it alongside the PMS you already have.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -318,6 +319,41 @@ const Home = () => {
             None of this is a one-off push. Every patient captured, review earned and slot saved feeds
             the next — organic growth that builds on itself, month after month.
           </p>
+        </div>
+      </section>
+
+      {/* TWO WAYS TO RUN AUMY — with our full PMS, or on top of yours */}
+      <section className="ch-section" id="pms">
+        <div className="ch-container">
+          <div className="ch-head">
+            <span className="ch-eyebrow">Your software, your choice</span>
+            <h2 className="ch-h2 ch-center">Full dental software included — or keep the one you have.</h2>
+            <p className="ch-lead ch-center-lead">
+              AUMY works both ways. Run your whole clinic on it, or let it power growth on top of the
+              software you already use — same price either way.
+            </p>
+          </div>
+          <div className="ch-paths">
+            <div className="ch-pillar ch-path">
+              <span className="ch-eyebrow">Want one complete platform?</span>
+              <h3 className="ch-pillar-title">AUMY includes a full Dental PMS</h3>
+              <p className="ch-pillar-body">
+                Everything a traditional dental software does — and then some. Patient records &amp;
+                appointments, FDI odontogram with 6-point perio charting, digital prescriptions,
+                treatment plans, billing, invoicing &amp; accounts. Plus voice-powered charting:
+                you talk, AUMY charts.
+              </p>
+            </div>
+            <div className="ch-pillar ch-path">
+              <span className="ch-eyebrow">Happy with your current PMS?</span>
+              <h3 className="ch-pillar-title">Keep it — AUMY runs on top</h3>
+              <p className="ch-pillar-body">
+                No migration, no retraining. AUMY sits alongside your existing software and runs the
+                growth layer — Convert, Care, Retain, Reactivate, Grow — while your records stay
+                exactly where they are. Move onto the full platform later, whenever you choose.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

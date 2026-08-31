@@ -149,6 +149,10 @@
 
 /* PILLARS */
 .ch-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+/* Two-path cards (full PMS vs run-on-top) — wider, roomier siblings of the pillars. */
+.ch-paths { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
+.ch-path { padding: 28px; }
+@media (max-width: 760px) { .ch-paths { grid-template-columns: 1fr; } }
 /* Named capabilities under a journey pillar — machinery, not the story */
 .ch-pillar-machinery {
   margin-top: 12px;
