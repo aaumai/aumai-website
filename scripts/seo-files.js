@@ -134,7 +134,7 @@ const LLMS = {
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how the system works
 - ${ORIGIN}/growth-audit — free clinic growth audit
-- ${ORIGIN}/pricing — AUMY pricing: ₹20,000/month full suite, custom multi-clinic plans
+- ${ORIGIN}/pricing — AUMY pricing: from ₹20,000/month (Growth), ₹30,000 (Business), custom multi-clinic plans
 - ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments
 - ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: recalls, reactivation, campaigns
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics

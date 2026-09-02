@@ -163,15 +163,16 @@ const videoLd = {
 const routes = [
   {
     slug: 'pricing',
-    title: 'AUMY Pricing — ₹20,000/month for Dental Clinics | AUM AI',
+    title: 'AUMY Pricing — from ₹20,000/month for Dental Clinics | AUM AI',
     description:
-      'Simple, flat pricing for dental clinics: AUMY Full Suite at ₹20,000/month plus one-time setup — AI receptionist, follow-up automation, recalls, reactivation and review growth included. 60-day money-back guarantee. Custom plans for multi-clinic groups.',
+      'Clear pricing for dental clinics: AUMY Growth at ₹20,000/month with 10,000 appointment messages, 2,000 campaign messages and 300 AI phone minutes included. Unlimited patients and staff logins. 60-day money-back guarantee. Custom plans for multi-clinic groups.',
     canonical: `${ORIGIN}/pricing`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type': 'Question', name: 'What does AUMY cost?', acceptedAnswer: { '@type': 'Answer', text: 'AUMY Full Suite is Rs 20,000 per month per clinic, plus a one-time onboarding and setup fee of Rs 50,000. The subscription includes WhatsApp/messaging charges, AI usage, support and updates.' } },
+        { '@type': 'Question', name: 'What does AUMY cost?', acceptedAnswer: { '@type': 'Answer', text: 'AUMY Growth is Rs 20,000 per month per clinic, plus a one-time onboarding and setup fee of Rs 50,000. It includes 10,000 appointment messages, 2,000 campaign messages and 300 minutes of AI phone time every month, with unlimited patients and staff logins. Busier clinics take AUMY Business at Rs 30,000.' } },
+        { '@type': 'Question', name: 'What happens if we go over the monthly allowance?', acceptedAnswer: { '@type': 'Answer', text: 'Nothing stops. We tell you before you reach the limit, and you either move up a plan or top up only what you need — 500 extra campaign messages for Rs 500, or 100 extra AI phone minutes for Rs 1,199. Top-ups are chosen, never automatic, so there is no surprise bill.' } },
         { '@type': 'Question', name: 'Is there a free trial?', acceptedAnswer: { '@type': 'Answer', text: 'Instead of a trial, AUMY offers a live demo on a real clinic and a 60-day money-back guarantee.' } },
         { '@type': 'Question', name: 'Do I have to replace my practice management software?', acceptedAnswer: { '@type': 'Answer', text: 'No. AUMY works alongside your existing PMS as the growth layer — no migration needed. And if you want one platform, AUMY includes a complete Dental PMS (records, charting, prescriptions, treatment plans, billing & accounts) at the same price.' } },
         { '@type': 'Question', name: 'What about multi-clinic groups?', acceptedAnswer: { '@type': 'Answer', text: 'Dental groups get custom per-clinic pricing with one consolidated billing account and group-level analytics.' } },
@@ -179,8 +180,9 @@ const routes = [
     }],
     content: `
       <section><div class="ch-container ch-narrow">
-        <h1 class="ch-hero-title">Simple, flat pricing. Everything included.</h1>
-        <p>AUMY Full Suite — ₹20,000 per month per clinic, plus a one-time onboarding &amp; setup fee of ₹50,000. Includes the 24/7 AI receptionist, patient follow-up automation, recalls and reactivation, after-treatment care journeys, Google review growth, WhatsApp/messaging charges and AI usage, onboarding and support. No per-message or per-user billing.</p>
+        <h1 class="ch-hero-title">Clear pricing. Generous limits. No surprises.</h1>
+        <p>AUMY Growth — ₹20,000 per month per clinic, plus a one-time onboarding &amp; setup fee of ₹50,000. Includes the 24/7 AI receptionist, patient follow-up automation, recalls and reactivation, after-treatment care journeys, Google review growth, onboarding and support — with 10,000 appointment messages, 2,000 campaign messages and 300 minutes of AI phone time every month. Unlimited patients and unlimited staff logins; no per-user seats.</p>
+        <p>Busier clinics take AUMY Business at ₹30,000 per month (25,000 appointment messages, 5,000 campaign messages, 600 AI phone minutes). Had a busy month? Top up only what you need — 500 extra campaign messages ₹500, 100 extra AI phone minutes ₹1,199. Nothing stops, and nothing is charged without you choosing it.</p>
         <p>Multi-clinic groups: custom per-clinic pricing with one consolidated billing account and group-level analytics.</p>
         <p>Backed by a 60-day money-back guarantee.</p>
       </div></section>`,
