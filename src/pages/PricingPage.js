@@ -24,7 +24,7 @@ const PLANS = [
     name: 'AUMY Growth',
     blurb: 'For a single clinic',
     price: '₹20,000',
-    setup: '+ ₹50,000 one-time onboarding & setup',
+    setup: '+ ₹50,000–₹80,000 one-time onboarding & setup',
     featured: true,
     includes: [
       '10,000 appointment messages a month — reminders, confirmations, follow-ups',
@@ -38,7 +38,7 @@ const PLANS = [
     name: 'AUMY Business',
     blurb: 'For busier or fast-growing clinics',
     price: '₹30,000',
-    setup: '+ ₹50,000 one-time onboarding & setup',
+    setup: '+ ₹50,000–₹80,000 one-time onboarding & setup',
     featured: false,
     includes: [
       '25,000 appointment messages a month',
@@ -71,7 +71,7 @@ const ADDONS = [
 const FAQS = [
   {
     q: 'What does AUMY cost?',
-    a: 'AUMY Growth is ₹20,000 per month per clinic, plus a one-time onboarding & setup fee of ₹50,000. That covers the whole platform and a monthly allowance of 10,000 appointment messages, 2,000 campaign messages and 300 minutes of AI phone time — comfortably more than a typical single-doctor clinic uses. Busier practices take AUMY Business at ₹30,000.',
+    a: 'AUMY Growth is ₹20,000 per month per clinic, plus a one-time onboarding & setup fee of ₹50,000–₹80,000 depending on how much of your existing system we migrate. That covers the whole platform and a monthly allowance of 10,000 appointment messages, 2,000 campaign messages and 300 minutes of AI phone time — comfortably more than a typical single-doctor clinic uses. Busier practices take AUMY Business at ₹30,000.',
   },
   {
     q: 'What happens if we go over the monthly allowance?',
@@ -86,8 +86,8 @@ const FAQS = [
     a: 'Instead of an empty trial account, we give you a live demo on a real clinic and back your purchase with a 60-day money-back guarantee: if AUMY does not meet your expectations, you get your money back.',
   },
   {
-    q: 'What does the setup fee cover?',
-    a: 'Complete onboarding: WhatsApp and Google Business Profile connection, importing your patient and appointment data, configuring treatments, recall rules and care journeys in your doctors’ own words, and training your front desk.',
+    q: 'What does the setup fee cover, and why is it a range?',
+    a: '₹50,000 covers a standard onboarding: WhatsApp and Google Business Profile connection, importing your patient and appointment data, configuring treatments, recall rules and care journeys in your doctors’ own words, and training your front desk. It goes up to ₹80,000 when you want a complete migration off your current system — full visit history, clinical notes, treatment records and x-rays brought across and linked to the right patient, so nothing is left behind. We quote the exact figure after seeing what you are on today.',
   },
   {
     q: 'Do I have to replace my practice management software?',
