@@ -30,7 +30,6 @@ const PLANS = [
       '10,000 appointment messages a month — reminders, confirmations, follow-ups',
       '2,000 campaign messages a month — recalls, reactivation, offers',
       '300 minutes of AI phone time a month',
-      '100 AI-generated images a month for your social posts',
     ],
   },
   {
@@ -44,7 +43,6 @@ const PLANS = [
       '25,000 appointment messages a month',
       '5,000 campaign messages a month',
       '600 minutes of AI phone time a month',
-      '200 AI-generated images a month',
     ],
   },
 ];
