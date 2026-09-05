@@ -1,0 +1,24 @@
+/* Switch-to-AUMY page — the few things HomeClinic.css does not already cover. */
+.sw-promise {
+  border-left: 6px solid var(--c-accent);
+  background: #fff;
+  border-radius: 14px;
+  padding: 26px 30px;
+  box-shadow: 0 10px 30px rgba(15, 40, 40, 0.06);
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--c-ink);
+}
+.sw-promise p { margin: 0; }
+.sw-promise strong { font-weight: 800; }
+.sw-three { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .sw-three { grid-template-columns: 1fr; } }
+.sw-step { position: relative; padding-top: 34px; }
+.sw-step-n {
+  position: absolute; top: 18px; right: 22px;
+  width: 34px; height: 34px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--c-accent); color: #fff; font-weight: 800; font-size: 15px;
+}
+.sw-proof { margin-top: 28px; font-weight: 500; color: var(--c-ink-soft, #4a5a5a); }
+@media (max-width: 560px) { .sw-promise { font-size: 18px; padding: 20px 22px; } }

@@ -26,6 +26,7 @@ import DemosPage from './pages/DemosPage';
 import PodcastPage from './pages/PodcastPage';
 import GrowthArticle from './pages/GrowthArticle';
 import LeakCalculator from './pages/LeakCalculator';
+import SwitchPage from './pages/SwitchPage';
 import MissedCallCalculator from './pages/MissedCallCalculator';
 import CalculatorPage from './pages/CalculatorPage';
 import { CALCULATORS } from './data/calculators';
@@ -95,6 +96,7 @@ function App() {
                 <Route path="/podcast" element={<PodcastPage />} />
                 <Route path="/growth/:slug" element={<GrowthArticle />} />
                 <Route path="/leak-calculator" element={<LeakCalculator />} />
+                <Route path="/switch" element={<SwitchPage />} />
                 <Route path="/missed-call-calculator" element={<MissedCallCalculator />} />
                 {CALCULATORS.map((c) => (
                   <Route key={c.slug} path={`/${c.slug}`} element={<CalculatorPage config={c} />} />

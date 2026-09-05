@@ -39,6 +39,7 @@ const SITEMAPS = {
   in: [
     ['/', 1.0, 'weekly'],
     ['/leak-calculator', 0.9, 'monthly'],
+    ['/switch', 0.9, 'monthly'],
     ['/missed-call-calculator', 0.8, 'monthly'],
     ...CALCULATORS.map((c) => [`/${c.slug}`, 0.8, 'monthly']),
     ['/revenue-generator', 0.9, 'weekly'],
@@ -63,6 +64,7 @@ const SITEMAPS = {
     ['/', 1.0, 'weekly'],
     ['/business-manager', 0.9, 'weekly'],
     ['/leak-calculator', 0.9, 'monthly'],
+    ['/switch', 0.9, 'monthly'],
     ['/privacy', 0.2, 'yearly'],
     ['/terms', 0.2, 'yearly'],
   ],
@@ -130,6 +132,7 @@ const LLMS = {
 ## Pages
 - ${ORIGIN}/ — overview for clinic owners
 - ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to missed enquiries, no-shows and lapsed patients
+- ${ORIGIN}/switch — moving from your current dental software: AUMY syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how the system works
@@ -170,6 +173,7 @@ AUM AI Healthcare Solutions, Pune, Maharashtra, India — jayesh.chaudhari@aumai
 - ${ORIGIN}/ — AI receptionist for US dental practices
 - ${ORIGIN}/business-manager — Aumy Business Manager for ecommerce, local and B2B businesses
 - ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to unanswered calls, no-shows and patients who never reappoint
+- ${ORIGIN}/switch — moving from your current dental software: AUMY syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - https://aumai.co.in/ — India market
 
 ## Contact

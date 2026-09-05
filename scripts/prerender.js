@@ -357,6 +357,26 @@ const routes = [
       </div></section>`,
   },
   {
+    slug: 'switch',
+    title: 'Switch Dental Software Without Losing a Single Record — Move to AUMY | AUM AI',
+    description:
+      'Whatever dental software your clinic uses today, AUMY keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into AUMY for a one-time migration fee. No downtime.',
+    canonical: `${ORIGIN}/switch`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">Moving from your current dental software</p>
+        <h1 class="ch-hero-title">Switch without losing a single patient record.</h1>
+        <p class="ch-hero-sub">Your data is not locked in. Whatever software your clinic runs today, AUMY keeps your data in sync with it from day one. When you are ready for one connected platform, we migrate patients, appointment history, treatment history, clinical notes, X-rays and images into AUMY for a one-time migration fee — with no downtime and nothing re-typed.</p>
+        <h2>How the move works</h2>
+        <ol>
+          <li><b>Sync</b> — AUMY keeps your current software and AUMY in step from day one.</li>
+          <li><b>Grow on top</b> — Convert, Care, Retain, Reactivate, Grow start working on the synced data.</li>
+          <li><b>Migrate when you are ready</b> — full history moved, counts verified with you, sync kept running until you switch the old system off.</li>
+        </ol>
+        <p><a href="/contact">Book a migration call</a> · <a href="/pricing">See pricing</a> · <a href="/revenue-generator">How AUMY works</a></p>
+      </div></section>`,
+  },
+  {
     slug: 'missed-call-calculator',
     title: 'Missed Call Calculator for Dental Clinics — What Unanswered Calls Cost | AUMY',
     description:

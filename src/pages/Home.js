@@ -60,7 +60,7 @@ const pillars = [
   {
     stage: 'Care',
     title: 'Look after patients beyond the chair',
-    body: 'Care before and after every visit. The moment an appointment is booked, AUMY sends doctor-approved pre-visit instructions and a smart intake form — so the patient arrives prepared and the doctor sees allergies and red flags before they sit down. After the visit, Treatment Care Plans take over: day-1 recovery check, care tips, the one-month follow-up — delivered consistently, flagging any reply that needs the clinic.',
+    body: 'Care before and after every visit. The moment an appointment is booked, AUMY sends doctor-approved pre-visit instructions and a smart intake form — so the patient arrives prepared. Reminders before the visit, and easy rescheduling if they cannot make it: a reschedule instead of a no-show. After every treatment, day-by-day care instructions for exactly what was done. And if a patient reports something urgent — severe pain, swelling, bleeding after a procedure — AUMY does not leave it in a chat: it calls your staff immediately so a human takes over within minutes.',
   },
   {
     stage: 'Retain',
@@ -89,7 +89,7 @@ const whyUs = [
 const faqs = [
   { q: 'How does the 60-day money-back guarantee work?', a: 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real recalls filled. If it doesn\u2019t meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.' },
   { q: 'Do you have your own dental software (PMS)?', a: 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on AUMY, at the same price.' },
-  { q: 'Do I have to replace my current software?', a: 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top. You can move onto AUMY’s full PMS later, whenever you choose.' },
+  { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, AUMY keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into AUMY for a one-time migration fee — with no downtime.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
   { q: 'Will my staff have to learn something complicated?', a: 'No. AUMY runs in the background; your team does less, not more.' },
@@ -348,9 +348,11 @@ const Home = () => {
               <span className="ch-eyebrow">Happy with your current PMS?</span>
               <h3 className="ch-pillar-title">Keep it — AUMY runs on top</h3>
               <p className="ch-pillar-body">
-                No migration, no retraining. AUMY sits alongside your existing software and runs the
-                growth layer — Convert, Care, Retain, Reactivate, Grow — while your records stay
-                exactly where they are. Move onto the full platform later, whenever you choose.
+                No retraining on day one. Whatever software you use, AUMY keeps your data in sync
+                with it and runs the growth layer — Convert, Care, Retain, Reactivate, Grow — on top.
+                <strong> Want one connected platform? We migrate your data from your current software
+                into AUMY for a one-time migration fee.</strong>{' '}
+                <Link to="/switch">How the move works</Link>.
               </p>
             </div>
           </div>
