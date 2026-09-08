@@ -1,0 +1,106 @@
+/* ── Get the Aumy app: branded download band + store badges ─────────────── */
+.app-dl {
+  padding: 84px 0;
+  background: linear-gradient(135deg, #0f2540 0%, #16324f 55%, #1d4463 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.app-dl::before {
+  content: '';
+  position: absolute; inset: -40% -20% auto auto; width: 60%; height: 140%;
+  background: radial-gradient(closest-side, rgba(37, 99, 235, 0.35), transparent 70%);
+  pointer-events: none;
+}
+.app-dl-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 56px;
+  align-items: center;
+}
+.app-dl-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: #bfdbfe;
+}
+.app-dl-eyebrow img { border-radius: 8px; background: #fff; }
+.app-dl-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 800; letter-spacing: -0.025em; line-height: 1.08;
+  margin: 18px 0 14px;
+}
+.app-dl-sub { font-size: 18px; line-height: 1.55; color: rgba(255, 255, 255, 0.82); max-width: 560px; margin: 0 0 24px; }
+.app-dl-points { list-style: none; margin: 0 0 30px; padding: 0; display: grid; gap: 12px; max-width: 580px; }
+.app-dl-points li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: rgba(255, 255, 255, 0.88); }
+.app-dl-points strong { color: #fff; }
+.app-dl-check {
+  flex: 0 0 auto; width: 24px; height: 24px; margin-top: 2px;
+  display: grid; place-items: center; border-radius: 8px;
+  background: #2563eb; color: #fff;
+}
+.app-dl-fine { margin: 14px 0 0; font-size: 13px; color: rgba(255, 255, 255, 0.6); }
+
+/* Store badges */
+.app-badges { display: flex; flex-wrap: wrap; gap: 12px; }
+.app-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-width: 176px; height: 56px; padding: 0 18px 0 14px;
+  border-radius: 12px;
+  background: #0b1220; color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.app-badge:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35); border-color: rgba(255, 255, 255, 0.45); color: #fff; }
+.app-badge-icon { display: grid; place-items: center; width: 26px; }
+.app-badge-text { display: flex; flex-direction: column; line-height: 1.05; }
+.app-badge-small { font-size: 10.5px; letter-spacing: 0.02em; opacity: 0.85; }
+.app-badge-big { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+.app-badges-compact .app-badge { height: 46px; min-width: 150px; padding: 0 14px 0 12px; }
+.app-badges-compact .app-badge-big { font-size: 16px; }
+
+/* Phone frame */
+.app-dl-phone { display: flex; justify-content: center; }
+.app-phone {
+  width: 290px; padding: 12px;
+  border-radius: 40px;
+  background: #0b1220;
+  box-shadow: 0 30px 60px rgba(2, 6, 23, 0.55), inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+  position: relative;
+  transform: rotate(-4deg);
+}
+.app-phone-notch { position: absolute; top: 20px; left: 50%; width: 92px; height: 22px; transform: translateX(-50%); border-radius: 12px; background: #0b1220; z-index: 2; }
+.app-phone-screen {
+  border-radius: 30px; background: #f8fafc; color: #0f172a;
+  padding: 44px 16px 20px; min-height: 520px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.app-phone-top { display: flex; align-items: center; gap: 10px; }
+.app-phone-top img { border-radius: 8px; }
+.app-phone-brand { font-weight: 800; font-size: 15px; color: #16324f; letter-spacing: -0.01em; }
+.app-phone-sub { font-size: 11.5px; color: #64748b; }
+.app-phone-tallies { display: flex; gap: 8px; margin: 6px 0 4px; }
+.app-phone-tallies span { flex: 1; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 8px 6px; text-align: center; font-size: 10.5px; color: #64748b; }
+.app-phone-tallies b { display: block; font-size: 17px; color: #0f172a; }
+.app-phone-card { display: flex; gap: 10px; align-items: center; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 9px 10px; }
+.app-phone-card i { width: 4px; align-self: stretch; border-radius: 4px; }
+.app-phone-card.c1 i { background: #b91c1c; } .app-phone-card.c1 { background: #fff1f2; }
+.app-phone-card.c2 i { background: #1d4ed8; } .app-phone-card.c2 { background: #eff6ff; }
+.app-phone-card.c3 i { background: #15803d; } .app-phone-card.c3 { background: #f0fdf4; }
+.app-phone-card b { display: block; font-size: 13px; }
+.app-phone-card small { font-size: 11px; color: #475569; }
+.app-phone-ai { margin-top: auto; display: flex; gap: 8px; align-items: flex-start; background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 12px; padding: 10px; font-size: 11.5px; color: #3730a3; line-height: 1.4; }
+.app-phone-ai-dot { flex: 0 0 auto; width: 10px; height: 10px; margin-top: 3px; border-radius: 50%; background: #2563eb; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2); }
+
+@media (max-width: 900px) {
+  .app-dl { padding: 64px 0; }
+  .app-dl-grid { grid-template-columns: 1fr; gap: 40px; }
+  .app-dl-phone { order: -1; }
+  .app-phone { transform: none; width: 260px; }
+  .app-phone-screen { min-height: 460px; }
+}

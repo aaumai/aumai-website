@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { OFFICES, ICON } from '../config/contact';
+import AppDownload from './AppDownload';
 import './Footer.css';
 
 const Footer = () => {
@@ -57,6 +58,11 @@ const Footer = () => {
               <img src="/aumy-lockup-dark.png" alt="Aumy by AUM AI" />
             </Link>
             <p className="footer-byline">an AUM AI product</p>
+            {/* Aumy app on both stores (owner ask, 8 Sept 2026) */}
+            <div className="footer-apps">
+              <p className="footer-apps-label">Get the Aumy app</p>
+              <AppDownload variant="compact" />
+            </div>
             <p className="footer-tagline">
               The AI Patient Journey &amp; Revenue Operating System for Dental Clinics. Turn more
               enquiries into patients, deliver better post-treatment care, and bring patients back —

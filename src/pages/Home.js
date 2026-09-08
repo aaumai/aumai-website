@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import LeakCheck from '../components/LeakCheck';
 import DemoPlaylist from '../components/DemoPlaylist';
+import AppDownload from '../components/AppDownload';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -567,6 +568,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* GET THE APP — iOS + Android */}
+      <AppDownload />
 
       {/* FAQ */}
       <section className="ch-section">
