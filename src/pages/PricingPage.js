@@ -9,91 +9,135 @@ const Check = () => (
   </svg>
 );
 
+const WA = (msg) => `https://wa.me/918007189868?text=${encodeURIComponent(msg)}`;
+
 /**
- * ⚠️ These numbers MIRROR the product's `usage_plans` and `usage_addon_catalog`
- * tables (AUM AI EHR DB). The site previously advertised flat pricing with "no
- * per-message billing" while the product metered templates and voice minutes and
- * sold top-ups — a promise we would have had to break on the first heavy clinic.
+ * ⚠️ PRICING TRUTH RULES — read before editing.
  *
- * If a plan or add-on price changes, change it in the migration AND here, in the
- * same session. Prices below are rupees (the tables store paise).
+ * 1. This page deliberately shows STARTING prices ("from ₹X"), not final ones.
+ *    A clinic's bill = the modules they take + their monthly message/call
+ *    volume. Quoting one flat number pushed small clinics away (they read
+ *    ₹20,000 and never called) and boxed us in with big ones.
+ *
+ * 2. Any "from" figure here MUST be a price we would actually honour on a call.
+ *    The site previously advertised flat pricing with "no per-message billing"
+ *    while the product metered templates and voice minutes — a promise we would
+ *    have had to break on the first heavy clinic. Never again.
+ *
+ * 3. Volume allowances and overage rates live in the product's `usage_plans`
+ *    and `usage_addon_catalog` tables. Do not restate specific allowances here
+ *    unless they are changed in the same session in BOTH places.
  */
-const PLANS = [
+
+/**
+ * The modules, in the order a clinic grows into them. Every clinic starts with
+ * Clinic OS; the rest are genuinely optional, which is the whole point.
+ */
+const MODULES = [
   {
-    code: 'growth',
-    name: 'AUMY Growth',
-    blurb: 'For a single clinic',
-    price: '₹20,000',
-    setup: '+ ₹50,000–₹80,000 one-time onboarding & setup',
+    name: 'Clinic OS',
+    tag: 'Where most clinics start',
+    from: '₹5,000',
     featured: true,
-    includes: [
-      '10,000 appointment messages a month — reminders, confirmations, follow-ups',
-      '2,000 campaign messages a month — recalls, reactivation, offers',
-      '300 minutes of AI phone time a month',
+    blurb: 'Run the day. Appointments, patient records and dental charting in one place.',
+    points: [
+      'Appointment book, calendar and reminders',
+      'Patient records, dental charting and treatment history',
+      'Prescriptions, invoices and reports',
+      'Unlimited patients and unlimited staff logins',
     ],
   },
   {
-    code: 'business',
-    name: 'AUMY Business',
-    blurb: 'For busier or fast-growing clinics',
-    price: '₹30,000',
-    setup: '+ ₹50,000–₹80,000 one-time onboarding & setup',
-    featured: false,
-    includes: [
-      '25,000 appointment messages a month',
-      '5,000 campaign messages a month',
-      '600 minutes of AI phone time a month',
+    name: 'Patient Journey',
+    tag: 'The one that pays for itself',
+    from: '₹15,000',
+    featured: true,
+    blurb:
+      'Turns enquiries into patients and keeps the ones you have. This is the module that finds revenue you already earned but never collected.',
+    points: [
+      'Every enquiry answered and followed up, day or night',
+      'Books, reschedules and cancels appointments on its own',
+      'Closes care gaps — reminds patients when their next treatment is due',
+      'Brings lapsed patients back, in your own doctors’ words',
+      'Birthday and festival messages, review requests, campaigns',
+      'After-treatment care, per treatment',
     ],
+  },
+  {
+    name: 'Get Found',
+    tag: 'For clinics nobody is searching yet',
+    from: '₹5,000',
+    blurb: 'Be the clinic people find when they search for a dentist near them.',
+    points: [
+      'Google Business Profile kept live and posting',
+      'Review growth, and replies written for you',
+      'Local search visibility for the treatments you want more of',
+    ],
+  },
+  {
+    name: 'Voice Assistant',
+    tag: 'When the phone is the problem',
+    from: '₹6,000',
+    blurb: 'Answers the calls your front desk cannot get to, and never sends one to voicemail.',
+    points: ['Answers, books and reschedules by phone', 'Call recordings and quality review'],
+  },
+  {
+    name: 'Ads Manager',
+    tag: 'If you are already spending on ads',
+    from: '₹3,000',
+    blurb: 'Runs and measures your Google and Meta ads, and follows up the leads they produce.',
+    points: ['Campaigns built and managed for you', 'Every lead answered within seconds'],
+  },
+  {
+    name: 'Smile Simulation',
+    tag: 'For cosmetic cases',
+    from: '₹2,000',
+    blurb: 'Show a patient their result before they say yes. Consultations close faster.',
+    points: ['AI smile preview from a photo', 'Shareable with the patient on WhatsApp'],
   },
 ];
 
-/** Everything both plans include, regardless of volume. */
+/** True on every module — the things a clinic should never have to ask about. */
 const INCLUDED = [
-  '24/7 AI receptionist — every call & WhatsApp enquiry answered and followed up',
-  'Patient follow-up automation — enquiries, pending treatment plans, no-show re-booking',
-  'Recalls & reactivation — cleanings, check-ups and lapsed patients brought back',
-  'After-treatment care journeys, per treatment',
-  'Google review growth, review replies & Get Found local SEO',
-  'Unlimited patients, unlimited staff logins — no per-user seats',
-  'Onboarding, configuration, training & ongoing support',
-];
-
-/** Mirrors usage_addon_catalog. */
-const ADDONS = [
-  ['500 extra campaign messages', '₹500'],
-  ['5,000 extra appointment messages', '₹950'],
-  ['100 extra AI phone minutes', '₹1,199'],
-  ['500 extra AI phone minutes', '₹4,999'],
+  'Unlimited patients and unlimited staff logins — we never charge per seat',
+  'Onboarding, configuration and training for your team',
+  'Your data stays yours, and leaves with you if you go',
+  'Ongoing support from the people who built it',
+  'A 60-day money-back guarantee',
 ];
 
 const FAQS = [
   {
-    q: 'What does AUMY cost?',
-    a: 'AUMY Growth is ₹20,000 per month per clinic, plus a one-time onboarding & setup fee of ₹50,000–₹80,000 depending on how much of your existing system we migrate. That covers the whole platform and a monthly allowance of 10,000 appointment messages, 2,000 campaign messages and 300 minutes of AI phone time — comfortably more than a typical single-doctor clinic uses. Busier practices take AUMY Business at ₹30,000.',
+    q: 'Why is there no fixed price on this page?',
+    a: 'Because a two-chair clinic and a six-doctor practice should not pay the same, and until recently ours did. What you pay depends on two things: which modules you switch on, and how many patients you message and call in a month. A single-doctor clinic taking just Clinic OS starts at ₹5,000 a month. A busy multi-doctor practice running the full patient journey pays a good deal more, and gets a good deal more back. One short call and we will tell you your number.',
   },
   {
-    q: 'What happens if we go over the monthly allowance?',
-    a: 'Nothing stops and nothing breaks. We tell you before you reach the limit, and you either move up a plan or top up just what you need — 500 extra campaign messages for ₹500, or 100 extra AI phone minutes for ₹1,199. You will never get a surprise bill: top-ups are something you choose, not something that happens to you.',
+    q: 'I am a small clinic. Is this built for someone my size?',
+    a: 'Yes, and we would rather you called than assumed otherwise. Small clinics usually take Clinic OS on its own to get the day organised, and add the Patient Journey later once the appointment book is full enough to be worth protecting. There is no minimum size and no minimum patient count. If you are two chairs and a receptionist, say so on the call — we will build you the smallest thing that solves your actual problem.',
   },
   {
-    q: 'Are there per-user or per-patient charges?',
-    a: 'No. Every plan includes unlimited patients and unlimited staff logins. The only thing that scales is how much you message and call — which is also the part that brings patients back, so it tends to pay for itself.',
+    q: 'Can I start with one module and add more later?',
+    a: 'That is how most clinics do it. Modules switch on and off month to month, and nothing has to be reinstalled or re-onboarded when you add one. Your patient data is already there, so a module you add in month six starts working with your full history on day one.',
+  },
+  {
+    q: 'What decides the price beyond the modules?',
+    a: 'Your monthly volume — how many appointment reminders, follow-ups and campaign messages go out, and how many minutes the AI spends on the phone. We size that from your actual patient numbers on the call rather than guessing, and we tell you before you approach a limit. You will never get a surprise bill.',
+  },
+  {
+    q: 'Is there a setup fee?',
+    a: 'For most clinics, yes — it covers connecting WhatsApp and your Google Business Profile, importing your patients and appointments, and configuring treatments and recall rules in your own doctors’ words. It scales with how much we migrate. A clinic starting fresh on Clinic OS pays very little. A practice moving twenty years of history, clinical notes and x-rays across pays more, because that is real work. We quote it exactly after seeing what you are on today.',
+  },
+  {
+    q: 'Do I have to replace the software I already use?',
+    a: 'Only if you want to. If you are happy with your current practice management software, take the Patient Journey or Get Found modules and leave it in place — they work alongside it. If your current system is the thing holding you back, Clinic OS replaces it and we migrate your history across.',
   },
   {
     q: 'Is there a free trial?',
-    a: 'Instead of an empty trial account, we give you a live demo on a real clinic and back your purchase with a 60-day money-back guarantee: if AUMY does not meet your expectations, you get your money back.',
-  },
-  {
-    q: 'What does the setup fee cover, and why is it a range?',
-    a: '₹50,000 covers a standard onboarding: WhatsApp and Google Business Profile connection, importing your patient and appointment data, configuring treatments, recall rules and care journeys in your doctors’ own words, and training your front desk. It goes up to ₹80,000 when you want a complete migration off your current system — full visit history, clinical notes, treatment records and x-rays brought across and linked to the right patient, so nothing is left behind. We quote the exact figure after seeing what you are on today.',
-  },
-  {
-    q: 'Do I have to replace my practice management software?',
-    a: 'No. AUMY works alongside whatever PMS you already use — it is the growth layer, not the system of record. There is no migration.',
+    a: 'Instead of an empty trial account, we show you a live demo on a real clinic so you can see it working with real patients and real messages. Every purchase is backed by a 60-day money-back guarantee.',
   },
   {
     q: 'What about multi-clinic groups?',
-    a: 'Dental groups get custom per-clinic pricing with one consolidated billing account and group-level analytics. Contact us for a tailored quote.',
+    a: 'Groups get per-clinic pricing under one consolidated bill, with group-level reporting across every location. Tell us how many clinics and we will put a number together.',
   },
 ];
 
@@ -101,9 +145,9 @@ const PricingPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({
-      title: 'AUMY Pricing — from ₹20,000/month for Dental Clinics | AUM AI',
+      title: 'AUMY Pricing — modular software for dental clinics, from ₹5,000/month | AUM AI',
       description:
-        'Clear pricing for dental clinics: AUMY Growth at ₹20,000/month with 10,000 appointment messages, 2,000 campaign messages and 300 AI phone minutes included. Unlimited patients and staff logins. 60-day money-back guarantee. Custom plans for multi-clinic groups.',
+        'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and more. Small clinics welcome — call us for pricing built around your patient volume. 60-day money-back guarantee.',
       canonical: 'https://aumai.co.in/pricing',
     });
   }, []);
@@ -113,72 +157,129 @@ const PricingPage = () => {
       <section className="ch-hero" style={{ paddingBottom: 24 }}>
         <div className="ch-container ch-narrow ch-center">
           <span className="ch-eyebrow">Pricing</span>
-          <h1 className="ch-hero-title">Clear pricing. Generous limits. No surprises.</h1>
+          <h1 className="ch-hero-title">One system. Pay for the parts you need.</h1>
           <p className="ch-hero-sub">
-            One subscription covers the full patient journey — Convert, Care, Retain, Reactivate, Grow.
-            Unlimited patients, unlimited staff logins, and a monthly message &amp; call allowance most
-            clinics never finish.
+            AUMY is one connected platform, but you do not have to buy all of it. Switch on the
+            modules that solve your problem today and add the rest when you are ready. What you pay
+            depends on which modules you take and how many patients you have — so a small clinic
+            pays like a small clinic.
           </p>
+          <div className="ch-hero-cta" style={{ marginTop: 22 }}>
+            <a href={WA('Hi, I would like pricing for my clinic. Here is roughly my size and what I need:')} className="ch-btn ch-btn-primary">
+              Get your price on WhatsApp
+            </a>
+            <Link to="/growth-audit" className="ch-btn ch-btn-ghost">
+              Or start with a free Growth Audit
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section style={{ padding: '24px 0 48px' }}>
-        <div className="ch-container" style={{ display: 'grid', gap: 24, gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 380px))', justifyContent: 'center' }}>
-          {PLANS.map((p) => (
-            <div
-              key={p.code}
-              className="ch-why-card"
-              style={{ display: 'block', padding: 28, ...(p.featured ? { borderTop: '4px solid #2563EB' } : {}) }}
-            >
-              <h2 style={{ margin: 0, fontSize: '1.3rem' }}>{p.name}</h2>
-              <p style={{ margin: '4px 0 14px', color: '#5b6784' }}>{p.blurb}</p>
-              <div style={{ fontSize: '2.2rem', fontWeight: 800 }}>
-                {p.price}
-                <span style={{ fontSize: '1rem', fontWeight: 500, color: '#5b6784' }}> / month</span>
-              </div>
-              <p style={{ margin: '2px 0 18px', color: '#5b6784' }}>{p.setup}</p>
-
-              <p style={{ margin: '0 0 8px', fontWeight: 700, fontSize: '0.92rem' }}>Included every month</p>
-              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                {p.includes.map((f) => (
-                  <li key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '9px 0' }}>
-                    <Check /> <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div style={{ marginTop: 20 }}>
-                <Link to="/growth-audit" className={`ch-btn ${p.featured ? 'ch-btn-primary' : 'ch-btn-ghost'}`} style={{ width: '100%', textAlign: 'center', display: 'block' }}>
-                  Start with a free Growth Audit
-                </Link>
-              </div>
-            </div>
-          ))}
-
-          <div className="ch-why-card" style={{ display: 'block', padding: 28 }}>
-            <h2 style={{ margin: 0, fontSize: '1.3rem' }}>Multi-Clinic Group</h2>
-            <p style={{ margin: '4px 0 14px', color: '#5b6784' }}>For dental groups &amp; multi-location practices</p>
-            <div style={{ fontSize: '2.2rem', fontWeight: 800 }}>Custom</div>
-            <p style={{ margin: '2px 0 18px', color: '#5b6784' }}>Per-clinic pricing, one consolidated bill</p>
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-              {['Everything in Business, for every location', 'One consolidated billing account', 'Group-level analytics & reporting', 'Centralised onboarding across clinics'].map((f) => (
-                <li key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '9px 0' }}>
-                  <Check /> <span>{f}</span>
-                </li>
-              ))}
-            </ul>
-            <div style={{ marginTop: 20 }}>
-              <a href="https://wa.me/918007189868?text=Hi%2C%20I%20run%20a%20multi-clinic%20dental%20group%20and%20want%20a%20custom%20AUMY%20quote."
-                className="ch-btn ch-btn-ghost" style={{ width: '100%', textAlign: 'center', display: 'block' }}>
-                Talk to us for a group quote
+      {/* Small clinics are the ones who bounce off a pricing page. Say it early,
+          say it plainly, and give them their own way in. */}
+      <section style={{ padding: '8px 0 8px' }}>
+        <div className="ch-container ch-narrow">
+          <div
+            className="ch-why-card"
+            style={{ display: 'block', padding: '22px 26px', borderLeft: '4px solid #2563EB' }}
+          >
+            <h2 style={{ margin: '0 0 6px', fontSize: '1.15rem' }}>Running a smaller clinic?</h2>
+            <p style={{ margin: 0, color: '#5b6784' }}>
+              Please still call. Most small clinics do not need the whole platform, and we would
+              rather sell you the one module that fixes your actual problem than talk you into six.
+              Plenty of our clinics started on Clinic OS alone at{' '}
+              <strong style={{ color: '#0f172a' }}>₹5,000 a month</strong> and added more only once
+              they were busy enough to need it. There is no minimum size.
+            </p>
+            <div style={{ marginTop: 14 }}>
+              <a
+                href={WA('Hi, I run a small clinic and want to know which module would suit me and what it would cost.')}
+                className="ch-btn ch-btn-primary"
+              >
+                Tell us your size, get a straight answer
               </a>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Everything included on every plan — the part that never depends on volume. */}
-        <div className="ch-container ch-narrow" style={{ marginTop: 34 }}>
-          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>On every plan</h2>
+      <section style={{ padding: '30px 0 20px' }}>
+        <div className="ch-container ch-narrow ch-center">
+          <h2 className="ch-h2" style={{ textAlign: 'center', marginBottom: 6 }}>The modules</h2>
+          <p style={{ textAlign: 'center', color: '#5b6784', maxWidth: 680, margin: '0 auto 8px' }}>
+            Starting prices per clinic, per month. Your final number depends on your patient volume,
+            which we work out with you rather than guess at.
+          </p>
+        </div>
+
+        <div
+          className="ch-container"
+          style={{
+            display: 'grid',
+            gap: 22,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 370px))',
+            justifyContent: 'center',
+            marginTop: 20,
+          }}
+        >
+          {MODULES.map((m) => (
+            <div
+              key={m.name}
+              className="ch-why-card"
+              style={{ display: 'block', padding: 26, ...(m.featured ? { borderTop: '4px solid #2563EB' } : {}) }}
+            >
+              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{m.name}</h3>
+              <p style={{ margin: '3px 0 12px', color: '#2563EB', fontWeight: 600, fontSize: '0.86rem' }}>
+                {m.tag}
+              </p>
+              <div style={{ fontSize: '1.9rem', fontWeight: 800 }}>
+                <span style={{ fontSize: '0.9rem', fontWeight: 500, color: '#5b6784' }}>from </span>
+                {m.from}
+                <span style={{ fontSize: '0.95rem', fontWeight: 500, color: '#5b6784' }}> / month</span>
+              </div>
+              <p style={{ margin: '12px 0 14px', color: '#5b6784' }}>{m.blurb}</p>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                {m.points.map((f) => (
+                  <li key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '8px 0' }}>
+                    <Check /> <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* How the number is actually arrived at. Clinics distrust "custom pricing"
+          when nobody explains the inputs. */}
+      <section style={{ padding: '18px 0' }}>
+        <div className="ch-container ch-narrow">
+          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>
+            How we arrive at your price
+          </h2>
+          <div className="ch-why-card" style={{ display: 'block', padding: '20px 24px' }}>
+            {[
+              ['The modules you switch on', 'Only what you need. Add or drop them month to month.'],
+              ['Your monthly patient volume', 'How many patients you message and call. A quiet clinic pays less than a busy one, permanently.'],
+              ['One-time setup', 'Connecting WhatsApp and Google, bringing your data across, and setting up your treatments and recalls. Scales with how much history you are moving.'],
+            ].map(([h, s]) => (
+              <div key={h} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', margin: '12px 0' }}>
+                <Check />
+                <div>
+                  <strong>{h}</strong>
+                  <div style={{ color: '#5b6784' }}>{s}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ padding: '10px 0 20px' }}>
+        <div className="ch-container ch-narrow">
+          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>
+            On every module
+          </h2>
           <div className="ch-why-card" style={{ display: 'block', padding: '18px 22px' }}>
             <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
               {INCLUDED.map((f) => (
@@ -189,43 +290,31 @@ const PricingPage = () => {
             </ul>
           </div>
         </div>
+      </section>
 
-        {/* Top-ups, stated plainly — a busy month should feel like a good problem. */}
-        <div className="ch-container ch-narrow" style={{ marginTop: 28 }}>
-          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 6 }}>Had a busy month?</h2>
-          <p className="ch-center" style={{ textAlign: 'center', color: '#5b6784', maxWidth: 640, margin: '0 auto 16px' }}>
-            We tell you before you reach your limit. Move up a plan, or top up only what you need —
-            nothing stops, and nothing is charged without you choosing it.
-          </p>
-          <div className="ch-why-card" style={{ display: 'block', padding: '18px 22px' }}>
-            {ADDONS.map(([label, price]) => (
-              <div key={label} style={{ display: 'flex', justifyContent: 'space-between', gap: 12, margin: '9px 0' }}>
-                <span>{label}</span>
-                <span style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{price}</span>
+      <section style={{ padding: '20px 0 56px' }}>
+        <div className="ch-container ch-narrow">
+          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 16 }}>
+            Questions clinics actually ask
+          </h2>
+          <div className="ch-faq">
+            {FAQS.map((f) => (
+              <div key={f.q} className="ch-faq-item">
+                <h3 style={{ margin: '0 0 6px', fontSize: '1.02rem' }}>{f.q}</h3>
+                <p style={{ margin: 0, color: '#5b6784' }}>{f.a}</p>
               </div>
             ))}
           </div>
-        </div>
 
-        <div className="ch-container ch-narrow ch-center" style={{ marginTop: 28 }}>
-          <p style={{ fontWeight: 700, fontSize: '1.05rem' }}>🛡️ 60-day money-back guarantee</p>
-          <p style={{ color: '#5b6784', maxWidth: 620, margin: '4px auto 0' }}>
-            If AUMY doesn&rsquo;t meet your expectations in the first 60 days, you get your money back. That&rsquo;s the whole policy.
-          </p>
-        </div>
-      </section>
-
-      <section style={{ padding: '12px 0 64px' }}>
-        <div className="ch-container ch-narrow">
-          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center' }}>Pricing questions, answered</h2>
-          {FAQS.map((f) => (
-            <div key={f.q} className="ch-why-card" style={{ display: 'block', padding: '18px 22px', margin: '12px 0' }}>
-              <h3 style={{ margin: '0 0 6px', fontSize: '1.02rem' }}>{f.q}</h3>
-              <p style={{ margin: 0, color: '#5b6784' }}>{f.a}</p>
-            </div>
-          ))}
-          <div className="ch-center" style={{ textAlign: 'center', marginTop: 26 }}>
-            <Link to="/demos" className="ch-btn ch-btn-primary">See AUMY in action — real clinic, real WhatsApp</Link>
+          <div className="ch-center-cta" style={{ textAlign: 'center', marginTop: 34 }}>
+            <h2 className="ch-h2" style={{ marginBottom: 8 }}>Tell us your size. We will tell you your price.</h2>
+            <p style={{ color: '#5b6784', maxWidth: 620, margin: '0 auto 18px' }}>
+              No form to fill in, no sales sequence. One conversation about how many chairs you run
+              and what is not working, and you will have a number the same day.
+            </p>
+            <a href={WA('Hi, I would like pricing for my clinic. Here is roughly my size and what I need:')} className="ch-btn ch-btn-primary">
+              Get your price on WhatsApp
+            </a>
           </div>
         </div>
       </section>
