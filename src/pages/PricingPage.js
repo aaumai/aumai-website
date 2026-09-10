@@ -82,18 +82,19 @@ const MODULES = [
     points: ['Answers, books and reschedules by phone', 'Call recordings and quality review'],
   },
   {
-    name: 'Ads Manager',
-    tag: 'If you are already spending on ads',
-    from: '₹3,000',
-    blurb: 'Runs and measures your Google and Meta ads, and follows up the leads they produce.',
-    points: ['Campaigns built and managed for you', 'Every lead answered within seconds'],
-  },
-  {
-    name: 'Smile Simulation',
-    tag: 'For cosmetic cases',
-    from: '₹2,000',
-    blurb: 'Show a patient their result before they say yes. Consultations close faster.',
-    points: ['AI smile preview from a photo', 'Shareable with the patient on WhatsApp'],
+    name: 'Meta Ads Management',
+    tag: 'If you are spending on Facebook or Instagram',
+    from: '₹10,000',
+    featured: true,
+    blurb:
+      'We run your Meta ads — and they work harder here than anywhere else, because the platform running them also knows which leads turned into paying patients.',
+    points: [
+      'Campaigns built, run and optimised for you',
+      'Your ads get sharper over time — we send real outcomes back to Meta, so it learns to find people who book, not people who click',
+      'See the revenue each rupee of ad spend actually produced, not just cost per lead',
+      'Every enquiry answered in seconds, day or night, before they message the next clinic',
+      'High-intent enquiries kept warm for months — a good share book long after the ad stopped running',
+    ],
   },
 ];
 
@@ -132,6 +133,11 @@ const FAQS = [
     a: 'Only if you want to. If you are happy with your current practice management software, take the Patient Journey or Get Found modules and leave it in place — they work alongside it. If your current system is the thing holding you back, Clinic OS replaces it and we migrate your history across.',
   },
   {
+    q: 'Why would my Meta ads do better with you than with my current agency?',
+    a:
+      'Because an agency hands you leads and stops there. We run the ads and then watch what happens to every single lead — who replied, who booked, who actually turned up, and what they spent. That goes back to Meta, so its targeting stops chasing cheap clicks and starts finding people who behave like your paying patients. It is the same ad budget learning from better information. It also means we report revenue per rupee spent rather than cost per lead, which is the only number that tells you whether the ads are working. And the enquiries who were not ready yet keep getting followed up for months, so a good share of them book long after the campaign ended.',
+  },
+  {
     q: 'Is there a free trial?',
     a: 'Instead of an empty trial account, we show you a live demo on a real clinic so you can see it working with real patients and real messages. Every purchase is backed by a 60-day money-back guarantee.',
   },
@@ -147,7 +153,7 @@ const PricingPage = () => {
     setPageSeo({
       title: 'AUMY Pricing — modular software for dental clinics, from ₹5,000/month | AUM AI',
       description:
-        'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and more. Small clinics welcome — call us for pricing built around your patient volume. 60-day money-back guarantee.',
+        'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and Meta Ads. Small clinics welcome — call us for pricing built around your patient volume. 60-day money-back guarantee.',
       canonical: 'https://aumai.co.in/pricing',
     });
   }, []);

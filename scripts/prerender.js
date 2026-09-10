@@ -165,7 +165,7 @@ const routes = [
     slug: 'pricing',
     title: 'AUMY Pricing — modular software for dental clinics, from ₹5,000/month | AUM AI',
     description:
-      'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and more. Small clinics welcome — call us for pricing built around your patient volume. 60-day money-back guarantee.',
+      'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and Meta Ads. Small clinics welcome — call us for pricing built around your patient volume. 60-day money-back guarantee.',
     canonical: `${ORIGIN}/pricing`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
@@ -176,6 +176,7 @@ const routes = [
         { '@type': 'Question', name: 'Can I start with one module and add more later?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Modules switch on and off month to month with no re-onboarding. Your patient data is already there, so a module added later starts working with your full history on day one.' } },
         { '@type': 'Question', name: 'What decides the price beyond the modules?', acceptedAnswer: { '@type': 'Answer', text: 'Your monthly volume — how many appointment reminders, follow-ups and campaign messages go out, and how many minutes the AI spends on the phone. We size it from your actual patient numbers and tell you before you approach a limit, so there is no surprise bill.' } },
         { '@type': 'Question', name: 'Do I have to replace the software I already use?', acceptedAnswer: { '@type': 'Answer', text: 'Only if you want to. Take the Patient Journey or Get Found modules and they work alongside your existing practice management software. If your current system is holding you back, Clinic OS replaces it and we migrate your history across.' } },
+        { '@type': 'Question', name: 'Why would my Meta ads do better with you than with my current agency?', acceptedAnswer: { '@type': 'Answer', text: 'Because an agency hands you leads and stops there. We run the ads and then watch what happens to every single lead - who replied, who booked, who actually turned up, and what they spent. That goes back to Meta, so its targeting stops chasing cheap clicks and starts finding people who behave like your paying patients. It is the same ad budget learning from better information. It also means we report revenue per rupee spent rather than cost per lead, which is the only number that tells you whether the ads are working. And the enquiries who were not ready yet keep getting followed up for months, so a good share of them book long after the campaign ended.' } },
         { '@type': 'Question', name: 'Is there a free trial?', acceptedAnswer: { '@type': 'Answer', text: 'Instead of an empty trial account, AUMY gives a live demo on a real clinic, backed by a 60-day money-back guarantee.' } },
         { '@type': 'Question', name: 'What about multi-clinic groups?', acceptedAnswer: { '@type': 'Answer', text: 'Groups get per-clinic pricing under one consolidated bill, with group-level reporting across every location.' } },
       ],
@@ -188,7 +189,8 @@ const routes = [
         <p><strong>Clinic OS &mdash; from &#8377;5,000/month.</strong> Run the day: appointment book and reminders, patient records, dental charting and treatment history, prescriptions, invoices and reports. Unlimited patients and unlimited staff logins.</p>
         <p><strong>Patient Journey &mdash; from &#8377;15,000/month.</strong> Turns enquiries into patients and keeps the ones you have. Every enquiry answered day or night, appointments booked, rescheduled and cancelled on its own, care gaps closed by reminding patients when their next treatment is due, lapsed patients brought back in your own doctors&rsquo; words, plus birthday and festival messages, review requests, campaigns and after-treatment care.</p>
         <p><strong>Get Found &mdash; from &#8377;5,000/month.</strong> Be the clinic people find when they search for a dentist near them: Google Business Profile kept live and posting, review growth with replies written for you, and local search visibility for the treatments you want more of.</p>
-        <p><strong>Also available:</strong> Voice Assistant from &#8377;6,000/month, Ads Manager from &#8377;3,000/month, Smile Simulation from &#8377;2,000/month.</p>
+        <p><strong>Meta Ads Management &mdash; &#8377;10,000/month.</strong> We run your Facebook and Instagram ads, and they work harder here than anywhere else because the platform running them also knows which leads became paying patients. Real outcomes go back to Meta, so it learns to find people who book rather than people who click; you see the revenue each rupee of ad spend actually produced, not just cost per lead; and high-intent enquiries are followed up for months, so a good share book long after the ad stopped running.</p>
+        <p><strong>Also available:</strong> Voice Assistant from &#8377;6,000/month.</p>
         <p>Your price is set by three things: the modules you switch on, your monthly patient volume, and a one-time setup that scales with how much history you are moving. Every module includes unlimited patients and staff logins, onboarding and training, and a 60-day money-back guarantee.</p>
       </div></section>`,
   },
