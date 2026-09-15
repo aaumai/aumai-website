@@ -1,0 +1,376 @@
+{
+  "fetched_at": "2026-09-15T17:01:22.833Z",
+  "code": "usage_v2026_09",
+  "version": 1,
+  "effective_from": "2026-09-15",
+  "currency": "INR",
+  "card": {
+    "tax": {
+      "name": "GST",
+      "rate": 0.18,
+      "apply": false
+    },
+    "name": "AUMY usage pricing",
+    "voice": {
+      "minutes": [
+        [
+          1000,
+          17
+        ],
+        [
+          3000,
+          13.5
+        ],
+        [
+          null,
+          11.2
+        ]
+      ],
+      "monthly": 1500,
+      "includedMinutes": 100
+    },
+    "addons": {
+      "metaAds": {
+        "note": "Management fee; your ad budget is paid to Meta",
+        "label": "Meta Ads management",
+        "monthly": 10000
+      },
+      "getFound": {
+        "note": "Google Business Profile, reviews and replies",
+        "label": "Get Found",
+        "monthly": 5000
+      }
+    },
+    "visits": {
+      "premium": [
+        [
+          1000,
+          15.25
+        ],
+        [
+          2500,
+          12.2
+        ],
+        [
+          null,
+          10.2
+        ]
+      ],
+      "standard": [
+        [
+          1000,
+          6.25
+        ],
+        [
+          2500,
+          5
+        ],
+        [
+          null,
+          4.2
+        ]
+      ]
+    },
+    "included": {
+      "visits": 500,
+      "enquiries": 300
+    },
+    "metering": {
+      "visit": "Appointments scheduled in the period with status completed, checked in or in progress; recall placeholders excluded",
+      "enquiry": "WhatsApp contacts who first wrote in the period and were not already patients, plus unknown inbound callers (calls of at least minCallSeconds) not already counted from WhatsApp",
+      "voiceMinutes": "AI voice minutes: inbound AI calls plus AI outbound calls (human dialer excluded)",
+      "visitStatuses": [
+        "completed",
+        "checked_in",
+        "in_progress"
+      ],
+      "minCallSeconds": 10
+    },
+    "enquiries": {
+      "premium": [
+        [
+          1000,
+          22.5
+        ],
+        [
+          2500,
+          18
+        ],
+        [
+          null,
+          15
+        ]
+      ],
+      "standard": [
+        [
+          1000,
+          10
+        ],
+        [
+          2500,
+          8
+        ],
+        [
+          null,
+          6.7
+        ]
+      ]
+    },
+    "messaging": {
+      "utility": 0.6,
+      "marketing": 2.5,
+      "utilityPerVisit": 1.63
+    },
+    "notBilled": [
+      "AI charting",
+      "Doctor check-ins to dormant patients"
+    ],
+    "onboarding": {
+      "max": 50000,
+      "min": 25000,
+      "text": "One-time setup ₹25,000–50,000, depending on the data we migrate."
+    },
+    "platformFee": {
+      "premium": 18000,
+      "standard": 15000
+    },
+    "capabilities": [
+      {
+        "what": "Every enquiry answered, followed up and booked.",
+        "group": "Convert",
+        "items": [
+          {
+            "id": "ai_receptionist",
+            "on": true,
+            "name": "AI Receptionist",
+            "what": "Answers every WhatsApp enquiry in seconds, day or night, answers questions and books appointments."
+          },
+          {
+            "id": "lead_nurture",
+            "on": true,
+            "name": "Lead Nurture",
+            "what": "Follows up new enquiries who have not visited yet, around the treatment they asked about, until they decide."
+          },
+          {
+            "id": "cold_lead_retry",
+            "on": true,
+            "name": "Cold Lead Retry",
+            "what": "One more friendly attempt with enquiries that went quiet after nurture."
+          },
+          {
+            "id": "follow_up",
+            "on": true,
+            "name": "Follow-up on Request",
+            "what": "When someone says \"check with me next week\" or \"after Diwali\", AUMY follows up exactly then."
+          }
+        ]
+      },
+      {
+        "what": "Every visit confirmed, kept and cared for afterwards.",
+        "group": "Care",
+        "items": [
+          {
+            "id": "appointment",
+            "on": true,
+            "name": "Appointment Reminders",
+            "what": "Confirms every booking and reminds patients before the visit, with easy rescheduling."
+          },
+          {
+            "id": "noshow_rebook",
+            "on": true,
+            "name": "No-show Re-book",
+            "what": "Messages patients who missed their appointment and helps them rebook."
+          },
+          {
+            "id": "post_treatment_followup",
+            "on": true,
+            "name": "After-Treatment Care & Follow-Up",
+            "what": "Treatment-specific care instructions and check-ins after the visit; anything urgent goes straight to your team."
+          },
+          {
+            "id": "lab_order_followup",
+            "on": true,
+            "name": "Lab Order Follow-Ups",
+            "what": "Tells the patient when their crown, aligners or dentures are back from the lab and books the fitting."
+          }
+        ]
+      },
+      {
+        "what": "The next step a treatment needs, before the patient forgets it.",
+        "group": "Care Gaps",
+        "items": [
+          {
+            "id": "recall",
+            "on": true,
+            "name": "Care Gaps",
+            "what": "Finds treatment steps that never happened — crown after a root canal, retainer after braces, overdue cleaning — and reaches out."
+          },
+          {
+            "id": "treatment_plan_followup",
+            "on": true,
+            "name": "Treatment Plan Follow-Up",
+            "what": "Follows up patients who were advised a treatment and are still deciding."
+          },
+          {
+            "id": "treatment_plan_reminder",
+            "on": true,
+            "name": "Treatment Plan Reminders",
+            "what": "Once a plan is accepted, keeps the patient on track until every step is done."
+          }
+        ]
+      },
+      {
+        "what": "Patients who drifted away, brought back and kept close.",
+        "group": "Retain",
+        "items": [
+          {
+            "id": "dormant",
+            "on": true,
+            "name": "Doctor Check-in",
+            "what": "Personal check-ins in your doctor’s voice to patients not seen in a long time, paced at the number you choose.",
+            "dormant": true
+          },
+          {
+            "id": "referral_thank_you",
+            "on": true,
+            "name": "Referral Thank-You",
+            "what": "Thanks patients who refer others, so referrals keep coming."
+          },
+          {
+            "id": "birthday_greeting",
+            "on": true,
+            "name": "Birthday Wishes",
+            "what": "A warm, personal birthday message — goodwill only, no offers."
+          },
+          {
+            "id": "festival_greeting",
+            "on": true,
+            "name": "Festival Greetings",
+            "what": "Wishes your patients on festivals and holidays in your clinic’s name."
+          }
+        ]
+      },
+      {
+        "what": "Other patient messages that keep the clinic running smoothly.",
+        "group": "Miscellaneous",
+        "items": [
+          {
+            "id": "provider_unavailable",
+            "on": true,
+            "name": "Doctor Unavailable",
+            "what": "When a doctor is suddenly away, tells booked patients at once and offers another doctor or a later slot."
+          },
+          {
+            "id": "intake_form",
+            "on": true,
+            "name": "Intake Form Before the Visit",
+            "what": "Sends the intake form link before the visit, so history is filled in before the patient arrives."
+          },
+          {
+            "id": "review_request",
+            "on": true,
+            "name": "Review Request",
+            "what": "Asks how the visit went; happy patients get a Google review link, unhappy ones alert you first."
+          },
+          {
+            "id": "educational_content",
+            "on": false,
+            "name": "Educational Content",
+            "what": "Short oral-health tips and videos, like brushing and flossing technique."
+          },
+          {
+            "id": "upsell",
+            "on": false,
+            "name": "Treatment Upsell",
+            "what": "Suggests a related treatment that suits the patient, such as whitening after cleaning."
+          }
+        ]
+      },
+      {
+        "what": "The software your team runs the clinic on. Always included.",
+        "group": "Clinic OS",
+        "items": [
+          {
+            "id": "clinic_os",
+            "name": "Appointments, patient records & dental charting",
+            "what": "Calendar, doctor schedules, patient workspace, prescriptions, X-rays and invoices.",
+            "fixed": true
+          },
+          {
+            "id": "clinic_forms",
+            "name": "Digital registration, intake & consent",
+            "what": "Forms filled and signed on the patient’s phone or the clinic iPad — a paperless front desk.",
+            "fixed": true
+          },
+          {
+            "id": "charting",
+            "name": "AI Charting",
+            "what": "Turns typed or spoken clinical notes into structured records — procedures, diagnoses, prescriptions — with a short visit note.",
+            "fixed": true
+          }
+        ]
+      },
+      {
+        "what": "Switch on only if you need them.",
+        "group": "Add-ons",
+        "items": [
+          {
+            "id": "voice",
+            "name": "AI Voice Agent",
+            "what": "Answers calls your front desk cannot get to, books and reschedules by phone, and calls for reminders.",
+            "addon": "voice"
+          },
+          {
+            "id": "get_found",
+            "name": "Get Found",
+            "what": "Keeps your Google Business Profile active, grows reviews and replies to them for you.",
+            "addon": "getFound"
+          },
+          {
+            "id": "meta_ads",
+            "name": "Meta Ads Management",
+            "what": "We run your Facebook and Instagram ads, and AUMY tells Meta which leads became patients.",
+            "addon": "metaAds"
+          }
+        ]
+      }
+    ],
+    "annualPrepayDiscount": 0.1
+  },
+  "sample": {
+    "inputs": {
+      "tier": "standard",
+      "enquiries": 250,
+      "patients_per_day": 20,
+      "working_days": 26,
+      "voice": false,
+      "voice_minutes": 200,
+      "own_number": true,
+      "marketing": 800,
+      "get_found": false,
+      "meta_ads": false
+    },
+    "quote": {
+      "rate_card": {
+        "code": "usage_v2026_09",
+        "version": 1
+      },
+      "lines": [
+        {
+          "label": "Platform (Standard AI)",
+          "sub": "Includes 300 enquiries and 500 patient visits",
+          "amount": 15000
+        },
+        {
+          "label": "Additional patient visits coordinated",
+          "sub": "20 × ₹6.25 (501–520) · 520 visits this month",
+          "amount": 125
+        }
+      ],
+      "total": 15125,
+      "visits": 520,
+      "annual_total": 163350,
+      "excludes_tax": true
+    }
+  }
+}

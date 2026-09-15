@@ -1,0 +1,44 @@
+/* /pricing — transparent calculator (uses HomeClinic.css tokens and the .ch-calc-* layout) */
+.pp-section { padding: 24px 0; }
+.pp-notice { color: var(--c-ink-soft); font-size: 0.92rem; max-width: 640px; margin: 14px auto 0; }
+.pp-lede { color: var(--c-ink-soft); max-width: 680px; margin: 0 auto 18px; text-align: center; }
+.pp-grid { margin-top: 0; }
+.pp-hint { color: var(--c-ink-soft); font-size: 13px; }
+.pp-field-label { font-size: 14.5px; font-weight: 600; color: var(--c-ink); }
+.pp-num {
+  width: 96px; padding: 6px 8px; border: 1px solid var(--c-line); border-radius: 10px;
+  font: 700 15px/1.2 inherit; color: var(--c-accent-dark); text-align: right; font-variant-numeric: tabular-nums; background: #fff;
+}
+.pp-num:focus-visible, .pp-switch:focus-visible, .ch-calc-seg:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+.pp-result .ch-calc-breakdown li { align-items: flex-start; }
+.pp-result .ch-calc-breakdown span { display: grid; gap: 2px; }
+.pp-sub { color: rgba(255, 255, 255, 0.6); font-size: 12.5px; font-weight: 400; }
+.pp-updating { font-size: 12px; color: rgba(255, 255, 255, 0.55); margin-left: 6px; }
+.pp-error { background: rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.pp-cta { width: 100%; justify-content: center; }
+
+.pp-capgroups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 20px; align-items: start; }
+.pp-capgroup { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius); box-shadow: var(--c-shadow); padding: 20px 22px; }
+.pp-capgroup h3 { margin: 0 0 2px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--c-accent-dark); }
+.pp-gwhat { color: var(--c-ink-soft); font-size: 14px; margin: 0 0 6px; }
+.pp-cap { display: flex; gap: 14px; align-items: flex-start; justify-content: space-between; padding: 11px 0; border-bottom: 1px dashed var(--c-line); }
+.pp-cap:last-child { border-bottom: 0; }
+.pp-cap-name { font-weight: 700; font-size: 15px; color: var(--c-ink); }
+.pp-cap-what { color: var(--c-ink-soft); font-size: 14px; }
+.pp-cap-price { font-size: 13px; font-weight: 700; color: var(--c-accent-dark); margin-top: 2px; }
+.pp-extra { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pp-mini .ch-calc-seg { padding: 6px 10px; font-size: 13px; flex: none; }
+.pp-switch { position: relative; flex: none; width: 44px; height: 26px; border-radius: 999px; border: 0; background: var(--c-line); cursor: pointer; margin-top: 2px; }
+.pp-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(22, 50, 79, 0.2); transition: transform 0.15s; }
+.pp-switch.on { background: var(--c-accent); }
+.pp-switch.on::after { transform: translateX(18px); }
+.pp-included { margin-top: 18px; background: var(--c-accent-tint); border-radius: 14px; padding: 14px 18px; font-size: 15px; }
+.pp-included ul { margin: 6px 0 0; padding-left: 18px; }
+.pp-rates { display: grid; gap: 12px; padding: 22px 24px; }
+.pp-rates > div { display: flex; gap: 12px; align-items: flex-start; }
+
+@media (max-width: 920px) {
+  .pp-grid { grid-template-columns: 1fr; }
+  .pp-result { position: static; }
+}
+@media (prefers-reduced-motion: reduce) { .pp-switch::after { transition: none; } }

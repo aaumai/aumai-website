@@ -1,333 +1,366 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
+import snapshot from '../data/pricing.json';
 import './HomeClinic.css';
-
-const Check = () => (
-  <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <path d="M5 13l4 4L19 7" />
-  </svg>
-);
-
-const WA = (msg) => `https://wa.me/918007189868?text=${encodeURIComponent(msg)}`;
+import './PricingPage.css';
 
 /**
  * ⚠️ PRICING TRUTH RULES — read before editing.
  *
- * 1. This page deliberately shows STARTING prices ("from ₹X"), not final ones.
- *    A clinic's bill = the modules they take + their monthly message/call
- *    volume. Quoting one flat number pushed small clinics away (they read
- *    ₹20,000 and never called) and boxed us in with big ones.
- *
- * 2. Any "from" figure here MUST be a price we would actually honour on a call.
- *    The site previously advertised flat pricing with "no per-message billing"
- *    while the product metered templates and voice minutes — a promise we would
- *    have had to break on the first heavy clinic. Never again.
- *
- * 3. Volume allowances and overage rates live in the product's `usage_plans`
- *    and `usage_addon_catalog` tables. Do not restate specific allowances here
- *    unless they are changed in the same session in BOTH places.
+ * 1. There are NO prices in this file. Every number comes from the AUMY API's
+ *    pricing rate card (EHR API mig 830) — the same rate card clinics are
+ *    billed from. src/data/pricing.json is a build-time snapshot
+ *    (scripts/fetch-pricing.js) for the first paint and the prerendered HTML;
+ *    the page refreshes it live.
+ * 2. The monthly total is never computed here. Every change asks the API's
+ *    /quote endpoint, which runs the exact formula used to bill clinics. One
+ *    formula, so the website can never promise a price the bill does not honour.
+ * 3. To change a price: add a new rate card version in the AUMY API (effective
+ *    date), then rebuild the site so the prerendered copy follows.
  */
 
-/**
- * The modules, in the order a clinic grows into them. Every clinic starts with
- * Clinic OS; the rest are genuinely optional, which is the whole point.
- */
-const MODULES = [
-  {
-    name: 'Clinic OS',
-    tag: 'Where most clinics start',
-    from: '₹5,000',
-    featured: true,
-    blurb: 'Run the day. Appointments, patient records and dental charting in one place.',
-    points: [
-      'Appointment book, calendar and reminders',
-      'Patient records, dental charting and treatment history',
-      'Prescriptions, invoices and reports',
-      'Unlimited patients and unlimited staff logins',
-    ],
-  },
-  {
-    name: 'Patient Journey',
-    tag: 'The one that pays for itself',
-    from: '₹15,000',
-    featured: true,
-    blurb:
-      'Turns enquiries into patients and keeps the ones you have. This is the module that makes sure patients don’t slip through the cracks.',
-    points: [
-      'Every enquiry answered and followed up, day or night',
-      'Books, reschedules and cancels appointments on its own',
-      'Closes care gaps — reminds patients when their next treatment is due',
-      'Brings lapsed patients back, in your own doctors’ words',
-      'Birthday and festival messages, review requests, campaigns',
-      'After-treatment care, per treatment',
-    ],
-  },
-  {
-    name: 'Get Found',
-    tag: 'For clinics nobody is searching yet',
-    from: '₹5,000',
-    blurb: 'Be the clinic people find when they search for a dentist near them.',
-    points: [
-      'Google Business Profile kept live and posting',
-      'Review growth, and replies written for you',
-      'Local search visibility for the treatments you want more of',
-    ],
-  },
-  {
-    name: 'Voice Assistant',
-    tag: 'When the phone is the problem',
-    from: '₹6,000',
-    blurb: 'Answers the calls your front desk cannot get to, and never sends one to voicemail.',
-    points: ['Answers, books and reschedules by phone', 'Call recordings and quality review'],
-  },
-  {
-    name: 'Meta Ads Management',
-    tag: 'If you are spending on Facebook or Instagram',
-    from: '₹10,000',
-    featured: true,
-    blurb:
-      'We run your Meta ads — and they work harder here than anywhere else, because the platform running them also knows which leads turned into paying patients.',
-    points: [
-      'Campaigns built, run and optimised for you',
-      'Your ads get sharper over time — we send real outcomes back to Meta, so it learns to find people who book, not people who click',
-      'See the revenue each rupee of ad spend actually produced, not just cost per lead',
-      'Every enquiry answered in seconds, day or night, before they message the next clinic',
-      'High-intent enquiries kept warm for months — a good share book long after the ad stopped running',
-    ],
-  },
-];
+const API = 'https://aumy.aumai.co.in/api/v1/public/pricing';
+const WA = (msg) => `https://wa.me/918007189868?text=${encodeURIComponent(msg)}`;
 
-/** True on every module — the things a clinic should never have to ask about. */
-const INCLUDED = [
-  'Unlimited patients and unlimited staff logins — we never charge per seat',
-  'Onboarding, configuration and training for your team',
-  'Your data stays yours, and leaves with you if you go',
-  'Ongoing support from the people who built it',
-  'A 60-day money-back guarantee',
-];
+// Starting position of the calculator — must match SAMPLE in scripts/fetch-pricing.js.
+const DEFAULT_INPUTS = { tier: 'standard', enquiries: 250, patients_per_day: 20, working_days: 26, voice: false, voice_minutes: 200, own_number: true, marketing: 800, get_found: false, meta_ads: false };
 
-const FAQS = [
-  {
-    q: 'Why is there no fixed price on this page?',
-    a: 'Because a two-chair clinic and a six-doctor practice should not pay the same, and until recently ours did. What you pay depends on which modules you switch on and the size of your practice. A single-doctor clinic taking just Clinic OS starts at ₹5,000 a month. A busy multi-doctor practice running the full patient journey pays a good deal more, and gets a good deal more back. One short call and we will tell you your number.',
-  },
-  {
-    q: 'I am a small clinic. Is this built for someone my size?',
-    a: 'Yes, and we would rather you called than assumed otherwise. Small clinics usually take Clinic OS on its own to get the day organised, and add the Patient Journey later once the appointment book is full enough to be worth protecting. There is no minimum size and no minimum patient count. If you are two chairs and a receptionist, say so on the call — we will build you the smallest thing that solves your actual problem.',
-  },
-  {
-    q: 'Can I start with one module and add more later?',
-    a: 'That is how most clinics do it. Modules switch on and off month to month, and nothing has to be reinstalled or re-onboarded when you add one. Your patient data is already there, so a module you add in month six starts working with your full history on day one.',
-  },
-  {
-    q: 'Are messages and calls charged separately?',
-    a: 'No. Your monthly price covers the WhatsApp messages and AI phone calls a clinic of your size normally makes — reminders, follow-ups, campaigns, the receptionist — under a fair usage policy. We size the plan from your actual patient numbers on the call, and if your clinic grows well past that we talk to you first. You will never get a surprise bill.',
-  },
-  {
-    q: 'Is there a setup fee?',
-    a: 'For most clinics, yes — it covers connecting WhatsApp and your Google Business Profile, importing your patients and appointments, and configuring treatments and care-gap rules in your own doctors’ words. It scales with how much we migrate. A clinic starting fresh on Clinic OS pays very little. A practice moving twenty years of history, clinical notes and x-rays across pays more, because that is real work. We quote it exactly after seeing what you are on today.',
-  },
-  {
-    q: 'Do I have to replace the software I already use?',
-    a: 'Only if you want to. If you are happy with your current practice management software, take the Patient Journey or Get Found modules and leave it in place — they work alongside it. If your current system is the thing holding you back, Clinic OS replaces it and we migrate your history across.',
-  },
-  {
-    q: 'Why would my Meta ads do better with you than with my current agency?',
-    a:
-      'Because an agency hands you leads and stops there. We run the ads and then watch what happens to every single lead — who replied, who booked, who actually turned up, and what they spent. That goes back to Meta, so its targeting stops chasing cheap clicks and starts finding people who behave like your paying patients. It is the same ad budget learning from better information. It also means we report revenue per rupee spent rather than cost per lead, which is the only number that tells you whether the ads are working. And the enquiries who were not ready yet keep getting followed up for months, so a good share of them book long after the campaign ended.',
-  },
-  {
-    q: 'Is there a free trial?',
-    a: 'Instead of an empty trial account, we show you a live demo on a real clinic so you can see it working with real patients and real messages. Every purchase is backed by a 60-day money-back guarantee.',
-  },
-  {
-    q: 'What about multi-clinic groups?',
-    a: 'Groups get per-clinic pricing under one consolidated bill, with group-level reporting across every location. Tell us how many clinics and we will put a number together.',
-  },
-];
+const inr = (n) => `₹${Math.round(Number(n) || 0).toLocaleString('en-IN')}`;
+const sameInputs = (a, b) => Object.keys(DEFAULT_INPUTS).every((k) => a[k] === b[k]);
+
+const Check = () => (
+  <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    <path d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+// Module scope so a slider is not remounted mid-drag.
+const Slider = ({ id, label, hint, value, onChange, min, max, step = 1 }) => (
+  <div className="ch-calc-field">
+    <div className="ch-calc-label">
+      <label htmlFor={id}>{label}</label>
+      <input
+        className="pp-num"
+        type="number"
+        min={min}
+        value={value}
+        onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))}
+        aria-label={`${label} (number)`}
+      />
+    </div>
+    <input id={id} type="range" min={min} max={max} step={step} value={Math.min(value, max)} onChange={(e) => onChange(Number(e.target.value))} />
+    {hint && <span className="pp-hint">{hint}</span>}
+  </div>
+);
+
+const Segmented = ({ label, options, value, onChange }) => (
+  <div className="ch-calc-field">
+    <span className="pp-field-label">{label}</span>
+    <div className="ch-calc-toggle" role="group" aria-label={label}>
+      {options.map(([v, text]) => (
+        <button key={String(v)} type="button" className={`ch-calc-seg${value === v ? ' active' : ''}`} aria-pressed={value === v} onClick={() => onChange(v)}>
+          {text}
+        </button>
+      ))}
+    </div>
+  </div>
+);
+
+const bandsText = (bands, unit) => {
+  let prev = null;
+  return bands
+    .map(([upTo, rate]) => {
+      const part = upTo == null ? `₹${rate} beyond ${prev.toLocaleString('en-IN')}` : `₹${rate} up to ${upTo.toLocaleString('en-IN')}`;
+      prev = upTo;
+      return part;
+    })
+    .join(' · ') + ` per ${unit}`;
+};
 
 const PricingPage = () => {
+  const [rate, setRate] = useState(snapshot);
+  const card = rate.card;
+  const [inputs, setInputs] = useState(DEFAULT_INPUTS);
+  const [quote, setQuote] = useState(snapshot.sample && sameInputs(snapshot.sample.inputs, DEFAULT_INPUTS) ? snapshot.sample.quote : null);
+  const [quoteState, setQuoteState] = useState('ready'); // ready | loading | error
+  const [journey, setJourney] = useState(() => {
+    const on = {};
+    for (const g of card.capabilities || []) for (const c of g.items) if (!c.addon && !c.fixed) on[c.id] = !!c.on;
+    return on;
+  });
+  const [dormantPace, setDormantPace] = useState({ n: 20, unit: 'day' });
+  const firstQuote = useRef(true);
+
+  const set = (patch) => setInputs((prev) => ({ ...prev, ...patch }));
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    const p = card.platformFee;
     setPageSeo({
-      title: 'AUMY Pricing — modular software for dental clinics, from ₹5,000/month | AUM AI',
-      description:
-        'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and Meta Ads. Small clinics welcome — call us for pricing built around your practice. 60-day money-back guarantee.',
+      title: `AUMY Pricing — from ${inr(p.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
+      description: `Transparent pricing for dental clinics. ${inr(p.standard)}/month (Standard AI) or ${inr(p.premium)}/month (Premium AI) includes ${card.included.enquiries} enquiries and ${card.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
       canonical: 'https://aumai.co.in/pricing',
     });
+    // Refresh the rate card: a price change shows here without a site rebuild.
+    fetch(API)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((b) => { if (b && b.success && b.data && b.data.card) setRate((prev) => ({ ...prev, ...b.data })); })
+      .catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (firstQuote.current && quote && sameInputs(inputs, DEFAULT_INPUTS)) {
+      firstQuote.current = false;
+      return undefined;
+    }
+    firstQuote.current = false;
+    const ctl = new AbortController();
+    setQuoteState('loading');
+    const t = setTimeout(() => {
+      const qs = new URLSearchParams(Object.entries(inputs).map(([k, v]) => [k, String(v)])).toString();
+      fetch(`${API}/quote?${qs}`, { signal: ctl.signal })
+        .then((r) => r.json())
+        .then((b) => {
+          if (!b.success) throw new Error('quote failed');
+          setQuote(b.data);
+          setQuoteState('ready');
+        })
+        .catch((e) => { if (e.name !== 'AbortError') setQuoteState('error'); });
+    }, 250);
+    return () => { clearTimeout(t); ctl.abort(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputs]);
+
+  const visits = inputs.patients_per_day * inputs.working_days;
+  const chosenJourney = useMemo(
+    () => (card.capabilities || [])
+      .map((g) => ({ group: g.group, names: g.items.filter((c) => !c.addon && !c.fixed && journey[c.id]).map((c) => c.name) }))
+      .filter((x) => x.names.length),
+    [card, journey],
+  );
+
+  const addonOn = (c) => (c.addon === 'voice' ? inputs.voice : c.addon === 'getFound' ? inputs.get_found : inputs.meta_ads);
+  const toggleAddon = (c) => {
+    if (c.addon === 'voice') set({ voice: !inputs.voice });
+    else if (c.addon === 'getFound') set({ get_found: !inputs.get_found });
+    else set({ meta_ads: !inputs.meta_ads });
+  };
+  const priceOf = (c) => {
+    if (c.addon === 'voice') return `${inr(card.voice.monthly)}/month + call minutes`;
+    if (c.addon === 'getFound') return `${inr(card.addons.getFound.monthly)}/month`;
+    if (c.addon === 'metaAds') return `${inr(card.addons.metaAds.monthly)}/month`;
+    if (c.fixed) return 'Always included';
+    if (c.dormant) return 'Included — as many as you choose';
+    return 'Included';
+  };
+
+  const waMessage = quote
+    ? `Hi, my AUMY estimate is ${inr(quote.total)}/month (${inputs.tier === 'premium' ? 'Premium' : 'Standard'} AI, ${inputs.enquiries} enquiries/month, ${inputs.patients_per_day} patients/day${inputs.voice ? ', voice agent' : ''}${inputs.get_found ? ', Get Found' : ''}${inputs.meta_ads ? ', Meta Ads' : ''}). I would like to talk it through.`
+    : 'Hi, I would like pricing for my clinic.';
+
+  const faqs = [
+    {
+      q: 'How is my price worked out?',
+      a: `A platform fee — ${inr(card.platformFee.standard)} a month on Standard AI, ${inr(card.platformFee.premium)} on Premium — covers your first ${card.included.enquiries} enquiries and ${card.included.visits} patient visits every month. Beyond that you pay per extra enquiry and per extra visit, and the rate drops as your clinic gets busier, like tax slabs: each unit is charged at the rate of the band it falls in, so the bill never jumps at a threshold. Add-ons such as the AI voice agent, Get Found and Meta Ads management are flat monthly fees. The calculator above runs the exact formula we bill with.`,
+    },
+    {
+      q: 'What counts as an enquiry, and what counts as a visit?',
+      a: 'An enquiry is someone who is not yet your patient writing to your clinic on WhatsApp for the first time, or calling from an unknown number (hang-ups under ten seconds are not counted). A visit is an appointment that actually happened — completed, checked in or in the chair. Cancellations and no-shows are not visits.',
+    },
+    {
+      q: 'What is the difference between Standard and Premium AI?',
+      a: 'Premium runs every patient conversation on our most capable AI model: better with long, messy conversations, mixed languages and unusual requests. Standard uses a faster, lighter model that handles the everyday enquiry and booking very well. You can move between them month to month.',
+    },
+    {
+      q: 'Are WhatsApp messages extra?',
+      a: 'If you connect your own WhatsApp Business number (most clinics do), Meta bills its message fees to you directly and AUMY adds nothing on top. If your messages go out through AUMY’s number instead, those Meta fees are passed through on your invoice at the rates shown in the calculator.',
+    },
+    {
+      q: 'What is never charged extra?',
+      a: `${(card.notBilled || ['AI charting']).join(', ')}, unlimited patients and unlimited staff logins, the Clinic OS — appointments, records, dental charting, digital registration, intake and consent — and every patient-journey message: reminders, after-care, care gaps, reviews and more.`,
+    },
+    {
+      q: 'Is there a setup fee?',
+      a: card.onboarding ? `${card.onboarding.text} It covers connecting WhatsApp and your Google Business Profile, bringing your patients and appointments across, and setting up your treatments and care gaps in your own doctors’ words.` : 'Yes — it scales with how much data we migrate.',
+    },
+    {
+      q: 'Is there a discount for paying yearly?',
+      a: `Yes — pay for the year up front and save ${Math.round((card.annualPrepayDiscount || 0) * 100)}%.`,
+    },
+    {
+      q: 'I am a small clinic. Will I pay for capacity I do not use?',
+      a: `No. A clinic seeing ten patients a day, six days a week, is around 260 visits a month — well inside the ${card.included.visits} included — so it pays the platform fee and nothing more.`,
+    },
+    {
+      q: 'Do I have to replace the software I already use?',
+      a: 'Only if you want to. The patient journey works alongside your current practice management software; if that system is what is holding you back, the Clinic OS replaces it and we migrate your history across.',
+    },
+    {
+      q: 'What about multi-clinic groups?',
+      a: 'Each clinic is priced on its own enquiries and visits, all on one consolidated bill with group-level reporting.',
+    },
+    {
+      q: 'Do prices include GST?',
+      a: 'No. Prices on this page exclude GST.',
+    },
+  ];
 
   return (
     <div className="ch-home">
-      <section className="ch-hero" style={{ paddingBottom: 24 }}>
+      <section className="ch-hero" style={{ paddingBottom: 18 }}>
         <div className="ch-container ch-narrow ch-center">
           <span className="ch-eyebrow">Pricing</span>
-          <h1 className="ch-hero-title">One system. Pay for the parts you need.</h1>
+          <h1 className="ch-hero-title">Grow your clinic. Don&rsquo;t grow the chaos &mdash; or the bill.</h1>
           <p className="ch-hero-sub">
-            AUMY is one connected platform, but you do not have to buy all of it. Switch on the
-            modules that solve your problem today and add the rest when you are ready. What you pay
-            depends on which modules you take and how many patients you have — so a small clinic
-            pays like a small clinic.
+            Transparent pricing, worked out in front of you. You pay for the enquiries AUMY handles and the patient
+            visits it coordinates, and the busier you get, the less each one costs. No hidden fees, no surprises.
           </p>
-          <div className="ch-hero-cta" style={{ marginTop: 22 }}>
-            <a href={WA('Hi, I would like pricing for my clinic. Here is roughly my size and what I need:')} className="ch-btn ch-btn-primary">
-              Get your price on WhatsApp
-            </a>
-            <Link to="/growth-audit" className="ch-btn ch-btn-ghost">
-              Or start with a free Growth Audit
-            </Link>
-          </div>
-          <p style={{ color: '#5b6784', fontSize: '0.92rem', maxWidth: 620, margin: '14px auto 0' }}>
-            {ONBOARDING_NOTICE.inline}
-          </p>
+          <p className="pp-notice">{ONBOARDING_NOTICE.inline}</p>
         </div>
       </section>
 
-      {/* Small clinics are the ones who bounce off a pricing page. Say it early,
-          say it plainly, and give them their own way in. */}
-      <section style={{ padding: '8px 0 8px' }}>
-        <div className="ch-container ch-narrow">
-          <div
-            className="ch-why-card"
-            style={{ display: 'block', padding: '22px 26px', borderLeft: '4px solid #2563EB' }}
-          >
-            <h2 style={{ margin: '0 0 6px', fontSize: '1.15rem' }}>Running a smaller clinic?</h2>
-            <p style={{ margin: 0, color: '#5b6784' }}>
-              Please still call. Most small clinics do not need the whole platform, and we would
-              rather sell you the one module that fixes your actual problem than talk you into six.
-              Plenty of our clinics started on Clinic OS alone at{' '}
-              <strong style={{ color: '#0f172a' }}>₹5,000 a month</strong> and added more only once
-              they were busy enough to need it. There is no minimum size.
-            </p>
-            <div style={{ marginTop: 14 }}>
-              <a
-                href={WA('Hi, I run a small clinic and want to know which module would suit me and what it would cost.')}
-                className="ch-btn ch-btn-primary"
-              >
-                Tell us your size, get a straight answer
-              </a>
+      <section className="pp-section">
+        <div className="ch-container">
+          <div className="ch-calc-grid pp-grid">
+            <div className="ch-calc-inputs">
+              <Slider id="pp-enq" label="New enquiries per month" hint="People who are not yet patients: WhatsApp, calls, website, ads."
+                value={inputs.enquiries} min={0} max={3000} step={10} onChange={(v) => set({ enquiries: v })} />
+              <Slider id="pp-ppd" label="Patients seen per day" value={inputs.patients_per_day} min={0} max={150} onChange={(v) => set({ patients_per_day: v })} />
+              <Slider id="pp-days" label="Working days per month" value={inputs.working_days} min={15} max={31} onChange={(v) => set({ working_days: Math.min(31, Math.max(1, v)) })} />
+              <Segmented label="AI tier" value={inputs.tier} onChange={(v) => set({ tier: v })} options={[['standard', 'Standard'], ['premium', 'Premium']]} />
+              <Segmented label="AI voice agent" value={inputs.voice} onChange={(v) => set({ voice: v })} options={[[false, 'Off'], [true, 'On']]} />
+              {inputs.voice && (
+                <Slider id="pp-vmin" label="Call minutes per month" hint="Answering calls, reminders and bookings by phone."
+                  value={inputs.voice_minutes} min={0} max={2000} step={25} onChange={(v) => set({ voice_minutes: v })} />
+              )}
+              <Segmented label="WhatsApp number" value={inputs.own_number} onChange={(v) => set({ own_number: v })} options={[[true, 'Our own number'], [false, 'Send via AUMY']]} />
+              {!inputs.own_number && (
+                <Slider id="pp-mkt" label="Marketing messages per month" hint="Appointment and after-care messages are estimated from your visits."
+                  value={inputs.marketing} min={0} max={10000} step={50} onChange={(v) => set({ marketing: v })} />
+              )}
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section style={{ padding: '30px 0 20px' }}>
-        <div className="ch-container ch-narrow ch-center">
-          <h2 className="ch-h2" style={{ textAlign: 'center', marginBottom: 6 }}>The modules</h2>
-          <p style={{ textAlign: 'center', color: '#5b6784', maxWidth: 680, margin: '0 auto 8px' }}>
-            Starting prices per clinic, per month. Your final number depends on the size of your practice,
-            which we work out with you rather than guess at. Messages and calls are included — fair usage policy applies.
-          </p>
-        </div>
-
-        <div
-          className="ch-container"
-          style={{
-            display: 'grid',
-            gap: 22,
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 370px))',
-            justifyContent: 'center',
-            marginTop: 20,
-          }}
-        >
-          {MODULES.map((m) => (
-            <div
-              key={m.name}
-              className="ch-why-card"
-              style={{ display: 'block', padding: 26, ...(m.featured ? { borderTop: '4px solid #2563EB' } : {}) }}
-            >
-              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{m.name}</h3>
-              <p style={{ margin: '3px 0 12px', color: '#2563EB', fontWeight: 600, fontSize: '0.86rem' }}>
-                {m.tag}
+            <div className="ch-calc-result pp-result" aria-live="polite">
+              <p className="ch-calc-result-label">Your monthly price {quoteState === 'loading' && <span className="pp-updating">updating…</span>}</p>
+              <p className="ch-calc-total">{quote ? inr(quote.total) : '—'}<span className="ch-calc-per">/month</span></p>
+              <p className="ch-calc-monthly">{visits.toLocaleString('en-IN')} visits a month · {inputs.tier === 'premium' ? 'Premium' : 'Standard'} AI</p>
+              {quoteState === 'error' && (
+                <p className="pp-error">We could not reach the price service just now. Message us and we will send your number.</p>
+              )}
+              {quote && (
+                <ul className="ch-calc-breakdown">
+                  {quote.lines.map((l, i) => (
+                    <li key={`${l.label}-${i}`}>
+                      <span>{l.label}{l.sub && <small className="pp-sub">{l.sub}</small>}</span>
+                      <b>{inr(l.amount)}</b>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p className="ch-calc-fine">
+                {inputs.own_number ? 'With your own WhatsApp number, Meta bills message fees to you directly — AUMY adds nothing on top. ' : ''}
+                Allowances reset every month. {card.onboarding ? card.onboarding.text : ''}{' '}
+                {quote ? `Pay annually and save ${Math.round((card.annualPrepayDiscount || 0) * 100)}% (${inr(quote.annual_total)}/year). ` : ''}
+                Prices exclude GST.
               </p>
-              <div style={{ fontSize: '1.9rem', fontWeight: 800 }}>
-                <span style={{ fontSize: '0.9rem', fontWeight: 500, color: '#5b6784' }}>from </span>
-                {m.from}
-                <span style={{ fontSize: '0.95rem', fontWeight: 500, color: '#5b6784' }}> / month</span>
-              </div>
-              <p style={{ margin: '12px 0 14px', color: '#5b6784' }}>{m.blurb}</p>
-              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                {m.points.map((f) => (
-                  <li key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '8px 0' }}>
-                    <Check /> <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
+              <a href={WA(waMessage)} className="ch-btn ch-btn-primary pp-cta">Talk this price through on WhatsApp</a>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* How the number is actually arrived at. Clinics distrust "custom pricing"
-          when nobody explains the inputs. */}
-      <section style={{ padding: '18px 0' }}>
-        <div className="ch-container ch-narrow">
-          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>
-            How we arrive at your price
-          </h2>
-          <div className="ch-why-card" style={{ display: 'block', padding: '20px 24px' }}>
-            {[
-              ['The modules you switch on', 'Only what you need. Add or drop them month to month.'],
-              ['The size of your practice', 'A quiet two-chair clinic pays less than a busy multi-doctor one, permanently. Messages and calls are included under a fair usage policy.'],
-              ['One-time setup', 'Connecting WhatsApp and Google, bringing your data across, and setting up your treatments and care gaps. Scales with how much history you are moving.'],
-            ].map(([h, s]) => (
-              <div key={h} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', margin: '12px 0' }}>
-                <Check />
-                <div>
-                  <strong>{h}</strong>
-                  <div style={{ color: '#5b6784' }}>{s}</div>
-                </div>
+      <section className="pp-section">
+        <div className="ch-container">
+          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 6 }}>Choose your patient journey</h2>
+          <p className="pp-lede">
+            Every patient message below is included in the platform fee — switch on the ones you want. The Clinic OS is
+            always part of it; add-ons show their price.
+          </p>
+          <div className="pp-capgroups">
+            {(card.capabilities || []).map((g) => (
+              <div key={g.group} className="pp-capgroup">
+                <h3>{g.group}</h3>
+                <p className="pp-gwhat">{g.what}</p>
+                {g.items.map((c) => {
+                  const isAddon = !!c.addon;
+                  const on = isAddon ? addonOn(c) : !!journey[c.id];
+                  return (
+                    <div key={c.id} className="pp-cap">
+                      <div>
+                        <div className="pp-cap-name">{c.name}</div>
+                        <div className="pp-cap-what">{c.what}</div>
+                        <div className="pp-cap-price">{priceOf(c)}</div>
+                        {c.dormant && on && (
+                          <div className="pp-extra">
+                            <label htmlFor="pp-dorm" className="pp-hint">Follow up</label>
+                            <input id="pp-dorm" className="pp-num" type="number" min="0" value={dormantPace.n}
+                              onChange={(e) => setDormantPace({ ...dormantPace, n: Math.max(0, Number(e.target.value) || 0) })} />
+                            <div className="ch-calc-toggle pp-mini" role="group" aria-label="per day or per month">
+                              {['day', 'month'].map((u) => (
+                                <button key={u} type="button" className={`ch-calc-seg${dormantPace.unit === u ? ' active' : ''}`} aria-pressed={dormantPace.unit === u}
+                                  onClick={() => setDormantPace({ ...dormantPace, unit: u })}>per {u}</button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      {!c.fixed && (
+                        <button type="button" role="switch" aria-checked={on} aria-label={c.name} className={`pp-switch${on ? ' on' : ''}`}
+                          onClick={() => (isAddon ? toggleAddon(c) : setJourney({ ...journey, [c.id]: !journey[c.id] }))} />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>
+          {chosenJourney.length > 0 && (
+            <div className="pp-included">
+              <strong>Your patient journey — included:</strong>
+              <ul>{chosenJourney.map((x) => <li key={x.group}><b>{x.group}:</b> {x.names.join(', ')}</li>)}</ul>
+            </div>
+          )}
         </div>
       </section>
 
-      <section style={{ padding: '10px 0 20px' }}>
+      <section className="pp-section">
         <div className="ch-container ch-narrow">
-          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>
-            On every module
-          </h2>
-          <div className="ch-why-card" style={{ display: 'block', padding: '18px 22px' }}>
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-              {INCLUDED.map((f) => (
-                <li key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '9px 0' }}>
-                  <Check /> <span>{f}</span>
-                </li>
-              ))}
-            </ul>
+          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>The rates, in full</h2>
+          <div className="ch-why-card pp-rates">
+            <div><Check /><span><strong>Platform fee:</strong> {inr(card.platformFee.standard)}/month Standard AI · {inr(card.platformFee.premium)}/month Premium AI — includes {card.included.enquiries} enquiries and {card.included.visits} patient visits.</span></div>
+            <div><Check /><span><strong>Extra enquiries (Standard):</strong> {bandsText(card.enquiries.standard, 'enquiry')}. <strong>Premium:</strong> {bandsText(card.enquiries.premium, 'enquiry')}.</span></div>
+            <div><Check /><span><strong>Extra visits (Standard):</strong> {bandsText(card.visits.standard, 'visit')}. <strong>Premium:</strong> {bandsText(card.visits.premium, 'visit')}.</span></div>
+            <div><Check /><span><strong>AI voice agent:</strong> {inr(card.voice.monthly)}/month with a number and {card.voice.includedMinutes} minutes; then {bandsText(card.voice.minutes, 'minute')}.</span></div>
+            <div><Check /><span><strong>Get Found:</strong> {inr(card.addons.getFound.monthly)}/month · <strong>Meta Ads management:</strong> {inr(card.addons.metaAds.monthly)}/month ({card.addons.metaAds.note}).</span></div>
+            <div><Check /><span><strong>One-time setup:</strong> {card.onboarding ? card.onboarding.text : '—'} Pay yearly and save {Math.round((card.annualPrepayDiscount || 0) * 100)}%. Prices exclude GST.</span></div>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: '20px 0 56px' }}>
+      <section className="pp-section" style={{ paddingBottom: 56 }}>
         <div className="ch-container ch-narrow">
-          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 16 }}>
-            Questions clinics actually ask
-          </h2>
+          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 16 }}>Questions clinics actually ask</h2>
           <div className="ch-faq">
-            {FAQS.map((f) => (
-              <div key={f.q} className="ch-faq-item">
-                <h3 style={{ margin: '0 0 6px', fontSize: '1.02rem' }}>{f.q}</h3>
-                <p style={{ margin: 0, color: '#5b6784' }}>{f.a}</p>
-              </div>
+            {faqs.map((f) => (
+              <details key={f.q} className="ch-faq-item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
             ))}
           </div>
-
-          <div className="ch-center-cta" style={{ textAlign: 'center', marginTop: 34 }}>
-            <h2 className="ch-h2" style={{ marginBottom: 8 }}>Tell us your size. We will tell you your price.</h2>
-            <p style={{ color: '#5b6784', maxWidth: 620, margin: '0 auto 18px' }}>
-              No form to fill in, no sales sequence. One conversation about how many chairs you run
-              and what is not working, and you will have a number the same day.
+          <div style={{ textAlign: 'center', marginTop: 34 }}>
+            <h2 className="ch-h2" style={{ marginBottom: 8 }}>Your number, then a conversation.</h2>
+            <p className="pp-lede" style={{ marginBottom: 18 }}>
+              Send us the estimate above and we will check it against how your clinic actually runs — same day.
             </p>
-            <a href={WA('Hi, I would like pricing for my clinic. Here is roughly my size and what I need:')} className="ch-btn ch-btn-primary">
-              Get your price on WhatsApp
-            </a>
-            <p style={{ color: '#5b6784', fontSize: '0.92rem', maxWidth: 620, margin: '14px auto 0' }}>
-              {ONBOARDING_NOTICE.inline}
-            </p>
+            <div className="ch-hero-cta" style={{ justifyContent: 'center' }}>
+              <a href={WA(waMessage)} className="ch-btn ch-btn-primary">Send my estimate on WhatsApp</a>
+              <Link to="/growth-audit" className="ch-btn ch-btn-ghost">Or start with a free Growth Audit</Link>
+            </div>
+            <p className="pp-notice">{ONBOARDING_NOTICE.inline}</p>
           </div>
         </div>
       </section>

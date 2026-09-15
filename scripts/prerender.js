@@ -20,6 +20,22 @@ const path = require('path');
 // crawler-visible HTML and the client-rendered article can never drift apart.
 const { growthPosts } = require('../src/data/growthPosts');
 const { CALCULATORS } = require('../src/data/calculators');
+// Prices come from the AUMY API's rate card (the one clinics are billed from),
+// snapshotted by scripts/fetch-pricing.js just before the build — never typed here.
+const PRICING = require('../src/data/pricing.json');
+const PC = PRICING.card;
+const rs = (n) => '&#8377;' + Math.round(Number(n) || 0).toLocaleString('en-IN');
+const rsText = (n) => 'Rs ' + Math.round(Number(n) || 0).toLocaleString('en-IN');
+const bands = (list, unit, money) => {
+  let prev = null;
+  return list.map(([upTo, rate]) => {
+    const part = upTo == null ? money(rate) + ' beyond ' + prev.toLocaleString('en-IN') : money(rate) + ' up to ' + upTo.toLocaleString('en-IN');
+    prev = upTo;
+    return part;
+  }).join(', ') + ' per ' + unit;
+};
+const moneyRate = (r) => '&#8377;' + r;
+const textRate = (r) => 'Rs ' + r;
 
 const BUILD = path.join(__dirname, '..', 'build');
 // US-market build (REACT_APP_MARKET=us → aumyai.com) prerenders only the US
@@ -168,35 +184,37 @@ const videoLd = {
 const routes = [
   {
     slug: 'pricing',
-    title: 'AUMY Pricing — modular software for dental clinics, from ₹5,000/month | AUM AI',
+    title: `AUMY Pricing — from ${rsText(PC.platformFee.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
     description:
-      'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and Meta Ads. Small clinics welcome — call us for pricing built around your practice. 60-day money-back guarantee.',
+      `Transparent pricing for dental clinics. ${rsText(PC.platformFee.standard)}/month (Standard AI) or ${rsText(PC.platformFee.premium)}/month (Premium AI) includes ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
     canonical: `${ORIGIN}/pricing`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type': 'Question', name: 'Why is there no fixed price?', acceptedAnswer: { '@type': 'Answer', text: 'Because a two-chair clinic and a six-doctor practice should not pay the same. What you pay depends on which modules you switch on and the size of your practice. A single-doctor clinic taking just Clinic OS starts at Rs 5,000 per month. One short call and we tell you your number.' } },
-        { '@type': 'Question', name: 'I am a small clinic. Is AUMY built for someone my size?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Small clinics usually take Clinic OS on its own to get the day organised, from Rs 5,000 per month, and add the Patient Journey later once the appointment book is worth protecting. There is no minimum size and no minimum patient count.' } },
-        { '@type': 'Question', name: 'Can I start with one module and add more later?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Modules switch on and off month to month with no re-onboarding. Your patient data is already there, so a module added later starts working with your full history on day one.' } },
-        { '@type': 'Question', name: 'Are messages and calls charged separately?', acceptedAnswer: { '@type': 'Answer', text: 'No. The monthly price covers the WhatsApp messages and AI phone calls a clinic of your size normally makes, under a fair usage policy. We size the plan from your actual patient numbers, and if the clinic grows well past that we talk to you first — no surprise bill.' } },
-        { '@type': 'Question', name: 'Do I have to replace the software I already use?', acceptedAnswer: { '@type': 'Answer', text: 'Only if you want to. Take the Patient Journey or Get Found modules and they work alongside your existing practice management software. If your current system is holding you back, Clinic OS replaces it and we migrate your history across.' } },
-        { '@type': 'Question', name: 'Why would my Meta ads do better with you than with my current agency?', acceptedAnswer: { '@type': 'Answer', text: 'Because an agency hands you leads and stops there. We run the ads and then watch what happens to every single lead - who replied, who booked, who actually turned up, and what they spent. That goes back to Meta, so its targeting stops chasing cheap clicks and starts finding people who behave like your paying patients. It is the same ad budget learning from better information. It also means we report revenue per rupee spent rather than cost per lead, which is the only number that tells you whether the ads are working. And the enquiries who were not ready yet keep getting followed up for months, so a good share of them book long after the campaign ended.' } },
-        { '@type': 'Question', name: 'Is there a free trial?', acceptedAnswer: { '@type': 'Answer', text: 'Instead of an empty trial account, AUMY gives a live demo on a real clinic, backed by a 60-day money-back guarantee.' } },
-        { '@type': 'Question', name: 'What about multi-clinic groups?', acceptedAnswer: { '@type': 'Answer', text: 'Groups get per-clinic pricing under one consolidated bill, with group-level reporting across every location.' } },
+        { '@type': 'Question', name: 'How is my AUMY price worked out?', acceptedAnswer: { '@type': 'Answer', text: `A platform fee of ${rsText(PC.platformFee.standard)} a month on Standard AI or ${rsText(PC.platformFee.premium)} on Premium covers the first ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits each month. Beyond that each extra enquiry and visit is charged at a rate that falls as the clinic gets busier, band by band like tax slabs. Add-ons (AI voice agent, Get Found, Meta Ads management) are flat monthly fees.` } },
+        { '@type': 'Question', name: 'What counts as an enquiry and a visit?', acceptedAnswer: { '@type': 'Answer', text: 'An enquiry is someone who is not yet a patient writing to the clinic on WhatsApp for the first time, or calling from an unknown number. A visit is an appointment that actually happened: completed, checked in or in the chair.' } },
+        { '@type': 'Question', name: 'Are WhatsApp messages extra?', acceptedAnswer: { '@type': 'Answer', text: 'With the clinic’s own WhatsApp Business number, Meta bills its message fees to the clinic directly and AUMY adds nothing. If messages go out through AUMY’s number, Meta’s fees are passed through on the invoice.' } },
+        { '@type': 'Question', name: 'What is never charged extra?', acceptedAnswer: { '@type': 'Answer', text: `${(PC.notBilled || []).join(', ')}, unlimited patients and staff logins, the Clinic OS, and every patient-journey message: reminders, after-care, care gaps and reviews.` } },
+        { '@type': 'Question', name: 'Is there a setup fee?', acceptedAnswer: { '@type': 'Answer', text: `One-time setup of ${rsText(PC.onboarding.min)} to ${rsText(PC.onboarding.max)}, depending on the data migrated. Paying yearly saves ${Math.round(PC.annualPrepayDiscount * 100)}%. Prices exclude GST.` } },
       ],
     }],
     content: `
       <section><div class="ch-container ch-narrow">
-        <h1 class="ch-hero-title">One system. Pay for the parts you need.</h1>
-        <p>AUMY is one connected platform, but you do not have to buy all of it. Switch on the modules that solve your problem today and add the rest when you are ready. What you pay depends on which modules you take and how many patients you have &mdash; so a small clinic pays like a small clinic.</p>
-        <p><strong>Running a smaller clinic?</strong> Please still call. Most small clinics do not need the whole platform, and we would rather sell you the one module that fixes your actual problem than talk you into six. Plenty of our clinics started on Clinic OS alone at &#8377;5,000 a month and added more only once they were busy enough to need it. There is no minimum size.</p>
-        <p><strong>Clinic OS &mdash; from &#8377;5,000/month.</strong> Run the day: appointment book and reminders, patient records, dental charting and treatment history, prescriptions, invoices and reports. Unlimited patients and unlimited staff logins.</p>
-        <p><strong>Patient Journey &mdash; from &#8377;15,000/month.</strong> Turns enquiries into patients and keeps the ones you have. Every enquiry answered day or night, appointments booked, rescheduled and cancelled on its own, care gaps closed by reminding patients when their next treatment is due, lapsed patients brought back in your own doctors&rsquo; words, plus birthday and festival messages, review requests, campaigns and after-treatment care.</p>
-        <p><strong>Get Found &mdash; from &#8377;5,000/month.</strong> Be the clinic people find when they search for a dentist near them: Google Business Profile kept live and posting, review growth with replies written for you, and local search visibility for the treatments you want more of.</p>
-        <p><strong>Meta Ads Management &mdash; &#8377;10,000/month.</strong> We run your Facebook and Instagram ads, and they work harder here than anywhere else because the platform running them also knows which leads became paying patients. Real outcomes go back to Meta, so it learns to find people who book rather than people who click; you see the revenue each rupee of ad spend actually produced, not just cost per lead; and high-intent enquiries are followed up for months, so a good share book long after the ad stopped running.</p>
-        <p><strong>Also available:</strong> Voice Assistant from &#8377;6,000/month.</p>
-        <p>Your price is set by three things: the modules you switch on, the size of your practice, and a one-time setup that scales with how much history you are moving. WhatsApp messages and AI calls are included under a fair usage policy. Every module includes unlimited patients and staff logins, onboarding and training, and a 60-day money-back guarantee.</p>
+        <h1 class="ch-hero-title">Grow your clinic. Don&rsquo;t grow the chaos &mdash; or the bill.</h1>
+        <p>Transparent pricing, worked out in front of you. You pay for the enquiries AUMY handles and the patient visits it coordinates, and the busier you get, the less each one costs. No hidden fees, no surprises.</p>
+        <h2>The rates, in full</h2>
+        <ul>
+          <li><strong>Platform fee:</strong> ${rs(PC.platformFee.standard)}/month on Standard AI or ${rs(PC.platformFee.premium)}/month on Premium AI, including ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits every month.</li>
+          <li><strong>Extra enquiries:</strong> Standard ${bands(PC.enquiries.standard, 'enquiry', moneyRate)}; Premium ${bands(PC.enquiries.premium, 'enquiry', moneyRate)}.</li>
+          <li><strong>Extra patient visits:</strong> Standard ${bands(PC.visits.standard, 'visit', moneyRate)}; Premium ${bands(PC.visits.premium, 'visit', moneyRate)}.</li>
+          <li><strong>AI voice agent:</strong> ${rs(PC.voice.monthly)}/month with a number and ${PC.voice.includedMinutes} minutes, then ${bands(PC.voice.minutes, 'minute', moneyRate)}.</li>
+          <li><strong>Get Found:</strong> ${rs(PC.addons.getFound.monthly)}/month. <strong>Meta Ads management:</strong> ${rs(PC.addons.metaAds.monthly)}/month (your ad budget is paid to Meta).</li>
+          <li><strong>Included, never charged extra:</strong> ${(PC.notBilled || []).join(', ')}, unlimited patients and staff logins, the Clinic OS and every patient-journey message.</li>
+          <li><strong>One-time setup:</strong> ${rs(PC.onboarding.min)}&ndash;${rs(PC.onboarding.max)} depending on the data we migrate. Pay yearly and save ${Math.round(PC.annualPrepayDiscount * 100)}%. Prices exclude GST.</li>
+        </ul>
+        <p>Example: a clinic with 250 new enquiries a month seeing 20 patients a day for 26 days pays ${rs(PRICING.sample.quote.total)} a month on Standard AI.</p>
+        <p>With your own WhatsApp Business number, Meta bills message fees to you directly &mdash; AUMY adds nothing on top.</p>
         <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
       </div></section>`,
   },
