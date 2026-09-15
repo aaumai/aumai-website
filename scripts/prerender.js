@@ -248,57 +248,65 @@ const routes = [
   },
   {
     slug: '',
-    title: 'AUMY — AI Receptionist & Practice Growth Platform for Dental Clinics',
+    title: 'Aumy — The Operating System for a Growing Dental Clinic',
     description:
-      'AUMY — the Next-Gen Dental Platform: a complete dental PMS (records, charting, prescriptions, billing) plus a 24/7 AI receptionist, patient follow-up automation, recalls, reactivation and Google review growth. Use it as your full clinic software, or run it alongside the PMS you already have.',
+      'Aumy manages the chaos that comes with growth — coordinating your patients, people and processes from the first enquiry to ongoing care: AI voice agent, appointments, follow-ups, digital intake and clinic tasks in one connected platform. Grow your clinic. Don’t grow the chaos.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
-        <p><strong>See it for yourself — live.</strong> Message our AI receptionist for a demo dental clinic on WhatsApp at +91 80071 89868 and watch it answer, book, reschedule and cancel appointments, 24/7. No sign-up — just say hello.</p>
+        <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello.</p>
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">The Next-Gen Dental Platform</p>
-        <h1 class="ch-hero-title">Your software keeps records. AUMY grows your practice.</h1>
-        <p class="ch-hero-sub">AI-powered patient engagement and practice growth. AUMY converts your enquiries, cares for patients after treatment, brings them back on time, wins back the ones who drifted — and grows your reviews, reach and revenue. Automatically, even while you sleep. CONVERT → CARE → RETAIN → REACTIVATE → GROW.</p>
-        <p><a href="/contact">Get started — risk-free</a> · <a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
+        <p class="ch-eyebrow">The operating system for a growing dental clinic</p>
+        <h1 class="ch-hero-title">Your clinic is growing. Don't let the chaos grow with it.</h1>
+        <p class="ch-hero-sub">Aumy is the AI-powered operating system for dental clinics — managing patient journeys, follow-ups, appointments, calls, digital intake and clinic tasks in one connected platform.</p>
+        <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
+        <p><strong>One platform. One patient context. Less manual work.</strong></p>
+        <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
-        <h2>Dentistry changed. Great work and a good location are no longer enough.</h2>
-        <p>Before a patient ever sits in your chair, an ad reaches them first, they check your Google reviews, and they call or message your clinic — and if no one answers, they move to the next name in the results. Winning patients now runs on systems, not skill alone.</p>
+        <h2>A successful dental clinic doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>
+        <p>When chairs are full, growth creates chaos: calls, WhatsApp messages, enquiries, appointment confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents, X-rays, invoices and patient questions.</p>
+        <p><strong>Before Aumy:</strong> Growth → More patients → More calls → More WhatsApp → More follow-ups → More staff workload → More things falling through the cracks.</p>
+        <p><strong>With Aumy:</strong> Growth → Aumy coordinates the work → Your team focuses on patients.</p>
+        <p>When your clinic grows, Aumy makes sure the operational workload doesn't grow with it.</p>
+        <h2>Aumy manages the chaos that comes with growth.</h2>
+        <p>Coordinating your patients, people and processes from the first enquiry to ongoing care.</p>
         <ul>
-          <li>The phone rings while your team is with a patient, or after hours. That caller books somewhere else.</li>
-          <li>A patient no-shows. The chair sits empty. No one had time to fill it.</li>
-          <li>An enquiry asks a question, gets no reply, and quietly disappears.</li>
-          <li>Patients you treated once never come back — and no one reminds them.</li>
-          <li>On Google, the clinic down the road shows up above you.</li>
-          <li>You spend on ads every month — shown to the same people — with no idea which ones become patients.</li>
+          <li><strong>Patient communication</strong> — AI voice agent, answer calls, book appointments, appointment reminders, WhatsApp, patient queries, follow-ups.</li>
+          <li><strong>Appointment orchestration</strong> — confirmations, rescheduling, cancellations, no-show management, waitlists, care gaps.</li>
+          <li><strong>Digital clinic</strong> — digital registration, patient intake, consent, X-rays, invoices, paperless workflows.</li>
+          <li><strong>Patient journey</strong> — pre-treatment, treatment, after-care, care gaps, doctor check-ins, reactivation.</li>
+          <li><strong>Growth</strong> — Get Found, Meta Ads, lead capture, lead conversion.</li>
         </ul>
-        <h2>One system. The entire patient journey.</h2>
-        <p>From first enquiry to ongoing care, AUMY manages the patient relationship beyond the appointment — five stages, one connected engine:</p>
+        <h2>Everything is connected. Think of Aumy as Jarvis for your dental clinic.</h2>
+        <p>Not because it's a chatbot. Because everything knows what's happening. A patient calls → Aumy knows who they are. They need an appointment → Aumy knows the doctor's availability. They don't show → Aumy knows what happened. They need a follow-up → Aumy creates and manages it. They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it. The clinic gets a call → the voice agent has the context.</p>
+        <p>Your calls know your appointments. Your appointments know your patients. Your patients know their treatment. Your follow-ups know what happened. And Aumy knows all of it. One patient. One journey. One connected system.</p>
+        <h2>Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
         <ul>
-          <li><strong>CONVERT — turn enquiries into booked patients.</strong> Every enquiry from WhatsApp, Instagram, a missed call or your website answered in seconds, 24/7, across chat and phone; leads followed up until they book, no-shows recovered and refilled.</li>
-          <li><strong>CARE — look after patients beyond the chair.</strong> Treatment Care Plans: your doctors define what a patient should hear after an implant, a root canal or whitening — the day-1 recovery check, care tips, the one-month follow-up — and AUMY delivers it consistently, flagging replies that need the clinic.</li>
-          <li><strong>RETAIN — bring patients back for ongoing care.</strong> Cleaning recalls, periodic check-ups and treatment maintenance, sent personally and on time.</li>
-          <li><strong>REACTIVATE — win back patients who drifted away.</strong> Dormant patients, overdue recalls and stalled treatment plans re-engaged automatically.</li>
-          <li><strong>GROW — reputation and reach that compound.</strong> Happy patients become Google reviews, every review gets a reply, and your Instagram and YouTube presence grows — so the next patient finds you first.</li>
+          <li><strong>CONVERT</strong> — Leads → Enquiries → Calls → Appointments → Bookings.</li>
+          <li><strong>CARE</strong> — Registration → Intake → Consent → Treatment → After-care → Patient communication.</li>
+          <li><strong>RETAIN</strong> — Appointment follow-ups → Care gaps → Doctor check-ins → Preventive care.</li>
+          <li><strong>REACTIVATE</strong> — Old patients → Overdue treatment → Missed appointments → Inactive patients.</li>
         </ul>
-        <p>Underneath the five stages sits the machinery: the AI receptionist across WhatsApp and phone, Google Business Profile and reviews, Instagram and Facebook, the Content Studio, and ad spend that learns from real bookings via the Conversions API.</p>
-        <p>None of this is a one-off push. Every patient captured, review earned and slot saved feeds the next — organic growth that builds on itself, month after month.</p>
+        <p>So your clinic can grow without growing the chaos.</p>
         <h2>Full dental software included — or keep the one you have.</h2>
         <p><strong>Want one complete platform?</strong> AUMY includes a full Dental PMS: patient records &amp; appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and complete billing, invoicing &amp; accounts — plus voice-powered charting where you talk and AUMY charts.</p>
         <p><strong>Happy with your current PMS?</strong> Keep it. AUMY runs on top as the growth layer — Convert, Care, Retain, Reactivate, Grow — with no migration and no retraining. Move onto the full platform later, whenever you choose. Same price either way.</p>
-        <h2>A dedicated growth expert runs it for you.</h2>
-        <p>You are never handed a login and left to work it out. A growth expert is assigned to your clinic on a permanent basis — they learn how your practice runs, build the strategy, operate the entire system on your behalf, and review results with you every week. You get the outcome; they carry the work.</p>
+        <h2>A dedicated expert runs it with you.</h2>
+        <p>You are never handed a login and left to work it out. An AUMY expert is assigned to your clinic on a permanent basis — they learn how your clinic runs, set AUMY up around it, operate the system with you, and review it with you every week. You get a calmer clinic; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
-        <p>AUMY works best for dental clinics serious about growth — from single-doctor practices to multi-chair centres — led by a founder or owner who makes the growth calls and would rather grow with a system than by hiring more front-desk staff. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
+        <p>AUMY works best for dental clinics that are already busy — from single-doctor practices to multi-chair centres — whose chairs are filling up and whose front desk is stretched, led by an owner who would rather run a calm clinic on one system than keep hiring to keep up. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
         <h2>Watch AUMY actually doing it.</h2>
         <p>Short, unedited demos of the live product - answering, booking, rescheduling and following up. New clip every day: <a href="https://www.youtube.com/watch?v=-qw1sp7Ub4k">Watch the whole patient journey, live and unedited</a>.</p>
-        <h2>Clinics are already growing with us.</h2>
-        <p>Vinayaka Dental Care grew revenue about 25% in two months without hiring a single extra person. Vinayaka Derma keeps a 4.9-star Google rating with recalls and follow-ups running automatically. AUM AI is an NVIDIA Inception member.</p>
-        <h2>Try AUMY free for 30 days — see the difference yourself.</h2>
-        <p>We set AUMY up on your clinic and you watch it work for 30 days alongside everything you use today — real enquiries answered, real bookings made. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
+        <h2>Busy clinics already run on AUMY.</h2>
+        <p>Vinayaka Dental Care: fewer no-shows and patients coming back — "we didn't hire a single extra person to make it happen." AUM AI is an NVIDIA Inception member.</p>
+        <h2>Grow your dental clinic. Not your administrative workload.</h2>
+        <p>Aumy coordinates the manual tasks and patient journey behind your clinic, so your team can spend less time chasing patients and more time caring for them.</p>
+        <h2>Try Aumy free for 30 days — see the difference yourself.</h2>
+        <p>We set AUMY up on your clinic and you watch it work for 30 days alongside everything you use today — real calls and enquiries answered, real bookings made, forms gone digital. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
         <h2>Questions clinic owners ask</h2>
         <p><strong>How does the 60-day money-back guarantee work?</strong> We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.</p>
         <p><strong>Do you have your own dental software (PMS)?</strong> Yes — a complete Dental PMS is included: records, appointments, charting, prescriptions, treatment plans and full billing &amp; accounts.</p>

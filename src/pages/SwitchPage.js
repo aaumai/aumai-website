@@ -247,7 +247,7 @@ const SwitchPage = () => {
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">What you get once you are in</span>
-            <h2 className="ch-h2">Your software keeps records. AUMY grows your practice.</h2>
+            <h2 className="ch-h2">Your clinic is growing. Don&rsquo;t let the chaos grow with it.</h2>
             <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE → GROW</p>
           </div>
           <div className="ch-pillars">

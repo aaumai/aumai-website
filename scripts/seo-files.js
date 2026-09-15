@@ -114,17 +114,22 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 const LLMS = {
   in: `# AUM AI — AUMY for dental clinics (India)
 
-> AUMY — The AI Patient Journey & Revenue Operating System for Dental
-> Clinics. One system across the whole patient journey (Convert → Care →
-> Retain → Reactivate) for dental clinics in
-> India — from single-doctor practices to multi-chair centres. It captures every patient enquiry (WhatsApp, Instagram,
-> missed calls, website), books appointments 24/7 with an AI receptionist,
-> recovers no-shows, wins back lapsed patients, manages Google Business Profile
-> and reviews, and feeds real bookings back to Meta and Google so ad spend
-> targets people who actually become patients.
+> Aumy — the AI-powered operating system for a growing dental clinic, in
+> India, from single-doctor practices to multi-chair centres. Aumy manages the
+> chaos that comes with growth — coordinating patients, people and processes
+> from the first enquiry to ongoing care. It takes the day-to-day load off the
+> front desk: answers every call (AI voice agent) and WhatsApp /
+> Instagram enquiry and books appointments 24/7, follows up leads, sends
+> appointment reminders by message and call, handles rescheduling and no-show
+> follow-up, and makes registration, patient intake, consent, X-rays and
+> invoices digital. Once the clinic runs calm, it closes care gaps, sends
+> treatment-specific aftercare, brings back patients who drifted away, manages
+> Google Business Profile and reviews, and runs Meta Ads with real booking data.
+> One platform with full context across the patient journey
+> (Convert → Care → Retain → Reactivate → Grow), including a complete dental PMS.
 
 ## Key facts
-- Operated as a managed service: a dedicated growth expert runs the system for the clinic.
+- Operated as a managed service: a dedicated expert runs the system with the clinic.
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
 - 10-day free trial. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
