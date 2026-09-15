@@ -110,7 +110,7 @@ const INCLUDED = [
 const FAQS = [
   {
     q: 'Why is there no fixed price on this page?',
-    a: 'Because a two-chair clinic and a six-doctor practice should not pay the same, and until recently ours did. What you pay depends on two things: which modules you switch on, and how many patients you message and call in a month. A single-doctor clinic taking just Clinic OS starts at ₹5,000 a month. A busy multi-doctor practice running the full patient journey pays a good deal more, and gets a good deal more back. One short call and we will tell you your number.',
+    a: 'Because a two-chair clinic and a six-doctor practice should not pay the same, and until recently ours did. What you pay depends on which modules you switch on and the size of your practice. A single-doctor clinic taking just Clinic OS starts at ₹5,000 a month. A busy multi-doctor practice running the full patient journey pays a good deal more, and gets a good deal more back. One short call and we will tell you your number.',
   },
   {
     q: 'I am a small clinic. Is this built for someone my size?',
@@ -121,8 +121,8 @@ const FAQS = [
     a: 'That is how most clinics do it. Modules switch on and off month to month, and nothing has to be reinstalled or re-onboarded when you add one. Your patient data is already there, so a module you add in month six starts working with your full history on day one.',
   },
   {
-    q: 'What decides the price beyond the modules?',
-    a: 'Your monthly volume — how many appointment reminders, follow-ups and campaign messages go out, and how many minutes the AI spends on the phone. We size that from your actual patient numbers on the call rather than guessing, and we tell you before you approach a limit. You will never get a surprise bill.',
+    q: 'Are messages and calls charged separately?',
+    a: 'No. Your monthly price covers the WhatsApp messages and AI phone calls a clinic of your size normally makes — reminders, follow-ups, campaigns, the receptionist — under a fair usage policy. We size the plan from your actual patient numbers on the call, and if your clinic grows well past that we talk to you first. You will never get a surprise bill.',
   },
   {
     q: 'Is there a setup fee?',
@@ -153,7 +153,7 @@ const PricingPage = () => {
     setPageSeo({
       title: 'AUMY Pricing — modular software for dental clinics, from ₹5,000/month | AUM AI',
       description:
-        'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and Meta Ads. Small clinics welcome — call us for pricing built around your patient volume. 60-day money-back guarantee.',
+        'One connected system, priced by the modules you need. Clinic OS from ₹5,000/month, plus Patient Journey, Get Found, Voice and Meta Ads. Small clinics welcome — call us for pricing built around your practice. 60-day money-back guarantee.',
       canonical: 'https://aumai.co.in/pricing',
     });
   }, []);
@@ -213,8 +213,8 @@ const PricingPage = () => {
         <div className="ch-container ch-narrow ch-center">
           <h2 className="ch-h2" style={{ textAlign: 'center', marginBottom: 6 }}>The modules</h2>
           <p style={{ textAlign: 'center', color: '#5b6784', maxWidth: 680, margin: '0 auto 8px' }}>
-            Starting prices per clinic, per month. Your final number depends on your patient volume,
-            which we work out with you rather than guess at.
+            Starting prices per clinic, per month. Your final number depends on the size of your practice,
+            which we work out with you rather than guess at. Messages and calls are included — fair usage policy applies.
           </p>
         </div>
 
@@ -266,7 +266,7 @@ const PricingPage = () => {
           <div className="ch-why-card" style={{ display: 'block', padding: '20px 24px' }}>
             {[
               ['The modules you switch on', 'Only what you need. Add or drop them month to month.'],
-              ['Your monthly patient volume', 'How many patients you message and call. A quiet clinic pays less than a busy one, permanently.'],
+              ['The size of your practice', 'A quiet two-chair clinic pays less than a busy multi-doctor one, permanently. Messages and calls are included under a fair usage policy.'],
               ['One-time setup', 'Connecting WhatsApp and Google, bringing your data across, and setting up your treatments and recalls. Scales with how much history you are moving.'],
             ].map(([h, s]) => (
               <div key={h} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', margin: '12px 0' }}>
