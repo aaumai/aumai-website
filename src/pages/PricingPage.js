@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -178,6 +179,9 @@ const PricingPage = () => {
               Or start with a free Growth Audit
             </Link>
           </div>
+          <p style={{ color: '#5b6784', fontSize: '0.92rem', maxWidth: 620, margin: '14px auto 0' }}>
+            {ONBOARDING_NOTICE.inline}
+          </p>
         </div>
       </section>
 
@@ -321,6 +325,9 @@ const PricingPage = () => {
             <a href={WA('Hi, I would like pricing for my clinic. Here is roughly my size and what I need:')} className="ch-btn ch-btn-primary">
               Get your price on WhatsApp
             </a>
+            <p style={{ color: '#5b6784', fontSize: '0.92rem', maxWidth: 620, margin: '14px auto 0' }}>
+              {ONBOARDING_NOTICE.inline}
+            </p>
           </div>
         </div>
       </section>

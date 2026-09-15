@@ -1,5 +1,6 @@
 import React from 'react';
 import Contact from '../components/Contact';
+import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
 import './Page.css';
 
 const ContactPage = () => {
@@ -11,6 +12,9 @@ const ContactPage = () => {
           <p className="page-subtitle">
             Tell us what you need — a growth strategy call for your clinic, or a build partner for
             your product. We reply within 24 hours.
+          </p>
+          <p className="page-subtitle" style={{ fontSize: '0.95rem', marginTop: 12 }}>
+            <strong>Clinics:</strong> {ONBOARDING_NOTICE.inline}
           </p>
         </div>
       </div>

@@ -55,9 +55,14 @@ function apply(html, r) {
       .join('');
     out = out.replace('</head>', `${blocks}</head>`);
   }
+  // Onboarding pause (owner 2026-09-15) — same wording as
+  // src/config/onboardingNotice.js; India site only (the US build has no header).
+  const notice = MARKET === 'us'
+    ? ''
+    : `<p class="onboarding-notice">We&rsquo;re not onboarding new clinics until 15 October 2026. <a href="/contact">Join the waitlist</a> and we&rsquo;ll reach out when onboarding reopens.</p>`;
   out = out.replace(
     '<div id="root"></div>',
-    `<div id="root"><div class="ch-home">${r.content}</div></div>`
+    `<div id="root">${notice}<div class="ch-home">${r.content}</div></div>`
   );
   return out;
 }
@@ -192,6 +197,7 @@ const routes = [
         <p><strong>Meta Ads Management &mdash; &#8377;10,000/month.</strong> We run your Facebook and Instagram ads, and they work harder here than anywhere else because the platform running them also knows which leads became paying patients. Real outcomes go back to Meta, so it learns to find people who book rather than people who click; you see the revenue each rupee of ad spend actually produced, not just cost per lead; and high-intent enquiries are followed up for months, so a good share book long after the ad stopped running.</p>
         <p><strong>Also available:</strong> Voice Assistant from &#8377;6,000/month.</p>
         <p>Your price is set by three things: the modules you switch on, the size of your practice, and a one-time setup that scales with how much history you are moving. WhatsApp messages and AI calls are included under a fair usage policy. Every module includes unlimited patients and staff logins, onboarding and training, and a 60-day money-back guarantee.</p>
+        <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
       </div></section>`,
   },
   {
@@ -407,6 +413,7 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Get in touch.</h1>
         <p class="ch-hero-sub">Tell us what you need — a growth strategy call for your clinic, or a build partner for your product. We reply within 24 hours.</p>
+        <p><strong>Clinics:</strong> We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
         <p><strong>India:</strong> AUM AI Healthcare Solutions &middot; Pune, Maharashtra, India &middot; jayesh.chaudhari@aumai.co.in &middot; +91 800 718 9868</p>
         <p><strong>United States:</strong> AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
       </div></section>`,

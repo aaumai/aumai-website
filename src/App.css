@@ -6,6 +6,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  /* room for the onboarding notice inside the fixed header (set by Header.js) */
+  padding-top: var(--notice-h, 0px);
 }
 
 /* Ensure content pushes footer down */

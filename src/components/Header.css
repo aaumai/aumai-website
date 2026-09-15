@@ -31,6 +31,30 @@
   box-shadow: 0 4px 24px rgba(22, 50, 79, 0.08);
 }
 
+/* Onboarding pause notice — slim navy strip above the navigation */
+.onboarding-notice {
+  position: relative;
+  z-index: 2;
+  background: #16324f;
+  color: #ffffff;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.onboarding-notice-link {
+  color: #7fd6c9;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.onboarding-notice-link:hover,
+.onboarding-notice-link:focus-visible {
+  color: #ffffff;
+}
+
 .header-content {
   position: relative;
   z-index: 1;
