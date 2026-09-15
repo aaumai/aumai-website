@@ -100,12 +100,12 @@ const CalculatorPage = ({ config }) => {
               <p className="ch-calc-fine">{result.fine}</p>
 
               <Link to="/growth-audit" className="ch-btn ch-btn-primary ch-audit-submit">
-                Find out where else your clinic leaks — free audit
+                See where else work gets stuck in your clinic — free audit
               </Link>
               <p className="ch-fineprint ch-center">
                 Want the full picture first? Read{' '}
                 <Link to={config.relatedArticle.href}>{config.relatedArticle.label}</Link> — or run
-                the <Link to="/leak-calculator">complete 60-second leak check</Link>.
+                the <Link to="/leak-calculator">complete 60-second check</Link>.
               </p>
             </div>
           </div>

@@ -12,12 +12,12 @@ const Footer = () => {
   const multiOffice = OFFICES.length > 1;
 
   const services = [
-    'AI Receptionist — 24/7 Booking',
-    'Lead Capture — Every Channel',
-    'No-show Recovery & Recalls',
-    'Dormant-Patient Reactivation',
-    'Reviews & Local SEO',
-    'Smarter Ads (Conversion API)'
+    'AI Voice Agent & WhatsApp — Every Call Answered',
+    'Lead Capture & Follow-up',
+    'Appointments, Reminders & No-shows',
+    'Digital Registration, Intake & Consent',
+    'After-care, Care Gaps & Reactivation',
+    'Get Found & Meta Ads'
   ];
 
   // Dental-growth pages only. The legacy engineering/consulting pages (About,
@@ -33,8 +33,8 @@ const Footer = () => {
     { label: 'Dental Practice Growth Hub', path: '/growth' },
     { label: 'Podcast — Be a Guest', path: '/podcast' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
-    { label: 'Free Clinic Growth Audit', path: '/growth-audit' },
-    { label: 'Revenue Leak Calculator', path: '/leak-calculator' },
+    { label: 'Free Clinic Audit', path: '/growth-audit' },
+    { label: 'What Slips Through the Cracks — 60-second Check', path: '/leak-calculator' },
     { label: 'Missed Call Calculator', path: '/missed-call-calculator' },
     { label: 'Platform Partners', path: '/platform-partner' },
     { label: 'Contact', path: '/contact' }
@@ -64,9 +64,9 @@ const Footer = () => {
               <AppDownload variant="compact" />
             </div>
             <p className="footer-tagline">
-              The AI Patient Journey &amp; Revenue Operating System for Dental Clinics. Turn more
-              enquiries into patients, deliver better post-treatment care, and bring patients back —
-              one system across the entire patient journey.
+              The operating system for a growing dental clinic. Aumy coordinates your patients,
+              people and processes from the first enquiry to ongoing care — one connected platform.
+              Grow your clinic. Don&rsquo;t grow the chaos.
             </p>
             <div className="footer-social">
               <a href="https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">

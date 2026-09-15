@@ -4,62 +4,94 @@ import { setPageSeo } from '../utils/seo';
 import { WatchButton, VideoLightbox } from '../components/FeatureVideo';
 import './HomeClinic.css';
 
+// "How Aumy works" (route kept at /revenue-generator so every existing link and
+// the /aumy redirect still land here). Positioning 2026-09-15, owner's words —
+// reports/positioning-2026-09-15-chaos-of-growth.md: Aumy is the operating
+// system for a growing dental clinic; the problem is coordination, not
+// patient acquisition; Convert → Care → Retain → Reactivate is the
+// architecture underneath, and Aumy coordinates the work.
+
 const Check = () => (
   <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
     <path d="M5 13l4 4L19 7" />
   </svg>
 );
 
-const heroStats = [
-  { value: '20–40%*', label: 'Lost revenue recovered' },
-  { value: '2–3×*', label: 'More enquiries converted' },
-  { value: '+25%†', label: 'Revenue in 60 days' },
-  { value: '100%', label: 'Bookings attributed' },
-];
+const before = ['Growth', 'More patients', 'More calls', 'More WhatsApp', 'More follow-ups', 'More staff workload', 'More things falling through the cracks'];
+const withAumy = ['Growth', 'Aumy coordinates the work', 'Your team focuses on patients'];
 
-// The four journey pillars (Convert → Care → Retain → Reactivate) — outcome
-// first; WhatsApp/phone/Instagram are channels inside them, never the story.
-// The pillars are the JOURNEY; `m` is the machinery underneath each — named
-// capabilities, so the page keeps up with what the product actually ships.
+// The four stages — the architecture underneath. `m` is the work Aumy does in each.
 const steps = [
-  { stage: 'Convert', t: 'Turn every enquiry into a booked patient', d: 'Instagram, WhatsApp, a missed call, your website, a walk-in — every enquiry answered in seconds, qualified, and followed up until it books or clearly declines.', m: 'AI Receptionist · Lead Nurture · Missed-Call Recovery · WhatsApp Booking' },
-  { stage: 'Care', t: 'A structured journey around every visit', d: 'Before the visit: doctor-approved pre-visit instructions and a smart intake form the moment the appointment is booked — allergies and red flags reach the doctor first. After: the treatment-specific follow-up — day-1 recovery check, care tips, the one-month review — delivered consistently, flagging any reply that needs the clinic.', m: 'Pre-Visit Instructions · Smart Intake · Treatment Care Plans · Day-by-Day Follow-up' },
-  { stage: 'Retain', t: 'Keep patients engaged — before they drift', d: 'Recalls and maintenance on time, every time — and AUMY knows which patients are at risk of disappearing, so your clinic can intervene before they go dormant.', m: 'No-Show Reduction · Recall Automation · Predictive Retention' },
-  { stage: 'Reactivate', t: 'Bring back patients who already went quiet', d: 'Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically — revenue you already paid to acquire, recovered.', m: 'Dormant Reactivation · Overdue Recalls · Stalled Treatment Plans' },
+  {
+    stage: 'Convert',
+    t: 'From the first enquiry to a booking',
+    flow: 'Leads → Enquiries → Calls → Appointments → Bookings',
+    d: 'Every call, WhatsApp message and ad enquiry answered, followed up and booked into a real slot — without someone at the front desk having to remember who asked what.',
+    m: 'AI voice agent · WhatsApp answers · Lead follow-up · Appointment booking',
+  },
+  {
+    stage: 'Care',
+    t: 'Everything around the treatment',
+    flow: 'Registration → Intake → Consent → Treatment → After-care → Patient communication',
+    d: 'Digital registration and intake before the visit, consent signed on a phone or the clinic iPad, and treatment-specific after-care your doctors define — with any worrying reply routed to a person.',
+    m: 'Digital registration · Intake forms · Digital consent · After-care plans',
+  },
+  {
+    stage: 'Retain',
+    t: 'Keeping patients on track',
+    flow: 'Appointment follow-ups → Care gaps → Doctor check-ins → Preventive care',
+    d: 'Confirmations, rescheduling and no-show recovery handled in the conversation, and every care gap — the crown after a root canal, the overdue cleaning — followed up on time.',
+    m: 'Reminders & confirmations · No-show recovery · Care gaps · Doctor check-ins',
+  },
+  {
+    stage: 'Reactivate',
+    t: 'Bringing patients back',
+    flow: 'Old patients → Overdue treatment → Missed appointments → Inactive patients',
+    d: 'Patients who drifted away invited back in your doctors’ own words, at a pace your team can handle — not a blast to your whole list.',
+    m: 'Inactive patients · Overdue treatment · Missed appointments · Stalled treatment plans',
+  },
 ];
 
-const capabilities = [
-  { t: 'Lead capture, every channel', d: 'Instagram, WhatsApp, calls, ads, walk-ins — every enquiry answered in seconds.' },
-  { t: '24/7 appointment booking', d: 'Patients book a real slot in a natural WhatsApp chat — straight into your calendar.' },
-  { t: 'Voice AI for missed calls', d: 'The call you couldn’t pick up — answered naturally, in their language, and booked.' },
-  { t: 'Cold-lead follow-up', d: 'Polite retries until they book or opt out.' },
-  { t: 'No-show recovery', d: 'Reminders, confirmations, and automatic rebooking.' },
-  { t: 'Recall & reactivation', d: 'Personalised to each patient — not generic blasts.' },
-  { t: 'Treatment-plan follow-up', d: 'Turn accepted plans into booked revenue.' },
-  { t: 'After-treatment care plans', d: 'Treatment-specific follow-up your doctors define — day-by-day guidance and scheduled check-ins after every major treatment.' },
-  { t: 'Predictive retention', d: 'Knows which patients are at risk of disappearing — churn risk and revenue-at-risk per patient — so you intervene before they go dormant.' },
-  { t: 'Products & upsells, in the chat', d: 'Sells your packages and products right inside the conversation.' },
-  { t: 'ROI dashboard', d: 'Every booking and rupee attributed.' },
+// The five groups of work Aumy manages — the chaos, not features.
+const chaosGroups = [
+  {
+    title: 'Patient communication',
+    items: ['AI voice agent that answers calls', 'Books appointments', 'Appointment reminders', 'WhatsApp and patient queries', 'Follow-ups', 'Your team takes over any chat in one tap'],
+  },
+  {
+    title: 'Appointment orchestration',
+    items: ['Confirmations', 'Rescheduling and cancellations', 'No-show management', 'Waitlists for earlier slots', 'Care gaps', 'Doctor away? Booked patients handled'],
+  },
+  {
+    title: 'Digital clinic',
+    items: ['Digital registration', 'Patient intake with signature', 'Digital consent', 'X-rays and documents on the record', 'Invoices and payments', 'Paperless workflows'],
+  },
+  {
+    title: 'Patient journey',
+    items: ['Pre-treatment instructions', 'Treatment records and charting', 'After-care', 'Care gaps', 'Doctor check-ins', 'Reactivation'],
+  },
+  {
+    title: 'Growth',
+    items: ['Get Found on Google', 'Reviews', 'Meta Ads', 'Lead capture', 'Lead conversion'],
+  },
 ];
 
-const platform = [
-  { t: 'Reviews & Google profile', d: 'Asks happy patients for a review at the right moment, follows up, auto-replies to every review — and your local ranking climbs.' },
-  { t: 'Local SEO & AI search visibility', d: 'Get found on Google Maps — and recommended when patients ask ChatGPT or Gemini for a clinic.' },
-  { t: 'One-click social posting', d: 'The AI drafts the post; one tap publishes to Google Business, Instagram and Facebook together.' },
-  { t: 'AI Creative Studio', d: 'Branded photos and short videos for your clinic, generated from a single snapshot — always ready to post or run as an ad.' },
-  { t: 'Patient education, in your name', d: 'Helpful health content sent between visits — branded to your clinic, never repeated.' },
-  { t: 'Ambient Scribe', d: 'You talk to your patient; the AI writes the visit note. Every consultation documented automatically — no typing after hours.' },
-  { t: 'Telehealth', d: 'Secure video consultations built in — follow-ups, second opinions and out-of-town patients without the travel.' },
-  { t: 'Predictive retention AI', d: 'Machine learning flags your best patients before they drift — so a 5-minute call saves a lifetime patient.' },
-  { t: 'Ask-anything reports', d: 'Ask a question in plain English — get the report. No spreadsheets, no analyst.' },
-  { t: 'Clinic records (light EHR)', d: 'A clean, modern patient record — appointments, plans, prescriptions — for clinics that want one system, not five.' },
+const knows = [
+  { when: 'A patient calls', aumy: 'Aumy knows who they are.' },
+  { when: 'They need an appointment', aumy: 'Aumy knows the doctor’s availability.' },
+  { when: 'They don’t show', aumy: 'Aumy knows what happened.' },
+  { when: 'They need a follow-up', aumy: 'Aumy creates and manages it.' },
+  { when: 'They message after treatment', aumy: 'Aumy understands the treatment context.' },
+  { when: 'They have an overdue care gap', aumy: 'Aumy knows it.' },
+  { when: 'The clinic gets a call', aumy: 'The voice agent has the context.' },
 ];
 
+// "Examine first. Prescribe after." — how we start with a clinic.
 const workingModel = [
-  { n: '01', t: 'We audit your data', d: 'From your software — or even paper registers. No work for your team.' },
-  { n: '02', t: 'We show you the money first', d: 'Exactly how much revenue is sitting unrecovered, on your real numbers.' },
-  { n: '03', t: 'We build it around your clinic', d: 'A dedicated growth expert sets up AUMY on your data and runs it end-to-end — you don’t lift a finger.' },
-  { n: '04', t: 'We own the outcome with you', d: 'Every booking and rupee tracked live and reviewed with you every week — a partner accountable for real results.' },
+  { n: '01', t: 'We understand how your clinic runs', d: 'Your front desk, your doctors, your software — even paper registers. No work for your team.' },
+  { n: '02', t: 'We find where work gets stuck', d: 'Where calls go unanswered, follow-ups stall and patients fall through the cracks — on your real data.' },
+  { n: '03', t: 'We set Aumy up around your clinic', d: 'A dedicated expert configures Aumy to how your clinic actually works and runs it with you.' },
+  { n: '04', t: 'We measure it with you', d: 'What was handled, what was booked, what still needs a person — reviewed with you every week.' },
 ];
 
 const testimonials = [
@@ -67,13 +99,6 @@ const testimonials = [
     quote: `AUM AI brought us a steady stream of new patients, woke up our dormant list, and kept our regulars coming back. Our revenue grew about 25% in just two months — and we didn’t hire a single extra person to make it happen.`,
     name: 'Vinayaka Dental Care',
     clinic: 'Dental clinic',
-    result: '+25% revenue in 2 months',
-  },
-  {
-    quote: `AUMY quietly went to work on the patients we already had — waking up our dormant list, sending recall reminders right on time, and following up after every appointment. Patients feel genuinely looked after, our Google reviews keep climbing, and we’re earning more from the same chairs.`,
-    name: 'Vinayaka Derma',
-    clinic: 'Dermatology & aesthetics',
-    result: '4.9★ Google rating',
   },
 ];
 
@@ -81,9 +106,9 @@ const AumyRevenueGenerator = () => {
   const [video, setVideo] = useState(null);
   useEffect(() => {
     setPageSeo({
-      title: 'Aumy — The AI Patient Journey & Revenue Operating System for Dental Clinics',
+      title: 'How Aumy Works — The Operating System for a Growing Dental Clinic',
       description:
-        'Aumy is the AI Patient Journey & Revenue Operating System we run for dental clinics — it captures every enquiry, books it, wins back patients who drift, and makes your ad spend work harder, with the recovered revenue proven on a live dashboard. Never lose revenue to missed calls & follow-ups again.',
+        'How Aumy manages the chaos that comes with growth: calls, WhatsApp, appointments, follow-ups, digital registration, intake, consent, X-rays and invoices on one connected platform — Convert, Care, Retain, Reactivate. Grow your clinic. Don’t grow the chaos.',
       canonical: 'https://aumai.co.in/revenue-generator',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -94,66 +119,137 @@ const AumyRevenueGenerator = () => {
       {/* HERO */}
       <section className="ch-hero">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">Aumy — how it works</span>
-          <h1 className="ch-hero-title">Recover the revenue your clinic is already leaking.</h1>
+          <span className="ch-eyebrow">How Aumy works</span>
+          <h1 className="ch-hero-title">Grow your clinic. Don&rsquo;t grow the chaos.</h1>
           <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            AUMY is the AI Patient Journey &amp; Revenue Operating System for dental clinics. It
-            works across the entire patient journey — from first enquiry to treatment,
-            after-treatment care, recall and reactivation — with the recovered revenue proven on a
-            live dashboard.
+            Aumy is the operating system for a growing dental clinic. It manages the chaos that comes
+            with growth — coordinating your patients, people and processes from the first enquiry to
+            ongoing care.
           </p>
+          <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Audit</Link>
             <Link to="/contact" className="ch-btn ch-btn-ghost">Talk to us</Link>
           </div>
-          <div className="ch-stats">
-            {heroStats.map((s, i) => (
-              <div key={i} className="ch-stat">
-                <span className="ch-stat-value">{s.value}</span>
-                <span className="ch-stat-label">{s.label}</span>
-              </div>
-            ))}
-          </div>
-          <p className="ch-fineprint">* Illustrative ranges, tuned to your clinic. † Real result from a partner clinic.</p>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
+      {/* THE PROBLEM */}
+      <section className="ch-section">
+        <div className="ch-container ch-narrow ch-center">
+          <span className="ch-eyebrow">The problem</span>
+          <h2 className="ch-h2">
+            A successful dental clinic doesn&rsquo;t necessarily have a patient-acquisition problem.
+            It often has a coordination problem.
+          </h2>
+          <p className="ch-lead">
+            When chairs are full, growth creates chaos: calls, WhatsApp messages, enquiries, appointment
+            confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents,
+            X-rays, invoices and patient questions.
+          </p>
+          <div className="ch-closetable">
+            <div className="ch-close-row">
+              <span className="ch-close-leak"><strong>Before Aumy</strong></span>
+              <span className="ch-close-arrow" aria-hidden="true">·</span>
+              <span className="ch-close-aumy">{before.join(' → ')}</span>
+            </div>
+            <div className="ch-close-row">
+              <span className="ch-close-leak"><strong>With Aumy</strong></span>
+              <span className="ch-close-arrow" aria-hidden="true">·</span>
+              <span className="ch-close-aumy">{withAumy.join(' → ')}</span>
+            </div>
+          </div>
+          <p className="ch-note ch-center">
+            When your clinic grows, Aumy makes sure the operational workload doesn&rsquo;t grow with it.
+          </p>
+        </div>
+      </section>
+
+      {/* THE ARCHITECTURE */}
       <section className="ch-section ch-tint">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">The patient journey</span>
-            <h2 className="ch-h2">Four stages, working as one.</h2>
+            <span className="ch-eyebrow">The architecture underneath</span>
+            <h2 className="ch-h2">Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
           </div>
           <div className="ch-pillars">
             {steps.map((s, i) => (
               <div key={i} className="ch-pillar">
                 <span className="ch-eyebrow">{s.stage}</span>
                 <h3 className="ch-pillar-title">{s.t}</h3>
+                <p className="ch-pillar-body"><strong>{s.flow}</strong></p>
                 <p className="ch-pillar-body">{s.d}</p>
                 <p className="ch-pillar-machinery">{s.m}</p>
               </div>
             ))}
           </div>
-          <p className="ch-note ch-center">One patient journey. One operating system.</p>
+          <p className="ch-note ch-center">Surrounding all four: <strong>Aumy coordinates the work.</strong></p>
         </div>
       </section>
 
-      {/* SMARTER ADS */}
+      {/* THE FIVE GROUPS OF WORK */}
+      <section className="ch-section">
+        <div className="ch-container">
+          <div className="ch-head">
+            <span className="ch-eyebrow">What Aumy manages</span>
+            <h2 className="ch-h2">The work around your chairs, handled.</h2>
+            <p className="ch-lead ch-center-lead">
+              Not a bundle of separate tools — one connected platform doing the operational work in
+              between, so your team spends less time chasing patients and more time caring for them.
+            </p>
+          </div>
+          <div className="ch-pillars" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))' }}>
+            {chaosGroups.map((g, i) => (
+              <div key={i} className="ch-pillar">
+                <span className="ch-eyebrow">{String(i + 1)}</span>
+                <h3 className="ch-pillar-title">{g.title}</h3>
+                <ul className="ch-mini">
+                  {g.items.map((it) => <li key={it}><Check /> {it}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* EVERYTHING IS CONNECTED */}
+      <section className="ch-section ch-tint">
+        <div className="ch-container ch-narrow ch-center">
+          <span className="ch-eyebrow">Everything is connected</span>
+          <h2 className="ch-h2">Think of Aumy as Jarvis for your dental clinic.</h2>
+          <p className="ch-lead">Not because it&rsquo;s a chatbot. Because everything knows what&rsquo;s happening.</p>
+          <div className="ch-closetable">
+            {knows.map((row, i) => (
+              <div key={i} className="ch-close-row">
+                <span className="ch-close-leak">{row.when}</span>
+                <span className="ch-close-arrow" aria-hidden="true">→</span>
+                <span className="ch-close-aumy">{row.aumy}</span>
+              </div>
+            ))}
+          </div>
+          <p className="ch-lead">
+            Your calls know your appointments. Your appointments know your patients. Your patients know
+            their treatment. Your follow-ups know what happened. And Aumy knows all of it.
+          </p>
+          <p className="ch-note ch-center"><strong>One patient. One journey. One connected system.</strong></p>
+        </div>
+      </section>
+
+      {/* GROWTH — ads on the same connected platform */}
       <section className="ch-section">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">And your marketing gets smarter</span>
-          <h2 className="ch-h2">Your ads learn from your real patients.</h2>
+          <span className="ch-eyebrow">And when you do advertise</span>
+          <h2 className="ch-h2">Your ads learn from what happens next.</h2>
           <p className="ch-lead">
-            On top of the four stages, a growth flywheel: when a lead becomes a real patient, AUMY&rsquo;s
-            private attribution ties that revenue to the exact ad and audience — so you put budget
-            where paying patients come from. Meta &amp; Google only ever see anonymous lead
-            signals: treatment and health details never leave the clinic.
+            Because the platform running your Meta ads also handles the enquiry, the booking and the
+            visit, it knows which leads became patients — and your campaigns learn from that. Meta
+            &amp; Google only ever see anonymous lead signals: treatment and health details never leave
+            the clinic.
           </p>
           <ul className="ch-mini" style={{ display: 'inline-grid', textAlign: 'left' }}>
-            <li><Check /> Revenue tracked per ad inside AUMY — not clicks a pixel guessed at</li>
-            <li><Check /> Cost per genuine lead drops as lead quality climbs</li>
-            <li><Check /> It compounds every month — privacy-safe, no patient data exposed</li>
+            <li><Check /> Every enquiry from an ad answered and followed up — not left in a spreadsheet</li>
+            <li><Check /> Campaigns judged by patients who booked, not clicks</li>
+            <li><Check /> Privacy-safe — no patient data handed to ad platforms</li>
           </ul>
           <div>
             <WatchButton onClick={() => setVideo({ file: 'smarter-ads', title: 'Smarter ads — how the loop works' })} />
@@ -161,83 +257,16 @@ const AumyRevenueGenerator = () => {
         </div>
       </section>
 
-      {/* CAPABILITIES */}
+      {/* PROOF */}
       <section className="ch-section ch-tint">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">Your AI receptionist</span>
-            <h2 className="ch-h2">One AI receptionist. The work of ten.</h2>
-            <p className="ch-lead ch-center-lead">
-              AUMY isn&rsquo;t a bundle of separate tools — it&rsquo;s one AI working across
-              WhatsApp, phone, Instagram and your website, doing what would take a team of ten
-              humans: answering every lead in seconds, 24/7, never sick, never on leave — and
-              quietly handling all of this for your clinic:
-            </p>
-          </div>
-          <div className="ch-why">
-            {capabilities.map((c, i) => (
-              <div key={i} className="ch-why-card">
-                <Check />
-                <div>
-                  <h3 className="ch-why-title">
-                    {c.t}
-                    {c.badge && (
-                      <span style={{
-                        marginLeft: 8, padding: '2px 8px', borderRadius: 999,
-                        background: '#312e81', color: '#fff',
-                        fontSize: 11, fontWeight: 700, verticalAlign: 'middle',
-                        whiteSpace: 'nowrap',
-                      }}>{c.badge}</span>
-                    )}
-                  </h3>
-                  <p className="ch-why-body">{c.d}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="ch-head" style={{ marginTop: 56 }}>
-            <span className="ch-eyebrow">The full platform</span>
-            <h2 className="ch-h2">And it goes far beyond the receptionist.</h2>
-            <p className="ch-lead ch-center-lead">
-              These aren&rsquo;t bolt-ons from five different vendors — one platform, one dashboard,
-              one login. The receptionist is the hero; this breadth is the moat:
-            </p>
-          </div>
-          <div className="ch-why">
-            {platform.map((c, i) => (
-              <div key={i} className="ch-why-card">
-                <Check />
-                <div>
-                  <h3 className="ch-why-title">
-                    {c.t}
-                    {c.badge && (
-                      <span style={{
-                        marginLeft: 8, padding: '2px 8px', borderRadius: 999,
-                        background: '#eef2ff', color: '#312e81',
-                        fontSize: 11, fontWeight: 700, verticalAlign: 'middle',
-                        whiteSpace: 'nowrap',
-                      }}>{c.badge}</span>
-                    )}
-                  </h3>
-                  <p className="ch-why-body">{c.d}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="ch-section">
         <div className="ch-container ch-center">
-          <h2 className="ch-h2">Clinics are already growing with us.</h2>
+          <h2 className="ch-h2">Busy clinics already run on Aumy.</h2>
           <div className="ch-testimonials">
             {testimonials.map((t, i) => (
               <figure key={i} className="ch-testimonial">
                 <blockquote>{t.quote}</blockquote>
                 <figcaption>
                   <strong>{t.name}</strong> · {t.clinic}
-                  <span className="ch-result"> — {t.result}</span>
                 </figcaption>
               </figure>
             ))}
@@ -246,11 +275,11 @@ const AumyRevenueGenerator = () => {
       </section>
 
       {/* WORKING MODEL */}
-      <section className="ch-section ch-tint">
+      <section className="ch-section">
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">How we work with you</span>
-            <h2 className="ch-h2">We lead with your numbers — then we get to work.</h2>
+            <h2 className="ch-h2">Examine first. Prescribe after.</h2>
           </div>
           <div className="ch-pillars">
             {workingModel.map((s, i) => (
@@ -267,13 +296,13 @@ const AumyRevenueGenerator = () => {
       {/* CTA */}
       <section className="ch-offer">
         <div className="ch-container ch-center">
-          <h2 className="ch-offer-title">See what your clinic is leaving on the table — free.</h2>
+          <h2 className="ch-offer-title">See where work gets stuck in your clinic — free.</h2>
           <p className="ch-offer-sub">
-            A free Clinic Growth Audit shows exactly where your clinic is leaking revenue — no
-            obligation.
+            A free Clinic Audit shows where enquiries, follow-ups and patients slip through the cracks
+            in your clinic — no obligation.
           </p>
           <div className="ch-hero-cta ch-center-cta">
-            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Audit</Link>
           </div>
         </div>
       </section>

@@ -21,15 +21,15 @@ const LeakCalculator = () => {
     setPageSeo(
       IS_US
         ? {
-            title: 'Dental Revenue Leak Calculator — What Missed Calls & No-Shows Cost You | AUM AI',
+            title: 'What Slips Through the Cracks? A 60-Second Check for Dental Practices | AUM AI',
             description:
-              'A 60-second, deliberately conservative estimate of the revenue leaking from your dental practice or med spa — unanswered calls, no-shows, and patients who never reappoint. Free, no sign-up.',
+              'When a dental practice is stretched, calls go unanswered, no-shows go unrecovered and patients never reappoint. A 60-second, deliberately conservative estimate of what that is worth. Free, no sign-up.',
             canonical: `${ORIGIN}/leak-calculator`,
           }
         : {
-            title: 'Clinic Revenue Leak Calculator — Dental | AUM AI',
+            title: 'What Slips Through the Cracks? A 60-Second Check for Dental Clinics | AUM AI',
             description:
-              'A 60-second, deliberately conservative estimate of the revenue quietly leaking from your dental clinic — missed enquiries, no-shows, and patients who never come back. Free, no sign-up.',
+              'When a dental clinic is stretched, enquiries go unanswered, no-shows go unrecovered and patients never come back. A 60-second, deliberately conservative estimate of what that is worth. Free, no sign-up.',
             canonical: `${ORIGIN}/leak-calculator`,
           }
     );

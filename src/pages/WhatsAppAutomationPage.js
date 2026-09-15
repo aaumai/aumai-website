@@ -12,9 +12,8 @@ const Check = () => (
 const STAGES = [
   ['Convert', 'New enquiries answered in seconds and nurtured until they book — with treatment-aware follow-ups for implants, aligners, RCTs and more.'],
   ['Care', 'Day-by-day after-treatment instructions sent automatically, matched to the procedure performed — fewer anxious calls, better outcomes.'],
-  ['Retain', 'Cleaning and check-up recalls that go out on schedule and fill your chair — no register, no reminder diary, no staff time.'],
-  ['Reactivate', 'Patients who haven’t visited in months get personal win-back journeys that bring them back — your highest-ROI revenue, already in your database.'],
-  ['Grow', 'Happy patients nudged at the right moment to leave a Google review, compounding your local visibility month after month.'],
+  ['Retain', 'Cleaning and check-up care gaps followed up on schedule — no register, no reminder diary, no staff time.'],
+  ['Reactivate', 'Patients who haven’t visited in months get personal win-back journeys that bring them back — patients who already know and trust you.'],
 ];
 
 const DIFFERENCE = [
@@ -32,7 +31,7 @@ const FAQS = [
   },
   {
     q: 'Isn’t automated WhatsApp just spam?',
-    a: 'Blast tools are spam. AUMY sends each patient the message that’s relevant to them at the moment it’s relevant — their recall when it’s due, their after-care on the day of treatment, their follow-up when their plan is pending. Relevance is the opposite of spam, and opt-outs are honoured instantly.',
+    a: 'Blast tools are spam. AUMY sends each patient the message that’s relevant to them at the moment it’s relevant — their care-gap reminder when it’s due, their after-care on the day of treatment, their follow-up when their plan is pending. Relevance is the opposite of spam, and opt-outs are honoured instantly.',
   },
   {
     q: 'Can my staff still use the WhatsApp number normally?',
@@ -54,7 +53,7 @@ const WhatsAppAutomationPage = () => {
     setPageSeo({
       title: 'WhatsApp Automation for Dental Clinics — Official API | AUMY',
       description:
-        'AUMY automates your dental clinic’s WhatsApp on the official Business API — instant replies, appointment booking, recalls, reactivation and review requests — with human takeover and revenue attribution built in.',
+        'AUMY automates your dental clinic’s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
       canonical: 'https://aumai.co.in/whatsapp-automation-for-clinics',
     });
   }, []);
@@ -67,8 +66,8 @@ const WhatsAppAutomationPage = () => {
           <h1 className="ch-hero-title">WhatsApp automation built for dental clinics</h1>
           <p className="ch-hero-sub">
             India&rsquo;s patients live on WhatsApp. AUMY turns your clinic&rsquo;s number into a system that
-            answers, books, follows up, recalls and reactivates — on the official WhatsApp Business API,
-            across all five stages of the patient journey.
+            answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API,
+            across the whole patient journey.
           </p>
           <div style={{ marginTop: 18, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/demos" className="ch-btn ch-btn-primary">See it live on a real clinic&rsquo;s WhatsApp</Link>
@@ -79,7 +78,7 @@ const WhatsAppAutomationPage = () => {
 
       <section style={{ padding: '20px 0 8px' }}>
         <div className="ch-container ch-narrow ch-center">
-          <h2 className="ch-h2" style={{ textAlign: 'center' }}>One number, five automated stages</h2>
+          <h2 className="ch-h2" style={{ textAlign: 'center' }}>One number, the whole patient journey</h2>
           <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>
             Most clinics use WhatsApp manually — replying when the front desk gets a minute, forgetting
             follow-ups by Friday. AUMY runs the entire patient journey on it, automatically.

@@ -21,9 +21,9 @@ const GrowthAudit = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({
-      title: 'Free Clinic Growth Audit — AUMY by AUM AI',
+      title: 'Free Clinic Audit — Aumy by AUM AI',
       description:
-        'A free growth audit for dental clinics: where you rank on Google versus the clinics near you, how visible you are to new patients, and the specific gaps quietly costing you bookings. Prepared for your clinic within 24 hours.',
+        'A free audit for dental clinics: where work gets stuck and patients slip through the cracks, where you rank on Google versus the clinics near you, and what each gap is worth. Prepared for your clinic within 24 hours.',
       canonical: 'https://aumai.co.in/growth-audit',
     });
   }, []);
@@ -87,16 +87,16 @@ const GrowthAudit = () => {
         <div className="ch-container">
           <div className="ch-audit-grid">
             <div>
-              <span className="ch-eyebrow">Free Clinic Growth Audit</span>
-              <h1 className="ch-hero-title">See exactly where your clinic is leaking — and how much.</h1>
+              <span className="ch-eyebrow">Free Clinic Audit</span>
+              <h1 className="ch-hero-title">See where work gets stuck in your clinic — and where patients slip through the cracks.</h1>
               <p className="ch-hero-sub">
-                Tell us your clinic and city. Within 24 hours, you get a growth audit prepared
+                Tell us your clinic and city. Within 24 hours, you get an audit prepared
                 for <em>your</em> clinic — not an automated template:
               </p>
               <ul className="ch-mini">
                 <li><Check /> Where you rank on Google versus the clinics near you — and why</li>
                 <li><Check /> How visible you are to the patients searching in your area right now</li>
-                <li><Check /> The specific gaps quietly costing you bookings, and what each one is worth</li>
+                <li><Check /> Where enquiries, follow-ups and appointments slip through the cracks — and what each gap is worth</li>
               </ul>
               <p className="ch-hero-trust">
                 Free. No obligation. Reviewed by a person before it reaches you.

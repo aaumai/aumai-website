@@ -40,11 +40,11 @@ export const MARKETS = {
       { key: 'dental', label: 'Dental clinic', avgValue: 4000 },
     ],
     auditHref: '/growth-audit',
-    auditCta: 'Find out where your number hides — free audit',
+    auditCta: 'See where work gets stuck in your clinic — free audit',
     auditNote: (
       <>
-        The audit shows the leaks in <em>your</em> clinic — Google visibility, unanswered
-        enquiries, and the gaps behind these numbers. Free, within 24 hours.
+        The audit shows where work gets stuck in <em>your</em> clinic — unanswered enquiries,
+        follow-ups, no-shows and care gaps, and the numbers behind them. Free, within 24 hours.
       </>
     ),
   },
@@ -54,14 +54,14 @@ export const MARKETS = {
     enquiryLabel: 'New patient enquiries per week (calls, texts, web forms)',
     valueLabel: 'Average production per visit ($)',
     value: { min: 100, max: 3000, step: 25 },
+    // Dental-only (2026-09-15): a single segment hides the toggle.
     segments: [
       { key: 'dental', label: 'Dental practice', avgValue: 450 },
-      { key: 'medspa', label: 'Med spa / aesthetics', avgValue: 700 },
     ],
     auditHref: 'https://calendar.app.google/tecaeebTBEWSoJnV7',
-    auditCta: 'See where your number hides — book a 30-minute call',
+    auditCta: 'See where work gets stuck in your practice — book a 30-minute call',
     auditNote:
-      'On the call we walk through your own numbers — unanswered calls, recall gaps, and what each one is worth. No obligation.',
+      'On the call we walk through how your practice runs today — unanswered calls, follow-ups, no-shows and care gaps, and what each one is worth. No obligation.',
   },
 };
 
@@ -129,9 +129,9 @@ const LeakCheck = ({ market = 'in', headingLevel = 'h1', showHeading = true }) =
     <>
       {showHeading && (
         <div className="ch-head">
-          <span className="ch-eyebrow">60-second leak check</span>
+          <span className="ch-eyebrow">60-second check</span>
           <Heading className="ch-hero-title">
-            Do the math for your {market === 'us' ? 'practice' : 'clinic'}.
+            What slips through the cracks when your {market === 'us' ? 'practice' : 'clinic'} is stretched?
           </Heading>
           <p className="ch-lead ch-center-lead">
             Six honest answers. Deliberately conservative math — we undercount on purpose.
@@ -167,7 +167,7 @@ const LeakCheck = ({ market = 'in', headingLevel = 'h1', showHeading = true }) =
 
         <div className="ch-calc-result">
           <p className="ch-calc-result-label">
-            Even counting conservatively, your {market === 'us' ? 'practice' : 'clinic'} is leaking about
+            Even counting conservatively, what slips through the cracks is worth about
           </p>
           <p className="ch-calc-total">
             {money(leaks.total)}<span className="ch-calc-per">/year</span>

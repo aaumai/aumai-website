@@ -54,7 +54,7 @@ const MODULES = [
     from: '₹15,000',
     featured: true,
     blurb:
-      'Turns enquiries into patients and keeps the ones you have. This is the module that finds revenue you already earned but never collected.',
+      'Turns enquiries into patients and keeps the ones you have. This is the module that makes sure patients don’t slip through the cracks.',
     points: [
       'Every enquiry answered and followed up, day or night',
       'Books, reschedules and cancels appointments on its own',
@@ -127,7 +127,7 @@ const FAQS = [
   },
   {
     q: 'Is there a setup fee?',
-    a: 'For most clinics, yes — it covers connecting WhatsApp and your Google Business Profile, importing your patients and appointments, and configuring treatments and recall rules in your own doctors’ words. It scales with how much we migrate. A clinic starting fresh on Clinic OS pays very little. A practice moving twenty years of history, clinical notes and x-rays across pays more, because that is real work. We quote it exactly after seeing what you are on today.',
+    a: 'For most clinics, yes — it covers connecting WhatsApp and your Google Business Profile, importing your patients and appointments, and configuring treatments and care-gap rules in your own doctors’ words. It scales with how much we migrate. A clinic starting fresh on Clinic OS pays very little. A practice moving twenty years of history, clinical notes and x-rays across pays more, because that is real work. We quote it exactly after seeing what you are on today.',
   },
   {
     q: 'Do I have to replace the software I already use?',
@@ -271,7 +271,7 @@ const PricingPage = () => {
             {[
               ['The modules you switch on', 'Only what you need. Add or drop them month to month.'],
               ['The size of your practice', 'A quiet two-chair clinic pays less than a busy multi-doctor one, permanently. Messages and calls are included under a fair usage policy.'],
-              ['One-time setup', 'Connecting WhatsApp and Google, bringing your data across, and setting up your treatments and recalls. Scales with how much history you are moving.'],
+              ['One-time setup', 'Connecting WhatsApp and Google, bringing your data across, and setting up your treatments and care gaps. Scales with how much history you are moving.'],
             ].map(([h, s]) => (
               <div key={h} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', margin: '12px 0' }}>
                 <Check />

@@ -71,7 +71,7 @@ const whyUs = [
 ];
 
 const faqs = [
-  { q: 'How does the 60-day money-back guarantee work?', a: 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real recalls filled. If it doesn\u2019t meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.' },
+  { q: 'How does the 60-day money-back guarantee work?', a: 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real care gaps followed up. If it doesn\u2019t meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.' },
   { q: 'Do you have your own dental software (PMS)?', a: 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on AUMY, at the same price.' },
   { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, AUMY keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into AUMY for a one-time migration fee — with no downtime.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
@@ -180,7 +180,7 @@ const Home = () => {
               <li><strong>Booked? Try changing your mind</strong> — reschedule or cancel in one message, no phone queue.</li>
               <li><strong>Skip your appointment</strong> — and watch how it wins the rebooking without nagging.</li>
               <li><strong>After your &ldquo;visit&rdquo;</strong>, we&rsquo;ll mark it done — see how it asks for your feedback.</li>
-              <li><strong>Come back in 3 months</strong> for your recall reminder. Ghost us for 6, and AUMY will try to win you back 🙂</li>
+              <li><strong>Come back in 3 months</strong> for your check-up reminder. Ghost us for 6, and AUMY will try to win you back 🙂</li>
             </ol>
             <p style={{ marginTop: 18, textAlign: 'center', color: '#5b6784' }}>
               Every message you receive is the same system your patients would experience — Convert, Care, Retain, Reactivate, in real time.
@@ -333,7 +333,7 @@ const Home = () => {
               <h3 className="ch-pillar-title">Keep it — AUMY runs on top</h3>
               <p className="ch-pillar-body">
                 No retraining on day one. Whatever software you use, AUMY keeps your data in sync
-                with it and runs the front-desk and patient-journey layer — Convert, Care, Retain, Reactivate, Grow — on top.
+                with it and runs the front-desk and patient-journey layer — Convert, Care, Retain, Reactivate — on top.
                 <strong> Want one connected platform? We migrate your data from your current software
                 into AUMY for a one-time migration fee.</strong>{' '}
                 <Link to="/switch">How the move works</Link>.
@@ -358,7 +358,7 @@ const Home = () => {
             <ul className="ch-mini">
               <li><Check /> Captures every enquiry and follows up until it books — no lead goes cold</li>
               <li><Check /> Confirms, reschedules and cancels — so a would-be no-show reopens the slot</li>
-              <li><Check /> Sends recall reminders on time and reactivates patients who drifted away</li>
+              <li><Check /> Follows up care gaps on time and reactivates patients who drifted away</li>
               <li><Check /> Follows up every accepted treatment plan until the patient books it</li>
               <li><Check /> Every call, message, form and follow-up in one patient record — full context, always</li>
             </ul>

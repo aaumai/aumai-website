@@ -41,9 +41,9 @@ const steps = [
   },
   {
     n: '2',
-    title: 'Grow on top',
+    title: 'Run on top',
     body:
-      'AUMY starts working immediately on the synced data: converting enquiries, caring for patients, filling recalls, winning back the ones who drifted, and growing your reviews.',
+      'Aumy starts coordinating the work immediately on the synced data: converting enquiries, caring for patients, following up care gaps and winning back the ones who drifted.',
   },
   {
     n: '3',
@@ -79,19 +79,13 @@ const pillars = [
     stage: 'Retain',
     title: 'Bring patients back for ongoing care',
     body:
-      'Cleaning, check-up and maintenance recalls reached out to on time, every time, without anyone in the clinic having to remember.',
+      'Cleaning, check-up and maintenance care gaps followed up on time, every time, without anyone in the clinic having to remember.',
   },
   {
     stage: 'Reactivate',
     title: 'Win back patients who drifted away',
     body:
-      'Patients who came once and forgot you are brought back with a campaign you approve. Revenue you already paid to acquire, recovered.',
-  },
-  {
-    stage: 'Grow',
-    title: 'Grow your reputation and reach',
-    body:
-      'Happy patients become Google reviews, asked at the right moment. Every review answered in your voice, your Google profile kept active, so the next patient finds you first.',
+      'Patients who came once and forgot you are brought back with a campaign you approve, at a pace your team can handle.',
   },
 ];
 
@@ -200,9 +194,9 @@ const SwitchPage = () => {
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">How the move works</span>
-            <h2 className="ch-h2">Sync first. Grow on top. Migrate when you are ready.</h2>
+            <h2 className="ch-h2">Sync first. Run on top. Migrate when you are ready.</h2>
             <p className="ch-lead ch-center-lead">
-              You never have to choose between keeping your records and growing your practice.
+              You never have to choose between keeping your records and calming the chaos.
               The order is yours.
             </p>
           </div>
@@ -248,7 +242,7 @@ const SwitchPage = () => {
           <div className="ch-head">
             <span className="ch-eyebrow">What you get once you are in</span>
             <h2 className="ch-h2">Your clinic is growing. Don&rsquo;t let the chaos grow with it.</h2>
-            <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE → GROW</p>
+            <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
           </div>
           <div className="ch-pillars">
             {pillars.map((p, i) => (

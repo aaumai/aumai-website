@@ -72,7 +72,7 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    ['How does the 60-day money-back guarantee work?', 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real recalls filled. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.'],
+    ['How does the 60-day money-back guarantee work?', 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real care gaps followed up. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.'],
     ['Do you have your own dental software (PMS)?', 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on AUMY, at the same price.'],
     ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top. You can move onto AUMY’s full PMS later, whenever you choose.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
@@ -220,21 +220,21 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">An AI receptionist that never misses a patient</h1>
         <p>Every call and WhatsApp message answered in seconds — nights, Sundays, lunch rush — in your patient's own language, and converted into a booked appointment. A busy clinic misses 20–30% of its calls; every missed enquiry is a patient who books with the next clinic on Google.</p>
-        <p>AUMY's AI receptionist answers instantly, books appointments end-to-end, recovers missed calls over WhatsApp, follows up until patients decide, and hands over to your staff the moment they want to join. It is trained on your clinic's treatments, doctors and pricing — and it is stage one of the full AUMY journey: Convert, Care, Retain, Reactivate, Grow.</p>
+        <p>AUMY's AI receptionist answers instantly, books appointments end-to-end, recovers missed calls over WhatsApp, follows up until patients decide, and hands over to your staff the moment they want to join. It is trained on your clinic's treatments, doctors and pricing — and it is the first stage of the Aumy patient journey: Convert, Care, Retain, Reactivate.</p>
       </div></section>`,
   },
   {
     slug: 'whatsapp-automation-for-clinics',
     title: 'WhatsApp Automation for Dental Clinics — Official API | AUMY',
     description:
-      'AUMY automates your dental clinic\u2019s WhatsApp on the official Business API — instant replies, appointment booking, recalls, reactivation and review requests — with human takeover and revenue attribution built in.',
+      'AUMY automates your dental clinic\u2019s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
     canonical: `${ORIGIN}/whatsapp-automation-for-clinics`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: "Is this the official WhatsApp API?", acceptedAnswer: { '@type': 'Answer', text: "Yes — AUMY uses the official WhatsApp Business API from Meta on your clinic's own verified number, following Meta's messaging rules, which is why numbers do not get blocked." } },
-        { '@type': 'Question', name: "Is automated WhatsApp messaging spam?", acceptedAnswer: { '@type': 'Answer', text: "No — AUMY sends each patient the message relevant to them at the right moment: their recall when due, after-care on the day of treatment, follow-ups while a plan is pending. Opt-outs are honoured instantly." } },
+        { '@type': 'Question', name: "Is automated WhatsApp messaging spam?", acceptedAnswer: { '@type': 'Answer', text: "No — AUMY sends each patient the message relevant to them at the right moment: their care-gap reminder when due, after-care on the day of treatment, follow-ups while a plan is pending. Opt-outs are honoured instantly." } },
         { '@type': 'Question', name: "Can staff still use the WhatsApp number normally?", acceptedAnswer: { '@type': 'Answer', text: "Yes. The team sees every conversation and can take over any chat with one tap; the AI steps back the moment a human joins." } },
         { '@type': 'Question', name: "Do I need a new number or new software?", acceptedAnswer: { '@type': 'Answer', text: "No. AUMY connects to your existing WhatsApp number and runs alongside your existing practice software." } },
       ],
@@ -242,8 +242,8 @@ const routes = [
     content: `
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">WhatsApp automation built for dental clinics</h1>
-        <p>India's patients live on WhatsApp. AUMY turns your clinic's number into a system that answers, books, follows up, recalls and reactivates — on the official WhatsApp Business API, across all five stages of the patient journey: Convert, Care, Retain, Reactivate, Grow.</p>
-        <p>Unlike broadcast tools, every message is a conversation the AI actually continues: enquiries are nurtured until they book, after-treatment care goes out day by day, recalls fill the chair, lapsed patients get win-back journeys, and happy patients are guided to leave Google reviews. Campaigns run with start/end dates, daily caps and instant opt-out handling — and every booking is attributed back to the message that produced it.</p>
+        <p>India's patients live on WhatsApp. AUMY turns your clinic's number into a system that answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API, across the whole patient journey: Convert, Care, Retain, Reactivate.</p>
+        <p>Unlike broadcast tools, every message is a conversation the AI actually continues: enquiries are nurtured until they book, after-treatment care goes out day by day, care gaps get followed up, lapsed patients get win-back journeys, and happy patients are guided to leave Google reviews. Campaigns run with start/end dates, daily caps and instant opt-out handling — and every booking is attributed back to the message that produced it.</p>
       </div></section>`,
   },
   {
@@ -294,7 +294,7 @@ const routes = [
         <p>So your clinic can grow without growing the chaos.</p>
         <h2>Full dental software included — or keep the one you have.</h2>
         <p><strong>Want one complete platform?</strong> AUMY includes a full Dental PMS: patient records &amp; appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and complete billing, invoicing &amp; accounts — plus voice-powered charting where you talk and AUMY charts.</p>
-        <p><strong>Happy with your current PMS?</strong> Keep it. AUMY runs on top as the growth layer — Convert, Care, Retain, Reactivate, Grow — with no migration and no retraining. Move onto the full platform later, whenever you choose. Same price either way.</p>
+        <p><strong>Happy with your current PMS?</strong> Keep it. Aumy runs on top and coordinates the patient journey — Convert, Care, Retain, Reactivate — with no migration and no retraining. Move onto the full platform later, whenever you choose. Same price either way.</p>
         <h2>A dedicated expert runs it with you.</h2>
         <p>You are never handed a login and left to work it out. An AUMY expert is assigned to your clinic on a permanent basis — they learn how your clinic runs, set AUMY up around it, operate the system with you, and review it with you every week. You get a calmer clinic; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
@@ -313,68 +313,83 @@ const routes = [
         <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use, and you can move onto its full PMS whenever you choose.</p>
         <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>
         <p><strong>Is this a product or a service?</strong> Both — a proven system (AUMY), run and tailored for you by a partner.</p>
-        <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
+        <p><a href="/growth-audit">Get my free Clinic Audit</a></p>
       </div></section>`,
   },
   {
     slug: 'revenue-generator',
-    title: 'How AUMY Works — Recover Lost Clinic Revenue | AUM AI',
+    title: 'How Aumy Works — The Operating System for a Growing Dental Clinic',
     description:
-      'AUMY recovers the revenue dental clinics leak every day: it captures every enquiry, books it, wins back patients who drift, feeds real bookings back to Meta so ads get smarter, and proves recovered revenue on a live dashboard.',
+      'How Aumy manages the chaos that comes with growth: calls, WhatsApp, appointments, follow-ups, digital registration, intake, consent, X-rays and invoices on one connected platform — Convert, Care, Retain, Reactivate. Grow your clinic. Don’t grow the chaos.',
     canonical: `${ORIGIN}/revenue-generator`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">How AUMY works</p>
-        <h1 class="ch-hero-title">Recover the revenue your clinic is already leaking.</h1>
-        <p class="ch-hero-sub">AUMY finds where your clinic leaks revenue and closes every gap. It captures every enquiry, books it, wins back patients who drift away, and makes your ad spend work harder — with the recovered revenue proven on a live dashboard.</p>
-        <p><a href="/growth-audit">Get my free Clinic Growth Audit</a></p>
+        <p class="ch-eyebrow">How Aumy works</p>
+        <h1 class="ch-hero-title">Grow your clinic. Don't grow the chaos.</h1>
+        <p class="ch-hero-sub">Aumy is the operating system for a growing dental clinic. It manages the chaos that comes with growth — coordinating your patients, people and processes from the first enquiry to ongoing care.</p>
+        <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
+        <p><a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/contact">Talk to us</a></p>
       </div></section>
-      <section><div class="ch-container">
-        <h2>Four stages, working as one — the entire patient journey.</h2>
-        <p>AUMY is the AI Patient Journey &amp; Revenue Operating System for dental clinics: from first enquiry to treatment, after-treatment care, recall and reactivation.</p>
+      <section><div class="ch-container ch-narrow">
+        <h2>A successful dental clinic doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>
+        <p>When chairs are full, growth creates chaos: calls, WhatsApp messages, enquiries, appointment confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents, X-rays, invoices and patient questions.</p>
+        <p><strong>Before Aumy:</strong> Growth → More patients → More calls → More WhatsApp → More follow-ups → More staff workload → More things falling through the cracks.</p>
+        <p><strong>With Aumy:</strong> Growth → Aumy coordinates the work → Your team focuses on patients.</p>
+        <h2>Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
         <ul>
-          <li><strong>CONVERT — turn every enquiry into a booked patient.</strong> Instagram, WhatsApp, a missed call, your website, a walk-in — answered in seconds, qualified, followed up until it books or clearly declines. (AI Receptionist · Lead Nurture · Missed-Call Recovery · WhatsApp Booking)</li>
-          <li><strong>CARE — a structured journey after every treatment.</strong> Your doctors define the treatment-specific follow-up — day-1 recovery check, care tips, the one-month review — and AUMY delivers it consistently, flagging replies that need the clinic. (Treatment Care Plans · Day-by-Day Follow-up · Patient Check-ins)</li>
-          <li><strong>RETAIN — keep patients engaged before they drift.</strong> Recalls and maintenance on time — and AUMY knows which patients are at risk of disappearing, so the clinic intervenes before they go dormant. (No-Show Reduction · Recall Automation · Predictive Retention)</li>
-          <li><strong>REACTIVATE — bring back patients who already went quiet.</strong> Overdue recalls, stalled treatment plans and dormant patients re-engaged automatically. (Dormant Reactivation · Overdue Recalls · Stalled Treatment Plans)</li>
+          <li><strong>CONVERT — from the first enquiry to a booking.</strong> Leads → Enquiries → Calls → Appointments → Bookings. Every call, WhatsApp message and ad enquiry answered, followed up and booked into a real slot. (AI voice agent · WhatsApp answers · Lead follow-up · Appointment booking)</li>
+          <li><strong>CARE — everything around the treatment.</strong> Registration → Intake → Consent → Treatment → After-care → Patient communication. Digital registration and intake, consent signed on a phone or the clinic iPad, and treatment-specific after-care your doctors define. (Digital registration · Intake forms · Digital consent · After-care plans)</li>
+          <li><strong>RETAIN — keeping patients on track.</strong> Appointment follow-ups → Care gaps → Doctor check-ins → Preventive care. Confirmations, rescheduling and no-show recovery handled in the conversation, and every care gap followed up on time. (Reminders &amp; confirmations · No-show recovery · Care gaps · Doctor check-ins)</li>
+          <li><strong>REACTIVATE — bringing patients back.</strong> Old patients → Overdue treatment → Missed appointments → Inactive patients. Patients who drifted away invited back in your doctors' own words. (Inactive patients · Overdue treatment · Missed appointments · Stalled treatment plans)</li>
         </ul>
-        <p><strong>One patient journey. One operating system.</strong> Retention prevents the patient from disappearing; reactivation brings them back after they have.</p>
-        <h2>And your marketing gets smarter.</h2>
-        <p>On top of the four stages, a growth flywheel: when a lead becomes a real patient, AUMY feeds that conversion back to Meta &amp; Google — so your campaigns optimise toward people who actually book and show up. Privacy-safe, no patient data exposed.</p>
+        <h2>The work around your chairs, handled.</h2>
+        <ul>
+          <li><strong>Patient communication</strong> — AI voice agent that answers calls, books appointments, appointment reminders, WhatsApp and patient queries, follow-ups, one-tap human takeover.</li>
+          <li><strong>Appointment orchestration</strong> — confirmations, rescheduling and cancellations, no-show management, waitlists for earlier slots, care gaps.</li>
+          <li><strong>Digital clinic</strong> — digital registration, patient intake with signature, digital consent, X-rays and documents on the record, invoices and payments, paperless workflows.</li>
+          <li><strong>Patient journey</strong> — pre-treatment instructions, treatment records and charting, after-care, care gaps, doctor check-ins, reactivation.</li>
+          <li><strong>Growth</strong> — Get Found on Google, reviews, Meta Ads, lead capture, lead conversion.</li>
+        </ul>
+        <h2>Think of Aumy as Jarvis for your dental clinic.</h2>
+        <p>Not because it's a chatbot. Because everything knows what's happening. A patient calls → Aumy knows who they are. They need an appointment → Aumy knows the doctor's availability. They don't show → Aumy knows what happened. They need a follow-up → Aumy creates and manages it. They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it. The clinic gets a call → the voice agent has the context.</p>
+        <p>Your calls know your appointments. Your appointments know your patients. Your patients know their treatment. Your follow-ups know what happened. And Aumy knows all of it. <strong>One patient. One journey. One connected system.</strong></p>
+        <h2>Examine first. Prescribe after.</h2>
+        <p>We understand how your clinic runs, find where work gets stuck and patients fall through the cracks, set Aumy up around your clinic, and measure it with you every week.</p>
+        <p><a href="/growth-audit">Get my free Clinic Audit</a></p>
       </div></section>`,
   },
   {
     slug: 'growth-audit',
-    title: 'Free Clinic Growth Audit for Dental Clinics | AUM AI',
+    title: 'Free Clinic Audit for Dental Clinics | AUM AI',
     description:
-      'A free growth audit for your dental clinic: where you rank on Google versus the clinics near you, how visible you are to new patients, and the specific gaps quietly costing you bookings. Prepared for your clinic within 24 hours.',
+      'A free audit for your dental clinic: where work gets stuck and patients slip through the cracks, where you rank on Google versus the clinics near you, and what each gap is worth. Prepared for your clinic within 24 hours.',
     canonical: `${ORIGIN}/growth-audit`,
     content: `
       <section class="ch-hero"><div class="ch-container">
-        <p class="ch-eyebrow">Free Clinic Growth Audit</p>
-        <h1 class="ch-hero-title">See exactly where your clinic is leaking — and how much.</h1>
-        <p class="ch-hero-sub">Tell us your clinic and city. Within 24 hours you get a growth audit prepared for your clinic — not an automated template.</p>
+        <p class="ch-eyebrow">Free Clinic Audit</p>
+        <h1 class="ch-hero-title">See where work gets stuck in your clinic — and where patients slip through the cracks.</h1>
+        <p class="ch-hero-sub">Tell us your clinic and city. Within 24 hours you get an audit prepared for your clinic — not an automated template.</p>
         <ul>
           <li>Where you rank on Google versus the clinics near you — and why.</li>
           <li>How visible you are to the patients searching in your area right now.</li>
-          <li>The specific gaps quietly costing you bookings, and what each one is worth.</li>
+          <li>Where enquiries, follow-ups and appointments slip through the cracks — and what each gap is worth.</li>
         </ul>
         <p>Free. No obligation. Reviewed by a person before it reaches you.</p>
       </div></section>`,
   },
   {
     slug: 'leak-calculator',
-    title: 'Clinic Revenue Leak Calculator — Dental | AUM AI',
+    title: 'What Slips Through the Cracks? A 60-Second Check for Dental Clinics | AUM AI',
     description:
-      'A 60-second, deliberately conservative estimate of the revenue quietly leaking from your dental clinic — missed enquiries, no-shows, and patients who never come back.',
+      'When a dental clinic is stretched, enquiries go unanswered, no-shows go unrecovered and patients never come back. A 60-second, deliberately conservative estimate of what that is worth.',
     canonical: `${ORIGIN}/leak-calculator`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">60-second leak check</p>
-        <h1 class="ch-hero-title">How much is quietly leaking from your clinic?</h1>
-        <p class="ch-hero-sub">Answer six honest questions about your clinic — enquiries, missed follow-ups, no-shows, patients who never return, and average treatment value — and see an estimate of the revenue leaking every year. Deliberately conservative math: we undercount on purpose, so your real number is almost certainly higher.</p>
-        <p><a href="/growth-audit">Find out where your number hides — free audit</a></p>
+        <p class="ch-eyebrow">60-second check</p>
+        <h1 class="ch-hero-title">What slips through the cracks when your clinic is stretched?</h1>
+        <p class="ch-hero-sub">When chairs are full, enquiries go unanswered, follow-ups stall, no-shows go unrecovered and patients quietly never come back. Answer six honest questions about your clinic — enquiries, missed follow-ups, no-shows, patients who never return, and average treatment value — and see an estimate of what that is worth every year. Deliberately conservative math: we undercount on purpose.</p>
+        <p><a href="/growth-audit">See where work gets stuck in your clinic — free audit</a></p>
       </div></section>`,
   },
   {
@@ -391,10 +406,10 @@ const routes = [
         <h2>How the move works</h2>
         <ol>
           <li><b>Sync</b> — AUMY keeps your current software and AUMY in step from day one.</li>
-          <li><b>Grow on top</b> — Convert, Care, Retain, Reactivate, Grow start working on the synced data.</li>
+          <li><b>Run on top</b> — Convert, Care, Retain and Reactivate start working on the synced data.</li>
           <li><b>Migrate when you are ready</b> — full history moved, counts verified with you, sync kept running until you switch the old system off.</li>
         </ol>
-        <p><a href="/contact">Book a migration call</a> · <a href="/pricing">See pricing</a> · <a href="/revenue-generator">How AUMY works</a></p>
+        <p><a href="/contact">Book a migration call</a> · <a href="/pricing">See pricing</a> · <a href="/revenue-generator">How Aumy works</a></p>
       </div></section>`,
   },
   {
@@ -408,7 +423,7 @@ const routes = [
         <p class="ch-eyebrow">Missed call calculator</p>
         <h1 class="ch-hero-title">What is that unanswered phone costing you?</h1>
         <p class="ch-hero-sub">Every missed call was a patient ready to talk at that exact moment. Four honest answers — missed calls per month from your phone's call log, how many were potential new patients, how many enquiries you normally convert, and your average first-treatment value — and you'll know what those calls are worth per month and per year. Deliberately conservative: first treatment only, no lifetime value, no referrals, not a single implant case counted.</p>
-        <p><a href="/growth/dental-clinic-missed-calls-revenue-loss">Read how much revenue missed calls really cost</a> · <a href="/leak-calculator">Run the complete 60-second leak check</a> · <a href="/growth-audit">Get my free Revenue Leak Audit</a></p>
+        <p><a href="/growth/dental-clinic-missed-calls-revenue-loss">Read how much revenue missed calls really cost</a> · <a href="/leak-calculator">Run the complete 60-second check</a> · <a href="/growth-audit">Get my free Clinic Audit</a></p>
       </div></section>`,
   },
   {
@@ -455,7 +470,7 @@ for (const c of CALCULATORS) {
         <p class="ch-eyebrow">${esc(c.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(c.heroTitle)}</h1>
         <p class="ch-hero-sub">${esc(c.heroSub)}</p>
-        <p><a href="${c.relatedArticle.href}">Read ${esc(c.relatedArticle.label)}</a> · <a href="/leak-calculator">Run the complete 60-second leak check</a> · <a href="/growth-audit">Get my free Revenue Leak Audit</a></p>
+        <p><a href="${c.relatedArticle.href}">Read ${esc(c.relatedArticle.label)}</a> · <a href="/leak-calculator">Run the complete 60-second check</a> · <a href="/growth-audit">Get my free Clinic Audit</a></p>
       </div></section>`,
   });
 }
@@ -465,9 +480,9 @@ for (const c of CALCULATORS) {
 // the full text. BlogPosting JSON-LD makes each eligible for article treatment.
 routes.push({
   slug: 'growth',
-  title: 'Dental Practice Growth Hub — Missed Calls, Follow-Up, Recall & More | AUMY',
+  title: 'Dental Practice Growth Hub — Missed Calls, Follow-Up, Care Gaps & More | Aumy',
   description:
-    'Practical, India-specific guides for dental clinic owners: what missed calls really cost, how to follow up leads until they book, how much revenue sits in your recall list — with real numbers and real WhatsApp messages, no jargon.',
+    'Practical, India-specific guides for dental clinic owners: what missed calls really cost, how to follow up leads until they book, how many patients sit in your care-gap list — with real numbers and real WhatsApp messages, no jargon.',
   canonical: `${ORIGIN}/growth`,
   content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
@@ -482,13 +497,13 @@ routes.push({
           `<h2><a href="/growth/${p.slug}">${esc(p.title)}</a></h2><p>${esc(p.excerpt)}</p>`
       )
       .join('') +
-    `<p><a href="/growth-audit">Get my free Revenue Leak Audit</a> · <a href="/leak-calculator">Try the 60-second leak calculator</a></p>
+    `<p><a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Try the 60-second check</a></p>
       </div></section>`,
 });
 for (const p of growthPosts) {
   routes.push({
     slug: `growth/${p.slug}`,
-    title: `${p.title} | AUMY Dental Practice Growth`,
+    title: `${p.title} | Aumy Growth Hub`,
     description: p.description,
     canonical: `${ORIGIN}/growth/${p.slug}`,
     // Social shares of articles need an image; the dental hero is the site
@@ -517,7 +532,7 @@ for (const p of growthPosts) {
         <p>${esc(p.author)} · ${p.date} · ${esc(p.readingTime)}</p>
         ${p.body}
         <h2>Want to know what this looks like in your clinic?</h2>
-        <p>Get a free Revenue Leak Audit: where your clinic is quietly losing enquiries, appointments and returning patients — and what each gap is worth. <a href="/growth-audit">Get my free Revenue Leak Audit</a> · <a href="/leak-calculator">Run the 60-second leak calculator</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp AUMY</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
+        <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp AUMY</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
       </div></article>`,
   });
 }
@@ -531,17 +546,38 @@ for (const p of growthPosts) {
 const usRoutes = [
   {
     slug: '',
-    title: 'AI Receptionist for Dental Practices — Every Call & Text Answered | AUM AI',
+    title: 'Aumy — The Operating System for a Growing Dental Practice',
     description:
-      'AUM AI’s AI receptionist answers every call and text 24/7, books patients, recovers no-shows, runs hygiene recall, and wins back patients who drifted — recovering $120,000+ a year for a typical practice. HIPAA-compliant by design.',
+      'Aumy manages the chaos that comes with growth — coordinating your patients, people and processes from the first call to ongoing care: AI voice agent, texts, appointments, follow-ups, intake, consent and care gaps on one connected platform. Grow your practice. Don’t grow the chaos.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, demoVideoLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">AI receptionist for US dental practices</p>
-        <h1 class="ch-hero-title">Your practice is leaking revenue every day. AUMY stops the leak — then grows what stays.</h1>
-        <p class="ch-hero-sub">AUMY answers every call and text in seconds — 2 PM or 2 AM — books patients straight into your calendar, follows up every lead until it books, runs hygiene recall, recovers no-shows, and quietly brings back patients who stopped coming. Your marketing team keeps running the ads; AUMY makes sure their leads become patients. For a typical $1M practice, that's $120,000+ a year quietly recovered. HIPAA-compliant by design: we sign a BAA with your practice, host data in US data centers, and log every access.</p>
+        <p class="ch-eyebrow">The operating system for a growing dental practice</p>
+        <h1 class="ch-hero-title">Grow your practice. Don't grow the chaos.</h1>
+        <p class="ch-hero-sub">Aumy manages the chaos that comes with growth — coordinating your patients, people and processes from the first call to ongoing care. Calls answered, texts replied to, appointments confirmed, follow-ups sent and care gaps closed, on one connected platform.</p>
+        <p class="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
+        <h2>A successful dental practice doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>
+        <p>When the schedule is full, growth creates chaos: calls, texts, enquiries, confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents, X-rays, invoices and patient questions. Before Aumy: growth → more patients → more calls → more texts → more follow-ups → more front-desk workload → more things falling through the cracks. With Aumy: growth → Aumy coordinates the work → your team focuses on patients.</p>
+        <h2>Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
+        <ul>
+          <li><strong>Convert</strong> — every call, text and web enquiry answered, followed up and booked into a real slot.</li>
+          <li><strong>Care</strong> — registration and intake before the visit, digital consent, and after-care your doctors define.</li>
+          <li><strong>Retain</strong> — confirmations, rescheduling, no-shows and care gaps followed up on time.</li>
+          <li><strong>Reactivate</strong> — patients who drifted away invited back in your doctors' own words.</li>
+        </ul>
+        <h2>What Aumy manages</h2>
+        <ul>
+          <li><strong>Patient communication</strong> — AI voice agent, texts and web chat, reminders, follow-ups, one-tap human takeover.</li>
+          <li><strong>Appointment orchestration</strong> — confirmations, rescheduling, cancellations, no-shows, waitlists, care gaps.</li>
+          <li><strong>Digital practice</strong> — digital registration, intake with signature, consent, X-rays and documents, invoices.</li>
+          <li><strong>Patient journey</strong> — pre-treatment instructions, after-care, care gaps, doctor check-ins, reactivation.</li>
+          <li><strong>Growth</strong> — Google Business Profile, reviews, ad attribution, lead capture and conversion.</li>
+        </ul>
+        <h2>Think of Aumy as Jarvis for your dental practice.</h2>
+        <p>Not because it's a chatbot. Because everything knows what's happening. Your calls know your appointments. Your appointments know your patients. Your patients know their treatment. Your follow-ups know what happened. And Aumy knows all of it. One patient. One journey. One connected system.</p>
+        <p>Security &amp; HIPAA: we sign a BAA with your practice, log every access, and send no patient data to any AI or telecom subprocessor until its BAA is signed. Consent-first texting with automatic STOP/HELP handling.</p>
         <p>Watch short, unedited demos of the live product - a new clip every day: <a href="https://www.youtube.com/watch?v=-qw1sp7Ub4k">Watch the whole patient journey, live and unedited</a>.</p>
         <p>Book a 30-minute call: https://calendar.app.google/tecaeebTBEWSoJnV7 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
         <p>AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801</p>
@@ -599,15 +635,15 @@ usRoutes.push(
   },
   {
     slug: 'leak-calculator',
-    title: 'Dental Revenue Leak Calculator - What Missed Calls & No-Shows Cost You | AUM AI',
+    title: 'What Slips Through the Cracks? A 60-Second Check for Dental Practices | AUM AI',
     description:
-      'A 60-second, deliberately conservative estimate of the revenue leaking from your dental practice or med spa - unanswered calls, no-shows, and patients who never reappoint. Free, no sign-up.',
+      'When a dental practice is stretched, calls go unanswered, no-shows go unrecovered and patients never reappoint. A 60-second, deliberately conservative estimate of what that is worth. Free, no sign-up.',
     canonical: `${ORIGIN}/leak-calculator`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">60-second leak check</p>
-        <h1 class="ch-hero-title">Do the math for your practice.</h1>
-        <p class="ch-hero-sub">Answer six honest questions about your practice - new patient enquiries per week, how many never get a reply, appointments per week, no-show rate, patients who never reappoint, and average production per visit - and see an estimate of the revenue leaking every year. Deliberately conservative: only 35% of missed enquiries are counted as lost bookings, only half of no-shows are counted, just three visits per lapsed patient, and 48 working weeks. Your real number is almost certainly higher.</p>
+        <p class="ch-eyebrow">60-second check</p>
+        <h1 class="ch-hero-title">What slips through the cracks when your practice is stretched?</h1>
+        <p class="ch-hero-sub">Answer six honest questions about your practice - new patient enquiries per week, how many never get a reply, appointments per week, no-show rate, patients who never reappoint, and average production per visit - and see an estimate of what slips through every year. Deliberately conservative: only 35% of missed enquiries are counted as lost bookings, only half of no-shows are counted, just three visits per lapsed patient, and 48 working weeks. Your real number is almost certainly higher.</p>
       </div></section>`,
   }
 );

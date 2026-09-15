@@ -101,9 +101,9 @@ const AIReceptionistPage = () => {
         <div className="ch-container ch-narrow ch-center">
           <h2 className="ch-h2" style={{ textAlign: 'center' }}>Converting is only stage one</h2>
           <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>
-            The receptionist is the front door of the full AUMY journey — after it Converts an enquiry,
-            AUMY Cares for the patient after treatment, Retains them with automated recalls, Reactivates
-            them if they drift away, and Grows your Google reviews. One platform, five stages,
+            The receptionist is the front door of the Aumy patient journey — after it Converts an enquiry,
+            Aumy Cares for the patient after treatment, Retains them by following up care gaps, and
+            Reactivates them if they drift away. One connected platform coordinating the whole journey,
             alongside the practice software you already use.
           </p>
           <div style={{ marginTop: 16 }}>

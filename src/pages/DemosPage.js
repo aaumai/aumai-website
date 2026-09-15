@@ -8,20 +8,20 @@ import './DemosPage.css';
  * Click-to-play: each card shows the YouTube thumbnail (fast, no third-party
  * JS on load) and swaps in the iframe only when tapped. The full unedited
  * demo leads; feature clips follow in a grid. Every card funnels to the same
- * Leak Audit CTA the rest of the site uses.
+ * Clinic Audit CTA the rest of the site uses.
  */
 
 const VIDEOS = [
   // Revenue + patient-journey demos only (owner directive 2026-08-23): the
   // clinical clips (documentation, smile simulation, charting) are deliberately
-  // NOT here — we are known for revenue recovery and the patient journey.
+  // NOT here — we are known for coordinating the patient journey.
   // The hero demo leads everywhere (site, deck, AI employee).
   {
     id: '-qw1sp7Ub4k',
     tag: 'The patient journey',
-    title: 'One patient, five stages, zero typing.',
+    title: 'One patient. One journey. One connected system.',
     blurb:
-      'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the recall, an eight-month-dormant patient won back with a ₹999 package, and the review ask that listens first. Convert → Care → Retain → Reactivate → Grow.',
+      'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the care-gap follow-up, an eight-month-dormant patient won back with a ₹999 package, and the review ask that listens first. Convert → Care → Retain → Reactivate.',
     featured: true,
   },
   {
@@ -121,11 +121,11 @@ const DemosPage = () => {
             <div className="dv-cta dv-cta-cell">
               <h2 className="dv-cta-title">Want this running in your clinic?</h2>
               <p className="dv-cta-sub">
-                Start with the free Revenue Leak Audit — we’ll show you exactly how much your
-                clinic loses to missed calls, no-shows and silent patients, before you spend a rupee.
+                Start with the free Clinic Audit — we’ll show you where work gets stuck in your
+                clinic: missed calls, no-shows and patients who quietly never come back, before you spend a rupee.
               </p>
               <div className="dv-cta-row">
-                <Link to="/growth-audit" className="dv-btn dv-btn-primary">Get my free Leak Audit</Link>
+                <Link to="/growth-audit" className="dv-btn dv-btn-primary">Get my free Clinic Audit</Link>
                 <Link to="/contact" className="dv-btn dv-btn-ghost">Book a live demo</Link>
               </div>
             </div>

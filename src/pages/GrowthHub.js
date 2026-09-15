@@ -6,7 +6,7 @@ import './GrowthHub.css';
 
 // Hub for the dental-growth content engine (strategy doc:
 // aum-ehr-api/docs/growth/inbound-marketing-strategy.md). Every article
-// funnels to the free Revenue Leak Audit — the hub itself closes with the
+// funnels to the free Clinic Audit — the hub itself closes with the
 // same CTA so a browser who reads nothing still sees the offer.
 const GrowthHub = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -104,12 +104,12 @@ const GrowthHub = () => {
           <div className="gh-tools">
             <h2>Tools &amp; downloads</h2>
             <p className="gh-tools-sub">
-              Put your own numbers in — the articles explain the leaks, these show you yours.
+              Put your own numbers in — the articles explain what slips through the cracks, these show you yours.
             </p>
             <div className="gh-grid">
               <Link to="/leak-calculator" className="gh-card">
                 <span className="gh-tool-tag">Calculator</span>
-                <h2 className="gh-card-title">Revenue Leak Calculator</h2>
+                <h2 className="gh-card-title">What Slips Through the Cracks — 60-second Check</h2>
                 <p className="gh-card-excerpt">
                   The full 60-second check: missed enquiries, no-shows and patients who never come
                   back, added up for the year.
@@ -136,9 +136,9 @@ const GrowthHub = () => {
                 download
               >
                 <span className="gh-tool-tag">Free PDF</span>
-                <h2 className="gh-card-title">Revenue Leak Checklist</h2>
+                <h2 className="gh-card-title">Front-Desk Checklist</h2>
                 <p className="gh-card-excerpt">
-                  A one-page checklist covering all six leaks — print it and hand it to your
+                  A one-page checklist of the six places patients slip through — print it and hand it to your
                   practice manager this week.
                 </p>
               </a>
@@ -151,12 +151,12 @@ const GrowthHub = () => {
         <div className="ch-container ch-center">
           <h2 className="gh-cta-title">Want to know what this looks like in your clinic?</h2>
           <p className="gh-cta-sub">
-            Get a free Revenue Leak Audit — where your clinic is quietly losing bookings, and what
+            Get a free Clinic Audit — where work gets stuck in your clinic and bookings slip through the cracks, and what
             each gap is worth. Prepared for your clinic, on your WhatsApp within 24 hours.
           </p>
           <div className="ch-hero-cta ch-center-cta">
             <Link to="/growth-audit" className="ch-btn ch-btn-primary">
-              Get my free Revenue Leak Audit
+              Get my free Clinic Audit
             </Link>
             <a
               href="https://wa.me/918007189868?text=Hi"
@@ -167,7 +167,7 @@ const GrowthHub = () => {
               See it live — WhatsApp AUMY now
             </a>
             <Link to="/leak-calculator" className="ch-btn ch-btn-ghost ch-ghost-light">
-              Try the 60-second leak calculator
+              Try the 60-second check
             </Link>
           </div>
         </div>

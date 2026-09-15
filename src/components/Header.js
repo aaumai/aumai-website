@@ -64,7 +64,6 @@ const Header = () => {
     { path: '/', label: 'Home' },
     { path: '/revenue-generator', label: 'How it works' },
     { path: '/demos', label: 'Watch demos' },
-    { path: '/leak-calculator', label: 'Leak check' },
     { path: '/switch', label: 'Switching software?' },
     { path: '/pricing', label: 'Pricing' },
     { path: '/growth', label: 'Growth Hub' },

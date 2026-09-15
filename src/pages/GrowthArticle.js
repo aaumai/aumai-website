@@ -12,7 +12,7 @@ const GrowthArticle = () => {
 
   useEffect(() => {
     if (post) {
-      document.title = `${post.title} | AUMY Dental Practice Growth`;
+      document.title = `${post.title} | Aumy Growth Hub`;
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute('content', post.description);
     }
@@ -57,13 +57,13 @@ const GrowthArticle = () => {
           <div className="gh-article-cta">
             <h2>Want to know what this looks like in your clinic?</h2>
             <p>
-              Get a free Revenue Leak Audit: where your clinic is quietly losing enquiries,
-              appointments and returning patients — and what each gap is worth in rupees.
+              Get a free Clinic Audit: where work gets stuck in your clinic and enquiries,
+              appointments and returning patients slip through the cracks — and what each gap is worth.
               Prepared for your clinic and reviewed by a person, on your WhatsApp within 24 hours.
             </p>
             <div className="ch-hero-cta">
               <Link to="/growth-audit" className="ch-btn ch-btn-primary">
-                Get my free Revenue Leak Audit
+                Get my free Clinic Audit
               </Link>
               {/* Experience beats explanation: the live demo lets a dentist see
                   the product at 11 pm without committing to a sales call. */}
@@ -80,7 +80,7 @@ const GrowthArticle = () => {
               The WhatsApp demo is a live AI receptionist for a demo dental clinic
               (+91&nbsp;80071&nbsp;89868) — just say hello and watch it answer and book, 24/7. Or{' '}
               <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>
-                download the one-page Revenue Leak Checklist
+                download the one-page front-desk checklist
               </a>{' '}
               and hand it to your practice manager.
             </p>

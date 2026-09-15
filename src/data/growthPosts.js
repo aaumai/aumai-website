@@ -28,7 +28,7 @@ const GROWTH_CATEGORIES = [
   'Marketing & ROI',
   'WhatsApp for Clinics',
   'AI for Dental Clinics',
-  'Revenue Leaks',
+  'Clinic Operations',
   'After-Treatment Care',
 ];
 
@@ -715,15 +715,15 @@ const growthPosts = [
   // ------------------------------------------------------------------
   {
     slug: 'dental-clinic-revenue-leak-audit-25-questions',
-    title: 'Dental Clinic Revenue Leak Audit: 25 Questions Every Practice Owner Should Ask',
-    category: 'Revenue Leaks',
+    title: 'Dental Clinic Self-Audit: 25 Questions to Find What Slips Through the Cracks',
+    category: 'Clinic Operations',
     date: '2026-08-15',
     readingTime: '9 min read',
     author: 'Jayesh Chaudhari',
     excerpt:
       'One honest evening with these 25 questions tells you more about your clinic’s growth than any marketing proposal. Six sections, one rule: answer with evidence from last month, not with "usually."',
     description:
-      'A self-audit for dental clinic owners: 25 questions across missed calls, lead follow-up, no-shows, recall, dormant patients and measurement — each with why it matters — to find where revenue quietly leaks. India-focused, free, with a printable one-page checklist companion.',
+      'A self-audit for dental clinic owners: 25 questions across missed calls, lead follow-up, no-shows, recall, dormant patients and measurement — each with why it matters — to find where work gets stuck and patients slip through the cracks. India-focused, free, with a printable one-page checklist companion.',
     body: `
 <p>This is the audit we walk through with clinic owners, in question form so you can run it yourself. One rule makes it work: <strong>answer from evidence, not impression.</strong> "Usually" and "mostly" are how leaks hide. If the honest answer is "I don't know," write that down — every "I don't know" is a place money moves unwatched. (Prefer the tick-box version? <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>The one-page checklist</a> covers the same ground for your practice manager.)</p>
 
@@ -874,7 +874,7 @@ const growthPosts = [
 <h2>What changes in the numbers</h2>
 <p>Clinics measure the difference in three places: enquiry-to-booking conversion (because speed-to-reply decides who wins the patient), front-desk hours recovered (the repetitive 60% disappears from their day), and after-hours bookings that previously did not exist at all. If you run ads, there's a fourth: every ad rupee finally gets a same-minute response, which is the single biggest determinant of ad ROI for clinics.</p>
 
-<p>This is exactly what AUMY's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's the CONVERT pillar of the five-stage AUMY journey, and it works its first night on the job.</p>`,
+<p>This is exactly what AUMY's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's where the patient journey starts — Convert, before Care, Retain and Reactivate — and it works its first night on the job.</p>`,
   },
   {
     slug: "patient-follow-up-automation-dental",
@@ -906,17 +906,17 @@ const growthPosts = [
 <h2>The guardrails that keep it welcome</h2>
 <p>Frequency caps, quiet hours, instant opt-out honoured forever, and messages written in the doctor's voice rather than a marketer's. The test for every automated message: would the front desk be comfortable saying this sentence aloud to the patient's face? If yes, send. If no, rewrite.</p>
 
-<p>Inside AUMY, these four streams run as configured journeys — per treatment, per patient, with rate limits and human-handover built in, and every recovered booking traced back to the exact follow-up that produced it. Clinics rarely believe the "pending treatment plan" number until they see their own: it is usually the largest pile of recoverable revenue in the building.</p>`,
+<p>Inside AUMY, these four streams run as configured journeys — per treatment, per patient, with rate limits and human-handover built in, and every booking traced back to the exact follow-up that produced it. Clinics rarely believe the "pending treatment plan" number until they see their own: it is usually the biggest pile of work that quietly slips through the cracks.</p>`,
   },
   {
     slug: "dental-practice-management-software-vs-growth",
-    title: "Dental Practice Management Software Manages Your Clinic. What Grows It?",
+    title: "Dental Practice Management Software Keeps Your Records. What Runs the Patient Journey?",
     category: "AI for Dental Clinics",
     date: "2026-08-26",
     readingTime: "5 min read",
     author: "Jayesh Chaudhari",
-    excerpt: "Your PMS is a system of record: appointments, charts, billing. Growth lives in a different layer — enquiries, follow-ups, recalls, reviews. You need both, and you should not confuse one for the other.",
-    description: "Dental practice management software (PMS) vs a practice growth layer: what each does, why clinics need both, and how to add AI-powered patient engagement on top of the PMS you already use — without migrating anything.",
+    excerpt: "Your PMS is a system of record: appointments, charts, billing. Coordinating the patient journey lives in a different layer — enquiries, follow-ups, care gaps, reviews. You need both, and you should not confuse one for the other.",
+    description: "Dental practice management software (PMS) vs a patient-journey coordination layer: what each does, why clinics need both, and how to add AI-powered patient engagement on top of the PMS you already use — without migrating anything.",
     body: `
 <p>Every serious dental clinic in India runs some kind of practice management software — appointments, patient records, billing, maybe inventory. And almost every owner who searches "dental practice management software" is actually trying to solve a problem their PMS was never designed for: <em>more patients, fewer no-shows, better retention.</em></p>
 <p>It helps to name the difference plainly.</p>
@@ -928,15 +928,15 @@ const growthPosts = [
 <p>Growth happens in the moments your PMS never sees: the WhatsApp enquiry at 9 PM, the quote that was never followed up, the recall that nobody called, the lapsed patient nobody noticed, the happy patient nobody asked for a review. None of these live in patient records. All of them live in conversations — and conversations need something that acts, not something that records.</p>
 <p>That action layer is what has recently become possible with AI: answering every enquiry instantly, running follow-up sequences that never forget, filling recall books automatically, reactivating dormant patients with a well-timed offer, and turning finished treatments into five-star Google reviews.</p>
 
-<h2>The test: where does your revenue actually leak?</h2>
+<h2>The test: where does work actually get stuck?</h2>
 <ul>
   <li>If appointments get double-booked and bills go missing — that's a PMS problem.</li>
-  <li>If enquiries go unanswered for hours, quotes die silently, and your recall list is a graveyard — no PMS upgrade will fix that. That's the growth layer, and it's missing.</li>
+  <li>If enquiries go unanswered for hours, quotes die silently, and your recall list is a graveyard — no PMS upgrade will fix that. That's a coordination problem, and the layer that solves it is missing.</li>
 </ul>
-<p>Most clinics that go shopping for a "better PMS" are feeling the second list. They migrate everything, endure three months of pain, and discover the leaks are exactly where they were — because the leaks were never in the records.</p>
+<p>Most clinics that go shopping for a "better PMS" are feeling the second list. They migrate everything, endure three months of pain, and discover the gaps are exactly where they were — because the gaps were never in the records.</p>
 
 <h2>The both/and answer</h2>
-<p>The architecture that works: your PMS stays the system of record; a growth layer like AUMY sits alongside it and works the patient journey — CONVERT, CARE, RETAIN, REACTIVATE, GROW — over WhatsApp, calls and your Google profile. No migration, no retraining the front desk on new billing screens, live in days. Your software keeps managing the clinic. Something finally starts growing the practice.</p>`,
+<p>The architecture that works: your PMS stays the system of record; Aumy sits alongside it as the operating system for the patient journey — Convert, Care, Retain, Reactivate — over WhatsApp, calls and your Google profile. No migration, no retraining the front desk on new billing screens, live in days. Your software keeps the records. Aumy coordinates everything that happens between them, so you can grow your clinic without growing the chaos.</p>`,
   },
   {
     slug: "digital-marketing-for-dental-clinics",
@@ -970,7 +970,7 @@ const growthPosts = [
 </ul>
 
 <h2>The honest summary</h2>
-<p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> AUMY automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. That's the GROW pillar, working with the other four.</p>`,
+<p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> AUMY automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. It runs on the same connected platform as Convert, Care, Retain and Reactivate — so the patients your marketing brings in don't get lost in the chaos that follows.</p>`,
   },
   {
     slug: "ai-software-for-dentists-india-cost-comparison",
@@ -1023,7 +1023,7 @@ const growthPosts = [
   <li>Can it <strong>show you the revenue</strong> it recovered \u2014 bookings and rupees, attributed \u2014 or just call logs?</li>
 </ol>
 
-<p>For context on where AUMY sits in that table: the full platform \u2014 24/7 AI receptionist on WhatsApp and calls, treatment-plan follow-ups, recalls, reactivation, after-treatment care and Google review growth, with every recovered rupee attributed \u2014 is <a href="/pricing">\u20B920,000 per month, everything included</a>. That is less than half the <em>entry</em> price of a US phone-only tool, for the whole patient journey: Convert, Care, Retain, Reactivate, Grow.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>.</p>`,
+<p>For context on where Aumy sits in that table: it is not a receptionist tool but the operating system for a growing dental clinic \u2014 24/7 AI receptionist on WhatsApp and calls, appointments and reminders, treatment-plan follow-ups, after-treatment care, care gaps and reactivation, all working from one patient record. It is <a href="/pricing">priced by module, so a clinic pays for the parts it runs</a>, and underneath it runs the whole patient journey: Convert, Care, Retain, Reactivate.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>.</p>`,
   },
   {
     slug: "dental-clinic-software-stack-india-comparison",
@@ -1078,7 +1078,7 @@ const growthPosts = [
 <p>A stitched stack fails at least three of these five. Not because the tools are bad \u2014 because they were never designed to know about each other.</p>
 
 <h2>The integrated alternative</h2>
-<p>This is the reason AUMY is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, runs recalls and reactivation from real records, posts to your Google profile \u2014 and attributes every recovered rupee in one dashboard. The full suite is <a href="/pricing">\u20B920,000/month, with a monthly message and call allowance most clinics never finish</a> \u2014 the bottom of the stitched-stack range, with none of the gaps. That's the whole journey \u2014 Convert, Care, Retain, Reactivate, Grow \u2014 as one machine instead of five.</p>
+<p>This is the reason AUMY is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, follows up care gaps and reactivation from real records, posts to your Google profile \u2014 and shows what happened to every enquiry in one dashboard. <a href="/pricing">Pricing is by module</a>, so a clinic starts with the parts it needs instead of paying five vendors for overlapping pieces. That's the whole journey \u2014 Convert, Care, Retain, Reactivate \u2014 as one connected system instead of five tools that don't talk to each other.</p>
 
 <p>Comparing us with the US tools instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">That comparison is here</a>.</p>`,
   },

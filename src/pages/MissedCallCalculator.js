@@ -155,7 +155,7 @@ const MissedCallCalculator = () => {
               </p>
 
               <Link to="/growth-audit" className="ch-btn ch-btn-primary ch-audit-submit">
-                Find out where else your clinic leaks — free audit
+                See where else work gets stuck in your clinic — free audit
               </Link>
               <p className="ch-fineprint ch-center">
                 Want the full picture first? Read{' '}
@@ -163,7 +163,7 @@ const MissedCallCalculator = () => {
                   how much revenue missed calls really cost
                 </Link>{' '}
                 — including a ladder of fixes from free to fully automatic — or run the{' '}
-                <Link to="/leak-calculator">complete 60-second leak check</Link>.
+                <Link to="/leak-calculator">complete 60-second check</Link>.
               </p>
             </div>
           </div>

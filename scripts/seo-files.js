@@ -126,7 +126,7 @@ const LLMS = {
 > treatment-specific aftercare, brings back patients who drifted away, manages
 > Google Business Profile and reviews, and runs Meta Ads with real booking data.
 > One platform with full context across the patient journey
-> (Convert → Care → Retain → Reactivate → Grow), including a complete dental PMS.
+> (Convert → Care → Retain → Reactivate), including a complete dental PMS.
 
 ## Key facts
 - Operated as a managed service: a dedicated expert runs the system with the clinic.
@@ -136,20 +136,20 @@ const LLMS = {
 
 ## Pages
 - ${ORIGIN}/ — overview for clinic owners
-- ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to missed enquiries, no-shows and lapsed patients
+- ${ORIGIN}/leak-calculator — 60-second check estimating what slips through the cracks in a stretched clinic: missed enquiries, no-shows and lapsed patients
 - ${ORIGIN}/switch — moving from your current dental software: AUMY syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
-- ${ORIGIN}/revenue-generator — how the system works
-- ${ORIGIN}/growth-audit — free clinic growth audit
-- ${ORIGIN}/pricing — AUMY pricing: from ₹20,000/month (Growth), ₹30,000 (Business), custom multi-clinic plans
+- ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
+- ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
+- ${ORIGIN}/pricing — Aumy pricing: modular, priced by the modules a clinic needs (Clinic OS, Patient Journey, Get Found, Voice Assistant, Meta Ads Management)
 - ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments
-- ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: recalls, reactivation, campaigns
-- ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, recall and patient reactivation for Indian dental clinics
+- ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: care-gap reminders, reactivation, campaigns
+- ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, care gaps and patient reactivation for Indian dental clinics
 - ${ORIGIN}/compliance — security and data handling
 ## Dental practice growth guides (free, no sign-up, India-focused)
 ${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s+/g, ' ')}`).join('\n')}
-- ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page Revenue Leak Checklist for practice managers
+- ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page front-desk checklist for practice managers
 
 ## Contact
 AUM AI Healthcare Solutions, Pune, Maharashtra, India — jayesh.chaudhari@aumai.co.in
@@ -158,26 +158,25 @@ AUM AI Healthcare Solutions, Pune, Maharashtra, India — jayesh.chaudhari@aumai
 
 > Two products on one platform.
 > 1. Aumy for Dental Practices — an AI receptionist that answers every call and
->    text 24/7, books patients, recovers no-shows, runs hygiene recall, follows
->    up treatment plans, and chases dental labs. HIPAA-compliant by design: BAA
->    signed with the practice, US data hosting, full audit logging.
+>    text 24/7, books patients, handles no-shows, follows up care gaps and
+>    treatment plans — the operating system for a growing dental practice.
+>    BAA signed with the practice, full audit logging.
 > 2. Aumy Business Manager — an "AI Employee" for any business: answers
 >    customers on WhatsApp, Instagram, Facebook, web chat and phone; makes
->    human-sounding outbound sales calls; books meetings; runs Content Studio
->    and Google Business Profile; and traces every ad dollar to real revenue.
+>    human-sounding outbound sales calls; books meetings; runs Google Business
+>    Profile; and ties ad spend to real outcomes.
 
 ## Key facts
 - Aumy does NOT run your ads. It feeds real revenue back to Meta and Google so
-  the ads your own team or agency runs target better — higher ROAS, lower cost
-  per purchase.
+  the ads your own team or agency runs can learn from real outcomes.
 - Business Manager integrates with Shopify and WooCommerce. 7-day free trial, no card.
 - Dental: $450/month per location + $600 one-time setup. Business Manager: from $77/month.
 - Entity: AUM AI Healthcare Technology LLC, 30 N Gould St, Ste N, Sheridan, WY 82801.
 
 ## Pages
-- ${ORIGIN}/ — AI receptionist for US dental practices
+- ${ORIGIN}/ — Aumy, the operating system for a growing US dental practice
 - ${ORIGIN}/business-manager — Aumy Business Manager for ecommerce, local and B2B businesses
-- ${ORIGIN}/leak-calculator — 60-second calculator estimating revenue lost to unanswered calls, no-shows and patients who never reappoint
+- ${ORIGIN}/leak-calculator — 60-second check estimating what slips through the cracks: unanswered calls, no-shows and patients who never reappoint
 - ${ORIGIN}/switch — moving from your current dental software: AUMY syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - https://aumai.co.in/ — India market
 

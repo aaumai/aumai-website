@@ -47,8 +47,8 @@ export const PLAYLIST_ID = 'PLZ8QbQSGNg1A';
 export const FEATURED_VIDEO_ID = '-qw1sp7Ub4k';
 
 const DemoPlaylist = ({
-  title = 'One patient, five stages, zero typing.',
-  lead = 'Watch AUMY run the whole patient journey on a real clinic’s WhatsApp number — live, unedited: convert the enquiry, care after treatment, retain with recalls, reactivate the patient who drifted, grow through reviews.',
+  title = 'One patient. One journey. One connected system.',
+  lead = 'Watch Aumy coordinate one patient’s whole journey on a real clinic’s WhatsApp number — live, unedited: the enquiry converted, after-care on the day, the care gap followed up, and the patient who drifted brought back. Nothing slips through the cracks, and nobody at the front desk types a word.',
   eyebrow = 'Watch it work',
   posterSrc = '/images/hero-dental.jpg',
 }) => {
