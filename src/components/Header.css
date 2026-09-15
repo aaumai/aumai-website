@@ -61,6 +61,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* breathing room between the Aumy logo and the first menu item */
+  gap: 40px;
   padding: 16px 0;
   transition: padding var(--transition-base);
 }
@@ -70,6 +72,10 @@
 }
 
 /* Logo */
+.logo {
+  flex-shrink: 0;
+}
+
 .logo a {
   display: flex;
   align-items: center;
@@ -103,7 +109,7 @@
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 8px;
+  gap: 4px;
   margin: 0;
   padding: 0;
 }
@@ -112,7 +118,9 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 16px;
+  /* one line per item — a wrapped label dropped below the logo's line */
+  white-space: nowrap;
   color: rgba(22, 50, 79, 0.78);
   font-weight: 500;
   font-size: 0.95rem;
@@ -227,8 +235,29 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile Styles */
-@media (max-width: 1024px) {
+/* Laptop widths: keep the whole menu on one line next to the logo */
+@media (min-width: 1201px) and (max-width: 1500px) {
+  .header-content {
+    gap: 24px;
+  }
+
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 0.88rem;
+  }
+
+  .nav-cta {
+    margin-left: 8px;
+  }
+
+  .nav-cta .btn {
+    padding: 9px 16px;
+    white-space: nowrap;
+  }
+}
+
+/* Mobile Styles — below 1200px the eight menu items no longer fit on one line */
+@media (max-width: 1200px) {
   .mobile-menu-toggle {
     display: flex;
   }
