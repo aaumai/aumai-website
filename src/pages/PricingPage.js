@@ -68,11 +68,16 @@ const Segmented = ({ label, options, value, onChange }) => (
   </div>
 );
 
+// A single open band ([[null, rate]]) is a flat rate — "₹7 per minute" — with
+// no "beyond" (there is no previous ceiling to name). Voice minutes went flat
+// on 2026-09-17; the old code dereferenced null and blanked the page.
 const bandsText = (bands, unit) => {
   let prev = null;
   return bands
     .map(([upTo, rate]) => {
-      const part = upTo == null ? `₹${rate} beyond ${prev.toLocaleString('en-IN')}` : `₹${rate} up to ${upTo.toLocaleString('en-IN')}`;
+      const part = upTo == null
+        ? (prev == null ? `₹${rate}` : `₹${rate} beyond ${prev.toLocaleString('en-IN')}`)
+        : `₹${rate} up to ${upTo.toLocaleString('en-IN')}`;
       prev = upTo;
       return part;
     })

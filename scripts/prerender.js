@@ -26,10 +26,15 @@ const PRICING = require('../src/data/pricing.json');
 const PC = PRICING.card;
 const rs = (n) => '&#8377;' + Math.round(Number(n) || 0).toLocaleString('en-IN');
 const rsText = (n) => 'Rs ' + Math.round(Number(n) || 0).toLocaleString('en-IN');
+// A single open band ([[null, rate]]) is a flat rate ("Rs 7 per minute") —
+// no "beyond" because there is no previous ceiling. Same rule as bandsText in
+// PricingPage.js; keep the two in step.
 const bands = (list, unit, money) => {
   let prev = null;
   return list.map(([upTo, rate]) => {
-    const part = upTo == null ? money(rate) + ' beyond ' + prev.toLocaleString('en-IN') : money(rate) + ' up to ' + upTo.toLocaleString('en-IN');
+    const part = upTo == null
+      ? (prev == null ? money(rate) : money(rate) + ' beyond ' + prev.toLocaleString('en-IN'))
+      : money(rate) + ' up to ' + upTo.toLocaleString('en-IN');
     prev = upTo;
     return part;
   }).join(', ') + ' per ' + unit;
