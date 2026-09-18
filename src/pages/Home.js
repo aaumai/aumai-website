@@ -95,9 +95,13 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'Aumy — The Operating System for a Growing Dental Clinic',
+      // Title/description carry the two search themes (owner 2026-09-18) —
+      // AI-powered dental clinic operations, AI-powered patient journey &
+      // engagement — in front of the positioning line. Same strings in
+      // scripts/prerender.js (slug '') and public/index.html.
+      title: 'Aumy — AI-Powered Dental Clinic Operations & Patient Engagement | The Operating System for a Growing Dental Clinic',
       description:
-        'Aumy manages the chaos that comes with growth — coordinating your patients, people and processes from the first enquiry to ongoing care: AI voice agent, appointments, follow-ups, digital intake and clinic tasks in one connected platform. Grow your clinic. Don’t grow the chaos.',
+        'Aumy is the AI-powered operating system for a growing dental clinic: clinic operations (calls, WhatsApp, appointments, intake, consent, invoices, tasks) and the patient journey (reminders, after-care, doctor check-ins, care gaps, reactivation) in one connected platform. Grow your clinic. Don’t grow the chaos.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -244,6 +248,48 @@ const Home = () => {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TWO HALVES — the two things clinic owners search for (owner 2026-09-18):
+          AI-powered dental clinic operations, and an AI-powered patient journey.
+          The five groups above fold into these two; each has its own page. */}
+      <section className="ch-section" id="two-halves">
+        <div className="ch-container">
+          <div className="ch-head">
+            <span className="ch-eyebrow">Two halves of one system</span>
+            <h2 className="ch-h2">AI-powered dental clinic operations. An AI-powered patient journey. One connected platform.</h2>
+            <p className="ch-lead ch-center-lead">
+              The work around your chairs, and the journey of every patient through them &mdash;
+              coordinated by the same system, with the same patient context.
+            </p>
+          </div>
+          <div className="ch-paths">
+            <div className="ch-pillar ch-path">
+              <span className="ch-eyebrow">Clinic operations</span>
+              <h3 className="ch-pillar-title">AI-powered dental clinic operations</h3>
+              <p className="ch-pillar-body">
+                Every call and WhatsApp answered, appointments booked, confirmed and rescheduled, no-shows
+                followed up, registration, intake, consent and invoices digital &mdash; and one team inbox
+                for whatever needs a person.
+              </p>
+              <Link to="/ai-dental-clinic-operations" className="ch-btn ch-btn-ghost" style={{ marginTop: 14 }}>
+                See clinic operations
+              </Link>
+            </div>
+            <div className="ch-pillar ch-path">
+              <span className="ch-eyebrow">Patient journey</span>
+              <h3 className="ch-pillar-title">AI-powered patient journey &amp; engagement</h3>
+              <p className="ch-pillar-body">
+                Reminders, pre-treatment instructions, treatment-specific after-care, doctor check-ins, care
+                gaps, treatment-plan follow-ups and reactivation &mdash; each message in the context of that
+                patient&rsquo;s treatment, and each journey ending the moment the patient books.
+              </p>
+              <Link to="/ai-patient-engagement" className="ch-btn ch-btn-ghost" style={{ marginTop: 14 }}>
+                See the patient journey
+              </Link>
+            </div>
           </div>
         </div>
       </section>

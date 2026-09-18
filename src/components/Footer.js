@@ -27,6 +27,8 @@ const Footer = () => {
     { label: 'Aumy — How It Works', path: '/revenue-generator' },
     { label: 'AI Receptionist', path: '/ai-receptionist' },
     { label: 'WhatsApp Automation', path: '/whatsapp-automation-for-clinics' },
+    { label: 'AI-Powered Clinic Operations', path: '/ai-dental-clinic-operations' },
+    { label: 'AI-Powered Patient Journey', path: '/ai-patient-engagement' },
     { label: 'Switching Dental Software?', path: '/switch' },
     { label: 'Pricing', path: '/pricing' },
     { label: 'Watch Demo Videos', path: '/demos' },

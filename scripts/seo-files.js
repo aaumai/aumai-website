@@ -48,6 +48,9 @@ const SITEMAPS = {
     ['/pricing', 0.9, 'monthly'],
     ['/ai-receptionist', 0.9, 'monthly'],
     ['/whatsapp-automation-for-clinics', 0.9, 'monthly'],
+    // The two search themes (owner 2026-09-18).
+    ['/ai-dental-clinic-operations', 0.9, 'monthly'],
+    ['/ai-patient-engagement', 0.9, 'monthly'],
     ['/growth', 0.8, 'weekly'],
     ['/podcast', 0.7, 'monthly'],
     // Articles carry their real publish date as lastmod — honest signals beat
@@ -127,6 +130,10 @@ const LLMS = {
 > Google Business Profile and reviews, and runs Meta Ads with real booking data.
 > One platform with full context across the patient journey
 > (Convert → Care → Retain → Reactivate), including a complete dental PMS.
+> Two halves: AI-powered dental clinic operations (calls, WhatsApp,
+> appointments, registration, intake, consent, invoices, clinic tasks) and an
+> AI-powered patient journey and patient engagement (reminders, after-care,
+> doctor check-ins, care gaps, treatment-plan follow-ups, reactivation).
 
 ## Key facts
 - Operated as a managed service: a dedicated expert runs the system with the clinic.
@@ -145,6 +152,8 @@ ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/pricing — Aumy pricing: modular, priced by the modules a clinic needs (Clinic OS, Patient Journey, Get Found, Voice Assistant, Meta Ads Management)
 - ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments
 - ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: care-gap reminders, reactivation, campaigns
+- ${ORIGIN}/ai-dental-clinic-operations — AI-powered dental clinic operations: every call and WhatsApp answered, appointment orchestration, digital registration, intake and consent, invoices, one team inbox
+- ${ORIGIN}/ai-patient-engagement — AI-powered patient journey and patient engagement: reminders, treatment-specific after-care, doctor check-ins, care gaps, treatment-plan follow-ups, reactivation — each message in context
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, care gaps and patient reactivation for Indian dental clinics
 - ${ORIGIN}/compliance — security and data handling
 ## Dental practice growth guides (free, no sign-up, India-focused)

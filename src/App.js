@@ -21,6 +21,8 @@ import GrowthAudit from './pages/GrowthAudit';
 import PricingPage from './pages/PricingPage';
 import AIReceptionistPage from './pages/AIReceptionistPage';
 import WhatsAppAutomationPage from './pages/WhatsAppAutomationPage';
+import AIDentalClinicOperationsPage from './pages/AIDentalClinicOperationsPage';
+import AIPatientEngagementPage from './pages/AIPatientEngagementPage';
 import GrowthHub from './pages/GrowthHub';
 import DemosPage from './pages/DemosPage';
 import PodcastPage from './pages/PodcastPage';
@@ -91,6 +93,11 @@ function App() {
                 <Route path="/pricing" element={<PricingPage />} />
                 <Route path="/ai-receptionist" element={<AIReceptionistPage />} />
                 <Route path="/whatsapp-automation-for-clinics" element={<WhatsAppAutomationPage />} />
+                {/* The two search themes the site targets (owner 2026-09-18):
+                    AI-powered dental clinic operations, and the AI-powered
+                    patient journey & engagement. Crawler copy: scripts/prerender.js. */}
+                <Route path="/ai-dental-clinic-operations" element={<AIDentalClinicOperationsPage />} />
+                <Route path="/ai-patient-engagement" element={<AIPatientEngagementPage />} />
                 <Route path="/growth" element={<GrowthHub />} />
                 <Route path="/demos" element={<DemosPage />} />
                 <Route path="/podcast" element={<PodcastPage />} />
