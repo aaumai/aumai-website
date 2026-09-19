@@ -66,9 +66,9 @@ const Footer = () => {
               <AppDownload variant="compact" />
             </div>
             <p className="footer-tagline">
-              The operating system for a growing dental clinic. Aumy coordinates your patients,
-              people and processes from the first enquiry to ongoing care — one connected platform.
-              Grow your clinic. Don&rsquo;t grow the chaos.
+              AI-Powered Dental Clinic Management. Aumy coordinates your patients, people and
+              processes from the first enquiry to ongoing care — one connected platform.
+              Growing your clinic shouldn&rsquo;t mean growing your headache.
             </p>
             <div className="footer-social">
               <a href="https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">

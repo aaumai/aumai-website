@@ -113,16 +113,18 @@ const Home = () => {
       <section className="ch-hero">
         <div className="ch-container ch-hero-grid">
           <div className="ch-hero-text">
-            <span className="ch-eyebrow">The operating system for a growing dental clinic</span>
+            <span className="ch-eyebrow">AI-Powered Dental Clinic Management</span>
             <h1 className="ch-hero-title">
-              Your clinic is growing. <span className="ch-hero-accent">Don&rsquo;t let the chaos grow with it.</span>
+              Growing your clinic <span className="ch-hero-accent">shouldn&rsquo;t mean growing your headache.</span>
             </h1>
             <p className="ch-hero-sub">
-              Aumy is the AI-powered operating system for dental clinics — managing patient journeys,
-              follow-ups, appointments, calls, digital intake and clinic tasks in one connected platform.
+              Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care,
+              digital records — so your team can focus on patients, not coordination.
             </p>
             <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
-            <p className="ch-hero-sub"><strong>One platform. One patient context. Less manual work.</strong></p>
+            <p className="ch-hero-sub">
+              <strong>For dental clinics that are growing — and those ready to grow.</strong>
+            </p>
             <div className="ch-hero-cta">
               <a href="#how-it-works" className="ch-btn ch-btn-primary">
                 See How Aumy Works

@@ -365,9 +365,9 @@ const routes = [
   },
   {
     slug: '',
-    title: 'Aumy — AI-Powered Dental Clinic Operations & Patient Engagement | The Operating System for a Growing Dental Clinic',
+    title: 'Aumy — AI-Powered Dental Clinic Management | Clinic Operations & Patient Engagement',
     description:
-      'Aumy is the AI-powered operating system for a growing dental clinic: clinic operations (calls, WhatsApp, appointments, intake, consent, invoices, tasks) and the patient journey (reminders, after-care, doctor check-ins, care gaps, reactivation) in one connected platform. Grow your clinic. Don’t grow the chaos.',
+      'Aumy is AI-powered dental clinic management: enquiries on phone and WhatsApp, appointments, confirmations, rescheduling, after-treatment care, reactivation and digital records — handled automatically or in a few clicks. For dental clinics that are growing, and those ready to grow. Growing your clinic shouldn’t mean growing your headache.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
@@ -376,11 +376,11 @@ const routes = [
         <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello.</p>
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">The operating system for a growing dental clinic</p>
-        <h1 class="ch-hero-title">Your clinic is growing. Don't let the chaos grow with it.</h1>
-        <p class="ch-hero-sub">Aumy is the AI-powered operating system for dental clinics — managing patient journeys, follow-ups, appointments, calls, digital intake and clinic tasks in one connected platform.</p>
+        <p class="ch-eyebrow">AI-Powered Dental Clinic Management</p>
+        <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
+        <p class="ch-hero-sub">Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
         <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
-        <p><strong>One platform. One patient context. Less manual work.</strong></p>
+        <p><strong>For dental clinics that are growing — and those ready to grow.</strong></p>
         <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
