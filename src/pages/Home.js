@@ -4,6 +4,7 @@ import { setPageSeo } from '../utils/seo';
 import LeakCheck from '../components/LeakCheck';
 import DemoPlaylist from '../components/DemoPlaylist';
 import AppDownload from '../components/AppDownload';
+import ClinicsServed from '../components/ClinicsServed';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -164,6 +165,13 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ── Who already runs on Aumy ───────────────────────────────────────
+          Directly under the hero: the first question a clinic owner has after
+          "what is this" is "who else uses it". Shows the cities today and
+          upgrades to named logos as each clinic's written permission lands —
+          see src/data/clinicsServed.js. */}
+      <ClinicsServed />
 
       {/* ── Be the patient: live hands-on demo ─────────────────────────── */}
       <section className="ch-section" id="be-the-patient">

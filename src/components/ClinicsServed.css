@@ -1,0 +1,92 @@
+/**
+ * "Dental clinics Aumy serves" trust strip.
+ *
+ * Uses the homepage's own tokens (--c-* from HomeClinic.css) rather than a new
+ * palette, so it sits inside the page instead of on top of it. White surface
+ * between the warm off-white sections above and below: a quiet band, not a
+ * feature block — proof should look calm, not shouted.
+ */
+
+.cs {
+  background: var(--c-surface, #ffffff);
+  border-block: 1px solid var(--c-line, #ece9e3);
+  padding-block: clamp(44px, 6vw, 68px);
+  text-align: center;
+}
+
+.cs-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-accent-dark, #218779);
+  background: var(--c-accent-tint, #edf6f4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin: 0 0 18px;
+}
+
+.cs-title {
+  font-size: clamp(22px, 3.2vw, 32px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--c-ink, #16324f);
+  margin: 0 auto;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.cs-sub {
+  font-size: clamp(15px, 1.7vw, 17px);
+  line-height: 1.6;
+  color: var(--c-ink-soft, #55636e);
+  margin: 14px auto 0;
+  max-width: 56ch;
+}
+
+/* ── logo state (renders only for clinics that have given permission) ───── */
+.cs-logos {
+  list-style: none;
+  margin: 30px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.cs-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 200px;
+}
+
+/* Clinic logos arrive in wildly different weights and colours. Cap the HEIGHT
+   rather than the width so a wordmark and a round crest read as the same size,
+   and mute them slightly so no single clinic's brand dominates the row. */
+.cs-logo img {
+  height: clamp(38px, 5vw, 54px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0.82;
+  filter: saturate(0.9);
+  transition: opacity 0.2s ease;
+}
+
+.cs-logo:hover img { opacity: 1; }
+
+.cs-city {
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--c-ink-soft, #55636e);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-logo img { transition: none; }
+}

@@ -381,6 +381,11 @@ const routes = [
         <p class="ch-hero-sub">Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
         <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
         <p><strong>For dental clinics that are growing — and those ready to grow.</strong></p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">Dental clinics Aumy serves</p>
+        <h2>Trusted by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.</h2>
+        <p>4 clinics run their front desk, patient journeys and records on Aumy — from single practices to multi-location groups.</p>
         <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
