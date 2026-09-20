@@ -43,11 +43,18 @@ const clinicsServed = [
     consent: true, // confirmed by Sterling 2026-09-20
   },
   {
-    name: 'RB Enhanced Dental Laser Center',
+    // Their PATIENT-FACING brand, which is what their own logo leads with and
+    // what their Google listing says ("Dental Solutions Indiranagar"). The
+    // tenant in Aumy is filed under the legal entity, RB Enhanced Dental Laser
+    // Center LLP — that name belongs on a contract, not on a strip whose job is
+    // for a visitor to recognise the clinic.
+    name: 'Dental Solutions',
     city: 'Bengaluru',
-    // No logo file has ever reached us — not in the tenant record, not in S3,
-    // not in brand assets. Renders as a typographic nameplate until one does.
-    logo: null,
+    logo: '/logos/clinics/rb-enhanced.png',
+    // Three tiers of type, the smallest being the LLP line. At the standard cap
+    // that bottom line is sub-pixel, so it takes the taller slot — same reason
+    // as Sterling.
+    tall: true,
     consent: true, // cleared by Jayesh 2026-09-20
   },
   {
