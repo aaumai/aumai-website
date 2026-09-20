@@ -56,18 +56,21 @@ const clinicsServed = [
     logo: '/logos/clinics/dental-planet.png',
     consent: true, // cleared by Jayesh 2026-09-20
     /**
-     * Branches listed under the logo. ONLY list a branch that is actually live
-     * on Aumy — this sits in a section whose whole job is to be believed, and
-     * naming a branch we do not run is a false claim about someone else's
-     * business.
+     * Dental Planet's Hitech City footprint, listed at the owner's direction
+     * (2026-09-20) as the GROUP's branches.
      *
-     * These two are what prod has: tenants `dental-planet-elite` (21.8k
-     * patients) and `dental-planet-tellapur` (687), both taking appointments
-     * this week. Jayesh is confirming DP's full branch list from their site —
-     * if it turns out we serve more than these two, add them here ONLY once the
-     * matching tenant exists and is live.
+     * 🚨 Read this before editing: only TWO of these five run on Aumy today —
+     * `dental-planet-elite` (which is the Gachibowli site; 21.8k patients) and
+     * `dental-planet-tellapur` (687). Kokapet, Manikonda and Narsingi have no
+     * tenant, no facility and no appointments in prod. Jayesh's call, made with
+     * that stated; recorded here so nobody later reads this list as a map of
+     * what we actually run, and so it can be trimmed fast if DP ever object.
      */
-    locations: ['Elite', 'Tellapur'],
+    locations: ['Gachibowli', 'Tellapur', 'Kokapet', 'Manikonda', 'Narsingi'],
+    // Principal. Name only — his IDA office is deliberately NOT published here:
+    // it is a publicly checkable claim about him, on our marketing site, that we
+    // have not verified. Add a title only if he confirms the exact wording.
+    lead: 'Dr Rajesh KK Reddy',
   },
   {
     name: 'Vinaykia Dental Care',

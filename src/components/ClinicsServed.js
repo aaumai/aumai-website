@@ -60,9 +60,16 @@ export default function ClinicsServed() {
                       <span className="cs-name">{c.name}</span>
                     )}
                   </span>
+                  {/* City stays directly under the mark for EVERY clinic, so
+                      all the city labels share one line across the row; the
+                      extra detail a group carries hangs below that line rather
+                      than pushing it down. */}
                   <span className="cs-city">{c.city}</span>
+                  {c.lead && <span className="cs-lead">{c.lead}</span>}
                   {c.locations?.length > 0 && (
-                    <span className="cs-branches">{c.locations.join(' · ')}</span>
+                    // Non-breaking space BEFORE each separator so a wrap never
+                    // starts a line with a stray "·".
+                    <span className="cs-branches">{c.locations.join(' · ')}</span>
                   )}
                 </li>
               ))}

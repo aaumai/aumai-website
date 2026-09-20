@@ -69,8 +69,9 @@ function clinicsStripHtml() {
   }
   const items = consentedClinics
     .map((c) => {
+      const lead = c.lead ? `, ${esc(c.lead)}` : '';
       const branches = c.locations?.length ? ` (${c.locations.map(esc).join(', ')})` : '';
-      return `<li>${esc(c.name)} — ${esc(c.city)}${branches}</li>`;
+      return `<li>${esc(c.name)}${lead} — ${esc(c.city)}${branches}</li>`;
     })
     .join('\n          ');
   return `<h2>Trusted by growing dental clinics across India.</h2>

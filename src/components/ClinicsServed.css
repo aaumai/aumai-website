@@ -130,18 +130,30 @@
   color: var(--c-ink-soft, #55636e);
 }
 
-/* Branch names for a multi-location group. A step quieter than the city so the
-   hierarchy stays clinic → city → branches, and the row still scans as one
-   name per clinic rather than a wall of place names. Sits in the column flow,
-   so a group with branches simply runs one line taller than its neighbours. */
+/* The principal dentist. Set in ink rather than the soft grey — for a clinic
+   whose owner is a recognised name, that name IS the credential, so it reads a
+   step above the location detail under it without competing with the logo. */
+.cs-lead {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  color: var(--c-ink, #16324f);
+  opacity: 0.88;
+}
+
+/* Branch names for a multi-location group. Quietest line in the cell, so the
+   hierarchy stays logo → principal → city → branches and the row still scans
+   as one clinic per column rather than a wall of place names. Wide enough for
+   five names to break over two tidy lines. */
 .cs-branches {
   margin-top: -2px;
   font-size: 11.5px;
-  line-height: 1.45;
+  line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--c-ink-soft, #55636e);
   opacity: 0.72;
-  max-width: 190px;
+  max-width: 230px;
   text-wrap: balance;
 }
 
