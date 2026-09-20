@@ -42,12 +42,24 @@ export default function ClinicsServed() {
             </h2>
             <ul className="cs-logos">
               {named.map((c) => (
-                <li key={c.name} className={c.logo ? 'cs-logo' : 'cs-logo cs-logo--text'}>
-                  {c.logo ? (
-                    <img src={c.logo} alt={c.name} loading="lazy" />
-                  ) : (
-                    <span className="cs-name">{c.name}</span>
-                  )}
+                <li
+                  key={c.name}
+                  className={[
+                    'cs-logo',
+                    c.logo ? '' : 'cs-logo--text',
+                    c.logo && c.tall ? 'cs-logo--tall' : '',
+                  ].filter(Boolean).join(' ')}
+                >
+                  {/* Fixed-height slot: marks differ in height (a stacked
+                      wordmark is far taller than a monogram), and without it
+                      each city label would sit at its own logo's baseline. */}
+                  <span className="cs-mark">
+                    {c.logo ? (
+                      <img src={c.logo} alt={c.name} loading="lazy" />
+                    ) : (
+                      <span className="cs-name">{c.name}</span>
+                    )}
+                  </span>
                   <span className="cs-city">{c.city}</span>
                 </li>
               ))}

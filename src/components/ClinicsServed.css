@@ -82,14 +82,29 @@
 
 .cs-logo:hover img { opacity: 1; }
 
+/* Stacked wordmarks (several lines of type) lose far more to a height cap than
+   a horizontal mark does — matched on height alone their letters come out
+   visibly smaller than a monogram's. Opt-in via `tall` in the data, so the row
+   is matched by OPTICAL weight rather than by bounding box. */
+.cs-logo--tall img { height: clamp(62px, 8vw, 92px); }
+
 /* ── nameplate state (consented clinic, logo file not supplied yet) ──────
    Sized to sit on the same optical line as the logos beside it: matched to the
    capped logo height so the row keeps one baseline, and set in the page's own
    ink rather than a grey, so it reads as a considered wordmark instead of a
    placeholder where an image failed. */
+/* One slot height for every mark, tall enough for the tallest (the stacked
+   wordmark), so all four city labels sit on a single baseline no matter how
+   different the artwork above them is. */
+.cs-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(62px, 8vw, 92px);
+}
+
 .cs-logo--text {
   justify-content: center;
-  min-height: clamp(46px, 6vw, 68px);
 }
 
 /* Weight sits deliberately BELOW the logos beside it. This is the fallback
@@ -99,7 +114,6 @@
 .cs-name {
   display: flex;
   align-items: center;
-  min-height: clamp(46px, 6vw, 68px);
   font-size: clamp(14px, 1.6vw, 16px);
   font-weight: 700;
   line-height: 1.25;

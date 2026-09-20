@@ -6,9 +6,9 @@
  * / §9A US, added 2026-09-19). All four signed BEFORE that clause existed, so
  * none is covered by their agreement — permission is tracked per clinic here.
  *
- * 2026-09-20: Jayesh cleared RB, Dental Planet and Vinaykia to publish. Sterling
- * stays off until Dr Priyanka Giroti confirms. Back the three verbal clearances
- * with an email on file per clinic —
+ * 2026-09-20: Jayesh cleared RB, Dental Planet and Vinaykia to publish, and
+ * Sterling confirmed the same day — all four are now named. Back each verbal
+ * clearance with an email on file —
  * onboarding-docket/CUSTOMER_REFERENCE_PERMISSION_EMAIL.md is the template — so
  * consent is evidenced rather than remembered.
  *
@@ -33,6 +33,16 @@
 
 const clinicsServed = [
   {
+    name: 'The Sterling Dental Clinic',
+    city: 'New Delhi',
+    logo: '/logos/clinics/sterling.png',
+    // Their published mark is a four-line stacked wordmark. Capped to the same
+    // HEIGHT as a horizontal logo its letters come out visibly smaller, so it
+    // gets the taller cap to sit at the same optical weight as its neighbours.
+    tall: true,
+    consent: true, // confirmed by Sterling 2026-09-20
+  },
+  {
     name: 'RB Enhanced Dental Laser Center',
     city: 'Bengaluru',
     // No logo file has ever reached us — not in the tenant record, not in S3,
@@ -51,12 +61,6 @@ const clinicsServed = [
     city: 'Pune',
     logo: '/logos/clinics/vinaykia.png',
     consent: true, // cleared by Jayesh 2026-09-20
-  },
-  {
-    name: 'The Sterling Dental Clinic',
-    city: 'New Delhi',
-    logo: '/logos/clinics/sterling.png',
-    consent: false, // awaiting Dr Priyanka Giroti
   },
 ];
 
