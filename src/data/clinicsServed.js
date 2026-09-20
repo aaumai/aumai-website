@@ -61,6 +61,12 @@ const clinicsServed = [
     name: 'Dental Planet',
     city: 'Hyderabad',
     logo: '/logos/clinics/dental-planet.png',
+    // Their logo is a MONOGRAM — it never spells the name out, unlike the other
+    // three whose artwork is a wordmark. Without this the row shows a visitor a
+    // "dp" mark and no clinic. Set the name in type beside the mark instead.
+    showName: true,
+    // What the group is, in their own words. Reads on the city line.
+    descriptor: 'Chain of clinics',
     consent: true, // cleared by Jayesh 2026-09-20
     /**
      * Dental Planet's Hitech City footprint, listed at the owner's direction

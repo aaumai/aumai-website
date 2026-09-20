@@ -70,8 +70,9 @@ function clinicsStripHtml() {
   const items = consentedClinics
     .map((c) => {
       const lead = c.lead ? `, ${esc(c.lead)}` : '';
+      const where = c.descriptor ? `${esc(c.descriptor)}, ${esc(c.city)}` : esc(c.city);
       const branches = c.locations?.length ? ` (${c.locations.map(esc).join(', ')})` : '';
-      return `<li>${esc(c.name)}${lead} — ${esc(c.city)}${branches}</li>`;
+      return `<li>${esc(c.name)}${lead} — ${where}${branches}</li>`;
     })
     .join('\n          ');
   return `<h2>Trusted by growing dental clinics across India.</h2>
