@@ -67,19 +67,48 @@
 }
 
 /* Clinic logos arrive in wildly different weights and colours. Cap the HEIGHT
-   rather than the width so a wordmark and a round crest read as the same size,
-   and mute them slightly so no single clinic's brand dominates the row. */
+   rather than the width so a wordmark and a round crest read as the same size.
+   Barely muted: the section exists to be believed, and the palest mark in the
+   row (a light silver wordmark) drops below legible if these are dimmed the way
+   a long logo wall would be. Three real names earn full strength. */
 .cs-logo img {
-  height: clamp(38px, 5vw, 54px);
+  height: clamp(46px, 6vw, 68px);
   width: auto;
   max-width: 100%;
   object-fit: contain;
-  opacity: 0.82;
-  filter: saturate(0.9);
+  opacity: 0.95;
   transition: opacity 0.2s ease;
 }
 
 .cs-logo:hover img { opacity: 1; }
+
+/* ── nameplate state (consented clinic, logo file not supplied yet) ──────
+   Sized to sit on the same optical line as the logos beside it: matched to the
+   capped logo height so the row keeps one baseline, and set in the page's own
+   ink rather than a grey, so it reads as a considered wordmark instead of a
+   placeholder where an image failed. */
+.cs-logo--text {
+  justify-content: center;
+  min-height: clamp(46px, 6vw, 68px);
+}
+
+/* Weight sits deliberately BELOW the logos beside it. This is the fallback
+   state, and set any heavier the clinic we have no artwork for shouts louder
+   than the two we do — the row would read as if the plainest name mattered
+   most. Same height box, so all three share one baseline. */
+.cs-name {
+  display: flex;
+  align-items: center;
+  min-height: clamp(46px, 6vw, 68px);
+  font-size: clamp(14px, 1.6vw, 16px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--c-ink, #16324f);
+  text-align: center;
+  text-wrap: balance;
+  opacity: 0.78;
+}
 
 .cs-city {
   font-size: 12.5px;

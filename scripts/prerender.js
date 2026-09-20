@@ -20,6 +20,10 @@ const path = require('path');
 // crawler-visible HTML and the client-rendered article can never drift apart.
 const { growthPosts } = require('../src/data/growthPosts');
 const { CALCULATORS } = require('../src/data/calculators');
+// Clinic trust strip: same consent-gated list the React component renders, so a
+// clinic that has NOT given permission (or withdraws it) can never survive in
+// the crawler-visible HTML after the app stops showing it.
+const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
 // Prices come from the AUMY API's rate card (the one clinics are billed from),
 // snapshotted by scripts/fetch-pricing.js just before the build — never typed here.
 const PRICING = require('../src/data/pricing.json');
@@ -51,6 +55,26 @@ const template = fs.readFileSync(path.join(BUILD, 'index.html'), 'utf8');
 
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+/**
+ * Crawler-visible twin of <ClinicsServed>. Mirrors that component's two states
+ * off the SAME consent list, so the static HTML can never name a clinic the app
+ * has stopped naming. Deliberately prints no clinic count — the number is not
+ * the proof, the names are.
+ */
+function clinicsStripHtml() {
+  if (!consentedClinics.length) {
+    return `<h2>Trusted by dental clinics in ${esc(servedCities())}.</h2>
+        <p>Clinics run their front desk, patient journeys and records on Aumy — from single practices to multi-location groups.</p>`;
+  }
+  const items = consentedClinics
+    .map((c) => `<li>${esc(c.name)} — ${esc(c.city)}</li>`)
+    .join('\n          ');
+  return `<h2>Trusted by growing dental clinics across India.</h2>
+        <ul>
+          ${items}
+        </ul>`;
+}
 
 function setTag(html, re, replacement) {
   if (re.test(html)) return html.replace(re, replacement);
@@ -384,8 +408,7 @@ const routes = [
       </div></section>
       <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Dental clinics Aumy serves</p>
-        <h2>Trusted by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.</h2>
-        <p>4 clinics run their front desk, patient journeys and records on Aumy — from single practices to multi-location groups.</p>
+        ${clinicsStripHtml()}
         <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">

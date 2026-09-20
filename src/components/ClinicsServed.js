@@ -1,5 +1,5 @@
 import React from 'react';
-import { clinicsServed, consentedClinics, servedCities } from '../data/clinicsServed';
+import { consentedClinics, servedCities } from '../data/clinicsServed';
 import './ClinicsServed.css';
 
 /**
@@ -8,25 +8,27 @@ import './ClinicsServed.css';
  * TWO STATES, and which one shows is decided by CONSENT, never by design
  * preference:
  *
- *   logos   only the clinics that have given written permission to be named
- *           (MSA §10A India / §9A US). Verbal is fine to ask, but it gets
- *           confirmed in writing before a name appears here.
- *   cities  the fallback, and what ships today: the real cities we serve, no
- *           clinic named. True, verifiable, and needs nobody's permission.
+ *   logos   the clinics that have given permission to be named
+ *           (MSA §10A India / §9A US), each shown with its city.
+ *   cities  the fallback if that list is ever empty: the real cities we serve,
+ *           no clinic named. True, and needs nobody's permission.
  *
- * Our first four clinics signed BEFORE that clause existed, so none is covered
- * by their agreement. Holding a clinic's logo is not consent either — those
- * were given so we could brand THEIR patient messages. Naming a dental clinic
- * as our customer tells the world their patient records sit on our system,
- * which is a statement about them, not about us.
+ * Holding a clinic's logo is not consent — those were given so we could brand
+ * THEIR patient messages. Naming a dental clinic as our customer tells the
+ * world their patient records sit on our system, which is a statement about
+ * them, not about us. So `consent` in data/clinicsServed.js is the only thing
+ * that puts a name on this page.
  *
- * So the section goes live now in its honest form and upgrades itself, clinic
- * by clinic, as each yes lands: flip `consent` in data/clinicsServed.js, drop
- * the logo in public/logos/clinics/, rebuild.
+ * A consented clinic whose logo file we don't have yet renders as a
+ * typographic nameplate rather than a broken image, so a missing asset never
+ * blocks a clinic that has already said yes. Drop the file in
+ * public/logos/clinics/, set `logo`, rebuild — it upgrades in place.
+ *
+ * No count is printed. The number of clinics is not the proof on offer here;
+ * naming real ones is, and a small number argues against us.
  */
 export default function ClinicsServed() {
   const named = consentedClinics;
-  const count = clinicsServed.length;
 
   return (
     <section className="cs" aria-labelledby="cs-title">
@@ -40,8 +42,12 @@ export default function ClinicsServed() {
             </h2>
             <ul className="cs-logos">
               {named.map((c) => (
-                <li key={c.name} className="cs-logo">
-                  <img src={c.logo} alt={c.name} loading="lazy" />
+                <li key={c.name} className={c.logo ? 'cs-logo' : 'cs-logo cs-logo--text'}>
+                  {c.logo ? (
+                    <img src={c.logo} alt={c.name} loading="lazy" />
+                  ) : (
+                    <span className="cs-name">{c.name}</span>
+                  )}
                   <span className="cs-city">{c.city}</span>
                 </li>
               ))}
@@ -53,7 +59,7 @@ export default function ClinicsServed() {
               Trusted by dental clinics in {servedCities()}.
             </h2>
             <p className="cs-sub">
-              {count} clinics run their front desk, patient journeys and records on Aumy —
+              Clinics run their front desk, patient journeys and records on Aumy —
               from single practices to multi-location groups.
             </p>
           </>
