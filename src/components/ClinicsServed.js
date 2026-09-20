@@ -61,6 +61,9 @@ export default function ClinicsServed() {
                     )}
                   </span>
                   <span className="cs-city">{c.city}</span>
+                  {c.locations?.length > 0 && (
+                    <span className="cs-branches">{c.locations.join(' · ')}</span>
+                  )}
                 </li>
               ))}
             </ul>

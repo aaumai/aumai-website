@@ -68,7 +68,10 @@ function clinicsStripHtml() {
         <p>Clinics run their front desk, patient journeys and records on Aumy — from single practices to multi-location groups.</p>`;
   }
   const items = consentedClinics
-    .map((c) => `<li>${esc(c.name)} — ${esc(c.city)}</li>`)
+    .map((c) => {
+      const branches = c.locations?.length ? ` (${c.locations.map(esc).join(', ')})` : '';
+      return `<li>${esc(c.name)} — ${esc(c.city)}${branches}</li>`;
+    })
     .join('\n          ');
   return `<h2>Trusted by growing dental clinics across India.</h2>
         <ul>

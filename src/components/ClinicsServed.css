@@ -130,6 +130,21 @@
   color: var(--c-ink-soft, #55636e);
 }
 
+/* Branch names for a multi-location group. A step quieter than the city so the
+   hierarchy stays clinic → city → branches, and the row still scans as one
+   name per clinic rather than a wall of place names. Sits in the column flow,
+   so a group with branches simply runs one line taller than its neighbours. */
+.cs-branches {
+  margin-top: -2px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: var(--c-ink-soft, #55636e);
+  opacity: 0.72;
+  max-width: 190px;
+  text-wrap: balance;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cs-logo img { transition: none; }
 }

@@ -54,7 +54,20 @@ const clinicsServed = [
     name: 'Dental Planet',
     city: 'Hyderabad',
     logo: '/logos/clinics/dental-planet.png',
-    consent: true, // cleared by Jayesh 2026-09-20 — two locations, one brand
+    consent: true, // cleared by Jayesh 2026-09-20
+    /**
+     * Branches listed under the logo. ONLY list a branch that is actually live
+     * on Aumy — this sits in a section whose whole job is to be believed, and
+     * naming a branch we do not run is a false claim about someone else's
+     * business.
+     *
+     * These two are what prod has: tenants `dental-planet-elite` (21.8k
+     * patients) and `dental-planet-tellapur` (687), both taking appointments
+     * this week. Jayesh is confirming DP's full branch list from their site —
+     * if it turns out we serve more than these two, add them here ONLY once the
+     * matching tenant exists and is live.
+     */
+    locations: ['Elite', 'Tellapur'],
   },
   {
     name: 'Vinaykia Dental Care',
