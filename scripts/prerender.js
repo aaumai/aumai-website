@@ -122,7 +122,6 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    ['How does the 60-day money-back guarantee work?', 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real care gaps followed up. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.'],
     ['Do you have your own dental software (PMS)?', 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on AUMY, at the same price.'],
     ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top. You can move onto AUMY’s full PMS later, whenever you choose.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
@@ -464,7 +463,6 @@ const routes = [
         <h2>Try Aumy free for 30 days — see the difference yourself.</h2>
         <p>We set AUMY up on your clinic and you watch it work for 30 days alongside everything you use today — real calls and enquiries answered, real bookings made, forms gone digital. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
         <h2>Questions clinic owners ask</h2>
-        <p><strong>How does the 60-day money-back guarantee work?</strong> We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made. If it does not meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.</p>
         <p><strong>Do you have your own dental software (PMS)?</strong> Yes — a complete Dental PMS is included: records, appointments, charting, prescriptions, treatment plans and full billing &amp; accounts.</p>
         <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use, and you can move onto its full PMS whenever you choose.</p>
         <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>

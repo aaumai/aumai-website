@@ -72,7 +72,6 @@ const whyUs = [
 ];
 
 const faqs = [
-  { q: 'How does the 60-day money-back guarantee work?', a: 'We set AUMY up on your clinic and it goes to work — real enquiries answered, real bookings made, real care gaps followed up. If it doesn\u2019t meet your expectations in the first 60 days, you get your money back. No lock-in, and your data stays yours.' },
   { q: 'Do you have your own dental software (PMS)?', a: 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on AUMY, at the same price.' },
   { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, AUMY keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into AUMY for a one-time migration fee — with no downtime.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
@@ -151,7 +150,7 @@ const Home = () => {
               Try it live — WhatsApp us like a patient would
             </a>
             <p className="ch-hero-trust">
-              60-day money-back guarantee · no lock-in · we set everything up for you · limited implementation capacity · built only for dental clinics · NVIDIA Inception member
+              no lock-in · we set everything up for you · limited implementation capacity · built only for dental clinics · NVIDIA Inception member
             </p>
           </div>
 
