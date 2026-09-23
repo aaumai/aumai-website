@@ -230,6 +230,7 @@ const routes = [
         { '@type': 'Question', name: 'Are WhatsApp messages extra?', acceptedAnswer: { '@type': 'Answer', text: 'With the clinic’s own WhatsApp Business number, Meta bills its message fees to the clinic directly and AUMY adds nothing. If messages go out through AUMY’s number, Meta’s fees are passed through on the invoice.' } },
         { '@type': 'Question', name: 'What is never charged extra?', acceptedAnswer: { '@type': 'Answer', text: `${(PC.notBilled || []).join(', ')}, unlimited patients and staff logins, the Clinic OS, and every patient-journey message: reminders, after-care, care gaps and reviews.` } },
         { '@type': 'Question', name: 'Is there a setup fee?', acceptedAnswer: { '@type': 'Answer', text: `One-time setup of ${rsText(PC.onboarding.min)} to ${rsText(PC.onboarding.max)}, depending on the data migrated. Paying yearly saves ${Math.round(PC.annualPrepayDiscount * 100)}%. Prices exclude GST.` } },
+        { '@type': 'Question', name: 'Can I run AUMY only when the clinic is closed?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Off-hours-only mode lets your own team answer during opening hours while AUMY covers nights, Sundays and holidays. Because you are billed on the enquiries AUMY handles, covering only the closed hours costs a fraction of covering the whole day — and the after-hours enquiry is the one most clinics are losing. It is a single setting you can switch on and off, so you can give AUMY the full day during a busy season or when a receptionist is on leave.' } },
       ],
     }],
     content: `
@@ -248,6 +249,9 @@ const routes = [
         </ul>
         <p>Example: a clinic with 250 new enquiries a month seeing 20 patients a day for 26 days pays ${rs(PRICING.sample.quote.total)} a month on Standard AI.</p>
         <p>With your own WhatsApp Business number, Meta bills message fees to you directly &mdash; AUMY adds nothing on top.</p>
+        <h2>Don&rsquo;t need AUMY all day? Pay for the hours you actually need it.</h2>
+        <p>You do not have to run an AI receptionist 24/7 to stop losing patients. Switch AUMY to off-hours only and your team answers while you are open &mdash; nobody is replacing your receptionist, she is better at it and patients can tell. AUMY takes the nights, the Sundays and the holidays: the hours when someone in pain messages, gets silence, and books with the clinic that answered.</p>
+        <p>Because the bill follows the enquiries AUMY handles, covering only your closed hours costs a fraction of covering all of them &mdash; and the after-hours enquiry is the one you are losing today. It is one setting, on or off whenever you like: turn it on for the full day in a busy season or when a receptionist is on leave, and back again after.</p>
         <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
       </div></section>`,
   },

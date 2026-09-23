@@ -176,6 +176,10 @@ const PricingPage = () => {
       a: 'An enquiry is someone who is not yet your patient writing to your clinic on WhatsApp for the first time, or calling from an unknown number (hang-ups under ten seconds are not counted). A visit is an appointment that actually happened — completed, checked in or in the chair. Cancellations and no-shows are not visits.',
     },
     {
+      q: 'Can I run AUMY only when my clinic is closed?',
+      a: 'Yes — and most clinics should start there. In off-hours-only mode your own team answers during opening hours and AUMY covers the nights, Sundays and holidays. Since you are billed on the enquiries AUMY actually handles, covering only your closed hours costs a fraction of covering the whole day, while catching the enquiry you are most likely losing today: the one that arrives after you have gone home. It is a single setting, so you can hand AUMY the full day in a busy season or when a receptionist is on leave, and switch back afterwards.',
+    },
+    {
       q: 'What is the difference between Standard and Premium AI?',
       a: 'Premium runs every patient conversation on our most capable AI model: better with long, messy conversations, mixed languages and unusual requests. Standard uses a faster, lighter model that handles the everyday enquiry and booking very well. You can move between them month to month.',
     },
@@ -342,6 +346,29 @@ const PricingPage = () => {
             <div><Check /><span><strong>Get Found:</strong> {inr(card.addons.getFound.monthly)}/month · <strong>Meta Ads management:</strong> {inr(card.addons.metaAds.monthly)}/month ({card.addons.metaAds.note}).</span></div>
             <div><Check /><span><strong>One-time setup:</strong> {card.onboarding ? card.onboarding.text : '—'} Pay yearly and save {Math.round((card.annualPrepayDiscount || 0) * 100)}%. Prices exclude GST.</span></div>
           </div>
+        </div>
+      </section>
+
+      {/* Off-hours-only mode (owner 2026-09-23). A real switch, not a pitch:
+          tenants.ai_receptionist_off_hours_only + voice_assistant_config.
+          off_hours_only (mig 949). It belongs on the pricing page because
+          that is where it changes the number — the bill follows enquiries,
+          and a clinic whose team answers all day sends AUMY only the ones
+          that arrive after closing. */}
+      <section className="pp-section">
+        <div className="ch-container ch-narrow">
+          <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>
+            Don&rsquo;t need AUMY all day? Pay for the hours you actually need it.
+          </h2>
+          <div className="ch-why-card pp-rates">
+            <div><Check /><span><strong>Your team answers while you&rsquo;re open.</strong> Nobody is replacing your receptionist — she is better at it, and patients can tell.</span></div>
+            <div><Check /><span><strong>AUMY takes the nights, Sundays and holidays.</strong> The hours when a patient in pain messages, gets silence, and books with the clinic that answered.</span></div>
+            <div><Check /><span><strong>You pay for a fraction of the enquiries.</strong> The bill follows what AUMY handles, so covering only the closed hours costs a fraction of covering all of them.</span></div>
+            <div><Check /><span><strong>Switch it on or off whenever you like.</strong> One setting. Busy season, or a receptionist on leave — turn it on for the full day and back again.</span></div>
+          </div>
+          <p className="ch-center" style={{ textAlign: 'center', marginTop: 12, opacity: 0.85 }}>
+            The after-hours enquiry is the one you are losing today. This is the cheapest way to stop losing it.
+          </p>
         </div>
       </section>
 
