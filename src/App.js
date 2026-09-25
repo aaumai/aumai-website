@@ -23,6 +23,7 @@ import AIReceptionistPage from './pages/AIReceptionistPage';
 import WhatsAppAutomationPage from './pages/WhatsAppAutomationPage';
 import AIDentalClinicOperationsPage from './pages/AIDentalClinicOperationsPage';
 import AIPatientEngagementPage from './pages/AIPatientEngagementPage';
+import AIDentalSoftwareIndiaPage from './pages/AIDentalSoftwareIndiaPage';
 import GrowthHub from './pages/GrowthHub';
 import DemosPage from './pages/DemosPage';
 import PodcastPage from './pages/PodcastPage';
@@ -98,6 +99,7 @@ function App() {
                     patient journey & engagement. Crawler copy: scripts/prerender.js. */}
                 <Route path="/ai-dental-clinic-operations" element={<AIDentalClinicOperationsPage />} />
                 <Route path="/ai-patient-engagement" element={<AIPatientEngagementPage />} />
+                <Route path="/ai-dental-software-india" element={<AIDentalSoftwareIndiaPage />} />
                 <Route path="/growth" element={<GrowthHub />} />
                 <Route path="/demos" element={<DemosPage />} />
                 <Route path="/podcast" element={<PodcastPage />} />

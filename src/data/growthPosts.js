@@ -1023,7 +1023,7 @@ const growthPosts = [
   <li>Can it <strong>show you the revenue</strong> it recovered \u2014 bookings and rupees, attributed \u2014 or just call logs?</li>
 </ol>
 
-<p>For context on where Aumy sits in that table: it is not a receptionist tool but the operating system for a growing dental clinic \u2014 24/7 AI receptionist on WhatsApp and calls, appointments and reminders, treatment-plan follow-ups, after-treatment care, care gaps and reactivation, all working from one patient record. It is <a href="/pricing">priced by module, so a clinic pays for the parts it runs</a>, and underneath it runs the whole patient journey: Convert, Care, Retain, Reactivate.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>.</p>`,
+<p>For context on where Aumy sits in that table: it is not a receptionist tool but the operating system for a growing dental clinic \u2014 24/7 AI receptionist on WhatsApp and calls, appointments and reminders, treatment-plan follow-ups, after-treatment care, care gaps and reactivation, all working from one patient record. It is <a href="/pricing">priced by module, so a clinic pays for the parts it runs</a>, and underneath it runs the whole patient journey: Convert, Care, Retain, Reactivate.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>. For the full picture of AI dental software in India, see <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>.</p>`,
   },
   {
     slug: "dental-clinic-software-stack-india-comparison",
@@ -1080,7 +1080,7 @@ const growthPosts = [
 <h2>The integrated alternative</h2>
 <p>This is the reason AUMY is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, follows up care gaps and reactivation from real records, posts to your Google profile \u2014 and shows what happened to every enquiry in one dashboard. <a href="/pricing">Pricing is by module</a>, so a clinic starts with the parts it needs instead of paying five vendors for overlapping pieces. That's the whole journey \u2014 Convert, Care, Retain, Reactivate \u2014 as one connected system instead of five tools that don't talk to each other.</p>
 
-<p>Comparing us with the US tools instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">That comparison is here</a>.</p>`,
+<p>Comparing us with the US tools instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">That comparison is here</a>. New to the category? Start with <a href="/ai-dental-software-india">what AI dental software does in an Indian clinic</a>.</p>`,
   },
 ];
 

@@ -27,6 +27,7 @@ const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
 // Prices come from the AUMY API's rate card (the one clinics are billed from),
 // snapshotted by scripts/fetch-pricing.js just before the build — never typed here.
 const PRICING = require('../src/data/pricing.json');
+const ADS = require('../src/data/aiDentalSoftwareIndia');
 const PC = PRICING.card;
 const rs = (n) => '&#8377;' + Math.round(Number(n) || 0).toLocaleString('en-IN');
 const rsText = (n) => 'Rs ' + Math.round(Number(n) || 0).toLocaleString('en-IN');
@@ -151,6 +152,37 @@ const orgLd = {
     email: MARKET === 'us' ? 'jayesh@aumyai.com' : 'jayesh.chaudhari@aumai.co.in',
     telephone: MARKET === 'us' ? '+1-307-263-5098' : '+91-800-718-9868',
   }],
+};
+
+// Aumy (dental, India) as a product entity. AI assistants answering "AI dental
+// software in India" and "how much does it cost" read this; the price comes
+// from the same pricing snapshot the pricing page uses.
+const dentalSoftwareLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Aumy',
+  alternateName: 'Aumy AI dental software',
+  applicationCategory: 'HealthApplication',
+  applicationSubCategory: 'AI dental software / dental practice management software',
+  operatingSystem: 'Web, iOS, Android',
+  url: `${ORIGIN}/ai-dental-software-india`,
+  description: ADS.DESCRIPTION,
+  areaServed: { '@type': 'Country', name: 'India' },
+  inLanguage: ['en-IN', 'hi-IN', 'mr-IN'],
+  featureList: ADS.CAPABILITIES.map(([t]) => t),
+  offers: {
+    '@type': 'Offer',
+    price: String(Math.round(Number(PC.platformFee.standard) || 0)),
+    priceCurrency: 'INR',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: String(Math.round(Number(PC.platformFee.standard) || 0)),
+      priceCurrency: 'INR',
+      unitText: 'MONTH',
+    },
+    url: `${ORIGIN}/pricing`,
+  },
+  publisher: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
 };
 
 // SoftwareApplication with offers: this is what makes a product page eligible
@@ -301,6 +333,63 @@ const routes = [
         <p>Unlike broadcast tools, every message is a conversation the AI actually continues: enquiries are nurtured until they book, after-treatment care goes out day by day, care gaps get followed up, lapsed patients get win-back journeys, and happy patients are guided to leave Google reviews. Campaigns run with start/end dates, daily caps and instant opt-out handling — and every booking is attributed back to the message that produced it.</p>
       </div></section>`,
   },
+  // "AI dental software India" (owner 2026-09-25). Built from the SAME data
+  // file as the React page (src/data/aiDentalSoftwareIndia.js), so the crawler
+  // copy cannot drift from what people see.
+  {
+    slug: 'ai-dental-software-india',
+    title: ADS.TITLE,
+    description: ADS.DESCRIPTION,
+    canonical: `${ORIGIN}/ai-dental-software-india`,
+    jsonld: [orgLd, dentalSoftwareLd, {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: ADS.FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    }, {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Aumy', item: `${ORIGIN}/` },
+        { '@type': 'ListItem', position: 2, name: 'AI dental software India', item: `${ORIGIN}/ai-dental-software-india` },
+      ],
+    }],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(ADS.HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(ADS.HERO.h1)}</h1>
+        <p class="ch-hero-sub">${esc(ADS.HERO.sub)}</p>
+        <p><a href="/demos">Watch it work, live</a> · <a href="/pricing">See pricing in ₹</a></p>
+        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would.</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>What is AI dental software?</h2>
+        ${ADS.DEFINITION.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}
+        <h2>What Aumy’s AI does in your clinic</h2>
+        <ul>
+          ${ADS.CAPABILITIES.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('\n          ')}
+        </ul>
+        <h2>Built for dental clinics in India</h2>
+        <ul>
+          ${ADS.INDIA.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('\n          ')}
+        </ul>
+        <h2>AI dental software vs traditional dental software</h2>
+        <table>
+          <thead><tr>${ADS.COMPARE.head.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead>
+          <tbody>
+            ${ADS.COMPARE.rows.map(([k, a, b]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('\n            ')}
+          </tbody>
+        </table>
+        ${clinicsStripHtml()}
+        <h2>How to choose AI dental software in India: six questions to ask</h2>
+        <ol>
+          ${ADS.CHOOSE.map(([t, b]) => `<li><strong>${esc(t)}</strong> ${esc(b)}</li>`).join('\n          ')}
+        </ol>
+        <h2>AI dental software questions, answered</h2>
+        ${ADS.FAQS.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')}
+        <p>Last updated ${esc(ADS.UPDATED)}. See also <a href="/ai-dental-clinic-operations">AI-powered clinic operations</a>, <a href="/ai-patient-engagement">the AI-powered patient journey</a> and <a href="/switch">switching dental software</a>.</p>
+        <p><a href="/contact">Talk to us</a></p>
+      </div></section>`,
+  },
   // The two search themes the site targets (owner 2026-09-18). Each has a
   // React page (src/pages/AIDentalClinicOperationsPage.js,
   // AIPatientEngagementPage.js) — keep this crawler copy in step with them.
@@ -397,18 +486,21 @@ const routes = [
   },
   {
     slug: '',
-    title: 'Aumy — AI-Powered Dental Clinic Management | Clinic Operations & Patient Engagement',
+    // Same strings as src/pages/Home.js and public/index.html (owner 2026-09-25:
+    // lead with "AI dental software India").
+    title: 'Aumy — AI Dental Software for Clinics in India | Clinic Operations & Patient Engagement',
     description:
-      'Aumy is AI-powered dental clinic management: enquiries on phone and WhatsApp, appointments, confirmations, rescheduling, after-treatment care, reactivation and digital records — handled automatically or in a few clicks. For dental clinics that are growing, and those ready to grow. Growing your clinic shouldn’t mean growing your headache.',
+      'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls, WhatsApp, appointments, intake, consent and invoices, plus the patient journey (reminders, after-care, care gaps, reactivation) in one connected platform. Grow your clinic. Don’t grow the chaos.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
-    jsonld: [orgLd, faqLd, videoLd, demoVideoLd],
+    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
         <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello.</p>
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">AI-Powered Dental Clinic Management</p>
+        <p class="ch-eyebrow">AI Dental Software · India</p>
+        <p>Aumy is AI dental software for dental clinics in India. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
         <p class="ch-hero-sub">Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
         <p>CONVERT → CARE → RETAIN → REACTIVATE</p>

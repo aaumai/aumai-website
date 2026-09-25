@@ -23,6 +23,7 @@ const fs = require('fs');
 const path = require('path');
 const { growthPosts } = require('../src/data/growthPosts');
 const { CALCULATORS } = require('../src/data/calculators');
+const ADS = require('../src/data/aiDentalSoftwareIndia');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -38,6 +39,7 @@ const SITEMAPS = {
   // identity of aumai.co.in is dental clinic growth, nothing else.
   in: [
     ['/', 1.0, 'weekly'],
+    ['/ai-dental-software-india', 1.0, 'monthly'],
     ['/leak-calculator', 0.9, 'monthly'],
     ['/switch', 0.9, 'monthly'],
     ['/missed-call-calculator', 0.8, 'monthly'],
@@ -117,8 +119,9 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 const LLMS = {
   in: `# AUM AI — AUMY for dental clinics (India)
 
-> Aumy — the AI-powered operating system for a growing dental clinic, in
-> India, from single-doctor practices to multi-chair centres. Aumy manages the
+> Aumy is AI dental software for dental clinics in India — the AI-powered
+> operating system for a growing dental clinic, from single-doctor practices
+> to multi-chair centres and multi-location groups. Aumy manages the
 > chaos that comes with growth — coordinating patients, people and processes
 > from the first enquiry to ongoing care. It takes the day-to-day load off the
 > front desk: answers every call (AI voice agent) and WhatsApp /
@@ -140,9 +143,15 @@ const LLMS = {
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
 - 10-day free trial. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
+- Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
+- Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
+- Patient data hosted in India (AWS Mumbai region); clinical records on FHIR R4, the standard ABDM uses.
+- Priced in rupees: modular, from ${ADS.FROM_PRICE} INR a month.
+- Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages
 - ${ORIGIN}/ — overview for clinic owners
+- ${ORIGIN}/ai-dental-software-india — AI dental software in India: what it is, what Aumy's AI does in a dental clinic, how it compares with traditional dental software, how to choose, pricing and FAQs
 - ${ORIGIN}/leak-calculator — 60-second check estimating what slips through the cracks in a stretched clinic: missed enquiries, no-shows and lapsed patients
 - ${ORIGIN}/switch — moving from your current dental software: AUMY syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year

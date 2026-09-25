@@ -95,13 +95,12 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      // Title/description carry the two search themes (owner 2026-09-18) —
-      // AI-powered dental clinic operations, AI-powered patient journey &
-      // engagement — in front of the positioning line. Same strings in
+      // Title leads with the target keyword "AI dental software India" (owner
+      // 2026-09-25), then the two search themes (2026-09-18). Same strings in
       // scripts/prerender.js (slug '') and public/index.html.
-      title: 'Aumy — AI-Powered Dental Clinic Operations & Patient Engagement | The Operating System for a Growing Dental Clinic',
+      title: 'Aumy — AI Dental Software for Clinics in India | Clinic Operations & Patient Engagement',
       description:
-        'Aumy is the AI-powered operating system for a growing dental clinic: clinic operations (calls, WhatsApp, appointments, intake, consent, invoices, tasks) and the patient journey (reminders, after-care, doctor check-ins, care gaps, reactivation) in one connected platform. Grow your clinic. Don’t grow the chaos.',
+        'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls, WhatsApp, appointments, intake, consent and invoices, plus the patient journey (reminders, after-care, care gaps, reactivation) in one connected platform. Grow your clinic. Don’t grow the chaos.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
@@ -113,7 +112,7 @@ const Home = () => {
       <section className="ch-hero">
         <div className="ch-container ch-hero-grid">
           <div className="ch-hero-text">
-            <span className="ch-eyebrow">AI-Powered Dental Clinic Management</span>
+            <span className="ch-eyebrow">AI Dental Software · India</span>
             <h1 className="ch-hero-title">
               Growing your clinic <span className="ch-hero-accent">shouldn&rsquo;t mean growing your headache.</span>
             </h1>
@@ -300,6 +299,10 @@ const Home = () => {
               </Link>
             </div>
           </div>
+          <p className="ch-lead ch-center-lead" style={{ marginTop: 22 }}>
+            Aumy is AI dental software for dental clinics in India.{' '}
+            <Link to="/ai-dental-software-india">What AI dental software does in an Indian clinic &rarr;</Link>
+          </p>
         </div>
       </section>
 
