@@ -175,6 +175,7 @@ const dentalSoftwareLd = {
     '@type': 'Offer',
     price: String(Math.round(Number(PC.platformFee.standard) || 0)),
     priceCurrency: 'INR',
+    valueAddedTaxIncluded: false,
     priceSpecification: {
       '@type': 'UnitPriceSpecification',
       price: String(Math.round(Number(PC.platformFee.standard) || 0)),
@@ -498,7 +499,7 @@ const routes = [
     // lead with "AI dental software India").
     title: 'Aumy — AI Dental Software for Dental Clinics in India',
     description:
-      'Aumy is AI dental software for dental clinics in India: calls and WhatsApp answered, appointments, intake, reminders, care gaps and a complete dental PMS.',
+      'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],

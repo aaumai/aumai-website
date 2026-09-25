@@ -100,7 +100,7 @@ const Home = () => {
       // scripts/prerender.js (slug '') and public/index.html.
       title: 'Aumy — AI Dental Software for Dental Clinics in India',
       description:
-        'Aumy is AI dental software for dental clinics in India: calls and WhatsApp answered, appointments, intake, reminders, care gaps and a complete dental PMS.',
+        'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });
