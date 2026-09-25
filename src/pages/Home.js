@@ -98,9 +98,9 @@ const Home = () => {
       // Title leads with the target keyword "AI dental software India" (owner
       // 2026-09-25), then the two search themes (2026-09-18). Same strings in
       // scripts/prerender.js (slug '') and public/index.html.
-      title: 'Aumy — AI Dental Software for Clinics in India | Clinic Operations & Patient Engagement',
+      title: 'Aumy — AI Dental Software for Dental Clinics in India',
       description:
-        'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls, WhatsApp, appointments, intake, consent and invoices, plus the patient journey (reminders, after-care, care gaps, reactivation) in one connected platform. Grow your clinic. Don’t grow the chaos.',
+        'Aumy is AI dental software for dental clinics in India: calls and WhatsApp answered, appointments, intake, reminders, care gaps and a complete dental PMS.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/images/hero-dental.jpg',
     });

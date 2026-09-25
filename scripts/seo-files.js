@@ -141,12 +141,12 @@ const LLMS = {
 ## Key facts
 - Operated as a managed service: a dedicated expert runs the system with the clinic.
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
-- 10-day free trial. Data encrypted in transit and at rest, role-based access.
+- Onboarding of new clinics is paused until 15 October 2026; clinics can join the waitlist at ${ORIGIN}/contact. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
-- Patient data hosted in India (AWS Mumbai region); clinical records on FHIR R4, the standard ABDM uses.
-- Priced in rupees: modular, from ${ADS.FROM_PRICE} INR a month.
+- Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
+- Priced in rupees: modular, from ${ADS.FROM_PRICE} INR a month plus a one-time setup fee.
 - Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages

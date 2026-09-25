@@ -165,8 +165,9 @@ const dentalSoftwareLd = {
   applicationCategory: 'HealthApplication',
   applicationSubCategory: 'AI dental software / dental practice management software',
   operatingSystem: 'Web, iOS, Android',
-  url: `${ORIGIN}/ai-dental-software-india`,
-  description: ADS.DESCRIPTION,
+  '@id': `${ORIGIN}/#aumy-dental`,
+  url: `${ORIGIN}/`,
+  description: 'Aumy is AI dental software for dental clinics in India: an AI voice agent and WhatsApp receptionist that answer and book 24/7 in English, Hindi and Marathi, reminders, digital intake and consent, care-gap follow-ups and a complete dental PMS.',
   areaServed: { '@type': 'Country', name: 'India' },
   inLanguage: ['en-IN', 'hi-IN', 'mr-IN'],
   featureList: ADS.CAPABILITIES.map(([t]) => t),
@@ -347,6 +348,13 @@ const routes = [
       mainEntity: ADS.FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
     }, {
       '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': `${ORIGIN}/ai-dental-software-india`,
+      name: ADS.TITLE,
+      dateModified: ADS.UPDATED_ISO,
+      about: { '@id': `${ORIGIN}/#aumy-dental` },
+    }, {
+      '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Aumy', item: `${ORIGIN}/` },
@@ -488,9 +496,9 @@ const routes = [
     slug: '',
     // Same strings as src/pages/Home.js and public/index.html (owner 2026-09-25:
     // lead with "AI dental software India").
-    title: 'Aumy — AI Dental Software for Clinics in India | Clinic Operations & Patient Engagement',
+    title: 'Aumy — AI Dental Software for Dental Clinics in India',
     description:
-      'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls, WhatsApp, appointments, intake, consent and invoices, plus the patient journey (reminders, after-care, care gaps, reactivation) in one connected platform. Grow your clinic. Don’t grow the chaos.',
+      'Aumy is AI dental software for dental clinics in India: calls and WhatsApp answered, appointments, intake, reminders, care gaps and a complete dental PMS.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/images/hero-dental.jpg`,
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
