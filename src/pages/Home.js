@@ -1,52 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import LeakCheck from '../components/LeakCheck';
 import DemoPlaylist from '../components/DemoPlaylist';
 import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
+import AumyLoop from '../components/AumyLoop';
 import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
 import './HomeClinic.css';
-
-/**
- * The hero's silent background film. Desktop and tablet only: on a phone the
- * hero shade is near-opaque, so the still carries it and saves the data.
- * Skipped too for visitors who ask for less motion or have data-saver on.
- * Fades in over the still only once it is actually PLAYING — an iPhone in
- * Low Power Mode loads it but refuses autoplay, and a paused frame with a
- * play glyph must never replace the still.
- */
-const HeroFilm = () => {
-  const [show, setShow] = useState(false);
-  const [ready, setReady] = useState(false);
-  const ref = useRef(null);
-  useEffect(() => {
-    const mq = (q) => window.matchMedia && window.matchMedia(q).matches;
-    const saveData = navigator.connection && navigator.connection.saveData;
-    if (!mq('(prefers-reduced-motion: reduce)') && !saveData && mq('(min-width: 761px)')) setShow(true);
-  }, []);
-  useEffect(() => {
-    const el = ref.current;
-    if (!show || !el) return;
-    // React does not reliably write the `muted` attribute; iOS autoplays only muted video.
-    el.muted = true;
-    const p = el.play();
-    if (p && p.catch) p.catch(() => {});
-  }, [show]);
-  if (!show) return null;
-  return (
-    <video
-      ref={ref}
-      className={`lux-hero-film ${ready ? 'is-ready' : ''}`}
-      autoPlay muted loop playsInline preload="auto"
-      poster="/images/hero-aumy-desk.jpg"
-      onPlaying={() => setReady(true)}
-    >
-      <source src="/videos/aumy-hero.webm" type="video/webm" />
-      <source src="/videos/aumy-hero.mp4" type="video/mp4" />
-    </video>
-  );
-};
 
 const Check = () => (
   <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -143,7 +104,7 @@ const Home = () => {
       description:
         'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
       canonical: 'https://aumai.co.in/',
-      image: 'https://aumai.co.in/images/hero-aumy-desk.jpg',
+      image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
   }, []);
 
@@ -151,25 +112,8 @@ const Home = () => {
     <div className="ch-home">
       {/* HERO */}
       <section className="ch-hero lux-hero">
-        {/* Background film (owner 2026-09-26): the reception phone quietly
-            handled in the foreground while the receptionist greets a patient,
-            i.e. "Aumy handles the phone, your team gives patients their full
-            attention". Veo can't draw readable screens, so the product itself
-            appears as the real moments floating on the right. */}
-        <div className="lux-hero-media" aria-hidden="true">
-          <picture>
-            <source srcSet="/images/hero-aumy-desk.webp" type="image/webp" />
-            <img src="/images/hero-aumy-desk.jpg" alt="" />
-          </picture>
-          <HeroFilm />
-        </div>
-        <div className="lux-hero-shade" aria-hidden="true" />
-        <ul className="lux-moments" aria-label="What Aumy is doing in the background">
-          <li><span className="lux-moment-k">WhatsApp enquiry</span>Answered in 4 seconds</li>
-          <li><span className="lux-moment-k">Appointment</span>Confirmed · Tue 11:30 AM</li>
-          <li><span className="lux-moment-k">Reminders</span>Sent to 38 patients for tomorrow</li>
-          <li><span className="lux-moment-k">Recall</span>6-month check-up booked</li>
-        </ul>
+        {/* Owner 2026-09-26: the background film did not suit the product.
+            The hero now shows the product itself — the Aumy loop (AumyLoop). */}
         <span className="lux-scroll-cue" aria-hidden="true" />
         <div className="ch-container ch-hero-grid lux-hero-grid">
           <div className="ch-hero-text">
@@ -214,6 +158,9 @@ const Home = () => {
             </p>
           </div>
 
+          <div className="lux-hero-loop">
+            <AumyLoop />
+          </div>
         </div>
       </section>
 

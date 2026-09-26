@@ -30,6 +30,19 @@ const PRICING = require('../src/data/pricing.json');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The founder: same words as the About page (src/data/founder.js).
 const FOUNDER = require('../src/data/founder');
+const AIR = require('../src/data/aiReceptionist');
+const WA = require('../src/data/whatsappAutomation');
+const COMP = require('../src/data/compliance');
+// FAQPage JSON-LD straight from a page's own FAQ list ({q, a}), so the
+// answers an assistant quotes are word for word what the page says.
+const faqPageLd = (faqs) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+// Crawler HTML for the FAQ block and a [title, body] list.
+const faqHtml = (faqs, heading) => `<h2>${esc(heading)}</h2>${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
+const pairsHtml = (pairs) => `<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('')}</ul>`;
 const PC = PRICING.card;
 const rs = (n) => '&#8377;' + Math.round(Number(n) || 0).toLocaleString('en-IN');
 const rsText = (n) => 'Rs ' + Math.round(Number(n) || 0).toLocaleString('en-IN');
@@ -65,6 +78,26 @@ const esc = (s) =>
  * has stopped naming. Deliberately prints no clinic count — the number is not
  * the proof, the names are.
  */
+// The site's own links, in the crawler HTML of every India page. AI crawlers
+// do not run JavaScript, so without this each prerendered page was an island
+// (no nav, no footer) — the React header/footer replace it for people.
+const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
+  ['/', 'Aumy — AI dental software'],
+  ['/ai-dental-software-india', 'AI dental software in India'],
+  ['/ai-receptionist', 'AI receptionist for dental clinics'],
+  ['/whatsapp-automation-for-clinics', 'WhatsApp automation for clinics'],
+  ['/ai-dental-clinic-operations', 'AI dental clinic operations'],
+  ['/ai-patient-engagement', 'AI patient journey & engagement'],
+  ['/revenue-generator', 'How Aumy works'],
+  ['/pricing', 'Pricing'],
+  ['/switch', 'Switching dental software'],
+  ['/demos', 'Demo videos'],
+  ['/growth', 'Growth Hub'],
+  ['/compliance', 'Security & compliance'],
+  ['/about', 'About the founder'],
+  ['/contact', 'Contact'],
+].map(([href, label]) => `<li><a href="${href}">${label.replace(/&/g, '&amp;')}</a></li>`).join('')}</ul></nav>`;
+
 function clinicsStripHtml() {
   if (!consentedClinics.length) {
     return `<h2>Trusted by dental clinics in ${esc(servedCities())}.</h2>
@@ -102,20 +135,29 @@ function apply(html, r) {
     out = setTag(out, /(<meta property="og:image" content=")[^"]*(")/, `$1${r.ogImage}$2`);
     out = setTag(out, /(<meta name="twitter:image" content=")[^"]*(")/, `$1${r.ogImage}$2`);
   }
-  if (r.jsonld) {
-    const blocks = r.jsonld
+  // One Aumy product entity (#aumy-dental) on every India page — the template
+  // no longer carries its own, conflicting copy (SEO review 2026-09-26).
+  const ld = [...(r.jsonld || [])];
+  if (MARKET !== 'us' && !ld.includes(dentalSoftwareLd)) ld.push(dentalSoftwareLd);
+  // Google treats FAQ markup for text that is not on the page as spam: every
+  // FAQPage question must also be in the crawler HTML. Missing ones are added.
+  const faqExtra = ld.filter((o) => o && o['@type'] === 'FAQPage')
+    .flatMap((o) => o.mainEntity || [])
+    .filter((q) => !String(r.content || '').includes(esc(q.name)) && !String(r.content || '').includes(q.name));
+  r = { ...r, content: (r.content || '')
+    + (faqExtra.length ? `<section><div class="ch-container ch-narrow"><h2>Questions, answered</h2>${faqExtra.map((q) => `<h3>${esc(q.name)}</h3><p>${esc(q.acceptedAnswer && q.acceptedAnswer.text)}</p>`).join('')}</div></section>` : '')
+    + (MARKET === 'us' ? '' : SITE_LINKS) };
+  if (ld.length) {
+    const blocks = ld
       .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`)
       .join('');
     out = out.replace('</head>', `${blocks}</head>`);
   }
-  // Onboarding pause (owner 2026-09-15) — same wording as
-  // src/config/onboardingNotice.js; India site only (the US build has no header).
-  const notice = MARKET === 'us'
-    ? ''
-    : `<p class="onboarding-notice">We&rsquo;re not onboarding new clinics until 15 October 2026. <a href="/contact">Join the waitlist</a> and we&rsquo;ll reach out when onboarding reopens.</p>`;
+  // The site-wide onboarding-pause banner was removed (owner 2026-09-26),
+  // here as in Header.js; pricing and contact keep their own notice.
   out = out.replace(
     '<div id="root"></div>',
-    `<div id="root">${notice}<div class="ch-home">${r.content}</div></div>`
+    `<div id="root"><div class="ch-home">${r.content}</div></div>`
   );
   return out;
 }
@@ -140,6 +182,9 @@ const faqLd = {
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  // Same entity as the template node in public/index.html (merged by @id).
+  '@id': `${ORIGIN}/#organization`,
+  ...(MARKET === 'us' ? {} : { founder: { '@id': `${ORIGIN}/about#founder` } }),
   name: MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'AUM AI Healthcare Solutions',
   url: `${ORIGIN}/`,
   logo: `${ORIGIN}/aumy-mark-512.png`,
@@ -186,7 +231,7 @@ const dentalSoftwareLd = {
     },
     url: `${ORIGIN}/pricing`,
   },
-  publisher: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
+  publisher: { '@id': `${ORIGIN}/#organization` },
 };
 
 // SoftwareApplication with offers: this is what makes a product page eligible
@@ -253,7 +298,7 @@ const videoLd = {
 const routes = [
   {
     slug: 'pricing',
-    title: `Aumy Pricing — from ${rsText(PC.platformFee.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
+    title: `Dental Clinic Software Price in India — from ${rsText(PC.platformFee.standard)}/mo | Aumy`,
     description:
       `Transparent pricing for dental clinics. ${rsText(PC.platformFee.standard)}/month (Standard AI) or ${rsText(PC.platformFee.premium)}/month (Premium AI) includes ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
     canonical: `${ORIGIN}/pricing`,
@@ -293,53 +338,40 @@ const routes = [
   },
   {
     slug: 'ai-receptionist',
-    title: 'AI Receptionist for Dental Clinics — 24/7 Calls & WhatsApp | Aumy',
-    description:
-      'Aumy\u2019s AI receptionist answers every call and WhatsApp enquiry for your dental clinic 24/7 — in the patient\u2019s own language — and converts enquiries into booked appointments. Works alongside your existing software.',
+    title: AIR.TITLE,
+    description: AIR.DESCRIPTION,
     canonical: `${ORIGIN}/ai-receptionist`,
-    jsonld: [orgLd, {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: "Will an AI receptionist replace my front-desk staff?", acceptedAnswer: { '@type': 'Answer', text: "No — it covers what staff cannot: nights, Sundays, lunch rushes and simultaneous calls. Your team keeps full control and can join any conversation at any time." } },
-        { '@type': 'Question', name: "Will patients realise they are talking to AI?", acceptedAnswer: { '@type': 'Answer', text: "Aumy replies naturally in the patient's own language and hands anything sensitive to your team immediately. Patients care about getting an instant, helpful answer." } },
-        { '@type': 'Question', name: "Which languages does the AI receptionist speak?", acceptedAnswer: { '@type': 'Answer', text: "It replies in the language the patient writes in — English, Hindi, Marathi and more — switching automatically mid-conversation." } },
-        { '@type': 'Question', name: "How long does setup take?", acceptedAnswer: { '@type': 'Answer', text: "Onboarding is done for you — WhatsApp connection and your treatments configured in your doctors' own words. Most clinics are live within a week." } },
-      ],
-    }],
+    jsonld: [orgLd, faqPageLd(AIR.FAQS)],
     content: `
       <section><div class="ch-container ch-narrow">
-        <h1 class="ch-hero-title">An AI receptionist that never misses a patient</h1>
-        <p>Every call and WhatsApp message answered in seconds — nights, Sundays, lunch rush — in your patient's own language, and converted into a booked appointment. A busy clinic misses 20–30% of its calls; every missed enquiry is a patient who books with the next clinic on Google.</p>
-        <p>Aumy's AI receptionist answers instantly, books appointments end-to-end, recovers missed calls over WhatsApp, follows up until patients decide, and hands over to your staff the moment they want to join. It is trained on your clinic's treatments, doctors and pricing — and it is the first stage of the Aumy patient journey: Convert, Care, Retain, Reactivate.</p>
+        <p class="ch-eyebrow">AI receptionist for dental clinics</p>
+        <h1 class="ch-hero-title">${esc(AIR.HERO.title)}</h1>
+        <p>${esc(AIR.HERO.sub)}</p>
+        <h2>${esc(AIR.MATHS.title)}</h2><p>${esc(AIR.MATHS.body)}</p>
+        <h2>What the AI receptionist does</h2>${pairsHtml(AIR.CAPABILITIES)}
+        <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
+        ${faqHtml(AIR.FAQS, 'AI receptionist questions, answered')}
+        <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a></p>
       </div></section>`,
   },
   {
     slug: 'whatsapp-automation-for-clinics',
-    title: 'WhatsApp Automation for Dental Clinics — Official API | Aumy',
-    description:
-      'Aumy automates your dental clinic\u2019s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
+    title: WA.TITLE,
+    description: WA.DESCRIPTION,
     canonical: `${ORIGIN}/whatsapp-automation-for-clinics`,
-    jsonld: [orgLd, {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: "Is this the official WhatsApp API?", acceptedAnswer: { '@type': 'Answer', text: "Yes — Aumy uses the official WhatsApp Business API from Meta on your clinic's own verified number, following Meta's messaging rules, which is why numbers do not get blocked." } },
-        { '@type': 'Question', name: "Is automated WhatsApp messaging spam?", acceptedAnswer: { '@type': 'Answer', text: "No — Aumy sends each patient the message relevant to them at the right moment: their care-gap reminder when due, after-care on the day of treatment, follow-ups while a plan is pending. Opt-outs are honoured instantly." } },
-        { '@type': 'Question', name: "Can staff still use the WhatsApp number normally?", acceptedAnswer: { '@type': 'Answer', text: "Yes. The team sees every conversation and can take over any chat with one tap; the AI steps back the moment a human joins." } },
-        { '@type': 'Question', name: "Do I need a new number or new software?", acceptedAnswer: { '@type': 'Answer', text: "No. Aumy connects to your existing WhatsApp number and runs alongside your existing practice software." } },
-      ],
-    }],
+    jsonld: [orgLd, faqPageLd(WA.FAQS)],
     content: `
       <section><div class="ch-container ch-narrow">
-        <h1 class="ch-hero-title">WhatsApp automation built for dental clinics</h1>
-        <p>India's patients live on WhatsApp. Aumy turns your clinic's number into a system that answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API, across the whole patient journey: Convert, Care, Retain, Reactivate.</p>
-        <p>Unlike broadcast tools, every message is a conversation the AI actually continues: enquiries are nurtured until they book, after-treatment care goes out day by day, care gaps get followed up, lapsed patients get win-back journeys, and happy patients are guided to leave Google reviews. Campaigns run with start/end dates, daily caps and instant opt-out handling — and every booking is attributed back to the message that produced it.</p>
+        <p class="ch-eyebrow">WhatsApp automation for dental clinics</p>
+        <h1 class="ch-hero-title">${esc(WA.HERO.title)}</h1>
+        <p>${esc(WA.HERO.sub)}</p>
+        <h2>${esc(WA.JOURNEY.title)}</h2><p>${esc(WA.JOURNEY.body)}</p>
+        ${pairsHtml(WA.STAGES)}
+        <h2>Not another broadcast tool</h2>${pairsHtml(WA.DIFFERENCE)}
+        ${faqHtml(WA.FAQS, 'WhatsApp automation questions, answered')}
+        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a></p>
       </div></section>`,
   },
-  // "AI dental software India" (owner 2026-09-25). Built from the SAME data
-  // file as the React page (src/data/aiDentalSoftwareIndia.js), so the crawler
-  // copy cannot drift from what people see.
   {
     slug: 'ai-dental-software-india',
     title: ADS.TITLE,
@@ -503,7 +535,7 @@ const routes = [
     description:
       'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
     canonical: `${ORIGIN}/`,
-    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
+    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
@@ -579,11 +611,11 @@ const routes = [
   },
   {
     slug: 'revenue-generator',
-    title: 'How Aumy Works — AI-Powered Dental Clinic Operations & Patient Journey | The Operating System for a Growing Dental Clinic',
+    title: 'How Aumy Works — The Operating System for a Growing Dental Clinic',
     description:
       'How Aumy manages the chaos that comes with growth: AI-powered clinic operations (calls, WhatsApp, appointments, digital registration, intake, consent, X-rays, invoices) and an AI-powered patient journey (reminders, after-care, care gaps, reactivation) on one connected platform — Convert, Care, Retain, Reactivate.',
     canonical: `${ORIGIN}/revenue-generator`,
-    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
+    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">How Aumy works</p>
@@ -660,16 +692,19 @@ const routes = [
   },
   {
     slug: 'compliance',
-    title: 'Security & Compliance | Aumy Healthcare Platform',
-    description:
-      'How Aumy protects patient data: encryption in transit and at rest, role-based access, audit logging, consent handling and data deletion — healthcare-grade security built into the platform.',
+    title: COMP.TITLE,
+    description: COMP.DESCRIPTION,
     canonical: `${ORIGIN}/compliance`,
     jsonld: [orgLd],
     content: `
-      <section class="ch-hero"><div class="ch-container ch-narrow">
+      <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Security &amp; compliance</p>
-        <h1 class="ch-hero-title">Healthcare-grade security, built in.</h1>
-        <p class="ch-hero-sub">Patient data is encrypted in transit and at rest, access is role-based and audited, consent is recorded, and data can be deleted on request. Private by design.</p>
+        <h1 class="ch-hero-title">${esc(COMP.HEADLINE)}</h1>
+        <p class="ch-hero-sub">${esc(COMP.SUBTITLE)}</p>
+        <p>${esc(COMP.INTRO)}</p>
+        ${COMP.SECTIONS.map((sec) => `<h2>${esc(sec.title)}</h2>${sec.lead ? `<p>${esc(sec.lead)}</p>` : ''}<ul>${sec.items.map(([k, v]) => `<li>${k ? `<strong>${esc(k)}</strong> ` : ''}${esc(v)}</li>`).join('')}</ul>`).join('')}
+        <p>${esc(COMP.DISCLAIMER)}</p>
+        <p>Questions from your IT or compliance team? Email <a href="mailto:${COMP.CONTACT_EMAIL}">${COMP.CONTACT_EMAIL}</a>.</p>
       </div></section>`,
   },
   {
@@ -791,10 +826,11 @@ const routes = [
     title: `About Aumy & its founder, ${FOUNDER.NAME} | AI Dental Software`,
     description: `Aumy is built by ${FOUNDER.NAME}: ${FOUNDER.SUMMARY}`,
     canonical: `${ORIGIN}/about`,
-    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
+    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'Person',
+      '@id': 'https://aumai.co.in/about#founder',
       name: FOUNDER.NAME,
       jobTitle: FOUNDER.ROLE,
       description: FOUNDER.SUMMARY,
@@ -881,7 +917,7 @@ for (const p of growthPosts) {
     canonical: `${ORIGIN}/growth/${p.slug}`,
     // Social shares of articles need an image; the dental hero is the site
     // default until articles get their own art.
-    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
+    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     jsonld: [
       {
         '@context': 'https://schema.org',

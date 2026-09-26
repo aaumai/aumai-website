@@ -555,3 +555,116 @@
 .site-lux .aumy-page .section-subtitle { color: rgba(255, 255, 255, 0.72); }
 .site-lux .aumy-page .section-label { color: var(--lux-gold-2); }
 .site-lux .aumy-page .section-title { color: #fff; }
+
+/* ── Document pages (compliance) ───────────────────────────────────────── */
+.site-lux .lux-doc { max-width: 860px; margin: 0 auto; padding: 80px 24px 110px; }
+.site-lux .lux-doc-intro { font-family: var(--lux-serif); font-size: 26px; line-height: 1.5; font-weight: 400; color: var(--lux-navy); margin: 0 0 56px; }
+.site-lux .lux-doc-section { padding: 36px 0; border-top: 1px solid var(--lux-line); }
+.site-lux .lux-doc-section h2 { font-family: var(--lux-serif); font-weight: 400; font-size: 34px; color: var(--lux-navy); margin: 0 0 18px; }
+.site-lux .lux-doc-section p { font-size: 17px; line-height: 1.8; margin: 0 0 14px; }
+.site-lux .lux-doc-section ul { list-style: none; margin: 0; padding: 0; }
+.site-lux .lux-doc-section li { position: relative; padding: 10px 0 10px 24px; font-size: 16.5px; line-height: 1.75; border-bottom: 1px solid rgba(226, 219, 205, 0.6); }
+.site-lux .lux-doc-section li::before { content: ''; position: absolute; left: 2px; top: 22px; width: 6px; height: 6px; border-radius: 50%; background: var(--lux-gold); }
+.site-lux .lux-doc-section li strong { color: var(--lux-navy); font-weight: 500; }
+.site-lux .lux-doc-disclaimer { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--lux-line); font-size: 13.5px; color: #6b7280; line-height: 1.7; }
+.site-lux .lux-doc-contact { font-size: 15px; }
+
+/* ── Hero: the Aumy loop instead of the film (owner 2026-09-26) ─────────── */
+.site-lux .ch-hero.lux-hero {
+  background:
+    radial-gradient(52rem 34rem at 78% 42%, rgba(37, 99, 235, 0.22), transparent 62%),
+    radial-gradient(36rem 26rem at 88% 8%, rgba(184, 151, 90, 0.16), transparent 60%),
+    radial-gradient(rgba(220, 197, 148, 0.07) 1px, transparent 1px) 0 0 / 26px 26px,
+    var(--lux-navy);
+}
+.site-lux .lux-hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+.lux-hero-loop { display: flex; justify-content: center; }
+
+.lux-loop { width: 100%; max-width: 520px; text-align: center; }
+.lux-loop-kicker { margin: 0 0 6px; font-family: var(--lux-serif); font-weight: 300; font-size: 30px; color: #fff; }
+.lux-loop-kicker em { font-style: italic; color: var(--lux-gold-2); }
+.lux-loop-stage { position: relative; width: 100%; aspect-ratio: 1 / 1; }
+.lux-loop-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.lux-loop-ring { fill: none; stroke: rgba(220, 197, 148, 0.18); stroke-width: 0.35; }
+.lux-loop-ring-lit {
+  fill: none; stroke: var(--lux-gold-2); stroke-width: 0.55; stroke-linecap: round;
+  stroke-dasharray: 238.76; /* 2π × 38 */
+  transform: rotate(-90deg); transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 1.2px rgba(220, 197, 148, 0.9));
+  transition: stroke-dashoffset 2.4s cubic-bezier(0.45, 0, 0.25, 1);
+}
+.lux-loop-comet { transform-origin: 50% 50%; transition: transform 2.4s cubic-bezier(0.45, 0, 0.25, 1); }
+.lux-loop-comet circle { fill: #fff; filter: drop-shadow(0 0 2.2px #dcc594) drop-shadow(0 0 5px rgba(220, 197, 148, 0.7)); }
+
+.lux-loop-core {
+  position: absolute; left: 50%; top: 50%; width: 30%; aspect-ratio: 1; transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center; border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #16234f, #0a0f22 70%);
+  box-shadow: 0 0 0 1px rgba(220, 197, 148, 0.35), 0 0 60px rgba(37, 99, 235, 0.35), inset 0 0 30px rgba(10, 15, 34, 0.8);
+  animation: lux-core 5.2s ease-in-out infinite;
+}
+.lux-loop-core img { width: 46%; height: auto; border-radius: 18%; }
+@keyframes lux-core { 0%, 100% { box-shadow: 0 0 0 1px rgba(220, 197, 148, 0.35), 0 0 50px rgba(37, 99, 235, 0.28), inset 0 0 30px rgba(10, 15, 34, 0.8); } 50% { box-shadow: 0 0 0 1px rgba(220, 197, 148, 0.6), 0 0 80px rgba(37, 99, 235, 0.45), inset 0 0 30px rgba(10, 15, 34, 0.8); } }
+
+.lux-loop-node {
+  position: absolute; transform: translate(-50%, -50%);
+  display: inline-flex; flex-direction: column; align-items: center; gap: 5px;
+  min-width: 104px; padding: 11px 14px 10px;
+  background: rgba(16, 26, 62, 0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(220, 197, 148, 0.22);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--lux-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  transition: background 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease, transform 0.6s ease;
+}
+.lux-loop-node svg { color: var(--lux-gold-2); opacity: 0.8; transition: color 0.6s ease; }
+.lux-loop-node.is-done { border-color: rgba(220, 197, 148, 0.5); color: #fff; }
+.lux-loop-node.is-live {
+  background: linear-gradient(135deg, #dcc594, #b8975a); color: var(--lux-navy); border-color: #dcc594;
+  box-shadow: 0 0 0 6px rgba(220, 197, 148, 0.12), 0 14px 40px -10px rgba(220, 197, 148, 0.65);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.lux-loop-node.is-live svg { color: var(--lux-navy); opacity: 1; }
+.lux-loop.is-closing .lux-loop-node { border-color: var(--lux-gold-2); color: #fff; box-shadow: 0 0 24px -6px rgba(220, 197, 148, 0.55); }
+
+.lux-loop-caption { min-height: 88px; margin-top: 4px; animation: lux-caption 0.7s ease both; }
+.lux-loop-caption-title { margin: 0; font-family: var(--lux-serif); font-size: 30px; font-weight: 400; color: #fff; line-height: 1.15; }
+.lux-loop.is-closing .lux-loop-caption-title { color: var(--lux-gold-2); font-style: italic; }
+.lux-loop-caption-line { margin: 8px auto 0; max-width: 430px; text-wrap: balance; font-size: 15.5px; line-height: 1.55; color: rgba(255, 255, 255, 0.72); }
+@keyframes lux-caption { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.lux-loop.is-still .lux-loop-node { border-color: rgba(220, 197, 148, 0.5); color: #fff; }
+@media (prefers-reduced-motion: reduce) { .lux-loop-core, .lux-loop-caption { animation: none; } }
+
+@media (max-width: 920px) {
+  .site-lux .lux-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .lux-hero-loop { order: 2; }
+  .lux-loop { max-width: 440px; }
+}
+@media (max-width: 480px) {
+  .lux-loop-node { min-width: 84px; padding: 8px 9px 7px; font-size: 9.5px; letter-spacing: 0.1em; }
+  .lux-loop-kicker { font-size: 25px; }
+  .lux-loop-caption-title { font-size: 25px; }
+}
+/* The film-era pieces are gone from the page; the shade/media rules are unused. */
+.site-lux .ch-hero.lux-hero { min-height: auto; padding: 88px 0 110px; }
+@media (max-width: 760px) { .site-lux .ch-hero.lux-hero { padding: 64px 0 88px; } }
+/* Two columns now (text + loop): keep the headline to three lines. */
+@media (min-width: 921px) { .site-lux .lux-hero .ch-hero-title { font-size: clamp(40px, 4.4vw, 66px); } }
+/* Loop review fixes: Safari transform origin, no page jump, pause, reduced motion, 320px. */
+.lux-loop-comet, .lux-loop-ring-lit { transform-box: view-box; transform-origin: 50px 50px; }
+.lux-loop-caption { min-height: 104px; }
+@media (max-width: 480px) { .lux-loop-caption { min-height: 128px; } }
+.lux-loop { position: relative; }
+.lux-loop-pause {
+  position: absolute; right: 4px; top: 50px; z-index: 2;
+  width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; color: rgba(220, 197, 148, 0.85);
+  border: 1px solid rgba(220, 197, 148, 0.35); border-radius: 50%; cursor: pointer;
+}
+.lux-loop-pause:hover, .lux-loop-pause:focus-visible { color: #fff; border-color: var(--lux-gold-2); outline: none; }
+@media (prefers-reduced-motion: reduce) {
+  .lux-loop-ring-lit, .lux-loop-comet, .lux-loop-node { transition: none; }
+}
+@media (max-width: 360px) {
+  .lux-loop-node { min-width: 74px; padding: 7px 6px 6px; font-size: 8.5px; letter-spacing: 0.06em; }
+}

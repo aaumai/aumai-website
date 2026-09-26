@@ -23,7 +23,7 @@
 
     <!-- Open Graph (social / link previews) -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="AUM AI" />
+    <meta property="og:site_name" content="Aumy" />
     <meta property="og:title" content="Aumy — AI Dental Software for Dental Clinics in India" />
     <meta property="og:description" content="AI-Powered Dental Clinic Management. Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care and digital records — so your team can focus on patients, not coordination." />
     <meta property="og:url" content="https://aumai.co.in/" />
@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Structured data: Organization + the Aumy platform as a SoftwareApplication -->
+    <!-- Structured data: Organization + WebSite. The Aumy product entity (#aumy-dental) is added per page by scripts/prerender.js — one copy, never two. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -51,40 +51,30 @@
           "@type": "Organization",
           "@id": "https://aumai.co.in/#organization",
           "name": "AUM AI Healthcare Solutions",
+          "alternateName": ["Aumy", "AUM AI"],
           "url": "https://aumai.co.in/",
           "logo": "https://aumai.co.in/aumy-mark-512.png",
-          "description": "AI-native clinic growth and automation platform for dental clinics.",
-          "areaServed": "IN"
+          "description": "AUM AI builds Aumy, AI dental software for dental clinics in India.",
+          "areaServed": "IN",
+          "foundingLocation": { "@type": "Place", "name": "Pune, Maharashtra, India" },
+          "founder": {
+            "@type": "Person",
+            "@id": "https://aumai.co.in/about#founder",
+            "name": "Jayesh Chaudhari",
+            "jobTitle": "Founder, Aumy",
+            "url": "https://aumai.co.in/about"
+          }
         },
         {
           "@type": "WebSite",
           "@id": "https://aumai.co.in/#website",
           "url": "https://aumai.co.in/",
-          "name": "AUM AI",
+          "name": "Aumy",
+          "alternateName": ["Aumy by AUM AI", "AUM AI"],
+          "inLanguage": "en-IN",
           "publisher": { "@id": "https://aumai.co.in/#organization" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Aumy — The Operating System for a Growing Dental Clinic",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "Web, WhatsApp",
-          "url": "https://aumai.co.in/revenue-generator",
-          "description": "Aumy manages the chaos that comes with growth in a dental clinic — coordinating patients, people and processes from the first enquiry to ongoing care: AI voice agent and WhatsApp receptionist, appointments and reminders, no-shows, digital registration, intake and consent, care gaps and reactivation, with a built-in dental PMS and ambient AI scribe.",
-          "publisher": { "@id": "https://aumai.co.in/#organization" },
-          "audience": {
-            "@type": "Audience",
-            "audienceType": "Dental clinics"
-          },
-          "featureList": [
-            "AI voice agent & WhatsApp receptionist with appointment booking",
-            "Appointment reminders, confirmations, rescheduling and no-shows",
-            "Digital registration, intake and consent",
-            "After-care, care gaps and patient reactivation",
-            "Lead follow-up and privacy-safe ad attribution",
-            "Built-in dental PMS and ambient AI scribe"
-          ],
-          "offers": { "@type": "Offer", "category": "SaaS", "availability": "https://schema.org/InStock" }
         }
+
       ]
     }
     </script>

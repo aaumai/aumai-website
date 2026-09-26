@@ -104,7 +104,7 @@ const PricingPage = () => {
     window.scrollTo(0, 0);
     const p = card.platformFee;
     setPageSeo({
-      title: `Aumy Pricing — from ${inr(p.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
+      title: `Dental Clinic Software Price in India — from ${inr(p.standard)}/mo | Aumy`,
       description: `Transparent pricing for dental clinics. ${inr(p.standard)}/month (Standard AI) or ${inr(p.premium)}/month (Premium AI) includes ${card.included.enquiries} enquiries and ${card.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
       canonical: 'https://aumai.co.in/pricing',
     });

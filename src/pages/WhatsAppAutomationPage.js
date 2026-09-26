@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import { TITLE, DESCRIPTION, HERO, JOURNEY, STAGES, DIFFERENCE, FAQS } from '../data/whatsappAutomation';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -9,51 +10,12 @@ const Check = () => (
   </svg>
 );
 
-const STAGES = [
-  ['Convert', 'New enquiries answered in seconds and nurtured until they book — with treatment-aware follow-ups for implants, aligners, RCTs and more.'],
-  ['Care', 'Day-by-day after-treatment instructions sent automatically, matched to the procedure performed — fewer anxious calls, better outcomes.'],
-  ['Retain', 'Cleaning and check-up care gaps followed up on schedule — no register, no reminder diary, no staff time.'],
-  ['Reactivate', 'Patients who haven’t visited in months get personal win-back journeys that bring them back — patients who already know and trust you.'],
-];
-
-const DIFFERENCE = [
-  ['Official WhatsApp Business API', 'Your clinic’s own verified number and branding on Meta’s approved business channel — not an unofficial bulk tool that gets numbers banned.'],
-  ['Conversations, not blasts', 'Every message can be replied to — and the AI actually answers, books and follows up. Broadcast tools stop where Aumy starts.'],
-  ['Campaigns with guardrails', 'Festival offers and promotions with start/end dates, daily send caps and automatic opt-out handling built in.'],
-  ['Human takeover any time', 'Your team can step into any conversation with one tap; the AI yields instantly and stays out while they chat.'],
-  ['Revenue attribution', 'Every booking is traced back to the message, campaign or channel that produced it — you see what each rupee returned.'],
-];
-
-const FAQS = [
-  {
-    q: 'Is this the official WhatsApp? Will my number get blocked?',
-    a: 'Aumy uses the official WhatsApp Business API from Meta on your clinic’s own number. It follows Meta’s messaging rules — approved templates, opt-outs, send limits — which is exactly why it doesn’t get blocked the way unofficial bulk tools do.',
-  },
-  {
-    q: 'Isn’t automated WhatsApp just spam?',
-    a: 'Blast tools are spam. Aumy sends each patient the message that’s relevant to them at the moment it’s relevant — their care-gap reminder when it’s due, their after-care on the day of treatment, their follow-up when their plan is pending. Relevance is the opposite of spam, and opt-outs are honoured instantly.',
-  },
-  {
-    q: 'Can my staff still use the WhatsApp number normally?',
-    a: 'Yes. Your team sees every conversation, can jump in whenever they want, and the AI steps back the moment they do. The number stays fully theirs.',
-  },
-  {
-    q: 'What can I send campaigns about?',
-    a: 'Festival offers, new services, health-camp announcements — composed with AI, sent to the right patient segments with daily caps and campaign start/end dates, and measured down to bookings and revenue.',
-  },
-  {
-    q: 'Do I need new software or a new number?',
-    a: 'No. Aumy connects to your existing WhatsApp number and runs alongside your existing practice software. Setup is done for you, typically within a week.',
-  },
-];
-
 const WhatsAppAutomationPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({
-      title: 'WhatsApp Automation for Dental Clinics — Official API | Aumy',
-      description:
-        'Aumy automates your dental clinic’s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
+      title: TITLE,
+      description: DESCRIPTION,
       canonical: 'https://aumai.co.in/whatsapp-automation-for-clinics',
     });
   }, []);
@@ -63,12 +25,8 @@ const WhatsAppAutomationPage = () => {
       <section className="ch-hero" style={{ paddingBottom: 24 }}>
         <div className="ch-container ch-narrow ch-center">
           <span className="ch-eyebrow">WhatsApp Automation</span>
-          <h1 className="ch-hero-title">WhatsApp automation built for dental clinics</h1>
-          <p className="ch-hero-sub">
-            India&rsquo;s patients live on WhatsApp. Aumy turns your clinic&rsquo;s number into a system that
-            answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API,
-            across the whole patient journey.
-          </p>
+          <h1 className="ch-hero-title">{HERO.title}</h1>
+          <p className="ch-hero-sub">{HERO.sub}</p>
           <div style={{ marginTop: 18, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/demos" className="ch-btn ch-btn-primary">See it live on a real clinic&rsquo;s WhatsApp</Link>
             <Link to="/pricing" className="ch-btn ch-btn-ghost">View pricing</Link>
@@ -78,11 +36,8 @@ const WhatsAppAutomationPage = () => {
 
       <section style={{ padding: '20px 0 8px' }}>
         <div className="ch-container ch-narrow ch-center">
-          <h2 className="ch-h2" style={{ textAlign: 'center' }}>One number, the whole patient journey</h2>
-          <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>
-            Most clinics use WhatsApp manually — replying when the front desk gets a minute, forgetting
-            follow-ups by Friday. Aumy runs the entire patient journey on it, automatically.
-          </p>
+          <h2 className="ch-h2" style={{ textAlign: 'center' }}>{JOURNEY.title}</h2>
+          <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>{JOURNEY.body}</p>
         </div>
       </section>
 

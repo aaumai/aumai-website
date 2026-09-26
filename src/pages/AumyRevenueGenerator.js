@@ -110,7 +110,7 @@ const AumyRevenueGenerator = () => {
       description:
         'How Aumy manages the chaos that comes with growth: calls, WhatsApp, appointments, follow-ups, digital registration, intake, consent, X-rays and invoices on one connected platform — Convert, Care, Retain, Reactivate. Grow your clinic. Don’t grow the chaos.',
       canonical: 'https://aumai.co.in/revenue-generator',
-      image: 'https://aumai.co.in/images/hero-aumy-desk.jpg',
+      image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
   }, []);
 

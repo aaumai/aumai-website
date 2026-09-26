@@ -24,6 +24,8 @@ const path = require('path');
 const { growthPosts } = require('../src/data/growthPosts');
 const { CALCULATORS } = require('../src/data/calculators');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
+// The rate card the pricing page is built from, so llms.txt quotes the same numbers.
+const PRICING = require('../src/data/pricing.json');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -146,10 +148,11 @@ const LLMS = {
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
 - Onboarding of new clinics is paused until 15 October 2026; clinics can join the waitlist at ${ORIGIN}/contact. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
+- Founder: Jayesh Chaudhari — 18 years in healthcare technology (clinic workflows, revenue cycle, compliance, interoperability, AI); built Aumy after working closely with dental clinics in the USA, Dubai and India. https://aumai.co.in/about
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
 - Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
-- Priced in rupees: modular, from ${ADS.FROM_PRICE} INR a month plus a one-time setup fee.
+- Priced in rupees: a platform fee of ${ADS.FROM_PRICE} INR a month (Standard AI) or ${Math.round(Number(PRICING.card.platformFee.premium) || 0).toLocaleString('en-IN')} INR (Premium AI), covering the first ${PRICING.card.included.enquiries} enquiries and ${PRICING.card.included.visits} patient visits a month, with extra usage priced in falling bands; plus a one-time setup fee. Prices exclude GST.
 - Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages
@@ -161,7 +164,12 @@ const LLMS = {
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
-- ${ORIGIN}/pricing — Aumy pricing: modular, priced by the modules a clinic needs (Clinic OS, Patient Journey, Get Found, Voice Assistant, Meta Ads Management)
+- ${ORIGIN}/pricing — Aumy pricing: a monthly platform fee (Standard or Premium AI) that includes a set of enquiries and patient visits, usage bands beyond that, optional add-ons (AI voice agent, Get Found, Meta Ads management) and a one-time setup fee; with a price calculator
+- ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
+- ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
+- ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
+- ${ORIGIN}/contact — talk to the Aumy team
+- ${ORIGIN}/podcast — the Dental Growth podcast
 - ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments
 - ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: care-gap reminders, reactivation, campaigns
 - ${ORIGIN}/ai-dental-clinic-operations — AI-powered dental clinic operations: every call and WhatsApp answered, appointment orchestration, digital registration, intake and consent, invoices, one team inbox
