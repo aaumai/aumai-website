@@ -125,6 +125,10 @@ const Home = () => {
               Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care,
               digital records — so your team can focus on patients, not coordination.
             </p>
+            {/* Owner 2026-09-26: "never lose a patient ever to a missed call or slow response to WhatsApp". */}
+            <p className="lux-promise">
+              Never lose a patient to a missed call or a slow WhatsApp reply <em>— ever.</em>
+            </p>
             <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
             <p className="ch-hero-sub">
               <strong>For dental clinics that are growing — and those ready to grow.</strong>

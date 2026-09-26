@@ -668,3 +668,12 @@
 @media (max-width: 360px) {
   .lux-loop-node { min-width: 74px; padding: 7px 6px 6px; font-size: 8.5px; letter-spacing: 0.06em; }
 }
+
+/* Hero promise line (owner 2026-09-26): a pledge, not another paragraph. */
+.site-lux .lux-promise {
+  margin: 4px 0 22px; padding: 4px 0 4px 18px; max-width: 600px;
+  border-left: 2px solid var(--lux-gold);
+  font-family: var(--lux-serif); font-size: 25px; line-height: 1.35; font-weight: 400; color: #fff;
+}
+.site-lux .lux-promise em { font-style: italic; color: var(--lux-gold-2); white-space: nowrap; }
+@media (max-width: 560px) { .site-lux .lux-promise { font-size: 21px; } }
