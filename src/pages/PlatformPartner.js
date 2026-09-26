@@ -8,9 +8,9 @@ import './Page.css';
 const PlatformPartner = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'White-Label Platform Partner Program — Resell AUMY Under Your Own Brand | AUM AI',
+      title: 'White-Label Platform Partner Program — Resell Aumy Under Your Own Brand | AUM AI',
       description:
-        'Agencies, voice-AI and revenue-recovery operators: run AUMY as your own white-labelled platform, exclusive to your territory, on a flat per-clinic rental. Sell the complete clinic growth engine — ads + Meta CAPI, AI receptionist, booking, recalls, reactivation, reviews, ROI dashboards and a light EHR — without building any of it.',
+        'Agencies, voice-AI and revenue-recovery operators: run Aumy as your own white-labelled platform, exclusive to your territory, on a flat per-clinic rental. Sell the complete clinic growth engine — ads + Meta CAPI, AI receptionist, booking, recalls, reactivation, reviews, ROI dashboards and a light EHR — without building any of it.',
       canonical: 'https://aumai.co.in/platform-partner',
       image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
@@ -23,13 +23,13 @@ const PlatformPartner = () => {
   const partnerBenefits = [
     {
       title: 'Your brand, white-labelled',
-      description: 'AUMY runs under your name, your logo, your domain. Your clients see your brand end-to-end — we stay invisible. You own the relationship; we power the platform underneath it.',
+      description: 'Aumy runs under your name, your logo, your domain. Your clients see your brand end-to-end — we stay invisible. You own the relationship; we power the platform underneath it.',
       color: '#10b981',
       icon: 'M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z M6 6h.008v.008H6V6z',
     },
     {
       title: 'Exclusive in your territory',
-      description: 'We partner with one leader per market. Lock your country or region as the exclusive AUMY platform partner — so you build your book without competing against other partners on your home turf.',
+      description: 'We partner with one leader per market. Lock your country or region as the exclusive Aumy platform partner — so you build your book without competing against other partners on your home turf.',
       color: '#3b82f6',
       icon: 'M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418',
     },
@@ -78,7 +78,7 @@ const PlatformPartner = () => {
             </div>
 
             <h1 className="aumy-hero-title">
-              Run AUMY as your own platform —
+              Run Aumy as your own platform —
               <br />
               and <span className="aumy-gradient">own your territory</span>.
             </h1>
@@ -103,7 +103,7 @@ const PlatformPartner = () => {
             </div>
 
             <p className="rev-footnote" style={{ marginTop: '1rem' }}>
-              Looking for AUMY for your own clinic instead?{' '}
+              Looking for Aumy for your own clinic instead?{' '}
               <Link to="/revenue-generator" className="aumy-gradient" style={{ fontWeight: 600 }}>
                 Explore Aumy →
               </Link>
@@ -188,7 +188,7 @@ const PlatformPartner = () => {
       <section className="section aumy-cta-section">
         <div className="container">
           <div className="aumy-cta-card">
-            <h2>Own your market with AUMY</h2>
+            <h2>Own your market with Aumy</h2>
             <p>
               Tell us your territory and the clinics you already serve. We will show you the full platform,
               the white-label setup, and the per-clinic economics — so you can start selling a complete

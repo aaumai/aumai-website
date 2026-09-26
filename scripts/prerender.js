@@ -24,10 +24,12 @@ const { CALCULATORS } = require('../src/data/calculators');
 // clinic that has NOT given permission (or withdraws it) can never survive in
 // the crawler-visible HTML after the app stops showing it.
 const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
-// Prices come from the AUMY API's rate card (the one clinics are billed from),
+// Prices come from the Aumy API's rate card (the one clinics are billed from),
 // snapshotted by scripts/fetch-pricing.js just before the build — never typed here.
 const PRICING = require('../src/data/pricing.json');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
+// The founder: same words as the About page (src/data/founder.js).
+const FOUNDER = require('../src/data/founder');
 const PC = PRICING.card;
 const rs = (n) => '&#8377;' + Math.round(Number(n) || 0).toLocaleString('en-IN');
 const rsText = (n) => 'Rs ' + Math.round(Number(n) || 0).toLocaleString('en-IN');
@@ -123,12 +125,12 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    ['Do you have your own dental software (PMS)?', 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on AUMY, at the same price.'],
-    ['Do I have to replace my current software?', 'No. AUMY works alongside what you already use — it adds the growth and engagement layer on top. You can move onto AUMY’s full PMS later, whenever you choose.'],
+    ['Do you have your own dental software (PMS)?', 'Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on Aumy, at the same price.'],
+    ['Do I have to replace my current software?', 'No. Aumy works alongside what you already use — it adds the growth and engagement layer on top. You can move onto Aumy’s full PMS later, whenever you choose.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
     ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
-    ['Will my staff have to learn something complicated?', 'No. AUMY runs in the background; your team does less, not more.'],
-    ['Is this a product or a service?', 'Both — you get a proven system (AUMY), run and tailored for you by a partner. You are getting a growth partner, not software to figure out alone.'],
+    ['Will my staff have to learn something complicated?', 'No. Aumy runs in the background; your team does less, not more.'],
+    ['Is this a product or a service?', 'Both — you get a proven system (Aumy), run and tailored for you by a partner. You are getting a growth partner, not software to figure out alone.'],
     ['Who actually runs all this?', 'A dedicated growth expert is assigned to your clinic on a permanent basis — they strategise, set up and operate the entire system on your behalf, and review results with you every week.'],
   ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 };
@@ -223,7 +225,7 @@ const bmFaqLd = {
 const demoVideoLd = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: 'One Patient, Five Stages, Zero Typing \u2014 AUMY runs the whole dental patient journey on WhatsApp (live, unedited)',
+  name: 'One Patient, Five Stages, Zero Typing \u2014 Aumy runs the whole dental patient journey on WhatsApp (live, unedited)',
   description:
     'A live, unedited demo on a real dental clinic\u2019s WhatsApp number: a lead from an ad who says \u201clet me think about it\u201d, the unprompted follow-up and booking, day-one aligner aftercare, the tracking recall, an eight-month-dormant patient won back with a \u20b9999 wellness package, and a review ask that listens before asking. Convert, Care, Retain, Reactivate, Grow.',
   thumbnailUrl: 'https://i.ytimg.com/vi/-qw1sp7Ub4k/maxresdefault.jpg',
@@ -240,8 +242,8 @@ const demoVideoLd = {
 const videoLd = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: 'Dr. Ronak, Vinayaka Dental Care — patient growth with AUMY',
-  description: 'A dental clinic owner describes how AUMY reduced no-shows, brought recall patients back, and grew the clinic 20–25% in 2–3 months.',
+  name: 'Dr. Ronak, Vinayaka Dental Care — patient growth with Aumy',
+  description: 'A dental clinic owner describes how Aumy reduced no-shows, brought recall patients back, and grew the clinic 20–25% in 2–3 months.',
   thumbnailUrl: `${ORIGIN}/videos/dr-ronak-poster.jpg`,
   contentUrl: `${ORIGIN}/videos/dr-ronak-vinayaka.mp4`,
   uploadDate: '2026-07-02',
@@ -251,7 +253,7 @@ const videoLd = {
 const routes = [
   {
     slug: 'pricing',
-    title: `AUMY Pricing — from ${rsText(PC.platformFee.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
+    title: `Aumy Pricing — from ${rsText(PC.platformFee.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
     description:
       `Transparent pricing for dental clinics. ${rsText(PC.platformFee.standard)}/month (Standard AI) or ${rsText(PC.platformFee.premium)}/month (Premium AI) includes ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
     canonical: `${ORIGIN}/pricing`,
@@ -259,18 +261,18 @@ const routes = [
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type': 'Question', name: 'How is my AUMY price worked out?', acceptedAnswer: { '@type': 'Answer', text: `A platform fee of ${rsText(PC.platformFee.standard)} a month on Standard AI or ${rsText(PC.platformFee.premium)} on Premium covers the first ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits each month. Beyond that each extra enquiry and visit is charged at a rate that falls as the clinic gets busier, band by band like tax slabs. Add-ons (AI voice agent, Get Found, Meta Ads management) are flat monthly fees.` } },
+        { '@type': 'Question', name: 'How is my Aumy price worked out?', acceptedAnswer: { '@type': 'Answer', text: `A platform fee of ${rsText(PC.platformFee.standard)} a month on Standard AI or ${rsText(PC.platformFee.premium)} on Premium covers the first ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits each month. Beyond that each extra enquiry and visit is charged at a rate that falls as the clinic gets busier, band by band like tax slabs. Add-ons (AI voice agent, Get Found, Meta Ads management) are flat monthly fees.` } },
         { '@type': 'Question', name: 'What counts as an enquiry and a visit?', acceptedAnswer: { '@type': 'Answer', text: 'An enquiry is someone who is not yet a patient writing to the clinic on WhatsApp for the first time, or calling from an unknown number. A visit is an appointment that actually happened: completed, checked in or in the chair.' } },
-        { '@type': 'Question', name: 'Are WhatsApp messages extra?', acceptedAnswer: { '@type': 'Answer', text: 'With the clinic’s own WhatsApp Business number, Meta bills its message fees to the clinic directly and AUMY adds nothing. If messages go out through AUMY’s number, Meta’s fees are passed through on the invoice.' } },
+        { '@type': 'Question', name: 'Are WhatsApp messages extra?', acceptedAnswer: { '@type': 'Answer', text: 'With the clinic’s own WhatsApp Business number, Meta bills its message fees to the clinic directly and Aumy adds nothing. If messages go out through Aumy’s number, Meta’s fees are passed through on the invoice.' } },
         { '@type': 'Question', name: 'What is never charged extra?', acceptedAnswer: { '@type': 'Answer', text: `${(PC.notBilled || []).join(', ')}, unlimited patients and staff logins, the Clinic OS, and every patient-journey message: reminders, after-care, care gaps and reviews.` } },
         { '@type': 'Question', name: 'Is there a setup fee?', acceptedAnswer: { '@type': 'Answer', text: `One-time setup of ${rsText(PC.onboarding.min)} to ${rsText(PC.onboarding.max)}, depending on the data migrated. Paying yearly saves ${Math.round(PC.annualPrepayDiscount * 100)}%. Prices exclude GST.` } },
-        { '@type': 'Question', name: 'Can I run AUMY only when the clinic is closed?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Off-hours-only mode lets your own team answer during opening hours while AUMY covers nights, Sundays and holidays. Because you are billed on the enquiries AUMY handles, covering only the closed hours costs a fraction of covering the whole day — and the after-hours enquiry is the one most clinics are losing. It is a single setting you can switch on and off, so you can give AUMY the full day during a busy season or when a receptionist is on leave.' } },
+        { '@type': 'Question', name: 'Can I run Aumy only when the clinic is closed?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Off-hours-only mode lets your own team answer during opening hours while Aumy covers nights, Sundays and holidays. Because you are billed on the enquiries Aumy handles, covering only the closed hours costs a fraction of covering the whole day — and the after-hours enquiry is the one most clinics are losing. It is a single setting you can switch on and off, so you can give Aumy the full day during a busy season or when a receptionist is on leave.' } },
       ],
     }],
     content: `
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Grow your clinic. Don&rsquo;t grow the chaos &mdash; or the bill.</h1>
-        <p>Transparent pricing, worked out in front of you. You pay for the enquiries AUMY handles and the patient visits it coordinates, and the busier you get, the less each one costs. No hidden fees, no surprises.</p>
+        <p>Transparent pricing, worked out in front of you. You pay for the enquiries Aumy handles and the patient visits it coordinates, and the busier you get, the less each one costs. No hidden fees, no surprises.</p>
         <h2>The rates, in full</h2>
         <ul>
           <li><strong>Platform fee:</strong> ${rs(PC.platformFee.standard)}/month on Standard AI or ${rs(PC.platformFee.premium)}/month on Premium AI, including ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits every month.</li>
@@ -282,25 +284,25 @@ const routes = [
           <li><strong>One-time setup:</strong> ${rs(PC.onboarding.min)}&ndash;${rs(PC.onboarding.max)} depending on the data we migrate. Pay yearly and save ${Math.round(PC.annualPrepayDiscount * 100)}%. Prices exclude GST.</li>
         </ul>
         <p>Example: a clinic with 250 new enquiries a month seeing 20 patients a day for 26 days pays ${rs(PRICING.sample.quote.total)} a month on Standard AI.</p>
-        <p>With your own WhatsApp Business number, Meta bills message fees to you directly &mdash; AUMY adds nothing on top.</p>
-        <h2>Don&rsquo;t need AUMY all day? Pay for the hours you actually need it.</h2>
-        <p>You do not have to run an AI receptionist 24/7 to stop losing patients. Switch AUMY to off-hours only and your team answers while you are open &mdash; nobody is replacing your receptionist, she is better at it and patients can tell. AUMY takes the nights, the Sundays and the holidays: the hours when someone in pain messages, gets silence, and books with the clinic that answered.</p>
-        <p>Because the bill follows the enquiries AUMY handles, covering only your closed hours costs a fraction of covering all of them &mdash; and the after-hours enquiry is the one you are losing today. It is one setting, on or off whenever you like: turn it on for the full day in a busy season or when a receptionist is on leave, and back again after.</p>
+        <p>With your own WhatsApp Business number, Meta bills message fees to you directly &mdash; Aumy adds nothing on top.</p>
+        <h2>Don&rsquo;t need Aumy all day? Pay for the hours you actually need it.</h2>
+        <p>You do not have to run an AI receptionist 24/7 to stop losing patients. Switch Aumy to off-hours only and your team answers while you are open &mdash; nobody is replacing your receptionist, she is better at it and patients can tell. Aumy takes the nights, the Sundays and the holidays: the hours when someone in pain messages, gets silence, and books with the clinic that answered.</p>
+        <p>Because the bill follows the enquiries Aumy handles, covering only your closed hours costs a fraction of covering all of them &mdash; and the after-hours enquiry is the one you are losing today. It is one setting, on or off whenever you like: turn it on for the full day in a busy season or when a receptionist is on leave, and back again after.</p>
         <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
       </div></section>`,
   },
   {
     slug: 'ai-receptionist',
-    title: 'AI Receptionist for Dental Clinics — 24/7 Calls & WhatsApp | AUMY',
+    title: 'AI Receptionist for Dental Clinics — 24/7 Calls & WhatsApp | Aumy',
     description:
-      'AUMY\u2019s AI receptionist answers every call and WhatsApp enquiry for your dental clinic 24/7 — in the patient\u2019s own language — and converts enquiries into booked appointments. Works alongside your existing software.',
+      'Aumy\u2019s AI receptionist answers every call and WhatsApp enquiry for your dental clinic 24/7 — in the patient\u2019s own language — and converts enquiries into booked appointments. Works alongside your existing software.',
     canonical: `${ORIGIN}/ai-receptionist`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: "Will an AI receptionist replace my front-desk staff?", acceptedAnswer: { '@type': 'Answer', text: "No — it covers what staff cannot: nights, Sundays, lunch rushes and simultaneous calls. Your team keeps full control and can join any conversation at any time." } },
-        { '@type': 'Question', name: "Will patients realise they are talking to AI?", acceptedAnswer: { '@type': 'Answer', text: "AUMY replies naturally in the patient's own language and hands anything sensitive to your team immediately. Patients care about getting an instant, helpful answer." } },
+        { '@type': 'Question', name: "Will patients realise they are talking to AI?", acceptedAnswer: { '@type': 'Answer', text: "Aumy replies naturally in the patient's own language and hands anything sensitive to your team immediately. Patients care about getting an instant, helpful answer." } },
         { '@type': 'Question', name: "Which languages does the AI receptionist speak?", acceptedAnswer: { '@type': 'Answer', text: "It replies in the language the patient writes in — English, Hindi, Marathi and more — switching automatically mid-conversation." } },
         { '@type': 'Question', name: "How long does setup take?", acceptedAnswer: { '@type': 'Answer', text: "Onboarding is done for you — WhatsApp connection and your treatments configured in your doctors' own words. Most clinics are live within a week." } },
       ],
@@ -309,29 +311,29 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">An AI receptionist that never misses a patient</h1>
         <p>Every call and WhatsApp message answered in seconds — nights, Sundays, lunch rush — in your patient's own language, and converted into a booked appointment. A busy clinic misses 20–30% of its calls; every missed enquiry is a patient who books with the next clinic on Google.</p>
-        <p>AUMY's AI receptionist answers instantly, books appointments end-to-end, recovers missed calls over WhatsApp, follows up until patients decide, and hands over to your staff the moment they want to join. It is trained on your clinic's treatments, doctors and pricing — and it is the first stage of the Aumy patient journey: Convert, Care, Retain, Reactivate.</p>
+        <p>Aumy's AI receptionist answers instantly, books appointments end-to-end, recovers missed calls over WhatsApp, follows up until patients decide, and hands over to your staff the moment they want to join. It is trained on your clinic's treatments, doctors and pricing — and it is the first stage of the Aumy patient journey: Convert, Care, Retain, Reactivate.</p>
       </div></section>`,
   },
   {
     slug: 'whatsapp-automation-for-clinics',
-    title: 'WhatsApp Automation for Dental Clinics — Official API | AUMY',
+    title: 'WhatsApp Automation for Dental Clinics — Official API | Aumy',
     description:
-      'AUMY automates your dental clinic\u2019s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
+      'Aumy automates your dental clinic\u2019s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
     canonical: `${ORIGIN}/whatsapp-automation-for-clinics`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
-        { '@type': 'Question', name: "Is this the official WhatsApp API?", acceptedAnswer: { '@type': 'Answer', text: "Yes — AUMY uses the official WhatsApp Business API from Meta on your clinic's own verified number, following Meta's messaging rules, which is why numbers do not get blocked." } },
-        { '@type': 'Question', name: "Is automated WhatsApp messaging spam?", acceptedAnswer: { '@type': 'Answer', text: "No — AUMY sends each patient the message relevant to them at the right moment: their care-gap reminder when due, after-care on the day of treatment, follow-ups while a plan is pending. Opt-outs are honoured instantly." } },
+        { '@type': 'Question', name: "Is this the official WhatsApp API?", acceptedAnswer: { '@type': 'Answer', text: "Yes — Aumy uses the official WhatsApp Business API from Meta on your clinic's own verified number, following Meta's messaging rules, which is why numbers do not get blocked." } },
+        { '@type': 'Question', name: "Is automated WhatsApp messaging spam?", acceptedAnswer: { '@type': 'Answer', text: "No — Aumy sends each patient the message relevant to them at the right moment: their care-gap reminder when due, after-care on the day of treatment, follow-ups while a plan is pending. Opt-outs are honoured instantly." } },
         { '@type': 'Question', name: "Can staff still use the WhatsApp number normally?", acceptedAnswer: { '@type': 'Answer', text: "Yes. The team sees every conversation and can take over any chat with one tap; the AI steps back the moment a human joins." } },
-        { '@type': 'Question', name: "Do I need a new number or new software?", acceptedAnswer: { '@type': 'Answer', text: "No. AUMY connects to your existing WhatsApp number and runs alongside your existing practice software." } },
+        { '@type': 'Question', name: "Do I need a new number or new software?", acceptedAnswer: { '@type': 'Answer', text: "No. Aumy connects to your existing WhatsApp number and runs alongside your existing practice software." } },
       ],
     }],
     content: `
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">WhatsApp automation built for dental clinics</h1>
-        <p>India's patients live on WhatsApp. AUMY turns your clinic's number into a system that answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API, across the whole patient journey: Convert, Care, Retain, Reactivate.</p>
+        <p>India's patients live on WhatsApp. Aumy turns your clinic's number into a system that answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API, across the whole patient journey: Convert, Care, Retain, Reactivate.</p>
         <p>Unlike broadcast tools, every message is a conversation the AI actually continues: enquiries are nurtured until they book, after-treatment care goes out day by day, care gaps get followed up, lapsed patients get win-back journeys, and happy patients are guided to leave Google reviews. Campaigns run with start/end dates, daily caps and instant opt-out handling — and every booking is attributed back to the message that produced it.</p>
       </div></section>`,
   },
@@ -501,7 +503,7 @@ const routes = [
     description:
       'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
     canonical: `${ORIGIN}/`,
-    ogImage: `${ORIGIN}/images/hero-dental.jpg`,
+    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
@@ -553,25 +555,25 @@ const routes = [
         </ul>
         <p>So your clinic can grow without growing the chaos.</p>
         <h2>Full dental software included — or keep the one you have.</h2>
-        <p><strong>Want one complete platform?</strong> AUMY includes a full Dental PMS: patient records &amp; appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and complete billing, invoicing &amp; accounts — plus voice-powered charting where you talk and AUMY charts.</p>
+        <p><strong>Want one complete platform?</strong> Aumy includes a full Dental PMS: patient records &amp; appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and complete billing, invoicing &amp; accounts — plus voice-powered charting where you talk and Aumy charts.</p>
         <p><strong>Happy with your current PMS?</strong> Keep it. Aumy runs on top and coordinates the patient journey — Convert, Care, Retain, Reactivate — with no migration and no retraining. Move onto the full platform later, whenever you choose. Same price either way.</p>
         <h2>A dedicated expert runs it with you.</h2>
-        <p>You are never handed a login and left to work it out. An AUMY expert is assigned to your clinic on a permanent basis — they learn how your clinic runs, set AUMY up around it, operate the system with you, and review it with you every week. You get a calmer clinic; they carry the work.</p>
+        <p>You are never handed a login and left to work it out. An Aumy expert is assigned to your clinic on a permanent basis — they learn how your clinic runs, set Aumy up around it, operate the system with you, and review it with you every week. You get a calmer clinic; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>
-        <p>AUMY works best for dental clinics that are already busy — from single-doctor practices to multi-chair centres — whose chairs are filling up and whose front desk is stretched, led by an owner who would rather run a calm clinic on one system than keep hiring to keep up. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
-        <h2>Watch AUMY actually doing it.</h2>
+        <p>Aumy works best for dental clinics that are already busy — from single-doctor practices to multi-chair centres — whose chairs are filling up and whose front desk is stretched, led by an owner who would rather run a calm clinic on one system than keep hiring to keep up. This is not built for every clinic, and that is deliberate — if it is not the right fit yet, we will tell you plainly.</p>
+        <h2>Watch Aumy actually doing it.</h2>
         <p>Short, unedited demos of the live product - answering, booking, rescheduling and following up. New clip every day: <a href="https://www.youtube.com/watch?v=-qw1sp7Ub4k">Watch the whole patient journey, live and unedited</a>.</p>
-        <h2>Busy clinics already run on AUMY.</h2>
+        <h2>Busy clinics already run on Aumy.</h2>
         <p>Vinayaka Dental Care: fewer no-shows and patients coming back — "we didn't hire a single extra person to make it happen." AUM AI is an NVIDIA Inception member.</p>
         <h2>Grow your dental clinic. Not your administrative workload.</h2>
         <p>Aumy coordinates the manual tasks and patient journey behind your clinic, so your team can spend less time chasing patients and more time caring for them.</p>
         <h2>Try Aumy free for 30 days — see the difference yourself.</h2>
-        <p>We set AUMY up on your clinic and you watch it work for 30 days alongside everything you use today — real calls and enquiries answered, real bookings made, forms gone digital. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
+        <p>We set Aumy up on your clinic and you watch it work for 30 days alongside everything you use today — real calls and enquiries answered, real bookings made, forms gone digital. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
         <h2>Questions clinic owners ask</h2>
         <p><strong>Do you have your own dental software (PMS)?</strong> Yes — a complete Dental PMS is included: records, appointments, charting, prescriptions, treatment plans and full billing &amp; accounts.</p>
-        <p><strong>Do I have to replace my current software?</strong> No — AUMY works alongside what you already use, and you can move onto its full PMS whenever you choose.</p>
+        <p><strong>Do I have to replace my current software?</strong> No — Aumy works alongside what you already use, and you can move onto its full PMS whenever you choose.</p>
         <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>
-        <p><strong>Is this a product or a service?</strong> Both — a proven system (AUMY), run and tailored for you by a partner.</p>
+        <p><strong>Is this a product or a service?</strong> Both — a proven system (Aumy), run and tailored for you by a partner.</p>
         <p><a href="/growth-audit">Get my free Clinic Audit</a></p>
       </div></section>`,
   },
@@ -581,7 +583,7 @@ const routes = [
     description:
       'How Aumy manages the chaos that comes with growth: AI-powered clinic operations (calls, WhatsApp, appointments, digital registration, intake, consent, X-rays, invoices) and an AI-powered patient journey (reminders, after-care, care gaps, reactivation) on one connected platform — Convert, Care, Retain, Reactivate.',
     canonical: `${ORIGIN}/revenue-generator`,
-    ogImage: `${ORIGIN}/images/hero-dental.jpg`,
+    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">How Aumy works</p>
@@ -643,7 +645,7 @@ const routes = [
   // entries — the React pages carry the full content client-side.
   {
     slug: 'demos',
-    title: 'Watch Aumy in Action — Demo Videos | AUMY by AUM AI',
+    title: 'Watch Aumy in Action — Demo Videos | Aumy by AUM AI',
     description:
       'Short, unedited demos of Aumy running a dental clinic: answering WhatsApp, booking and rescheduling, after-care, care-gap follow-ups and campaigns — the AI-powered patient journey, live.',
     canonical: `${ORIGIN}/demos`,
@@ -658,7 +660,7 @@ const routes = [
   },
   {
     slug: 'compliance',
-    title: 'Security & Compliance | AUMY Healthcare Platform',
+    title: 'Security & Compliance | Aumy Healthcare Platform',
     description:
       'How Aumy protects patient data: encryption in transit and at rest, role-based access, audit logging, consent handling and data deletion — healthcare-grade security built into the platform.',
     canonical: `${ORIGIN}/compliance`,
@@ -672,15 +674,15 @@ const routes = [
   },
   {
     slug: 'platform-partner',
-    title: 'White-Label Platform Partner Program — Resell AUMY Under Your Own Brand | AUM AI',
+    title: 'White-Label Platform Partner Program — Resell Aumy Under Your Own Brand | AUM AI',
     description:
-      'Run AUMY as your own platform: white-labelled, exclusive in your territory, simple per-clinic rental. We carry the technology; you grow the clients.',
+      'Run Aumy as your own platform: white-labelled, exclusive in your territory, simple per-clinic rental. We carry the technology; you grow the clients.',
     canonical: `${ORIGIN}/platform-partner`,
     jsonld: [orgLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Platform partner program</p>
-        <h1 class="ch-hero-title">Run AUMY as your own platform — and own your territory.</h1>
+        <h1 class="ch-hero-title">Run Aumy as your own platform — and own your territory.</h1>
         <p class="ch-hero-sub">Your brand, white-labelled. Exclusive in your territory. Simple per-clinic rental. Sell the whole system — AI-powered clinic operations and the patient journey — while we carry the technology.</p>
       </div></section>`,
   },
@@ -737,18 +739,18 @@ const routes = [
   },
   {
     slug: 'switch',
-    title: 'Switch Dental Software Without Losing a Single Record — Move to AUMY | AUM AI',
+    title: 'Switch Dental Software Without Losing a Single Record — Move to Aumy | AUM AI',
     description:
-      'Whatever dental software your clinic uses today, AUMY keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into AUMY for a one-time migration fee. No downtime.',
+      'Whatever dental software your clinic uses today, Aumy keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into Aumy for a one-time migration fee. No downtime.',
     canonical: `${ORIGIN}/switch`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Moving from your current dental software</p>
         <h1 class="ch-hero-title">Switch without losing a single patient record.</h1>
-        <p class="ch-hero-sub">Your data is not locked in. Whatever software your clinic runs today, AUMY keeps your data in sync with it from day one. When you are ready for one connected platform, we migrate patients, appointment history, treatment history, clinical notes, X-rays and images into AUMY for a one-time migration fee — with no downtime and nothing re-typed.</p>
+        <p class="ch-hero-sub">Your data is not locked in. Whatever software your clinic runs today, Aumy keeps your data in sync with it from day one. When you are ready for one connected platform, we migrate patients, appointment history, treatment history, clinical notes, X-rays and images into Aumy for a one-time migration fee — with no downtime and nothing re-typed.</p>
         <h2>How the move works</h2>
         <ol>
-          <li><b>Sync</b> — AUMY keeps your current software and AUMY in step from day one.</li>
+          <li><b>Sync</b> — Aumy keeps your current software and Aumy in step from day one.</li>
           <li><b>Run on top</b> — Convert, Care, Retain and Reactivate start working on the synced data.</li>
           <li><b>Migrate when you are ready</b> — full history moved, counts verified with you, sync kept running until you switch the old system off.</li>
         </ol>
@@ -757,7 +759,7 @@ const routes = [
   },
   {
     slug: 'missed-call-calculator',
-    title: 'Missed Call Calculator for Dental Clinics — What Unanswered Calls Cost | AUMY',
+    title: 'Missed Call Calculator for Dental Clinics — What Unanswered Calls Cost | Aumy',
     description:
       'How much revenue is your dental clinic losing to missed calls? Enter your missed calls per month and average treatment value — get a deliberately conservative monthly and yearly estimate. Free, no sign-up.',
     canonical: `${ORIGIN}/missed-call-calculator`,
@@ -782,6 +784,34 @@ const routes = [
         <p><strong>Clinics:</strong> We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
         <p><strong>India:</strong> AUM AI Healthcare Solutions &middot; Pune, Maharashtra, India &middot; jayesh.chaudhari@aumai.co.in &middot; +91 800 718 9868</p>
         <p><strong>United States:</strong> AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
+      </div></section>`,
+  },
+  {
+    slug: 'about',
+    title: `About Aumy & its founder, ${FOUNDER.NAME} | AI Dental Software`,
+    description: `Aumy is built by ${FOUNDER.NAME}: ${FOUNDER.SUMMARY}`,
+    canonical: `${ORIGIN}/about`,
+    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
+    jsonld: [orgLd, {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: FOUNDER.NAME,
+      jobTitle: FOUNDER.ROLE,
+      description: FOUNDER.SUMMARY,
+      worksFor: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
+      knowsAbout: FOUNDER.EXPERTISE.map((e) => e.title),
+      url: `${ORIGIN}/about`,
+    }],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">The founder</p>
+        <h1 class="ch-hero-title">${FOUNDER.YEARS} years inside healthcare. One problem, seen in clinic after clinic.</h1>
+        <p class="ch-hero-sub">${esc(FOUNDER.NAME)} &middot; ${esc(FOUNDER.ROLE)}. ${esc(FOUNDER.SUMMARY)}</p>
+        ${FOUNDER.STORY.map((p) => `<p>${esc(p)}</p>`).join('')}
+        <h2>What he brings</h2>
+        <ul>${FOUNDER.EXPERTISE.map((e) => `<li><strong>${esc(e.title)}</strong> — ${esc(e.body)}</li>`).join('')}</ul>
+        <h2>Career</h2>
+        <ul>${FOUNDER.CAREER.map((c) => `<li>${esc(c.years)} · ${esc(c.role)}, ${esc(c.org)} — ${esc(c.what)}</li>`).join('')}</ul>
       </div></section>`,
   },
 ];
@@ -851,7 +881,7 @@ for (const p of growthPosts) {
     canonical: `${ORIGIN}/growth/${p.slug}`,
     // Social shares of articles need an image; the dental hero is the site
     // default until articles get their own art.
-    ogImage: `${ORIGIN}/images/hero-dental.jpg`,
+    ogImage: `${ORIGIN}/images/hero-aumy-desk.jpg`,
     jsonld: [
       {
         '@context': 'https://schema.org',
@@ -875,7 +905,7 @@ for (const p of growthPosts) {
         <p>${esc(p.author)} · ${p.date} · ${esc(p.readingTime)}</p>
         ${p.body}
         <h2>Want to know what this looks like in your clinic?</h2>
-        <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp AUMY</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
+        <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp Aumy</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
       </div></article>`,
   });
 }

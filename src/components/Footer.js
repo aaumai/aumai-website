@@ -22,7 +22,7 @@ const Footer = () => {
 
   // Dental-growth pages only. The legacy engineering/consulting pages (About,
   // Services, Case Studies, Insights, Engineering Partner) keep their routes
-  // but are intentionally not linked anywhere on the AUMY site.
+  // but are intentionally not linked anywhere on the Aumy site.
   const company = [
     { label: 'Aumy — How It Works', path: '/revenue-generator' },
     { label: 'AI Dental Software India', path: '/ai-dental-software-india' },
@@ -82,7 +82,7 @@ const Footer = () => {
 
           {/* Services Column */}
           <div className="footer-column">
-            <h4>What AUMY Does</h4>
+            <h4>What Aumy Does</h4>
             <ul>
               {services.map((service, index) => (
                 <li key={index}>{service}</li>

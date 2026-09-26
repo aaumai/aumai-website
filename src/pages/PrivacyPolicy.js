@@ -113,7 +113,7 @@ const PrivacyPolicy = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>3. How we use information</h2>
             <ul style={{ marginLeft: '30px', marginBottom: '15px' }}>
-              <li>Deliver the EHR, telehealth, billing, AI-clinical-assistant (AUMY), and
+              <li>Deliver the EHR, telehealth, billing, AI-clinical-assistant (Aumy), and
                 WhatsApp Automation services the clinic has subscribed to.</li>
               <li>Authenticate users, enforce role-based and feature-level permissions, and
                 audit every read and write of clinical data.</li>
@@ -167,8 +167,8 @@ const PrivacyPolicy = () => {
                 ap-south-1 (Mumbai) region for in-country data residency, plus object storage
                 (S3) for clinical documents and call recordings.</li>
               <li><strong>Anthropic (Claude AI):</strong> our primary large-language-model
-                provider, used for AUMY's clinical assistant, draft generation, and
-                natural-language report queries. When you use AUMY in our mobile or web apps,
+                provider, used for Aumy's clinical assistant, draft generation, and
+                natural-language report queries. When you use Aumy in our mobile or web apps,
                 the messages, voice and documents you share with it — together with the relevant
                 clinic / patient context needed to answer — are sent to Anthropic through our
                 servers to generate a response. The apps disclose this and ask for your consent
@@ -279,7 +279,7 @@ const PrivacyPolicy = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>6A. Google user data — Business Profile disclosures</h2>
             <p style={{ marginBottom: '15px' }}>
-              Clinics can connect their own <strong>Google Business Profile</strong> to AUMY via
+              Clinics can connect their own <strong>Google Business Profile</strong> to Aumy via
               Google sign-in (OAuth). When a clinic does this, our use of information received
               from Google APIs adheres to the{' '}
               <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noreferrer">

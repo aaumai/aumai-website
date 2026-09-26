@@ -87,7 +87,7 @@ function VideoCard({ video, large }) {
 
 const DemosPage = () => {
   useEffect(() => {
-    document.title = 'Watch Aumy in Action — Demo Videos | AUMY by AUM AI';
+    document.title = 'Watch Aumy in Action — Demo Videos | Aumy by AUM AI';
   }, []);
 
   return (

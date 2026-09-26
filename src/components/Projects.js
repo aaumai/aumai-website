@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import './Projects.css';
 
 const Projects = () => {
-  // Featured product - AUMY / AUM AI HealthSystem
+  // Featured product - Aumy / AUM AI HealthSystem
   const featuredProject = {
-    title: 'AUMY · AUM AI HealthSystem',
+    title: 'Aumy · AUM AI HealthSystem',
     category: 'Flagship Product · In Production',
-    description: 'A voice-first AI operating system powering a production multi-tenant EHR. Ambient scribing, ICD-10 coding, medication reconciliation, and care-gap evaluation run behind a single voice interface on every screen. Click Start. Talk to the patient. Click Stop. 47 seconds later AUMY returns a signed, coded, care-gap-aware encounter.',
+    description: 'A voice-first AI operating system powering a production multi-tenant EHR. Ambient scribing, ICD-10 coding, medication reconciliation, and care-gap evaluation run behind a single voice interface on every screen. Click Start. Talk to the patient. Click Stop. 47 seconds later Aumy returns a signed, coded, care-gap-aware encounter.',
     features: [
       'Ambient scribe with structured SOAP, HPI, and vitals extraction',
       'ICD-10 + CPT + RxNorm coding validated against reference sets',
@@ -24,7 +24,7 @@ const Projects = () => {
     ],
     color: '#8b5cf6',
     link: '/aumy',
-    linkLabel: 'Explore AUMY'
+    linkLabel: 'Explore Aumy'
   };
 
   const projects = [

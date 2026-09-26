@@ -51,7 +51,7 @@ const MissedCallCalculator = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({
-      title: 'Missed Call Calculator for Dental Clinics — What Unanswered Calls Cost | AUMY',
+      title: 'Missed Call Calculator for Dental Clinics — What Unanswered Calls Cost | Aumy',
       description:
         'How much revenue is your dental clinic losing to missed calls? Enter your missed calls per month and average treatment value — get a deliberately conservative monthly and yearly estimate. Free, no sign-up.',
       canonical: 'https://aumai.co.in/missed-call-calculator',

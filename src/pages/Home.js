@@ -1,11 +1,52 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import LeakCheck from '../components/LeakCheck';
 import DemoPlaylist from '../components/DemoPlaylist';
 import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
+import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
 import './HomeClinic.css';
+
+/**
+ * The hero's silent background film. Desktop and tablet only: on a phone the
+ * hero shade is near-opaque, so the still carries it and saves the data.
+ * Skipped too for visitors who ask for less motion or have data-saver on.
+ * Fades in over the still only once it is actually PLAYING — an iPhone in
+ * Low Power Mode loads it but refuses autoplay, and a paused frame with a
+ * play glyph must never replace the still.
+ */
+const HeroFilm = () => {
+  const [show, setShow] = useState(false);
+  const [ready, setReady] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const mq = (q) => window.matchMedia && window.matchMedia(q).matches;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (!mq('(prefers-reduced-motion: reduce)') && !saveData && mq('(min-width: 761px)')) setShow(true);
+  }, []);
+  useEffect(() => {
+    const el = ref.current;
+    if (!show || !el) return;
+    // React does not reliably write the `muted` attribute; iOS autoplays only muted video.
+    el.muted = true;
+    const p = el.play();
+    if (p && p.catch) p.catch(() => {});
+  }, [show]);
+  if (!show) return null;
+  return (
+    <video
+      ref={ref}
+      className={`lux-hero-film ${ready ? 'is-ready' : ''}`}
+      autoPlay muted loop playsInline preload="auto"
+      poster="/images/hero-aumy-desk.jpg"
+      onPlaying={() => setReady(true)}
+    >
+      <source src="/videos/aumy-hero.webm" type="video/webm" />
+      <source src="/videos/aumy-hero.mp4" type="video/mp4" />
+    </video>
+  );
+};
 
 const Check = () => (
   <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -65,19 +106,19 @@ const pillars = [
 ];
 
 const whyUs = [
-  { title: 'A dedicated expert runs it with you', body: 'An expert is assigned to your clinic — they set AUMY up around how your clinic actually works, operate it end-to-end, and review it with you. You are never left to figure out software alone.' },
+  { title: 'A dedicated expert runs it with you', body: 'An expert is assigned to your clinic — they set Aumy up around how your clinic actually works, operate it end-to-end, and review it with you. You are never left to figure out software alone.' },
   { title: 'No rip-and-replace', body: 'It works on top of the systems you already use.' },
   { title: 'One connected platform', body: 'Front desk, patient records, forms, follow-ups, reviews and ads — everything talks to everything else, with full context.' },
   { title: 'Your data, secured', body: 'Encrypted, access-controlled, and private by design.' },
 ];
 
 const faqs = [
-  { q: 'Do you have your own dental software (PMS)?', a: 'Yes — AUMY includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on AUMY, at the same price.' },
-  { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, AUMY keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into AUMY for a one-time migration fee — with no downtime.' },
+  { q: 'Do you have your own dental software (PMS)?', a: 'Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on Aumy, at the same price.' },
+  { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, Aumy keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into Aumy for a one-time migration fee — with no downtime.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
-  { q: 'Will my staff have to learn something complicated?', a: 'No. AUMY runs in the background and takes work off the front desk — your team does less, not more.' },
-  { q: 'Is this a product or a service?', a: 'Both — you get a proven system (AUMY), run and tailored for you by a partner. You are not buying software to figure out alone.' },
+  { q: 'Will my staff have to learn something complicated?', a: 'No. Aumy runs in the background and takes work off the front desk — your team does less, not more.' },
+  { q: 'Is this a product or a service?', a: 'Both — you get a proven system (Aumy), run and tailored for you by a partner. You are not buying software to figure out alone.' },
   { q: 'Who actually runs all this?', a: 'A dedicated expert is assigned to your clinic on a permanent basis. They set up and operate the entire system with you, and review it with you every week — you are never left to run software yourself.' },
 ];
 
@@ -102,15 +143,35 @@ const Home = () => {
       description:
         'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
       canonical: 'https://aumai.co.in/',
-      image: 'https://aumai.co.in/images/hero-dental.jpg',
+      image: 'https://aumai.co.in/images/hero-aumy-desk.jpg',
     });
   }, []);
 
   return (
     <div className="ch-home">
       {/* HERO */}
-      <section className="ch-hero">
-        <div className="ch-container ch-hero-grid">
+      <section className="ch-hero lux-hero">
+        {/* Background film (owner 2026-09-26): the reception phone quietly
+            handled in the foreground while the receptionist greets a patient,
+            i.e. "Aumy handles the phone, your team gives patients their full
+            attention". Veo can't draw readable screens, so the product itself
+            appears as the real moments floating on the right. */}
+        <div className="lux-hero-media" aria-hidden="true">
+          <picture>
+            <source srcSet="/images/hero-aumy-desk.webp" type="image/webp" />
+            <img src="/images/hero-aumy-desk.jpg" alt="" />
+          </picture>
+          <HeroFilm />
+        </div>
+        <div className="lux-hero-shade" aria-hidden="true" />
+        <ul className="lux-moments" aria-label="What Aumy is doing in the background">
+          <li><span className="lux-moment-k">WhatsApp enquiry</span>Answered in 4 seconds</li>
+          <li><span className="lux-moment-k">Appointment</span>Confirmed · Tue 11:30 AM</li>
+          <li><span className="lux-moment-k">Reminders</span>Sent to 38 patients for tomorrow</li>
+          <li><span className="lux-moment-k">Recall</span>6-month check-up booked</li>
+        </ul>
+        <span className="lux-scroll-cue" aria-hidden="true" />
+        <div className="ch-container ch-hero-grid lux-hero-grid">
           <div className="ch-hero-text">
             <span className="ch-eyebrow">AI Dental Software · India</span>
             <h1 className="ch-hero-title">
@@ -153,14 +214,6 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="ch-hero-visual">
-            <div className="ch-hero-photo">
-              <img
-                src="/images/hero-dental.jpg"
-                alt="A premium modern dental treatment room in soft morning light — cream dental chair, sage-teal accent wall"
-              />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -192,7 +245,7 @@ const Home = () => {
               <li><strong>Booked? Try changing your mind</strong> — reschedule or cancel in one message, no phone queue.</li>
               <li><strong>Skip your appointment</strong> — and watch how it wins the rebooking without nagging.</li>
               <li><strong>After your &ldquo;visit&rdquo;</strong>, we&rsquo;ll mark it done — see how it asks for your feedback.</li>
-              <li><strong>Come back in 3 months</strong> for your check-up reminder. Ghost us for 6, and AUMY will try to win you back 🙂</li>
+              <li><strong>Come back in 3 months</strong> for your check-up reminder. Ghost us for 6, and Aumy will try to win you back 🙂</li>
             </ol>
             <p style={{ marginTop: 18, textAlign: 'center', color: '#5b6784' }}>
               Every message you receive is the same system your patients would experience — Convert, Care, Retain, Reactivate, in real time.
@@ -364,36 +417,36 @@ const Home = () => {
         </div>
       </section>
 
-      {/* TWO WAYS TO RUN AUMY — with our full PMS, or on top of yours */}
+      {/* TWO WAYS TO RUN Aumy — with our full PMS, or on top of yours */}
       <section className="ch-section" id="pms">
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">Your software, your choice</span>
             <h2 className="ch-h2 ch-center">Full dental software included — or keep the one you have.</h2>
             <p className="ch-lead ch-center-lead">
-              AUMY works both ways. Run your whole clinic on it, or let it power growth on top of the
+              Aumy works both ways. Run your whole clinic on it, or let it power growth on top of the
               software you already use — same price either way.
             </p>
           </div>
           <div className="ch-paths">
             <div className="ch-pillar ch-path">
               <span className="ch-eyebrow">Want one complete platform?</span>
-              <h3 className="ch-pillar-title">AUMY includes a full Dental PMS</h3>
+              <h3 className="ch-pillar-title">Aumy includes a full Dental PMS</h3>
               <p className="ch-pillar-body">
                 Everything a traditional dental software does — and then some. Patient records &amp;
                 appointments, FDI odontogram with 6-point perio charting, digital prescriptions,
                 treatment plans, billing, invoicing &amp; accounts. Plus voice-powered charting:
-                you talk, AUMY charts.
+                you talk, Aumy charts.
               </p>
             </div>
             <div className="ch-pillar ch-path">
               <span className="ch-eyebrow">Happy with your current PMS?</span>
-              <h3 className="ch-pillar-title">Keep it — AUMY runs on top</h3>
+              <h3 className="ch-pillar-title">Keep it — Aumy runs on top</h3>
               <p className="ch-pillar-body">
-                No retraining on day one. Whatever software you use, AUMY keeps your data in sync
+                No retraining on day one. Whatever software you use, Aumy keeps your data in sync
                 with it and runs the front-desk and patient-journey layer — Convert, Care, Retain, Reactivate — on top.
                 <strong> Want one connected platform? We migrate your data from your current software
-                into AUMY for a one-time migration fee.</strong>{' '}
+                into Aumy for a one-time migration fee.</strong>{' '}
                 <Link to="/switch">How the move works</Link>.
               </p>
             </div>
@@ -408,7 +461,7 @@ const Home = () => {
             <span className="ch-eyebrow">Why it works</span>
             <h2 className="ch-h2">Anyone can send a reminder. We hold the conversation — and book the patient.</h2>
             <p className="ch-lead">
-              That is the difference. AUMY does not just fire off messages. It answers questions,
+              That is the difference. Aumy does not just fire off messages. It answers questions,
               handles rescheduling, and turns interest into a booked appointment — the way your best
               receptionist would, at any hour. And we configure it around how your clinic actually
               works.
@@ -426,7 +479,7 @@ const Home = () => {
               <div className="ch-chat-head">
                 <span className="ch-chat-avatar">A</span>
                 <div>
-                  <div className="ch-chat-name">AUMY</div>
+                  <div className="ch-chat-name">Aumy</div>
                   <div className="ch-chat-status">AI receptionist · online</div>
                 </div>
               </div>
@@ -451,8 +504,8 @@ const Home = () => {
             <span className="ch-eyebrow">Not just software</span>
             <h2 className="ch-h2">A dedicated expert — assigned to your clinic, for good.</h2>
             <p className="ch-lead">
-              You are never handed a login and left to work it out. An AUMY expert is assigned to your
-              clinic and stays with you — they learn how your clinic runs, set AUMY up around it, and
+              You are never handed a login and left to work it out. An Aumy expert is assigned to your
+              clinic and stays with you — they learn how your clinic runs, set Aumy up around it, and
               operate the entire system with you.
             </p>
             <p className="ch-lead">
@@ -465,7 +518,7 @@ const Home = () => {
               <div className="ch-chat-head">
                 <span className="ch-chat-avatar">✦</span>
                 <div>
-                  <div className="ch-chat-name">Your AUMY expert</div>
+                  <div className="ch-chat-name">Your Aumy expert</div>
                   <div className="ch-chat-status">Assigned to your clinic · permanent</div>
                 </div>
               </div>
@@ -483,7 +536,7 @@ const Home = () => {
       {/* PROOF */}
       <section className="ch-section">
         <div className="ch-container ch-center">
-          <h2 className="ch-h2">Busy clinics already run on AUMY.</h2>
+          <h2 className="ch-h2">Busy clinics already run on Aumy.</h2>
           <p className="ch-lead ch-center-lead">
             Hear it from a clinic owner — 37 seconds, in his own words.
           </p>
@@ -567,7 +620,7 @@ const Home = () => {
           <span className="ch-eyebrow">A fit, or not</span>
           <h2 className="ch-h2">We take on a handful of clinics at a time — and we&apos;re honest about fit.</h2>
           <p className="ch-lead ch-center-lead">
-            AUMY works best for dental clinics that are already busy — from single-doctor practices to
+            Aumy works best for dental clinics that are already busy — from single-doctor practices to
             multi-chair centres. It is built for you if:
           </p>
           <div className="ch-fit-card">
@@ -591,7 +644,7 @@ const Home = () => {
           <h2 className="ch-offer-title">So your clinic can grow without growing the chaos.</h2>
           <p className="ch-offer-sub"><strong>Try Aumy free for 30 days — see the difference yourself.</strong></p>
           <p className="ch-offer-sub">
-            We set AUMY up on your clinic — the AI answering calls and WhatsApp, the follow-ups, the
+            We set Aumy up on your clinic — the AI answering calls and WhatsApp, the follow-ups, the
             digital forms — and you watch it work for 30 days alongside everything you use today. If the
             difference convinces you, we continue. If not, you walk away — no charges, no lock-in,
             no obligation to stay. Prefer to start smaller? Get a free Clinic Growth Audit first:
@@ -637,6 +690,9 @@ const Home = () => {
             everything happening around those chairs.&rdquo;
             <cite>— Jayesh, Founder, AUM AI</cite>
           </blockquote>
+          <p className="lux-founder-note">
+            {FOUNDER_SUMMARY} <Link to="/about">Read Jayesh&rsquo;s story &rarr;</Link>
+          </p>
           <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
         </div>
       </section>

@@ -11,9 +11,9 @@ import './Page.css';
 const Compliance = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'Security & Compliance | AUMY Healthcare Platform',
+      title: 'Security & Compliance | Aumy Healthcare Platform',
       description:
-        'AUMY is built on healthcare-grade infrastructure: patient data isolation, encryption, ABDM/FHIR R4 readiness, DPDP Act 2023 alignment, and granular access control.',
+        'Aumy is built on healthcare-grade infrastructure: patient data isolation, encryption, ABDM/FHIR R4 readiness, DPDP Act 2023 alignment, and granular access control.',
       canonical: 'https://aumai.co.in/compliance',
       image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
@@ -30,7 +30,7 @@ const Compliance = () => {
         <div className="container">
           <h1 className="page-title">Healthcare-grade security, built in.</h1>
           <p className="page-subtitle">
-            AUMY is designed for the regulatory requirements of Indian and UAE healthcare providers.
+            Aumy is designed for the regulatory requirements of Indian and UAE healthcare providers.
           </p>
         </div>
       </div>
@@ -45,7 +45,7 @@ const Compliance = () => {
           color: '#334155',
         }}>
           <p style={{ marginBottom: '24px', fontSize: '1.1rem' }}>
-            AUMY is built for clinics that handle sensitive patient data. Security and data
+            Aumy is built for clinics that handle sensitive patient data. Security and data
             protection are part of the platform&rsquo;s architecture — not features bolted on
             afterwards. This page summarises how we protect data and which regulatory frameworks
             the platform is designed to support.
@@ -111,7 +111,7 @@ const Compliance = () => {
                 options, designed with awareness of the Dubai Health Authority and NABIDH health
                 information exchange framework.</li>
               <li><strong>US — HIPAA-aware architecture:</strong> encryption, access controls, audit
-                logging, and sub-processor BAAs follow HIPAA-aligned practices. AUMY is not formally
+                logging, and sub-processor BAAs follow HIPAA-aligned practices. Aumy is not formally
                 HIPAA-certified; we provide a HIPAA-aware architecture and execute a BAA for
                 HIPAA-covered engagements.</li>
               <li><strong>EU / global — GDPR-aligned:</strong> data-subject rights to access,
@@ -129,7 +129,7 @@ const Compliance = () => {
                 (40+ permission types) — receptionists, doctors, and admins each see only what they should.</li>
               <li><strong>Role-scoped facility access:</strong> multi-location clinics can scope a
                 user to specific facilities.</li>
-              <li><strong>Reviewable AI:</strong> AUMY&rsquo;s clinical drafts and recommendations are
+              <li><strong>Reviewable AI:</strong> Aumy&rsquo;s clinical drafts and recommendations are
                 always reviewable — the clinician remains the decision-maker.</li>
               <li><strong>Full user-action audit trail</strong> across clinical and configuration changes.</li>
             </ul>
@@ -143,7 +143,7 @@ const Compliance = () => {
             color: '#64748b',
             lineHeight: '1.7',
           }}>
-            AUMY is designed to support compliance with the frameworks described above. Healthcare
+            Aumy is designed to support compliance with the frameworks described above. Healthcare
             providers are responsible for their own regulatory obligations and should consult
             qualified legal and compliance counsel for their jurisdiction.
           </p>

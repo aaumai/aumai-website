@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './DemoPlaylist.css';
 
 /**
- * The AUMY demo playlist, embedded as a click-to-load facade.
+ * The Aumy demo playlist, embedded as a click-to-load facade.
  *
  * WHY NOT A PLAIN <iframe>
  * ------------------------
@@ -50,7 +50,7 @@ const DemoPlaylist = ({
   title = 'One patient. One journey. One connected system.',
   lead = 'Watch Aumy coordinate one patient’s whole journey on a real clinic’s WhatsApp number — live, unedited: the enquiry converted, after-care on the day, the care gap followed up, and the patient who drifted brought back. Nothing slips through the cracks, and nobody at the front desk types a word.',
   eyebrow = 'Watch it work',
-  posterSrc = '/images/hero-dental.jpg',
+  posterSrc = '/images/demo-poster-reception.jpg',
 }) => {
   const [playing, setPlaying] = useState(false);
 
@@ -75,7 +75,7 @@ const DemoPlaylist = ({
             <iframe
               className="dp-player"
               src={embedSrc}
-              title="AUMY product demos"
+              title="Aumy product demos"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -85,7 +85,7 @@ const DemoPlaylist = ({
               type="button"
               className="dp-facade"
               onClick={() => setPlaying(true)}
-              aria-label="Play the AUMY demo playlist"
+              aria-label="Play the Aumy demo playlist"
               style={{ backgroundImage: `url(${posterSrc})` }}
             >
               <span className="dp-play" aria-hidden="true">

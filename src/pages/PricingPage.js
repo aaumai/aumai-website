@@ -9,7 +9,7 @@ import './PricingPage.css';
 /**
  * ⚠️ PRICING TRUTH RULES — read before editing.
  *
- * 1. There are NO prices in this file. Every number comes from the AUMY API's
+ * 1. There are NO prices in this file. Every number comes from the Aumy API's
  *    pricing rate card (EHR API mig 830) — the same rate card clinics are
  *    billed from. src/data/pricing.json is a build-time snapshot
  *    (scripts/fetch-pricing.js) for the first paint and the prerendered HTML;
@@ -17,7 +17,7 @@ import './PricingPage.css';
  * 2. The monthly total is never computed here. Every change asks the API's
  *    /quote endpoint, which runs the exact formula used to bill clinics. One
  *    formula, so the website can never promise a price the bill does not honour.
- * 3. To change a price: add a new rate card version in the AUMY API (effective
+ * 3. To change a price: add a new rate card version in the Aumy API (effective
  *    date), then rebuild the site so the prerendered copy follows.
  */
 
@@ -104,7 +104,7 @@ const PricingPage = () => {
     window.scrollTo(0, 0);
     const p = card.platformFee;
     setPageSeo({
-      title: `AUMY Pricing — from ${inr(p.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
+      title: `Aumy Pricing — from ${inr(p.standard)}/month, priced by your enquiries and patient visits | AUM AI`,
       description: `Transparent pricing for dental clinics. ${inr(p.standard)}/month (Standard AI) or ${inr(p.premium)}/month (Premium AI) includes ${card.included.enquiries} enquiries and ${card.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
       canonical: 'https://aumai.co.in/pricing',
     });
@@ -163,7 +163,7 @@ const PricingPage = () => {
   };
 
   const waMessage = quote
-    ? `Hi, my AUMY estimate is ${inr(quote.total)}/month (${inputs.tier === 'premium' ? 'Premium' : 'Standard'} AI, ${inputs.enquiries} enquiries/month, ${inputs.patients_per_day} patients/day${inputs.voice ? ', voice agent' : ''}${inputs.get_found ? ', Get Found' : ''}${inputs.meta_ads ? ', Meta Ads' : ''}). I would like to talk it through.`
+    ? `Hi, my Aumy estimate is ${inr(quote.total)}/month (${inputs.tier === 'premium' ? 'Premium' : 'Standard'} AI, ${inputs.enquiries} enquiries/month, ${inputs.patients_per_day} patients/day${inputs.voice ? ', voice agent' : ''}${inputs.get_found ? ', Get Found' : ''}${inputs.meta_ads ? ', Meta Ads' : ''}). I would like to talk it through.`
     : 'Hi, I would like pricing for my clinic.';
 
   const faqs = [
@@ -176,8 +176,8 @@ const PricingPage = () => {
       a: 'An enquiry is someone who is not yet your patient writing to your clinic on WhatsApp for the first time, or calling from an unknown number (hang-ups under ten seconds are not counted). A visit is an appointment that actually happened — completed, checked in or in the chair. Cancellations and no-shows are not visits.',
     },
     {
-      q: 'Can I run AUMY only when my clinic is closed?',
-      a: 'Yes — and most clinics should start there. In off-hours-only mode your own team answers during opening hours and AUMY covers the nights, Sundays and holidays. Since you are billed on the enquiries AUMY actually handles, covering only your closed hours costs a fraction of covering the whole day, while catching the enquiry you are most likely losing today: the one that arrives after you have gone home. It is a single setting, so you can hand AUMY the full day in a busy season or when a receptionist is on leave, and switch back afterwards.',
+      q: 'Can I run Aumy only when my clinic is closed?',
+      a: 'Yes — and most clinics should start there. In off-hours-only mode your own team answers during opening hours and Aumy covers the nights, Sundays and holidays. Since you are billed on the enquiries Aumy actually handles, covering only your closed hours costs a fraction of covering the whole day, while catching the enquiry you are most likely losing today: the one that arrives after you have gone home. It is a single setting, so you can hand Aumy the full day in a busy season or when a receptionist is on leave, and switch back afterwards.',
     },
     {
       q: 'What is the difference between Standard and Premium AI?',
@@ -185,7 +185,7 @@ const PricingPage = () => {
     },
     {
       q: 'Are WhatsApp messages extra?',
-      a: 'If you connect your own WhatsApp Business number (most clinics do), Meta bills its message fees to you directly and AUMY adds nothing on top. If your messages go out through AUMY’s number instead, those Meta fees are passed through on your invoice at the rates shown in the calculator.',
+      a: 'If you connect your own WhatsApp Business number (most clinics do), Meta bills its message fees to you directly and Aumy adds nothing on top. If your messages go out through Aumy’s number instead, those Meta fees are passed through on your invoice at the rates shown in the calculator.',
     },
     {
       q: 'What is never charged extra?',
@@ -224,7 +224,7 @@ const PricingPage = () => {
           <span className="ch-eyebrow">Pricing</span>
           <h1 className="ch-hero-title">Grow your clinic. Don&rsquo;t grow the chaos &mdash; or the bill.</h1>
           <p className="ch-hero-sub">
-            Transparent pricing, worked out in front of you. You pay for the enquiries AUMY handles and the patient
+            Transparent pricing, worked out in front of you. You pay for the enquiries Aumy handles and the patient
             visits it coordinates, and the busier you get, the less each one costs. No hidden fees, no surprises.
           </p>
           <p className="pp-notice">{ONBOARDING_NOTICE.inline}</p>
@@ -245,7 +245,7 @@ const PricingPage = () => {
                 <Slider id="pp-vmin" label="Call minutes per month" hint="Answering calls, reminders and bookings by phone."
                   value={inputs.voice_minutes} min={0} max={2000} step={25} onChange={(v) => set({ voice_minutes: v })} />
               )}
-              <Segmented label="WhatsApp number" value={inputs.own_number} onChange={(v) => set({ own_number: v })} options={[[true, 'Our own number'], [false, 'Send via AUMY']]} />
+              <Segmented label="WhatsApp number" value={inputs.own_number} onChange={(v) => set({ own_number: v })} options={[[true, 'Our own number'], [false, 'Send via Aumy']]} />
               {!inputs.own_number && (
                 <Slider id="pp-mkt" label="Marketing messages per month" hint="Appointment and after-care messages are estimated from your visits."
                   value={inputs.marketing} min={0} max={10000} step={50} onChange={(v) => set({ marketing: v })} />
@@ -270,7 +270,7 @@ const PricingPage = () => {
                 </ul>
               )}
               <p className="ch-calc-fine">
-                {inputs.own_number ? 'With your own WhatsApp number, Meta bills message fees to you directly — AUMY adds nothing on top. ' : ''}
+                {inputs.own_number ? 'With your own WhatsApp number, Meta bills message fees to you directly — Aumy adds nothing on top. ' : ''}
                 Allowances reset every month. {card.onboarding ? card.onboarding.text : ''}{' '}
                 {quote ? `Pay annually and save ${Math.round((card.annualPrepayDiscount || 0) * 100)}% (${inr(quote.annual_total)}/year). ` : ''}
                 Prices exclude GST.
@@ -353,17 +353,17 @@ const PricingPage = () => {
           tenants.ai_receptionist_off_hours_only + voice_assistant_config.
           off_hours_only (mig 949). It belongs on the pricing page because
           that is where it changes the number — the bill follows enquiries,
-          and a clinic whose team answers all day sends AUMY only the ones
+          and a clinic whose team answers all day sends Aumy only the ones
           that arrive after closing. */}
       <section className="pp-section">
         <div className="ch-container ch-narrow">
           <h2 className="ch-h2 ch-center" style={{ textAlign: 'center', marginBottom: 14 }}>
-            Don&rsquo;t need AUMY all day? Pay for the hours you actually need it.
+            Don&rsquo;t need Aumy all day? Pay for the hours you actually need it.
           </h2>
           <div className="ch-why-card pp-rates">
             <div><Check /><span><strong>Your team answers while you&rsquo;re open.</strong> Nobody is replacing your receptionist — she is better at it, and patients can tell.</span></div>
-            <div><Check /><span><strong>AUMY takes the nights, Sundays and holidays.</strong> The hours when a patient in pain messages, gets silence, and books with the clinic that answered.</span></div>
-            <div><Check /><span><strong>You pay for a fraction of the enquiries.</strong> The bill follows what AUMY handles, so covering only the closed hours costs a fraction of covering all of them.</span></div>
+            <div><Check /><span><strong>Aumy takes the nights, Sundays and holidays.</strong> The hours when a patient in pain messages, gets silence, and books with the clinic that answered.</span></div>
+            <div><Check /><span><strong>You pay for a fraction of the enquiries.</strong> The bill follows what Aumy handles, so covering only the closed hours costs a fraction of covering all of them.</span></div>
             <div><Check /><span><strong>Switch it on or off whenever you like.</strong> One setting. Busy season, or a receptionist on leave — turn it on for the full day and back again.</span></div>
           </div>
           <p className="ch-center" style={{ textAlign: 'center', marginTop: 12, opacity: 0.85 }}>

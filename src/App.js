@@ -3,12 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import ProjectsPage from './pages/ProjectsPage';
-import CaseStudiesPage from './pages/CaseStudiesPage';
-import CaseStudyDetail from './pages/CaseStudyDetail';
 import ShippingPolicy from './pages/ShippingPolicy';
 import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -34,7 +30,6 @@ import MissedCallCalculator from './pages/MissedCallCalculator';
 import CalculatorPage from './pages/CalculatorPage';
 import { CALCULATORS } from './data/calculators';
 import PlatformPartner from './pages/PlatformPartner';
-import EngineeringPartner from './pages/EngineeringPartner';
 import SocialMessaging from './pages/SocialMessaging';
 import Compliance from './pages/Compliance';
 import Analytics from './components/Analytics';
@@ -42,6 +37,7 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import HomeUS from './pages/HomeUS';
 import BusinessManagerUS from './pages/BusinessManagerUS';
 import './App.css';
+import LuxReveal from './components/LuxReveal';
 
 // US-market build (aumyai.com): react-scripts build with REACT_APP_MARKET=us.
 // Serves the standalone US landing page for every route except legal pages.
@@ -77,15 +73,20 @@ function App() {
         <Route
           path="*"
           element={
-            <div className="App">
+            <div className="App site-lux">
+              <LuxReveal />
               <Analytics />
               <Header />
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/services" element={<ServicesPage />} />
+                {/* The old US healthcare-IT engineering pages (services, projects,
+                    case studies, engineering partner) were taken down (owner
+                    2026-09-26: a dentist should never read Aumy as an outsourcing
+                    firm). Their URLs land on the home page. Page files stay in code. */}
+                <Route path="/services" element={<Navigate to="/" replace />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
-                {/* Legacy health-system-OS AUMY page (pages/AumyProduct.js stays
+                {/* Legacy health-system-OS Aumy page (pages/AumyProduct.js stays
                     in code) — its story conflicts with the dental positioning,
                     so the URL lands on the dental product page instead. */}
                 <Route path="/aumy" element={<Navigate to="/revenue-generator" replace />} />
@@ -111,12 +112,12 @@ function App() {
                   <Route key={c.slug} path={`/${c.slug}`} element={<CalculatorPage config={c} />} />
                 ))}
                 <Route path="/platform-partner" element={<PlatformPartner />} />
-                <Route path="/engineering-partner" element={<EngineeringPartner />} />
+                <Route path="/engineering-partner" element={<Navigate to="/" replace />} />
                 <Route path="/facebook-instagram" element={<SocialMessaging />} />
                 <Route path="/compliance" element={<Compliance />} />
-                <Route path="/projects" element={<ProjectsPage />} />
-                <Route path="/case-studies" element={<CaseStudiesPage />} />
-                <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+                <Route path="/projects" element={<Navigate to="/" replace />} />
+                <Route path="/case-studies" element={<Navigate to="/" replace />} />
+                <Route path="/case-studies/:slug" element={<Navigate to="/" replace />} />
                 {/* Insights library removed 2026-08-15 (dental-only focus).
                     Old URLs — some indexed/bookmarked — land on the Growth Hub. */}
                 <Route path="/insights" element={<Navigate to="/growth" replace />} />

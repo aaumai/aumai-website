@@ -45,9 +45,9 @@ const AIReceptionistPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({
-      title: 'AI Receptionist for Dental Clinics — 24/7 Calls & WhatsApp | AUMY',
+      title: 'AI Receptionist for Dental Clinics — 24/7 Calls & WhatsApp | Aumy',
       description:
-        'AUMY’s AI receptionist answers every call and WhatsApp enquiry for your dental clinic 24/7 — in the patient’s own language — and converts enquiries into booked appointments. Works alongside your existing software.',
+        'Aumy’s AI receptionist answers every call and WhatsApp enquiry for your dental clinic 24/7 — in the patient’s own language — and converts enquiries into booked appointments. Works alongside your existing software.',
       canonical: 'https://aumai.co.in/ai-receptionist',
     });
   }, []);
@@ -61,7 +61,7 @@ const AIReceptionistPage = () => {
           <p className="ch-hero-sub">
             Every call and WhatsApp message answered in seconds — nights, Sundays, lunch rush —
             in your patient&rsquo;s own language, and converted into a booked appointment.
-            That&rsquo;s the Convert stage of the AUMY patient journey, running 24/7.
+            That&rsquo;s the Convert stage of the Aumy patient journey, running 24/7.
           </p>
           <div style={{ marginTop: 18, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/demos" className="ch-btn ch-btn-primary">Watch it handle a real clinic&rsquo;s WhatsApp</Link>

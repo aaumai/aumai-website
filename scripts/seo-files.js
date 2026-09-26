@@ -34,9 +34,11 @@ const TODAY = new Date().toISOString().slice(0, 10);
 // often rank first in our own crawl budget.
 const SITEMAPS = {
   // Dental-growth pages only. The legacy engineering/consulting pages
-  // (/about, /services, /case-studies, /insights, /engineering-partner, /aumy)
+  // (/services, /case-studies, /insights, /engineering-partner, /aumy)
   // stay routable but are deliberately kept out of the sitemap — the public
-  // identity of aumai.co.in is dental clinic growth, nothing else.
+  // identity of aumai.co.in is dental clinic growth, nothing else. /about is
+  // IN since 2026-09-26: it is now the founder's dental story, not the old
+  // engineering-partner page.
   in: [
     ['/', 1.0, 'weekly'],
     ['/ai-dental-software-india', 1.0, 'monthly'],
@@ -61,6 +63,7 @@ const SITEMAPS = {
     ['/platform-partner', 0.7, 'monthly'],
     ['/facebook-instagram', 0.6, 'monthly'],
     ['/compliance', 0.7, 'monthly'],
+    ['/about', 0.6, 'monthly'],
     ['/contact', 0.5, 'yearly'],
     ['/privacy', 0.2, 'yearly'],
     ['/terms', 0.2, 'yearly'],
@@ -117,7 +120,7 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 // assistants that fetch it. Kept factual and free of marketing adjectives:
 // an assistant summarising us should get the same facts a human would.
 const LLMS = {
-  in: `# AUM AI — AUMY for dental clinics (India)
+  in: `# AUM AI — Aumy for dental clinics (India)
 
 > Aumy is AI dental software for dental clinics in India — the AI-powered
 > operating system for a growing dental clinic, from single-doctor practices
@@ -153,7 +156,7 @@ const LLMS = {
 - ${ORIGIN}/ — overview for clinic owners
 - ${ORIGIN}/ai-dental-software-india — AI dental software in India: what it is, what Aumy's AI does in a dental clinic, how it compares with traditional dental software, how to choose, pricing and FAQs
 - ${ORIGIN}/leak-calculator — 60-second check estimating what slips through the cracks in a stretched clinic: missed enquiries, no-shows and lapsed patients
-- ${ORIGIN}/switch — moving from your current dental software: AUMY syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
+- ${ORIGIN}/switch — moving from your current dental software: Aumy syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
@@ -195,7 +198,7 @@ AUM AI Healthcare Solutions, Pune, Maharashtra, India — jayesh.chaudhari@aumai
 - ${ORIGIN}/ — Aumy, the operating system for a growing US dental practice
 - ${ORIGIN}/business-manager — Aumy Business Manager for ecommerce, local and B2B businesses
 - ${ORIGIN}/leak-calculator — 60-second check estimating what slips through the cracks: unanswered calls, no-shows and patients who never reappoint
-- ${ORIGIN}/switch — moving from your current dental software: AUMY syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
+- ${ORIGIN}/switch — moving from your current dental software: Aumy syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - https://aumai.co.in/ — India market
 
 ## Contact

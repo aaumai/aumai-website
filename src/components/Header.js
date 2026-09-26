@@ -1,32 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
 import './Header.css';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const noticeRef = useRef(null);
-
-  // The notice sits inside the fixed header, so the page below must be pushed
-  // down by its real height (it wraps to two lines on phones). --notice-h is
-  // read by .App in App.css.
-  useEffect(() => {
-    const el = noticeRef.current;
-    const root = document.documentElement;
-    if (!el) return undefined;
-    const update = () => root.style.setProperty('--notice-h', `${el.offsetHeight}px`);
-    update();
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(update) : null;
-    if (ro) ro.observe(el);
-    window.addEventListener('resize', update);
-    return () => {
-      if (ro) ro.disconnect();
-      window.removeEventListener('resize', update);
-      root.style.removeProperty('--notice-h');
-    };
-  }, []);
+  // The site-wide onboarding-pause banner was removed (owner 2026-09-26); the
+  // pricing and contact pages keep their own notice (config/onboardingNotice).
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,15 +53,6 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="onboarding-notice" ref={noticeRef} role="status">
-        <div className="container">
-          {ONBOARDING_NOTICE.banner}{' '}
-          <Link to="/contact" className="onboarding-notice-link" onClick={closeMobileMenu}>
-            Join the waitlist
-          </Link>
-          {' '}and we&rsquo;ll reach out when onboarding reopens.
-        </div>
-      </div>
       <div className="container">
         <div className="header-content">
           <div className="logo">

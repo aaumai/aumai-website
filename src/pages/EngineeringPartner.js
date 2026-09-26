@@ -42,7 +42,7 @@ const EngineeringPartner = () => {
     <div className="home-page">
       <Hero />
 
-      {/* Flagship Product: AUMY */}
+      {/* Flagship Product: Aumy */}
       <section className="section home-product-section">
         <div className="container">
           <div className="home-product-card">
@@ -52,7 +52,7 @@ const EngineeringPartner = () => {
                 Flagship Product · In Production
               </span>
               <h2 className="home-product-title">
-                Meet <span className="home-product-title-gradient">AUMY</span>.
+                Meet <span className="home-product-title-gradient">Aumy</span>.
               </h2>
               <p className="home-product-tagline">
                 The voice-first AI operating system powering AUM AI HealthSystem.
@@ -60,7 +60,7 @@ const EngineeringPartner = () => {
               <p className="home-product-description">
                 A production multi-tenant EHR where ambient scribing, ICD-10 coding, medication
                 reconciliation, and care-gap evaluation all run behind a single voice interface.
-                Click Start. Talk to the patient. Click Stop. 47 seconds later AUMY returns a signed,
+                Click Start. Talk to the patient. Click Stop. 47 seconds later Aumy returns a signed,
                 coded, care-gap-aware encounter.
               </p>
               <ul className="home-product-features">
@@ -91,7 +91,7 @@ const EngineeringPartner = () => {
               </ul>
               <div className="home-product-cta">
                 <Link to="/aumy" className="btn btn-primary">
-                  Explore AUMY
+                  Explore Aumy
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>

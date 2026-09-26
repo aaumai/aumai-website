@@ -50,7 +50,7 @@ export const StoreBadge = ({ store }) => {
 const points = [
   { title: 'Today at a glance', body: 'Every doctor’s appointments, who has arrived and who is in the chair — on your phone, wherever you are.' },
   { title: 'The patient in your hand', body: 'Open any patient’s workspace: history, alerts, notes, X-rays, what was done and what it cost.' },
-  { title: 'Speak the visit, done', body: 'Dictate or type the visit; AUMY writes the note, charts the treatment and drafts the prescription for your review.' },
+  { title: 'Speak the visit, done', body: 'Dictate or type the visit; Aumy writes the note, charts the treatment and drafts the prescription for your review.' },
 ];
 
 const AppDownload = ({ variant = 'section' }) => {
@@ -72,7 +72,7 @@ const AppDownload = ({ variant = 'section' }) => {
           </div>
           <h2 id="app-dl-title" className="app-dl-title">Your clinic, in your pocket.</h2>
           <p className="app-dl-sub">
-            The Aumy app puts the day, every patient and AUMY&rsquo;s help on your phone &mdash; for doctors
+            The Aumy app puts the day, every patient and Aumy&rsquo;s help on your phone &mdash; for doctors
             between chairs and the front desk on the move. Same login as the web.
           </p>
           <ul className="app-dl-points">
@@ -113,7 +113,7 @@ const AppDownload = ({ variant = 'section' }) => {
               <div className="app-phone-card c3"><i /><div><b>Sheila K.</b><small>11:00 am &middot; 30 min &middot; Scaling</small></div></div>
               <div className="app-phone-ai">
                 <span className="app-phone-ai-dot" />
-                AUMY drafted the note, 2 treatments and the prescription &mdash; review &amp; sign
+                Aumy drafted the note, 2 treatments and the prescription &mdash; review &amp; sign
               </div>
             </div>
           </div>

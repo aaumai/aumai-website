@@ -53,7 +53,7 @@ const GrowthArticle = () => {
             dangerouslySetInnerHTML={{ __html: post.body }}
           />
 
-          {/* Standard CTA — the one ask every article ends with. Never "buy AUMY". */}
+          {/* Standard CTA — the one ask every article ends with. Never "buy Aumy". */}
           <div className="gh-article-cta">
             <h2>Want to know what this looks like in your clinic?</h2>
             <p>
@@ -73,7 +73,7 @@ const GrowthArticle = () => {
                 rel="noopener noreferrer"
                 className="ch-btn ch-btn-ghost"
               >
-                Want to see what this actually looks like? WhatsApp AUMY
+                Want to see what this actually looks like? WhatsApp Aumy
               </a>
             </div>
             <p className="gh-cta-demo">

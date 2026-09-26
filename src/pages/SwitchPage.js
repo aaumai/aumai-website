@@ -11,24 +11,24 @@ import './SwitchPage.css';
 // do not need. The page answers the fear, then shows the five pillars.
 
 const WA_HREF = `https://wa.me/${INDIA_WHATSAPP.number}?text=${encodeURIComponent(
-  "Hi, I'd like to move my clinic to AUMY. Can we talk about keeping my data in sync and migrating it?",
+  "Hi, I'd like to move my clinic to Aumy. Can we talk about keeping my data in sync and migrating it?",
 )}`;
 
 const worries = [
   {
     title: '“My data is locked in.”',
     body:
-      'It is not. Patients, appointment history, treatment history, clinical notes, X-rays and images can all be moved into AUMY. We have done full migrations of years of records, images included.',
+      'It is not. Patients, appointment history, treatment history, clinical notes, X-rays and images can all be moved into Aumy. We have done full migrations of years of records, images included.',
   },
   {
     title: '“Migration means weeks of downtime.”',
     body:
-      'There is no downtime. Your current software keeps running the whole time. AUMY syncs with it first, so the clinic never stops seeing patients while the move happens.',
+      'There is no downtime. Your current software keeps running the whole time. Aumy syncs with it first, so the clinic never stops seeing patients while the move happens.',
   },
   {
     title: '“My staff will have to re-learn everything.”',
     body:
-      'On day one nothing changes for your team. AUMY works on top of what they already use. When you switch fully, we train your staff and stay with you through the first weeks.',
+      'On day one nothing changes for your team. Aumy works on top of what they already use. When you switch fully, we train your staff and stay with you through the first weeks.',
   },
 ];
 
@@ -37,7 +37,7 @@ const steps = [
     n: '1',
     title: 'Sync',
     body:
-      'Whatever software you run today, AUMY keeps your data in sync with it from day one. Patients and appointments flow into AUMY automatically. Nothing to re-type, nothing to give up.',
+      'Whatever software you run today, Aumy keeps your data in sync with it from day one. Patients and appointments flow into Aumy automatically. Nothing to re-type, nothing to give up.',
   },
   {
     n: '2',
@@ -49,7 +49,7 @@ const steps = [
     n: '3',
     title: 'Migrate when you are ready',
     body:
-      'When you want one connected platform, we migrate your full history from your current software into AUMY for a one-time migration fee, verify the counts with you, and keep the sync running until you switch the old system off.',
+      'When you want one connected platform, we migrate your full history from your current software into Aumy for a one-time migration fee, verify the counts with you, and keep the sync running until you switch the old system off.',
   },
 ];
 
@@ -73,7 +73,7 @@ const pillars = [
     stage: 'Care',
     title: 'Look after patients around every visit',
     body:
-      'Reminders and preparation before the visit, and easy rescheduling if they cannot make it, so it is a reschedule instead of a no-show. Day-by-day care instructions after every treatment. And if a patient reports something urgent, severe pain, swelling or bleeding after a procedure, AUMY does not leave it in a chat: it calls your staff immediately so a human takes over within minutes.',
+      'Reminders and preparation before the visit, and easy rescheduling if they cannot make it, so it is a reschedule instead of a no-show. Day-by-day care instructions after every treatment. And if a patient reports something urgent, severe pain, swelling or bleeding after a procedure, Aumy does not leave it in a chat: it calls your staff immediately so a human takes over within minutes.',
   },
   {
     stage: 'Retain',
@@ -96,11 +96,11 @@ const faqs = [
   },
   {
     q: 'Will my clinic have to stop working during the move?',
-    a: 'No. Your current software keeps running throughout. AUMY syncs with it first, the migration runs in the background, and we verify the record counts together before you switch anything off.',
+    a: 'No. Your current software keeps running throughout. Aumy syncs with it first, the migration runs in the background, and we verify the record counts together before you switch anything off.',
   },
   {
     q: 'What does the migration cost?',
-    a: 'Syncing is included. A full migration into AUMY carries a one-time migration fee, scoped on the call once we know how many years of records and images you have. Plans are on the pricing page.',
+    a: 'Syncing is included. A full migration into Aumy carries a one-time migration fee, scoped on the call once we know how many years of records and images you have. Plans are on the pricing page.',
   },
   {
     q: 'What if some data does not map cleanly?',
@@ -108,7 +108,7 @@ const faqs = [
   },
   {
     q: 'Do I have to migrate at all?',
-    a: 'No. Many clinics keep their current software and simply let AUMY run on top of it in sync. Migrate only if and when you want one connected platform.',
+    a: 'No. Many clinics keep their current software and simply let Aumy run on top of it in sync. Migrate only if and when you want one connected platform.',
   },
   {
     q: 'Is my patient data safe during the move?',
@@ -119,9 +119,9 @@ const faqs = [
 const SwitchPage = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'Switch Dental Software Without Losing a Single Record — Move to AUMY | AUM AI',
+      title: 'Switch Dental Software Without Losing a Single Record — Move to Aumy | AUM AI',
       description:
-        'Whatever dental software your clinic uses today, AUMY keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into AUMY for a one-time migration fee. No downtime.',
+        'Whatever dental software your clinic uses today, Aumy keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into Aumy for a one-time migration fee. No downtime.',
       canonical: 'https://aumai.co.in/switch',
       image: 'https://aumai.co.in/screenshots/automation.png',
     });
@@ -138,9 +138,9 @@ const SwitchPage = () => {
           </h1>
           <p className="ch-hero-sub">
             <strong>Your data is not locked in.</strong> Whatever software your clinic runs today,
-            AUMY keeps your data in sync with it from day one. And when you are ready for one
+            Aumy keeps your data in sync with it from day one. And when you are ready for one
             connected platform, we move everything, patients, appointments, treatment history,
-            clinical notes and images, into AUMY. No downtime. Nothing re-typed.
+            clinical notes and images, into Aumy. No downtime. Nothing re-typed.
           </p>
           <div className="ch-hero-cta">
             <a href={WA_HREF} target="_blank" rel="noopener noreferrer" className="ch-btn ch-btn-primary">
@@ -165,7 +165,7 @@ const SwitchPage = () => {
                 No matter what practice-management software you use, we keep your data in sync.
               </strong>{' '}
               And if you want to move completely to one connected platform, we migrate your data
-              from your current software into AUMY, for a one-time migration fee.
+              from your current software into Aumy, for a one-time migration fee.
             </p>
           </div>
         </div>
@@ -230,8 +230,8 @@ const SwitchPage = () => {
           </div>
           <p className="ch-note ch-center sw-proof">
             One Delhi clinic moved 84,000+ appointments and years of clinical notes and images
-            into AUMY, and kept seeing patients the whole time. A small sync app now keeps its old
-            system and AUMY in step every day.
+            into Aumy, and kept seeing patients the whole time. A small sync app now keeps its old
+            system and Aumy in step every day.
           </p>
         </div>
       </section>
@@ -254,7 +254,7 @@ const SwitchPage = () => {
             ))}
           </div>
           <p className="ch-note ch-center">
-            AUMY also includes a complete dental PMS: records, appointments, dental charting,
+            Aumy also includes a complete dental PMS: records, appointments, dental charting,
             prescriptions, treatment plans, billing. One platform, one login, one brain.{' '}
             <Link to="/revenue-generator">See how it works</Link>.
           </p>

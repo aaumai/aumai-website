@@ -29,7 +29,7 @@ const CALCULATORS = [
     heroTitle: 'What are your unfollowed leads worth?',
     heroSub:
       'Most enquiries don’t book on the first conversation — and at most clinics, nobody ever talks to them again. Estimate what a real follow-up system would recover.',
-    seoTitle: 'Lead Follow-up Calculator for Dental Clinics — What Unfollowed Enquiries Cost | AUMY',
+    seoTitle: 'Lead Follow-up Calculator for Dental Clinics — What Unfollowed Enquiries Cost | Aumy',
     seoDescription:
       'How much revenue could your dental clinic recover with systematic lead follow-up? Enter your monthly enquiries and conversion rates for a deliberately conservative estimate. Free, no sign-up.',
     relatedArticle: {
@@ -75,7 +75,7 @@ const CALCULATORS = [
     heroTitle: 'What does the empty chair actually cost?',
     heroSub:
       'A no-show isn’t just an annoyance — it’s paid-for chair time producing nothing, and most clinics never rebook or refill it. Put a number on yours.',
-    seoTitle: 'Dental No-Show Calculator — What Missed Appointments Cost Your Clinic | AUMY',
+    seoTitle: 'Dental No-Show Calculator — What Missed Appointments Cost Your Clinic | Aumy',
     seoDescription:
       'Estimate what appointment no-shows cost your dental clinic per month and year: appointments per week, no-show rate and average visit value, counted conservatively. Free, no sign-up.',
     relatedArticle: {
@@ -119,7 +119,7 @@ const CALCULATORS = [
     heroTitle: 'How much is sitting in your recall list?',
     heroSub:
       'Every month, a predictable number of your patients come due for a cleaning or check-up. A well-run recall system books around 40% of them — we use that benchmark and count only the gap above what you book today.',
-    seoTitle: 'Dental Recall Calculator — Revenue Sitting in Your Due-Patient List | AUMY',
+    seoTitle: 'Dental Recall Calculator — Revenue Sitting in Your Due-Patient List | Aumy',
     seoDescription:
       'Estimate the revenue in your dental clinic’s recall list: patients due per month, how many currently return, and average recall visit value — counted conservatively against a 40% well-run benchmark. Free, no sign-up.',
     relatedArticle: {
@@ -163,7 +163,7 @@ const CALCULATORS = [
     heroTitle: 'What is your inactive patient database worth?',
     heroSub:
       'Patients who haven’t visited in a year aren’t gone — most just drifted, and nobody invited them back. Estimate what a modest, well-run reactivation campaign would recover.',
-    seoTitle: 'Dormant Patient Calculator — What Your Inactive Dental Database Is Worth | AUMY',
+    seoTitle: 'Dormant Patient Calculator — What Your Inactive Dental Database Is Worth | Aumy',
     seoDescription:
       'Estimate the value of your dental clinic’s dormant patients: total patients on file, how many visited this year, and a conservative reactivation rate. Free, no sign-up.',
     relatedArticle: {

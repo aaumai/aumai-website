@@ -1,7 +1,7 @@
 /**
- * Build-time snapshot of AUMY's price list.
+ * Build-time snapshot of Aumy's price list.
  *
- * The price list lives in ONE place — the AUMY API's pricing rate card, the
+ * The price list lives in ONE place — the Aumy API's pricing rate card, the
  * same one clinics are billed from (EHR API mig 830). This script copies the
  * current rate card and a sample quote into src/data/pricing.json before the
  * React build, so:
@@ -41,7 +41,10 @@ async function getJson(url) {
     const qs = new URLSearchParams(Object.entries(SAMPLE).map(([k, v]) => [k, String(v)])).toString();
     const quote = await getJson(`${API}/quote?${qs}`);
     const snapshot = { fetched_at: new Date().toISOString(), ...card, sample: { inputs: SAMPLE, quote } };
-    fs.writeFileSync(OUT, `${JSON.stringify(snapshot, null, 2)}\n`);
+    // The site spells the product "Aumy", as the logo does (owner 2026-09-26);
+    // the rate card's own copy still says "AUMY" in places.
+    const json = JSON.stringify(snapshot, null, 2).replace(/\bAUMY\b/g, 'Aumy');
+    fs.writeFileSync(OUT, `${json}\n`);
     console.log(`fetch-pricing: rate card ${card.code} v${card.version} (effective ${card.effective_from}); sample total ₹${quote.total}`);
   } catch (err) {
     if (!fs.existsSync(OUT)) {

@@ -12,7 +12,7 @@ const GrowthHub = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
-    document.title = 'Dental Practice Growth Hub | AUMY by AUM AI';
+    document.title = 'Dental Practice Growth Hub | Aumy by AUM AI';
   }, []);
 
   const posts =
@@ -164,7 +164,7 @@ const GrowthHub = () => {
               rel="noopener noreferrer"
               className="ch-btn ch-btn-ghost ch-ghost-light"
             >
-              See it live — WhatsApp AUMY now
+              See it live — WhatsApp Aumy now
             </a>
             <Link to="/leak-calculator" className="ch-btn ch-btn-ghost ch-ghost-light">
               Try the 60-second check

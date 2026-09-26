@@ -15,7 +15,7 @@
  * written from real sales-call material, India-specific, about money and
  * patients — never "AI in dentistry". Worked examples state their assumptions
  * explicitly; no invented statistics. Every article's CTA is the free Revenue
- * Leak Audit (the component appends it — don't put "buy AUMY" in the body).
+ * Leak Audit (the component appends it — don't put "buy Aumy" in the body).
  */
 
 const GROWTH_CATEGORIES = [
@@ -177,7 +177,7 @@ const growthPosts = [
   <li><strong>Written touches.</strong> The day 1/3/5/7/10 messages drafted once, per treatment type, so each follow-up is a 30-second personalisation, not a composition exercise.</li>
   <li><strong>Count one number weekly:</strong> enquiries → booked. That conversion rate is the single most improvable number in your clinic, and watching it move is what keeps the system alive. (What the gap is worth today: <a href="/lead-followup-calculator">the lead follow-up calculator</a>.)</li>
 </ol>
-<p>Or automate exactly this: instant first response on every channel, the right sequence per treatment, every conversation tracked — which is, candidly, the job we built AUMY to do. But the system matters more than the tool. A clinic running this manually will beat a clinic running nothing, every month.</p>`,
+<p>Or automate exactly this: instant first response on every channel, the right sequence per treatment, every conversation tracked — which is, candidly, the job we built Aumy to do. But the system matters more than the tool. A clinic running this manually will beat a clinic running nothing, every month.</p>`,
   },
 
   // ------------------------------------------------------------------
@@ -241,7 +241,7 @@ const growthPosts = [
 <ol>
   <li><strong>This week:</strong> pull one list — every patient whose last visit was 6–12 months ago. Send twenty messages a day for a week, like the overdue example above, and book the replies. This one batch usually pays for the time tenfold and proves the list is alive.</li>
   <li><strong>Ongoing:</strong> a standing weekly 30-minute recall block, owned by a named person, working the due and overdue lists.</li>
-  <li><strong>Automatic:</strong> this is among the first things clinics automate with AUMY — every patient enters the right sequence at the right time, replies get answered instantly and booked, and the dormant list is worked steadily in the background without anyone at the desk lifting a finger.</li>
+  <li><strong>Automatic:</strong> this is among the first things clinics automate with Aumy — every patient enters the right sequence at the right time, replies get answered instantly and booked, and the dormant list is worked steadily in the background without anyone at the desk lifting a finger.</li>
 </ol>
 <p>Before spending another rupee acquiring strangers, find out what the patients you already have are worth. It is usually the easiest revenue you will recover this year.</p>`,
   },
@@ -440,7 +440,7 @@ const growthPosts = [
 <h2>What to expect, and how to count it</h2>
 <p>Set expectations soberly: this is a patience game, and single-digit percentage response is normal on a genuinely cold list. But run the numbers — as always, illustrative assumptions, use your own: message 300 dormant patients over a quarter, get even 5% booking a visit, and that is 15 returning patients. At a conservative ₹3,000 per returning visit that's ₹45,000 — from a list you'd written off, at the cost of some front-desk time. And every one of those 15 re-enters your recall cycle for next year. (Your own database's number: <a href="/dormant-patient-calculator">the dormant patient calculator</a>.)</p>
 <p>Track three numbers per campaign: messages sent, replies, appointments kept. If replies are healthy but bookings aren't, your reply-handling is the leak. If replies are near zero, your message reads like a promotion — rewrite it warmer and more specific.</p>
-<p>Then make it a rhythm, not an event: a standing quarterly campaign, working the log from last time. Or automate the rhythm entirely — this is precisely the "important but never urgent" work that <a href="/growth/dental-recall-list-hidden-revenue">clinics never sustain manually</a>, and one of the first things AUMY takes over for a clinic: the right patients contacted at the right time, replies answered instantly, bookings made, log kept — every quarter, without anyone remembering.</p>`,
+<p>Then make it a rhythm, not an event: a standing quarterly campaign, working the log from last time. Or automate the rhythm entirely — this is precisely the "important but never urgent" work that <a href="/growth/dental-recall-list-hidden-revenue">clinics never sustain manually</a>, and one of the first things Aumy takes over for a clinic: the right patients contacted at the right time, replies answered instantly, bookings made, log kept — every quarter, without anyone remembering.</p>`,
   },
 
   // ------------------------------------------------------------------
@@ -508,7 +508,7 @@ const growthPosts = [
   <li><strong>What gets escalated</strong> — pain, complaints, and anything clinical goes to the doctor; the owner shouldn't discover a complaint three days later in a scroll-back.</li>
   <li><strong>Volume matched to capacity</strong> — send prompts in batches sized to what the inbox owner can answer well, as in <a href="/growth/reactivate-dormant-dental-patients">the reactivation campaign rules</a>.</li>
 </ul>
-<p>Run honestly, this workflow is a part-time job — which is why at most clinics it is nobody's job. That, candidly, is the gap AUMY fills: every one of the messages above sent at the right moment, every reply answered in seconds around the clock, bookings made directly into the calendar, and the clinical escalations routed to a human. But whether a person or a system runs it, the playbook is the same — and a clinic running even half of it manually will feel the difference in a month.</p>`,
+<p>Run honestly, this workflow is a part-time job — which is why at most clinics it is nobody's job. That, candidly, is the gap Aumy fills: every one of the messages above sent at the right moment, every reply answered in seconds around the clock, bookings made directly into the calendar, and the clinical escalations routed to a human. But whether a person or a system runs it, the playbook is the same — and a clinic running even half of it manually will feel the difference in a month.</p>`,
   },
 
   // ------------------------------------------------------------------
@@ -560,7 +560,7 @@ const growthPosts = [
 <p>Nobody's job disappears in this model. The front desk stops drowning in the inhuman parts of their job and does the human parts better. The dentist sees fuller days. The patient gets a clinic that answers at midnight <em>and</em> a doctor who looks them in the eye. That is the whole point: <strong>AI gets more patients into your chair. You take over from there.</strong></p>
 
 <h2>Evaluating any AI for your clinic: five questions</h2>
-<p>Whether you look at AUMY or anything else, the same test applies:</p>
+<p>Whether you look at Aumy or anything else, the same test applies:</p>
 <ol>
   <li><strong>What happens when a patient describes pain or asks a clinical question?</strong> The only acceptable answer: it escalates to a human and offers an urgent slot. If it "helpfully" answers medical questions, walk away.</li>
   <li><strong>Can your team take over any conversation, instantly?</strong> AI should hand off mid-chat the moment a human wants in — and hand back after.</li>
@@ -707,7 +707,7 @@ const growthPosts = [
   <li>Real bookings are tied to campaigns in your own attribution — Meta gets only compliant lead signals, never health data.</li>
   <li>The report you read weekly says <strong>cost per booked patient</strong> at the top.</li>
 </ol>
-<p>Get those five right and the same budget behaves like a different product — which is why, candidly, wiring exactly this (instant response, sequences, outcome tracking, conversion feedback) is a core part of what AUMY does for clinics that advertise. But the principle stands with or without us: <strong>ads buy attention. Systems turn attention into patients. Meta can only find you more of what you prove you can keep.</strong></p>`,
+<p>Get those five right and the same budget behaves like a different product — which is why, candidly, wiring exactly this (instant response, sequences, outcome tracking, conversion feedback) is a core part of what Aumy does for clinics that advertise. But the principle stands with or without us: <strong>ads buy attention. Systems turn attention into patients. Meta can only find you more of what you prove you can keep.</strong></p>`,
   },
 
   // ------------------------------------------------------------------
@@ -840,7 +840,7 @@ const growthPosts = [
 <h2>Start this week, with one treatment</h2>
 <p>Don't design protocols for your whole treatment menu. Pick the one high-value treatment you do most — implants for many clinics, RCTs for others — and write its plan in 30 minutes: five messages, day 0 to day 30, in the doctor's words. Send them manually for the next ten patients if you must; a WhatsApp reminder to the front desk each morning is enough to prove it.</p>
 <p>What you'll notice first isn't revenue. It's the replies — patients answering a day-1 check-in with a relieved question they would never have called about, and thank-you messages your clinic has done nothing to earn before. The revenue effects — completed treatment plans, kept recalls, reviews, referrals — follow from there.</p>
-<p>And when you're ready to run it for every treatment and every patient without the morning reminders: this is exactly what Treatment Care Plans in AUMY do — your doctors define the protocol per treatment, the system delivers it consistently and flags the replies that need a human. The protocol stays yours. The consistency becomes automatic.</p>`,
+<p>And when you're ready to run it for every treatment and every patient without the morning reminders: this is exactly what Treatment Care Plans in Aumy do — your doctors define the protocol per treatment, the system delivers it consistently and flags the replies that need a human. The protocol stays yours. The consistency becomes automatic.</p>`,
   },
   {
     slug: "ai-receptionist-dental-clinic",
@@ -874,7 +874,7 @@ const growthPosts = [
 <h2>What changes in the numbers</h2>
 <p>Clinics measure the difference in three places: enquiry-to-booking conversion (because speed-to-reply decides who wins the patient), front-desk hours recovered (the repetitive 60% disappears from their day), and after-hours bookings that previously did not exist at all. If you run ads, there's a fourth: every ad rupee finally gets a same-minute response, which is the single biggest determinant of ad ROI for clinics.</p>
 
-<p>This is exactly what AUMY's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's where the patient journey starts — Convert, before Care, Retain and Reactivate — and it works its first night on the job.</p>`,
+<p>This is exactly what Aumy's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's where the patient journey starts — Convert, before Care, Retain and Reactivate — and it works its first night on the job.</p>`,
   },
   {
     slug: "patient-follow-up-automation-dental",
@@ -906,7 +906,7 @@ const growthPosts = [
 <h2>The guardrails that keep it welcome</h2>
 <p>Frequency caps, quiet hours, instant opt-out honoured forever, and messages written in the doctor's voice rather than a marketer's. The test for every automated message: would the front desk be comfortable saying this sentence aloud to the patient's face? If yes, send. If no, rewrite.</p>
 
-<p>Inside AUMY, these four streams run as configured journeys — per treatment, per patient, with rate limits and human-handover built in, and every booking traced back to the exact follow-up that produced it. Clinics rarely believe the "pending treatment plan" number until they see their own: it is usually the biggest pile of work that quietly slips through the cracks.</p>`,
+<p>Inside Aumy, these four streams run as configured journeys — per treatment, per patient, with rate limits and human-handover built in, and every booking traced back to the exact follow-up that produced it. Clinics rarely believe the "pending treatment plan" number until they see their own: it is usually the biggest pile of work that quietly slips through the cracks.</p>`,
   },
   {
     slug: "dental-practice-management-software-vs-growth",
@@ -970,7 +970,7 @@ const growthPosts = [
 </ul>
 
 <h2>The honest summary</h2>
-<p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> AUMY automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. It runs on the same connected platform as Convert, Care, Retain and Reactivate — so the patients your marketing brings in don't get lost in the chaos that follows.</p>`,
+<p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> Aumy automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. It runs on the same connected platform as Convert, Care, Retain and Reactivate — so the patients your marketing brings in don't get lost in the chaos that follows.</p>`,
   },
   {
     slug: "ai-software-for-dentists-india-cost-comparison",
@@ -1078,7 +1078,7 @@ const growthPosts = [
 <p>A stitched stack fails at least three of these five. Not because the tools are bad \u2014 because they were never designed to know about each other.</p>
 
 <h2>The integrated alternative</h2>
-<p>This is the reason AUMY is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, follows up care gaps and reactivation from real records, posts to your Google profile \u2014 and shows what happened to every enquiry in one dashboard. <a href="/pricing">Pricing is by module</a>, so a clinic starts with the parts it needs instead of paying five vendors for overlapping pieces. That's the whole journey \u2014 Convert, Care, Retain, Reactivate \u2014 as one connected system instead of five tools that don't talk to each other.</p>
+<p>This is the reason Aumy is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, follows up care gaps and reactivation from real records, posts to your Google profile \u2014 and shows what happened to every enquiry in one dashboard. <a href="/pricing">Pricing is by module</a>, so a clinic starts with the parts it needs instead of paying five vendors for overlapping pieces. That's the whole journey \u2014 Convert, Care, Retain, Reactivate \u2014 as one connected system instead of five tools that don't talk to each other.</p>
 
 <p>Comparing us with the US tools instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">That comparison is here</a>. New to the category? Start with <a href="/ai-dental-software-india">what AI dental software does in an Indian clinic</a>.</p>`,
   },

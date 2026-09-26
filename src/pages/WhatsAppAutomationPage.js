@@ -18,7 +18,7 @@ const STAGES = [
 
 const DIFFERENCE = [
   ['Official WhatsApp Business API', 'Your clinic’s own verified number and branding on Meta’s approved business channel — not an unofficial bulk tool that gets numbers banned.'],
-  ['Conversations, not blasts', 'Every message can be replied to — and the AI actually answers, books and follows up. Broadcast tools stop where AUMY starts.'],
+  ['Conversations, not blasts', 'Every message can be replied to — and the AI actually answers, books and follows up. Broadcast tools stop where Aumy starts.'],
   ['Campaigns with guardrails', 'Festival offers and promotions with start/end dates, daily send caps and automatic opt-out handling built in.'],
   ['Human takeover any time', 'Your team can step into any conversation with one tap; the AI yields instantly and stays out while they chat.'],
   ['Revenue attribution', 'Every booking is traced back to the message, campaign or channel that produced it — you see what each rupee returned.'],
@@ -27,11 +27,11 @@ const DIFFERENCE = [
 const FAQS = [
   {
     q: 'Is this the official WhatsApp? Will my number get blocked?',
-    a: 'AUMY uses the official WhatsApp Business API from Meta on your clinic’s own number. It follows Meta’s messaging rules — approved templates, opt-outs, send limits — which is exactly why it doesn’t get blocked the way unofficial bulk tools do.',
+    a: 'Aumy uses the official WhatsApp Business API from Meta on your clinic’s own number. It follows Meta’s messaging rules — approved templates, opt-outs, send limits — which is exactly why it doesn’t get blocked the way unofficial bulk tools do.',
   },
   {
     q: 'Isn’t automated WhatsApp just spam?',
-    a: 'Blast tools are spam. AUMY sends each patient the message that’s relevant to them at the moment it’s relevant — their care-gap reminder when it’s due, their after-care on the day of treatment, their follow-up when their plan is pending. Relevance is the opposite of spam, and opt-outs are honoured instantly.',
+    a: 'Blast tools are spam. Aumy sends each patient the message that’s relevant to them at the moment it’s relevant — their care-gap reminder when it’s due, their after-care on the day of treatment, their follow-up when their plan is pending. Relevance is the opposite of spam, and opt-outs are honoured instantly.',
   },
   {
     q: 'Can my staff still use the WhatsApp number normally?',
@@ -43,7 +43,7 @@ const FAQS = [
   },
   {
     q: 'Do I need new software or a new number?',
-    a: 'No. AUMY connects to your existing WhatsApp number and runs alongside your existing practice software. Setup is done for you, typically within a week.',
+    a: 'No. Aumy connects to your existing WhatsApp number and runs alongside your existing practice software. Setup is done for you, typically within a week.',
   },
 ];
 
@@ -51,9 +51,9 @@ const WhatsAppAutomationPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({
-      title: 'WhatsApp Automation for Dental Clinics — Official API | AUMY',
+      title: 'WhatsApp Automation for Dental Clinics — Official API | Aumy',
       description:
-        'AUMY automates your dental clinic’s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
+        'Aumy automates your dental clinic’s WhatsApp on the official Business API — instant replies, appointment booking, care-gap reminders, reactivation and review requests — with human takeover and booking attribution built in.',
       canonical: 'https://aumai.co.in/whatsapp-automation-for-clinics',
     });
   }, []);
@@ -65,7 +65,7 @@ const WhatsAppAutomationPage = () => {
           <span className="ch-eyebrow">WhatsApp Automation</span>
           <h1 className="ch-hero-title">WhatsApp automation built for dental clinics</h1>
           <p className="ch-hero-sub">
-            India&rsquo;s patients live on WhatsApp. AUMY turns your clinic&rsquo;s number into a system that
+            India&rsquo;s patients live on WhatsApp. Aumy turns your clinic&rsquo;s number into a system that
             answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API,
             across the whole patient journey.
           </p>
@@ -81,7 +81,7 @@ const WhatsAppAutomationPage = () => {
           <h2 className="ch-h2" style={{ textAlign: 'center' }}>One number, the whole patient journey</h2>
           <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>
             Most clinics use WhatsApp manually — replying when the front desk gets a minute, forgetting
-            follow-ups by Friday. AUMY runs the entire patient journey on it, automatically.
+            follow-ups by Friday. Aumy runs the entire patient journey on it, automatically.
           </p>
         </div>
       </section>

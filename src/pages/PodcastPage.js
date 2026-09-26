@@ -9,7 +9,7 @@ import './GrowthHub.css';
  * educators, entrepreneurs) while the show is in prep. Podcast plan:
  * aum-ehr-api/docs/growth/dental-growth-podcast-plan.md. The show is
  * deliberately NOT AUMY-branded — this page is the only place it touches
- * the AUMY site, as the application funnel.
+ * the Aumy site, as the application funnel.
  */
 
 const ROLES = [

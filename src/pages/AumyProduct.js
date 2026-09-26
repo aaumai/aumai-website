@@ -7,8 +7,8 @@ import './Page.css';
 const AumyProduct = () => {
   useEffect(() => {
     setPageSeo({
-      title: 'AUMY — Voice-First AI Assistant for Clinics: AI Scribe & Receptionist | AUM AI',
-      description: 'AUMY is the voice-first AI for clinics: an ambient AI scribe that drafts clinical notes, an AI WhatsApp receptionist that books appointments, and an assistant on every screen — for dental, aesthetic and healthcare clinics.',
+      title: 'Aumy — Voice-First AI Assistant for Clinics: AI Scribe & Receptionist | AUM AI',
+      description: 'Aumy is the voice-first AI for clinics: an ambient AI scribe that drafts clinical notes, an AI WhatsApp receptionist that books appointments, and an assistant on every screen — for dental, aesthetic and healthcare clinics.',
       canonical: 'https://aumai.co.in/aumy',
       image: 'https://aumai.co.in/screenshots/automation.png',
     });
@@ -39,7 +39,7 @@ const AumyProduct = () => {
     {
       title: 'Voice-First Care Gaps',
       description:
-        '"Hey AUMY, any open care gaps?" A multi-agent workflow pulls eCQM measures and runs denominator, exclusion, and numerator checks in parallel — no clicking.',
+        '"Hey Aumy, any open care gaps?" A multi-agent workflow pulls eCQM measures and runs denominator, exclusion, and numerator checks in parallel — no clicking.',
       color: '#f43f5e',
       icon: 'M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622',
     },
@@ -69,9 +69,9 @@ const AumyProduct = () => {
   ];
 
   const demoSteps = [
-    { number: '01', title: 'Click Start Ambient', text: 'AUMY begins listening. No scripted prompts, no keyboard.' },
+    { number: '01', title: 'Click Start Ambient', text: 'Aumy begins listening. No scripted prompts, no keyboard.' },
     { number: '02', title: 'Talk to the patient', text: 'The clinician has a normal conversation. The chart is untouched.' },
-    { number: '03', title: 'Click Stop', text: '47 seconds later AUMY returns a full structured encounter.' },
+    { number: '03', title: 'Click Stop', text: '47 seconds later Aumy returns a full structured encounter.' },
     { number: '04', title: 'Review and sign', text: 'Every item is reviewable and editable. One click saves to the chart.' },
   ];
 
@@ -101,7 +101,7 @@ const AumyProduct = () => {
             </div>
 
             <h1 className="aumy-hero-title">
-              Meet <span className="aumy-gradient">AUMY</span>.
+              Meet <span className="aumy-gradient">Aumy</span>.
               <br />
               The voice-first AI operating system
               <br />
@@ -109,7 +109,7 @@ const AumyProduct = () => {
             </h1>
 
             <p className="aumy-hero-subtitle">
-              AUMY powers AUM AI HealthSystem — a production multi-tenant EHR where ambient scribing,
+              Aumy powers AUM AI HealthSystem — a production multi-tenant EHR where ambient scribing,
               ICD-10 coding, care gap evaluation, and clinical workflows all run behind a single
               voice-first interface on every screen.
             </p>
@@ -144,7 +144,7 @@ const AumyProduct = () => {
               From a patient conversation to a signed encounter — before the clinician stands up.
             </h2>
             <p className="section-subtitle">
-              Physicians spend two hours charting for every one hour of patient care. AUMY gives that time back.
+              Physicians spend two hours charting for every one hour of patient care. Aumy gives that time back.
             </p>
           </div>
 
@@ -165,7 +165,7 @@ const AumyProduct = () => {
               </svg>
             </div>
             <div className="aumy-demo-callout-body">
-              <strong>"Hey AUMY, any open care gaps on this patient?"</strong>
+              <strong>"Hey Aumy, any open care gaps on this patient?"</strong>
               <p>
                 A multi-agent workflow spins up, pulls the relevant eCQM measures, runs denominator, exclusion,
                 and numerator checks in parallel, and comes back with: "Three open care gaps. HbA1c overdue by
@@ -181,7 +181,7 @@ const AumyProduct = () => {
       <section className="section aumy-caps-section">
         <div className="container">
           <div className="section-header">
-            <span className="section-label">What AUMY Does</span>
+            <span className="section-label">What Aumy Does</span>
             <h2 className="section-title">One AI surface. A team of specialized agents underneath.</h2>
             <p className="section-subtitle">
               Every capability is built on a structured FHIR R4 data model, scoped to the right tenant and
@@ -249,7 +249,7 @@ const AumyProduct = () => {
             <div className="aumy-arch-card">
               <h3>FHIR R4 Data Model</h3>
               <p>
-                Every clinical fact AUMY writes — SOAP notes, diagnoses, medications, vitals, procedures — lands
+                Every clinical fact Aumy writes — SOAP notes, diagnoses, medications, vitals, procedures — lands
                 as a structured FHIR R4 resource. Any chart can be serialized as a FHIR Bundle for exchange.
               </p>
             </div>
@@ -341,7 +341,7 @@ const AumyProduct = () => {
       <section className="section aumy-cta-section">
         <div className="container">
           <div className="aumy-cta-card">
-            <h2>See AUMY Live</h2>
+            <h2>See Aumy Live</h2>
             <p>
               If you are a hospital CEO, health system leader, or investor who believes healthcare deserves
               software that works for clinicians — let us show you the real product, on a real tenant, with
