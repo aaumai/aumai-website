@@ -96,11 +96,11 @@ const PricingModules = ({ rate }) => {
       fetch(`${PRICING_API}/quote?${queryOf(sel)}`, { signal: ctl.signal })
         .then((r) => r.json())
         .then((b) => {
-          if (!b.success || b.data.model !== 'modules') throw new Error('quote failed');
+          if (!b.success || !b.data || b.data.model !== 'modules' || typeof b.data.monthly_total !== 'number') throw new Error('quote failed');
           setQuote(b.data);
           setQuoteState('ready');
         })
-        .catch((e) => { if (e.name !== 'AbortError') setQuoteState('error'); });
+        .catch((e) => { if (e.name !== 'AbortError') { setQuote(null); setQuoteState('error'); } });
     }, 250);
     return () => { clearTimeout(t); ctl.abort(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -206,6 +206,7 @@ const PricingModules = ({ rate }) => {
                       <Segmented label="AI tier" value={sel.tier} onChange={(v) => setSel((p) => ({ ...p, tier: v }))}
                         options={[['standard', `${(tiers.standard || {}).label || 'Standard AI'} · ${inr(tieredUse.rate.standard)}`], ['premium', `${(tiers.premium || {}).label || 'Premium AI'} · ${inr(tieredUse.rate.premium)}`]]} />
                     )}
+                    {isOn && tieredUse && <p className="pp-hint pp-module-note">Most clinics start on Standard. You can change month to month.</p>}
                     {isOn && usages.map((u) => {
                       const ui = USAGE_UI[u.key] || { label: `${u.unit}s per month`, max: 3000, step: 10 };
                       return (
@@ -257,11 +258,16 @@ const PricingModules = ({ rate }) => {
                   </ul>
                 </div>
               )))}
+              {quote && figures.length > 0 && (
+                <div className="pp-years">
+                  <div><span>Your first year</span><b>{inr(quote.first_year_total)}</b></div>
+                  <div><span>Every year after</span><b>{inr(quote.later_year_total)}</b></div>
+                </div>
+              )}
               {quote && (
                 <p className="ch-calc-fine">
-                  First year {inr(quote.first_year_total)}; every year after {inr(quote.later_year_total)}.{' '}
                   {tiered ? `${sel.tier === 'premium' ? 'Premium' : 'Standard'} AI. ` : ''}
-                  Prices exclude GST.
+                  Prices exclude GST{on('patient_journey') || on('ai_receptionist') || on('meta_ads') ? ' and the WhatsApp message charges you pay to Meta' : ''}.
                 </p>
               )}
               <a href={WA(waMessage)} className="ch-btn ch-btn-primary pp-cta">Talk this price through on WhatsApp</a>

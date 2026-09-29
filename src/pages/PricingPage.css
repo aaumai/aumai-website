@@ -62,3 +62,7 @@
 .pp-period-title { margin: 0 0 6px; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); text-align: left; }
 .pp-module .ch-calc-field { margin: 0; }
 .pp-switch.waiting { opacity: 0.45; cursor: not-allowed; }
+.pp-years { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 6px 0 14px; }
+.pp-years > div { background: rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 10px 12px; display: grid; gap: 2px; text-align: left; }
+.pp-years span { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255, 255, 255, 0.65); }
+.pp-years b { font-size: 18px; font-variant-numeric: tabular-nums; }

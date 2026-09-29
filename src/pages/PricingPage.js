@@ -78,11 +78,14 @@ const UsagePricing = ({ rate }) => {
       fetch(`${API}/quote?${qs}`, { signal: ctl.signal })
         .then((r) => r.json())
         .then((b) => {
-          if (!b.success) throw new Error('quote failed');
+          // The price list can change shape between the card this page holds and
+          // the quote it asks for. An answer in the other shape is not a price for
+          // these inputs: show the error, never a ₹0.
+          if (!b.success || !b.data || b.data.model === 'modules' || typeof b.data.total !== 'number') throw new Error('quote failed');
           setQuote(b.data);
           setQuoteState('ready');
         })
-        .catch((e) => { if (e.name !== 'AbortError') setQuoteState('error'); });
+        .catch((e) => { if (e.name !== 'AbortError') { setQuote(null); setQuoteState('error'); } });
     }, 250);
     return () => { clearTimeout(t); ctl.abort(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps

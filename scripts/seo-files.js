@@ -167,7 +167,9 @@ const LLMS = {
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
-- ${ORIGIN}/pricing — Aumy pricing: a monthly platform fee (Standard or Premium AI) that includes a set of enquiries and patient visits, usage bands beyond that, optional add-ons (AI voice agent, Get Found, Meta Ads management) and a one-time setup fee; with a price calculator
+- ${ORIGIN}/pricing — ${PV.isModules(PRICING.card)
+    ? `Aumy pricing by module: ${PRICING.card.modules.map((m) => m.name).join(', ')}; each with its own price, and a calculator that adds up the ones a clinic picks`
+    : 'Aumy pricing: a monthly platform fee (Standard or Premium AI) that includes a set of enquiries and patient visits, usage bands beyond that, optional add-ons (AI voice agent, Get Found, Meta Ads management) and a one-time setup fee; with a price calculator'}
 - ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
 - ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
