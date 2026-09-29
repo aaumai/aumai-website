@@ -23,6 +23,13 @@ const inr = (n) => num(n).toLocaleString('en-IN');
 const isModules = (card) => !!card && card.model === 'modules' && Array.isArray(card.modules);
 const moduleById = (card, id) => (isModules(card) ? card.modules.find((m) => m.id === id) : undefined) || null;
 
+/** A module's usage rates as a list: the card writes one rate or several. */
+const usagesOf = (mod) => {
+  const u = mod && mod.price && mod.price.usage;
+  if (!u) return [];
+  return (Array.isArray(u) ? u : [u]).filter((x) => x && typeof x.key === 'string');
+};
+
 const rateOf = (usage, tier) => {
   if (!usage) return 0;
   if (typeof usage.rate === 'number') return usage.rate;
@@ -38,9 +45,9 @@ const priceParts = (mod, money) => {
   const out = [];
   if (num(p.yearly) > 0) out.push(`${money(p.yearly)} a year`);
   if (num(p.monthly) > 0) out.push(`${money(p.monthly)} a month${num(p.yearly) > 0 ? ' platform fee' : ''}`);
-  if (p.usage) {
-    if (typeof p.usage.rate === 'number') out.push(`${money(p.usage.rate)} per ${p.usage.unit}`);
-    else out.push(`${money(p.usage.rate.standard)} per ${p.usage.unit} on Standard AI, ${money(p.usage.rate.premium)} on Premium AI`);
+  for (const u of usagesOf(mod)) {
+    if (typeof u.rate === 'number') out.push(`${money(u.rate)} per ${u.unit}`);
+    else out.push(`${money(u.rate.standard)} per ${u.unit} on Standard AI, ${money(u.rate.premium)} on Premium AI`);
   }
   if (num(p.setup) > 0) out.push(`${money(p.setup)} one-time setup`);
   return out;
@@ -59,7 +66,7 @@ const summary = (card, money) => {
     const os = moduleById(card, 'clinic_os');
     const pj = moduleById(card, 'patient_journey');
     const bits = [];
-    if (os) bits.push(`Clinic OS at ${priceParts(os, money).join(' plus ')}${os.price.setup === 0 ? ', no setup fee' : ''}`);
+    if (os) bits.push(`Clinic OS at ${priceParts(os, money).join(' plus ')}${num(os.price.monthly) === 0 && num(os.price.yearly) > 0 ? ', all inclusive' : ''}${os.price.setup === 0 ? ', no setup fee' : ''}`);
     if (pj) bits.push(`the patient journey at ${priceParts(pj, money).join(' plus ')}`);
     return `Pick only the modules your clinic needs: ${bits.join('; ')}. The AI WhatsApp receptionist, AI voice receptionist, AI documentation and Get Found are separate modules, each with its own price.`;
   }
@@ -68,7 +75,10 @@ const summary = (card, money) => {
   return `A platform fee of ${money(f.standard)} a month (Standard AI) or ${money(f.premium)} (Premium AI) includes ${inc.enquiries} enquiries and ${inc.visits} patient visits.`;
 };
 
-/** The lowest monthly figure a clinic can start the dental software at, and what else comes with it. */
+/**
+ * What the dental software itself starts at. `monthly` is 0 when the module is
+ * priced by the year only (Clinic OS: one yearly fee, all inclusive).
+ */
 const entry = (card) => {
   if (isModules(card)) {
     const os = moduleById(card, 'clinic_os');
@@ -90,4 +100,4 @@ const setupText = (card, money) => {
   return `One-time setup of ${money(o.min)} to ${money(o.max)}, depending on the data migrated.`;
 };
 
-module.exports = { isModules, moduleById, rateOf, priceParts, priceText, summary, entry, setupText, inr, num };
+module.exports = { isModules, moduleById, usagesOf, rateOf, priceParts, priceText, summary, entry, setupText, inr, num };

@@ -20,7 +20,7 @@ const OUT = path.join(__dirname, '..', 'src', 'data', 'pricing.json');
 
 // The calculator's starting position, one per shape of price list (src/data/pricingView.js).
 // Module price list (API mig 987). Must match MODULE_DEFAULTS in PricingModules.js.
-const MODULE_SAMPLE = { modules: ['clinic_os', 'patient_journey'], tier: 'standard', usage: { documented_visits: 300, chats: 300, voice_minutes: 200 } };
+const MODULE_SAMPLE = { modules: ['clinic_os', 'patient_journey'], tier: 'standard', usage: { notes_read: 300, dictated_visits: 20, chats: 300, voice_minutes: 200 } };
 // Usage price list. Must match DEFAULT_INPUTS in PricingPage.js.
 const SAMPLE = { tier: 'standard', enquiries: 250, patients_per_day: 20, working_days: 26, voice: false, voice_minutes: 200, own_number: true, marketing: 800, get_found: false, meta_ads: false };
 

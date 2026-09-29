@@ -222,13 +222,15 @@ const dentalSoftwareLd = {
   featureList: ADS.CAPABILITIES.map(([t]) => t),
   offers: {
     '@type': 'Offer',
-    price: String(PV.entry(PC).monthly),
+    // The monthly figure when there is one; a module priced by the year only
+    // (Clinic OS) is quoted by the year.
+    price: String(PV.entry(PC).monthly || PV.entry(PC).yearly),
     priceCurrency: 'INR',
     valueAddedTaxIncluded: false,
     description: PV.summary(PC, (n) => 'Rs ' + PV.inr(n)),
     priceSpecification: [
-      { '@type': 'UnitPriceSpecification', name: `${PV.entry(PC).label} — monthly`, price: String(PV.entry(PC).monthly), priceCurrency: 'INR', unitText: 'MONTH' },
-      ...(PV.entry(PC).yearly ? [{ '@type': 'UnitPriceSpecification', name: `${PV.entry(PC).label} — yearly licence`, price: String(PV.entry(PC).yearly), priceCurrency: 'INR', unitText: 'ANN' }] : []),
+      ...(PV.entry(PC).monthly ? [{ '@type': 'UnitPriceSpecification', name: `${PV.entry(PC).label} — monthly`, price: String(PV.entry(PC).monthly), priceCurrency: 'INR', unitText: 'MONTH' }] : []),
+      ...(PV.entry(PC).yearly ? [{ '@type': 'UnitPriceSpecification', name: `${PV.entry(PC).label} — yearly`, price: String(PV.entry(PC).yearly), priceCurrency: 'INR', unitText: 'ANN' }] : []),
     ],
     url: `${ORIGIN}/pricing`,
   },
@@ -349,7 +351,7 @@ const modulesPricingRoute = () => {
     .map((m) => `          <li><strong>${esc(m.name)}:</strong> ${esc(m.what || '')} ${PV.priceText(m, rs)}${(m.notes || []).map((n) => ' ' + esc(n)).join('')}</li>`)
     .join('\n');
   const example = sample
-    ? `        <p>Example: ${esc(sampleNames.join(' and '))} together cost ${rs(sample.quote.monthly_total)} a month${sample.quote.yearly_total ? ', plus ' + rs(sample.quote.yearly_total) + ' once a year' : ''}${sample.quote.one_time_total ? ' and ' + rs(sample.quote.one_time_total) + ' once, at the start' : ''}.</p>`
+    ? `        <p>Example: ${esc(sampleNames.join(' and '))} together cost ${rs(sample.quote.monthly_total)} a month${sample.quote.yearly_total ? ', plus ' + rs(sample.quote.yearly_total) + ' every year' : ''}${sample.quote.one_time_total ? ' and ' + rs(sample.quote.one_time_total) + ' once, at the start' : ''}.</p>`
     : '';
   const included = journey && (journey.capabilities || []).length
     ? `        <h2>What the ${esc(journey.name)} includes</h2>\n        <ul>\n${journey.capabilities.map((g) => `          <li><strong>${esc(g.group)}:</strong> ${g.items.map((c) => esc(c.name)).join(', ')}.</li>`).join('\n')}\n        </ul>`
@@ -366,7 +368,8 @@ const modulesPricingRoute = () => {
         q('How is my Aumy price worked out?', `You pick the modules your clinic needs and pay for those only. ${PC.modules.map((m) => m.name + ': ' + PV.priceText(m, rsText)).join(' ')} Prices exclude GST.`),
         q('Do I have to take everything?', 'No. Take one module or take them all. A clinic can run only the Clinic OS, only the patient journey alongside the software it already has, or add the AI receptionist later.'),
         ...(DEF.chat ? [q('What counts as a chat?', DEF.chat)] : []),
-        ...(DEF.documentedVisit ? [q('What counts as a documented visit?', DEF.documentedVisit)] : []),
+        ...(DEF.noteRead ? [q('What counts as a note read?', DEF.noteRead)] : []),
+        ...(DEF.dictatedVisit ? [q('What counts as a dictated visit?', DEF.dictatedVisit)] : []),
         ...(whatsapp.length ? [q('Are WhatsApp messages extra?', whatsapp.join(' '))] : []),
         q('Is there a setup fee?', `${PV.setupText(PC, rsText)} Prices exclude GST.`),
         q('Can I run the AI receptionist only when the clinic is closed?', 'Yes. Off-hours-only mode lets your own team answer during opening hours while Aumy covers nights, Sundays and holidays. Because you pay for the chats Aumy handles, covering only the closed hours costs a fraction of covering the whole day. It is a single setting you can switch on and off.'),

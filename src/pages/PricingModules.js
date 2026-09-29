@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
 import snapshot from '../data/pricing.json';
-import { priceText, setupText, moduleById } from '../data/pricingView';
+import { priceText, setupText, moduleById, usagesOf } from '../data/pricingView';
 import { PRICING_API, WA, inr, Check, Slider, Segmented } from './pricingParts';
 
 /**
@@ -25,17 +25,18 @@ import { PRICING_API, WA, inr, Check, Slider, Segmented } from './pricingParts';
 export const MODULE_DEFAULTS = {
   modules: ['clinic_os', 'patient_journey'],
   tier: 'standard',
-  usage: { documented_visits: 300, chats: 300, voice_minutes: 200 },
+  usage: { notes_read: 300, dictated_visits: 20, chats: 300, voice_minutes: 200 },
 };
 
 const USAGE_UI = {
   chats: { label: 'Chats per month', max: 3000, step: 10, definition: 'chat' },
   voice_minutes: { label: 'Call minutes per month', max: 2000, step: 25, definition: 'voiceMinute' },
-  documented_visits: { label: 'Documented visits per month', max: 3000, step: 10, definition: 'documentedVisit' },
+  notes_read: { label: 'Notes read per month', max: 3000, step: 10, definition: 'noteRead' },
+  dictated_visits: { label: 'Dictated visits per month', max: 1000, step: 5, definition: 'dictatedVisit' },
 };
 const PERIODS = [
   ['monthly', 'Every month'],
-  ['yearly', 'Once a year'],
+  ['yearly', 'Every year'],
   ['one_time', 'Once, at the start'],
 ];
 
@@ -96,14 +97,22 @@ const PricingModules = ({ rate }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sel]);
 
-  const tiered = card.modules.some((m) => on(m.id) && m.price.usage && typeof m.price.usage.rate !== 'number');
+  const tiered = card.modules.some((m) => on(m.id) && usagesOf(m).some((u) => typeof u.rate !== 'number'));
+  // What is owed, largest rhythm first. The first one that applies is the
+  // headline: a clinic taking only the Clinic OS pays by the year, so its
+  // headline is the yearly figure, not "₹0 a month".
+  const figures = quote ? [
+    { key: 'monthly', value: quote.monthly_total, per: '/month', words: 'every month' },
+    { key: 'yearly', value: quote.yearly_total, per: '/year', words: 'every year' },
+    { key: 'one_time', value: quote.one_time_total, per: '', words: 'once, at the start' },
+  ].filter((f) => f.value > 0) : [];
   const chosenNames = card.modules.filter((m) => on(m.id)).map((m) => m.name);
   const linesOf = (period) => (quote ? quote.lines.filter((l) => l.period === period) : []);
   const defs = card.definitions || {};
   const tiers = card.tiers || {};
 
   const waMessage = quote && chosenNames.length
-    ? `Hi, my Aumy estimate is ${inr(quote.monthly_total)} a month${quote.yearly_total ? `, ${inr(quote.yearly_total)} a year` : ''}${quote.one_time_total ? ` and ${inr(quote.one_time_total)} one-time setup` : ''} for: ${chosenNames.join(', ')}. I would like to talk it through.`
+    ? `Hi, my Aumy estimate is ${figures.map((f) => `${inr(f.value)} ${f.words}`).join(', ')} for: ${chosenNames.join(', ')}. I would like to talk it through.`
     : 'Hi, I would like pricing for my clinic.';
 
   const receptionist = moduleById(card, 'ai_receptionist');
@@ -118,7 +127,8 @@ const PricingModules = ({ rate }) => {
       a: 'No. Take one module or take them all. A clinic can run only the Clinic OS, only the patient journey alongside the software it already has, or add the AI receptionist later.',
     },
     ...(defs.chat ? [{ q: 'What counts as a chat?', a: defs.chat }] : []),
-    ...(defs.documentedVisit ? [{ q: 'What counts as a documented visit?', a: defs.documentedVisit }] : []),
+    ...(defs.noteRead ? [{ q: 'What counts as a note read?', a: defs.noteRead }] : []),
+    ...(defs.dictatedVisit ? [{ q: 'What counts as a dictated visit?', a: defs.dictatedVisit }] : []),
     ...(defs.voiceMinute ? [{ q: 'What counts as a call minute?', a: defs.voiceMinute }] : []),
     ...(tiers.standard && tiers.premium ? [{
       q: 'What is the difference between Standard and Premium AI?',
@@ -159,8 +169,8 @@ const PricingModules = ({ rate }) => {
             <div className="pp-modules">
               {card.modules.map((m) => {
                 const isOn = on(m.id);
-                const u = m.price.usage;
-                const ui = u ? (USAGE_UI[u.key] || { label: `${u.unit}s per month`, max: 3000, step: 10 }) : null;
+                const usages = usagesOf(m);
+                const tieredUse = usages.find((u) => typeof u.rate !== 'number');
                 const needs = (m.requires || []).map((id) => (moduleById(card, id) || {}).name).filter(Boolean);
                 return (
                   <div key={m.id} className={`pp-module${isOn ? ' on' : ''}`} data-module={m.id}>
@@ -178,14 +188,17 @@ const PricingModules = ({ rate }) => {
                       <ul className="pp-module-list">{m.includes.map((x) => <li key={x}>{x}</li>)}</ul>
                     )}
                     {(m.notes || []).map((n) => <p key={n} className="pp-hint pp-module-note">{n}</p>)}
-                    {isOn && u && typeof u.rate !== 'number' && (
+                    {isOn && tieredUse && (
                       <Segmented label="AI tier" value={sel.tier} onChange={(v) => setSel((p) => ({ ...p, tier: v }))}
-                        options={[['standard', `${(tiers.standard || {}).label || 'Standard AI'} · ${inr(u.rate.standard)}`], ['premium', `${(tiers.premium || {}).label || 'Premium AI'} · ${inr(u.rate.premium)}`]]} />
+                        options={[['standard', `${(tiers.standard || {}).label || 'Standard AI'} · ${inr(tieredUse.rate.standard)}`], ['premium', `${(tiers.premium || {}).label || 'Premium AI'} · ${inr(tieredUse.rate.premium)}`]]} />
                     )}
-                    {isOn && u && (
-                      <Slider id={`pp-${u.key}`} label={ui.label} hint={ui.definition ? defs[ui.definition] : undefined}
-                        value={sel.usage[u.key] || 0} min={0} max={ui.max} step={ui.step} onChange={(v) => setUsage(u.key, v)} />
-                    )}
+                    {isOn && usages.map((u) => {
+                      const ui = USAGE_UI[u.key] || { label: `${u.unit}s per month`, max: 3000, step: 10 };
+                      return (
+                        <Slider key={u.key} id={`pp-${u.key}`} label={ui.label} hint={ui.definition ? defs[ui.definition] : undefined}
+                          value={sel.usage[u.key] || 0} min={0} max={ui.max} step={ui.step} onChange={(v) => setUsage(u.key, v)} />
+                      );
+                    })}
                     {(m.capabilities || []).length > 0 && (
                       <details className="pp-module-more">
                         <summary>See everything it includes</summary>
@@ -204,16 +217,14 @@ const PricingModules = ({ rate }) => {
             </div>
 
             <div className="ch-calc-result pp-result" aria-live="polite">
-              <p className="ch-calc-result-label">Your price, every month {quoteState === 'loading' && <span className="pp-updating">updating…</span>}</p>
-              <p className="ch-calc-total">{quote ? inr(quote.monthly_total) : '—'}<span className="ch-calc-per">/month</span></p>
+              <p className="ch-calc-result-label">Your price{figures.length ? `, ${figures[0].words}` : ''} {quoteState === 'loading' && <span className="pp-updating">updating…</span>}</p>
+              <p className="ch-calc-total">{figures.length ? inr(figures[0].value) : '—'}{figures.length > 0 && <span className="ch-calc-per">{figures[0].per}</span>}</p>
               {sel.modules.length === 0 && (
                 <p className="pp-error">Nothing is switched on. Switch on a module to see your price.</p>
               )}
-              {quote && (quote.yearly_total > 0 || quote.one_time_total > 0) && (
+              {figures.length > 1 && (
                 <p className="ch-calc-monthly">
-                  {quote.yearly_total > 0 ? `plus ${inr(quote.yearly_total)} once a year` : ''}
-                  {quote.yearly_total > 0 && quote.one_time_total > 0 ? ' · ' : ''}
-                  {quote.one_time_total > 0 ? `${quote.yearly_total > 0 ? '' : 'plus '}${inr(quote.one_time_total)} once, at the start` : ''}
+                  plus {figures.slice(1).map((f) => `${inr(f.value)} ${f.words}`).join(' · ')}
                 </p>
               )}
               {quoteState === 'error' && (
@@ -225,7 +236,7 @@ const PricingModules = ({ rate }) => {
                   <ul className="ch-calc-breakdown">
                     {linesOf(period).map((l, i) => (
                       <li key={`${l.label}-${i}`}>
-                        <span>{l.label}{period === 'monthly' && l.sub && l.sub !== 'Every month' && <small className="pp-sub">{l.sub}</small>}</span>
+                        <span>{l.label}{/ × /.test(l.sub || '') && <small className="pp-sub">{l.sub}</small>}</span>
                         <b>{inr(l.amount)}</b>
                       </li>
                     ))}
