@@ -25,7 +25,7 @@ import { PRICING_API, WA, inr, Check, Slider, Segmented } from './pricingParts';
 export const MODULE_DEFAULTS = {
   modules: ['clinic_os', 'patient_journey'],
   tier: 'standard',
-  usage: { notes_read: 300, dictated_visits: 20, chats: 300, voice_minutes: 200 },
+  usage: { notes_read: 300, dictated_visits: 20, chats: 300, voice_minutes: 200, leads: 100 },
 };
 
 const USAGE_UI = {
@@ -33,6 +33,7 @@ const USAGE_UI = {
   voice_minutes: { label: 'Call minutes per month', max: 2000, step: 25, definition: 'voiceMinute' },
   notes_read: { label: 'Notes read per month', max: 3000, step: 10, definition: 'noteRead' },
   dictated_visits: { label: 'Dictated visits per month', max: 1000, step: 5, definition: 'dictatedVisit' },
+  leads: { label: 'Leads per month', max: 3000, step: 10, definition: 'lead' },
 };
 const PERIODS = [
   ['monthly', 'Every month'],
@@ -130,6 +131,7 @@ const PricingModules = ({ rate }) => {
     ...(defs.noteRead ? [{ q: 'What counts as a note read?', a: defs.noteRead }] : []),
     ...(defs.dictatedVisit ? [{ q: 'What counts as a dictated visit?', a: defs.dictatedVisit }] : []),
     ...(defs.voiceMinute ? [{ q: 'What counts as a call minute?', a: defs.voiceMinute }] : []),
+    ...(defs.lead ? [{ q: 'What counts as a lead?', a: defs.lead }] : []),
     ...(tiers.standard && tiers.premium ? [{
       q: 'What is the difference between Standard and Premium AI?',
       a: `Standard AI: ${tiers.standard.what} Premium AI: ${tiers.premium.what} You can move between them month to month.`,

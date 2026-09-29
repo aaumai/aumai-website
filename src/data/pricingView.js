@@ -68,7 +68,9 @@ const summary = (card, money) => {
     const bits = [];
     if (os) bits.push(`Clinic OS at ${priceParts(os, money).join(' plus ')}${num(os.price.monthly) === 0 && num(os.price.yearly) > 0 ? ', all inclusive' : ''}${os.price.setup === 0 ? ', no setup fee' : ''}`);
     if (pj) bits.push(`the patient journey at ${priceParts(pj, money).join(' plus ')}`);
-    return `Pick only the modules your clinic needs: ${bits.join('; ')}. The AI WhatsApp receptionist, AI voice receptionist, AI documentation and Get Found are separate modules, each with its own price.`;
+    const rest = card.modules.filter((m) => m.id !== 'clinic_os' && m.id !== 'patient_journey').map((m) => m.name);
+    const others = rest.length > 1 ? `${rest.slice(0, -1).join(', ')} and ${rest[rest.length - 1]}` : rest.join('');
+    return `Pick only the modules your clinic needs: ${bits.join('; ')}.${others ? ` ${others} are separate modules, each with its own price.` : ''}`;
   }
   const f = (card && card.platformFee) || {};
   const inc = (card && card.included) || {};
