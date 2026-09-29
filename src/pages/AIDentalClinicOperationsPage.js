@@ -114,7 +114,7 @@ const AIDentalClinicOperationsPage = () => {
             </div>
           ))}
           <div className="ch-center" style={{ textAlign: 'center', marginTop: 26 }}>
-            <Link to="/pricing" className="ch-btn ch-btn-primary">See pricing &mdash; everything included</Link>
+            <Link to="/pricing" className="ch-btn ch-btn-primary">See pricing</Link>
           </div>
         </div>
       </section>

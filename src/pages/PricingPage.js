@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
 import snapshot from '../data/pricing.json';
+import { isModules, summary, entry } from '../data/pricingView';
+import { PRICING_API as API, WA, inr, Check, Slider, Segmented } from './pricingParts';
+import PricingModules from './PricingModules';
 import './HomeClinic.css';
 import './PricingPage.css';
 
@@ -19,54 +22,17 @@ import './PricingPage.css';
  *    formula, so the website can never promise a price the bill does not honour.
  * 3. To change a price: add a new rate card version in the Aumy API (effective
  *    date), then rebuild the site so the prerendered copy follows.
+ * 4. The rate card has had two shapes (see src/data/pricingView.js). This file
+ *    fetches the live card and shows the layout that matches it: PricingModules
+ *    for the module price list (API mig 987), UsagePricing below for the usage
+ *    price list. The card is fetched live, so the page must read both — the
+ *    site is deployed before the API switches shape.
  */
-
-const API = 'https://aumy.aumai.co.in/api/v1/public/pricing';
-const WA = (msg) => `https://wa.me/918007189868?text=${encodeURIComponent(msg)}`;
 
 // Starting position of the calculator — must match SAMPLE in scripts/fetch-pricing.js.
 const DEFAULT_INPUTS = { tier: 'standard', enquiries: 250, patients_per_day: 20, working_days: 26, voice: false, voice_minutes: 200, own_number: true, marketing: 800, get_found: false, meta_ads: false };
 
-const inr = (n) => `₹${Math.round(Number(n) || 0).toLocaleString('en-IN')}`;
 const sameInputs = (a, b) => Object.keys(DEFAULT_INPUTS).every((k) => a[k] === b[k]);
-
-const Check = () => (
-  <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-    <path d="M5 13l4 4L19 7" />
-  </svg>
-);
-
-// Module scope so a slider is not remounted mid-drag.
-const Slider = ({ id, label, hint, value, onChange, min, max, step = 1 }) => (
-  <div className="ch-calc-field">
-    <div className="ch-calc-label">
-      <label htmlFor={id}>{label}</label>
-      <input
-        className="pp-num"
-        type="number"
-        min={min}
-        value={value}
-        onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))}
-        aria-label={`${label} (number)`}
-      />
-    </div>
-    <input id={id} type="range" min={min} max={max} step={step} value={Math.min(value, max)} onChange={(e) => onChange(Number(e.target.value))} />
-    {hint && <span className="pp-hint">{hint}</span>}
-  </div>
-);
-
-const Segmented = ({ label, options, value, onChange }) => (
-  <div className="ch-calc-field">
-    <span className="pp-field-label">{label}</span>
-    <div className="ch-calc-toggle" role="group" aria-label={label}>
-      {options.map(([v, text]) => (
-        <button key={String(v)} type="button" className={`ch-calc-seg${value === v ? ' active' : ''}`} aria-pressed={value === v} onClick={() => onChange(v)}>
-          {text}
-        </button>
-      ))}
-    </div>
-  </div>
-);
 
 // A single open band ([[null, rate]]) is a flat rate — "₹7 per minute" — with
 // no "beyond" (there is no previous ceiling to name). Voice minutes went flat
@@ -84,11 +50,10 @@ const bandsText = (bands, unit) => {
     .join(' · ') + ` per ${unit}`;
 };
 
-const PricingPage = () => {
-  const [rate, setRate] = useState(snapshot);
+const UsagePricing = ({ rate }) => {
   const card = rate.card;
   const [inputs, setInputs] = useState(DEFAULT_INPUTS);
-  const [quote, setQuote] = useState(snapshot.sample && sameInputs(snapshot.sample.inputs, DEFAULT_INPUTS) ? snapshot.sample.quote : null);
+  const [quote, setQuote] = useState(snapshot.sample && snapshot.sample.inputs && sameInputs(snapshot.sample.inputs, DEFAULT_INPUTS) ? snapshot.sample.quote : null);
   const [quoteState, setQuoteState] = useState('ready'); // ready | loading | error
   const [journey, setJourney] = useState(() => {
     const on = {};
@@ -99,22 +64,6 @@ const PricingPage = () => {
   const firstQuote = useRef(true);
 
   const set = (patch) => setInputs((prev) => ({ ...prev, ...patch }));
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const p = card.platformFee;
-    setPageSeo({
-      title: `Dental Clinic Software Price in India — from ${inr(p.standard)}/mo | Aumy`,
-      description: `Transparent pricing for dental clinics. ${inr(p.standard)}/month (Standard AI) or ${inr(p.premium)}/month (Premium AI) includes ${card.included.enquiries} enquiries and ${card.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
-      canonical: 'https://aumai.co.in/pricing',
-    });
-    // Refresh the rate card: a price change shows here without a site rebuild.
-    fetch(API)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((b) => { if (b && b.success && b.data && b.data.card) setRate((prev) => ({ ...prev, ...b.data })); })
-      .catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (firstQuote.current && quote && sameInputs(inputs, DEFAULT_INPUTS)) {
@@ -398,6 +347,40 @@ const PricingPage = () => {
       </section>
     </div>
   );
+};
+
+/** Page title and description, from whichever price list is live. */
+const seoFor = (card) => {
+  const e = entry(card);
+  const title = isModules(card)
+    ? `Dental Clinic Software Price in India — pick only what you need | Aumy`
+    : `Dental Clinic Software Price in India — from ${inr(e.monthly)}/mo | Aumy`;
+  return {
+    title,
+    description: `Transparent pricing for dental clinics. ${summary(card, inr)} Work out your exact price — no surprises.`,
+    canonical: 'https://aumai.co.in/pricing',
+  };
+};
+
+const PricingPage = () => {
+  const [rate, setRate] = useState(snapshot);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // Refresh the rate card: a price change shows here without a site rebuild.
+    fetch(API)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((b) => { if (b && b.success && b.data && b.data.card) setRate((prev) => ({ ...prev, ...b.data })); })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => { setPageSeo(seoFor(rate.card)); }, [rate]);
+
+  // Keyed by shape: if the live card's shape differs from the build snapshot's,
+  // the other layout starts clean instead of inheriting inputs it cannot read.
+  return isModules(rate.card)
+    ? <PricingModules key="modules" rate={rate} />
+    : <UsagePricing key="usage" rate={rate} />;
 };
 
 export default PricingPage;

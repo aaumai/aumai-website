@@ -18,7 +18,10 @@ const path = require('path');
 const API = process.env.AUMY_PRICING_API || 'https://aumy.aumai.co.in/api/v1/public/pricing';
 const OUT = path.join(__dirname, '..', 'src', 'data', 'pricing.json');
 
-// The calculator's starting position — must match DEFAULT_INPUTS in PricingPage.js.
+// The calculator's starting position, one per shape of price list (src/data/pricingView.js).
+// Module price list (API mig 987). Must match MODULE_DEFAULTS in PricingModules.js.
+const MODULE_SAMPLE = { modules: ['clinic_os', 'patient_journey'], tier: 'standard', usage: { documented_visits: 300, chats: 300, voice_minutes: 200 } };
+// Usage price list. Must match DEFAULT_INPUTS in PricingPage.js.
 const SAMPLE = { tier: 'standard', enquiries: 250, patients_per_day: 20, working_days: 26, voice: false, voice_minutes: 200, own_number: true, marketing: 800, get_found: false, meta_ads: false };
 
 async function getJson(url) {
@@ -38,14 +41,18 @@ async function getJson(url) {
 (async () => {
   try {
     const card = await getJson(API);
-    const qs = new URLSearchParams(Object.entries(SAMPLE).map(([k, v]) => [k, String(v)])).toString();
+    const modules = !!card.card && card.card.model === 'modules';
+    const inputs = modules ? MODULE_SAMPLE : SAMPLE;
+    const qs = modules
+      ? new URLSearchParams({ modules: inputs.modules.join(','), tier: inputs.tier, ...Object.fromEntries(Object.entries(inputs.usage).map(([k, v]) => [k, String(v)])) }).toString()
+      : new URLSearchParams(Object.entries(inputs).map(([k, v]) => [k, String(v)])).toString();
     const quote = await getJson(`${API}/quote?${qs}`);
-    const snapshot = { fetched_at: new Date().toISOString(), ...card, sample: { inputs: SAMPLE, quote } };
+    const snapshot = { fetched_at: new Date().toISOString(), ...card, sample: { inputs, quote } };
     // The site spells the product "Aumy", as the logo does (owner 2026-09-26);
     // the rate card's own copy still says "AUMY" in places.
     const json = JSON.stringify(snapshot, null, 2).replace(/\bAUMY\b/g, 'Aumy');
     fs.writeFileSync(OUT, `${json}\n`);
-    console.log(`fetch-pricing: rate card ${card.code} v${card.version} (effective ${card.effective_from}); sample total ₹${quote.total}`);
+    console.log(`fetch-pricing: rate card ${card.code} v${card.version} (effective ${card.effective_from}); sample ₹${modules ? quote.monthly_total : quote.total} a month`);
   } catch (err) {
     if (!fs.existsSync(OUT)) {
       console.error(`fetch-pricing: API unreachable (${err.message}) and no snapshot exists — cannot build /pricing.`);

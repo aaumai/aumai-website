@@ -27,6 +27,8 @@ const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
 // Prices come from the Aumy API's rate card (the one clinics are billed from),
 // snapshotted by scripts/fetch-pricing.js just before the build — never typed here.
 const PRICING = require('../src/data/pricing.json');
+// The price list has had two shapes; every price printed here goes through PV.
+const PV = require('../src/data/pricingView');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The founder: same words as the About page (src/data/founder.js).
 const FOUNDER = require('../src/data/founder');
@@ -220,15 +222,14 @@ const dentalSoftwareLd = {
   featureList: ADS.CAPABILITIES.map(([t]) => t),
   offers: {
     '@type': 'Offer',
-    price: String(Math.round(Number(PC.platformFee.standard) || 0)),
+    price: String(PV.entry(PC).monthly),
     priceCurrency: 'INR',
     valueAddedTaxIncluded: false,
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: String(Math.round(Number(PC.platformFee.standard) || 0)),
-      priceCurrency: 'INR',
-      unitText: 'MONTH',
-    },
+    description: PV.summary(PC, (n) => 'Rs ' + PV.inr(n)),
+    priceSpecification: [
+      { '@type': 'UnitPriceSpecification', name: `${PV.entry(PC).label} — monthly`, price: String(PV.entry(PC).monthly), priceCurrency: 'INR', unitText: 'MONTH' },
+      ...(PV.entry(PC).yearly ? [{ '@type': 'UnitPriceSpecification', name: `${PV.entry(PC).label} — yearly licence`, price: String(PV.entry(PC).yearly), priceCurrency: 'INR', unitText: 'ANN' }] : []),
+    ],
     url: `${ORIGIN}/pricing`,
   },
   publisher: { '@id': `${ORIGIN}/#organization` },
@@ -294,9 +295,9 @@ const videoLd = {
   uploadDate: '2026-07-02',
 };
 
-// ---- routes ---------------------------------------------------------------
-const routes = [
-  {
+// The pricing route, built from whichever price list the snapshot holds. Two
+// builders, called lazily: each reads fields only its own shape has.
+const usagePricingRoute = () => ({
     slug: 'pricing',
     title: `Dental Clinic Software Price in India — from ${rsText(PC.platformFee.standard)}/mo | Aumy`,
     description:
@@ -335,7 +336,64 @@ const routes = [
         <p>Because the bill follows the enquiries Aumy handles, covering only your closed hours costs a fraction of covering all of them &mdash; and the after-hours enquiry is the one you are losing today. It is one setting, on or off whenever you like: turn it on for the full day in a busy season or when a receptionist is on leave, and back again after.</p>
         <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
       </div></section>`,
-  },
+});
+
+const modulesPricingRoute = () => {
+  const DEF = PC.definitions || {};
+  const q = (name, text) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } });
+  const journey = PV.moduleById(PC, 'patient_journey');
+  const sample = PRICING.sample && PRICING.sample.quote && PRICING.sample.quote.model === 'modules' ? PRICING.sample : null;
+  const sampleNames = sample ? sample.quote.inputs.modules.map((id) => (PV.moduleById(PC, id) || {}).name).filter(Boolean) : [];
+  const whatsapp = journey ? (journey.notes || []).filter((n) => /whatsapp/i.test(n)) : [];
+  const priceList = PC.modules
+    .map((m) => `          <li><strong>${esc(m.name)}:</strong> ${esc(m.what || '')} ${PV.priceText(m, rs)}${(m.notes || []).map((n) => ' ' + esc(n)).join('')}</li>`)
+    .join('\n');
+  const example = sample
+    ? `        <p>Example: ${esc(sampleNames.join(' and '))} together cost ${rs(sample.quote.monthly_total)} a month${sample.quote.yearly_total ? ', plus ' + rs(sample.quote.yearly_total) + ' once a year' : ''}${sample.quote.one_time_total ? ' and ' + rs(sample.quote.one_time_total) + ' once, at the start' : ''}.</p>`
+    : '';
+  const included = journey && (journey.capabilities || []).length
+    ? `        <h2>What the ${esc(journey.name)} includes</h2>\n        <ul>\n${journey.capabilities.map((g) => `          <li><strong>${esc(g.group)}:</strong> ${g.items.map((c) => esc(c.name)).join(', ')}.</li>`).join('\n')}\n        </ul>`
+    : '';
+  return {
+    slug: 'pricing',
+    title: 'Dental Clinic Software Price in India — pick only what you need | Aumy',
+    description: `Transparent pricing for dental clinics. ${PV.summary(PC, rsText)} Work out your exact price — no surprises.`,
+    canonical: `${ORIGIN}/pricing`,
+    jsonld: [orgLd, {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        q('How is my Aumy price worked out?', `You pick the modules your clinic needs and pay for those only. ${PC.modules.map((m) => m.name + ': ' + PV.priceText(m, rsText)).join(' ')} Prices exclude GST.`),
+        q('Do I have to take everything?', 'No. Take one module or take them all. A clinic can run only the Clinic OS, only the patient journey alongside the software it already has, or add the AI receptionist later.'),
+        ...(DEF.chat ? [q('What counts as a chat?', DEF.chat)] : []),
+        ...(DEF.documentedVisit ? [q('What counts as a documented visit?', DEF.documentedVisit)] : []),
+        ...(whatsapp.length ? [q('Are WhatsApp messages extra?', whatsapp.join(' '))] : []),
+        q('Is there a setup fee?', `${PV.setupText(PC, rsText)} Prices exclude GST.`),
+        q('Can I run the AI receptionist only when the clinic is closed?', 'Yes. Off-hours-only mode lets your own team answer during opening hours while Aumy covers nights, Sundays and holidays. Because you pay for the chats Aumy handles, covering only the closed hours costs a fraction of covering the whole day. It is a single setting you can switch on and off.'),
+      ],
+    }],
+    content: `
+      <section><div class="ch-container ch-narrow">
+        <h1 class="ch-hero-title">Pick only what your clinic needs.</h1>
+        <p>Every module has its own price. Take one, or take them all, and add more when you are ready. No hidden fees, no surprises.</p>
+        <h2>The prices, in full</h2>
+        <ul>
+${priceList}
+          <li>Prices exclude GST.</li>
+        </ul>
+${example}
+${included}
+        <h2>Don&rsquo;t need the AI receptionist all day? Pay for the hours you actually need it.</h2>
+        <p>You do not have to run an AI receptionist 24/7 to stop losing patients. Switch Aumy to off-hours only and your team answers while you are open &mdash; nobody is replacing your receptionist, she is better at it and patients can tell. Aumy takes the nights, the Sundays and the holidays: the hours when someone in pain messages, gets silence, and books with the clinic that answered.</p>
+        <p>Because the bill follows the chats Aumy handles, covering only your closed hours costs a fraction of covering all of them &mdash; and the after-hours enquiry is the one you are losing today. It is one setting, on or off whenever you like.</p>
+        <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
+      </div></section>`,
+  };
+};
+
+// ---- routes ---------------------------------------------------------------
+const routes = [
+  PV.isModules(PC) ? modulesPricingRoute() : usagePricingRoute(),
   {
     slug: 'ai-receptionist',
     title: AIR.TITLE,
@@ -478,7 +536,7 @@ const routes = [
         <p><strong>Will my front desk have to change how they work?</strong> They do less of the chasing, not more.</p>
         <p><strong>What happens when the AI cannot handle something?</strong> It hands over to a person, with the context, and steps back the moment a human joins.</p>
         <p><strong>How is it set up?</strong> A dedicated Aumy expert sets it up around how your clinic runs and reviews it with you every week.</p>
-        <p><a href="/pricing">See pricing — everything included</a></p>
+        <p><a href="/pricing">See pricing</a></p>
       </div></section>`,
   },
   {
@@ -524,7 +582,7 @@ const routes = [
         <p><strong>Does the doctor have to write the messages?</strong> The doctors define the after-care and the tone once, in their own words.</p>
         <p><strong>Does it work with the software we already use?</strong> Yes — Aumy syncs with your practice management software.</p>
         <p><strong>Can patients opt out?</strong> Instantly, with one word, on every channel.</p>
-        <p><a href="/pricing">See pricing — everything included</a></p>
+        <p><a href="/pricing">See pricing</a></p>
       </div></section>`,
   },
   {

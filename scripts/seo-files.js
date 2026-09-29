@@ -26,6 +26,7 @@ const { CALCULATORS } = require('../src/data/calculators');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The rate card the pricing page is built from, so llms.txt quotes the same numbers.
 const PRICING = require('../src/data/pricing.json');
+const PV = require('../src/data/pricingView');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -152,7 +153,9 @@ const LLMS = {
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
 - Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
-- Priced in rupees: a platform fee of ${ADS.FROM_PRICE} INR a month (Standard AI) or ${Math.round(Number(PRICING.card.platformFee.premium) || 0).toLocaleString('en-IN')} INR (Premium AI), covering the first ${PRICING.card.included.enquiries} enquiries and ${PRICING.card.included.visits} patient visits a month, with extra usage priced in falling bands; plus a one-time setup fee. Prices exclude GST.
+- ${PV.isModules(PRICING.card)
+    ? `Priced in rupees, by module. ${PV.summary(PRICING.card, (n) => `${PV.inr(n)} INR`)} ${PV.setupText(PRICING.card, (n) => `${PV.inr(n)} INR`)} Prices exclude GST.`
+    : `Priced in rupees: a platform fee of ${ADS.FROM_PRICE} INR a month (Standard AI) or ${Math.round(Number(PRICING.card.platformFee.premium) || 0).toLocaleString('en-IN')} INR (Premium AI), covering the first ${PRICING.card.included.enquiries} enquiries and ${PRICING.card.included.visits} patient visits a month, with extra usage priced in falling bands; plus a one-time setup fee. Prices exclude GST.`}
 - Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages

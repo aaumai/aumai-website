@@ -77,7 +77,7 @@ const AIReceptionistPage = () => {
             </div>
           ))}
           <div className="ch-center" style={{ textAlign: 'center', marginTop: 26 }}>
-            <Link to="/pricing" className="ch-btn ch-btn-primary">See pricing — everything included</Link>
+            <Link to="/pricing" className="ch-btn ch-btn-primary">See pricing</Link>
           </div>
         </div>
       </section>
