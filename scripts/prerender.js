@@ -48,6 +48,9 @@ const pairsHtml = (pairs) => `<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}
 const PC = PRICING.card;
 const rs = (n) => '&#8377;' + Math.round(Number(n) || 0).toLocaleString('en-IN');
 const rsText = (n) => 'Rs ' + Math.round(Number(n) || 0).toLocaleString('en-IN');
+// The module price list has rates with paise (Rs 6.60 a chat): these keep them.
+const rsx = (n) => '&#8377;' + PV.inr(n);
+const rsTextx = (n) => 'Rs ' + PV.inr(n);
 // A single open band ([[null, rate]]) is a flat rate ("Rs 7 per minute") —
 // no "beyond" because there is no previous ceiling. Same rule as bandsText in
 // PricingPage.js; keep the two in step.
@@ -348,10 +351,10 @@ const modulesPricingRoute = () => {
   const sampleNames = sample ? sample.quote.inputs.modules.map((id) => (PV.moduleById(PC, id) || {}).name).filter(Boolean) : [];
   const whatsapp = journey ? (journey.notes || []).filter((n) => /whatsapp/i.test(n)) : [];
   const priceList = PC.modules
-    .map((m) => `          <li><strong>${esc(m.name)}:</strong> ${esc(m.what || '')} ${PV.priceText(m, rs)}${(m.notes || []).map((n) => ' ' + esc(n)).join('')}</li>`)
+    .map((m) => `          <li><strong>${esc(m.name)}:</strong> ${esc(m.what || '')} ${PV.priceText(m, rsx)}${(m.notes || []).map((n) => ' ' + esc(n)).join('')}</li>`)
     .join('\n');
   const example = sample
-    ? `        <p>Example: ${esc(sampleNames.join(' and '))} together cost ${rs(sample.quote.monthly_total)} a month${sample.quote.yearly_total ? ', plus ' + rs(sample.quote.yearly_total) + ' every year' : ''}${sample.quote.one_time_total ? ' and ' + rs(sample.quote.one_time_total) + ' once, at the start' : ''}.</p>`
+    ? `        <p>Example: ${esc(sampleNames.join(' and '))} together cost ${rsx(sample.quote.monthly_total)} a month${sample.quote.yearly_total ? ', plus ' + rsx(sample.quote.yearly_total) + ' every year' : ''}${sample.quote.one_time_total ? ' and ' + rsx(sample.quote.one_time_total) + ' once, at the start' : ''}.</p>`
     : '';
   const included = journey && (journey.capabilities || []).length
     ? `        <h2>What the ${esc(journey.name)} includes</h2>\n        <ul>\n${journey.capabilities.map((g) => `          <li><strong>${esc(g.group)}:</strong> ${g.items.map((c) => esc(c.name)).join(', ')}.</li>`).join('\n')}\n        </ul>`
@@ -359,19 +362,19 @@ const modulesPricingRoute = () => {
   return {
     slug: 'pricing',
     title: 'Dental Clinic Software Price in India — pick only what you need | Aumy',
-    description: `Transparent pricing for dental clinics. ${PV.summary(PC, rsText)} Work out your exact price — no surprises.`,
+    description: `Transparent pricing for dental clinics. ${PV.summary(PC, rsTextx)} Work out your exact price — no surprises.`,
     canonical: `${ORIGIN}/pricing`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
-        q('How is my Aumy price worked out?', `You pick the modules your clinic needs and pay for those only. ${PC.modules.map((m) => m.name + ': ' + PV.priceText(m, rsText)).join(' ')} Prices exclude GST.`),
+        q('How is my Aumy price worked out?', `You pick the modules your clinic needs and pay for those only. ${PC.modules.map((m) => m.name + ': ' + PV.priceText(m, rsTextx)).join(' ')} Prices exclude GST.`),
         q('Do I have to take everything?', 'No. Take one module or take them all. A clinic can run only the Clinic OS, only the patient journey alongside the software it already has, or add the AI receptionist later.'),
         ...(DEF.chat ? [q('What counts as a chat?', DEF.chat)] : []),
         ...(DEF.noteRead ? [q('What counts as a note read?', DEF.noteRead)] : []),
         ...(DEF.dictatedVisit ? [q('What counts as a dictated visit?', DEF.dictatedVisit)] : []),
         ...(whatsapp.length ? [q('Are WhatsApp messages extra?', whatsapp.join(' '))] : []),
-        q('Is there a setup fee?', `${PV.setupText(PC, rsText)} Prices exclude GST.`),
+        q('Is there a setup fee?', `${PV.setupText(PC, rsTextx)} Prices exclude GST.`),
         q('Can I run the AI receptionist only when the clinic is closed?', 'Yes. Off-hours-only mode lets your own team answer during opening hours while Aumy covers nights, Sundays and holidays. Because you pay for the chats Aumy handles, covering only the closed hours costs a fraction of covering the whole day. It is a single setting you can switch on and off.'),
       ],
     }],

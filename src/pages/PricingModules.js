@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
 import snapshot from '../data/pricing.json';
-import { priceText, setupText, moduleById, usagesOf } from '../data/pricingView';
-import { PRICING_API, WA, inr, Check, Slider, Segmented } from './pricingParts';
+import { priceText, setupText, moduleById, usagesOf, addOnOf } from '../data/pricingView';
+import { PRICING_API, WA, inrExact as inr, Check, Slider, Segmented } from './pricingParts';
 
 /**
  * /pricing for the MODULE price list (API mig 987, owner 2026-09-29):
@@ -57,6 +57,9 @@ const PricingModules = ({ rate }) => {
   const firstQuote = useRef(true);
 
   const on = (id) => sel.modules.includes(id);
+  // An add-on (AI receptionist, voice) has no fee of its own and cannot be
+  // bought alone: it waits until one of the modules it works with is on.
+  const waiting = (m) => (m.requiresAny || []).length > 0 && !m.requiresAny.some((id) => sel.modules.includes(id));
   const toggle = (id) => setSel((prev) => {
     const has = prev.modules.includes(id);
     let next = has ? prev.modules.filter((x) => x !== id) : [...prev.modules, id];
@@ -64,8 +67,13 @@ const PricingModules = ({ rate }) => {
       // Switching a module on brings what it needs with it.
       for (const need of (moduleById(card, id) || {}).requires || []) if (!next.includes(need)) next.push(need);
     } else {
-      // Switching one off takes off what cannot work without it.
+      // Switching one off takes off what cannot work without it…
       next = next.filter((x) => !(((moduleById(card, x) || {}).requires || []).includes(id)));
+      // …and the add-ons left with nothing to add on to.
+      next = next.filter((x) => {
+        const any = (moduleById(card, x) || {}).requiresAny || [];
+        return any.length === 0 || any.some((need) => next.includes(need));
+      });
     }
     return { ...prev, modules: card.modules.map((m) => m.id).filter((x) => next.includes(x)) };
   });
@@ -174,6 +182,8 @@ const PricingModules = ({ rate }) => {
                 const usages = usagesOf(m);
                 const tieredUse = usages.find((u) => typeof u.rate !== 'number');
                 const needs = (m.requires || []).map((id) => (moduleById(card, id) || {}).name).filter(Boolean);
+                const addOn = addOnOf(card, m);
+                const mustWait = !isOn && waiting(m);
                 return (
                   <div key={m.id} className={`pp-module${isOn ? ' on' : ''}`} data-module={m.id}>
                     <div className="pp-module-head">
@@ -182,9 +192,11 @@ const PricingModules = ({ rate }) => {
                         <p className="pp-cap-what">{m.what}</p>
                         <p className="pp-module-price">{priceText(m, inr)}</p>
                         {needs.length > 0 && <p className="pp-hint">Works with {needs.join(' and ')}.</p>}
+                        {addOn && <p className="pp-hint">{mustWait ? `An add-on. Switch on ${addOn} first.` : `An add-on to ${addOn}.`}</p>}
                       </div>
-                      <button type="button" role="switch" aria-checked={isOn} aria-label={m.name}
-                        className={`pp-switch${isOn ? ' on' : ''}`} onClick={() => toggle(m.id)} />
+                      <button type="button" role="switch" aria-checked={isOn} aria-label={m.name} disabled={mustWait}
+                        title={mustWait ? `Switch on ${addOn} first` : undefined}
+                        className={`pp-switch${isOn ? ' on' : ''}${mustWait ? ' waiting' : ''}`} onClick={() => toggle(m.id)} />
                     </div>
                     {(m.includes || []).length > 0 && (
                       <ul className="pp-module-list">{m.includes.map((x) => <li key={x}>{x}</li>)}</ul>

@@ -18,7 +18,11 @@
  * require it under Node, and the React pages import it.
  */
 const num = (n) => Math.round(Number(n) || 0);
-const inr = (n) => num(n).toLocaleString('en-IN');
+// A whole amount prints as before ("15,000"); a rate with paise prints both digits ("6.60").
+const inr = (n) => {
+  const v = Math.round((Number(n) || 0) * 100) / 100;
+  return Number.isInteger(v) ? v.toLocaleString('en-IN') : v.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+};
 
 const isModules = (card) => !!card && card.model === 'modules' && Array.isArray(card.modules);
 const moduleById = (card, id) => (isModules(card) ? card.modules.find((m) => m.id === id) : undefined) || null;
@@ -52,6 +56,10 @@ const priceParts = (mod, money) => {
   if (num(p.setup) > 0) out.push(`${money(p.setup)} one-time setup`);
   return out;
 };
+
+/** What an add-on needs, in words: "Clinic OS or Patient Journey". Empty when it is not an add-on. */
+const addOnOf = (card, mod) => ((mod && mod.requiresAny) || [])
+  .map((id) => (moduleById(card, id) || {}).name).filter(Boolean).join(' or ');
 
 const priceText = (mod, money) => {
   const parts = priceParts(mod, money);
@@ -102,4 +110,4 @@ const setupText = (card, money) => {
   return `One-time setup of ${money(o.min)} to ${money(o.max)}, depending on the data migrated.`;
 };
 
-module.exports = { isModules, moduleById, usagesOf, rateOf, priceParts, priceText, summary, entry, setupText, inr, num };
+module.exports = { isModules, moduleById, usagesOf, addOnOf, rateOf, priceParts, priceText, summary, entry, setupText, inr, num };

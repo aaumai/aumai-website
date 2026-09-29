@@ -1,10 +1,13 @@
 import React from 'react';
+import { inr as exact } from '../data/pricingView';
 
 /** Small pieces shared by the two pricing layouts (usage card and module card). */
 
 export const PRICING_API = process.env.REACT_APP_PRICING_API || 'https://aumy.aumai.co.in/api/v1/public/pricing';
 export const WA = (msg) => `https://wa.me/918007189868?text=${encodeURIComponent(msg)}`;
 export const inr = (n) => `₹${Math.round(Number(n) || 0).toLocaleString('en-IN')}`;
+/** Keeps paise when there are any: a rate of ₹6.60 must not print as ₹7. */
+export const inrExact = (n) => `₹${exact(n)}`;
 
 export const Check = () => (
   <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
