@@ -24,9 +24,9 @@ const { CALCULATORS } = require('../src/data/calculators');
 // clinic that has NOT given permission (or withdraws it) can never survive in
 // the crawler-visible HTML after the app stops showing it.
 const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
-// Prices come from the Aumy API's rate card (the one clinics are billed from),
-// snapshotted by scripts/fetch-pricing.js just before the build — never typed here.
-const PRICING = require('../src/data/pricing.json');
+// Prices: one file shared with the React /pricing page (owner 2026-10-04:
+// "starts from ₹5,000 a month" — no calculator, no rate card). Never typed here.
+const PRICE = require('../src/data/pricing');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The founder: same words as the About page (src/data/founder.js).
 const FOUNDER = require('../src/data/founder');
@@ -43,24 +43,6 @@ const faqPageLd = (faqs) => ({
 // Crawler HTML for the FAQ block and a [title, body] list.
 const faqHtml = (faqs, heading) => `<h2>${esc(heading)}</h2>${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
 const pairsHtml = (pairs) => `<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('')}</ul>`;
-const PC = PRICING.card;
-const rs = (n) => '&#8377;' + Math.round(Number(n) || 0).toLocaleString('en-IN');
-const rsText = (n) => 'Rs ' + Math.round(Number(n) || 0).toLocaleString('en-IN');
-// A single open band ([[null, rate]]) is a flat rate ("Rs 7 per minute") —
-// no "beyond" because there is no previous ceiling. Same rule as bandsText in
-// PricingPage.js; keep the two in step.
-const bands = (list, unit, money) => {
-  let prev = null;
-  return list.map(([upTo, rate]) => {
-    const part = upTo == null
-      ? (prev == null ? money(rate) : money(rate) + ' beyond ' + prev.toLocaleString('en-IN'))
-      : money(rate) + ' up to ' + upTo.toLocaleString('en-IN');
-    prev = upTo;
-    return part;
-  }).join(', ') + ' per ' + unit;
-};
-const moneyRate = (r) => '&#8377;' + r;
-const textRate = (r) => 'Rs ' + r;
 
 const BUILD = path.join(__dirname, '..', 'build');
 // US-market build (REACT_APP_MARKET=us → aumyai.com) prerenders only the US
@@ -167,7 +149,7 @@ const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-    ['Do you have your own dental software (PMS)?', 'Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on Aumy, at the same price.'],
+    ['Do you have your own dental software (PMS)?', `Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on Aumy.`],
     ['Do I have to replace my current software?', 'No. Aumy works alongside what you already use — it adds the growth and engagement layer on top. You can move onto Aumy’s full PMS later, whenever you choose.'],
     ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
     ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
@@ -203,7 +185,7 @@ const orgLd = {
 
 // Aumy (dental, India) as a product entity. AI assistants answering "AI dental
 // software in India" and "how much does it cost" read this; the price comes
-// from the same pricing snapshot the pricing page uses.
+// from src/data/pricing.js, the same file the pricing page uses.
 const dentalSoftwareLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -220,14 +202,19 @@ const dentalSoftwareLd = {
   featureList: ADS.CAPABILITIES.map(([t]) => t),
   offers: {
     '@type': 'Offer',
-    price: String(Math.round(Number(PC.platformFee.standard) || 0)),
+    name: 'Aumy Clinic OS',
+    description: `Starts from ${PRICE.MONTHLY_TEXT}. One-time setup and data migration ${PRICE.SETUP_TEXT}.`,
+    price: String(PRICE.MONTHLY_FROM),
     priceCurrency: 'INR',
     valueAddedTaxIncluded: false,
     priceSpecification: {
       '@type': 'UnitPriceSpecification',
-      price: String(Math.round(Number(PC.platformFee.standard) || 0)),
+      price: String(PRICE.MONTHLY_FROM),
+      minPrice: String(PRICE.MONTHLY_FROM), // "starts from"
       priceCurrency: 'INR',
+      unitCode: 'MON',
       unitText: 'MONTH',
+      valueAddedTaxIncluded: false,
     },
     url: `${ORIGIN}/pricing`,
   },
@@ -298,42 +285,25 @@ const videoLd = {
 const routes = [
   {
     slug: 'pricing',
-    title: `Dental Clinic Software Price in India — from ${rsText(PC.platformFee.standard)}/mo | Aumy`,
-    description:
-      `Transparent pricing for dental clinics. ${rsText(PC.platformFee.standard)}/month (Standard AI) or ${rsText(PC.platformFee.premium)}/month (Premium AI) includes ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits. Work out your exact monthly price — no surprises.`,
+    title: PRICE.SEO_TITLE,
+    description: PRICE.SEO_DESCRIPTION,
     canonical: `${ORIGIN}/pricing`,
-    jsonld: [orgLd, {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'How is my Aumy price worked out?', acceptedAnswer: { '@type': 'Answer', text: `A platform fee of ${rsText(PC.platformFee.standard)} a month on Standard AI or ${rsText(PC.platformFee.premium)} on Premium covers the first ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits each month. Beyond that each extra enquiry and visit is charged at a rate that falls as the clinic gets busier, band by band like tax slabs. Add-ons (AI voice agent, Get Found, Meta Ads management) are flat monthly fees.` } },
-        { '@type': 'Question', name: 'What counts as an enquiry and a visit?', acceptedAnswer: { '@type': 'Answer', text: 'An enquiry is someone who is not yet a patient writing to the clinic on WhatsApp for the first time, or calling from an unknown number. A visit is an appointment that actually happened: completed, checked in or in the chair.' } },
-        { '@type': 'Question', name: 'Are WhatsApp messages extra?', acceptedAnswer: { '@type': 'Answer', text: 'With the clinic’s own WhatsApp Business number, Meta bills its message fees to the clinic directly and Aumy adds nothing. If messages go out through Aumy’s number, Meta’s fees are passed through on the invoice.' } },
-        { '@type': 'Question', name: 'What is never charged extra?', acceptedAnswer: { '@type': 'Answer', text: `${(PC.notBilled || []).join(', ')}, unlimited patients and staff logins, the Clinic OS, and every patient-journey message: reminders, after-care, care gaps and reviews.` } },
-        { '@type': 'Question', name: 'Is there a setup fee?', acceptedAnswer: { '@type': 'Answer', text: `One-time setup of ${rsText(PC.onboarding.min)} to ${rsText(PC.onboarding.max)}, depending on the data migrated. Paying yearly saves ${Math.round(PC.annualPrepayDiscount * 100)}%. Prices exclude GST.` } },
-        { '@type': 'Question', name: 'Can I run Aumy only when the clinic is closed?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Off-hours-only mode lets your own team answer during opening hours while Aumy covers nights, Sundays and holidays. Because you are billed on the enquiries Aumy handles, covering only the closed hours costs a fraction of covering the whole day — and the after-hours enquiry is the one most clinics are losing. It is a single setting you can switch on and off, so you can give Aumy the full day during a busy season or when a receptionist is on leave.' } },
-      ],
-    }],
+    jsonld: [orgLd, dentalSoftwareLd, faqPageLd(PRICE.FAQS)],
     content: `
       <section><div class="ch-container ch-narrow">
-        <h1 class="ch-hero-title">Grow your clinic. Don&rsquo;t grow the chaos &mdash; or the bill.</h1>
-        <p>Transparent pricing, worked out in front of you. You pay for the enquiries Aumy handles and the patient visits it coordinates, and the busier you get, the less each one costs. No hidden fees, no surprises.</p>
-        <h2>The rates, in full</h2>
+        <p class="ch-eyebrow">Pricing</p>
+        <h1 class="ch-hero-title">${esc(PRICE.HEADLINE)} <em>${esc(PRICE.HEADLINE_ACCENT)}</em></h1>
+        <p>${esc(PRICE.SUB)}</p>
+        <h2>Aumy Clinic OS &mdash; starts from ${esc(PRICE.inr(PRICE.MONTHLY_FROM))} / month</h2>
         <ul>
-          <li><strong>Platform fee:</strong> ${rs(PC.platformFee.standard)}/month on Standard AI or ${rs(PC.platformFee.premium)}/month on Premium AI, including ${PC.included.enquiries} enquiries and ${PC.included.visits} patient visits every month.</li>
-          <li><strong>Extra enquiries:</strong> Standard ${bands(PC.enquiries.standard, 'enquiry', moneyRate)}; Premium ${bands(PC.enquiries.premium, 'enquiry', moneyRate)}.</li>
-          <li><strong>Extra patient visits:</strong> Standard ${bands(PC.visits.standard, 'visit', moneyRate)}; Premium ${bands(PC.visits.premium, 'visit', moneyRate)}.</li>
-          <li><strong>AI voice agent:</strong> ${rs(PC.voice.monthly)}/month with a number and ${PC.voice.includedMinutes} minutes, then ${bands(PC.voice.minutes, 'minute', moneyRate)}.</li>
-          <li><strong>Get Found:</strong> ${rs(PC.addons.getFound.monthly)}/month. <strong>Meta Ads management:</strong> ${rs(PC.addons.metaAds.monthly)}/month (your ad budget is paid to Meta).</li>
-          <li><strong>Included, never charged extra:</strong> ${(PC.notBilled || []).join(', ')}, unlimited patients and staff logins, the Clinic OS and every patient-journey message.</li>
-          <li><strong>One-time setup:</strong> ${rs(PC.onboarding.min)}&ndash;${rs(PC.onboarding.max)} depending on the data we migrate. Pay yearly and save ${Math.round(PC.annualPrepayDiscount * 100)}%. Prices exclude GST.</li>
+          ${PRICE.CLINIC_OS.map((item) => `<li>${esc(item)}</li>`).join('\n          ')}
         </ul>
-        <p>Example: a clinic with 250 new enquiries a month seeing 20 patients a day for 26 days pays ${rs(PRICING.sample.quote.total)} a month on Standard AI.</p>
-        <p>With your own WhatsApp Business number, Meta bills message fees to you directly &mdash; Aumy adds nothing on top.</p>
-        <h2>Don&rsquo;t need Aumy all day? Pay for the hours you actually need it.</h2>
-        <p>You do not have to run an AI receptionist 24/7 to stop losing patients. Switch Aumy to off-hours only and your team answers while you are open &mdash; nobody is replacing your receptionist, she is better at it and patients can tell. Aumy takes the nights, the Sundays and the holidays: the hours when someone in pain messages, gets silence, and books with the clinic that answered.</p>
-        <p>Because the bill follows the enquiries Aumy handles, covering only your closed hours costs a fraction of covering all of them &mdash; and the after-hours enquiry is the one you are losing today. It is one setting, on or off whenever you like: turn it on for the full day in a busy season or when a receptionist is on leave, and back again after.</p>
+        <h2>One-time setup and data migration: ${esc(PRICE.SETUP_TEXT)}</h2>
+        <p>${esc(PRICE.SETUP_WHY)}</p>
+        <p>${esc(PRICE.ADDONS)}</p>
+        <p><a href="/contact">Talk to us about your clinic</a>. ${esc(PRICE.GST)}</p>
         <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
+        ${faqHtml(PRICE.FAQS, 'Questions clinics ask')}
       </div></section>`,
   },
   {
@@ -589,7 +559,7 @@ const routes = [
         <p>So your clinic can grow without growing the chaos.</p>
         <h2>Full dental software included — or keep the one you have.</h2>
         <p><strong>Want one complete platform?</strong> Aumy includes a full Dental PMS: patient records &amp; appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and complete billing, invoicing &amp; accounts — plus voice-powered charting where you talk and Aumy charts.</p>
-        <p><strong>Happy with your current PMS?</strong> Keep it. Aumy runs on top and coordinates the patient journey — Convert, Care, Retain, Reactivate — with no migration and no retraining. Move onto the full platform later, whenever you choose. Same price either way.</p>
+        <p><strong>Happy with your current PMS?</strong> Keep it. Aumy runs on top and coordinates the patient journey — Convert, Care, Retain, Reactivate — with no migration and no retraining. Move onto the full platform later, whenever you choose.</p>
         <h2>A dedicated expert runs it with you.</h2>
         <p>You are never handed a login and left to work it out. An Aumy expert is assigned to your clinic on a permanent basis — they learn how your clinic runs, set Aumy up around it, operate the system with you, and review it with you every week. You get a calmer clinic; they carry the work.</p>
         <h2>We take on a handful of clinics at a time — and we are honest about fit.</h2>

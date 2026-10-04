@@ -74,7 +74,7 @@ const whyUs = [
 ];
 
 const faqs = [
-  { q: 'Do you have your own dental software (PMS)?', a: 'Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on Aumy, at the same price.' },
+  { q: 'Do you have your own dental software (PMS)?', a: 'Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on Aumy.' },
   { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, Aumy keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into Aumy for a one-time migration fee — with no downtime.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
   { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
@@ -376,7 +376,7 @@ const Home = () => {
             <h2 className="ch-h2 ch-center">Full dental software included — or keep the one you have.</h2>
             <p className="ch-lead ch-center-lead">
               Aumy works both ways. Run your whole clinic on it, or let it power growth on top of the
-              software you already use — same price either way.
+              software you already use.
             </p>
           </div>
           <div className="ch-paths">

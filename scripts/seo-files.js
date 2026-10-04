@@ -24,8 +24,8 @@ const path = require('path');
 const { growthPosts } = require('../src/data/growthPosts');
 const { CALCULATORS } = require('../src/data/calculators');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
-// The rate card the pricing page is built from, so llms.txt quotes the same numbers.
-const PRICING = require('../src/data/pricing.json');
+// The one pricing file the /pricing page reads, so llms.txt quotes the same numbers.
+const PRICING = require('../src/data/pricing');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -152,7 +152,7 @@ const LLMS = {
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
 - Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
-- Priced in rupees: a platform fee of ${ADS.FROM_PRICE} INR a month (Standard AI) or ${Math.round(Number(PRICING.card.platformFee.premium) || 0).toLocaleString('en-IN')} INR (Premium AI), covering the first ${PRICING.card.included.enquiries} enquiries and ${PRICING.card.included.visits} patient visits a month, with extra usage priced in falling bands; plus a one-time setup fee. Prices exclude GST.
+- Priced in rupees: the Clinic OS (appointments, patient records, dental charting, billing, staff and doctor logins) starts from ${PRICING.MONTHLY_FROM.toLocaleString("en-IN")} INR a month, plus a one-time setup and data migration fee of ${PRICING.SETUP_MIN.toLocaleString("en-IN")}–${PRICING.SETUP_MAX.toLocaleString("en-IN")} INR depending on data volume and the number of branches and doctors. The AI receptionist, AI calls and patient follow-up automation are added on top and priced with each clinic. Prices exclude GST.
 - Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages
@@ -164,7 +164,7 @@ const LLMS = {
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
-- ${ORIGIN}/pricing — Aumy pricing: a monthly platform fee (Standard or Premium AI) that includes a set of enquiries and patient visits, usage bands beyond that, optional add-ons (AI voice agent, Get Found, Meta Ads management) and a one-time setup fee; with a price calculator
+- ${ORIGIN}/pricing — Aumy pricing: the Clinic OS starts from ${PRICING.MONTHLY_FROM.toLocaleString("en-IN")} INR a month, plus a one-time setup and data migration fee; the AI receptionist, AI calls and follow-ups are priced with each clinic
 - ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
 - ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
