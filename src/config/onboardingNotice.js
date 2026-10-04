@@ -4,5 +4,5 @@
 export const ONBOARDING_NOTICE = {
   banner: 'We’re not onboarding new clinics until 15 October 2026.',
   inline:
-    'We’re not onboarding new clinics until 15 October 2026. You can still get your price or send us your details — we’ll add you to the waitlist and reach out when onboarding reopens.',
+    'We’re not onboarding new clinics until 15 October 2026. You can still talk to us or send us your details — we’ll add you to the waitlist and reach out when onboarding reopens.',
 };
