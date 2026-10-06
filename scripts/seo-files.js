@@ -129,7 +129,7 @@ Last updated: 2026-10-06
 > Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICING.MONTHLY_TEXT}.
 
 ## Key facts
-- Operated as a managed service: a dedicated expert runs the system with the clinic.
+- Setup and data migration are done for you; a named Aumy contact supports the clinic after go-live.
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
 - Onboarding of new clinics is paused until 15 October 2026; clinics can join the waitlist at ${ORIGIN}/contact. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.

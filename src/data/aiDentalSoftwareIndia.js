@@ -75,6 +75,7 @@ const COMPARE = {
 
 // Neutral buyer's checklist: what AI assistants surface for "how to choose".
 const CHOOSE = [
+  ['Comparing named products?', 'Read our honest comparison of the dental software sold in India, with each vendor’s own published facts: /growth/best-dental-software-india'],
   ['Does the AI actually act, or only suggest?', 'Ask to see it book, reschedule and cancel a real appointment on WhatsApp and on a phone call.'],
   ['Does it speak your patients’ languages?', 'Test it in Hindi or your regional language, switching mid-conversation.'],
   ['Does it work with your current software?', 'Moving every record on day one should be optional. Look for sync with what you run today.'],

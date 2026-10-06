@@ -398,7 +398,7 @@ const routes = [
         </ol>
         <h2>AI dental software questions, answered</h2>
         ${ADS.FAQS.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')}
-        <p>Last updated ${esc(ADS.UPDATED)}. See also <a href="/ai-dental-clinic-operations">AI-powered clinic operations</a>, <a href="/ai-patient-engagement">the AI-powered patient journey</a> and <a href="/switch">switching dental software</a>.</p>
+        <p>Last updated ${esc(ADS.UPDATED)}. Comparing named products? <a href="/growth/best-dental-software-india">Best dental software in India (2026): an honest comparison</a>. See also <a href="/ai-dental-clinic-operations">AI for dental clinic operations</a>, <a href="/ai-patient-engagement">the AI-powered patient journey</a> and <a href="/switch">switching dental software</a>.</p>
         <p><a href="/contact">Talk to us</a></p>
       </div></section>`,
   },
@@ -409,7 +409,7 @@ const routes = [
     slug: 'ai-dental-clinic-operations',
     title: 'AI for Dental Clinic Operations | Calls, WhatsApp, Appointments | Aumy',
     description:
-      'AI for clinic operations and clinic management in dental clinics: every call and WhatsApp answered, appointments confirmed, no-shows followed up, digital intake, invoices and tasks in one platform.',
+      'AI for dental clinic operations: every call and WhatsApp answered, appointments confirmed, no-shows followed up, digital intake, invoices and tasks in one platform.',
     canonical: `${ORIGIN}/ai-dental-clinic-operations`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
@@ -427,7 +427,7 @@ const routes = [
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI-powered dental clinic operations</p>
-        <h1 class="ch-hero-title">AI-powered dental clinic operations — the work around your chairs, handled.</h1>
+        <h1 class="ch-hero-title">AI for dental clinic operations: calls, WhatsApp, appointments and intake, handled.</h1>
         <p>AI for dental clinic operations means software that does the front desk's repetitive coordination itself — answering calls and WhatsApp, booking and confirming appointments, following up no-shows, collecting intake forms and routing tasks — so the workload does not grow with the clinic. Aumy does this for dental clinics in India, from ${PRICE.MONTHLY_TEXT}.</p>
         <p class="ch-hero-sub">Calls, WhatsApp, appointments, confirmations, rescheduling, no-shows, registration, intake, consent, X-rays, invoices and the tasks in between — coordinated by Aumy, the operating system for a growing dental clinic.</p>
         <p><a href="/revenue-generator">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
@@ -509,7 +509,7 @@ const routes = [
     // home owns "AI dental software" + "AI receptionist"; the canonical one-line description).
     title: 'Aumy | AI Dental Software & AI Receptionist for Dental Clinics in India',
     description:
-      `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}.`,
+      'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹5,000 a month.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
@@ -519,7 +519,7 @@ const routes = [
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI Dental Software · India</p>
-        <p>Aumy is AI dental software for dental clinics in India. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
+        <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
         <p class="ch-hero-sub">Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
         <p><strong>Never lose a patient to a missed call or a slow WhatsApp reply — ever.</strong></p>
@@ -810,6 +810,7 @@ const routes = [
       worksFor: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
       knowsAbout: FOUNDER.EXPERTISE.map((e) => e.title),
       url: `${ORIGIN}/about`,
+      sameAs: ['https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/'],
     }],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
@@ -885,7 +886,7 @@ routes.push({
 for (const p of growthPosts) {
   routes.push({
     slug: `growth/${p.slug}`,
-    title: `${p.title} | Aumy Growth Hub`,
+    title: `${p.title} | Aumy`,
     description: p.description,
     canonical: `${ORIGIN}/growth/${p.slug}`,
     // Social shares of articles need an image; the dental hero is the site

@@ -98,7 +98,7 @@ const Home = () => {
       // one canonical sentence used site-wide, price from src/data/pricing.js.
       title: 'Aumy | AI Dental Software & AI Receptionist for Dental Clinics in India',
       description:
-        `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${MONTHLY_TEXT}.`,
+        'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹5,000 a month.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
@@ -300,7 +300,7 @@ const Home = () => {
             </div>
           </div>
           <p className="ch-lead ch-center-lead" style={{ marginTop: 22 }}>
-            Aumy is AI dental software for dental clinics in India.{' '}
+            Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From {MONTHLY_TEXT}.{' '}
             <Link to="/ai-dental-software-india">What AI dental software does in an Indian clinic &rarr;</Link>
           </p>
         </div>

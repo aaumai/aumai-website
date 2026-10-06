@@ -43,7 +43,7 @@ const AIDentalClinicOperationsPage = () => {
       // was dropped from the title on 2026-10-06: /ai-dental-software-india owns that phrase.
       title: 'AI for Dental Clinic Operations | Calls, WhatsApp, Appointments | Aumy',
       description:
-        'AI for clinic operations and clinic management in dental clinics: every call and WhatsApp answered, appointments confirmed, no-shows followed up, digital intake, invoices and tasks in one platform.',
+        'AI for dental clinic operations: every call and WhatsApp answered, appointments confirmed, no-shows followed up, digital intake, invoices and tasks in one platform.',
       canonical: 'https://aumai.co.in/ai-dental-clinic-operations',
     });
   }, []);
@@ -53,7 +53,7 @@ const AIDentalClinicOperationsPage = () => {
       <section className="ch-hero" style={{ paddingBottom: 24 }}>
         <div className="ch-container ch-narrow ch-center">
           <span className="ch-eyebrow">AI-powered dental clinic operations</span>
-          <h1 className="ch-hero-title">AI-powered dental clinic operations &mdash; the work around your chairs, handled.</h1>
+          <h1 className="ch-hero-title">AI for dental clinic operations: calls, WhatsApp, appointments and intake, handled.</h1>
           <p className="ch-hero-sub">
             AI for dental clinic operations means software that does the front desk&rsquo;s repetitive
             coordination itself &mdash; answering calls and WhatsApp, booking and confirming appointments,

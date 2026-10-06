@@ -539,7 +539,7 @@ const growthPosts = [
     <tr><td>What it does</td><td>Reads X-rays and scans and flags what it sees: caries, bone loss, calculus, existing restorations</td><td>Answers patients on WhatsApp and the phone, books and reschedules, sends reminders, follows up, routes tasks</td></tr>
     <tr><td>Who it helps</td><td>The dentist, as a second pair of eyes</td><td>The front desk and the clinic owner</td></tr>
     <tr><td>Who decides</td><td>Always the dentist</td><td>The clinic's own rules, written by its doctors; clinical questions go to a person</td></tr>
-    <tr><td>Where it stands</td><td>Some tools have US FDA 510(k) clearance as aids to the dentist — Overjet Dental Assist (<a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K210187" target="_blank" rel="noopener noreferrer">K210187, May 2021</a>) and Pearl Second Opinion (<a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K210365" target="_blank" rel="noopener noreferrer">K210365, March 2022</a>); adoption in India is early</td><td>In daily use in Indian clinics today, mostly on WhatsApp</td></tr>
+    <tr><td>Where it stands</td><td>Some tools have US FDA 510(k) clearance as aids to the dentist — Overjet Dental Assist (<a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K210187" target="_blank" rel="noopener noreferrer">Overjet Dental Assist, FDA K210187, May 2021</a>) and Pearl Second Opinion (<a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K210365" target="_blank" rel="noopener noreferrer">Pearl Second Opinion, FDA K210365, March 2022</a>); adoption in India is early</td><td>In daily use in Indian clinics today, mostly on WhatsApp</td></tr>
   </tbody>
 </table>
 <p>Both are called "AI in dentistry", and they answer completely different questions. Diagnostic AI asks "what is on this X-ray?". Operations AI asks "did every patient who wrote to us today get an answer, a slot and a reminder?". The rest of this guide is about the second kind, because that is where an Indian clinic gets value this year — and because of the line below.</p>
@@ -1108,7 +1108,7 @@ const growthPosts = [
   },
   {
     slug: "best-dental-software-india",
-    title: "Best Dental Software in India (2026): An Honest Comparison for Clinic Owners",
+    title: "Best Dental Software in India (2026): An Honest Comparison",
     category: "AI for Dental Clinics",
     date: "2026-10-06",
     readingTime: "10 min read",

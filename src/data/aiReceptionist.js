@@ -9,7 +9,7 @@
 // /growth/ai-receptionist-dental-clinic supports it and links here (they were splitting Google's trust).
 const PRICING = require('./pricing');
 
-const TITLE = 'AI Receptionist for Dental Clinics in India | Calls & WhatsApp 24/7 | Aumy';
+const TITLE = 'AI Receptionist for Dental Clinics in India | Aumy';
 const DESCRIPTION =
   'Aumy’s AI receptionist answers every call and WhatsApp enquiry for dental clinics in India, 24/7, in the patient’s own language, and books appointments into your calendar.';
 
