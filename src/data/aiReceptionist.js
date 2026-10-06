@@ -14,7 +14,8 @@ const DESCRIPTION =
   'Aumy’s AI receptionist answers every call and WhatsApp enquiry for dental clinics in India, 24/7, in the patient’s own language, and books appointments into your calendar.';
 
 const HERO = {
-  title: 'An AI receptionist that never misses a patient',
+  // Owner 2026-10-06: the search phrase must be VISIBLE, not only in the <title>.
+  title: 'AI receptionist for dental clinics in India',
   sub: `Aumy’s AI receptionist for dental clinics in India answers every call and WhatsApp message in seconds, 24/7, in the patient’s own language, and books the appointment into your calendar. The Clinic OS starts from ${PRICING.MONTHLY_TEXT}; the AI receptionist is priced on top.`,
 };
 

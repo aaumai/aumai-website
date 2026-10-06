@@ -118,7 +118,7 @@ const Home = () => {
               Growing your clinic <span className="ch-hero-accent">shouldn&rsquo;t mean growing your headache.</span>
             </h1>
             <p className="ch-hero-sub">
-              Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care,
+              Aumy manages your clinic operations — an <Link to="/ai-receptionist">AI receptionist for dental clinics</Link> that answers calls and WhatsApp 24/7, appointments, follow-ups, patient care,
               digital records — so your team can focus on patients, not coordination.
             </p>
             {/* Owner 2026-09-26: "never lose a patient ever to a missed call or slow response to WhatsApp". */}

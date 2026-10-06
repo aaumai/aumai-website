@@ -521,7 +521,7 @@ const routes = [
         <p class="ch-eyebrow">AI Dental Software · India</p>
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
-        <p class="ch-hero-sub">Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
+        <p class="ch-hero-sub">Aumy manages your clinic operations — an <a href="/ai-receptionist">AI receptionist for dental clinics</a> that answers calls and WhatsApp 24/7, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
         <p><strong>Never lose a patient to a missed call or a slow WhatsApp reply — ever.</strong></p>
         <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
         <p><strong>For dental clinics that are growing — and those ready to grow.</strong></p>
