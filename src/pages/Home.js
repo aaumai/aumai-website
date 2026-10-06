@@ -7,6 +7,9 @@ import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
 import AumyLoop from '../components/AumyLoop';
 import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
+import { MONTHLY_TEXT } from '../data/pricing';
+// One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
+import { FAQS as HOME_FAQ } from '../data/homeFaq';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -73,15 +76,7 @@ const whyUs = [
   { title: 'Your data, secured', body: 'Encrypted, access-controlled, and private by design.' },
 ];
 
-const faqs = [
-  { q: 'Do you have your own dental software (PMS)?', a: 'Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on Aumy.' },
-  { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, Aumy keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into Aumy for a one-time migration fee — with no downtime.' },
-  { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
-  { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
-  { q: 'Will my staff have to learn something complicated?', a: 'No. Aumy runs in the background and takes work off the front desk — your team does less, not more.' },
-  { q: 'Is this a product or a service?', a: 'Both — you get a proven system (Aumy), run and tailored for you by a partner. You are not buying software to figure out alone.' },
-  { q: 'Who actually runs all this?', a: 'A dedicated expert is assigned to your clinic on a permanent basis. They set up and operate the entire system with you, and review it with you every week — you are never left to run software yourself.' },
-];
+// FAQ list lives in src/data/homeFaq.js (shared with the prerender's crawler HTML + JSON-LD).
 
 // Real, attributed partner-clinic testimonials (sourced from the revenue-generator page).
 const testimonials = [
@@ -97,12 +92,13 @@ const testimonials = [
 const Home = () => {
   useEffect(() => {
     setPageSeo({
-      // Title leads with the target keyword "AI dental software India" (owner
-      // 2026-09-25), then the two search themes (2026-09-18). Same strings in
-      // scripts/prerender.js (slug '') and public/index.html.
-      title: 'Aumy — AI Dental Software for Dental Clinics in India',
+      // SEO review 2026-10-06: the home page owns "AI dental software" + "AI receptionist" (brand
+      // first); "dental software india" / "clinic management" belong to /ai-dental-software-india.
+      // Same strings in scripts/prerender.js (slug '') and public/index.html; the description is the
+      // one canonical sentence used site-wide, price from src/data/pricing.js.
+      title: 'Aumy | AI Dental Software & AI Receptionist for Dental Clinics in India',
       description:
-        'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
+        `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${MONTHLY_TEXT}.`,
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });
@@ -617,7 +613,7 @@ const Home = () => {
         <div className="ch-container ch-narrow">
           <h2 className="ch-h2 ch-center">Questions clinic owners ask</h2>
           <div className="ch-faq">
-            {faqs.map((f, i) => (
+            {HOME_FAQ.map((f, i) => (
               <details key={i} className="ch-faq-item">
                 <summary>{f.q}</summary>
                 <p>{f.a}</p>

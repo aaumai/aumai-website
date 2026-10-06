@@ -3,7 +3,7 @@
  * 2026-09-26). The React page (src/pages/WhatsAppAutomationPage.js) and the
  * crawler HTML + FAQ JSON-LD (scripts/prerender.js) both read this file.
  */
-const TITLE = 'WhatsApp Automation for Dental Clinics — Official API | Aumy';
+const TITLE = 'WhatsApp Automation for Dental Clinics in India — Official API | Aumy';
 const DESCRIPTION =
   'Aumy automates your dental clinic’s WhatsApp on the official Business API: instant replies, booking, care-gap reminders, reactivation and reviews, with human takeover built in.';
 const HERO = {
