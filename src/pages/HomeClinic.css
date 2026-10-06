@@ -101,6 +101,8 @@
   text-wrap: balance; /* avoid widowed last words in the headline */
 }
 .ch-hero-sub { font-size: 19px; color: var(--c-ink-soft); margin: 0 0 30px; max-width: 560px; }
+/* In a centred hero the capped paragraph must sit centred too (owner 2026-10-06: it hugged the left on /ai-receptionist). */
+.ch-center .ch-hero-sub { margin-left: auto; margin-right: auto; }
 .ch-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
 .ch-center-cta { justify-content: center; }
 .ch-hero-trust { margin-top: 24px; font-size: 14px; color: var(--c-ink-soft); }
