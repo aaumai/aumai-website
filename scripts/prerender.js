@@ -33,6 +33,8 @@ const FOUNDER = require('../src/data/founder');
 const AIR = require('../src/data/aiReceptionist');
 const WA = require('../src/data/whatsappAutomation');
 const COMP = require('../src/data/compliance');
+// Home FAQ: the list src/pages/Home.js renders — crawler HTML and FAQPage JSON-LD read the same one.
+const HOME_FAQ = require('../src/data/homeFaq');
 // FAQPage JSON-LD straight from a page's own FAQ list ({q, a}), so the
 // answers an assistant quotes are word for word what the page says.
 const faqPageLd = (faqs) => ({
@@ -145,19 +147,8 @@ function apply(html, r) {
 }
 
 // ---- shared JSON-LD helpers ----------------------------------------------
-const faqLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    ['Do you have your own dental software (PMS)?', `Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. Clinics that want one platform run everything on Aumy.`],
-    ['Do I have to replace my current software?', 'No. Aumy works alongside what you already use — it adds the growth and engagement layer on top. You can move onto Aumy’s full PMS later, whenever you choose.'],
-    ['Is my patient data safe?', 'Yes — encrypted in transit and at rest, role-based access, and private by design.'],
-    ['How long does it take to get started?', 'Most clinics are live quickly — and most of that is simple setup we handle with you.'],
-    ['Will my staff have to learn something complicated?', 'No. Aumy runs in the background; your team does less, not more.'],
-    ['Is this a product or a service?', 'Both — you get a proven system (Aumy), run and tailored for you by a partner. You are getting a growth partner, not software to figure out alone.'],
-    ['Who actually runs all this?', 'A dedicated growth expert is assigned to your clinic on a permanent basis — they strategise, set up and operate the entire system on your behalf, and review results with you every week.'],
-  ].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
-};
+// Home FAQPage: word for word the list src/pages/Home.js shows (src/data/homeFaq.js).
+const faqLd = faqPageLd(HOME_FAQ.FAQS);
 // Organization: ties both hosts to one legal entity and declares the
 // cross-market relationship, so Google treats aumai.co.in and aumyai.com as
 // sister sites rather than duplicate competitors.
@@ -170,7 +161,15 @@ const orgLd = {
   name: MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'AUM AI Healthcare Solutions',
   url: `${ORIGIN}/`,
   logo: `${ORIGIN}/aumy-mark-512.png`,
-  sameAs: ['https://aumai.co.in/', 'https://aumyai.com/'],
+  // Same-entity profiles (all verified live 2026-10-06). LinkedIn is deliberately absent:
+  // https://www.linkedin.com/company/aumy returned 404 when checked.
+  sameAs: [
+    'https://aumai.co.in/',
+    'https://aumyai.com/',
+    'https://play.google.com/store/apps/details?id=co.aumai.ehr',
+    'https://apps.apple.com/in/app/aumy/id6780580041',
+    'https://www.softwaresuggest.com/aumy',
+  ],
   address:
     MARKET === 'us'
       ? { '@type': 'PostalAddress', streetAddress: '30 N Gould St, Ste N', addressLocality: 'Sheridan', addressRegion: 'WY', postalCode: '82801', addressCountry: 'US' }
@@ -196,7 +195,7 @@ const dentalSoftwareLd = {
   operatingSystem: 'Web, iOS, Android',
   '@id': `${ORIGIN}/#aumy-dental`,
   url: `${ORIGIN}/`,
-  description: 'Aumy is AI dental software for dental clinics in India: an AI voice agent and WhatsApp receptionist that answer and book 24/7 in English, Hindi and Marathi, reminders, digital intake and consent, care-gap follow-ups and a complete dental PMS.',
+  description: `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}.`,
   areaServed: { '@type': 'Country', name: 'India' },
   inLanguage: ['en-IN', 'hi-IN', 'mr-IN'],
   featureList: ADS.CAPABILITIES.map(([t]) => t),
@@ -399,7 +398,7 @@ const routes = [
         </ol>
         <h2>AI dental software questions, answered</h2>
         ${ADS.FAQS.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')}
-        <p>Last updated ${esc(ADS.UPDATED)}. See also <a href="/ai-dental-clinic-operations">AI-powered clinic operations</a>, <a href="/ai-patient-engagement">the AI-powered patient journey</a> and <a href="/switch">switching dental software</a>.</p>
+        <p>Last updated ${esc(ADS.UPDATED)}. Comparing named products? <a href="/growth/best-dental-software-india">Best dental software in India (2026): an honest comparison</a>. See also <a href="/ai-dental-clinic-operations">AI for dental clinic operations</a>, <a href="/ai-patient-engagement">the AI-powered patient journey</a> and <a href="/switch">switching dental software</a>.</p>
         <p><a href="/contact">Talk to us</a></p>
       </div></section>`,
   },
@@ -408,14 +407,17 @@ const routes = [
   // AIPatientEngagementPage.js) — keep this crawler copy in step with them.
   {
     slug: 'ai-dental-clinic-operations',
-    title: 'AI-Powered Dental Clinic Operations — Calls, WhatsApp, Appointments, Intake & Tasks | Aumy',
+    title: 'AI for Dental Clinic Operations | Calls, WhatsApp, Appointments | Aumy',
     description:
-      'Aumy runs the operations of a growing dental clinic with AI: every call and WhatsApp answered, appointments booked and confirmed, no-shows followed up, digital registration, intake and consent, invoices and clinic tasks — one connected platform, so the workload does not grow with the clinic.',
+      'AI for dental clinic operations: every call and WhatsApp answered, appointments confirmed, no-shows followed up, digital intake, invoices and tasks in one platform.',
     canonical: `${ORIGIN}/ai-dental-clinic-operations`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
+        { '@type': 'Question', name: 'What is AI for clinic management?', acceptedAnswer: { '@type': 'Answer', text: 'Software that runs part of a clinic’s day-to-day work itself instead of only recording it: answering calls and WhatsApp, booking and confirming appointments, following up no-shows and enquiries, collecting forms and routing tasks to the right person. In Aumy it is built for dental clinics and works from your doctors’ real calendars.' } },
+        { '@type': 'Question', name: 'How does AI help dental clinic operations?', acceptedAnswer: { '@type': 'Answer', text: 'It takes the repetitive coordination off the front desk: replies in seconds at any hour, reminders and confirmations sent on time, rescheduling written back to the calendar, and only the things that need a person landing in one team inbox.' } },
+        { '@type': 'Question', name: 'What is patient follow-up automation?', acceptedAnswer: { '@type': 'Answer', text: 'Follow-up messages that go out on their own at the right time: a reminder before the visit, a check after treatment, a nudge for a treatment the patient has not booked yet, and a recall when a cleaning is due. Aumy sends them on WhatsApp and stops once the patient books.' } },
         { '@type': 'Question', name: 'Do I have to replace my practice management software?', acceptedAnswer: { '@type': 'Answer', text: 'No. Aumy runs on top of whatever you use today and keeps your data in sync with it. If you want one connected platform, Aumy includes a complete dental PMS you can move onto whenever you choose.' } },
         { '@type': 'Question', name: 'Will my front desk have to change how they work?', acceptedAnswer: { '@type': 'Answer', text: 'They do less of the chasing, not more. Calls and messages are answered whether or not someone is free, confirmations and reminders go out on their own, forms arrive filled in, and the team inbox shows what actually needs a person.' } },
         { '@type': 'Question', name: 'What happens when the AI cannot handle something?', acceptedAnswer: { '@type': 'Answer', text: 'It hands over — to a person, with the context. Clinical questions, upset patients and anything sensitive go to your team immediately, and the AI steps back the moment a human joins a conversation.' } },
@@ -425,7 +427,8 @@ const routes = [
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI-powered dental clinic operations</p>
-        <h1 class="ch-hero-title">AI-powered dental clinic operations — the work around your chairs, handled.</h1>
+        <h1 class="ch-hero-title">AI for dental clinic operations: calls, WhatsApp, appointments and intake, handled.</h1>
+        <p>AI for dental clinic operations means software that does the front desk's repetitive coordination itself — answering calls and WhatsApp, booking and confirming appointments, following up no-shows, collecting intake forms and routing tasks — so the workload does not grow with the clinic. Aumy does this for dental clinics in India, from ${PRICE.MONTHLY_TEXT}.</p>
         <p class="ch-hero-sub">Calls, WhatsApp, appointments, confirmations, rescheduling, no-shows, registration, intake, consent, X-rays, invoices and the tasks in between — coordinated by Aumy, the operating system for a growing dental clinic.</p>
         <p><a href="/revenue-generator">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
       </div></section>
@@ -444,6 +447,9 @@ const routes = [
         <h2>One half of one system</h2>
         <p>Clinic operations are the Convert and Care stages of the Aumy patient journey — from the first enquiry to the visit itself. The other half is what happens around and after treatment: reminders, after-care, doctor check-ins, care gaps and reactivation. Same platform, same patient context. <a href="/ai-patient-engagement">See the AI-powered patient journey</a>.</p>
         <h2>Clinic operations questions, answered</h2>
+        <p><strong>What is AI for clinic management?</strong> Software that runs part of a clinic’s day-to-day work itself instead of only recording it: answering calls and WhatsApp, booking and confirming appointments, following up no-shows and enquiries, collecting forms and routing tasks to the right person. In Aumy it is built for dental clinics and works from your doctors’ real calendars.</p>
+        <p><strong>How does AI help dental clinic operations?</strong> It takes the repetitive coordination off the front desk: replies in seconds at any hour, reminders and confirmations sent on time, rescheduling written back to the calendar, and only the things that need a person landing in one team inbox.</p>
+        <p><strong>What is patient follow-up automation?</strong> Follow-up messages that go out on their own at the right time: a reminder before the visit, a check after treatment, a nudge for a treatment the patient has not booked yet, and a recall when a cleaning is due. Aumy sends them on WhatsApp and stops once the patient books.</p>
         <p><strong>Do I have to replace my practice management software?</strong> No. Aumy runs on top of whatever you use today and keeps your data in sync with it; a complete dental PMS is included for clinics that want one platform.</p>
         <p><strong>Will my front desk have to change how they work?</strong> They do less of the chasing, not more.</p>
         <p><strong>What happens when the AI cannot handle something?</strong> It hands over to a person, with the context, and steps back the moment a human joins.</p>
@@ -499,11 +505,11 @@ const routes = [
   },
   {
     slug: '',
-    // Same strings as src/pages/Home.js and public/index.html (owner 2026-09-25:
-    // lead with "AI dental software India").
-    title: 'Aumy — AI Dental Software for Dental Clinics in India',
+    // Same strings as src/pages/Home.js and public/index.html (SEO review 2026-10-06:
+    // home owns "AI dental software" + "AI receptionist"; the canonical one-line description).
+    title: 'Aumy | AI Dental Software & AI Receptionist for Dental Clinics in India',
     description:
-      'Aumy is AI dental software for dental clinics in India — the operating system for a growing clinic: calls and WhatsApp answered, appointments, reminders, care gaps and a complete dental PMS.',
+      'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹5,000 a month.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
@@ -513,7 +519,7 @@ const routes = [
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI Dental Software · India</p>
-        <p>Aumy is AI dental software for dental clinics in India. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
+        <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
         <p class="ch-hero-sub">Aumy manages your clinic operations — enquiries, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
         <p><strong>Never lose a patient to a missed call or a slow WhatsApp reply — ever.</strong></p>
@@ -572,11 +578,7 @@ const routes = [
         <p>Aumy coordinates the manual tasks and patient journey behind your clinic, so your team can spend less time chasing patients and more time caring for them.</p>
         <h2>Try Aumy free for 30 days — see the difference yourself.</h2>
         <p>We set Aumy up on your clinic and you watch it work for 30 days alongside everything you use today — real calls and enquiries answered, real bookings made, forms gone digital. If the difference convinces you, we continue. If not, you walk away: no charges, no lock-in, no obligation to stay.</p>
-        <h2>Questions clinic owners ask</h2>
-        <p><strong>Do you have your own dental software (PMS)?</strong> Yes — a complete Dental PMS is included: records, appointments, charting, prescriptions, treatment plans and full billing &amp; accounts.</p>
-        <p><strong>Do I have to replace my current software?</strong> No — Aumy works alongside what you already use, and you can move onto its full PMS whenever you choose.</p>
-        <p><strong>Is my patient data safe?</strong> Yes — encrypted in transit and at rest, role-based access, private by design.</p>
-        <p><strong>Is this a product or a service?</strong> Both — a proven system (Aumy), run and tailored for you by a partner.</p>
+        ${faqHtml(HOME_FAQ.FAQS, 'Questions clinic owners ask')}
         <p><a href="/growth-audit">Get my free Clinic Audit</a></p>
       </div></section>`,
   },
@@ -808,6 +810,7 @@ const routes = [
       worksFor: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
       knowsAbout: FOUNDER.EXPERTISE.map((e) => e.title),
       url: `${ORIGIN}/about`,
+      sameAs: ['https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/'],
     }],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
@@ -883,7 +886,7 @@ routes.push({
 for (const p of growthPosts) {
   routes.push({
     slug: `growth/${p.slug}`,
-    title: `${p.title} | Aumy Growth Hub`,
+    title: `${p.title} | Aumy`,
     description: p.description,
     canonical: `${ORIGIN}/growth/${p.slug}`,
     // Social shares of articles need an image; the dental hero is the site
@@ -896,6 +899,7 @@ for (const p of growthPosts) {
         headline: p.title,
         description: p.description,
         datePublished: p.date,
+        dateModified: p.updated || p.date,
         author: { '@type': 'Person', name: p.author },
         publisher: {
           '@type': 'Organization',
@@ -909,7 +913,7 @@ for (const p of growthPosts) {
       <article><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(p.category)}</p>
         <h1 class="ch-hero-title">${esc(p.title)}</h1>
-        <p>${esc(p.author)} · ${p.date} · ${esc(p.readingTime)}</p>
+        <p>${esc(p.author)} · ${p.date}${p.updated ? ` · Updated ${p.updated}` : ''} · ${esc(p.readingTime)}</p>
         ${p.body}
         <h2>Want to know what this looks like in your clinic?</h2>
         <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp Aumy</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>

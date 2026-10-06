@@ -59,9 +59,10 @@ const SITEMAPS = {
     ['/ai-patient-engagement', 0.9, 'monthly'],
     ['/growth', 0.8, 'weekly'],
     ['/podcast', 0.7, 'monthly'],
-    // Articles carry their real publish date as lastmod — honest signals beat
-    // a blanket "everything changed today".
-    ...growthPosts.map((p) => [`/growth/${p.slug}`, 0.7, 'monthly', p.date]),
+    // Articles carry their real publish date (or the date of a substantive
+    // update, `updated`) as lastmod — honest signals beat a blanket
+    // "everything changed today".
+    ...growthPosts.map((p) => [`/growth/${p.slug}`, 0.7, 'monthly', p.updated || p.date]),
     ['/platform-partner', 0.7, 'monthly'],
     ['/facebook-instagram', 0.6, 'monthly'],
     ['/compliance', 0.7, 'monthly'],
@@ -123,28 +124,12 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 // an assistant summarising us should get the same facts a human would.
 const LLMS = {
   in: `# AUM AI — Aumy for dental clinics (India)
+Last updated: 2026-10-06
 
-> Aumy is AI dental software for dental clinics in India — the AI-powered
-> operating system for a growing dental clinic, from single-doctor practices
-> to multi-chair centres and multi-location groups. Aumy manages the
-> chaos that comes with growth — coordinating patients, people and processes
-> from the first enquiry to ongoing care. It takes the day-to-day load off the
-> front desk: answers every call (AI voice agent) and WhatsApp /
-> Instagram enquiry and books appointments 24/7, follows up leads, sends
-> appointment reminders by message and call, handles rescheduling and no-show
-> follow-up, and makes registration, patient intake, consent, X-rays and
-> invoices digital. Once the clinic runs calm, it closes care gaps, sends
-> treatment-specific aftercare, brings back patients who drifted away, manages
-> Google Business Profile and reviews, and runs Meta Ads with real booking data.
-> One platform with full context across the patient journey
-> (Convert → Care → Retain → Reactivate), including a complete dental PMS.
-> Two halves: AI-powered dental clinic operations (calls, WhatsApp,
-> appointments, registration, intake, consent, invoices, clinic tasks) and an
-> AI-powered patient journey and patient engagement (reminders, after-care,
-> doctor check-ins, care gaps, treatment-plan follow-ups, reactivation).
+> Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICING.MONTHLY_TEXT}.
 
 ## Key facts
-- Operated as a managed service: a dedicated expert runs the system with the clinic.
+- Setup and data migration are done for you; a named Aumy contact supports the clinic after go-live.
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
 - Onboarding of new clinics is paused until 15 October 2026; clinics can join the waitlist at ${ORIGIN}/contact. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
@@ -170,12 +155,11 @@ ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
 - ${ORIGIN}/contact — talk to the Aumy team
 - ${ORIGIN}/podcast — the Dental Growth podcast
-- ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments
+- ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments; from ${PRICING.MONTHLY_TEXT}
 - ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: care-gap reminders, reactivation, campaigns
-- ${ORIGIN}/ai-dental-clinic-operations — AI-powered dental clinic operations: every call and WhatsApp answered, appointment orchestration, digital registration, intake and consent, invoices, one team inbox
+- ${ORIGIN}/ai-dental-clinic-operations — AI-powered dental clinic operations: every call and WhatsApp answered, appointment orchestration, digital registration, intake and consent, invoices, one team inbox; from ${PRICING.MONTHLY_TEXT}
 - ${ORIGIN}/ai-patient-engagement — AI-powered patient journey and patient engagement: reminders, treatment-specific after-care, doctor check-ins, care gaps, treatment-plan follow-ups, reactivation — each message in context
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, care gaps and patient reactivation for Indian dental clinics
-- ${ORIGIN}/compliance — security and data handling
 ## Dental practice growth guides (free, no sign-up, India-focused)
 ${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s+/g, ' ')}`).join('\n')}
 - ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page front-desk checklist for practice managers

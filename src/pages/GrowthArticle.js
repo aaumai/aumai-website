@@ -46,6 +46,12 @@ const GrowthArticle = () => {
             <span>{formatDate(post.date)}</span>
             <span className="gh-card-dot" />
             <span>{post.readingTime}</span>
+            {post.updated && (
+              <>
+                <span className="gh-card-dot" />
+                <span>Updated {formatDate(post.updated)}</span>
+              </>
+            )}
           </div>
 
           <div

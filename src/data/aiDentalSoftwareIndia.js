@@ -20,16 +20,18 @@ const PRICING = require('./pricing');
 const FROM_PRICE = PRICING.MONTHLY_FROM.toLocaleString('en-IN');
 
 const UPDATED = 'October 2026';
-const UPDATED_ISO = '2026-10-04';
+const UPDATED_ISO = '2026-10-06';
 
-const TITLE = 'AI Dental Software in India: What It Does, Cost & How to Choose | Aumy';
+// Owner 2026-10-06: this page owns "dental software india", "dental clinic software" and "ai dental software india".
+const TITLE = 'Dental Software in India (2026): AI, Cost & How to Choose | Aumy';
 const DESCRIPTION =
-  'What AI dental software does for a clinic in India, what it costs and how to choose — and how Aumy answers calls and WhatsApp, reminders and care gaps.';
+  'Dental software for clinics in India: what AI dental clinic software does, what it costs in rupees and how to choose — and how Aumy runs calls, WhatsApp, reminders and records.';
 
 const HERO = {
   eyebrow: 'AI dental software · India',
-  h1: 'AI dental software in India: what it does and how to choose',
-  sub: 'Aumy is the AI operating system for a growing dental clinic. It answers every call and WhatsApp, books and confirms appointments, runs the patient journey after treatment and keeps the clinic’s records — so when your clinic grows, the workload doesn’t grow with it.',
+  h1: 'Dental software in India: what AI dental clinic software does, costs and how to choose',
+  // First sentence = the site's canonical one-line description (SEO review 2026-10-06).
+  sub: `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICING.MONTHLY_TEXT}. When your clinic grows, the workload doesn’t grow with it.`,
 };
 
 const DEFINITION = [
@@ -73,6 +75,7 @@ const COMPARE = {
 
 // Neutral buyer's checklist: what AI assistants surface for "how to choose".
 const CHOOSE = [
+  ['Comparing named products?', 'Read our honest comparison of the dental software sold in India, with each vendor’s own published facts: /growth/best-dental-software-india'],
   ['Does the AI actually act, or only suggest?', 'Ask to see it book, reschedule and cancel a real appointment on WhatsApp and on a phone call.'],
   ['Does it speak your patients’ languages?', 'Test it in Hindi or your regional language, switching mid-conversation.'],
   ['Does it work with your current software?', 'Moving every record on day one should be optional. Look for sync with what you run today.'],
@@ -83,6 +86,9 @@ const CHOOSE = [
 
 const FAQS = [
   { q: 'What is AI dental software?', a: 'AI dental software is dental practice software that does part of the clinic’s work itself: it answers patients on the phone and WhatsApp, books and reschedules appointments, sends reminders and after-care, follows up care gaps and tells the team what needs a person — on top of the records, charting and billing that traditional dental software provides.' },
+  { q: 'What is dental clinic management software?', a: 'The software a dental clinic runs on: appointments and doctor calendars, patient records and dental charting, treatment plans, prescriptions, billing and staff logins. AI dental clinic management software also does part of the work itself, such as answering patients on WhatsApp and the phone, sending reminders and following up.' },
+  { q: 'Does Aumy include patient intake and digital registration?', a: 'Yes. Patients fill in registration, medical history and consent forms on their phone before they arrive, or on the clinic iPad, and everything lands on their record. It is part of the Clinic OS.' },
+  { q: 'Is there a dental patient management system that works on WhatsApp?', a: 'Aumy is one: patient records, appointments and treatment plans in the Clinic OS, with reminders, confirmations and follow-ups sent on the official WhatsApp Business API, and replies landing back on the patient’s record.' },
   { q: 'What is the best AI dental software in India?', a: 'It depends on five things: whether the AI actually acts (books, reschedules, follows up) or only suggests; whether it speaks your patients’ languages; whether it runs on the official WhatsApp Business API; whether it works with the software you already use; and where patient data is stored. Aumy is built for clinics that want the calls, WhatsApp messages, reminders and follow-ups taken off a stretched front desk — in Indian languages, on WhatsApp, with its database in AWS Mumbai — alongside the dental software they already use.' },
   { q: 'How much does AI dental software cost in India?', a: `Aumy is priced in rupees. The Clinic OS — appointments, patient records, dental charting, billing and staff logins — starts from ₹${FROM_PRICE} a month, plus a one-time setup and data migration fee of ${PRICING.SETUP_TEXT}, depending on how much data is moved and how many branches and doctors are set up. The AI receptionist, AI calls and patient follow-up automation are added on top and priced with the clinic. Prices exclude GST. New-clinic onboarding reopens on 15 October 2026. Details are on the pricing page.` },
   { q: 'Do I have to replace my current dental software?', a: 'No. Aumy runs alongside the practice management software you use today and keeps the data in sync. If you want one platform, Aumy includes a complete dental PMS and migrates your full history for you.' },

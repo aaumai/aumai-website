@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import { MONTHLY_TEXT } from '../data/pricing';
 import './HomeClinic.css';
 
 // Theme page (owner 2026-09-18): "AI-powered dental clinic operations" — the
@@ -25,6 +26,9 @@ const AREAS = [
 ];
 
 const FAQS = [
+  { q: 'What is AI for clinic management?', a: 'Software that runs part of a clinic’s day-to-day work itself instead of only recording it: answering calls and WhatsApp, booking and confirming appointments, following up no-shows and enquiries, collecting forms and routing tasks to the right person. In Aumy it is built for dental clinics and works from your doctors’ real calendars.' },
+  { q: 'How does AI help dental clinic operations?', a: 'It takes the repetitive coordination off the front desk: replies in seconds at any hour, reminders and confirmations sent on time, rescheduling written back to the calendar, and only the things that need a person landing in one team inbox.' },
+  { q: 'What is patient follow-up automation?', a: 'Follow-up messages that go out on their own at the right time: a reminder before the visit, a check after treatment, a nudge for a treatment the patient has not booked yet, and a recall when a cleaning is due. Aumy sends them on WhatsApp and stops once the patient books.' },
   { q: 'Do I have to replace my practice management software?', a: 'No. Aumy runs on top of whatever you use today and keeps your data in sync with it. If you want one connected platform, Aumy includes a complete dental PMS you can move onto whenever you choose.' },
   { q: 'Will my front desk have to change how they work?', a: 'They do less of the chasing, not more. Calls and messages are answered whether or not someone is free, confirmations and reminders go out on their own, forms arrive filled in, and the team inbox shows what actually needs a person.' },
   { q: 'What happens when the AI cannot handle something?', a: 'It hands over — to a person, with the context. Clinical questions, upset patients and anything sensitive go to your team immediately, and the AI steps back the moment a human joins a conversation.' },
@@ -35,9 +39,11 @@ const AIDentalClinicOperationsPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({
-      title: 'AI-Powered Dental Clinic Operations — Calls, WhatsApp, Appointments, Intake & Tasks | Aumy',
+      // Same strings as scripts/prerender.js (slug 'ai-dental-clinic-operations'). "Clinic management"
+      // was dropped from the title on 2026-10-06: /ai-dental-software-india owns that phrase.
+      title: 'AI for Dental Clinic Operations | Calls, WhatsApp, Appointments | Aumy',
       description:
-        'Aumy runs the operations of a growing dental clinic with AI: every call and WhatsApp answered, appointments booked and confirmed, no-shows followed up, digital registration, intake and consent, invoices and clinic tasks — one connected platform, so the workload does not grow with the clinic.',
+        'AI for dental clinic operations: every call and WhatsApp answered, appointments confirmed, no-shows followed up, digital intake, invoices and tasks in one platform.',
       canonical: 'https://aumai.co.in/ai-dental-clinic-operations',
     });
   }, []);
@@ -47,7 +53,13 @@ const AIDentalClinicOperationsPage = () => {
       <section className="ch-hero" style={{ paddingBottom: 24 }}>
         <div className="ch-container ch-narrow ch-center">
           <span className="ch-eyebrow">AI-powered dental clinic operations</span>
-          <h1 className="ch-hero-title">AI-powered dental clinic operations &mdash; the work around your chairs, handled.</h1>
+          <h1 className="ch-hero-title">AI for dental clinic operations: calls, WhatsApp, appointments and intake, handled.</h1>
+          <p className="ch-hero-sub">
+            AI for dental clinic operations means software that does the front desk&rsquo;s repetitive
+            coordination itself &mdash; answering calls and WhatsApp, booking and confirming appointments,
+            following up no-shows, collecting intake forms and routing tasks &mdash; so the workload does not
+            grow with the clinic. Aumy does this for dental clinics in India, from {MONTHLY_TEXT}.
+          </p>
           <p className="ch-hero-sub">
             Calls, WhatsApp, appointments, confirmations, rescheduling, no-shows, registration, intake,
             consent, X-rays, invoices and the tasks in between &mdash; coordinated by Aumy, the operating
