@@ -538,7 +538,7 @@ const routes = [
           <li><strong>Appointment orchestration</strong> — confirmations, rescheduling, cancellations, no-show management, waitlists, care gaps.</li>
           <li><strong>Digital clinic</strong> — digital registration, patient intake, consent, X-rays, invoices, paperless workflows.</li>
           <li><strong>Patient journey</strong> — pre-treatment, treatment, after-care, care gaps, doctor check-ins, reactivation.</li>
-          <li><strong>Growth</strong> — Get Found, Meta Ads, lead capture, lead conversion.</li>
+          <li><strong>Growth</strong> — Get Found on Google and local SEO, your website, Meta Ads through our marketing partners, lead capture, lead conversion. One holistic solution, one point of contact.</li>
         </ul>
         <h2>AI-powered dental clinic operations. An AI-powered patient journey. One connected platform.</h2>
         <p>The work around your chairs, and the journey of every patient through them — coordinated by the same system, with the same patient context.</p>
@@ -613,7 +613,7 @@ const routes = [
           <li><strong>Appointment orchestration</strong> — confirmations, rescheduling and cancellations, no-show management, waitlists for earlier slots, care gaps.</li>
           <li><strong>Digital clinic</strong> — digital registration, patient intake with signature, digital consent, X-rays and documents on the record, invoices and payments, paperless workflows.</li>
           <li><strong>Patient journey</strong> — pre-treatment instructions, treatment records and charting, after-care, care gaps, doctor check-ins, reactivation.</li>
-          <li><strong>Growth</strong> — Get Found on Google, reviews, Meta Ads, lead capture, lead conversion.</li>
+          <li><strong>Growth</strong> — Get Found on Google, reviews and local SEO, your website, Meta Ads through our marketing partners, lead capture, lead conversion.</li>
         </ul>
         <h2>Think of Aumy as Jarvis for your dental clinic.</h2>
         <p>Not because it's a chatbot. Because everything knows what's happening. A patient calls → Aumy knows who they are. They need an appointment → Aumy knows the doctor's availability. They don't show → Aumy knows what happened. They need a follow-up → Aumy creates and manages it. They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it. The clinic gets a call → the voice agent has the context.</p>

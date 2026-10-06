@@ -13,7 +13,7 @@ import React, { useEffect, useState } from 'react';
  * Reduced motion: the ring is shown complete and still.
  */
 const STEPS = [
-  { key: 'found', label: 'Get Found', line: 'Your Google profile, reviews and ads working, so patients find you first.', icon: 'M11 4a7 7 0 1 0 4.9 12l4.6 4.6 1.4-1.4-4.6-4.6A7 7 0 0 0 11 4zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z' },
+  { key: 'found', label: 'Get Found', line: 'Your Google profile, reviews, website and ads working, so patients find you first.', icon: 'M11 4a7 7 0 1 0 4.9 12l4.6 4.6 1.4-1.4-4.6-4.6A7 7 0 0 0 11 4zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z' },
   { key: 'convert', label: 'Convert', line: 'Every call and WhatsApp answered in seconds. Booked, not lost.', icon: 'M4 4h16v11H8l-4 4V4zm2 2v8.2L7.2 13H18V6H6z' },
   { key: 'care', label: 'Care', line: 'Registration, consent and after-care handled. Patients feel looked after.', icon: 'M12 21l-1.4-1.3C5.4 15 2 12 2 8.4 2 5.4 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.4 22 8.4c0 3.6-3.4 6.6-8.6 11.3L12 21z' },
   { key: 'retain', label: 'Retain', line: 'Check-ups and care gaps followed up on time, automatically.', icon: 'M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11zm-8.5-2.5L7 14l1.4-1.4 2.1 2.1 5.1-5.1L17 11l-6.5 6.5z' },

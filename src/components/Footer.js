@@ -17,7 +17,7 @@ const Footer = () => {
     'Appointments, Reminders & No-shows',
     'Digital Registration, Intake & Consent',
     'After-care, Care Gaps & Reactivation',
-    'Get Found & Meta Ads'
+    'Get Found, Website & Meta Ads'
   ];
 
   // Dental-growth pages only. The legacy engineering/consulting pages (About,

@@ -72,7 +72,7 @@ const chaosGroups = [
   },
   {
     title: 'Growth',
-    items: ['Get Found on Google', 'Reviews', 'Meta Ads', 'Lead capture', 'Lead conversion'],
+    items: ['Get Found on Google', 'Reviews & website', 'Meta Ads, through our partners', 'Lead capture', 'Lead conversion'],
   },
 ];
 
@@ -241,7 +241,7 @@ const AumyRevenueGenerator = () => {
           <span className="ch-eyebrow">And when you do advertise</span>
           <h2 className="ch-h2">Your ads learn from what happens next.</h2>
           <p className="ch-lead">
-            Because the platform running your Meta ads also handles the enquiry, the booking and the
+            Your Meta ads run through our marketing partners, and because the same platform handles the enquiry, the booking and the
             visit, it knows which leads became patients — and your campaigns learn from that. Meta
             &amp; Google only ever see anonymous lead signals: treatment and health details never leave
             the clinic.

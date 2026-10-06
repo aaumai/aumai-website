@@ -43,7 +43,7 @@ const chaosGroups = [
   },
   {
     title: 'Growth',
-    items: ['Get Found', 'Meta Ads', 'Lead capture', 'Lead conversion'],
+    items: ['Get Found on Google & local SEO', 'Your website', 'Meta Ads, through our partners', 'Lead conversion'],
   },
 ];
 
@@ -528,15 +528,15 @@ const Home = () => {
         </div>
       </section>
 
-      {/* GROWTH — Get Found + Meta Ads on the same connected platform. */}
+      {/* GROWTH — Get Found, local SEO and the website are Aumy's own work; Meta Ads run through our marketing partners (owner 2026-10-06): one holistic solution, one point of contact. */}
       <section className="ch-section">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">Growth, on the same platform</span>
-          <h2 className="ch-h2">Get Found, Meta Ads, lead capture and conversion — connected to everything else.</h2>
+          <span className="ch-eyebrow">Growth, one holistic solution</span>
+          <h2 className="ch-h2">Get Found, your website, Meta Ads and lead conversion — one plan, one point of contact.</h2>
           <p className="ch-lead ch-center-lead">
-            Aumy keeps your Google profile and reviews working, and your Meta Ads get real data: Aumy
+            Aumy keeps your Google profile, reviews and local SEO working, and builds and optimises your website. Meta Ads run through our marketing partners, as part of the same plan, and get real data: Aumy
             privately tracks every ad-clicked patient through booking, so you see which campaigns bring
-            patients, not just clicks. Meta only ever receives an anonymous lead signal: your patients’
+            patients, not just clicks, and so does your partner. Meta only ever receives an anonymous lead signal: your patients’
             health data never leaves the clinic, exactly as Meta’s health-data rules and India’s DPDP Act
             demand.
           </p>
