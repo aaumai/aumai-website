@@ -168,7 +168,7 @@ const orgLd = {
     'https://aumyai.com/',
     'https://play.google.com/store/apps/details?id=co.aumai.ehr',
     'https://apps.apple.com/in/app/aumy/id6780580041',
-    'https://www.softwaresuggest.com/aumy',
+    'https://www.softwaresuggest.com/aumy', 'https://www.linkedin.com/company/110661944/',
   ],
   address:
     MARKET === 'us'
