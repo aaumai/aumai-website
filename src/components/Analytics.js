@@ -95,37 +95,41 @@ const send = (endpoint, data) => {
   }
 };
 
+// The referrer and UTM tags describe how THIS page load arrived. A later visit
+// started in the same tab (after 30 min idle) is a return, not a new click.
+let arrivalUnused = true;
+
 // Current visit id; starts (and announces) a new visit when the last one went idle.
+// Every path that may start a visit goes through here, so no visit id is ever
+// used without the backend having been told about it.
 const ensureSession = (landingPath) => {
   const { id, isNew } = touchSession();
   if (isNew) {
-    const utm = getUtmParams();
+    const utm = arrivalUnused ? getUtmParams() : {};
     send('session', {
       session_id: id,
       visitor_id: getVisitorId(),
-      referrer: document.referrer || null,
-      utm_source: utm.utm_source,
-      utm_medium: utm.utm_medium,
-      utm_campaign: utm.utm_campaign,
+      referrer: arrivalUnused ? document.referrer || null : null,
+      utm_source: utm.utm_source || null,
+      utm_medium: utm.utm_medium || null,
+      utm_campaign: utm.utm_campaign || null,
       landing_page: landingPath,
       device_type: getDeviceType(),
       // Set when this browser has logged in to /aumaianalytics — our own visits never alert.
       internal: store.get('aumai_internal') === '1',
     });
   }
+  arrivalUnused = false;
   return id;
 };
 
-// Seconds this page has been on screen (finished stretches + the running one).
-const onScreenSeconds = (visibleMs, visibleSince) => {
-  const running = visibleSince.current ? Date.now() - visibleSince.current : 0;
-  return Math.round((visibleMs.current + running) / 1000);
-};
+const TICK_MS = 5000;
 
 const Analytics = () => {
   const location = useLocation();
-  const visibleMs = useRef(0);          // time this page was actually on screen
-  const visibleSince = useRef(null);    // when the current on-screen stretch began
+  // Seconds someone was actually on this page: the tab visible AND they did
+  // something in the last ACTIVE_WINDOW_MS. A tab left open on a desk stops counting.
+  const activeSeconds = useRef(0);
   const lastInteraction = useRef(Date.now());
   const maxScroll = useRef(0);
   const prevPath = useRef(null);
@@ -144,10 +148,16 @@ const Analytics = () => {
     };
     const markActive = () => { lastInteraction.current = Date.now(); };
     const activity = ['pointerdown', 'keydown', 'mousemove', 'touchstart'];
+    const tick = setInterval(() => {
+      if (document.visibilityState === 'visible' && Date.now() - lastInteraction.current <= ACTIVE_WINDOW_MS) {
+        activeSeconds.current += TICK_MS / 1000;
+      }
+    }, TICK_MS);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     activity.forEach((e) => window.addEventListener(e, markActive, { passive: true }));
     return () => {
+      clearInterval(tick);
       window.removeEventListener('scroll', handleScroll);
       activity.forEach((e) => window.removeEventListener(e, markActive));
     };
@@ -162,7 +172,7 @@ const Analytics = () => {
       send('time', {
         session_id: sessionId.current,
         page_url: prevPath.current,
-        time_seconds: onScreenSeconds(visibleMs, visibleSince),
+        time_seconds: Math.round(activeSeconds.current),
         scroll_depth: maxScroll.current,
       });
     }
@@ -177,8 +187,7 @@ const Analytics = () => {
     });
 
     // Reset counters for new page
-    visibleMs.current = 0;
-    visibleSince.current = document.visibilityState === 'visible' ? Date.now() : null;
+    activeSeconds.current = 0;
     lastInteraction.current = Date.now();
     maxScroll.current = 0;
     prevPath.current = currentPath;
@@ -192,44 +201,44 @@ const Analytics = () => {
       send('time', {
         session_id: sessionId.current,
         page_url: prevPath.current || location.pathname,
-        time_seconds: onScreenSeconds(visibleMs, visibleSince),
+        time_seconds: Math.round(activeSeconds.current),
         scroll_depth: maxScroll.current,
       });
+    };
+
+    // Keep the current visit — or, after a 30-min break, start (and announce)
+    // a new one on this page. Then tell the backend we are here right away.
+    const resumeVisit = () => {
+      const prevId = sessionId.current;
+      sessionId.current = ensureSession(location.pathname);
+      if (sessionId.current !== prevId) {
+        send('pageview', {
+          session_id: sessionId.current,
+          visitor_id: getVisitorId(),
+          page_url: location.pathname,
+          page_title: document.title,
+          referrer_page: null,
+        });
+        activeSeconds.current = 0;
+        maxScroll.current = 0;
+      }
+      flush();
     };
 
     // visibilitychange is more reliable than beforeunload on mobile
     const handleVisibility = () => {
       if (document.visibilityState === 'hidden') {
-        if (visibleSince.current) {
-          visibleMs.current += Date.now() - visibleSince.current;
-          visibleSince.current = null;
-        }
         flush();
       } else {
-        // Back after a long break → that is a new visit, starting on this page.
-        const prevId = sessionId.current;
-        sessionId.current = ensureSession(location.pathname);
-        if (sessionId.current !== prevId) {
-          send('pageview', {
-            session_id: sessionId.current,
-            visitor_id: getVisitorId(),
-            page_url: location.pathname,
-            page_title: document.title,
-            referrer_page: null,
-          });
-          visibleMs.current = 0;
-          maxScroll.current = 0;
-        }
-        visibleSince.current = Date.now();
         lastInteraction.current = Date.now();
+        resumeVisit();
       }
     };
 
     const heartbeat = setInterval(() => {
       if (document.visibilityState !== 'visible') return;
       if (Date.now() - lastInteraction.current > ACTIVE_WINDOW_MS) return;
-      touchSession();
-      flush();
+      resumeVisit();
     }, HEARTBEAT_MS);
 
     document.addEventListener('visibilitychange', handleVisibility);

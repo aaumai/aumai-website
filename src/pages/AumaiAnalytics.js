@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 // REACT_APP_SITE_API lets a local run point at a local backend; prod uses the default.
 const API_BASE = `${process.env.REACT_APP_SITE_API || 'https://site-api.aumai.co.in'}/api/aumai/analytics`;
@@ -15,15 +15,13 @@ const KEY_STORE = 'aumai_dash_key';
 const readKey = () => { try { return localStorage.getItem(KEY_STORE) || ''; } catch (e) { return ''; } };
 const saveKey = (k) => {
   try {
-    if (k) {
-      localStorage.setItem(KEY_STORE, k);
-      // Mark this browser as ours so our own website visits never send WhatsApp alerts.
-      localStorage.setItem('aumai_internal', '1');
-    } else {
-      localStorage.removeItem(KEY_STORE);
-    }
+    if (k) localStorage.setItem(KEY_STORE, k);
+    else localStorage.removeItem(KEY_STORE);
   } catch (e) { /* ignore */ }
 };
+// Only after the server ACCEPTED the password: this browser is ours, so our
+// own website visits never send WhatsApp alerts.
+const markInternal = () => { try { localStorage.setItem('aumai_internal', '1'); } catch (e) { /* ignore */ } };
 
 // Backend timestamps are UTC ("2026-10-07 05:59:12"); show them in IST.
 const formatIST = (utc) => {
@@ -59,16 +57,21 @@ const AumaiAnalytics = () => {
   const [pwInput, setPwInput] = useState('');
   const [authError, setAuthError] = useState(null);
 
+  const latestRequest = useRef(0);
+
   const fetchData = useCallback(async () => {
     if (!dashKey) { setLoading(false); return; }
+    const reqNo = ++latestRequest.current; // a slower, older answer must not overwrite a newer one
     setLoading(true);
     try {
       const qs = `days=${days}${site ? `&site=${encodeURIComponent(site)}` : ''}${country ? `&country=${country}` : ''}`;
       const headers = { 'X-Dashboard-Key': dashKey };
       const [res, vRes] = await Promise.all([
         fetch(`${API_BASE}/dashboard?${qs}`, { headers }),
-        fetch(`${API_BASE}/visits?${qs}${visitor ? `&visitor=${visitor}` : ''}&limit=200`, { headers }),
+        // One visitor's history ignores the period/country filters, so "visit 3 of 5" shows all 5.
+        fetch(`${API_BASE}/visits?${visitor ? `days=365&visitor=${visitor}` : qs}&limit=200`, { headers }),
       ]);
+      if (reqNo !== latestRequest.current) return;
       if (res.status === 401 || vRes.status === 401) {
         saveKey('');
         setDashKey('');
@@ -80,10 +83,14 @@ const AumaiAnalytics = () => {
         const body = await (res.ok ? vRes : res).json().catch(() => ({}));
         throw new Error(body.error || 'Could not load analytics. Press Refresh to try again.');
       }
-      setData(await res.json());
-      setVisits((await vRes.json()).visits || []);
+      const [dJson, vJson] = await Promise.all([res.json(), vRes.json()]);
+      if (reqNo !== latestRequest.current) return;
+      markInternal();
+      setData(dJson);
+      setVisits(vJson.visits || []);
       setError(null);
     } catch (err) {
+      if (reqNo !== latestRequest.current) return;
       // Keep whatever was already on screen; just say what went wrong.
       setError(err.message || 'Could not load analytics. Press Refresh to try again.');
     }
