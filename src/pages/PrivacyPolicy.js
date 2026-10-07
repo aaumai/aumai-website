@@ -380,7 +380,10 @@ const PrivacyPolicy = () => {
             <p style={{ marginBottom: '15px' }}>
               The marketing website uses a small number of first-party cookies to remember your
               session and a privacy-respecting analytics endpoint we operate ourselves (no
-              third-party advertising trackers). The hosted clinical platform uses only
+              third-party advertising trackers). It stores an anonymous visitor ID in a cookie so
+              we can recognise a returning visit, and records the pages you view, the time spent on
+              each and an approximate city and state derived from your IP address. This does not
+              identify you by name, and our team may be notified of visits as they happen. The hosted clinical platform uses only
               functional cookies needed for authentication; no third-party tracking is loaded
               inside the clinical platform.
             </p>

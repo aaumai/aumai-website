@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const API_BASE = 'https://site-api.aumai.co.in/api/aumai/analytics';
+// REACT_APP_SITE_API lets a local run point at a local backend; prod uses the default.
+const API_BASE = `${process.env.REACT_APP_SITE_API || 'https://site-api.aumai.co.in'}/api/aumai/analytics`;
 
 // Site selector options. '' = all sites combined.
 const SITES = [
@@ -9,40 +10,134 @@ const SITES = [
   { value: 'aumyai.com', label: '🇺🇸 US (aumyai.com)' },
 ];
 
+// Storage can throw (private mode); the page must still work.
+const KEY_STORE = 'aumai_dash_key';
+const readKey = () => { try { return localStorage.getItem(KEY_STORE) || ''; } catch (e) { return ''; } };
+const saveKey = (k) => {
+  try {
+    if (k) {
+      localStorage.setItem(KEY_STORE, k);
+      // Mark this browser as ours so our own website visits never send WhatsApp alerts.
+      localStorage.setItem('aumai_internal', '1');
+    } else {
+      localStorage.removeItem(KEY_STORE);
+    }
+  } catch (e) { /* ignore */ }
+};
+
+// Backend timestamps are UTC ("2026-10-07 05:59:12"); show them in IST.
+const formatIST = (utc) => {
+  if (!utc) return '';
+  const d = new Date(`${String(utc).replace(' ', 'T')}Z`);
+  return d.toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true,
+  });
+};
+
+const pageName = (url) => (!url || url === '/' ? 'Home' : url);
+
+const formatDuration = (seconds) => {
+  if (!seconds) return '0s';
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  if (h > 0) return `${h}h ${m}m`;
+  return m > 0 ? `${m}m ${s}s` : `${s}s`;
+};
+
 const AumaiAnalytics = () => {
   const [data, setData] = useState(null);
+  const [visits, setVisits] = useState(null);
+  const [visitor, setVisitor] = useState(null); // visitor_no to show alone
   const [days, setDays] = useState(7);
   const [site, setSite] = useState('');
   // Default to India — the market we sell in. 'All' shows the raw world.
   const [country, setCountry] = useState('IN');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [dashKey, setDashKey] = useState(readKey);
+  const [pwInput, setPwInput] = useState('');
+  const [authError, setAuthError] = useState(null);
 
   const fetchData = useCallback(async () => {
+    if (!dashKey) { setLoading(false); return; }
     setLoading(true);
     try {
       const qs = `days=${days}${site ? `&site=${encodeURIComponent(site)}` : ''}${country ? `&country=${country}` : ''}`;
-      const res = await fetch(`${API_BASE}/dashboard?${qs}`);
-      const json = await res.json();
-      setData(json);
+      const headers = { 'X-Dashboard-Key': dashKey };
+      const [res, vRes] = await Promise.all([
+        fetch(`${API_BASE}/dashboard?${qs}`, { headers }),
+        fetch(`${API_BASE}/visits?${qs}${visitor ? `&visitor=${visitor}` : ''}&limit=200`, { headers }),
+      ]);
+      if (res.status === 401 || vRes.status === 401) {
+        saveKey('');
+        setDashKey('');
+        setAuthError('That password is not right. Please type it again.');
+        setLoading(false);
+        return;
+      }
+      if (!res.ok || !vRes.ok) {
+        const body = await (res.ok ? vRes : res).json().catch(() => ({}));
+        throw new Error(body.error || 'Could not load analytics. Press Refresh to try again.');
+      }
+      setData(await res.json());
+      setVisits((await vRes.json()).visits || []);
       setError(null);
     } catch (err) {
-      setError('Failed to load analytics');
+      // Keep whatever was already on screen; just say what went wrong.
+      setError(err.message || 'Could not load analytics. Press Refresh to try again.');
     }
     setLoading(false);
-  }, [days, site, country]);
+  }, [days, site, country, visitor, dashKey]);
 
   useEffect(() => {
     document.title = 'Analytics | AUM AI';
     fetchData();
   }, [fetchData]);
 
-  const formatDuration = (seconds) => {
-    if (!seconds) return '0s';
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return m > 0 ? `${m}m ${s}s` : `${s}s`;
+  const login = (e) => {
+    e.preventDefault();
+    const k = pwInput.trim();
+    if (!k) return;
+    setAuthError(null);
+    saveKey(k);
+    setDashKey(k);
+    setPwInput('');
   };
+
+  const logout = () => {
+    saveKey('');
+    setDashKey('');
+    setData(null);
+    setVisits(null);
+  };
+
+  if (!dashKey) {
+    return (
+      <div style={styles.page}>
+        <form onSubmit={login} style={styles.loginBox}>
+          <h1 style={{ ...styles.title, marginBottom: '0.5rem' }}>AUM AI Analytics</h1>
+          <p style={{ color: '#94a3b8', margin: '0 0 1.25rem', fontSize: '0.9rem' }}>
+            Enter the dashboard password to see who is visiting the website.
+          </p>
+          <label htmlFor="dash-pw" style={styles.label}>Password</label>
+          <input
+            id="dash-pw"
+            type="password"
+            autoFocus
+            autoComplete="current-password"
+            value={pwInput}
+            onChange={(e) => setPwInput(e.target.value)}
+            style={styles.input}
+          />
+          {authError && <p style={{ ...styles.error, padding: '0.75rem 0 0', textAlign: 'left' }}>{authError}</p>}
+          <button type="submit" style={{ ...styles.btn, ...styles.btnActive, width: '100%', marginTop: '1rem', padding: '0.7rem' }}>
+            Open dashboard
+          </button>
+        </form>
+      </div>
+    );
+  }
 
   return (
     <div style={styles.page}>
@@ -82,16 +177,19 @@ const AumaiAnalytics = () => {
                 {d === 1 ? 'Today' : `${d}d`}
               </button>
             ))}
-            <button onClick={fetchData} style={styles.btnRefresh}>
-              Refresh
+            <button onClick={fetchData} style={styles.btnRefresh} disabled={loading}>
+              {loading ? 'Loading…' : 'Refresh'}
+            </button>
+            <button onClick={logout} style={styles.btn}>
+              Log out
             </button>
           </div>
         </div>
 
-        {loading && <p style={styles.loading}>Loading...</p>}
+        {loading && !data && <p style={styles.loading}>Loading...</p>}
         {error && <p style={styles.error}>{error}</p>}
 
-        {data && !loading && (
+        {data && (
           <>
             {/* Summary Cards */}
             <div style={styles.statsGrid}>
@@ -118,6 +216,83 @@ const AumaiAnalytics = () => {
                   {formatDuration(data.summary?.avg_duration)}
                 </span>
                 <span style={styles.statLabel}>Avg Session Duration</span>
+              </div>
+            </div>
+
+            {/* Visitors — one row per visit, named so returning people are recognisable */}
+            <div style={styles.section}>
+              <div style={styles.sectionHead}>
+                <h2 style={{ ...styles.sectionTitle, margin: 0 }}>
+                  Visitors {visits ? `(${visits.length} visit${visits.length === 1 ? '' : 's'})` : ''}
+                </h2>
+                {visitor && (
+                  <span style={styles.filterChip}>
+                    Showing Visitor {visitor} only
+                    <button onClick={() => setVisitor(null)} style={styles.linkBtn}>Show everyone</button>
+                  </span>
+                )}
+              </div>
+              <p style={styles.hint}>
+                Tap a visitor's name to see all their visits. A visit ends after 30 minutes with no activity.
+                Location is approximate (from the internet connection).
+              </p>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={styles.th}>Visitor</th>
+                      <th style={styles.th}>When</th>
+                      <th style={styles.th}>Location</th>
+                      <th style={styles.th}>Came from</th>
+                      <th style={styles.th}>Time on site</th>
+                      <th style={styles.th}>Pages and time spent</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {visits?.map((v, i) => (
+                      <tr key={v.session_id} style={i % 2 === 0 ? styles.trEven : {}}>
+                        <td style={styles.td}>
+                          {v.visitor_no ? (
+                            <button onClick={() => setVisitor(v.visitor_no)} style={styles.nameBtn}>
+                              {v.visitor_name}
+                            </button>
+                          ) : (
+                            <span style={{ fontWeight: 600 }}>{v.visitor_name}</span>
+                          )}
+                          <div style={styles.subText}>
+                            {v.visit_number <= 1 ? 'First visit' : `Returning · visit ${v.visit_number} of ${v.total_visits}`}
+                            {v.in_progress && <span style={styles.liveBadge}>On site now</span>}
+                            {v.internal && <span style={styles.mutedBadge}>Our team</span>}
+                          </div>
+                        </td>
+                        <td style={styles.td}>
+                          {formatIST(v.started_at)}
+                          <div style={styles.subText}>{v.device_type}{site ? '' : ` · ${(v.site || '').replace(/^www\./, '')}`}</div>
+                        </td>
+                        <td style={styles.td}>{v.location}</td>
+                        <td style={styles.td}>{v.source}</td>
+                        <td style={styles.td}>{formatDuration(v.time_on_site_seconds)}</td>
+                        <td style={{ ...styles.td, whiteSpace: 'normal', minWidth: '260px' }}>
+                          {v.pages.length
+                            ? v.pages.map((p, j) => (
+                                <span key={j}>
+                                  {j > 0 && <span style={{ color: '#64748b' }}> → </span>}
+                                  {pageName(p.page_url)} <span style={{ color: '#94a3b8' }}>{formatDuration(p.time_seconds)}</span>
+                                </span>
+                              ))
+                            : <span style={{ color: '#64748b' }}>No pages recorded</span>}
+                        </td>
+                      </tr>
+                    ))}
+                    {visits && visits.length === 0 && (
+                      <tr>
+                        <td style={styles.td} colSpan={6}>
+                          No visits in this period. Pick a longer period (for example 30d) or press 🌍 All.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -434,7 +609,7 @@ const styles = {
   },
   twoCol: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))',
     gap: '1.5rem',
   },
   table: {
@@ -460,6 +635,80 @@ const styles = {
   },
   trEven: {
     background: 'rgba(15,23,42,0.3)',
+  },
+  loginBox: {
+    maxWidth: '380px',
+    margin: '10vh auto 0',
+    background: '#1e293b',
+    borderRadius: '12px',
+    padding: '2rem 1.5rem',
+    border: '1px solid #334155',
+  },
+  label: { display: 'block', fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '0.4rem', fontWeight: 600 },
+  input: {
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: '0.7rem 0.8rem',
+    borderRadius: '8px',
+    border: '1px solid #475569',
+    background: '#0f172a',
+    color: '#e2e8f0',
+    fontSize: '1rem',
+  },
+  sectionHead: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '0.75rem',
+    flexWrap: 'wrap',
+    marginBottom: '0.4rem',
+  },
+  hint: { color: '#94a3b8', fontSize: '0.8rem', margin: '0 0 1rem' },
+  filterChip: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.6rem',
+    background: 'rgba(59,130,246,0.15)',
+    border: '1px solid #3b82f6',
+    borderRadius: '999px',
+    padding: '0.3rem 0.8rem',
+    fontSize: '0.8rem',
+    color: '#bfdbfe',
+  },
+  linkBtn: {
+    background: 'none',
+    border: 'none',
+    color: '#93c5fd',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+    fontSize: '0.8rem',
+    padding: 0,
+  },
+  nameBtn: {
+    background: 'none',
+    border: 'none',
+    padding: 0,
+    color: '#93c5fd',
+    fontWeight: 700,
+    fontSize: '0.9rem',
+    cursor: 'pointer',
+    textDecoration: 'underline',
+  },
+  subText: { color: '#94a3b8', fontSize: '0.75rem', marginTop: '0.2rem' },
+  liveBadge: {
+    marginLeft: '0.4rem',
+    background: 'rgba(16,185,129,0.15)',
+    color: '#34d399',
+    borderRadius: '999px',
+    padding: '0.05rem 0.5rem',
+    fontWeight: 600,
+  },
+  mutedBadge: {
+    marginLeft: '0.4rem',
+    background: 'rgba(148,163,184,0.15)',
+    color: '#cbd5e1',
+    borderRadius: '999px',
+    padding: '0.05rem 0.5rem',
   },
 };
 
