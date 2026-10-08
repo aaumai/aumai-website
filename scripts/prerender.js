@@ -466,7 +466,7 @@ const routes = [
         <h1 class="ch-hero-title">${esc(ADS.HERO.h1)}</h1>
         <p class="ch-hero-sub">${esc(ADS.HERO.sub)}</p>
         <p><a href="/demos">Watch it work, live</a> · <a href="/pricing">See pricing in ₹</a></p>
-        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would.</p>
+        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would — or call +91 22 6423 0581 and wait a couple of rings for Aumy Voice to pick up. (Demo clinic: Lumière Dental.)</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>What is AI dental software?</h2>

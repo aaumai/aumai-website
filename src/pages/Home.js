@@ -189,13 +189,19 @@ const Home = () => {
             <span className="ch-eyebrow">Don&rsquo;t watch a demo</span>
             <h2 className="ch-h2">Be the patient.</h2>
             <p className="ch-sub">
-              WhatsApp our live demo clinic and experience exactly what your patients would —
+              WhatsApp or call our live demo clinic and experience exactly what your patients would —
               the same AI, the same follow-ups, the real product.
             </p>
           </div>
           <div className="ch-why-card" style={{ display: 'block', maxWidth: 720, margin: '0 auto', padding: 28 }}>
             <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', marginTop: 0 }}>
               📱 WhatsApp <a href="https://wa.me/919022312554?text=Hi%2C%20I%20wanted%20to%20ask%20about%20aligners" style={{ whiteSpace: 'nowrap' }}>+91 90223 12554</a>
+            </p>
+            <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', margin: '8px 0 0' }}>
+              📞 Call <a href="tel:+912264230581" style={{ whiteSpace: 'nowrap' }}>+91 22 6423 0581</a> and wait a couple of rings — Aumy Voice will pick up.
+            </p>
+            <p style={{ textAlign: 'center', color: '#5b6784', margin: '6px 0 0', fontSize: '0.95rem' }}>
+              This is our demo clinic, Lumière Dental — Aumy answers as its receptionist.
             </p>
             <ol style={{ lineHeight: 1.9, margin: '18px 0 0', paddingLeft: 22 }}>
               <li><strong>Ask about aligners or implants</strong> — watch it answer instantly, like your best receptionist on her best day.</li>
