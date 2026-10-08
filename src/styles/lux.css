@@ -692,3 +692,8 @@
 .site-lux .ch-home .lux-hero .ch-hero-outcomes a:not(.ch-btn) { color: #fff; text-decoration: none; }
 .site-lux .ch-home .lux-hero .ch-hero-outcomes a:not(.ch-btn) strong { font-weight: 600; color: inherit; }
 .site-lux .ch-home .lux-hero .ch-hero-outcomes a:not(.ch-btn):hover { color: var(--lux-gold-2); }
+/* Loss framing (owner 2026-10-08): the leak names are bold text, not links — white on the dark hero; the "stops it" link gold; the Aumy One line gold. */
+.site-lux .ch-home .lux-hero .ch-hero-outcomes li strong { color: #fff; font-weight: 600; }
+.site-lux .ch-home .lux-hero .ch-hero-outcomes li a:not(.ch-btn) { color: var(--lux-gold-2); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+.site-lux .ch-home .lux-hero .ch-hero-sub a:not(.ch-btn) { color: var(--lux-gold-2); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+.site-lux .ch-home .lux-hero .ch-hero-sub a:not(.ch-btn):hover { border-bottom-color: var(--lux-gold-2); }
