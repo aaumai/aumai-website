@@ -48,6 +48,8 @@ const faqPageLd = (faqs) => ({
 });
 // Crawler HTML for the FAQ block and a [title, body] list.
 const faqHtml = (faqs, heading) => `<h2>${esc(heading)}</h2>${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
+// Module cards as links to /modules/<id> (home section + "works even better with").
+const moduleCardsHtml = (pages) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}</li>`).join('\n          ');
 const pairsHtml = (pairs) => `<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('')}</ul>`;
 
 const BUILD = path.join(__dirname, '..', 'build');
@@ -370,7 +372,7 @@ const routes = [
           <ul>${m.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
           ${m.scribe ? `<h3>${esc(m.scribe.short)}: ${esc(m.scribe.title)} (add-on)</h3><p>${esc(m.scribe.promise)}</p>` : ""}
           <p>Add if you want: ${m.addons.map((a) => `+ ${esc(a)}`).join(" · ")}</p>
-          <p><a href="/contact">Book a demo</a> · <a href="${m.more.path}">${esc(m.more.label)}</a></p>
+          <p><a href="/modules/${m.id}">Everything about ${esc(m.short)}</a>${m.scribe ? ` · <a href="/modules/aumy-scribe">Everything about ${esc(m.scribe.short)}</a>` : ''} · <a href="/contact">Book a demo</a> · <a href="${m.more.path}">${esc(m.more.label)}</a></p>
         </article>`).join('')}
       </div></section>
       <section id="one-system"><div class="ch-container">
@@ -379,7 +381,7 @@ const routes = [
         <p>${esc(MODS.CONNECTED.sub)}</p>
         <ol>${MODS.CONNECTED.steps.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></li>`).join('')}</ol>
         ${MODS.CONNECTED.why.map(([t, b]) => `<h3>${esc(t)}</h3><p>${esc(b)}</p>`).join('')}
-        <p><a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
+        <p><a href="/modules/aumy-one">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
       </div></section>
       <section><div class="ch-container">
         <h2>${esc(MODS.TABLE.title)}</h2>
@@ -625,6 +627,15 @@ const routes = [
         ${clinicsStripHtml()}
         <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
       </div></section>
+      <section id="modules"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(MODS.HOME.eyebrow)}</p>
+        <h2>${esc(MODS.HOME.title)}</h2>
+        <p>${esc(MODS.HOME.sub)}</p>
+        <ul>
+          ${moduleCardsHtml(MODS.PAGES)}
+        </ul>
+        <p><a href="/modules">Compare all the modules side by side</a></p>
+      </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>A successful dental clinic doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>
         <p>When chairs are full, growth creates chaos: calls, WhatsApp messages, enquiries, appointment confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents, X-rays, invoices and patient questions.</p>
@@ -646,8 +657,6 @@ const routes = [
           <li><strong><a href="/ai-dental-clinic-operations">AI-powered dental clinic operations</a></strong> — every call and WhatsApp answered, appointments booked, confirmed and rescheduled, no-shows followed up, registration, intake, consent and invoices digital, and one team inbox for whatever needs a person.</li>
           <li><strong><a href="/ai-patient-engagement">AI-powered patient journey &amp; engagement</a></strong> — reminders, pre-treatment instructions, treatment-specific after-care, doctor check-ins, care gaps, treatment-plan follow-ups and reactivation, each message in the context of that patient's treatment, and each journey ending the moment the patient books.</li>
         </ul>
-        <h2>Need just one part? Buy only that module — or run all of it as one system.</h2>
-        <p>Aumy Leads (lead management &amp; Meta ads), Aumy Clinic (the dental clinic operating system, with Aumy Scribe for AI notes if you want it), Aumy Journey (patient follow-ups), Aumy Chat (AI WhatsApp receptionist) or Aumy Voice (AI voice receptionist) — each sold on its own. Or Aumy One: all of it as one connected system. <a href="/modules">Compare the modules</a>.</p>
         <h2>Everything is connected. Think of Aumy as Jarvis for your dental clinic.</h2>
         <p>Not because it's a chatbot. Because everything knows what's happening. A patient calls → Aumy knows who they are. They need an appointment → Aumy knows the doctor's availability. They don't show → Aumy knows what happened. They need a follow-up → Aumy creates and manages it. They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it. The clinic gets a call → the voice agent has the context.</p>
         <p>Your calls know your appointments. Your appointments know your patients. Your patients know their treatment. Your follow-ups know what happened. And Aumy knows all of it. One patient. One journey. One connected system.</p>
@@ -1016,6 +1025,77 @@ for (const p of growthPosts) {
         <h2>Want to know what this looks like in your clinic?</h2>
         <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp Aumy</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
       </div></article>`,
+  });
+}
+
+// ---- One page per Aumy module: /modules/<id> (owner 2026-10-08) ------------
+// Same words as src/pages/ModuleDetailPage.js (PAGES in src/data/modules.js).
+// INDIA_WHATSAPP.number in src/config/contact.js (ESM, so not require-able here).
+const MODS_WA = '918007189868';
+for (const p of MODS.PAGES) {
+  const url = `${ORIGIN}/modules/${p.id}`;
+  const pairs = p.pairs.map(MODS.pageById).filter(Boolean);
+  routes.push({
+    slug: `modules/${p.id}`,
+    title: p.seoTitle,
+    description: p.seoDescription,
+    canonical: url,
+    jsonld: [
+      orgLd,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Modules', item: `${ORIGIN}/modules` },
+          { '@type': 'ListItem', position: 3, name: p.short, item: url },
+        ],
+      },
+      {
+        // No offers/prices: /pricing owns them, and the AI modules are priced per clinic.
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        '@id': `${url}#software`,
+        name: `${p.short}: ${p.title}`,
+        url,
+        applicationCategory: 'BusinessApplication',
+        applicationSubCategory: p.keyword,
+        operatingSystem: 'Web, Android, iOS',
+        description: `${p.intro} ${POS.LD_SUFFIX}`,
+        featureList: p.does,
+        audience: { '@type': 'BusinessAudience', audienceType: 'Dental clinics' },
+        isPartOf: { '@id': `${ORIGIN}/#aumy-dental` },
+        provider: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
+      },
+    ],
+    content: `
+      <nav aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/modules">Modules</a></li><li>${esc(p.short)}</li></ol></nav>
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        ${p.addonOf ? `<p>Add-on to ${esc(p.addonOf)}</p>` : ''}
+        <h1 class="ch-hero-title">${esc(p.short)}: ${esc(p.title)}</h1>
+        <p class="ch-hero-sub">${esc(p.intro)}</p>
+        <p>${esc(POS.MODULES_LINE)}</p>
+        <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${p.featured ? 'How it works, from enquiry to recall' : 'What it does'}</h2>
+        <ul>${p.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
+        ${p.addons.length ? `<p>Add if you want: ${p.addons.map((a) => `+ ${esc(a)}`).join(' · ')}</p>` : ''}
+        <h2>Who it's for</h2>
+        <ul>${p.whoFor.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>
+        <h2>What you get</h2>
+        <ul>${p.outcomes.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>
+        <h2>${p.featured ? 'The modules inside Aumy One' : 'Works even better with'}</h2>
+        <ul>
+          ${moduleCardsHtml(pairs)}
+        </ul>
+        ${p.deep.length ? `<p>Go deeper: ${p.deep.map((d) => `<a href="${d.path}">${esc(d.label)}</a>`).join(' · ')}</p>` : ''}
+        ${p.featured ? '' : `<h2>Or run it all as ${esc(MODS.CONNECTED.short)}: ${esc(MODS.CONNECTED.title)}</h2>
+        <p>${esc(MODS.CONNECTED.sub)} <a href="/modules/aumy-one">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/modules">Compare all modules</a></p>`}
+        <h2>See ${esc(p.short)} working in a dental clinic</h2>
+        <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
+        <p>Other modules: ${MODS.PAGES.filter((o) => o.id !== p.id).map((o) => `<a href="/modules/${o.id}">${esc(o.short)}</a>`).join(' · ')}</p>
+      </div></section>`,
   });
 }
 
