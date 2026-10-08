@@ -138,6 +138,7 @@ function apply(html, r) {
   r = { ...r, content: (r.content || '')
     + (faqExtra.length ? `<section><div class="ch-container ch-narrow"><h2>Questions, answered</h2>${faqExtra.map((q) => `<h3>${esc(q.name)}</h3><p>${esc(q.acceptedAnswer && q.acceptedAnswer.text)}</p>`).join('')}</div></section>` : '')
     + (MARKET === 'us' ? '' : SITE_LINKS) };
+  if (r.refresh) out = out.replace('</head>', `<meta http-equiv="refresh" content="0; url=${r.refresh}"></head>`);
   if (ld.length) {
     const blocks = ld
       .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`)
@@ -616,7 +617,7 @@ const routes = [
         <p class="ch-eyebrow">AI Dental Software · India</p>
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
-        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/aumy-chat">Aumy Chat</a>, <a href="/modules/aumy-voice">Voice</a>, <a href="/modules/aumy-leads">Leads</a>, <a href="/modules/aumy-journey">Journey</a> or <a href="/modules/aumy-clinic">Clinic</a> — or take <a href="/modules/aumy-one">Aumy One</a>, one connected system that includes everything.</p>
+        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/aumy-chat">Aumy Chat</a>, <a href="/modules/aumy-voice">Voice</a>, <a href="/modules/aumy-convert">Convert</a>, <a href="/modules/aumy-journey">Journey</a> or <a href="/modules/aumy-clinic">Clinic</a> — or take <a href="/modules/aumy-one">Aumy One</a>, one connected system that includes everything.</p>
         <p><strong>${esc(POS.HERO_OUTCOMES_HEADING)}</strong></p>
         <ul>
           ${POS.HERO_MODULES.map((m) => `<li><a href="/modules/${m.id}"><strong>${esc(m.name)}</strong></a> — ${esc(m.outcome)}</li>`).join('\n          ')}
@@ -1098,6 +1099,20 @@ for (const p of MODS.PAGES) {
         <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
         <p>Other modules: ${MODS.PAGES.filter((o) => o.id !== p.id).map((o) => `<a href="/modules/${o.id}">${esc(o.short)}</a>`).join(' · ')}</p>
       </div></section>`,
+  });
+}
+// Old module URLs (owner 2026-10-08: lead-nurturing module renamed "Aumy Convert"). Not in the sitemap;
+// canonical + meta refresh point crawlers and no-JS visitors at the new page.
+const MODULE_REDIRECTS = { 'aumy-leads': 'aumy-convert' };
+for (const [oldId, newId] of Object.entries(MODULE_REDIRECTS)) {
+  const p = MODS.pageById(newId);
+  routes.push({
+    slug: `modules/${oldId}`,
+    title: p.seoTitle,
+    description: p.seoDescription,
+    canonical: `${ORIGIN}/modules/${newId}`,
+    refresh: `/modules/${newId}`,
+    content: `<section><div class="ch-container ch-narrow"><p>${esc(p.short)} has moved: <a href="/modules/${newId}">${esc(p.short)} — ${esc(p.title)}</a>.</p></div></section>`,
   });
 }
 

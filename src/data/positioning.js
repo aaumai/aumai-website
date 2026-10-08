@@ -42,7 +42,7 @@ const LD_SUFFIX = 'Handcrafted only for dentists and trained for dentistry: Aumy
 const HERO_MODULES = [
   { id: 'aumy-chat', name: 'Aumy Chat', outcome: 'every WhatsApp answered in seconds, day or night, and the appointment booked into your diary.' },
   { id: 'aumy-voice', name: 'Aumy Voice', outcome: 'every call picked up, even when the desk is busy or the clinic is closed. No patient lost to a missed call.' },
-  { id: 'aumy-leads', name: 'Aumy Leads', outcome: 'Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.' },
+  { id: 'aumy-convert', name: 'Aumy Convert', outcome: 'Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.' },
   { id: 'aumy-journey', name: 'Aumy Journey', outcome: 'fewer no-shows, missed visits rebooked, advised treatments followed up, recalls coming back on time.' },
   { id: 'aumy-clinic', name: 'Aumy Clinic', outcome: 'appointments, records, charting, treatment plans and billing in one place; add Aumy Scribe: speak the note, the chart fills itself.' },
   { id: 'aumy-one', name: 'Aumy One', outcome: 'all of it as one system: one patient record, nothing falling between tools.' },

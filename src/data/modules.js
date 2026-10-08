@@ -5,7 +5,7 @@
  * (src/pages/ModulesPage.js) and the crawler HTML + JSON-LD
  * (scripts/prerender.js) both read this file. Edit here, never there.
  *
- * Module names approved by the owner 2026-10-08: Aumy Leads, Aumy Clinic
+ * Module names approved by the owner 2026-10-08 (lead module renamed Aumy Convert the same day): Aumy Convert, Aumy Clinic
  * (+ Aumy Scribe add-on), Aumy Journey, Aumy Chat, Aumy Voice, and Aumy One
  * for the whole connected system. Each card shows the short name, the formal
  * name (which carries the search keywords) and a one-line promise.
@@ -41,10 +41,10 @@ const HERO = {
 // `addons` are shown as chips ("+ name"). `more` links out to the page that owns the deep keyword.
 const MODULES = [
   {
-    id: 'aumy-leads',
+    id: 'aumy-convert',
     icon: 'leads',
-    short: 'Aumy Leads',
-    title: 'Lead Management & Meta Ads Optimisation',
+    short: 'Aumy Convert',
+    title: 'Lead Nurturing & Meta Ads Optimisation',
     forWho: 'For clinics running Facebook and Instagram ads.',
     promise: 'Every enquiry from your ads is answered, followed up and tracked to a booked patient, so you know which ads pay and which don’t.',
     does: [
@@ -91,7 +91,7 @@ const MODULES = [
       'Appointment reminders on WhatsApp; patients confirm or ask to move the visit with one tap.',
       'Patients who miss an appointment are messaged to rebook — no one is forgotten.',
       'After-care messages after treatment, and a review request once the visit is done.',
-      'Advised treatment the patient has not started is followed up until they decide.',
+      'Follows up patients on treatments the doctor advised or planned but they haven’t booked (picked up from the doctor’s notes with Aumy Scribe, or entered by the team).',
       'Recalls and check-ups followed up when due; patients who drifted away invited back.',
     ],
     addons: ['Aumy Scribe', 'Approve each message first', 'Birthday & festival wishes'],
@@ -111,7 +111,7 @@ const MODULES = [
       'Your team can take over any chat with one tap; the AI steps back while they talk.',
       'Runs on the official WhatsApp Business API, on your clinic’s own number.',
     ],
-    addons: ['Facebook & Instagram messages', 'Aumy Leads', 'Aumy Clinic'],
+    addons: ['Facebook & Instagram messages', 'Aumy Convert', 'Aumy Clinic'],
     more: { path: '/whatsapp-automation-for-clinics', label: 'WhatsApp automation for clinics' },
   },
   {
@@ -128,7 +128,7 @@ const MODULES = [
       'Every call is recorded and written out, so you can see exactly what was said.',
       'Can also call patients for you — for example, a reminder call before a visit.',
     ],
-    addons: ['Outbound calls', 'Aumy Leads', 'Aumy Clinic'],
+    addons: ['Outbound calls', 'Aumy Convert', 'Aumy Clinic'],
     more: { path: '/ai-receptionist', label: 'AI receptionist for dental clinics' },
   },
 ];
@@ -160,7 +160,7 @@ const TABLE = {
   title: 'Compare the modules',
   sub: 'Every row is something Aumy does today. The last column is Aumy One, the full connected system.',
   caption: 'Add-on means you can add it to that module if you want it.',
-  cols: ['Aumy Leads', 'Aumy Clinic', 'Aumy Journey', 'Aumy Chat', 'Aumy Voice', 'Aumy One'],
+  cols: ['Aumy Convert', 'Aumy Clinic', 'Aumy Journey', 'Aumy Chat', 'Aumy Voice', 'Aumy One'],
   rows: [
     ['Ad enquiries in one leads list, with follow-up', ['yes', 'no', 'no', 'no', 'no', 'yes']],
     ['Which ad brought which patient', ['yes', 'no', 'no', 'no', 'no', 'yes']],
@@ -177,9 +177,9 @@ const TABLE = {
 };
 
 const FAQS = [
-  { q: 'Can I buy just one module of the dental clinic software?', a: 'Yes. Aumy Leads, Aumy Clinic, Aumy Journey, Aumy Chat and Aumy Voice can each be bought on their own. Many clinics start with the one problem that hurts most — usually unanswered WhatsApp, missed calls or unfollowed leads — and add the rest later.' },
+  { q: 'Can I buy just one module of the dental clinic software?', a: 'Yes. Aumy Convert, Aumy Clinic, Aumy Journey, Aumy Chat and Aumy Voice can each be bought on their own. Many clinics start with the one problem that hurts most — usually unanswered WhatsApp, missed calls or unfollowed leads — and add the rest later.' },
   { q: 'If I start with one module, can I add the others later?', a: 'Yes. Every module is built on the same platform, so one you add later joins up with what you already have. Take them all and you have Aumy One. Nothing is set up twice.' },
-  { q: 'Do I have to change my current dental software?', a: 'No. Aumy Chat, Aumy Voice, Aumy Leads and the patient follow-ups can run alongside the software you use today. If you want one connected platform, we move your data into Aumy Clinic for a one-time fee.' },
+  { q: 'Do I have to change my current dental software?', a: 'No. Aumy Chat, Aumy Voice, Aumy Convert and the patient follow-ups can run alongside the software you use today. If you want one connected platform, we move your data into Aumy Clinic for a one-time fee.' },
   { q: 'Does Aumy Scribe write in the patient’s file on its own?', a: 'No. It prepares the chart from the doctor’s typed note or spoken words, and nothing is saved until the doctor accepts it. The doctor stays in charge of every record.' },
   { q: 'Which languages do Aumy Chat and Aumy Voice speak?', a: 'English, Hindi and Marathi, on WhatsApp and on calls. On WhatsApp the AI replies in the language the patient writes in.' },
   { q: 'How much does each module cost?', a: 'Aumy Clinic has a starting price on our pricing page. Aumy Chat, Aumy Voice and the follow-ups are priced with you, once we know which modules and how many enquiries your clinic has.' },
@@ -208,16 +208,16 @@ const HOME = {
 
 const PAGES = [
   {
-    id: 'aumy-leads',
+    id: 'aumy-convert',
     icon: 'leads',
-    short: 'Aumy Leads',
-    title: 'Lead Management & Meta Ads Optimisation',
-    seoTitle: 'Aumy Leads — Dental Lead Management Software | Aumy',
+    short: 'Aumy Convert',
+    title: 'Lead Nurturing & Meta Ads Optimisation',
+    seoTitle: 'Aumy Convert — Dental Lead Management & Nurturing | Aumy',
     seoDescription: 'Dental lead management software: every Facebook and Instagram ad enquiry answered, followed up and tracked to a booked patient, with cost per patient.',
     keyword: 'dental lead management software',
     card: 'Every ad enquiry followed up and tracked to a booked patient.',
-    intro: `${byId('aumy-leads').promise} Aumy Leads is dental lead management software for clinics that spend on Facebook and Instagram ads.`,
-    does: byId('aumy-leads').does,
+    intro: `${byId('aumy-convert').promise} Aumy Convert is dental lead management software for clinics that spend on Facebook and Instagram ads.`,
+    does: byId('aumy-convert').does,
     whoFor: [
       'You run Facebook or Instagram ads and enquiries arrive faster than your team can call back.',
       'Leads go quiet after the first reply, and nobody has time to keep following up.',
@@ -230,7 +230,7 @@ const PAGES = [
       'You can see which campaigns bring patients and which only bring clicks, and spend accordingly.',
       'Meta learns from the enquiries that became real patients, so it can find more people like them.',
     ],
-    addons: byId('aumy-leads').addons,
+    addons: byId('aumy-convert').addons,
     pairs: ['aumy-chat', 'aumy-voice', 'aumy-journey'],
     deep: [{ path: '/facebook-instagram', label: 'Facebook & Instagram receptionist' }],
   },
@@ -278,6 +278,7 @@ const PAGES = [
     does: [
       'The doctor types a short note in their own words, or simply speaks it.',
       'Aumy reads the note and prepares the chart entries from it.',
+      'Treatments the doctor advises or plans in the note — say, a root canal on 36 or a crown next visit — are picked up as advised and planned treatments on the patient’s record.',
       'The doctor checks what Aumy prepared, and accepts it, changes it or drops it.',
       'Nothing goes into the patient’s record until the doctor accepts it.',
     ],
@@ -285,14 +286,16 @@ const PAGES = [
       'Doctors who finish a long day and still have notes to write up.',
       'Clinics where notes are short or missing because there is no time between patients.',
       'Clinics that want complete records without hiring someone to type them.',
+      'Clinics where patients are told they need a treatment and never come back to have it done.',
     ],
     outcomes: [
+      'No advised treatment slips through: every treatment the doctor recommends is on a list, so the clinic can follow up with patients who haven’t booked it yet — automatically with Aumy Journey.',
       'Notes are done in moments, while the visit is still fresh.',
       'Patient records are complete, so the next visit and the follow-ups have what they need.',
       'The doctor stays in charge of every entry in the record.',
     ],
     addons: [],
-    pairs: ['aumy-clinic', 'aumy-journey'],
+    pairs: ['aumy-journey', 'aumy-clinic'],
     deep: [{ path: '/ai-dental-clinic-operations', label: 'AI for dental clinic operations' }],
   },
   {
@@ -303,7 +306,7 @@ const PAGES = [
     seoTitle: 'Aumy Journey — Dental Patient Reminder & Recall Software',
     seoDescription: 'Dental patient reminder and recall software: WhatsApp reminders, no-show rebooking, after-care, reviews, treatment follow-up and recalls, on Aumy Clinic.',
     keyword: 'dental patient reminder and recall software',
-    card: 'Reminders, no-show rebooking, after-care, reviews and recalls.',
+    card: 'Reminders, no-show rebooking, advised-treatment follow-up, after-care, reviews and recalls.',
     intro: `${byId('aumy-journey').promise} Aumy Journey is dental patient reminder and recall software built into the clinic system, so every message knows the patient’s visits and treatment.`,
     does: byId('aumy-journey').does,
     whoFor: [
@@ -344,7 +347,7 @@ const PAGES = [
       'Your team handles only the chats that really need a person.',
     ],
     addons: byId('aumy-chat').addons,
-    pairs: ['aumy-voice', 'aumy-leads', 'aumy-journey'],
+    pairs: ['aumy-voice', 'aumy-convert', 'aumy-journey'],
     deep: [
       { path: '/whatsapp-automation-for-clinics', label: 'WhatsApp automation for clinics' },
       { path: '/ai-receptionist', label: 'AI receptionist for dental clinics' },
@@ -372,7 +375,7 @@ const PAGES = [
       'You can read any call to see exactly what was said.',
     ],
     addons: byId('aumy-voice').addons,
-    pairs: ['aumy-chat', 'aumy-leads', 'aumy-journey'],
+    pairs: ['aumy-chat', 'aumy-convert', 'aumy-journey'],
     deep: [{ path: '/ai-receptionist', label: 'AI receptionist for dental clinics' }],
   },
   {
@@ -394,7 +397,7 @@ const PAGES = [
     ],
     outcomes: CONNECTED.why.map(([t, b]) => `${t}. ${b}`),
     addons: [],
-    pairs: ['aumy-leads', 'aumy-clinic', 'aumy-journey', 'aumy-chat', 'aumy-voice'],
+    pairs: ['aumy-convert', 'aumy-clinic', 'aumy-journey', 'aumy-chat', 'aumy-voice'],
     deep: [
       { path: '/revenue-generator', label: 'How Aumy works' },
       { path: '/ai-dental-clinic-operations', label: 'AI-powered dental clinic operations' },
