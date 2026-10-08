@@ -392,16 +392,16 @@ const PAGES = [
     deep: [{ path: '/ai-receptionist', label: 'AI receptionist for dental clinics' }],
   },
   {
-    id: 'all-in-one-dental-software',
+    id: 'automate-dental-clinic-operations',
     icon: 'all',
     short: 'Aumy One',
     title: 'The Connected Dental Clinic System',
     featured: true,
-    seoTitle: 'All-in-One Dental Software — Aumy One',
-    h1: 'Aumy One: all-in-one dental software',
+    seoTitle: 'Automate Dental Clinic Operations — Aumy One',
+    h1: 'Aumy One: automate your dental clinic operations',
     sub: 'Everything above as one system — from the first enquiry to the next recall.',
-    seoDescription: 'All-in-one dental clinic software: leads, clinic OS, AI notes, patient follow-ups and AI WhatsApp and voice receptionists, working on one patient record.',
-    keyword: 'all-in-one dental clinic software',
+    seoDescription: 'Automate your dental clinic operations: leads, appointments, records, AI notes, follow-ups and AI WhatsApp and voice receptionists on one patient record.',
+    keyword: 'automate dental clinic operations',
     card: 'Every module working as one, from the first enquiry to the next recall.',
     intro: `${CONNECTED.sub} Aumy One is all-in-one dental clinic software: every module joined up, so nothing is typed twice and no patient falls between tools.`,
     does: CONNECTED.steps.map((s) => `${s.title}: ${s.body}`),
@@ -432,7 +432,8 @@ const OLD_SLUGS = {
   'aumy-journey': 'dental-patient-follow-up',
   'aumy-chat': 'whatsapp-ai-receptionist-for-dentists',
   'aumy-voice': 'ai-voice-receptionist-for-dentists',
-  'aumy-one': 'all-in-one-dental-software',
+  'aumy-one': 'automate-dental-clinic-operations',
+  'all-in-one-dental-software': 'automate-dental-clinic-operations',
 };
 
 module.exports = { TITLE, DESCRIPTION, HERO, MODULES, CONNECTED, TABLE, FAQS, HOME, PAGES, pageById, OLD_SLUGS };

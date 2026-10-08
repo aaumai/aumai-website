@@ -133,7 +133,7 @@ const ModulesPage = () => {
               ))}
             </div>
             <div className="md-connected-cta">
-              <Link to="/modules/all-in-one-dental-software" className="ch-btn ch-btn-primary">See {CONNECTED.short}</Link>
+              <Link to="/modules/automate-dental-clinic-operations" className="ch-btn ch-btn-primary">See {CONNECTED.short}</Link>
               <Link to="/contact" className="ch-btn ch-btn-ghost ch-ghost-light">Book a demo of {CONNECTED.short}</Link>
               <a href={waLink(CONNECTED.short)} className="ch-btn ch-btn-ghost ch-ghost-light" target="_blank" rel="noopener noreferrer">
                 WhatsApp us

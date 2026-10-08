@@ -131,7 +131,7 @@ const Home = () => {
             </ul>
             <p className="ch-hero-sub"><strong>{HERO_LEAKS_CLOSE}</strong></p>
             <p className="ch-hero-sub">
-              <Link to="/modules/all-in-one-dental-software">{HERO_ONE_LINE}</Link>
+              <Link to="/modules/automate-dental-clinic-operations">{HERO_ONE_LINE}</Link>
             </p>
             {/* Owner-approved hero copy 2026-10-08. Words: src/data/positioning.js (HERO_MODULES),
                 mirrored in scripts/prerender.js. */}
@@ -143,7 +143,7 @@ const Home = () => {
                   <Link to={`/modules/${m.id}`}>{m.name.replace('Aumy ', i === 0 ? 'Aumy ' : '')}</Link>
                 </React.Fragment>
               ))}
-              {' '}— or take <Link to="/modules/all-in-one-dental-software">Aumy One</Link>, one connected system that includes everything.
+              {' '}— or take <Link to="/modules/automate-dental-clinic-operations">Aumy One</Link>, one connected system that includes everything.
             </p>
             <div className="ch-hero-cta">
               <a href="#how-it-works" className="ch-btn ch-btn-primary">

@@ -45,7 +45,7 @@ const HERO_MODULES = [
   { id: 'dental-lead-management', name: 'Aumy Convert', outcome: 'Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.' },
   { id: 'dental-patient-follow-up', name: 'Aumy Journey', outcome: 'fewer no-shows, missed visits rebooked, advised treatments followed up, recalls coming back on time.' },
   { id: 'dental-clinic-management-software', name: 'Aumy Clinic', outcome: 'appointments, records, charting, treatment plans and billing in one place; add Aumy Scribe: speak the note, the chart fills itself.' },
-  { id: 'all-in-one-dental-software', name: 'Aumy One', outcome: 'all of it as one system: one patient record, nothing falling between tools.' },
+  { id: 'automate-dental-clinic-operations', name: 'Aumy One', outcome: 'all of it as one system: one patient record, nothing falling between tools.' },
 ];
 const HERO_OUTCOMES_HEADING = 'What changes in your clinic:';
 

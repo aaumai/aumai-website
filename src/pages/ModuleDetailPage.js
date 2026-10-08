@@ -143,7 +143,7 @@ const ModuleDetailPage = () => {
                 <p className="md-connected-sub">{CONNECTED.sub}</p>
               </div>
               <div className="md-connected-cta">
-                <Link to="/modules/all-in-one-dental-software" className="ch-btn ch-btn-primary">See Aumy One</Link>
+                <Link to="/modules/automate-dental-clinic-operations" className="ch-btn ch-btn-primary">See Aumy One</Link>
                 <Link to="/modules" className="ch-btn ch-btn-ghost ch-ghost-light">Compare all modules</Link>
               </div>
             </div>
