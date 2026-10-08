@@ -122,7 +122,7 @@ const AIDentalSoftwareIndiaPage = () => {
             </div>
           ))}
           <p style={{ ...muted, textAlign: 'center', fontSize: '0.85rem', marginTop: 18 }}>
-            Last updated {UPDATED}. See also <Link to="/ai-dental-clinic-operations">AI-powered clinic operations</Link>, <Link to="/ai-patient-engagement">the AI-powered patient journey</Link> and <Link to="/switch">switching dental software</Link>.
+            Last updated {UPDATED}. See also <Link to="/ai-dental-clinic-operations">AI-powered clinic operations</Link>, <Link to="/ai-patient-engagement">the AI-powered patient journey</Link>, <Link to="/switch">switching dental software</Link> and <Link to="/modules">the modules you can buy on their own</Link>.
           </p>
           <div className="ch-center" style={{ textAlign: 'center', marginTop: 22 }}>
             <Link to="/contact" className="ch-btn ch-btn-primary">Talk to us</Link>

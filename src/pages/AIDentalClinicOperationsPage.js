@@ -111,7 +111,8 @@ const AIDentalClinicOperationsPage = () => {
             patient context. Your calls know your appointments. Your appointments know your patients.
           </p>
           <div style={{ marginTop: 16 }}>
-            <Link to="/ai-patient-engagement" className="ch-btn ch-btn-ghost">See the AI-powered patient journey</Link>
+            <Link to="/ai-patient-engagement" className="ch-btn ch-btn-ghost">See the AI-powered patient journey</Link>{' '}
+            <Link to="/modules" className="ch-btn ch-btn-ghost">Pick only the modules you need</Link>
           </div>
         </div>
       </section>

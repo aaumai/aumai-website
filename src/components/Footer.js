@@ -25,6 +25,7 @@ const Footer = () => {
   // but are intentionally not linked anywhere on the Aumy site.
   const company = [
     { label: 'Aumy — How It Works', path: '/revenue-generator' },
+    { label: 'Modules — Buy One or All', path: '/modules' },
     { label: 'AI Dental Software India', path: '/ai-dental-software-india' },
     { label: 'AI Receptionist', path: '/ai-receptionist' },
     { label: 'WhatsApp Automation', path: '/whatsapp-automation-for-clinics' },

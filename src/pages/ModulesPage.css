@@ -1,0 +1,133 @@
+/* /modules — pick a module, or run it all as one system (owner 2026-10-08).
+   Builds on the HomeClinic.css tokens (.ch-home). No images, so no layout shift. */
+
+.md-hero { padding-bottom: 28px; }
+.md-hero .ch-hero-sub { margin-left: auto; margin-right: auto; max-width: 680px; }
+
+/* Jump chips — one per module */
+.md-jump { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 4px 0 0; padding: 0; list-style: none; }
+.md-jump a {
+  display: inline-block; padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  color: var(--c-ink); background: var(--c-surface); border: 1px solid var(--c-line); text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+.md-jump a:hover, .md-jump a:focus-visible { border-color: var(--c-accent); color: var(--c-accent-dark); }
+.md-jump .md-jump-all { background: var(--c-ink); color: #fff; border-color: var(--c-ink); }
+.md-jump .md-jump-all:hover, .md-jump .md-jump-all:focus-visible { background: var(--c-accent-dark); border-color: var(--c-accent-dark); color: #fff; }
+
+/* Module cards — equal heights, CTA pinned to the bottom */
+.md-cards-section { padding: 24px 0 64px; }
+.md-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 22px; align-items: stretch; }
+.md-card {
+  display: flex; flex-direction: column; background: var(--c-surface); border: 1px solid var(--c-line);
+  border-top: 4px solid var(--c-accent); border-radius: var(--radius); box-shadow: var(--c-shadow);
+  padding: 26px 26px 22px; scroll-margin-top: 110px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.md-card:hover, .md-card:focus-within { transform: translateY(-3px); box-shadow: var(--c-shadow-lg); border-color: rgba(42, 157, 143, 0.45); border-top-color: var(--c-accent); }
+@media (prefers-reduced-motion: reduce) { .md-card, .md-card:hover { transition: none; transform: none; } }
+.md-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.md-icon {
+  width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+  background: var(--c-accent-tint); color: var(--c-accent-dark);
+}
+.md-icon svg { width: 24px; height: 24px; }
+.md-kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-ink-soft); }
+.md-title { font-size: 21px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 8px; color: var(--c-ink); }
+.md-promise { font-size: 16px; font-weight: 600; color: var(--c-accent-dark); margin: 0 0 6px; }
+.md-for { font-size: 14px; color: var(--c-ink-soft); margin: 0 0 16px; }
+.md-does { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; }
+.md-does li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.5; color: var(--c-ink); }
+.md-does .ch-check { width: 19px; height: 19px; flex-basis: 19px; margin-top: 2px; }
+.md-addons { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--c-line); }
+.md-addons-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-ink-soft); margin-bottom: 8px; }
+.md-addons ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.md-chip {
+  font-size: 13px; font-weight: 600; color: var(--c-accent-dark); background: var(--c-accent-tint);
+  border: 1px solid rgba(42, 157, 143, 0.25); border-radius: 999px; padding: 4px 11px;
+}
+.md-card-foot { margin-top: 18px; }
+.md-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.md-cta .ch-btn { padding: 11px 18px; font-size: 14.5px; }
+.md-more { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--c-accent-dark); }
+
+/* Featured "one connected system" band */
+.md-connected-section { padding: 8px 0 72px; scroll-margin-top: 90px; }
+.md-connected {
+  position: relative; border-radius: 26px; padding: 44px 40px; color: #fff; overflow: hidden;
+  background: linear-gradient(135deg, #16324f 0%, #1d4463 55%, #1f6f6a 100%);
+  box-shadow: 0 30px 70px rgba(22, 50, 79, 0.22); border: 2px solid rgba(42, 157, 143, 0.55);
+}
+.md-connected-head { text-align: center; max-width: 760px; margin: 0 auto; }
+.md-icon-light { margin: 0 auto 12px; background: rgba(255,255,255,0.12); color: #7fd8cc; }
+.md-connected-eyebrow { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #7fd8cc; margin-bottom: 8px; }
+.md-connected-title { font-size: clamp(26px, 3.4vw, 36px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 12px; color: #fff; }
+.md-connected-sub { font-size: 17px; color: rgba(255,255,255,0.82); margin: 0; }
+
+.md-strip { list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; counter-reset: step; }
+.md-strip-step {
+  counter-increment: step; position: relative; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px; padding: 14px 12px;
+}
+.md-strip-step::before {
+  content: counter(step); display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--c-accent); color: #fff; font-size: 12px; font-weight: 700; margin-bottom: 8px;
+}
+.md-strip-step h3 { font-size: 15px; margin: 0 0 4px; color: #fff; }
+.md-strip-step p { font-size: 13px; line-height: 1.45; margin: 0; color: rgba(255,255,255,0.78); }
+
+.md-connected-why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+.md-connected-why h3 { font-size: 16px; margin: 0 0 4px; color: #fff; }
+.md-connected-why p { font-size: 14.5px; margin: 0; color: rgba(255,255,255,0.78); }
+.md-connected-cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+
+/* Comparison table */
+.md-table-wrap { overflow-x: auto; margin-top: 28px; border: 1px solid var(--c-line); border-radius: 14px; background: var(--c-surface); }
+.md-table-wrap:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+.md-table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 760px; }
+.md-table caption { text-align: left; padding: 14px 16px 0; font-size: 13px; color: var(--c-ink-soft); }
+.md-table th, .md-table td { padding: 12px 14px; border-bottom: 1px solid var(--c-line); text-align: center; position: relative; }
+.md-table thead th { font-size: 13px; color: var(--c-ink); background: var(--c-accent-tint); vertical-align: bottom; }
+.md-table tbody th { text-align: left; font-weight: 600; color: var(--c-ink); }
+.md-table tbody tr:last-child th, .md-table tbody tr:last-child td { border-bottom: 0; }
+.md-yes { color: var(--c-accent-dark); font-weight: 700; }
+.md-opt { color: var(--c-ink-soft); font-size: 13px; }
+.md-no { color: #b8b2a7; }
+.md-table .md-all { background: rgba(42, 157, 143, 0.08); }
+.md-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.md-price-note { text-align: center; font-size: 14.5px; color: var(--c-ink-soft); margin: 18px 0 0; }
+
+@media (max-width: 1080px) {
+  .md-strip { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 760px) {
+  .md-grid { grid-template-columns: 1fr; }
+  .md-card { padding: 22px 18px 20px; }
+  .md-connected { padding: 32px 18px; border-radius: 20px; }
+  .md-strip { grid-template-columns: repeat(2, 1fr); }
+  .md-connected-why { grid-template-columns: 1fr; }
+}
+@media (max-width: 400px) {
+  .md-strip { grid-template-columns: 1fr; }
+}
+
+/* Quiet-luxury theme (src/styles/lux.css, loaded last) re-colours every h2/h3
+   navy and every button; the dark band needs its own light text and gold CTAs. */
+.site-lux .md-connected {
+  background: linear-gradient(135deg, var(--lux-navy) 0%, var(--lux-navy-2) 60%, #1b2a5c 100%);
+  border: 1px solid var(--lux-gold); border-radius: 0; box-shadow: 0 30px 70px rgba(10, 15, 34, 0.25);
+}
+.site-lux .ch-home .md-connected h2.md-connected-title { color: #fff; font-weight: 300; }
+.site-lux .ch-home .md-connected h3 { color: var(--lux-gold-2); }
+.site-lux .md-connected-eyebrow, .site-lux .md-icon-light { color: var(--lux-gold-2); }
+.site-lux .md-icon-light { background: rgba(255, 255, 255, 0.08); }
+.site-lux .md-strip-step { border-radius: 0; border-color: rgba(220, 197, 148, 0.25); }
+.site-lux .md-strip-step::before { background: var(--lux-gold); color: var(--lux-navy); }
+.site-lux .md-connected .ch-btn-primary { background: var(--lux-gold); border-color: var(--lux-gold); color: var(--lux-navy); }
+.site-lux .md-connected .ch-btn-primary:hover { background: transparent; color: var(--lux-gold-2); border-color: var(--lux-gold-2); }
+.site-lux .md-connected .ch-btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
+.site-lux .md-connected .ch-btn-ghost:hover { color: var(--lux-gold-2); border-color: var(--lux-gold-2); }
+.site-lux .md-jump .md-jump-all { background: var(--lux-navy-2); border-color: var(--lux-navy-2); color: #fff; }
+.site-lux .md-jump .md-jump-all:hover, .site-lux .md-jump .md-jump-all:focus-visible { background: var(--lux-navy); border-color: var(--lux-gold); color: var(--lux-gold-2); }
+.site-lux .md-card { border-top-color: var(--lux-gold); }
+.site-lux .md-card:hover, .site-lux .md-card:focus-within { border-color: var(--lux-gold); border-top-color: var(--lux-gold); }
+.site-lux .md-chip { border-color: var(--lux-line); color: var(--lux-bronze); }

@@ -116,7 +116,8 @@ const AIPatientEngagementPage = () => {
             the same system, with the same patient context.
           </p>
           <div style={{ marginTop: 16 }}>
-            <Link to="/ai-dental-clinic-operations" className="ch-btn ch-btn-ghost">See AI-powered clinic operations</Link>
+            <Link to="/ai-dental-clinic-operations" className="ch-btn ch-btn-ghost">See AI-powered clinic operations</Link>{' '}
+            <Link to="/modules" className="ch-btn ch-btn-ghost">Pick only the modules you need</Link>
           </div>
         </div>
       </section>

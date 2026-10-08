@@ -67,6 +67,7 @@ const PricingPage = () => {
             </div>
           </div>
           <p className="pp-notice">{ONBOARDING_NOTICE.inline}</p>
+          <p className="pp-notice">Want only one part of Aumy? <Link to="/modules">See the modules you can buy on their own</Link>.</p>
         </div>
       </section>
 

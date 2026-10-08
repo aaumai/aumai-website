@@ -398,6 +398,17 @@ const Home = () => {
               </p>
             </div>
           </div>
+          {/* Modules teaser (owner 2026-10-08) — same words as the home route in scripts/prerender.js. */}
+          <div className="ch-head" style={{ marginTop: 56, marginBottom: 0 }}>
+            <span className="ch-eyebrow">Buy one module, or all of it</span>
+            <h2 className="ch-h2 ch-center">Need just one part? Buy only that module — or run all of it as one system.</h2>
+            <p className="ch-lead ch-center-lead">
+              Lead Management &amp; Meta Optimisation, the Clinic OS (with or without AI Documentation), the
+              Clinic OS with the end-to-end patient journey, an AI WhatsApp Receptionist or an AI Voice
+              Receptionist — each sold on its own, or all five as one connected system.
+            </p>
+            <Link to="/modules" className="ch-btn ch-btn-primary">Compare the modules</Link>
+          </div>
         </div>
       </section>
 
