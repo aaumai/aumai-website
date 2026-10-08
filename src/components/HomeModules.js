@@ -30,7 +30,7 @@ const HomeModules = () => {
                 <span className="mh-name">{m.short}</span>
                 <span className="mh-formal">{m.title}</span>
                 <span className="mh-line">{m.card}</span>
-                {m.id === 'aumy-clinic' && scribe && (
+                {m.id === 'dental-clinic-management-software' && scribe && (
                   <span className="md-chip mh-chip">+ {scribe.short} add-on</span>
                 )}
                 <span className="mh-go" aria-hidden="true">See what it does &rarr;</span>

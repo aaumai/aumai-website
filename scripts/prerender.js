@@ -373,7 +373,7 @@ const routes = [
           <ul>${m.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
           ${m.scribe ? `<h3>${esc(m.scribe.short)}: ${esc(m.scribe.title)} (add-on)</h3><p>${esc(m.scribe.promise)}</p>` : ""}
           <p>Add if you want: ${m.addons.map((a) => `+ ${esc(a)}`).join(" · ")}</p>
-          <p><a href="/modules/${m.id}">Everything about ${esc(m.short)}</a>${m.scribe ? ` · <a href="/modules/aumy-scribe">Everything about ${esc(m.scribe.short)}</a>` : ''} · <a href="/contact">Book a demo</a> · <a href="${m.more.path}">${esc(m.more.label)}</a></p>
+          <p><a href="/modules/${m.id}">Everything about ${esc(m.short)}</a>${m.scribe ? ` · <a href="/modules/ai-clinical-notes-for-dentists">Everything about ${esc(m.scribe.short)}</a>` : ''} · <a href="/contact">Book a demo</a> · <a href="${m.more.path}">${esc(m.more.label)}</a></p>
         </article>`).join('')}
       </div></section>
       <section id="one-system"><div class="ch-container">
@@ -382,7 +382,7 @@ const routes = [
         <p>${esc(MODS.CONNECTED.sub)}</p>
         <ol>${MODS.CONNECTED.steps.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></li>`).join('')}</ol>
         ${MODS.CONNECTED.why.map(([t, b]) => `<h3>${esc(t)}</h3><p>${esc(b)}</p>`).join('')}
-        <p><a href="/modules/aumy-one">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
+        <p><a href="/modules/all-in-one-dental-software">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
       </div></section>
       <section><div class="ch-container">
         <h2>${esc(MODS.TABLE.title)}</h2>
@@ -617,7 +617,7 @@ const routes = [
         <p class="ch-eyebrow">AI Dental Software · India</p>
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
-        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/aumy-chat">Aumy Chat</a>, <a href="/modules/aumy-voice">Voice</a>, <a href="/modules/aumy-convert">Convert</a>, <a href="/modules/aumy-journey">Journey</a> or <a href="/modules/aumy-clinic">Clinic</a> — or take <a href="/modules/aumy-one">Aumy One</a>, one connected system that includes everything.</p>
+        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, <a href="/modules/ai-voice-receptionist-for-dentists">Voice</a>, <a href="/modules/dental-lead-management">Convert</a>, <a href="/modules/dental-patient-follow-up">Journey</a> or <a href="/modules/dental-clinic-management-software">Clinic</a> — or take <a href="/modules/all-in-one-dental-software">Aumy One</a>, one connected system that includes everything.</p>
         <p><strong>${esc(POS.HERO_OUTCOMES_HEADING)}</strong></p>
         <ul>
           ${POS.HERO_MODULES.map((m) => `<li><a href="/modules/${m.id}"><strong>${esc(m.name)}</strong></a> — ${esc(m.outcome)}</li>`).join('\n          ')}
@@ -1075,7 +1075,9 @@ for (const p of MODS.PAGES) {
       <nav aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/modules">Modules</a></li><li>${esc(p.short)}</li></ol></nav>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         ${p.addonOf ? `<p>Add-on to ${esc(p.addonOf)}</p>` : ''}
-        <h1 class="ch-hero-title">${esc(p.short)}: ${esc(p.title)}</h1>
+        <p class="ch-eyebrow">${esc(p.short.toUpperCase())}</p>
+        <h1 class="ch-hero-title">${esc(p.h1)}</h1>
+        <p><strong>${esc(p.sub)}</strong></p>
         <p class="ch-hero-sub">${esc(p.intro)}</p>
         <p>${esc(POS.MODULES_LINE)}</p>
         <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
@@ -1094,16 +1096,16 @@ for (const p of MODS.PAGES) {
         </ul>
         ${p.deep.length ? `<p>Go deeper: ${p.deep.map((d) => `<a href="${d.path}">${esc(d.label)}</a>`).join(' · ')}</p>` : ''}
         ${p.featured ? '' : `<h2>Or run it all as ${esc(MODS.CONNECTED.short)}: ${esc(MODS.CONNECTED.title)}</h2>
-        <p>${esc(MODS.CONNECTED.sub)} <a href="/modules/aumy-one">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/modules">Compare all modules</a></p>`}
+        <p>${esc(MODS.CONNECTED.sub)} <a href="/modules/all-in-one-dental-software">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/modules">Compare all modules</a></p>`}
         <h2>See ${esc(p.short)} working in a dental clinic</h2>
         <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
         <p>Other modules: ${MODS.PAGES.filter((o) => o.id !== p.id).map((o) => `<a href="/modules/${o.id}">${esc(o.short)}</a>`).join(' · ')}</p>
       </div></section>`,
   });
 }
-// Old module URLs (owner 2026-10-08: lead-nurturing module renamed "Aumy Convert"). Not in the sitemap;
+// Old module URLs → keyword URLs (owner 2026-10-08; src/data/modules.js OLD_SLUGS). Not in the sitemap;
 // canonical + meta refresh point crawlers and no-JS visitors at the new page.
-const MODULE_REDIRECTS = { 'aumy-leads': 'aumy-convert' };
+const MODULE_REDIRECTS = MODS.OLD_SLUGS;
 for (const [oldId, newId] of Object.entries(MODULE_REDIRECTS)) {
   const p = MODS.pageById(newId);
   routes.push({

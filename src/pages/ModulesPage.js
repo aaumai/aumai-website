@@ -81,7 +81,7 @@ const ModulesPage = () => {
               {m.scribe && (
                 <div className="md-scribe">
                   <h3 className="md-scribe-title">
-                    + <Link to="/modules/aumy-scribe" className="md-title-link">{m.scribe.short}</Link><span className="md-formal">{m.scribe.title}</span>
+                    + <Link to="/modules/ai-clinical-notes-for-dentists" className="md-title-link">{m.scribe.short}</Link><span className="md-formal">{m.scribe.title}</span>
                   </h3>
                   <p>{m.scribe.promise}</p>
                 </div>
@@ -133,7 +133,7 @@ const ModulesPage = () => {
               ))}
             </div>
             <div className="md-connected-cta">
-              <Link to="/modules/aumy-one" className="ch-btn ch-btn-primary">See {CONNECTED.short}</Link>
+              <Link to="/modules/all-in-one-dental-software" className="ch-btn ch-btn-primary">See {CONNECTED.short}</Link>
               <Link to="/contact" className="ch-btn ch-btn-ghost ch-ghost-light">Book a demo of {CONNECTED.short}</Link>
               <a href={waLink(CONNECTED.short)} className="ch-btn ch-btn-ghost ch-ghost-light" target="_blank" rel="noopener noreferrer">
                 WhatsApp us

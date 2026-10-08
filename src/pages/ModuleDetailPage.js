@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { INDIA_WHATSAPP } from '../config/contact';
-import { PAGES, CONNECTED, pageById } from '../data/modules';
+import { PAGES, CONNECTED, pageById, OLD_SLUGS } from '../data/modules';
 import { MODULES_LINE } from '../data/positioning';
 import ModuleIcon from '../components/ModuleIcon';
 import './HomeClinic.css';
@@ -38,7 +38,7 @@ const ModuleDetailPage = () => {
     }
   }, [page]);
 
-  if (!page) return <Navigate to="/modules" replace />;
+  if (!page) return <Navigate to={OLD_SLUGS[slug] ? `/modules/${OLD_SLUGS[slug]}` : '/modules'} replace />;
 
   const pairs = page.pairs.map(pageById).filter(Boolean);
   const isOne = !!page.featured;
@@ -56,10 +56,11 @@ const ModuleDetailPage = () => {
           </nav>
           <span className="md-icon mp-icon"><ModuleIcon name={page.icon} /></span>
           {page.addonOf && <span className="mp-addon-tag">Add-on to {page.addonOf}</span>}
+          <span className="ch-eyebrow mp-eyebrow">{page.short.toUpperCase()}</span>
           <h1 className="ch-hero-title mp-title">
-            {page.short}
-            <span className="mp-formal">{page.title}</span>
+            {page.h1}
           </h1>
+          <p className="mp-sub">{page.sub}</p>
           <p className="ch-hero-sub mp-intro">{page.intro}</p>
           <p className="ch-dental-line">{MODULES_LINE}</p>
           <div className="ch-hero-cta">
@@ -142,7 +143,7 @@ const ModuleDetailPage = () => {
                 <p className="md-connected-sub">{CONNECTED.sub}</p>
               </div>
               <div className="md-connected-cta">
-                <Link to="/modules/aumy-one" className="ch-btn ch-btn-primary">See Aumy One</Link>
+                <Link to="/modules/all-in-one-dental-software" className="ch-btn ch-btn-primary">See Aumy One</Link>
                 <Link to="/modules" className="ch-btn ch-btn-ghost ch-ghost-light">Compare all modules</Link>
               </div>
             </div>

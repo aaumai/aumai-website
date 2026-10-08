@@ -98,8 +98,6 @@ function App() {
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}
                 <Route path="/modules" element={<ModulesPage />} />
-                {/* Owner 2026-10-08: the lead-nurturing module was renamed Aumy Convert — old URL redirects. */}
-                <Route path="/modules/aumy-leads" element={<Navigate to="/modules/aumy-convert" replace />} />
                 <Route path="/modules/:slug" element={<ModuleDetailPage />} />
                 <Route path="/ai-receptionist" element={<AIReceptionistPage />} />
                 <Route path="/whatsapp-automation-for-clinics" element={<WhatsAppAutomationPage />} />

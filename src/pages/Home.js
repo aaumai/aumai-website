@@ -130,7 +130,7 @@ const Home = () => {
                   <Link to={`/modules/${m.id}`}>{m.name.replace('Aumy ', i === 0 ? 'Aumy ' : '')}</Link>
                 </React.Fragment>
               ))}
-              {' '}— or take <Link to="/modules/aumy-one">Aumy One</Link>, one connected system that includes everything.
+              {' '}— or take <Link to="/modules/all-in-one-dental-software">Aumy One</Link>, one connected system that includes everything.
             </p>
             <p className="ch-hero-outcomes-title">{HERO_OUTCOMES_HEADING}</p>
             <ul className="ch-hero-outcomes">

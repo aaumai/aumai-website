@@ -219,3 +219,7 @@
 @media (min-width: 1100px) { .mh-grid-5 { grid-template-columns: repeat(5, 1fr); } }
 @media (min-width: 700px) and (max-width: 1099px) { .mh-grid-5 { grid-template-columns: repeat(3, 1fr); } }
 .mp-hero .ch-hero-sub { margin-left: 0; margin-right: 0; }
+/* Module page: product-name eyebrow above a keyword H1, plain-words subtitle (owner 2026-10-08). */
+.mp-eyebrow { display: block; margin: 0 0 10px; }
+.mp-sub { margin: -8px 0 18px; font-size: clamp(19px, 2.4vw, 24px); font-weight: 600; line-height: 1.35; color: var(--c-ink-soft); max-width: 680px; }
+.site-lux .ch-home .mp-sub { font-family: var(--lux-sans); color: var(--lux-body); }
