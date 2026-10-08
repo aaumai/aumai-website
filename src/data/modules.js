@@ -185,5 +185,224 @@ const FAQS = [
   { q: 'How much does each module cost?', a: 'Aumy Clinic has a starting price on our pricing page. Aumy Chat, Aumy Voice and the follow-ups are priced with you, once we know which modules and how many enquiries your clinic has.' },
 ];
 
-module.exports = { TITLE, DESCRIPTION, HERO, MODULES, CONNECTED, TABLE, FAQS };
+// ---------------------------------------------------------------------------
+// One page per module at /modules/<id> (owner 2026-10-08: "each card takes the
+// user to that separate module page where they can see what the module exactly
+// does, who it is suitable for and what would be the outcome of it").
+// The React template (src/pages/ModuleDetailPage.js), the home cards
+// (src/components/HomeModules.js) and the crawler HTML (scripts/prerender.js)
+// all read PAGES. `does` for the five sold modules is the vetted list above.
+// Outcomes are plain results — never invented numbers.
+// SEO: each page owns ONE keyword; /ai-receptionist and
+// /whatsapp-automation-for-clinics stay the owners of their deep keywords —
+// module pages link to them as the deep dives.
+// ---------------------------------------------------------------------------
+const byId = (id) => MODULES.find((m) => m.id === id);
+
+// Home section (src/components/HomeModules.js and the home crawler HTML).
+const HOME = {
+  eyebrow: 'Aumy is built from modules',
+  title: 'Pick one, combine any, or run them all as Aumy One.',
+  sub: 'Each module does one job in your clinic and can be bought on its own. Put two or three together, or run the whole thing as one connected system with one patient record. Tap a module to see what it does, who it suits and what you get.',
+};
+
+const PAGES = [
+  {
+    id: 'aumy-leads',
+    icon: 'leads',
+    short: 'Aumy Leads',
+    title: 'Lead Management & Meta Ads Optimisation',
+    seoTitle: 'Aumy Leads — Dental Lead Management Software | Aumy',
+    seoDescription: 'Dental lead management software: every Facebook and Instagram ad enquiry answered, followed up and tracked to a booked patient, with cost per patient.',
+    keyword: 'dental lead management software',
+    card: 'Every ad enquiry followed up and tracked to a booked patient.',
+    intro: `${byId('aumy-leads').promise} Aumy Leads is dental lead management software for clinics that spend on Facebook and Instagram ads.`,
+    does: byId('aumy-leads').does,
+    whoFor: [
+      'You run Facebook or Instagram ads and enquiries arrive faster than your team can call back.',
+      'Leads go quiet after the first reply, and nobody has time to keep following up.',
+      'You cannot tell which ad actually brought patients into the chair.',
+      'You want your Google profile and reviews looked after without a marketing team.',
+    ],
+    outcomes: [
+      'No enquiry from your ads is left unanswered or forgotten.',
+      'Your team spends its time on people who want to book, not on chasing a spreadsheet.',
+      'You can see which campaigns bring patients and which only bring clicks, and spend accordingly.',
+      'Meta learns from the enquiries that became real patients, so it can find more people like them.',
+    ],
+    addons: byId('aumy-leads').addons,
+    pairs: ['aumy-chat', 'aumy-voice', 'aumy-journey'],
+    deep: [{ path: '/facebook-instagram', label: 'Facebook & Instagram receptionist' }],
+  },
+  {
+    id: 'aumy-clinic',
+    icon: 'os',
+    short: 'Aumy Clinic',
+    title: 'Dental Clinic Operating System',
+    seoTitle: 'Aumy Clinic — Dental Clinic Management Software | Aumy',
+    seoDescription: 'Dental clinic management software: appointments, patient records, tooth charting, treatment plans and billing in one place, for one chair or many branches.',
+    keyword: 'dental clinic management software',
+    card: 'Appointments, records, charting, treatment plans and billing.',
+    intro: `${byId('aumy-clinic').promise} Aumy Clinic is dental clinic management software that runs the whole day, from the front desk to the doctor’s chair.`,
+    does: byId('aumy-clinic').does,
+    whoFor: [
+      'You run the clinic on paper, Excel or old software and want one simple system.',
+      'You have more than one branch or doctor and need one calendar and one patient record.',
+      'Your team wastes time hunting for X-rays, reports and old treatment notes.',
+      'You are moving from another dental software and want your history brought across.',
+    ],
+    outcomes: [
+      'Every patient’s history is one click away, for every doctor and every branch.',
+      'The front desk books, bills and registers patients without paper or double entry.',
+      'Each staff member sees only what their role needs.',
+      'You can see how the clinic is doing from the reports, not from guesswork.',
+    ],
+    addons: byId('aumy-clinic').addons,
+    pairs: ['aumy-scribe', 'aumy-journey', 'aumy-chat'],
+    deep: [
+      { path: '/ai-dental-software-india', label: 'Dental software in India: how to choose' },
+      { path: '/switch', label: 'Moving from your current dental software' },
+    ],
+  },
+  {
+    id: 'aumy-scribe',
+    icon: 'scribe',
+    short: 'Aumy Scribe',
+    title: 'AI Clinical Documentation',
+    addonOf: 'Aumy Clinic',
+    seoTitle: 'Aumy Scribe — AI Clinical Notes for Dentists | Aumy',
+    seoDescription: 'AI clinical notes for dentists: type a short note or just speak, and Aumy Scribe fills the dental chart. Nothing is saved until the doctor accepts it.',
+    keyword: 'AI clinical notes for dentists',
+    card: 'Type or speak a short note; Aumy fills the chart for you to accept.',
+    intro: `${byId('aumy-clinic').scribe.promise} Aumy Scribe gives dentists AI clinical notes without changing how they work. It is an add-on to Aumy Clinic.`,
+    does: [
+      'The doctor types a short note in their own words, or simply speaks it.',
+      'Aumy reads the note and prepares the chart entries from it.',
+      'The doctor checks what Aumy prepared, and accepts it, changes it or drops it.',
+      'Nothing goes into the patient’s record until the doctor accepts it.',
+    ],
+    whoFor: [
+      'Doctors who finish a long day and still have notes to write up.',
+      'Clinics where notes are short or missing because there is no time between patients.',
+      'Clinics that want complete records without hiring someone to type them.',
+    ],
+    outcomes: [
+      'Notes are done in moments, while the visit is still fresh.',
+      'Patient records are complete, so the next visit and the follow-ups have what they need.',
+      'The doctor stays in charge of every entry in the record.',
+    ],
+    addons: [],
+    pairs: ['aumy-clinic', 'aumy-journey'],
+    deep: [{ path: '/ai-dental-clinic-operations', label: 'AI for dental clinic operations' }],
+  },
+  {
+    id: 'aumy-journey',
+    icon: 'journey',
+    short: 'Aumy Journey',
+    title: 'Clinic OS with the End-to-End Patient Journey',
+    seoTitle: 'Aumy Journey — Dental Patient Reminder & Recall Software',
+    seoDescription: 'Dental patient reminder and recall software: WhatsApp reminders, no-show rebooking, after-care, reviews, treatment follow-up and recalls, on Aumy Clinic.',
+    keyword: 'dental patient reminder and recall software',
+    card: 'Reminders, no-show rebooking, after-care, reviews and recalls.',
+    intro: `${byId('aumy-journey').promise} Aumy Journey is dental patient reminder and recall software built into the clinic system, so every message knows the patient’s visits and treatment.`,
+    does: byId('aumy-journey').does,
+    whoFor: [
+      'Patients forget appointments and your desk has no time to call everyone.',
+      'Missed visits are never followed up, so those patients drift away.',
+      'Doctors advise treatment that patients never come back to start.',
+      'Your list of patients due for a check-up keeps growing and nobody works it.',
+    ],
+    outcomes: [
+      'Fewer empty chairs from forgotten appointments.',
+      'Patients who miss a visit are asked to rebook instead of being lost.',
+      'Advised treatment and check-ups are followed up without your team having to remember.',
+      'Happy patients are asked for a review at the right moment.',
+    ],
+    addons: byId('aumy-journey').addons,
+    pairs: ['aumy-scribe', 'aumy-chat', 'aumy-voice'],
+    deep: [{ path: '/ai-patient-engagement', label: 'The AI-powered patient journey' }],
+  },
+  {
+    id: 'aumy-chat',
+    icon: 'chat',
+    short: 'Aumy Chat',
+    title: 'AI WhatsApp Receptionist',
+    seoTitle: 'Aumy Chat — WhatsApp AI Receptionist for Dental Clinics',
+    seoDescription: 'Aumy Chat, the WhatsApp AI receptionist for dental clinics: every message answered in seconds, day or night, with real appointments booked for you.',
+    keyword: 'WhatsApp AI receptionist for dental clinics',
+    card: 'Every WhatsApp answered in seconds, with real slots booked.',
+    intro: `${byId('aumy-chat').promise} Aumy Chat is a WhatsApp AI receptionist for dental clinics that works on your own clinic number.`,
+    does: byId('aumy-chat').does,
+    whoFor: [
+      'Your WhatsApp fills up faster than the desk can reply.',
+      'Enquiries arrive at night and on Sundays, when nobody is there to answer.',
+      'Patients ask the same questions about timings, treatments and directions all day.',
+    ],
+    outcomes: [
+      'Patients get an answer in seconds instead of hours, so fewer go elsewhere.',
+      'Appointments get booked even while the clinic is closed.',
+      'Your team handles only the chats that really need a person.',
+    ],
+    addons: byId('aumy-chat').addons,
+    pairs: ['aumy-voice', 'aumy-leads', 'aumy-journey'],
+    deep: [
+      { path: '/whatsapp-automation-for-clinics', label: 'WhatsApp automation for clinics' },
+      { path: '/ai-receptionist', label: 'AI receptionist for dental clinics' },
+    ],
+  },
+  {
+    id: 'aumy-voice',
+    icon: 'phone',
+    short: 'Aumy Voice',
+    title: 'AI Voice Receptionist',
+    seoTitle: 'Aumy Voice — AI Voice Receptionist for Dental Clinics',
+    seoDescription: 'Aumy Voice, the AI voice receptionist for dental clinics: every call answered, appointments booked, moved and checked, and calls passed to your staff.',
+    keyword: 'AI voice receptionist for dental clinics',
+    card: 'Every call answered; books, moves and checks appointments.',
+    intro: `${byId('aumy-voice').promise} Aumy Voice is an AI voice receptionist for dental clinics, working from your doctors’ real calendars.`,
+    does: byId('aumy-voice').does,
+    whoFor: [
+      'Calls go unanswered when the desk is busy with the patients in front of them.',
+      'The phone rings after hours and at lunch, and those callers never call back.',
+      'Your receptionist spends the day on calls that only check or move an appointment.',
+    ],
+    outcomes: [
+      'Callers reach the clinic every time, not a phone that rings out.',
+      'Simple calls are handled without taking your team away from patients.',
+      'You can read any call to see exactly what was said.',
+    ],
+    addons: byId('aumy-voice').addons,
+    pairs: ['aumy-chat', 'aumy-leads', 'aumy-journey'],
+    deep: [{ path: '/ai-receptionist', label: 'AI receptionist for dental clinics' }],
+  },
+  {
+    id: 'aumy-one',
+    icon: 'all',
+    short: 'Aumy One',
+    title: 'The Connected Dental Clinic System',
+    featured: true,
+    seoTitle: 'Aumy One — All-in-One Dental Clinic Software | Aumy',
+    seoDescription: 'All-in-one dental clinic software: leads, clinic OS, AI notes, patient follow-ups and AI WhatsApp and voice receptionists, working on one patient record.',
+    keyword: 'all-in-one dental clinic software',
+    card: 'Every module working as one, from the first enquiry to the next recall.',
+    intro: `${CONNECTED.sub} Aumy One is all-in-one dental clinic software: every module joined up, so nothing is typed twice and no patient falls between tools.`,
+    does: CONNECTED.steps.map((s) => `${s.title}: ${s.body}`),
+    whoFor: [
+      'You want one system instead of separate tools for the desk, WhatsApp, calls and follow-ups.',
+      'You run several branches or doctors and want the whole picture in one place.',
+      'You are growing and want the coordination handled, not added to your team’s day.',
+    ],
+    outcomes: CONNECTED.why.map(([t, b]) => `${t}. ${b}`),
+    addons: [],
+    pairs: ['aumy-leads', 'aumy-clinic', 'aumy-journey', 'aumy-chat', 'aumy-voice'],
+    deep: [
+      { path: '/revenue-generator', label: 'How Aumy works' },
+      { path: '/ai-dental-clinic-operations', label: 'AI-powered dental clinic operations' },
+      { path: '/ai-patient-engagement', label: 'The AI-powered patient journey' },
+    ],
+  },
+];
+const pageById = (id) => PAGES.find((p) => p.id === id);
+
+module.exports = { TITLE, DESCRIPTION, HERO, MODULES, CONNECTED, TABLE, FAQS, HOME, PAGES, pageById };
 module.exports.default = module.exports;
