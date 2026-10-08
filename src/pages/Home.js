@@ -10,6 +10,8 @@ import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
 import { MONTHLY_TEXT } from '../data/pricing';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
+// Owner 2026-10-08: "Handcrafted only for dentists" — one copy, shared with scripts/prerender.js.
+import { DENTISTS_ONLY, TRAINED_FOR_DENTISTRY } from '../data/positioning';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -121,6 +123,10 @@ const Home = () => {
               Aumy manages your clinic operations — an <Link to="/ai-receptionist">AI receptionist for dental clinics</Link> that answers calls and WhatsApp 24/7, appointments, follow-ups, patient care,
               digital records — so your team can focus on patients, not coordination.
             </p>
+            <div className="ch-dental">
+              <span className="ch-dental-badge">{DENTISTS_ONLY.replace(/\.$/, '')}</span>
+              <p className="ch-dental-line">{TRAINED_FOR_DENTISTRY}</p>
+            </div>
             {/* Owner 2026-09-26: "never lose a patient ever to a missed call or slow response to WhatsApp". */}
             <p className="lux-promise">
               Never lose a patient to a missed call or a slow WhatsApp reply <em>— ever.</em>
@@ -154,7 +160,7 @@ const Home = () => {
               Try it live — WhatsApp us like a patient would
             </a>
             <p className="ch-hero-trust">
-              no lock-in · we set everything up for you · limited implementation capacity · built only for dental clinics · NVIDIA Inception member
+              no lock-in · we set everything up for you · limited implementation capacity · NVIDIA Inception member
             </p>
           </div>
 

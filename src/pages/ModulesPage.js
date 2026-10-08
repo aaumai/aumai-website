@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { INDIA_WHATSAPP } from '../config/contact';
 import { TITLE, DESCRIPTION, HERO, MODULES, CONNECTED, TABLE, FAQS } from '../data/modules';
+import { MODULES_LINE } from '../data/positioning';
 import './HomeClinic.css';
 import './ModulesPage.css';
 
@@ -56,6 +57,7 @@ const ModulesPage = () => {
           <span className="ch-eyebrow">{HERO.eyebrow}</span>
           <h1 className="ch-hero-title">{HERO.title}</h1>
           <p className="ch-hero-sub">{HERO.sub}</p>
+          <p className="ch-dental-line ch-dental-center">{MODULES_LINE}</p>
           <nav aria-label="Modules on this page">
             <ul className="md-jump">
               {MODULES.map((m) => (

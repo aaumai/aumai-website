@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { NAME, ROLE, YEARS, COUNTRIES, SUMMARY, STORY, EXPERTISE, CAREER, QUOTE } from '../data/founder';
+import { WHY_DENTAL_ONLY } from '../data/positioning';
 import './HomeClinic.css';
 
 /**
@@ -46,6 +47,14 @@ const AboutPage = () => {
           <div className="lux-about-prose">
             {STORY.map((p) => <p key={p.slice(0, 32)}>{p}</p>)}
           </div>
+        </div>
+      </section>
+
+      <section className="ch-section" style={{ paddingTop: 0 }}>
+        <div className="ch-container ch-narrow ch-center">
+          <span className="ch-eyebrow">{WHY_DENTAL_ONLY.eyebrow}</span>
+          <h2 className="ch-h2">{WHY_DENTAL_ONLY.title}</h2>
+          <p className="ch-lead">{WHY_DENTAL_ONLY.body}</p>
         </div>
       </section>
 

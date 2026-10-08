@@ -26,6 +26,7 @@ const { CALCULATORS } = require('../src/data/calculators');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The one pricing file the /pricing page reads, so llms.txt quotes the same numbers.
 const PRICING = require('../src/data/pricing');
+const POS = require('../src/data/positioning');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -127,7 +128,7 @@ const LLMS = {
   in: `# AUM AI — Aumy for dental clinics (India)
 Last updated: 2026-10-06
 
-> Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICING.MONTHLY_TEXT}.
+> Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICING.MONTHLY_TEXT}. ${POS.LD_SUFFIX}
 
 ## Key facts
 - Setup and data migration are done for you; a named Aumy contact supports the clinic after go-live.

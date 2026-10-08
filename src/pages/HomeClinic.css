@@ -454,3 +454,13 @@
   .ch-close-row { grid-template-columns: 1fr; gap: 4px; }
   .ch-close-arrow { display: none; }
 }
+
+/* "Handcrafted only for dentists" (owner 2026-10-08) — badge + supporting line under a hero sub. */
+.ch-dental { margin: -12px 0 26px; max-width: 560px; }
+.ch-dental-badge {
+  display: inline-block; margin: 0 0 8px; padding: 5px 12px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--c-accent-dark); border: 1px solid currentColor; border-radius: 999px;
+}
+.ch-dental-line { margin: 0; font-size: 16px; line-height: 1.6; color: var(--c-ink-soft); }
+.ch-dental-center { max-width: 620px; margin: -14px auto 0; text-align: center; }

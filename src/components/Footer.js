@@ -68,7 +68,7 @@ const Footer = () => {
               <AppDownload variant="compact" />
             </div>
             <p className="footer-tagline">
-              AI-Powered Dental Clinic Management. Aumy coordinates your patients, people and
+              AI-Powered Dental Clinic Management, handcrafted only for dentists. Aumy coordinates your patients, people and
               processes from the first enquiry to ongoing care — one connected platform.
               Growing your clinic shouldn&rsquo;t mean growing your headache.
             </p>

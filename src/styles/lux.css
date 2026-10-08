@@ -677,3 +677,8 @@
 }
 .site-lux .lux-promise em { font-style: italic; color: var(--lux-gold-2); white-space: nowrap; }
 @media (max-width: 560px) { .site-lux .lux-promise { font-size: 21px; } }
+
+/* "Handcrafted only for dentists" badge — lux: square hairline, gold on the dark hero. */
+.site-lux .ch-dental-badge { border-radius: 0; font-weight: 500; font-size: 11.5px; letter-spacing: 0.22em; color: var(--lux-navy); }
+.site-lux .lux-hero .ch-dental-badge { color: var(--lux-gold-2); }
+.site-lux .lux-hero .ch-dental-line { color: rgba(255, 255, 255, 0.82); font-weight: 300; }

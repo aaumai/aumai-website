@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { TITLE, DESCRIPTION, HERO, JOURNEY, STAGES, DIFFERENCE, FAQS } from '../data/whatsappAutomation';
+import { AI_TRAINED_FOR_DENTISTRY } from '../data/positioning';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -27,6 +28,7 @@ const WhatsAppAutomationPage = () => {
           <span className="ch-eyebrow">WhatsApp Automation</span>
           <h1 className="ch-hero-title">{HERO.title}</h1>
           <p className="ch-hero-sub">{HERO.sub}</p>
+          <p className="ch-dental-line ch-dental-center">{AI_TRAINED_FOR_DENTISTRY}</p>
           <div style={{ marginTop: 18, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/demos" className="ch-btn ch-btn-primary">See it live on a real clinic&rsquo;s WhatsApp</Link>
             <Link to="/pricing" className="ch-btn ch-btn-ghost">View pricing</Link>

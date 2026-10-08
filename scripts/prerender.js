@@ -37,6 +37,8 @@ const COMP = require('../src/data/compliance');
 const MODS = require('../src/data/modules');
 // Home FAQ: the list src/pages/Home.js renders — crawler HTML and FAQPage JSON-LD read the same one.
 const HOME_FAQ = require('../src/data/homeFaq');
+// "Handcrafted only for dentists" (owner 2026-10-08): same words as the React pages.
+const POS = require('../src/data/positioning');
 // FAQPage JSON-LD straight from a page's own FAQ list ({q, a}), so the
 // answers an assistant quotes are word for word what the page says.
 const faqPageLd = (faqs) => ({
@@ -198,7 +200,7 @@ const dentalSoftwareLd = {
   operatingSystem: 'Web, iOS, Android',
   '@id': `${ORIGIN}/#aumy-dental`,
   url: `${ORIGIN}/`,
-  description: `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}.`,
+  description: `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. ${POS.LD_SUFFIX}`,
   areaServed: { '@type': 'Country', name: 'India' },
   inLanguage: ['en-IN', 'hi-IN', 'mr-IN'],
   featureList: ADS.CAPABILITIES.map(([t]) => t),
@@ -356,6 +358,7 @@ const routes = [
         <p class="ch-eyebrow">${esc(MODS.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(MODS.HERO.title)}</h1>
         <p class="ch-hero-sub">${esc(MODS.HERO.sub)}</p>
+        <p>${esc(POS.MODULES_LINE)}</p>
       </div></section>
       <section><div class="ch-container">
         ${MODS.MODULES.map((m, i) => `
@@ -404,6 +407,7 @@ const routes = [
         <p class="ch-eyebrow">AI receptionist for dental clinics</p>
         <h1 class="ch-hero-title">${esc(AIR.HERO.title)}</h1>
         <p>${esc(AIR.HERO.sub)}</p>
+        <p>${esc(POS.AI_TRAINED_FOR_DENTISTRY)}</p>
         <h2>${esc(AIR.MATHS.title)}</h2><p>${esc(AIR.MATHS.body)}</p>
         <h2>What the AI receptionist does</h2>${pairsHtml(AIR.CAPABILITIES)}
         <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
@@ -422,6 +426,7 @@ const routes = [
         <p class="ch-eyebrow">WhatsApp automation for dental clinics</p>
         <h1 class="ch-hero-title">${esc(WA.HERO.title)}</h1>
         <p>${esc(WA.HERO.sub)}</p>
+        <p>${esc(POS.AI_TRAINED_FOR_DENTISTRY)}</p>
         <h2>${esc(WA.JOURNEY.title)}</h2><p>${esc(WA.JOURNEY.body)}</p>
         ${pairsHtml(WA.STAGES)}
         <h2>Not another broadcast tool</h2>${pairsHtml(WA.DIFFERENCE)}
@@ -610,6 +615,7 @@ const routes = [
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
         <p class="ch-hero-sub">Aumy manages your clinic operations — an <a href="/ai-receptionist">AI receptionist for dental clinics</a> that answers calls and WhatsApp 24/7, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
+        <p><strong>${esc(POS.DENTISTS_ONLY)}</strong> ${esc(POS.TRAINED_FOR_DENTISTRY)}</p>
         <p><strong>Never lose a patient to a missed call or a slow WhatsApp reply — ever.</strong></p>
         <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
         <p><strong>For dental clinics that are growing — and those ready to grow.</strong></p>
@@ -908,6 +914,8 @@ const routes = [
         <h1 class="ch-hero-title">${FOUNDER.YEARS} years inside healthcare. One problem, seen in clinic after clinic.</h1>
         <p class="ch-hero-sub">${esc(FOUNDER.NAME)} &middot; ${esc(FOUNDER.ROLE)}. ${esc(FOUNDER.SUMMARY)}</p>
         ${FOUNDER.STORY.map((p) => `<p>${esc(p)}</p>`).join('')}
+        <h2>${esc(POS.WHY_DENTAL_ONLY.title)}</h2>
+        <p>${esc(POS.WHY_DENTAL_ONLY.body)}</p>
         <h2>What he brings</h2>
         <ul>${FOUNDER.EXPERTISE.map((e) => `<li><strong>${esc(e.title)}</strong> — ${esc(e.body)}</li>`).join('')}</ul>
         <h2>Career</h2>
