@@ -5,6 +5,7 @@ import LeakCheck from '../components/LeakCheck';
 import DemoPlaylist from '../components/DemoPlaylist';
 import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
+import HomeModules from '../components/HomeModules';
 import AumyLoop from '../components/AumyLoop';
 import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
 import { MONTHLY_TEXT } from '../data/pricing';
@@ -176,6 +177,10 @@ const Home = () => {
           upgrades to named logos as each clinic's written permission lands —
           see src/data/clinicsServed.js. */}
       <ClinicsServed />
+
+      {/* ── Aumy is built from modules (owner 2026-10-08): every card links to
+          its /modules/<id> page. Words: src/data/modules.js (HOME, PAGES). */}
+      <HomeModules />
 
       {/* ── Be the patient: live hands-on demo ─────────────────────────── */}
       <section className="ch-section" id="be-the-patient">
@@ -404,18 +409,7 @@ const Home = () => {
               </p>
             </div>
           </div>
-          {/* Modules teaser (owner 2026-10-08) — same words as the home route in scripts/prerender.js. */}
-          <div className="ch-head" style={{ marginTop: 56, marginBottom: 0 }}>
-            <span className="ch-eyebrow">Buy one module, or all of it</span>
-            <h2 className="ch-h2 ch-center">Need just one part? Buy only that module — or run all of it as one system.</h2>
-            <p className="ch-lead ch-center-lead">
-              Aumy Leads (lead management &amp; Meta ads), Aumy Clinic (the dental clinic operating system,
-              with Aumy Scribe for AI notes if you want it), Aumy Journey (patient follow-ups), Aumy Chat (AI
-              WhatsApp receptionist) or Aumy Voice (AI voice receptionist) — each sold on its own. Or Aumy
-              One: all of it as one connected system.
-            </p>
-            <Link to="/modules" className="ch-btn ch-btn-primary">Compare the modules</Link>
-          </div>
+          {/* The old modules teaser lived here; replaced by <HomeModules /> under the hero (2026-10-08). */}
         </div>
       </section>
 

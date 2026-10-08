@@ -16,6 +16,7 @@ import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import GrowthAudit from './pages/GrowthAudit';
 import PricingPage from './pages/PricingPage';
 import ModulesPage from './pages/ModulesPage';
+import ModuleDetailPage from './pages/ModuleDetailPage';
 import AIReceptionistPage from './pages/AIReceptionistPage';
 import WhatsAppAutomationPage from './pages/WhatsAppAutomationPage';
 import AIDentalClinicOperationsPage from './pages/AIDentalClinicOperationsPage';
@@ -97,6 +98,7 @@ function App() {
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}
                 <Route path="/modules" element={<ModulesPage />} />
+                <Route path="/modules/:slug" element={<ModuleDetailPage />} />
                 <Route path="/ai-receptionist" element={<AIReceptionistPage />} />
                 <Route path="/whatsapp-automation-for-clinics" element={<WhatsAppAutomationPage />} />
                 {/* The two search themes the site targets (owner 2026-09-18):
