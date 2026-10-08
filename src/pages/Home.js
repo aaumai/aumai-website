@@ -12,7 +12,7 @@ import { MONTHLY_TEXT } from '../data/pricing';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
 // Owner 2026-10-08: "Handcrafted only for dentists" — one copy, shared with scripts/prerender.js.
-import { HERO_MODULES, HERO_OUTCOMES_HEADING } from '../data/positioning';
+import { HERO_MODULES, HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE } from '../data/positioning';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -118,10 +118,21 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">AI Dental Software · India</span>
             <h1 className="ch-hero-title">
-              Fix the one thing that&rsquo;s <span className="ch-hero-accent">costing your dental clinic patients.</span>
+              Stop <span className="ch-hero-accent">losing patients.</span>
             </h1>
-            {/* Owner 2026-10-08: positioning = buy only the module you need. */}
-            <p className="ch-hero-sub">Missed calls, slow WhatsApp replies, enquiries nobody followed up, no-shows, treatments never booked — pick the Aumy module that fixes yours. Buy only what you need.</p>
+            {/* Owner 2026-10-08: sell the loss — each leak links to the one module that stops it. */}
+            <p className="ch-hero-outcomes-title">{HERO_LEAKS_INTRO}</p>
+            <ul className="ch-hero-outcomes">
+              {HERO_LEAKS.map((l) => (
+                <li key={l.leak}>
+                  <strong>{l.leak}</strong> — <Link to={`/modules/${l.id}`}>{l.name} stops it</Link>
+                </li>
+              ))}
+            </ul>
+            <p className="ch-hero-sub"><strong>{HERO_LEAKS_CLOSE}</strong></p>
+            <p className="ch-hero-sub">
+              <Link to="/modules/all-in-one-dental-software">{HERO_ONE_LINE}</Link>
+            </p>
             {/* Owner-approved hero copy 2026-10-08. Words: src/data/positioning.js (HERO_MODULES),
                 mirrored in scripts/prerender.js. */}
             <p className="ch-hero-sub ch-hero-lead">
@@ -134,14 +145,6 @@ const Home = () => {
               ))}
               {' '}— or take <Link to="/modules/all-in-one-dental-software">Aumy One</Link>, one connected system that includes everything.
             </p>
-            <p className="ch-hero-outcomes-title">{HERO_OUTCOMES_HEADING}</p>
-            <ul className="ch-hero-outcomes">
-              {HERO_MODULES.map((m) => (
-                <li key={m.id}>
-                  <Link to={`/modules/${m.id}`}><strong>{m.name}</strong></Link> — {m.outcome}
-                </li>
-              ))}
-            </ul>
             <div className="ch-hero-cta">
               <a href="#how-it-works" className="ch-btn ch-btn-primary">
                 See How Aumy Works

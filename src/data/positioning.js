@@ -49,4 +49,20 @@ const HERO_MODULES = [
 ];
 const HERO_OUTCOMES_HEADING = 'What changes in your clinic:';
 
-module.exports = { HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
+// Home hero, loss framing (owner 2026-10-08: "Stop losing patients … lets sell loss"). Each leak links to the one module that stops it.
+const HERO_LEAKS_INTRO = 'Every dental clinic loses patients somewhere:';
+const HERO_LEAKS = [
+  { leak: 'Leads not followed up — and lost', id: 'dental-lead-management', name: 'Aumy Convert' },
+  { leak: 'Missed calls', id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice' },
+  { leak: 'Slow WhatsApp replies — patients book elsewhere', id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat' },
+  { leak: 'Last-minute cancellations', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
+  { leak: 'No-shows', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
+  { leak: 'Treatments left incomplete', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
+  { leak: 'Treatment advised — and never followed up', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
+];
+const HERO_LEAKS_CLOSE = 'Aumy stops every one of these leaks. Pick the one costing your clinic most and fix only that — buy only what you need.';
+
+// Owner 2026-10-08: the whole-system path, shown after the leaks.
+const HERO_ONE_LINE = 'Or automate and streamline your entire clinic operations with Aumy One.';
+
+module.exports = { HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };

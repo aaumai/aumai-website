@@ -616,13 +616,14 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI Dental Software · India</p>
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
-        <h1 class="ch-hero-title">Fix the one thing that's costing your dental clinic patients.</h1>
-        <p class="ch-hero-sub">Missed calls, slow WhatsApp replies, enquiries nobody followed up, no-shows, treatments never booked — pick the Aumy module that fixes yours. Buy only what you need.</p>
-        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, <a href="/modules/ai-voice-receptionist-for-dentists">Voice</a>, <a href="/modules/dental-lead-management">Convert</a>, <a href="/modules/dental-patient-follow-up">Journey</a> or <a href="/modules/dental-clinic-management-software">Clinic</a> — or take <a href="/modules/all-in-one-dental-software">Aumy One</a>, one connected system that includes everything.</p>
-        <p><strong>${esc(POS.HERO_OUTCOMES_HEADING)}</strong></p>
+        <h1 class="ch-hero-title">Stop losing patients.</h1>
+        <p><strong>${esc(POS.HERO_LEAKS_INTRO)}</strong></p>
         <ul>
-          ${POS.HERO_MODULES.map((m) => `<li><a href="/modules/${m.id}"><strong>${esc(m.name)}</strong></a> — ${esc(m.outcome)}</li>`).join('\n          ')}
+          ${POS.HERO_LEAKS.map((l) => `<li><strong>${esc(l.leak)}</strong> — <a href="/modules/${l.id}">${esc(l.name)} stops it</a></li>`).join('\n          ')}
         </ul>
+        <p class="ch-hero-sub"><strong>${esc(POS.HERO_LEAKS_CLOSE)}</strong></p>
+        <p class="ch-hero-sub"><a href="/modules/all-in-one-dental-software">${esc(POS.HERO_ONE_LINE)}</a></p>
+        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, <a href="/modules/ai-voice-receptionist-for-dentists">Voice</a>, <a href="/modules/dental-lead-management">Convert</a>, <a href="/modules/dental-patient-follow-up">Journey</a> or <a href="/modules/dental-clinic-management-software">Clinic</a> — or take <a href="/modules/all-in-one-dental-software">Aumy One</a>, one connected system that includes everything.</p>
         <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a> · <a href="/#be-the-patient">Try it live — WhatsApp or call our demo clinic</a></p>
         <p>no lock-in · we set everything up for you · limited implementation capacity · NVIDIA Inception member</p>
       </div></section>
