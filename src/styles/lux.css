@@ -682,3 +682,13 @@
 .site-lux .ch-dental-badge { border-radius: 0; font-weight: 500; font-size: 11.5px; letter-spacing: 0.22em; color: var(--lux-navy); }
 .site-lux .lux-hero .ch-dental-badge { color: var(--lux-gold-2); }
 .site-lux .lux-hero .ch-dental-line { color: rgba(255, 255, 255, 0.82); font-weight: 300; }
+
+/* Home hero outcomes on the dark lux hero (owner 2026-10-08). */
+.site-lux .ch-home .lux-hero .ch-hero-lead a:not(.ch-btn) { color: var(--lux-gold-2); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.25); }
+.site-lux .ch-home .lux-hero .ch-hero-lead a:not(.ch-btn):hover { border-bottom-color: var(--lux-gold-2); }
+.site-lux .lux-hero .ch-hero-outcomes-title { color: #fff; }
+.site-lux .lux-hero .ch-hero-outcomes li { color: rgba(255, 255, 255, 0.82); font-weight: 300; }
+.site-lux .lux-hero .ch-hero-outcomes li::before { background: var(--lux-gold-2); }
+.site-lux .ch-home .lux-hero .ch-hero-outcomes a:not(.ch-btn) { color: #fff; text-decoration: none; }
+.site-lux .ch-home .lux-hero .ch-hero-outcomes a:not(.ch-btn) strong { font-weight: 600; color: inherit; }
+.site-lux .ch-home .lux-hero .ch-hero-outcomes a:not(.ch-btn):hover { color: var(--lux-gold-2); }

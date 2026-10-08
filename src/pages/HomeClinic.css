@@ -464,3 +464,13 @@
 }
 .ch-dental-line { margin: 0; font-size: 16px; line-height: 1.6; color: var(--c-ink-soft); }
 .ch-dental-center { max-width: 620px; margin: -14px auto 0; text-align: center; }
+
+/* Home hero outcomes (owner 2026-10-08): lead line + "What changes in your clinic" list. */
+.ch-hero-lead { font-size: 17px; line-height: 1.6; margin-bottom: 18px; }
+.ch-hero-lead a { color: var(--c-accent-dark); font-weight: 600; }
+.ch-hero-outcomes-title { margin: 0 0 10px; font-size: 15px; font-weight: 700; color: var(--c-ink); }
+.ch-hero-outcomes { list-style: none; padding: 0; margin: 0 0 26px; max-width: 560px; display: grid; gap: 8px; }
+.ch-hero-outcomes li { position: relative; padding-left: 18px; font-size: 15px; line-height: 1.5; color: var(--c-ink-soft); }
+.ch-hero-outcomes li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 50%; background: var(--c-accent-dark); }
+.ch-hero-outcomes a { color: var(--c-ink); text-decoration: none; }
+.ch-hero-outcomes a:hover { color: var(--c-accent-dark); text-decoration: underline; }

@@ -616,11 +616,13 @@ const routes = [
         <p class="ch-eyebrow">AI Dental Software · India</p>
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
-        <p class="ch-hero-sub">Aumy manages your clinic operations — an <a href="/ai-receptionist">AI receptionist for dental clinics</a> that answers calls and WhatsApp 24/7, appointments, follow-ups, patient care, digital records — so your team can focus on patients, not coordination.</p>
-        <p><strong>${esc(POS.DENTISTS_ONLY)}</strong> ${esc(POS.TRAINED_FOR_DENTISTRY)}</p>
-        <p><strong>Never lose a patient to a missed call or a slow WhatsApp reply — ever.</strong></p>
-        <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
-        <p><strong>For dental clinics that are growing — and those ready to grow.</strong></p>
+        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/aumy-chat">Aumy Chat</a>, <a href="/modules/aumy-voice">Voice</a>, <a href="/modules/aumy-leads">Leads</a>, <a href="/modules/aumy-journey">Journey</a> or <a href="/modules/aumy-clinic">Clinic</a> — or take <a href="/modules/aumy-one">Aumy One</a>, one connected system that includes everything.</p>
+        <p><strong>${esc(POS.HERO_OUTCOMES_HEADING)}</strong></p>
+        <ul>
+          ${POS.HERO_MODULES.map((m) => `<li><a href="/modules/${m.id}"><strong>${esc(m.name)}</strong></a> — ${esc(m.outcome)}</li>`).join('\n          ')}
+        </ul>
+        <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a> · <a href="/#be-the-patient">Try it live — WhatsApp or call our demo clinic</a></p>
+        <p>no lock-in · we set everything up for you · limited implementation capacity · NVIDIA Inception member</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Dental clinics Aumy serves</p>

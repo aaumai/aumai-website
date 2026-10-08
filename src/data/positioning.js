@@ -37,4 +37,16 @@ const WHY_DENTAL_ONLY = {
 // Appended to the product / organisation descriptions (JSON-LD, llms.txt).
 const LD_SUFFIX = 'Handcrafted only for dentists and trained for dentistry: Aumy knows dental treatments, tooth numbers, recalls and how a dental clinic’s day runs.';
 
-module.exports = { DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
+// Home hero (owner-approved 2026-10-08): lead line + "What changes in your clinic" outcomes.
+// Read by src/pages/Home.js AND scripts/prerender.js — change here, both follow.
+const HERO_MODULES = [
+  { id: 'aumy-chat', name: 'Aumy Chat', outcome: 'every WhatsApp answered in seconds, day or night, and the appointment booked into your diary.' },
+  { id: 'aumy-voice', name: 'Aumy Voice', outcome: 'every call picked up, even when the desk is busy or the clinic is closed. No patient lost to a missed call.' },
+  { id: 'aumy-leads', name: 'Aumy Leads', outcome: 'Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.' },
+  { id: 'aumy-journey', name: 'Aumy Journey', outcome: 'fewer no-shows, missed visits rebooked, advised treatments followed up, recalls coming back on time.' },
+  { id: 'aumy-clinic', name: 'Aumy Clinic', outcome: 'appointments, records, charting, treatment plans and billing in one place; add Aumy Scribe: speak the note, the chart fills itself.' },
+  { id: 'aumy-one', name: 'Aumy One', outcome: 'all of it as one system: one patient record, nothing falling between tools.' },
+];
+const HERO_OUTCOMES_HEADING = 'What changes in your clinic:';
+
+module.exports = { HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
