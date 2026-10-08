@@ -63,6 +63,6 @@ const HERO_LEAKS = [
 const HERO_LEAKS_CLOSE = 'Aumy stops every one of these leaks. Pick the one costing your clinic most and fix only that — buy only what you need.';
 
 // Owner 2026-10-08: the whole-system path, shown after the leaks.
-const HERO_ONE_LINE = 'Or automate and streamline your entire clinic operations with Aumy One.';
+const HERO_ONE_LINE = 'Or automate your dental clinic operations end to end with Aumy One.';
 
 module.exports = { HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
