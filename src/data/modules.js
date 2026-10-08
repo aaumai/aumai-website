@@ -109,6 +109,7 @@ const MODULES = [
       'Books the appointment into a real free slot in your doctor’s calendar.',
       'Replies in English, Hindi or Marathi, and understands voice notes and photos patients send.',
       'Your team can take over any chat with one tap; the AI steps back while they talk.',
+      'All your clinic WhatsApp numbers in one place: one screen that looks just like WhatsApp, so the team never switches phones.',
       'Runs on the official WhatsApp Business API, on your clinic’s own number.',
     ],
     addons: ['Facebook & Instagram messages', 'Aumy Convert', 'Aumy Clinic'],

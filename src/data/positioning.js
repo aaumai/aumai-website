@@ -40,7 +40,7 @@ const LD_SUFFIX = 'Handcrafted only for dentists and trained for dentistry: Aumy
 // Home hero (owner-approved 2026-10-08): lead line + "What changes in your clinic" outcomes.
 // Read by src/pages/Home.js AND scripts/prerender.js — change here, both follow.
 const HERO_MODULES = [
-  { id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat', outcome: 'every WhatsApp answered in seconds, day or night, and the appointment booked into your diary.' },
+  { id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat', outcome: 'every WhatsApp answered in seconds, day or night, and the appointment booked into your diary — and all your clinic WhatsApp numbers in one screen that looks just like WhatsApp.' },
   { id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice', outcome: 'every call picked up, even when the desk is busy or the clinic is closed. No patient lost to a missed call.' },
   { id: 'dental-lead-management', name: 'Aumy Convert', outcome: 'Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.' },
   { id: 'dental-patient-follow-up', name: 'Aumy Journey', outcome: 'fewer no-shows, missed visits rebooked, advised treatments followed up, recalls coming back on time.' },
