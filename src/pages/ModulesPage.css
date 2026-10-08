@@ -131,3 +131,13 @@
 .site-lux .md-card { border-top-color: var(--lux-gold); }
 .site-lux .md-card:hover, .site-lux .md-card:focus-within { border-color: var(--lux-gold); border-top-color: var(--lux-gold); }
 .site-lux .md-chip { border-color: var(--lux-line); color: var(--lux-bronze); }
+
+/* Approved names (owner 2026-10-08): short name as the heading, formal name under it. */
+.md-formal { display: block; margin-top: 4px; font-family: inherit; font-size: 15px; font-weight: 600; letter-spacing: 0; line-height: 1.35; color: var(--c-ink-soft); }
+.site-lux .ch-home .md-title .md-formal { font-family: var(--lux-sans); font-size: 14.5px; color: var(--lux-body); }
+.md-scribe { margin: 0 0 18px; padding: 14px 16px; border: 1px solid var(--c-line); border-left: 3px solid var(--c-accent); background: var(--c-bg); }
+.md-scribe-title { font-size: 16px; margin: 0 0 6px; color: var(--c-ink); }
+.site-lux .ch-home .md-scribe-title .md-formal { font-family: var(--lux-sans); font-size: 13.5px; color: var(--lux-body); }
+.site-lux .md-scribe { border-left-color: var(--lux-gold); }
+.md-scribe p { margin: 0; font-size: 14.5px; color: var(--c-ink); }
+.site-lux .ch-home .md-connected .md-connected-title .md-formal { margin-top: 6px; font-family: inherit; font-size: clamp(20px, 2.4vw, 26px); font-weight: 300; color: var(--lux-gold-2); }

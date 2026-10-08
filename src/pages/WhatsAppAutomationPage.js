@@ -66,7 +66,7 @@ const WhatsAppAutomationPage = () => {
           </ul>
           <div className="ch-center" style={{ textAlign: 'center', marginTop: 22 }}>
             <Link to="/ai-receptionist" className="ch-btn ch-btn-ghost">Meet the AI receptionist that powers the replies</Link>{' '}
-            <Link to="/modules" className="ch-btn ch-btn-ghost">Buy it as a single module</Link>
+            <Link to="/modules" className="ch-btn ch-btn-ghost">Buy Aumy Chat on its own</Link>
           </div>
         </div>
       </section>

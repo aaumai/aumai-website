@@ -325,14 +325,14 @@ const routes = [
           '@type': 'ListItem',
           position: i + 1,
           url: `${ORIGIN}/modules#${m.id}`,
-          name: m.title,
+          name: `${m.short}: ${m.title}`,
           description: m.promise,
         })),
         {
           '@type': 'ListItem',
           position: MODS.MODULES.length + 1,
           url: `${ORIGIN}/modules#one-system`,
-          name: 'One connected system',
+          name: `${MODS.CONNECTED.short}: ${MODS.CONNECTED.title}`,
           description: MODS.CONNECTED.sub,
         },
       ],
@@ -361,21 +361,22 @@ const routes = [
         ${MODS.MODULES.map((m, i) => `
         <article id="${m.id}">
           <p>Module ${i + 1}</p>
-          <h2>${esc(m.title)}</h2>
+          <h2>${esc(m.short)}: ${esc(m.title)}</h2>
           <p><strong>${esc(m.promise)}</strong></p>
           <p>${esc(m.forWho)}</p>
           <ul>${m.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
-          <p>Add if you want: ${m.addons.map(esc).join(' · ')}</p>
+          ${m.scribe ? `<h3>${esc(m.scribe.short)}: ${esc(m.scribe.title)} (add-on)</h3><p>${esc(m.scribe.promise)}</p>` : ""}
+          <p>Add if you want: ${m.addons.map((a) => `+ ${esc(a)}`).join(" · ")}</p>
           <p><a href="/contact">Book a demo</a> · <a href="${m.more.path}">${esc(m.more.label)}</a></p>
         </article>`).join('')}
       </div></section>
       <section id="one-system"><div class="ch-container">
         <p>${esc(MODS.CONNECTED.eyebrow)}</p>
-        <h2>${esc(MODS.CONNECTED.title)}</h2>
+        <h2>${esc(MODS.CONNECTED.short)}: ${esc(MODS.CONNECTED.title)}</h2>
         <p>${esc(MODS.CONNECTED.sub)}</p>
         <ol>${MODS.CONNECTED.steps.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></li>`).join('')}</ol>
         ${MODS.CONNECTED.why.map(([t, b]) => `<h3>${esc(t)}</h3><p>${esc(b)}</p>`).join('')}
-        <p><a href="/contact">Book a demo of the full system</a></p>
+        <p><a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
       </div></section>
       <section><div class="ch-container">
         <h2>${esc(MODS.TABLE.title)}</h2>
@@ -407,7 +408,7 @@ const routes = [
         <h2>What the AI receptionist does</h2>${pairsHtml(AIR.CAPABILITIES)}
         <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
         ${faqHtml(AIR.FAQS, 'AI receptionist questions, answered')}
-        <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy it as a single module</a></p>
+        <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat or Aumy Voice on its own</a></p>
       </div></section>`,
   },
   {
@@ -425,7 +426,7 @@ const routes = [
         ${pairsHtml(WA.STAGES)}
         <h2>Not another broadcast tool</h2>${pairsHtml(WA.DIFFERENCE)}
         ${faqHtml(WA.FAQS, 'WhatsApp automation questions, answered')}
-        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy it as a single module</a></p>
+        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat on its own</a></p>
       </div></section>`,
   },
   {
@@ -581,7 +582,7 @@ const routes = [
         </ul>
         <h2>Everything knows what's happening</h2>
         <p>They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it, and knows when they last came in. They book → every nurture, check-in and care-gap follow-up they were in stops. They don't show → Aumy knows what happened and follows up to rebook. They say stop → every journey stops, instantly, on every channel. One patient. One journey. One connected system.</p>
-        <p>The patient journey is one half of Aumy. The other half is the clinic's day-to-day operations — calls, WhatsApp, bookings, intake, consent, invoices and tasks — run by the same system, with the same patient context. <a href="/ai-dental-clinic-operations">See AI-powered clinic operations</a>. Or <a href="/modules">pick only the modules you need</a>.</p>
+        <p>The patient journey is one half of Aumy. The other half is the clinic's day-to-day operations — calls, WhatsApp, bookings, intake, consent, invoices and tasks — run by the same system, with the same patient context. <a href="/ai-dental-clinic-operations">See AI-powered clinic operations</a>. Or <a href="/modules">buy Aumy Journey on its own</a>.</p>
         <h2>Patient journey questions, answered</h2>
         <p><strong>Isn't this just automated spam?</strong> No — every message is the one relevant to that patient at that moment, and the journey stops when they book, reply or opt out.</p>
         <p><strong>Does the doctor have to write the messages?</strong> The doctors define the after-care and the tone once, in their own words.</p>
@@ -640,7 +641,7 @@ const routes = [
           <li><strong><a href="/ai-patient-engagement">AI-powered patient journey &amp; engagement</a></strong> — reminders, pre-treatment instructions, treatment-specific after-care, doctor check-ins, care gaps, treatment-plan follow-ups and reactivation, each message in the context of that patient's treatment, and each journey ending the moment the patient books.</li>
         </ul>
         <h2>Need just one part? Buy only that module — or run all of it as one system.</h2>
-        <p>Lead Management &amp; Meta Optimisation, the Clinic OS (with or without AI Documentation), the Clinic OS with the end-to-end patient journey, an AI WhatsApp Receptionist or an AI Voice Receptionist — each sold on its own, or all five as one connected system. <a href="/modules">Compare the modules</a>.</p>
+        <p>Aumy Leads (lead management &amp; Meta ads), Aumy Clinic (the dental clinic operating system, with Aumy Scribe for AI notes if you want it), Aumy Journey (patient follow-ups), Aumy Chat (AI WhatsApp receptionist) or Aumy Voice (AI voice receptionist) — each sold on its own. Or Aumy One: all of it as one connected system. <a href="/modules">Compare the modules</a>.</p>
         <h2>Everything is connected. Think of Aumy as Jarvis for your dental clinic.</h2>
         <p>Not because it's a chatbot. Because everything knows what's happening. A patient calls → Aumy knows who they are. They need an appointment → Aumy knows the doctor's availability. They don't show → Aumy knows what happened. They need a follow-up → Aumy creates and manages it. They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it. The clinic gets a call → the voice agent has the context.</p>
         <p>Your calls know your appointments. Your appointments know your patients. Your patients know their treatment. Your follow-ups know what happened. And Aumy knows all of it. One patient. One journey. One connected system.</p>

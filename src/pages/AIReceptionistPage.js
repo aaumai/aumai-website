@@ -63,7 +63,7 @@ const AIReceptionistPage = () => {
           <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>{STAGE.body}</p>
           <div style={{ marginTop: 16 }}>
             <Link to="/whatsapp-automation-for-clinics" className="ch-btn ch-btn-ghost">See the WhatsApp automation behind it</Link>{' '}
-            <Link to="/modules" className="ch-btn ch-btn-ghost">Buy it as a single module</Link>
+            <Link to="/modules" className="ch-btn ch-btn-ghost">Buy Aumy Chat or Aumy Voice on its own</Link>
           </div>
         </div>
       </section>

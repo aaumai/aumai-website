@@ -27,7 +27,8 @@ const MATHS = {
 const CAPABILITIES = [
   ['Answers every WhatsApp enquiry in seconds', 'Treatment questions, timings, pricing, directions — answered instantly in the patient’s own language, any hour of the day.'],
   ['Books appointments end-to-end', 'Checks real availability, offers slots, confirms the booking and sends the reminder — no human in the loop unless you want one.'],
-  ['Recovers missed calls', 'A call your front desk couldn’t pick up gets an instant WhatsApp follow-up, so the patient books with you instead of the next clinic on Google.'],
+  // Owner 2026-10-08: the old "missed call → instant WhatsApp follow-up" claim is not in the product; removed.
+  ['Answers the phone too', 'The AI voice receptionist answers calls when the desk is busy or closed, books or moves the appointment against the doctor’s real availability, and passes the call to your team when a person is needed.'],
   ['Knows your clinic, not a script', 'Trained on your treatments, your doctors, your pricing and your policies — configured in your own words during onboarding.'],
   ['Follows up until patients decide', 'Enquiries that go quiet get polite, well-timed nudges. Treatment plans get chased. Nothing falls through the cracks.'],
   ['Hands over to humans instantly', 'Your staff can take over any conversation with one tap; the AI steps back the moment a human joins and stays back while they chat.'],

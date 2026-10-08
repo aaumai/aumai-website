@@ -61,7 +61,7 @@ const ModulesPage = () => {
               {MODULES.map((m) => (
                 <li key={m.id}><a href={`#${m.id}`}>{m.short}</a></li>
               ))}
-              <li><a href="#one-system" className="md-jump-all">All of it, connected</a></li>
+              <li><a href="#one-system" className="md-jump-all">{CONNECTED.short}</a></li>
             </ul>
           </nav>
         </div>
@@ -75,7 +75,11 @@ const ModulesPage = () => {
                 <span className="md-icon"><Icon name={m.icon} /></span>
                 <span className="md-kicker">Module {i + 1}</span>
               </div>
-              <h2 id={`${m.id}-title`} className="md-title">{m.title}</h2>
+              {/* Short name as the heading; the formal name carries the search keywords. */}
+              <h2 id={`${m.id}-title`} className="md-title">
+                {m.short}
+                <span className="md-formal">{m.title}</span>
+              </h2>
               <p className="md-promise">{m.promise}</p>
               <p className="md-for">{m.forWho}</p>
               <ul className="md-does">
@@ -83,6 +87,14 @@ const ModulesPage = () => {
                   <li key={d}><Check /><span>{d}</span></li>
                 ))}
               </ul>
+              {m.scribe && (
+                <div className="md-scribe">
+                  <h3 className="md-scribe-title">
+                    + {m.scribe.short}<span className="md-formal">{m.scribe.title}</span>
+                  </h3>
+                  <p>{m.scribe.promise}</p>
+                </div>
+              )}
               <div className="md-addons">
                 <span className="md-addons-label">Add if you want</span>
                 <ul>
@@ -92,7 +104,7 @@ const ModulesPage = () => {
               <div className="md-card-foot">
                 <div className="md-cta">
                   <Link to="/contact" className="ch-btn ch-btn-primary">Book a demo</Link>
-                  <a href={waLink(m.title)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">
+                  <a href={waLink(m.short)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">
                     WhatsApp us
                   </a>
                 </div>
@@ -109,7 +121,7 @@ const ModulesPage = () => {
             <div className="md-connected-head">
               <span className="md-icon md-icon-light"><Icon name="all" /></span>
               <span className="md-connected-eyebrow">{CONNECTED.eyebrow}</span>
-              <h2 id="one-system-title" className="md-connected-title">{CONNECTED.title}</h2>
+              <h2 id="one-system-title" className="md-connected-title">{CONNECTED.short}<span className="md-formal">{CONNECTED.title}</span></h2>
               <p className="md-connected-sub">{CONNECTED.sub}</p>
             </div>
             <ol className="md-strip">
@@ -129,8 +141,8 @@ const ModulesPage = () => {
               ))}
             </div>
             <div className="md-connected-cta">
-              <Link to="/contact" className="ch-btn ch-btn-primary">Book a demo of the full system</Link>
-              <a href={waLink('full connected system')} className="ch-btn ch-btn-ghost ch-ghost-light" target="_blank" rel="noopener noreferrer">
+              <Link to="/contact" className="ch-btn ch-btn-primary">Book a demo of {CONNECTED.short}</Link>
+              <a href={waLink(CONNECTED.short)} className="ch-btn ch-btn-ghost ch-ghost-light" target="_blank" rel="noopener noreferrer">
                 WhatsApp us
               </a>
             </div>

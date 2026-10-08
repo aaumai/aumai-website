@@ -403,9 +403,10 @@ const Home = () => {
             <span className="ch-eyebrow">Buy one module, or all of it</span>
             <h2 className="ch-h2 ch-center">Need just one part? Buy only that module — or run all of it as one system.</h2>
             <p className="ch-lead ch-center-lead">
-              Lead Management &amp; Meta Optimisation, the Clinic OS (with or without AI Documentation), the
-              Clinic OS with the end-to-end patient journey, an AI WhatsApp Receptionist or an AI Voice
-              Receptionist — each sold on its own, or all five as one connected system.
+              Aumy Leads (lead management &amp; Meta ads), Aumy Clinic (the dental clinic operating system,
+              with Aumy Scribe for AI notes if you want it), Aumy Journey (patient follow-ups), Aumy Chat (AI
+              WhatsApp receptionist) or Aumy Voice (AI voice receptionist) — each sold on its own. Or Aumy
+              One: all of it as one connected system.
             </p>
             <Link to="/modules" className="ch-btn ch-btn-primary">Compare the modules</Link>
           </div>

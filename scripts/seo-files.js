@@ -151,7 +151,7 @@ ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
 - ${ORIGIN}/pricing — Aumy pricing: the Clinic OS starts from ${PRICING.MONTHLY_FROM.toLocaleString("en-IN")} INR a month, plus a one-time setup and data migration fee; the AI receptionist, AI calls and follow-ups are priced with each clinic
-- ${ORIGIN}/modules — Aumy sold module by module or as one connected system: Lead Management & Meta Optimisation, Clinic OS with or without AI Documentation, Clinic OS with the end-to-end patient journey, AI WhatsApp Receptionist, AI Voice Receptionist
+- ${ORIGIN}/modules — Aumy sold module by module or as one connected system: Aumy Leads (lead management & Meta ads optimisation), Aumy Clinic (dental clinic operating system) with the Aumy Scribe add-on (AI clinical documentation), Aumy Journey (clinic OS with the end-to-end patient journey), Aumy Chat (AI WhatsApp receptionist), Aumy Voice (AI voice receptionist), and Aumy One (the connected dental clinic system)
 - ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
 - ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
