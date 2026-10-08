@@ -118,8 +118,10 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">AI Dental Software · India</span>
             <h1 className="ch-hero-title">
-              Growing your clinic <span className="ch-hero-accent">shouldn&rsquo;t mean growing your headache.</span>
+              Fix the one thing that&rsquo;s <span className="ch-hero-accent">costing your dental clinic patients.</span>
             </h1>
+            {/* Owner 2026-10-08: positioning = buy only the module you need. */}
+            <p className="ch-hero-sub">Missed calls, slow WhatsApp replies, enquiries nobody followed up, no-shows, treatments never booked — pick the Aumy module that fixes yours. Buy only what you need.</p>
             {/* Owner-approved hero copy 2026-10-08. Words: src/data/positioning.js (HERO_MODULES),
                 mirrored in scripts/prerender.js. */}
             <p className="ch-hero-sub ch-hero-lead">

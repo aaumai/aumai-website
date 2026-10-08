@@ -616,7 +616,8 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI Dental Software · India</p>
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
-        <h1 class="ch-hero-title">Growing your clinic shouldn't mean growing your headache.</h1>
+        <h1 class="ch-hero-title">Fix the one thing that's costing your dental clinic patients.</h1>
+        <p class="ch-hero-sub">Missed calls, slow WhatsApp replies, enquiries nobody followed up, no-shows, treatments never booked — pick the Aumy module that fixes yours. Buy only what you need.</p>
         <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, <a href="/modules/ai-voice-receptionist-for-dentists">Voice</a>, <a href="/modules/dental-lead-management">Convert</a>, <a href="/modules/dental-patient-follow-up">Journey</a> or <a href="/modules/dental-clinic-management-software">Clinic</a> — or take <a href="/modules/all-in-one-dental-software">Aumy One</a>, one connected system that includes everything.</p>
         <p><strong>${esc(POS.HERO_OUTCOMES_HEADING)}</strong></p>
         <ul>
