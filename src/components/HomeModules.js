@@ -22,7 +22,7 @@ const HomeModules = () => {
           <h2 id="home-modules-title" className="ch-h2">{HOME.title}</h2>
           <p className="ch-sub">{HOME.sub}</p>
         </div>
-        <ul className="mh-grid">
+        <ul className="mh-grid mh-grid-5">
           {mods.map((m) => (
             <li key={m.id}>
               <Link to={`/modules/${m.id}`} className="mh-card">
