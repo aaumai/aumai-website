@@ -610,7 +610,7 @@ const routes = [
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
-        <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello.</p>
+        <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello. Or call +91 22 6423 0581 and wait a couple of rings — Aumy Voice will pick up (demo clinic: Lumière Dental).</p>
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI Dental Software · India</p>
