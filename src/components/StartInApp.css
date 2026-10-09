@@ -1,0 +1,68 @@
+/* ── Start free in the app (owner 2026-10-09) ─────────────────────────────
+   Store action on the four self-serve module cards and module pages, and the
+   "1,000 Aumy credits" bar at the top of every page. Reads the .ch-home tokens
+   (HomeClinic.css, re-mapped by lux.css); badges come from AppDownload.css. */
+
+.sia { display: flex; flex-direction: column; gap: 4px; }
+.sia-line {
+  margin: 0; font-size: 17px; font-weight: 800; line-height: 1.3; letter-spacing: -0.01em;
+  color: var(--c-ink, #16324f);
+}
+.sia-fine { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--c-ink-soft, #55636e); }
+.sia-badges { margin-top: 10px; gap: 10px; }
+.sia .app-badge { height: 50px; min-width: 0; padding: 0 16px 0 12px; border-color: transparent; }
+.sia .app-badge:hover { box-shadow: 0 8px 18px rgba(11, 18, 32, 0.22); border-color: transparent; }
+.sia .app-badge:focus-visible { outline: 3px solid var(--c-accent, #2a9d8f); outline-offset: 2px; }
+.sia .app-badge-big { font-size: 17px; }
+@media (prefers-reduced-motion: reduce) { .sia .app-badge, .sia .app-badge:hover { transition: none; transform: none; } }
+
+/* /modules card: the store action is the card's primary action — a tinted panel. */
+.sia-card {
+  margin-bottom: 12px; padding: 16px;
+  background: var(--c-accent-tint, #edf6f4); border: 1px solid var(--c-line, #ece9e3); border-radius: 14px;
+}
+
+/* /modules/<id> hero */
+.sia-hero { margin: 4px 0 18px; }
+.sia-hero .sia-line { font-size: clamp(19px, 2.2vw, 22px); }
+
+/* Home module cards: compact — glyph + store name only. */
+.sia-compact { position: relative; z-index: 1; margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--c-line, #ece9e3); }
+/* Only the badges take taps; the rest of the strip lets them through to the card link. */
+.mh-card .sia-compact { pointer-events: none; }
+.mh-card .sia-compact .app-badge { pointer-events: auto; }
+.mh-card .sia-compact + .mh-go { margin-top: 0; }
+.sia-compact .sia-line { font-size: 14.5px; font-weight: 700; }
+.sia-compact .sia-badges { margin-top: 6px; gap: 8px; }
+.sia-compact .app-badge { height: 40px; padding: 0 12px 0 10px; gap: 8px; border-radius: 10px; }
+.sia-compact .app-badge-small { display: none; }
+.sia-compact .app-badge-big { font-size: 15px; }
+
+/* Quiet-luxury theme: square panels, sans line in navy. */
+.site-lux .sia-card { border-radius: 0; }
+.site-lux .ch-home .sia-line { font-family: var(--lux-sans); font-weight: 600; color: var(--lux-navy); }
+
+/* ── Top bar: "1,000 Aumy credits to try each product" ─────────────────── */
+.credits-bar {
+  position: relative; z-index: 2;
+  background: #16324f; color: #fff;
+  font-size: 14px; line-height: 1.4; text-align: center;
+  padding: 8px 0;
+}
+.credits-bar-text { margin: 0; }
+.credits-bar strong { font-weight: 700; color: #fff; }
+.credits-bar-sub { color: rgba(255, 255, 255, 0.82); }
+.credits-bar-link { color: #7fd6c9; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+a.credits-bar-link:hover, a.credits-bar-link:focus-visible { color: #fff; }
+.credits-bar-whole { display: block; color: #fff; text-decoration: none; }
+.credits-bar-whole:hover, .credits-bar-whole:focus-visible { color: #fff; }
+.credits-bar-whole:hover .credits-bar-link { color: #fff; }
+.credits-bar a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (max-width: 560px) {
+  .credits-bar { font-size: 13px; padding: 7px 0; }
+}
+.site-lux .credits-bar { background: var(--lux-navy); letter-spacing: 0.02em; }
+.site-lux .credits-bar strong { font-weight: 600; }
+.site-lux .credits-bar-link { color: var(--lux-gold-2); }
+/* lux.css recolours every .ch-home link (.ch-home a:not(.ch-btn)); the badges keep white text. */
+.site-lux .ch-home .sia a.app-badge:not(.ch-btn) { color: #fff; text-decoration: none; }

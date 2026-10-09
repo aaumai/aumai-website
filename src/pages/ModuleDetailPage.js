@@ -5,6 +5,8 @@ import { INDIA_WHATSAPP } from '../config/contact';
 import { PAGES, CONNECTED, pageById, OLD_SLUGS } from '../data/modules';
 import { MODULES_LINE } from '../data/positioning';
 import ModuleIcon from '../components/ModuleIcon';
+import StartInApp from '../components/StartInApp';
+import { isSelfServe } from '../data/appStores';
 import './HomeClinic.css';
 import './ModulesPage.css';
 
@@ -42,6 +44,7 @@ const ModuleDetailPage = () => {
 
   const pairs = page.pairs.map(pageById).filter(Boolean);
   const isOne = !!page.featured;
+  const selfServe = isSelfServe(page.id);
 
   return (
     <div className="ch-home">
@@ -63,8 +66,10 @@ const ModuleDetailPage = () => {
           <p className="mp-sub">{page.sub}</p>
           <p className="ch-hero-sub mp-intro">{page.intro}</p>
           <p className="ch-dental-line">{MODULES_LINE}</p>
+          {/* Owner 2026-10-09: self-serve modules start in the app; Book a demo is secondary. */}
+          {selfServe && <StartInApp moduleName={page.short} variant="hero" />}
           <div className="ch-hero-cta">
-            <Link to="/contact" className="ch-btn ch-btn-primary">Book a demo</Link>
+            <Link to="/contact" className={`ch-btn ${selfServe ? 'ch-btn-ghost' : 'ch-btn-primary'}`}>Book a demo</Link>
             <a href={waLink(page.short)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
           </div>
         </div>

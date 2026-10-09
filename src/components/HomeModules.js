@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ModuleIcon from './ModuleIcon';
+import StartInApp from './StartInApp';
 import { HOME, PAGES } from '../data/modules';
+import { isSelfServe } from '../data/appStores';
 import '../pages/ModulesPage.css';
 
 /**
@@ -25,16 +27,20 @@ const HomeModules = () => {
         <ul className="mh-grid mh-grid-5">
           {mods.map((m) => (
             <li key={m.id}>
-              <Link to={`/modules/${m.id}`} className="mh-card">
+              {/* The whole card still opens /modules/<id> (the name's link stretches over
+                  it), so the store badges can sit inside the card as their own links. */}
+              <div className="mh-card mh-card-stretch">
                 <span className="md-icon"><ModuleIcon name={m.icon} /></span>
-                <span className="mh-name">{m.short}</span>
+                <Link to={`/modules/${m.id}`} className="mh-name mh-stretch">{m.short}</Link>
                 <span className="mh-formal">{m.title}</span>
                 <span className="mh-line">{m.card}</span>
                 {m.id === 'dental-clinic-management-software' && scribe && (
                   <span className="md-chip mh-chip">+ {scribe.short} add-on</span>
                 )}
+                {/* Owner 2026-10-09: self-serve modules start in the app. */}
+                {isSelfServe(m.id) && <StartInApp moduleName={m.short} variant="compact" />}
                 <span className="mh-go" aria-hidden="true">See what it does &rarr;</span>
-              </Link>
+              </div>
             </li>
           ))}
           <li className="mh-one-item">

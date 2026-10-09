@@ -6,7 +6,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* room for the onboarding notice inside the fixed header (set by Header.js) */
+  /* room for the "1,000 Aumy credits" bar inside the fixed header (CreditsBar in StartInApp.js sets it) */
   padding-top: var(--notice-h, 0px);
 }
 

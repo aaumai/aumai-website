@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { CreditsBar } from './StartInApp';
 import './Header.css';
 
 const Header = () => {
@@ -55,6 +56,9 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      {/* Owner 2026-10-09: "1,000 Aumy credits to try each product" right at the top,
+          linking to this phone's app store. Mirrored in scripts/prerender.js. */}
+      <CreditsBar />
       <div className="container">
         <div className="header-content">
           <div className="logo">

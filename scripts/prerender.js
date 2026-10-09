@@ -48,8 +48,19 @@ const faqPageLd = (faqs) => ({
 });
 // Crawler HTML for the FAQ block and a [title, body] list.
 const faqHtml = (faqs, heading) => `<h2>${esc(heading)}</h2>${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
+// The Aumy app in the stores + the self-serve modules (owner 2026-10-09): same file
+// src/components/StartInApp.js reads. The React app shows only this phone's store;
+// the crawler / no-JS HTML always lists both.
+const STORES = require('../src/data/appStores');
+const storeLinksHtml = (name) =>
+  `<a href="${STORES.APP_STORE_URL}" aria-label="Start ${esc(name)} free: download Aumy on the App Store">Download on the App Store</a> · ` +
+  `<a href="${STORES.PLAY_STORE_URL}" aria-label="Start ${esc(name)} free: get Aumy on Google Play">Get it on Google Play</a>`;
+const startInAppHtml = (name) => `<p><strong>${esc(STORES.START_LINE)}</strong>. ${esc(STORES.START_FINE)}. ${storeLinksHtml(name)}</p>`;
+// Slim bar at the top of every India page (React: CreditsBar in the header).
+const creditsBarHtml = () => `<div class="credits-bar"><div class="container"><p class="credits-bar-text"><strong>${esc(STORES.TOP_LINE)}</strong> — ${esc(STORES.TOP_SUB)}: <a class="credits-bar-link" href="${STORES.APP_STORE_URL}">App Store</a> · <a class="credits-bar-link" href="${STORES.PLAY_STORE_URL}">Google Play</a></p></div></div>`;
 // Module cards as links to /modules/<id> (home section + "works even better with").
-const moduleCardsHtml = (pages) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}</li>`).join('\n          ');
+// `stores`: the home cards also carry the app-store links for the self-serve modules.
+const moduleCardsHtml = (pages, { stores = false } = {}) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}${stores && STORES.isSelfServe(p.id) ? ` ${esc(STORES.START_LINE)}: ${storeLinksHtml(p.short)}` : ''}</li>`).join('\n          ');
 const pairsHtml = (pairs) => `<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('')}</ul>`;
 
 const BUILD = path.join(__dirname, '..', 'build');
@@ -147,9 +158,11 @@ function apply(html, r) {
   }
   // The site-wide onboarding-pause banner was removed (owner 2026-09-26),
   // here as in Header.js; pricing and contact keep their own notice.
+  // The "1,000 Aumy credits" bar (owner 2026-10-09) tops every India page, as in Header.js.
+  const bar = MARKET === 'us' || r.refresh ? '' : creditsBarHtml();
   out = out.replace(
     '<div id="root"></div>',
-    `<div id="root"><div class="ch-home">${r.content}</div></div>`
+    `<div id="root"><div class="ch-home">${bar}${r.content}</div></div>`
   );
   return out;
 }
@@ -373,6 +386,7 @@ const routes = [
           <ul>${m.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
           ${m.scribe ? `<h3>${esc(m.scribe.short)}: ${esc(m.scribe.title)} (add-on)</h3><p>${esc(m.scribe.promise)}</p>` : ""}
           <p>Add if you want: ${m.addons.map((a) => `+ ${esc(a)}`).join(" · ")}</p>
+          ${STORES.isSelfServe(m.id) ? startInAppHtml(m.short) : ''}
           <p><a href="/modules/${m.id}">Everything about ${esc(m.short)}</a>${m.scribe ? ` · <a href="/modules/ai-clinical-notes-for-dentists">Everything about ${esc(m.scribe.short)}</a>` : ''} · <a href="/contact">Book a demo</a> · <a href="${m.more.path}">${esc(m.more.label)}</a></p>
         </article>`).join('')}
       </div></section>
@@ -637,7 +651,7 @@ const routes = [
         <h2>${esc(MODS.HOME.title)}</h2>
         <p>${esc(MODS.HOME.sub)}</p>
         <ul>
-          ${moduleCardsHtml(MODS.PAGES)}
+          ${moduleCardsHtml(MODS.PAGES, { stores: true })}
         </ul>
         <p><a href="/modules">Compare all the modules side by side</a></p>
       </div></section>
@@ -1082,6 +1096,7 @@ for (const p of MODS.PAGES) {
         <p><strong>${esc(p.sub)}</strong></p>
         <p class="ch-hero-sub">${esc(p.intro)}</p>
         <p>${esc(POS.MODULES_LINE)}</p>
+        ${STORES.isSelfServe(p.id) ? startInAppHtml(p.short) : ''}
         <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
