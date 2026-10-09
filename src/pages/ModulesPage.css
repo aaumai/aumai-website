@@ -21,7 +21,7 @@
 .md-card {
   display: flex; flex-direction: column; background: var(--c-surface); border: 1px solid var(--c-line);
   border-top: 4px solid var(--c-accent); border-radius: var(--radius); box-shadow: var(--c-shadow);
-  padding: 26px 26px 22px; scroll-margin-top: 110px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  padding: 26px 26px 22px; scroll-margin-top: calc(110px + var(--notice-h, 0px)); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .md-card:hover, .md-card:focus-within { transform: translateY(-3px); box-shadow: var(--c-shadow-lg); border-color: rgba(42, 157, 143, 0.45); border-top-color: var(--c-accent); }
 @media (prefers-reduced-motion: reduce) { .md-card, .md-card:hover { transition: none; transform: none; } }
@@ -51,7 +51,7 @@
 .md-more { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--c-accent-dark); }
 
 /* Featured "one connected system" band */
-.md-connected-section { padding: 8px 0 72px; scroll-margin-top: 90px; }
+.md-connected-section { padding: 8px 0 72px; scroll-margin-top: calc(90px + var(--notice-h, 0px)); }
 .md-connected {
   position: relative; border-radius: 26px; padding: 44px 40px; color: #fff; overflow: hidden;
   background: linear-gradient(135deg, #16324f 0%, #1d4463 55%, #1f6f6a 100%);
@@ -223,3 +223,13 @@
 .mp-eyebrow { display: block; margin: 0 0 10px; }
 .mp-sub { margin: -8px 0 18px; font-size: clamp(19px, 2.4vw, 24px); font-weight: 600; line-height: 1.35; color: var(--c-ink-soft); max-width: 680px; }
 .site-lux .ch-home .mp-sub { font-family: var(--lux-sans); color: var(--lux-body); }
+/* Home module cards carry store badges (owner 2026-10-09), so the card is a <div>:
+   the module name's link stretches over the whole card and the badges sit above it. */
+.mh-stretch { color: inherit; text-decoration: none; }
+.mh-stretch::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
+.mh-stretch:hover, .mh-stretch:focus-visible { color: inherit; }
+.mh-stretch:focus-visible { outline: none; }
+.mh-stretch:focus-visible::after { outline: 3px solid var(--c-accent); outline-offset: 3px; }
+.site-lux .mh-stretch:focus-visible::after { outline-color: var(--lux-gold); }
+/* lux.css recolours every .ch-home link; the module name keeps the card-title colour. */
+.site-lux .ch-home .mh-card a.mh-stretch:not(.ch-btn) { color: var(--c-ink); text-decoration: none; }

@@ -5,6 +5,8 @@ import { INDIA_WHATSAPP } from '../config/contact';
 import { TITLE, DESCRIPTION, HERO, MODULES, CONNECTED, TABLE, FAQS } from '../data/modules';
 import { MODULES_LINE } from '../data/positioning';
 import ModuleIcon from '../components/ModuleIcon';
+import StartInApp from '../components/StartInApp';
+import { isSelfServe } from '../data/appStores';
 import './HomeClinic.css';
 import './ModulesPage.css';
 
@@ -93,8 +95,11 @@ const ModulesPage = () => {
                 </ul>
               </div>
               <div className="md-card-foot">
+                {/* Owner 2026-10-09: the four self-serve modules start in the app (primary);
+                    Book a demo drops to a secondary button. Journey is set up with our team. */}
+                {isSelfServe(m.id) && <StartInApp moduleName={m.short} variant="card" />}
                 <div className="md-cta">
-                  <Link to="/contact" className="ch-btn ch-btn-primary">Book a demo</Link>
+                  <Link to="/contact" className={`ch-btn ${isSelfServe(m.id) ? 'ch-btn-ghost' : 'ch-btn-primary'}`}>Book a demo</Link>
                   <a href={waLink(m.short)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">
                     WhatsApp us
                   </a>

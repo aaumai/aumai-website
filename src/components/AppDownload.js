@@ -1,4 +1,6 @@
 import React from 'react';
+// Store links live in src/data/appStores.js so the crawler HTML (scripts/prerender.js) uses the same ones.
+import { APP_STORE_URL, PLAY_STORE_URL } from '../data/appStores';
 import './AppDownload.css';
 
 /**
@@ -10,8 +12,7 @@ import './AppDownload.css';
  * The badges are drawn inline (no third-party assets) so they load with the
  * page and match the site's palette.
  */
-export const APP_STORE_URL = 'https://apps.apple.com/in/app/aumy/id6780580041';
-export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=co.aumai.ehr';
+export { APP_STORE_URL, PLAY_STORE_URL };
 
 const AppleGlyph = () => (
   <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor">
@@ -28,7 +29,8 @@ const PlayGlyph = () => (
   </svg>
 );
 
-export const StoreBadge = ({ store }) => {
+// `label` overrides the screen-reader name (e.g. which module the tap starts).
+export const StoreBadge = ({ store, label }) => {
   const apple = store === 'ios';
   return (
     <a
@@ -36,7 +38,7 @@ export const StoreBadge = ({ store }) => {
       target="_blank"
       rel="noopener noreferrer"
       className="app-badge"
-      aria-label={apple ? 'Download Aumy on the App Store' : 'Get Aumy on Google Play'}
+      aria-label={label || (apple ? 'Download Aumy on the App Store' : 'Get Aumy on Google Play')}
     >
       <span className="app-badge-icon">{apple ? <AppleGlyph /> : <PlayGlyph />}</span>
       <span className="app-badge-text">
