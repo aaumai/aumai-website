@@ -8,8 +8,8 @@ import './StartInApp.css';
  * the Aumy app and get 1,000 Aumy credits per product, for the four
  * self-serve modules in src/data/appStores.js.
  *
- * Device-aware: an Android phone sees Google Play, an iPhone / iPad sees the
- * App Store, a desktop (or anything we can't tell) sees both. Detection runs
+ * Module cards show BOTH stores on every device, the visitor's own store first
+ * (owner 2026-10-09). The top credits bar stays one tap target on a phone. Detection runs
  * in the browser only — the app mounts with createRoot, and the crawler HTML
  * from scripts/prerender.js always lists both stores.
  */
@@ -41,7 +41,8 @@ const badgeLabel = (store, moduleName) =>
  */
 const StartInApp = ({ moduleName, variant = 'card' }) => {
   const store = useStore();
-  const stores = store === 'both' ? ['ios', 'android'] : [store];
+  // Both stores on every device (owner 2026-10-09: a phone showed only the App Store) — the visitor's own store first.
+  const stores = store === 'android' ? ['android', 'ios'] : ['ios', 'android'];
   return (
     <div className={`sia sia-${variant}`}>
       <p className="sia-line">{START_LINE}</p>
