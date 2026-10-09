@@ -242,7 +242,7 @@ const AumyRevenueGenerator = () => {
           <h2 className="ch-h2">Your ads learn from what happens next.</h2>
           <p className="ch-lead">
             Your Meta ads run through our marketing partners, and because the same platform handles the enquiry, the booking and the
-            visit, it knows which leads became patients — and your campaigns learn from that. Meta
+            visit, you see which ads brought real patients. Meta learns only which enquiries were serious, so your ads find more people like them. Meta
             &amp; Google only ever see anonymous lead signals: treatment and health details never leave
             the clinic.
           </p>

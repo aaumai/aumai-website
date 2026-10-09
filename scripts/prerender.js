@@ -623,7 +623,7 @@ const routes = [
         </ul>
         <p class="ch-hero-sub"><strong>${esc(POS.HERO_LEAKS_CLOSE)}</strong></p>
         <p class="ch-hero-sub"><a href="/modules/automate-dental-clinic-operations">${esc(POS.HERO_ONE_LINE)}</a></p>
-        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, <a href="/modules/ai-voice-receptionist-for-dentists">Voice</a>, <a href="/modules/dental-lead-management">Convert</a>, <a href="/modules/dental-patient-follow-up">Journey</a> or <a href="/modules/dental-clinic-management-software">Clinic</a> — or take <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, one connected system that includes everything.</p>
+        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, <a href="/modules/ai-voice-receptionist-for-dentists">Voice</a>, <a href="/modules/dental-lead-management">Convert</a>, <a href="/modules/dental-patient-follow-up">Journey</a> or <a href="/modules/dental-clinic-management-software">Clinic</a> — or take <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, one system that includes everything, customised to your clinic’s needs.</p>
         <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a> · <a href="/#be-the-patient">Try it live — WhatsApp or call our demo clinic</a></p>
         <p>no lock-in · we set everything up for you · limited implementation capacity · NVIDIA Inception member</p>
       </div></section>

@@ -264,7 +264,7 @@ const HomeUS = () => {
           <h2 className="ch-h2">Keep your marketing team. Your ads learn from what happens next.</h2>
           <p className="ch-lead ch-center-lead">
             We don’t run your ads and we don’t replace your agency. Because Aumy also handles the
-            enquiry, the booking and the visit, it knows which leads became patients — so campaigns can
+            enquiry, the booking and the visit, you see which ads brought real patients — so campaigns can
             be judged by booked patients instead of form fills. Ad platforms receive only minimal,
             compliant lead signals — never treatment or health details.
           </p>
