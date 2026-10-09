@@ -7,8 +7,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  // The site-wide onboarding-pause banner was removed (owner 2026-09-26); the
-  // pricing and contact pages keep their own notice (config/onboardingNotice).
+  // The onboarding pause is over (owner 2026-10-09): no banner, and the pricing and contact notices are gone too.
 
   useEffect(() => {
     const handleScroll = () => {

@@ -323,7 +323,6 @@ const routes = [
         <p>${esc(PRICE.ADDONS)}</p>
         <p><a href="/contact">Talk to us about your clinic</a>. ${esc(PRICE.GST)}</p>
         <p>Want only one part of Aumy? <a href="/modules">See the modules you can buy on their own</a>.</p>
-        <p>We&rsquo;re not onboarding new clinics until 15 October 2026. You can still talk to us or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
         ${faqHtml(PRICE.FAQS, 'Questions clinics ask')}
       </div></section>`,
   },
@@ -913,7 +912,6 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Get in touch.</h1>
         <p class="ch-hero-sub">Tell us what you need — a growth strategy call for your clinic, or a build partner for your product. We reply within 24 hours.</p>
-        <p><strong>Clinics:</strong> We&rsquo;re not onboarding new clinics until 15 October 2026. You can still talk to us or send us your details &mdash; we&rsquo;ll add you to the waitlist and reach out when onboarding reopens.</p>
         <p><strong>India:</strong> AUM AI Healthcare Solutions &middot; Pune, Maharashtra, India &middot; jayesh.chaudhari@aumai.co.in &middot; +91 800 718 9868</p>
         <p><strong>United States:</strong> AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
       </div></section>`,

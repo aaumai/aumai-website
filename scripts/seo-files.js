@@ -136,7 +136,7 @@ Last updated: 2026-10-06
 ## Key facts
 - Setup and data migration are done for you; a named Aumy contact supports the clinic after go-live.
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
-- Onboarding of new clinics is paused until 15 October 2026; clinics can join the waitlist at ${ORIGIN}/contact. Data encrypted in transit and at rest, role-based access.
+- Clinics can start free in the Aumy app (App Store / Google Play) with 1,000 Aumy credits per product. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
 - Founder: Jayesh Chaudhari — 18 years in healthcare technology (clinic workflows, revenue cycle, compliance, interoperability, AI); built Aumy after working closely with dental clinics in the USA, Dubai and India. https://aumai.co.in/about
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).

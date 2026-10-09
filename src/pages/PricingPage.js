@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import { ONBOARDING_NOTICE } from '../config/onboardingNotice';
 import {
   MONTHLY_FROM, SETUP_TEXT, inr, CLINIC_OS, HEADLINE, HEADLINE_ACCENT, SUB, SETUP_WHY, ADDONS, GST, FAQS,
   SEO_TITLE, SEO_DESCRIPTION,
@@ -66,7 +65,6 @@ const PricingPage = () => {
               <p className="pp-fine">{GST}</p>
             </div>
           </div>
-          <p className="pp-notice">{ONBOARDING_NOTICE.inline}</p>
           <p className="pp-notice">Want only one part of Aumy? <Link to="/modules">See the modules you can buy on their own</Link>.</p>
         </div>
       </section>
