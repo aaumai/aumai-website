@@ -194,7 +194,7 @@ const orgLd = {
   address:
     MARKET === 'us'
       ? { '@type': 'PostalAddress', streetAddress: '30 N Gould St, Ste N', addressLocality: 'Sheridan', addressRegion: 'WY', postalCode: '82801', addressCountry: 'US' }
-      : { '@type': 'PostalAddress', addressLocality: 'Pune', addressRegion: 'Maharashtra', addressCountry: 'IN' },
+      : { '@type': 'PostalAddress', streetAddress: 'Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar', addressLocality: 'Pune', addressRegion: 'Maharashtra', postalCode: '411028', addressCountry: 'IN' },
   contactPoint: [{
     '@type': 'ContactPoint',
     contactType: 'sales',
@@ -912,7 +912,7 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Get in touch.</h1>
         <p class="ch-hero-sub">Tell us what you need — a growth strategy call for your clinic, or a build partner for your product. We reply within 24 hours.</p>
-        <p><strong>India:</strong> AUM AI Healthcare Solutions &middot; Pune, Maharashtra, India &middot; jayesh.chaudhari@aumai.co.in &middot; +91 800 718 9868</p>
+        <p><strong>India:</strong> AUM AI Healthcare Solutions &middot; Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar, Pune, Maharashtra 411028, India &middot; jayesh.chaudhari@aumai.co.in &middot; +91 800 718 9868</p>
         <p><strong>United States:</strong> AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
       </div></section>`,
   },

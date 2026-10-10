@@ -172,7 +172,7 @@ ${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s
 - ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page front-desk checklist for practice managers
 
 ## Contact
-AUM AI Healthcare Solutions, Pune, Maharashtra, India — jayesh.chaudhari@aumai.co.in
+AUM AI Healthcare Solutions, Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar, Pune, Maharashtra 411028, India — jayesh.chaudhari@aumai.co.in
 `,
   us: `# Aumy by AUM AI (United States)
 
