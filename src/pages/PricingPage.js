@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import {
-  MONTHLY_FROM, SETUP_TEXT, inr, CLINIC_OS, HEADLINE, HEADLINE_ACCENT, SUB, SETUP_WHY, ADDONS, GST, FAQS,
+  MONTHLY_FROM, inr, CLINIC_OS, HEADLINE, HEADLINE_ACCENT, SUB, ADDONS, GST, FAQS,
   SEO_TITLE, SEO_DESCRIPTION,
 } from '../data/pricing';
 import './HomeClinic.css';
@@ -56,9 +56,6 @@ const PricingPage = () => {
             </div>
 
             <div className="pp-card-side">
-              <p className="pp-label">One-time setup and data migration</p>
-              <p className="pp-setup">{SETUP_TEXT}</p>
-              <p className="pp-why">{SETUP_WHY}</p>
               <p className="pp-addons">{ADDONS}</p>
               <Link to="/contact" className="ch-btn ch-btn-primary pp-cta">Talk to us about your clinic</Link>
               <a href={WA} className="pp-wa" target="_blank" rel="noopener noreferrer">Or message us on WhatsApp</a>

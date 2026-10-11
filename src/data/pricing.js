@@ -14,14 +14,13 @@
  * `module.exports` on purpose: the prerender scripts are plain Node.
  * Dental only — never mention aesthetics or children's dentistry.
  */
-const MONTHLY_FROM = 5000;
-const SETUP_MIN = 50000;
-const SETUP_MAX = 100000;
+// Owner 2026-10-11: Aumy Clinic's price in the app's price list (self_serve_products,
+// ₹3,000/month + GST). The one-time setup and data migration fee is no longer quoted.
+const MONTHLY_FROM = 3000;
 
 const inr = (n) => `₹${Number(n).toLocaleString('en-IN')}`;
 
-const MONTHLY_TEXT = `${inr(MONTHLY_FROM)} a month`; // "₹5,000 a month"
-const SETUP_TEXT = `${inr(SETUP_MIN)} – ${inr(SETUP_MAX)}`; // "₹50,000 – ₹1,00,000"
+const MONTHLY_TEXT = `${inr(MONTHLY_FROM)} a month`; // "₹3,000 a month"
 
 // What the Clinic OS is — the site's own words (Home / ai-dental-software-india).
 const CLINIC_OS = [
@@ -35,8 +34,7 @@ const CLINIC_OS = [
 
 const HEADLINE = 'Simple pricing.';
 const HEADLINE_ACCENT = 'No surprises.';
-const SUB = 'One monthly fee for the software your clinic runs on, and a one-time fee to set it up and bring your data across. That is the whole of it.';
-const SETUP_WHY = 'Where you fall in that range depends on how much data we move from your current software, and how many branches and doctors we set up.';
+const SUB = 'One monthly fee for the software your clinic runs on. That is the whole of it.';
 const ADDONS = 'AI receptionist, AI calls and patient follow-up automation are added on top — we price them with you.';
 const GST = 'Prices exclude GST.';
 
@@ -44,10 +42,6 @@ const FAQS = [
   {
     q: `What do I get for ${MONTHLY_TEXT}?`,
     a: `The Aumy Clinic OS — the software your team runs the clinic on: appointments and doctor calendars, patient records, X-rays and prescriptions, dental charting and treatment plans, billing, invoices and payments, digital registration, intake and consent, and logins for your staff and doctors. ${MONTHLY_TEXT} is where it starts; we confirm your clinic’s exact figure with you on a call.`,
-  },
-  {
-    q: 'What does the one-time setup fee cover?',
-    a: `Setting Aumy up around your clinic and moving your history across from your current software — patients, appointments, treatment history, notes and images — with no downtime. It is a one-time ${SETUP_TEXT}. ${SETUP_WHY}`,
   },
   {
     q: 'What about the AI receptionist, AI calls and follow-ups?',
@@ -60,9 +54,9 @@ const FAQS = [
 ];
 
 const SEO_TITLE = `Dental Clinic Software Price in India — from ${inr(MONTHLY_FROM)}/month | Aumy`;
-const SEO_DESCRIPTION = `Simple pricing for dental clinics: the Aumy Clinic OS starts from ${MONTHLY_TEXT}, plus a one-time setup and data migration fee of ${SETUP_TEXT}. AI receptionist, AI calls and follow-ups are priced with you.`;
+const SEO_DESCRIPTION = `Simple pricing for dental clinics: the Aumy Clinic OS starts from ${MONTHLY_TEXT}. AI receptionist, AI calls and follow-ups are priced with you.`;
 
 module.exports = {
-  MONTHLY_FROM, SETUP_MIN, SETUP_MAX, inr, MONTHLY_TEXT, SETUP_TEXT,
-  CLINIC_OS, HEADLINE, HEADLINE_ACCENT, SUB, SETUP_WHY, ADDONS, GST, FAQS, SEO_TITLE, SEO_DESCRIPTION,
+  MONTHLY_FROM, inr, MONTHLY_TEXT,
+  CLINIC_OS, HEADLINE, HEADLINE_ACCENT, SUB, ADDONS, GST, FAQS, SEO_TITLE, SEO_DESCRIPTION,
 };

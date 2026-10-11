@@ -101,7 +101,7 @@ const Home = () => {
       // one canonical sentence used site-wide, price from src/data/pricing.js.
       title: 'Aumy | AI Dental Software & AI Receptionist for Dental Clinics in India',
       description:
-        'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹5,000 a month.',
+        'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹3,000 a month.',
       canonical: 'https://aumai.co.in/',
       image: 'https://aumai.co.in/screenshots/roi-preview.png',
     });

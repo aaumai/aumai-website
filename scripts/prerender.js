@@ -25,7 +25,7 @@ const { CALCULATORS } = require('../src/data/calculators');
 // the crawler-visible HTML after the app stops showing it.
 const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
 // Prices: one file shared with the React /pricing page (owner 2026-10-04:
-// "starts from ₹5,000 a month" — no calculator, no rate card). Never typed here.
+// "starts from ₹3,000 a month" — no calculator, no rate card). Never typed here.
 const PRICE = require('../src/data/pricing');
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The founder: same words as the About page (src/data/founder.js).
@@ -223,7 +223,7 @@ const dentalSoftwareLd = {
   offers: {
     '@type': 'Offer',
     name: 'Aumy Clinic OS',
-    description: `Starts from ${PRICE.MONTHLY_TEXT}. One-time setup and data migration ${PRICE.SETUP_TEXT}.`,
+    description: `Starts from ${PRICE.MONTHLY_TEXT}.`,
     price: String(PRICE.MONTHLY_FROM),
     priceCurrency: 'INR',
     valueAddedTaxIncluded: false,
@@ -318,8 +318,6 @@ const routes = [
         <ul>
           ${PRICE.CLINIC_OS.map((item) => `<li>${esc(item)}</li>`).join('\n          ')}
         </ul>
-        <h2>One-time setup and data migration: ${esc(PRICE.SETUP_TEXT)}</h2>
-        <p>${esc(PRICE.SETUP_WHY)}</p>
         <p>${esc(PRICE.ADDONS)}</p>
         <p><a href="/contact">Talk to us about your clinic</a>. ${esc(PRICE.GST)}</p>
         <p>Want only one part of Aumy? <a href="/modules">See the modules you can buy on their own</a>.</p>
@@ -618,7 +616,7 @@ const routes = [
     // home owns "AI dental software" + "AI receptionist"; the canonical one-line description).
     title: 'Aumy | AI Dental Software & AI Receptionist for Dental Clinics in India',
     description:
-      'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹5,000 a month.',
+      'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹3,000 a month.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],

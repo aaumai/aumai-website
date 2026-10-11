@@ -16,7 +16,7 @@
  */
 const PRICING = require('./pricing');
 
-// "5,000" — the Clinic OS starting price, from the one pricing file.
+// "3,000" — the Clinic OS starting price, from the one pricing file.
 const FROM_PRICE = PRICING.MONTHLY_FROM.toLocaleString('en-IN');
 
 const UPDATED = 'October 2026';
@@ -54,7 +54,7 @@ const INDIA = [
   ['Indian languages', 'Replies in the language the patient writes in — English, Hindi, Marathi and more.'],
   ['Data on AWS Mumbai', 'Aumy’s patient database runs in AWS’s Mumbai region (ap-south-1), encrypted in transit and at rest, with role-based access for every staff member.'],
   ['Built on FHIR R4', 'Clinical records are kept in FHIR R4, the international standard for exchanging health records.'],
-  ['Priced in rupees', `The Clinic OS starts from ₹${FROM_PRICE} a month, with a one-time setup and data migration fee of ${PRICING.SETUP_TEXT}. The AI receptionist, AI calls and follow-ups are priced with you.`],
+  ['Priced in rupees', `The Clinic OS starts from ₹${FROM_PRICE} a month. The AI receptionist, AI calls and follow-ups are priced with you.`],
   ['Run with you, not handed over', 'A dedicated Aumy expert sets the system up around your doctors, treatments and timings, and reviews it with you every week.'],
 ];
 
@@ -90,7 +90,7 @@ const FAQS = [
   { q: 'Does Aumy include patient intake and digital registration?', a: 'Yes. Patients fill in registration, medical history and consent forms on their phone before they arrive, or on the clinic iPad, and everything lands on their record. It is part of the Clinic OS.' },
   { q: 'Is there a dental patient management system that works on WhatsApp?', a: 'Aumy is one: patient records, appointments and treatment plans in the Clinic OS, with reminders, confirmations and follow-ups sent on the official WhatsApp Business API, and replies landing back on the patient’s record.' },
   { q: 'What is the best AI dental software in India?', a: 'It depends on five things: whether the AI actually acts (books, reschedules, follows up) or only suggests; whether it speaks your patients’ languages; whether it runs on the official WhatsApp Business API; whether it works with the software you already use; and where patient data is stored. Aumy is built for clinics that want the calls, WhatsApp messages, reminders and follow-ups taken off a stretched front desk — in Indian languages, on WhatsApp, with its database in AWS Mumbai — alongside the dental software they already use.' },
-  { q: 'How much does AI dental software cost in India?', a: `Aumy is priced in rupees. The Clinic OS — appointments, patient records, dental charting, billing and staff logins — starts from ₹${FROM_PRICE} a month, plus a one-time setup and data migration fee of ${PRICING.SETUP_TEXT}, depending on how much data is moved and how many branches and doctors are set up. The AI receptionist, AI calls and patient follow-up automation are added on top and priced with the clinic. Prices exclude GST. Details are on the pricing page.` },
+  { q: 'How much does AI dental software cost in India?', a: `Aumy is priced in rupees. The Clinic OS — appointments, patient records, dental charting, billing and staff logins — starts from ₹${FROM_PRICE} a month. The AI receptionist, AI calls and patient follow-up automation are added on top and priced with the clinic. Prices exclude GST. Details are on the pricing page.` },
   { q: 'Do I have to replace my current dental software?', a: 'No. Aumy runs alongside the practice management software you use today and keeps the data in sync. If you want one platform, Aumy includes a complete dental PMS and migrates your full history for you.' },
   { q: 'Can the AI talk to patients in Hindi and other Indian languages?', a: 'Yes. It replies in the language the patient writes or speaks in — English, Hindi, Marathi and more — and switches automatically mid-conversation.' },
   { q: 'Where is patient data stored, and who can see it?', a: 'Aumy’s patient database runs in AWS’s Mumbai region (ap-south-1), encrypted in transit and at rest, and every staff member sees only what their role allows.' },
