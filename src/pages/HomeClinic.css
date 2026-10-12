@@ -490,3 +490,8 @@
 .ch-hero-outcomes li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 50%; background: var(--c-accent-dark); }
 .ch-hero-outcomes a { color: var(--c-ink); text-decoration: none; }
 .ch-hero-outcomes a:hover { color: var(--c-accent-dark); text-decoration: underline; }
+
+/* Lean home (owner 2026-10-12): one link row in the closing band keeps every key page linked from home. */
+.ch-explore { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: 34px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.ch-explore a { color: rgba(255, 255, 255, 0.78); font-size: 14px; text-decoration: none; }
+.ch-explore a:hover { color: #fff; text-decoration: underline; }

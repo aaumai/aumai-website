@@ -701,3 +701,6 @@
 .site-lux .ch-home .lux-hero .ch-hero-products li { color: rgba(255, 255, 255, 0.86); font-weight: 300; }
 .site-lux .ch-home .lux-hero .ch-hero-products li a:not(.ch-btn) { color: var(--lux-gold-2); font-weight: 600; text-decoration: none; }
 .site-lux .ch-home .lux-hero .ch-hero-products li a:not(.ch-btn):hover { text-decoration: underline; }
+/* Lean home closing band (owner 2026-10-12): explore links light on the dark band. */
+.site-lux .ch-home .ch-offer .ch-explore a:not(.ch-btn) { color: rgba(255, 255, 255, 0.78); text-decoration: none; }
+.site-lux .ch-home .ch-offer .ch-explore a:not(.ch-btn):hover { color: var(--lux-gold-2); text-decoration: underline; }

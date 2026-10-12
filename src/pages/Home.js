@@ -1,86 +1,22 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import LeakCheck from '../components/LeakCheck';
-import DemoPlaylist from '../components/DemoPlaylist';
 import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
 import HomeModules from '../components/HomeModules';
 import HomeExplainers from '../components/HomeExplainers';
 import { HERO_VIDEO } from '../data/explainers';
-import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
-import { MONTHLY_TEXT } from '../data/pricing';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
-// Owner 2026-10-08: "Handcrafted only for dentists" — one copy, shared with scripts/prerender.js.
-import { HERO_PRODUCTS } from '../data/positioning';
+import { HERO_PRODUCTS, HOME_EXPLORE } from '../data/positioning';
 import './HomeClinic.css';
 
-const Check = () => (
-  <svg className="ch-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <path d="M5 13l4 4L19 7" />
-  </svg>
-);
-
-// Positioning 2026-09-15 — the owner's own words (reports/positioning-2026-09-15-chaos-of-growth.md).
-// "A successful dental clinic doesn't necessarily have a patient-acquisition
-// problem. It often has a coordination problem." The page is organised around
-// the chaos, not features; Convert → Care → Retain → Reactivate is the
-// architecture underneath.
-const before = ['Growth', 'More patients', 'More calls', 'More WhatsApp', 'More follow-ups', 'More staff workload', 'More things falling through the cracks'];
-const withAumy = ['Growth', 'Aumy coordinates the work', 'Your team focuses on patients'];
-
-// The five groups the site is organised around — the chaos, not features.
-const chaosGroups = [
-  {
-    title: 'Patient communication',
-    items: ['AI voice agent', 'Answer calls', 'Book appointments', 'Appointment reminders', 'WhatsApp', 'Patient queries', 'Follow-ups'],
-  },
-  {
-    title: 'Appointment orchestration',
-    items: ['Confirmations', 'Rescheduling', 'Cancellations', 'No-show management', 'Waitlists', 'Care gaps'],
-  },
-  {
-    title: 'Digital clinic',
-    items: ['Digital registration', 'Patient intake', 'Consent', 'X-rays', 'Invoices', 'Paperless workflows'],
-  },
-  {
-    title: 'Patient journey',
-    items: ['Pre-treatment', 'Treatment', 'After-care', 'Care gaps', 'Doctor check-ins', 'Reactivation'],
-  },
-  {
-    title: 'Growth',
-    items: ['Get Found on Google & local SEO', 'Your website', 'Meta Ads, through our partners', 'Lead conversion'],
-  },
-];
-
-// "Think of Aumy as Jarvis for your dental clinic." — owner's analogy.
-const knows = [
-  { when: 'A patient calls', aumy: 'Aumy knows who they are.' },
-  { when: 'They need an appointment', aumy: 'Aumy knows the doctor’s availability.' },
-  { when: 'They don’t show', aumy: 'Aumy knows what happened.' },
-  { when: 'They need a follow-up', aumy: 'Aumy creates and manages it.' },
-  { when: 'They message after treatment', aumy: 'Aumy understands the treatment context.' },
-  { when: 'They have an overdue care gap', aumy: 'Aumy knows it.' },
-  { when: 'The clinic gets a call', aumy: 'The voice agent has the context.' },
-];
-
-// The architecture underneath: four stages, and Aumy coordinates the work.
-const pillars = [
-  { stage: 'Convert', title: 'From the first enquiry to a booking', flow: 'Leads → Enquiries → Calls → Appointments → Bookings' },
-  { stage: 'Care', title: 'Everything around the treatment', flow: 'Registration → Intake → Consent → Treatment → After-care → Patient communication' },
-  { stage: 'Retain', title: 'Keeping patients on track', flow: 'Appointment follow-ups → Care gaps → Doctor check-ins → Preventive care' },
-  { stage: 'Reactivate', title: 'Bringing patients back', flow: 'Old patients → Overdue treatment → Missed appointments → Inactive patients' },
-];
-
-const whyUs = [
-  { title: 'A dedicated expert runs it with you', body: 'An expert is assigned to your clinic — they set Aumy up around how your clinic actually works, operate it end-to-end, and review it with you. You are never left to figure out software alone.' },
-  { title: 'No rip-and-replace', body: 'It works on top of the systems you already use.' },
-  { title: 'One connected platform', body: 'Front desk, patient records, forms, follow-ups, reviews and ads — everything talks to everything else, with full context.' },
-  { title: 'Your data, secured', body: 'Encrypted, access-controlled, and private by design.' },
-];
-
-// FAQ list lives in src/data/homeFaq.js (shared with the prerender's crawler HTML + JSON-LD).
+// Lean home (owner 2026-10-12: "too much old information … make it lean and get rid of our old positioning",
+// "make sure we do not lose the seo advantage"). Eight sections: hero → module explainers → proof → modules →
+// be the patient → app → FAQ → one call to action. Title, description, H1, JSON-LD (org, software, FAQ, videos)
+// and every internal link are kept (HOME_EXPLORE). The retired sections (coordination problem, chaos groups,
+// two halves, Jarvis, Convert→Care→Retain→Reactivate, leak check, PMS, why it works, growth expert, Get Found,
+// why us, fit gate, 30-day offer, founder close) are in git history before this commit.
 
 // Real, attributed partner-clinic testimonials (sourced from the revenue-generator page).
 const testimonials = [
@@ -130,8 +66,8 @@ const Home = () => {
               ))}
             </ul>
             <div className="ch-hero-cta">
-              <a href="#how-it-works" className="ch-btn ch-btn-primary">
-                See How Aumy Works
+              <a href="#get-the-app" className="ch-btn ch-btn-primary">
+                Start free in the app
               </a>
               <Link to="/contact" className="ch-btn ch-btn-ghost">
                 Get started — risk-free
@@ -152,7 +88,7 @@ const Home = () => {
               Try it live — WhatsApp or call our demo clinic
             </a>
             <p className="ch-hero-trust">
-              no lock-in · we set everything up for you · limited implementation capacity · NVIDIA Inception member
+              1,000 free Aumy credits per product · cancel any time · NVIDIA Inception member
             </p>
           </div>
 
@@ -167,334 +103,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── One explainer video per module (owner 2026-10-12): immediately under the hero (owner, same day).
-          Words: src/data/explainers.js. */}
+      {/* ── One explainer video per module (owner 2026-10-12), immediately under the hero. Words: src/data/explainers.js. */}
       <HomeExplainers />
 
-      {/* ── Who already runs on Aumy ───────────────────────────────────────
-          Shows the cities today and upgrades to named logos as each clinic's
-          written permission lands — see src/data/clinicsServed.js. */}
+      {/* ── Proof: who runs on Aumy (src/data/clinicsServed.js) and a clinic owner in his own words. */}
       <ClinicsServed />
-
-      {/* ── Aumy is built from modules (owner 2026-10-08): every card links to
-          its /modules/<id> page. Words: src/data/modules.js (HOME, PAGES). */}
-      <HomeModules />
-
-      {/* ── Be the patient: live hands-on demo ─────────────────────────── */}
-      <section className="ch-section" id="be-the-patient">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">Don&rsquo;t watch a demo</span>
-            <h2 className="ch-h2">Be the patient.</h2>
-            <p className="ch-sub">
-              WhatsApp or call our live demo clinic and experience exactly what your patients would —
-              the same AI, the same follow-ups, the real product.
-            </p>
-          </div>
-          <div className="ch-why-card" style={{ display: 'block', maxWidth: 720, margin: '0 auto', padding: 28 }}>
-            <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', marginTop: 0 }}>
-              📱 WhatsApp <a href="https://wa.me/919022312554?text=Hi%2C%20I%20wanted%20to%20ask%20about%20aligners" style={{ whiteSpace: 'nowrap' }}>+91 90223 12554</a>
-            </p>
-            <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', margin: '8px 0 0' }}>
-              📞 Call <a href="tel:+912264230581" style={{ whiteSpace: 'nowrap' }}>+91 22 6423 0581</a> and wait a couple of rings — Aumy Voice will pick up.
-            </p>
-            <p style={{ textAlign: 'center', color: '#5b6784', margin: '6px 0 0', fontSize: '0.95rem' }}>
-              This is our demo clinic, Lumière Dental — Aumy answers as its receptionist.
-            </p>
-            <ol style={{ lineHeight: 1.9, margin: '18px 0 0', paddingLeft: 22 }}>
-              <li><strong>Ask about aligners or implants</strong> — watch it answer instantly, like your best receptionist on her best day.</li>
-              <li><strong>Book a slot… or don&rsquo;t.</strong> Go quiet, and see the gentle follow-up arrive tomorrow.</li>
-              <li><strong>Booked? Try changing your mind</strong> — reschedule or cancel in one message, no phone queue.</li>
-              <li><strong>Skip your appointment</strong> — and watch how it wins the rebooking without nagging.</li>
-              <li><strong>After your &ldquo;visit&rdquo;</strong>, we&rsquo;ll mark it done — see how it asks for your feedback.</li>
-              <li><strong>Come back in 3 months</strong> for your check-up reminder. Ghost us for 6, and Aumy will try to win you back 🙂</li>
-            </ol>
-            <p style={{ marginTop: 18, textAlign: 'center', color: '#5b6784' }}>
-              Every message you receive is the same system your patients would experience — Convert, Care, Retain, Reactivate, in real time.
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-      <DemoPlaylist />
-
-      {/* PROBLEM — owner's insight: a coordination problem, not an acquisition problem. */}
-      <section className="ch-section">
-        <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">What we learned from hundreds of dental clinics</span>
-          <h2 className="ch-h2">
-            A successful dental clinic doesn&rsquo;t necessarily have a patient-acquisition problem.
-            It often has a coordination problem.
-          </h2>
-          <p className="ch-lead">
-            When chairs are full, growth creates chaos: calls, WhatsApp messages, enquiries, appointment
-            confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents,
-            X-rays, invoices and patient questions.
-          </p>
-          <div className="ch-closetable">
-            <div className="ch-close-row">
-              <span className="ch-close-leak"><strong>Before Aumy</strong></span>
-              <span className="ch-close-arrow" aria-hidden="true">·</span>
-              <span className="ch-close-aumy">{before.join(' → ')}</span>
-            </div>
-            <div className="ch-close-row">
-              <span className="ch-close-leak"><strong>With Aumy</strong></span>
-              <span className="ch-close-arrow" aria-hidden="true">·</span>
-              <span className="ch-close-aumy">{withAumy.join(' → ')}</span>
-            </div>
-          </div>
-          <p className="ch-note ch-center">
-            When your clinic grows, Aumy makes sure the operational workload doesn&rsquo;t grow with it.
-          </p>
-        </div>
-      </section>
-
-      {/* THE FIVE GROUPS — the site is organised around the chaos, not features. */}
-      <section className="ch-section ch-tint">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">What Aumy manages</span>
-            <h2 className="ch-h2">Aumy manages the chaos that comes with growth.</h2>
-            <p className="ch-lead ch-center-lead">
-              Coordinating your patients, people and processes from the first enquiry to ongoing care.
-            </p>
-          </div>
-          {/* Five groups in one row on desktop (no orphan card); wraps on smaller screens. */}
-          <div className="ch-pillars" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))' }}>
-            {chaosGroups.map((g, i) => (
-              <div key={i} className="ch-pillar">
-                <span className="ch-eyebrow">{String(i + 1)}</span>
-                <h3 className="ch-pillar-title">{g.title}</h3>
-                <ul className="ch-mini">
-                  {g.items.map((it) => <li key={it}><Check /> {it}</li>)}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TWO HALVES — the two things clinic owners search for (owner 2026-09-18):
-          AI-powered dental clinic operations, and an AI-powered patient journey.
-          The five groups above fold into these two; each has its own page. */}
-      <section className="ch-section" id="two-halves">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">Two halves of one system</span>
-            <h2 className="ch-h2">AI-powered dental clinic operations. An AI-powered patient journey. One connected platform.</h2>
-            <p className="ch-lead ch-center-lead">
-              The work around your chairs, and the journey of every patient through them &mdash;
-              coordinated by the same system, with the same patient context.
-            </p>
-          </div>
-          <div className="ch-paths">
-            <div className="ch-pillar ch-path">
-              <span className="ch-eyebrow">Clinic operations</span>
-              <h3 className="ch-pillar-title">AI-powered dental clinic operations</h3>
-              <p className="ch-pillar-body">
-                Every call and WhatsApp answered, appointments booked, confirmed and rescheduled, no-shows
-                followed up, registration, intake, consent and invoices digital &mdash; and one team inbox
-                for whatever needs a person.
-              </p>
-              <Link to="/ai-dental-clinic-operations" className="ch-btn ch-btn-ghost" style={{ marginTop: 14 }}>
-                See clinic operations
-              </Link>
-            </div>
-            <div className="ch-pillar ch-path">
-              <span className="ch-eyebrow">Patient journey</span>
-              <h3 className="ch-pillar-title">AI-powered patient journey &amp; engagement</h3>
-              <p className="ch-pillar-body">
-                Reminders, pre-treatment instructions, treatment-specific after-care, doctor check-ins, care
-                gaps, treatment-plan follow-ups and reactivation &mdash; each message in the context of that
-                patient&rsquo;s treatment, and each journey ending the moment the patient books.
-              </p>
-              <Link to="/ai-patient-engagement" className="ch-btn ch-btn-ghost" style={{ marginTop: 14 }}>
-                See the patient journey
-              </Link>
-            </div>
-          </div>
-          <p className="ch-lead ch-center-lead" style={{ marginTop: 22 }}>
-            Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From {MONTHLY_TEXT}.{' '}
-            <Link to="/ai-dental-software-india">What AI dental software does in an Indian clinic &rarr;</Link>
-          </p>
-        </div>
-      </section>
-
-      {/* EVERYTHING IS CONNECTED — moat lines + the Jarvis analogy. */}
-      <section className="ch-section">
-        <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">Everything is connected</span>
-          <h2 className="ch-h2">Think of Aumy as Jarvis for your dental clinic.</h2>
-          <p className="ch-lead">
-            Not because it&rsquo;s a chatbot. Because everything knows what&rsquo;s happening.
-          </p>
-          <div className="ch-closetable">
-            {knows.map((row, i) => (
-              <div key={i} className="ch-close-row">
-                <span className="ch-close-leak">{row.when}</span>
-                <span className="ch-close-arrow" aria-hidden="true">→</span>
-                <span className="ch-close-aumy">{row.aumy}</span>
-              </div>
-            ))}
-          </div>
-          <p className="ch-lead">
-            Your calls know your appointments. Your appointments know your patients. Your patients know
-            their treatment. Your follow-ups know what happened. And Aumy knows all of it.
-          </p>
-          <p className="ch-note ch-center"><strong>One patient. One journey. One connected system.</strong></p>
-        </div>
-      </section>
-
-      {/* ARCHITECTURE — Convert → Care → Retain → Reactivate, and Aumy coordinates the work. */}
-      <section className="ch-section ch-tint" id="how-it-works">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">How Aumy works</span>
-            <h2 className="ch-h2">Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
-            <p className="ch-lead ch-center-lead">
-              One connected platform underneath the whole patient journey — so your clinic can grow
-              without growing the chaos.
-            </p>
-          </div>
-          <div className="ch-pillars">
-            {pillars.map((p, i) => (
-              <div key={i} className="ch-pillar">
-                <span className="ch-eyebrow">{p.stage}</span>
-                <h3 className="ch-pillar-title">{p.title}</h3>
-                <p className="ch-pillar-body">{p.flow}</p>
-              </div>
-            ))}
-          </div>
-          <p className="ch-note ch-center">
-            Surrounding all four: <strong>Aumy coordinates the work.</strong>
-          </p>
-        </div>
-      </section>
-
-      {/* LEAK CHECK — optional, below the story (it estimates what slips through). */}
-      <section className="ch-section ch-tint" id="leak-check">
-        <div className="ch-container">
-          <LeakCheck market="in" headingLevel="h2" />
-        </div>
-      </section>
-
-      {/* TWO WAYS TO RUN Aumy — with our full PMS, or on top of yours */}
-      <section className="ch-section" id="pms">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">Your software, your choice</span>
-            <h2 className="ch-h2 ch-center">Full dental software included — or keep the one you have.</h2>
-            <p className="ch-lead ch-center-lead">
-              Aumy works both ways. Run your whole clinic on it, or let it power growth on top of the
-              software you already use.
-            </p>
-          </div>
-          <div className="ch-paths">
-            <div className="ch-pillar ch-path">
-              <span className="ch-eyebrow">Want one complete platform?</span>
-              <h3 className="ch-pillar-title">Aumy includes a full Dental PMS</h3>
-              <p className="ch-pillar-body">
-                Everything a traditional dental software does — and then some. Patient records &amp;
-                appointments, FDI odontogram with 6-point perio charting, digital prescriptions,
-                treatment plans, billing, invoicing &amp; accounts. Plus voice-powered charting:
-                you talk, Aumy charts.
-              </p>
-            </div>
-            <div className="ch-pillar ch-path">
-              <span className="ch-eyebrow">Happy with your current PMS?</span>
-              <h3 className="ch-pillar-title">Keep it — Aumy runs on top</h3>
-              <p className="ch-pillar-body">
-                No retraining on day one. Whatever software you use, Aumy keeps your data in sync
-                with it and runs the front-desk and patient-journey layer — Convert, Care, Retain, Reactivate — on top.
-                <strong> Want one connected platform? We migrate your data from your current software
-                into Aumy for a one-time migration fee.</strong>{' '}
-                <Link to="/switch">How the move works</Link>.
-              </p>
-            </div>
-          </div>
-          {/* The old modules teaser lived here; replaced by <HomeModules /> under the hero (2026-10-08). */}
-        </div>
-      </section>
-
-      {/* HOW IT WORKS / MOAT */}
-      <section className="ch-section ch-tint">
-        <div className="ch-container ch-split">
-          <div className="ch-split-text">
-            <span className="ch-eyebrow">Why it works</span>
-            <h2 className="ch-h2">Anyone can send a reminder. We hold the conversation — and book the patient.</h2>
-            <p className="ch-lead">
-              That is the difference. Aumy does not just fire off messages. It answers questions,
-              handles rescheduling, and turns interest into a booked appointment — the way your best
-              receptionist would, at any hour. And we configure it around how your clinic actually
-              works.
-            </p>
-            <ul className="ch-mini">
-              <li><Check /> Captures every enquiry and follows up until it books — no lead goes cold</li>
-              <li><Check /> Confirms, reschedules and cancels — so a would-be no-show reopens the slot</li>
-              <li><Check /> Follows up care gaps on time and reactivates patients who drifted away</li>
-              <li><Check /> Follows up every accepted treatment plan until the patient books it</li>
-              <li><Check /> Every call, message, form and follow-up in one patient record — full context, always</li>
-            </ul>
-          </div>
-          <div className="ch-split-visual">
-            <div className="ch-chat">
-              <div className="ch-chat-head">
-                <span className="ch-chat-avatar">A</span>
-                <div>
-                  <div className="ch-chat-name">Aumy</div>
-                  <div className="ch-chat-status">AI receptionist · online</div>
-                </div>
-              </div>
-              <div className="ch-chat-body">
-                <div className="ch-bubble ch-in">Hi, saw your ad — how much is a consultation?</div>
-                <div className="ch-bubble ch-out">
-                  Happy to help! I have Tue 4 PM or Wed 11 AM open — shall I reserve one for you?
-                </div>
-                <div className="ch-bubble ch-in">Tuesday, please.</div>
-                <div className="ch-bubble ch-out">Reserved for Tue 4 PM. See you then! ✅</div>
-              </div>
-              <div className="ch-chat-foot">Booked — no staff lifted a finger.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* GROWTH EXPERT — the human partner who runs it */}
-      <section className="ch-section">
-        <div className="ch-container ch-split">
-          <div className="ch-split-text">
-            <span className="ch-eyebrow">Not just software</span>
-            <h2 className="ch-h2">A dedicated expert — assigned to your clinic, for good.</h2>
-            <p className="ch-lead">
-              You are never handed a login and left to work it out. An Aumy expert is assigned to your
-              clinic and stays with you — they learn how your clinic runs, set Aumy up around it, and
-              operate the entire system with you.
-            </p>
-            <p className="ch-lead">
-              You get a calmer clinic; they carry the work — a permanent partner, not another tool for
-              your front desk to manage.
-            </p>
-          </div>
-          <div className="ch-split-visual">
-            <div className="ch-expert-card">
-              <div className="ch-chat-head">
-                <span className="ch-chat-avatar">✦</span>
-                <div>
-                  <div className="ch-chat-name">Your Aumy expert</div>
-                  <div className="ch-chat-status">Assigned to your clinic · permanent</div>
-                </div>
-              </div>
-              <ul className="ch-mini ch-expert-list">
-                <li><Check /> Maps how your front desk and doctors actually work</li>
-                <li><Check /> Sets up and runs the whole system for you</li>
-                <li><Check /> Takes calls, follow-ups and paperwork off your team</li>
-                <li><Check /> Reviews the numbers that matter with you, weekly</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* PROOF */}
       <section className="ch-section">
@@ -540,88 +153,46 @@ const Home = () => {
         </div>
       </section>
 
-      {/* GROWTH — Get Found, local SEO and the website are Aumy's own work; Meta Ads run through our marketing partners (owner 2026-10-06): one holistic solution, one point of contact. */}
-      <section className="ch-section">
-        <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">Growth, one holistic solution</span>
-          <h2 className="ch-h2">Get Found, your website, Meta Ads and lead conversion — one plan, one point of contact.</h2>
-          <p className="ch-lead ch-center-lead">
-            Aumy keeps your Google profile, reviews and local SEO working, and builds and optimises your website. Meta Ads run through our marketing partners, as part of the same plan, and get real data: Aumy
-            privately tracks every ad-clicked patient through booking, so you see which campaigns bring
-            patients, not just clicks, and so does your partner. Meta only ever receives an anonymous lead signal: your patients’
-            health data never leaves the clinic, exactly as Meta’s health-data rules and India’s DPDP Act
-            demand.
-          </p>
-          <p className="ch-note">Grow your clinic. Don&rsquo;t grow the chaos.</p>
-        </div>
-      </section>
+      {/* ── Aumy is built from modules (owner 2026-10-08). Words: src/data/modules.js (HOME, PAGES). */}
+      <HomeModules />
 
-      {/* WHY US */}
-      <section className="ch-section ch-tint">
+      {/* ── Be the patient: live hands-on demo ─────────────────────────── */}
+      <section className="ch-section" id="be-the-patient">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">Why us</span>
-            <h2 className="ch-h2">A partner, not another tool you have to run.</h2>
+            <span className="ch-eyebrow">Don&rsquo;t watch a demo</span>
+            <h2 className="ch-h2">Be the patient.</h2>
+            <p className="ch-sub">
+              WhatsApp or call our live demo clinic and experience exactly what your patients would —
+              the same AI, the same follow-ups, the real product.
+            </p>
           </div>
-          <div className="ch-why">
-            {whyUs.map((w, i) => (
-              <div key={i} className="ch-why-card">
-                <Check />
-                <div>
-                  <h3 className="ch-why-title">{w.title}</h3>
-                  <p className="ch-why-body">{w.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* QUALIFICATION GATE — honest fit, premium positioning */}
-      <section className="ch-section">
-        <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">A fit, or not</span>
-          <h2 className="ch-h2">We take on a handful of clinics at a time — and we&apos;re honest about fit.</h2>
-          <p className="ch-lead ch-center-lead">
-            Aumy works best for dental clinics that are already busy — from single-doctor practices to
-            multi-chair centres. It is built for you if:
-          </p>
-          <div className="ch-fit-card">
-            <ul className="ch-mini">
-              <li><Check /> You run a dental clinic</li>
-              <li><Check /> Your chairs are filling up and your front desk is stretched</li>
-              <li><Check /> You are the founder or owner — the one who decides how the clinic runs</li>
-              <li><Check /> You would rather run a calm clinic on one system than keep hiring to keep up</li>
-            </ul>
-          </div>
-          <p className="ch-note">
-            This is not built for every clinic, and that is deliberate. If it is not the right fit yet,
-            we will tell you plainly rather than take you on. When it is, we should talk.
-          </p>
-        </div>
-      </section>
-
-      {/* OFFER — dark accent band */}
-      <section className="ch-offer">
-        <div className="ch-container ch-center">
-          <h2 className="ch-offer-title">So your clinic can grow without growing the chaos.</h2>
-          <p className="ch-offer-sub"><strong>Try Aumy free for 30 days — see the difference yourself.</strong></p>
-          <p className="ch-offer-sub">
-            We set Aumy up on your clinic — the AI answering calls and WhatsApp, the follow-ups, the
-            digital forms — and you watch it work for 30 days alongside everything you use today. If the
-            difference convinces you, we continue. If not, you walk away — no charges, no lock-in,
-            no obligation to stay. Prefer to start smaller? Get a free Clinic Growth Audit first:
-            where you rank on Google versus the clinics near you, and the specific gaps quietly
-            costing you bookings — on your WhatsApp within 24 hours.
-          </p>
-          <div className="ch-hero-cta ch-center-cta">
-            <Link to="/contact" className="ch-btn ch-btn-primary">Get started — risk-free</Link>
-            <Link to="/growth-audit" className="ch-btn ch-btn-ghost ch-ghost-light">Get my free Clinic Growth Audit</Link>
+          <div className="ch-why-card" style={{ display: 'block', maxWidth: 720, margin: '0 auto', padding: 28 }}>
+            <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', marginTop: 0 }}>
+              📱 WhatsApp <a href="https://wa.me/919022312554?text=Hi%2C%20I%20wanted%20to%20ask%20about%20aligners" style={{ whiteSpace: 'nowrap' }}>+91 90223 12554</a>
+            </p>
+            <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', margin: '8px 0 0' }}>
+              📞 Call <a href="tel:+912264230581" style={{ whiteSpace: 'nowrap' }}>+91 22 6423 0581</a> and wait a couple of rings — Aumy Voice will pick up.
+            </p>
+            <p style={{ textAlign: 'center', color: '#5b6784', margin: '6px 0 0', fontSize: '0.95rem' }}>
+              This is our demo clinic, Lumière Dental — Aumy answers as its receptionist.
+            </p>
+            <ol style={{ lineHeight: 1.9, margin: '18px 0 0', paddingLeft: 22 }}>
+              <li><strong>Ask about aligners or implants</strong> — watch it answer instantly, like your best receptionist on her best day.</li>
+              <li><strong>Book a slot… or don&rsquo;t.</strong> Go quiet, and see the gentle follow-up arrive tomorrow.</li>
+              <li><strong>Booked? Try changing your mind</strong> — reschedule or cancel in one message, no phone queue.</li>
+              <li><strong>Skip your appointment</strong> — and watch how it wins the rebooking without nagging.</li>
+              <li><strong>After your &ldquo;visit&rdquo;</strong>, we&rsquo;ll mark it done — see how it asks for your feedback.</li>
+              <li><strong>Come back in 3 months</strong> for your check-up reminder. Ghost us for 6, and Aumy will try to win you back 🙂</li>
+            </ol>
+            <p style={{ marginTop: 18, textAlign: 'center', color: '#5b6784' }}>
+              Every message you get is exactly what your patients would get.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* GET THE APP — iOS + Android */}
+      {/* GET THE APP — iOS + Android (self-serve signups start here) */}
       <AppDownload />
 
       {/* FAQ */}
@@ -639,24 +210,23 @@ const Home = () => {
         </div>
       </section>
 
-      {/* FINAL CTA + FOUNDER */}
-      <section className="ch-section ch-tint">
-        <div className="ch-container ch-narrow ch-center">
-          <h2 className="ch-h2">Grow your dental clinic. Not your administrative workload.</h2>
-          <p className="ch-lead">
-            Aumy coordinates the manual tasks and patient journey behind your clinic, so your team can
-            spend less time chasing patients and more time caring for them.
+      {/* ONE CALL TO ACTION + explore links (keeps every key page linked from home) */}
+      <section className="ch-offer">
+        <div className="ch-container ch-center">
+          <h2 className="ch-offer-title">Stop losing patients. Start with one module.</h2>
+          <p className="ch-offer-sub">
+            Pick the leak costing your clinic most and fix only that — 1,000 free Aumy credits for each product.
+            Want everything set up for you? Call us on <a href="tel:+918007189868" style={{ color: 'inherit', whiteSpace: 'nowrap' }}>80071 89868</a>.
           </p>
-          <blockquote className="ch-founder">
-            &ldquo;I&rsquo;ve spoken to hundreds of dental clinics. Many of the clinics interested in Aumy
-            aren&rsquo;t struggling to fill their chairs. Their chairs are already full. The problem is
-            everything happening around those chairs.&rdquo;
-            <cite>— Jayesh, Founder, AUM AI</cite>
-          </blockquote>
-          <p className="lux-founder-note">
-            {FOUNDER_SUMMARY} <Link to="/about">Read Jayesh&rsquo;s story &rarr;</Link>
-          </p>
-          <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get my free Clinic Growth Audit</Link>
+          <div className="ch-hero-cta ch-center-cta">
+            <a href="#get-the-app" className="ch-btn ch-btn-primary">Start free in the app</a>
+            <Link to="/contact" className="ch-btn ch-btn-ghost ch-ghost-light">Talk to our team</Link>
+          </div>
+          <nav className="ch-explore" aria-label="Explore Aumy">
+            {HOME_EXPLORE.map((e) => (
+              <Link key={e.to} to={e.to}>{e.label}</Link>
+            ))}
+          </nav>
         </div>
       </section>
     </div>

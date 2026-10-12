@@ -76,4 +76,22 @@ const HERO_PRODUCTS = [
   { id: 'automate-dental-clinic-operations', name: 'Aumy One', outcome: 'All of it, working as one.' },
 ];
 
-module.exports = { HERO_PRODUCTS, HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
+// Lean home (owner 2026-10-12: "make sure we do not lose the seo advantage"): the retired home sections linked
+// to these pages; one link row keeps every one of them reachable from home (page + crawler HTML).
+const HOME_EXPLORE = [
+  { to: '/modules', label: 'All modules' },
+  { to: '/ai-dental-software-india', label: 'AI dental software in India' },
+  { to: '/ai-receptionist', label: 'AI receptionist for dentists' },
+  { to: '/whatsapp-automation-for-clinics', label: 'WhatsApp automation for clinics' },
+  { to: '/ai-dental-clinic-operations', label: 'AI dental clinic operations' },
+  { to: '/ai-patient-engagement', label: 'AI patient engagement' },
+  { to: '/revenue-generator', label: 'How Aumy works' },
+  { to: '/demos', label: 'Watch demos' },
+  { to: '/switch', label: 'Switching software?' },
+  { to: '/pricing', label: 'Pricing' },
+  { to: '/case-studies', label: 'Case studies' },
+  { to: '/growth-audit', label: 'Free clinic audit' },
+  { to: '/growth', label: 'Growth Hub' },
+];
+
+module.exports = { HERO_PRODUCTS, HOME_EXPLORE, HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };

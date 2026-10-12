@@ -14,11 +14,12 @@
 const { MONTHLY_TEXT, GST } = require('./pricing');
 
 const FAQS = [
-  { q: 'How much does Aumy cost?', a: `The Clinic OS starts from ${MONTHLY_TEXT}; the AI receptionist, AI calls and follow-ups are priced on top. ${GST}` },
+  { q: 'How much does Aumy cost?', a: `Each module is priced on its own, so you pay only for what you use — from ${MONTHLY_TEXT} for Aumy Clinic. Start free in the Aumy app with 1,000 Aumy credits for each product; see the pricing page for every module. ${GST}` },
   { q: 'Do you have your own dental software (PMS)?', a: 'Yes — Aumy includes a complete Dental PMS: patient records, appointments, FDI odontogram with 6-point perio charting, digital prescriptions, treatment plans, and full billing, invoicing & accounts. It even charts as you speak. Clinics that want one platform run everything on Aumy.' },
-  { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, Aumy keeps your data in sync with it and adds the growth and engagement layer on top. If you want one connected platform, we migrate your data from your current software into Aumy for a one-time migration fee — with no downtime.' },
+  { q: 'Do I have to replace my current software?', a: 'No. Whatever software you use, Aumy keeps your data in sync with it and adds the Aumy modules you pick on top. If you want one connected platform, we migrate your data from your current software into Aumy for a one-time migration fee — with no downtime.' },
   { q: 'Is my patient data safe?', a: 'Yes — encrypted in transit and at rest, role-based access, and private by design.' },
-  { q: 'How long does it take to get started?', a: 'Most clinics are live quickly — and most of that is simple setup we handle with you.' },
+  { q: 'How long does it take to get started?', a: 'Download the Aumy app, pick a module and set it up from your phone in minutes. Prefer help? Call 80071 89868 and our team sets it up with you.' },
+  { q: 'Isn’t this just reminder software?', a: 'No. Anyone can send a reminder. Aumy reads every reply and acts on it — confirms the visit, moves it to a real free slot, follows up an advised treatment — and books the patient.' },
   { q: 'Will my staff have to learn something complicated?', a: 'No. Aumy runs in the background and takes work off the front desk — your team does less, not more.' },
 ];
 
