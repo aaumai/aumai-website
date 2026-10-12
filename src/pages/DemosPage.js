@@ -21,7 +21,7 @@ const VIDEOS = [
     tag: 'The patient journey',
     title: 'One patient. One journey. One connected system.',
     blurb:
-      'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the care-gap follow-up, an eight-month-dormant patient won back with a ₹999 package, and the review ask that listens first. Convert → Care → Retain → Reactivate.',
+      'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the care-gap follow-up, an eight-month-dormant patient won back with a ₹999 package, and the review ask that listens first.',
     featured: true,
   },
   {

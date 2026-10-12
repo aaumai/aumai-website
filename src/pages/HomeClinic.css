@@ -495,3 +495,12 @@
 .ch-explore { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: 34px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
 .ch-explore a { color: rgba(255, 255, 255, 0.78); font-size: 14px; text-decoration: none; }
 .ch-explore a:hover { color: #fff; text-decoration: underline; }
+
+/* How Aumy works (/revenue-generator, lean 2026-10-12) */
+.ch-how-steps { list-style: none; margin: 34px auto 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1100px; }
+.ch-how-steps li { display: flex; gap: 16px; align-items: flex-start; }
+.ch-how-num { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; background: var(--c-ink); color: #fff; }
+.ch-how-modules { list-style: none; margin: 26px 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.ch-how-modules li { font-size: 17px; line-height: 1.45; }
+.ch-how-modules li a { font-weight: 700; margin-right: 6px; }
+@media (max-width: 900px) { .ch-how-steps { grid-template-columns: 1fr; } }

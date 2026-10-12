@@ -242,7 +242,6 @@ const SwitchPage = () => {
           <div className="ch-head">
             <span className="ch-eyebrow">What you get once you are in</span>
             <h2 className="ch-h2">Your clinic is growing. Don&rsquo;t let the chaos grow with it.</h2>
-            <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
           </div>
           <div className="ch-pillars">
             {pillars.map((p, i) => (

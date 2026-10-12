@@ -20,8 +20,8 @@ const SUMMARY =
 const STORY = [
   'I started Aumy after seeing the same problem in clinic after clinic. It usually wasn’t a lack of patients — many clinics already had full chairs. The problem was everything happening around those chairs.',
   'Calls unanswered while the team was with patients. WhatsApp enquiries waiting for a reply. Appointments to confirm and reschedule. No-shows nobody had time to recover. Treatment plans quietly stalling, care gaps left open, patients drifting away — and much of the patient journey still running on paper, WhatsApp and memory.',
-  'The team wasn’t failing. The clinic had outgrown the way it operated. This wasn’t a patient-acquisition problem; it was a coordination problem.',
-  'So I’m building Aumy — the AI operating system for growing dental clinics. It doesn’t just record what happened; it actively manages the work around every patient journey, so clinics can grow without growing the chaos.',
+  'The team wasn’t failing. The clinic had outgrown the way it operated. This wasn’t a patient-acquisition problem; patients were slipping through the cracks.',
+  'So I’m building Aumy — the AI operating system for growing dental clinics. It doesn’t just record what happened; it actively manages the work around every patient journey, so clinics stop losing the patients they already have.',
 ];
 
 const EXPERTISE = [
@@ -33,7 +33,7 @@ const EXPERTISE = [
 
 // Most recent first. Dates as on his profile.
 const CAREER = [
-  { years: '2025 –', role: 'Founder', org: 'Aumy (AUM AI)', what: 'The AI operating system for growing dental clinics — convert, care, retain, reactivate. Live with paying dental clinics in India.' },
+  { years: '2025 –', role: 'Founder', org: 'Aumy (AUM AI)', what: 'AI modules for dental clinics that stop patients slipping away. Live with paying dental clinics in India.' },
   { years: '2023 – 2025', role: 'Product Manager', org: 'Abacus Insights', what: 'Healthcare data platforms on FHIR/HL7 joining EHR, claims and third-party data; care-gap closure and risk adjustment; GenAI (Llama + RAG) for clinical insight.' },
   { years: '2021 – 2022', role: 'Product Owner', org: 'FIGmd', what: 'A MIPS quality-measurement platform built with specialty clinical registries for CMS compliance.' },
   { years: '2019 – 2022', role: 'Healthcare IT Consultant', org: 'Coaction, for Medline Industries', what: 'Led engineering of a revenue-cycle platform — claims, eligibility and remittance — with HIPAA-compliant EDI.' },

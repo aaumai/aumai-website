@@ -60,8 +60,6 @@ const SITEMAPS = {
     ['/ai-receptionist', 0.9, 'monthly'],
     ['/whatsapp-automation-for-clinics', 0.9, 'monthly'],
     // The two search themes (owner 2026-09-18).
-    ['/ai-dental-clinic-operations', 0.9, 'monthly'],
-    ['/ai-patient-engagement', 0.9, 'monthly'],
     ['/growth', 0.8, 'weekly'],
     ['/podcast', 0.7, 'monthly'],
     // Articles carry their real publish date (or the date of a substantive
@@ -164,8 +162,6 @@ ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}$
 - ${ORIGIN}/podcast — the Dental Growth podcast
 - ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments; from ${PRICING.MONTHLY_TEXT}
 - ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: care-gap reminders, reactivation, campaigns
-- ${ORIGIN}/ai-dental-clinic-operations — AI-powered dental clinic operations: every call and WhatsApp answered, appointment orchestration, digital registration, intake and consent, invoices, one team inbox; from ${PRICING.MONTHLY_TEXT}
-- ${ORIGIN}/ai-patient-engagement — AI-powered patient journey and patient engagement: reminders, treatment-specific after-care, doctor check-ins, care gaps, treatment-plan follow-ups, reactivation — each message in context
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, care gaps and patient reactivation for Indian dental clinics
 ## Dental practice growth guides (free, no sign-up, India-focused)
 ${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s+/g, ' ')}`).join('\n')}

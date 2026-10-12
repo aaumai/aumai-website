@@ -41,7 +41,7 @@ const AboutPage = () => {
         <div className="ch-container lux-about-story">
           <div>
             <span className="ch-eyebrow">Why Aumy exists</span>
-            <h2 className="ch-h2">It wasn&rsquo;t a patient problem. <em>It was a coordination problem.</em></h2>
+            <h2 className="ch-h2">It wasn&rsquo;t a patient problem. <em>Patients were slipping through the cracks.</em></h2>
             <p className="ch-lead">{SUMMARY}</p>
           </div>
           <div className="lux-about-prose">

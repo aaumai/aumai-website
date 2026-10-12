@@ -37,6 +37,8 @@ const COMP = require('../src/data/compliance');
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
 const EXPL = require('../src/data/explainers');
+// How Aumy works (/revenue-generator, lean 2026-10-12): same file as src/pages/AumyRevenueGenerator.js.
+const HOW = require('../src/data/howItWorks');
 // Home FAQ: the list src/pages/Home.js renders — crawler HTML and FAQPage JSON-LD read the same one.
 const HOME_FAQ = require('../src/data/homeFaq');
 // "Handcrafted only for dentists" (owner 2026-10-08): same words as the React pages.
@@ -89,8 +91,6 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/ai-dental-software-india', 'AI dental software in India'],
   ['/ai-receptionist', 'AI receptionist for dental clinics'],
   ['/whatsapp-automation-for-clinics', 'WhatsApp automation for clinics'],
-  ['/ai-dental-clinic-operations', 'AI dental clinic operations'],
-  ['/ai-patient-engagement', 'AI patient journey & engagement'],
   ['/modules', 'Dental clinic software modules'],
   ['/revenue-generator', 'How Aumy works'],
   ['/pricing', 'Pricing'],
@@ -281,7 +281,7 @@ const demoVideoLd = {
   '@type': 'VideoObject',
   name: 'One Patient, Five Stages, Zero Typing \u2014 Aumy runs the whole dental patient journey on WhatsApp (live, unedited)',
   description:
-    'A live, unedited demo on a real dental clinic\u2019s WhatsApp number: a lead from an ad who says \u201clet me think about it\u201d, the unprompted follow-up and booking, day-one aligner aftercare, the tracking recall, an eight-month-dormant patient won back with a \u20b9999 wellness package, and a review ask that listens before asking. Convert, Care, Retain, Reactivate, Grow.',
+    'A live, unedited demo on a real dental clinic\u2019s WhatsApp number: a lead from an ad who says \u201clet me think about it\u201d, the unprompted follow-up and booking, day-one aligner aftercare, the tracking recall, an eight-month-dormant patient won back with a \u20b9999 wellness package, and a review ask that listens before asking.',
   thumbnailUrl: 'https://i.ytimg.com/vi/-qw1sp7Ub4k/maxresdefault.jpg',
   embedUrl: 'https://www.youtube.com/embed/-qw1sp7Ub4k',
   contentUrl: 'https://www.youtube.com/watch?v=-qw1sp7Ub4k',
@@ -520,111 +520,13 @@ const routes = [
         </ol>
         <h2>AI dental software questions, answered</h2>
         ${ADS.FAQS.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')}
-        <p>Last updated ${esc(ADS.UPDATED)}. Comparing named products? <a href="/growth/best-dental-software-india">Best dental software in India (2026): an honest comparison</a>. See also <a href="/ai-dental-clinic-operations">AI for dental clinic operations</a>, <a href="/ai-patient-engagement">the AI-powered patient journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">the modules you can buy on their own</a>.</p>
+        <p>Last updated ${esc(ADS.UPDATED)}. Comparing named products? <a href="/growth/best-dental-software-india">Best dental software in India (2026): an honest comparison</a>. See also <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, <a href="/modules/dental-patient-follow-up">Aumy Journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">the modules you can buy on their own</a>.</p>
         <p><a href="/contact">Talk to us</a></p>
       </div></section>`,
   },
   // The two search themes the site targets (owner 2026-09-18). Each has a
   // React page (src/pages/AIDentalClinicOperationsPage.js,
   // AIPatientEngagementPage.js) — keep this crawler copy in step with them.
-  {
-    slug: 'ai-dental-clinic-operations',
-    title: 'AI for Dental Clinic Operations | Calls, WhatsApp, Appointments | Aumy',
-    description:
-      'AI for dental clinic operations: every call and WhatsApp answered, appointments confirmed, no-shows followed up, digital intake, invoices and tasks in one platform.',
-    canonical: `${ORIGIN}/ai-dental-clinic-operations`,
-    jsonld: [orgLd, {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'What is AI for clinic management?', acceptedAnswer: { '@type': 'Answer', text: 'Software that runs part of a clinic’s day-to-day work itself instead of only recording it: answering calls and WhatsApp, booking and confirming appointments, following up no-shows and enquiries, collecting forms and routing tasks to the right person. In Aumy it is built for dental clinics and works from your doctors’ real calendars.' } },
-        { '@type': 'Question', name: 'How does AI help dental clinic operations?', acceptedAnswer: { '@type': 'Answer', text: 'It takes the repetitive coordination off the front desk: replies in seconds at any hour, reminders and confirmations sent on time, rescheduling written back to the calendar, and only the things that need a person landing in one team inbox.' } },
-        { '@type': 'Question', name: 'What is patient follow-up automation?', acceptedAnswer: { '@type': 'Answer', text: 'Follow-up messages that go out on their own at the right time: a reminder before the visit, a check after treatment, a nudge for a treatment the patient has not booked yet, and a recall when a cleaning is due. Aumy sends them on WhatsApp and stops once the patient books.' } },
-        { '@type': 'Question', name: 'Do I have to replace my practice management software?', acceptedAnswer: { '@type': 'Answer', text: 'No. Aumy runs on top of whatever you use today and keeps your data in sync with it. If you want one connected platform, Aumy includes a complete dental PMS you can move onto whenever you choose.' } },
-        { '@type': 'Question', name: 'Will my front desk have to change how they work?', acceptedAnswer: { '@type': 'Answer', text: 'They do less of the chasing, not more. Calls and messages are answered whether or not someone is free, confirmations and reminders go out on their own, forms arrive filled in, and the team inbox shows what actually needs a person.' } },
-        { '@type': 'Question', name: 'What happens when the AI cannot handle something?', acceptedAnswer: { '@type': 'Answer', text: 'It hands over — to a person, with the context. Clinical questions, upset patients and anything sensitive go to your team immediately, and the AI steps back the moment a human joins a conversation.' } },
-        { '@type': 'Question', name: 'How is it set up?', acceptedAnswer: { '@type': 'Answer', text: 'A dedicated Aumy expert learns how your clinic runs — your doctors, treatments, timings and policies — sets Aumy up around it, and reviews it with you every week. You are not handed a login and left alone.' } },
-      ],
-    }],
-    content: `
-      <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">AI-powered dental clinic operations</p>
-        <h1 class="ch-hero-title">AI for dental clinic operations: calls, WhatsApp, appointments and intake, handled.</h1>
-        <p>AI for dental clinic operations means software that does the front desk's repetitive coordination itself — answering calls and WhatsApp, booking and confirming appointments, following up no-shows, collecting intake forms and routing tasks — so the workload does not grow with the clinic. Aumy does this for dental clinics in India, from ${PRICE.MONTHLY_TEXT}.</p>
-        <p class="ch-hero-sub">Calls, WhatsApp, appointments, confirmations, rescheduling, no-shows, registration, intake, consent, X-rays, invoices and the tasks in between — coordinated by Aumy, the operating system for a growing dental clinic.</p>
-        <p><a href="/revenue-generator">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a></p>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        <h2>Growth creates chaos. Aumy coordinates it.</h2>
-        <p>A successful dental clinic doesn't necessarily have a patient-acquisition problem. It often has a coordination problem. When chairs are full, every new patient brings more calls, more WhatsApp messages, more confirmations, more rescheduling, more paperwork — and more things falling through the cracks. Aumy takes that work off the front desk, so when your clinic grows, the operational workload doesn't grow with it.</p>
-        <h2>What AI-powered clinic operations means in a dental clinic</h2>
-        <ul>
-          <li><strong>Every call answered</strong> — Aumy's AI voice agent answers the clinic phone, knows who is calling, books or reschedules against the doctor's real availability, and hands the call to your team when it should.</li>
-          <li><strong>Every WhatsApp enquiry answered</strong> — treatment questions, timings, directions and bookings answered in seconds on the official WhatsApp Business API, in the patient's own language; one-tap human takeover.</li>
-          <li><strong>Appointment orchestration</strong> — confirmations, reminders by message and call, rescheduling, cancellations, waitlists for earlier slots and no-show follow-up, written back to your calendar.</li>
-          <li><strong>Digital registration, intake and consent</strong> — forms completed on the patient's phone before they arrive; consent signed on a phone or the clinic iPad; X-rays, documents and invoices on the record.</li>
-          <li><strong>Clinic tasks, in one inbox</strong> — everything that needs a human today lands in one team inbox with the full context, instead of in somebody's head.</li>
-          <li><strong>Full dental software included — or keep yours</strong> — run the whole clinic on Aumy's dental PMS, or keep your current software; Aumy syncs with it from day one.</li>
-        </ul>
-        <h2>One half of one system</h2>
-        <p>Clinic operations are the Convert and Care stages of the Aumy patient journey — from the first enquiry to the visit itself. The other half is what happens around and after treatment: reminders, after-care, doctor check-ins, care gaps and reactivation. Same platform, same patient context. <a href="/ai-patient-engagement">See the AI-powered patient journey</a>. Or <a href="/modules">pick only the modules you need</a>.</p>
-        <h2>Clinic operations questions, answered</h2>
-        <p><strong>What is AI for clinic management?</strong> Software that runs part of a clinic’s day-to-day work itself instead of only recording it: answering calls and WhatsApp, booking and confirming appointments, following up no-shows and enquiries, collecting forms and routing tasks to the right person. In Aumy it is built for dental clinics and works from your doctors’ real calendars.</p>
-        <p><strong>How does AI help dental clinic operations?</strong> It takes the repetitive coordination off the front desk: replies in seconds at any hour, reminders and confirmations sent on time, rescheduling written back to the calendar, and only the things that need a person landing in one team inbox.</p>
-        <p><strong>What is patient follow-up automation?</strong> Follow-up messages that go out on their own at the right time: a reminder before the visit, a check after treatment, a nudge for a treatment the patient has not booked yet, and a recall when a cleaning is due. Aumy sends them on WhatsApp and stops once the patient books.</p>
-        <p><strong>Do I have to replace my practice management software?</strong> No. Aumy runs on top of whatever you use today and keeps your data in sync with it; a complete dental PMS is included for clinics that want one platform.</p>
-        <p><strong>Will my front desk have to change how they work?</strong> They do less of the chasing, not more.</p>
-        <p><strong>What happens when the AI cannot handle something?</strong> It hands over to a person, with the context, and steps back the moment a human joins.</p>
-        <p><strong>How is it set up?</strong> A dedicated Aumy expert sets it up around how your clinic runs and reviews it with you every week.</p>
-        <p><a href="/pricing">See pricing — everything included</a></p>
-      </div></section>`,
-  },
-  {
-    slug: 'ai-patient-engagement',
-    title: 'AI-Powered Patient Journey & Patient Engagement for Dental Clinics | Aumy',
-    description:
-      'Aumy runs the patient journey of a dental clinic with AI: reminders, pre-treatment instructions, treatment-specific after-care, doctor check-ins, care-gap follow-ups, treatment-plan follow-ups and reactivation — every message in the context of that patient’s treatment, on WhatsApp and by call.',
-    canonical: `${ORIGIN}/ai-patient-engagement`,
-    jsonld: [orgLd, {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Isn’t this just automated spam?', acceptedAnswer: { '@type': 'Answer', text: 'No. Every message is the one relevant to that patient at that moment: their reminder when the visit is near, their after-care on the day of treatment, their care-gap follow-up when it is due. When a patient books, replies or opts out, the journey they are in stops — nobody is chased twice.' } },
-        { '@type': 'Question', name: 'Does the doctor have to write the messages?', acceptedAnswer: { '@type': 'Answer', text: 'The doctors define the after-care and the tone once, in their own words, during setup. Aumy then sends the right message to the right patient in the right context.' } },
-        { '@type': 'Question', name: 'Does it work with the software we already use?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Aumy syncs with your practice management software, so the appointments, treatments and patients it acts on are the ones you already have. No migration is needed to start.' } },
-        { '@type': 'Question', name: 'Can patients opt out?', acceptedAnswer: { '@type': 'Answer', text: 'Instantly, with one word, on every channel — and the opt-out is honoured across every journey, not just the one that sent the last message.' } },
-      ],
-    }],
-    content: `
-      <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">AI-powered patient journey &amp; engagement</p>
-        <h1 class="ch-hero-title">An AI-powered patient journey that keeps every patient engaged — before, during and after treatment.</h1>
-        <p class="ch-hero-sub">Aumy knows where each patient is in their journey and sends the right message at the right moment — on WhatsApp and by call — so nobody is forgotten, and nobody is spammed.</p>
-        <p><a href="/demos">Watch the whole patient journey, live</a> · <a href="/contact">Get started — risk-free</a></p>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        <h2>Patient engagement with context, not broadcasts</h2>
-        <p>Reminder tools send the same message to everyone. Aumy sends each patient the message that fits where they are: the reminder for their visit, the after-care for their treatment, the doctor's check-in when it is due, the care-gap follow-up when it is overdue — and it stops the moment the patient books, replies or asks it to. Convert → Care → Retain → Reactivate, coordinated by one system that knows the whole journey.</p>
-        <h2>The AI-powered patient journey, stage by stage</h2>
-        <ul>
-          <li><strong>Before the visit</strong> — confirmations and reminders by WhatsApp and call, pre-treatment instructions in the doctor's words, and intake done before the patient walks in.</li>
-          <li><strong>Around the treatment</strong> — treatment-specific after-care, day by day; when a patient messages after treatment, Aumy understands which treatment, which doctor and what was said last time.</li>
-          <li><strong>Doctor check-ins</strong> — a check-in from the doctor at the right moment; pain, worry or a question surfaces as a signal your team sees.</li>
-          <li><strong>Care gaps</strong> — recalls, cleanings and next sittings followed up on time, and the follow-up stops the moment the patient books.</li>
-          <li><strong>Treatment plans</strong> — advised-but-not-started treatment followed up until the patient decides.</li>
-          <li><strong>Reactivation</strong> — patients who drifted away invited back in the doctor's own words, with opt-outs honoured instantly.</li>
-        </ul>
-        <h2>Everything knows what's happening</h2>
-        <p>They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it, and knows when they last came in. They book → every nurture, check-in and care-gap follow-up they were in stops. They don't show → Aumy knows what happened and follows up to rebook. They say stop → every journey stops, instantly, on every channel. One patient. One journey. One connected system.</p>
-        <p>The patient journey is one half of Aumy. The other half is the clinic's day-to-day operations — calls, WhatsApp, bookings, intake, consent, invoices and tasks — run by the same system, with the same patient context. <a href="/ai-dental-clinic-operations">See AI-powered clinic operations</a>. Or <a href="/modules">buy Aumy Journey on its own</a>.</p>
-        <h2>Patient journey questions, answered</h2>
-        <p><strong>Isn't this just automated spam?</strong> No — every message is the one relevant to that patient at that moment, and the journey stops when they book, reply or opt out.</p>
-        <p><strong>Does the doctor have to write the messages?</strong> The doctors define the after-care and the tone once, in their own words.</p>
-        <p><strong>Does it work with the software we already use?</strong> Yes — Aumy syncs with your practice management software.</p>
-        <p><strong>Can patients opt out?</strong> Instantly, with one word, on every channel.</p>
-        <p><a href="/pricing">See pricing — everything included</a></p>
-      </div></section>`,
-  },
   {
     slug: '',
     // Same strings as src/pages/Home.js and public/index.html (SEO review 2026-10-06:
@@ -685,45 +587,39 @@ const routes = [
   },
   {
     slug: 'revenue-generator',
-    title: 'How Aumy Works — The Operating System for a Growing Dental Clinic',
-    description:
-      'How Aumy manages the chaos that comes with growth: AI-powered clinic operations (calls, WhatsApp, appointments, digital registration, intake, consent, X-rays, invoices) and an AI-powered patient journey (reminders, after-care, care gaps, reactivation) on one connected platform — Convert, Care, Retain, Reactivate.',
+    // Lean "How Aumy works" (owner 2026-10-12). Words: src/data/howItWorks.js (same file as the React page).
+    title: HOW.HOW_SEO.title,
+    description: HOW.HOW_SEO.description,
     canonical: `${ORIGIN}/revenue-generator`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">How Aumy works</p>
-        <h1 class="ch-hero-title">Grow your clinic. Don't grow the chaos.</h1>
-        <p class="ch-hero-sub">Aumy is the operating system for a growing dental clinic. It manages the chaos that comes with growth — coordinating your patients, people and processes from the first enquiry to ongoing care.</p>
-        <p>CONVERT → CARE → RETAIN → REACTIVATE</p>
-        <p><a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/contact">Talk to us</a></p>
+        <h1 class="ch-hero-title">Pick a module. Connect. Stop losing patients.</h1>
+        <p class="ch-hero-sub">Aumy is built from modules for dental clinics. Start with the one for your biggest leak, set it up from your phone, and add more whenever you want.</p>
+        <p><a href="/#get-the-app">Start free in the app</a> · <a href="/contact">Talk to our team</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
-        <h2>A successful dental clinic doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>
-        <p>When chairs are full, growth creates chaos: calls, WhatsApp messages, enquiries, appointment confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents, X-rays, invoices and patient questions.</p>
-        <p><strong>Before Aumy:</strong> Growth → More patients → More calls → More WhatsApp → More follow-ups → More staff workload → More things falling through the cracks.</p>
-        <p><strong>With Aumy:</strong> Growth → Aumy coordinates the work → Your team focuses on patients.</p>
-        <h2>Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
+        <h2>Three steps.</h2>
+        <ol>
+          ${HOW.HOW_STEPS.map((st) => `<li><strong>${esc(st.title)}</strong> — ${esc(st.body)}</li>`).join('\n          ')}
+        </ol>
+        <p>Prefer it set up for you? Call our team on 80071 89868.</p>
+        <h2>${esc(EXPL.TITLE)}</h2>
         <ul>
-          <li><strong>CONVERT — from the first enquiry to a booking.</strong> Leads → Enquiries → Calls → Appointments → Bookings. Every call, WhatsApp message and ad enquiry answered, followed up and booked into a real slot. (AI voice agent · WhatsApp answers · Lead follow-up · Appointment booking)</li>
-          <li><strong>CARE — everything around the treatment.</strong> Registration → Intake → Consent → Treatment → After-care → Patient communication. Digital registration and intake, consent signed on a phone or the clinic iPad, and treatment-specific after-care your doctors define. (Digital registration · Intake forms · Digital consent · After-care plans)</li>
-          <li><strong>RETAIN — keeping patients on track.</strong> Appointment follow-ups → Care gaps → Doctor check-ins → Preventive care. Confirmations, rescheduling and no-show recovery handled in the conversation, and every care gap followed up on time. (Reminders &amp; confirmations · No-show recovery · Care gaps · Doctor check-ins)</li>
-          <li><strong>REACTIVATE — bringing patients back.</strong> Old patients → Overdue treatment → Missed appointments → Inactive patients. Patients who drifted away invited back in your doctors' own words. (Inactive patients · Overdue treatment · Missed appointments · Stalled treatment plans)</li>
+          ${EXPL.VIDEOS.map((v) => `<li><a href="${v.src}"><strong>${esc(v.name)}</strong> explainer video</a> — ${esc(v.line)}</li>`).join('\n          ')}
         </ul>
-        <h2>The work around your chairs, handled.</h2>
+        <h2>Buy only what you need.</h2>
         <ul>
-          <li><strong>Patient communication</strong> — AI voice agent that answers calls, books appointments, appointment reminders, WhatsApp and patient queries, follow-ups, one-tap human takeover.</li>
-          <li><strong>Appointment orchestration</strong> — confirmations, rescheduling and cancellations, no-show management, waitlists for earlier slots, care gaps.</li>
-          <li><strong>Digital clinic</strong> — digital registration, patient intake with signature, digital consent, X-rays and documents on the record, invoices and payments, paperless workflows.</li>
-          <li><strong>Patient journey</strong> — pre-treatment instructions, treatment records and charting, after-care, care gaps, doctor check-ins, reactivation.</li>
-          <li><strong>Growth</strong> — Get Found on Google, reviews and local SEO, your website, Meta Ads through our marketing partners, lead capture, lead conversion.</li>
+          ${POS.HERO_PRODUCTS.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.name)}</strong></a> ${esc(p.outcome)}</li>`).join('\n          ')}
         </ul>
-        <h2>Think of Aumy as Jarvis for your dental clinic.</h2>
-        <p>Not because it's a chatbot. Because everything knows what's happening. A patient calls → Aumy knows who they are. They need an appointment → Aumy knows the doctor's availability. They don't show → Aumy knows what happened. They need a follow-up → Aumy creates and manages it. They message after treatment → Aumy understands the treatment context. They have an overdue care gap → Aumy knows it. The clinic gets a call → the voice agent has the context.</p>
-        <p>Your calls know your appointments. Your appointments know your patients. Your patients know their treatment. Your follow-ups know what happened. And Aumy knows all of it. <strong>One patient. One journey. One connected system.</strong></p>
-        <h2>Examine first. Prescribe after.</h2>
-        <p>We understand how your clinic runs, find where work gets stuck and patients fall through the cracks, set Aumy up around your clinic, and measure it with you every week.</p>
-        <p><a href="/growth-audit">Get my free Clinic Audit</a></p>
+        <p><a href="/modules">Compare all the modules side by side</a></p>
+        <h2>Aumy works for your team, not around it.</h2>
+        <ul>
+          ${HOW.HOW_CONTROL.map((c) => `<li><strong>${esc(c.title)}</strong> — ${esc(c.body)}</li>`).join('\n          ')}
+        </ul>
+        <h2>Busy clinics already run on Aumy.</h2>
+        <p>Vinayaka Dental Care: "Our revenue grew about 25% in just two months — and we didn't hire a single extra person to make it happen." <a href="/case-studies">Read the case studies</a></p>
       </div></section>`,
   },
   {
@@ -761,7 +657,7 @@ const routes = [
         <p class="ch-eyebrow">See it, don't take our word for it</p>
         <h1 class="ch-hero-title">Watch Aumy run a clinic — live, unscripted</h1>
         <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Prefer to feel it? WhatsApp our live demo clinic on +91 90223 12554 as if you were a patient.</p>
-        <p><a href="/ai-dental-clinic-operations">AI-powered clinic operations</a> · <a href="/ai-patient-engagement">AI-powered patient journey</a></p>
+        <p><a href="/modules/automate-dental-clinic-operations">Aumy One</a> · <a href="/modules/dental-patient-follow-up">Aumy Journey</a></p>
       </div></section>`,
   },
   {
@@ -807,7 +703,7 @@ const routes = [
         <p class="ch-eyebrow">Facebook &amp; Instagram</p>
         <h1 class="ch-hero-title">AI receptionist for Facebook &amp; Instagram messages</h1>
         <p class="ch-hero-sub">Enquiries that arrive as Facebook or Instagram messages get the same instant, in-context answer as WhatsApp — and the same booking, follow-up and one-tap human takeover.</p>
-        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/ai-dental-clinic-operations">AI-powered clinic operations</a></p>
+        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/modules/automate-dental-clinic-operations">Aumy One</a></p>
       </div></section>`,
   },
   {
@@ -860,7 +756,7 @@ const routes = [
         <h2>How the move works</h2>
         <ol>
           <li><b>Sync</b> — Aumy keeps your current software and Aumy in step from day one.</li>
-          <li><b>Run on top</b> — Convert, Care, Retain and Reactivate start working on the synced data.</li>
+          <li><b>Run on top</b> — the Aumy modules you pick start working on the synced data.</li>
           <li><b>Migrate when you are ready</b> — full history moved, counts verified with you, sync kept running until you switch the old system off.</li>
         </ol>
         <p><a href="/contact">Book a migration call</a> · <a href="/pricing">See pricing</a> · <a href="/revenue-generator">How Aumy works</a></p>

@@ -83,8 +83,6 @@ const HOME_EXPLORE = [
   { to: '/ai-dental-software-india', label: 'AI dental software in India' },
   { to: '/ai-receptionist', label: 'AI receptionist for dentists' },
   { to: '/whatsapp-automation-for-clinics', label: 'WhatsApp automation for clinics' },
-  { to: '/ai-dental-clinic-operations', label: 'AI dental clinic operations' },
-  { to: '/ai-patient-engagement', label: 'AI patient engagement' },
   { to: '/revenue-generator', label: 'How Aumy works' },
   { to: '/demos', label: 'Watch demos' },
   { to: '/switch', label: 'Switching software?' },

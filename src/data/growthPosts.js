@@ -580,7 +580,7 @@ const growthPosts = [
   <li><strong>Reminders and follow-up that never lapse.</strong> Confirmations, no-show follow-up, treatment the patient has not booked yet, recalls — sent on time for every patient.</li>
   <li><strong>Notes, faster.</strong> The doctor speaks the visit notes and the software drafts them into the record for the doctor to check and sign.</li>
 </ul>
-<p>What it costs: Aumy, for example, starts from ₹3,000 a month for the clinic software, with the AI receptionist and follow-up priced on top for each clinic — see <a href="/pricing">pricing</a>. For how the dental software options in India compare, see <a href="/ai-dental-software-india">dental software in India</a>, and for the work AI takes off the front desk, <a href="/ai-dental-clinic-operations">AI for clinic operations</a>.</p>
+<p>What it costs: Aumy, for example, starts from ₹3,000 a month for the clinic software, with the AI receptionist and follow-up priced on top for each clinic — see <a href="/pricing">pricing</a>. For how the dental software options in India compare, see <a href="/ai-dental-software-india">dental software in India</a>, and for the work AI takes off the front desk, <a href="/modules/automate-dental-clinic-operations">AI for clinic operations</a>.</p>
 
 <h2>Evaluating any AI for your clinic: five questions</h2>
 <p>Whether you look at Aumy or anything else, the same test applies:</p>

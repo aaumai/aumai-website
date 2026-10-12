@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { OFFICES, ICON } from '../config/contact';
 import AppDownload from './AppDownload';
+import { HERO_PRODUCTS } from '../data/positioning';
 import './Footer.css';
 
 const Footer = () => {
@@ -11,14 +12,8 @@ const Footer = () => {
   // only; India build shows both India and US.
   const multiOffice = OFFICES.length > 1;
 
-  const services = [
-    'AI Voice Agent & WhatsApp — Every Call Answered',
-    'Lead Capture & Follow-up',
-    'Appointments, Reminders & No-shows',
-    'Digital Registration, Intake & Consent',
-    'After-care, Care Gaps & Reactivation',
-    'Get Found, Website & Meta Ads'
-  ];
+  // The modules (owner 2026-10-12: the old "What Aumy does" list retired with the old positioning).
+  const modules = HERO_PRODUCTS;
 
   // Dental-growth pages only. The legacy engineering/consulting pages (About,
   // Services, Case Studies, Insights, Engineering Partner) keep their routes
@@ -29,8 +24,6 @@ const Footer = () => {
     { label: 'AI Dental Software India', path: '/ai-dental-software-india' },
     { label: 'AI Receptionist', path: '/ai-receptionist' },
     { label: 'WhatsApp Automation', path: '/whatsapp-automation-for-clinics' },
-    { label: 'AI-Powered Clinic Operations', path: '/ai-dental-clinic-operations' },
-    { label: 'AI-Powered Patient Journey', path: '/ai-patient-engagement' },
     { label: 'Switching Dental Software?', path: '/switch' },
     { label: 'Pricing', path: '/pricing' },
     { label: 'Watch Demo Videos', path: '/demos' },
@@ -68,9 +61,7 @@ const Footer = () => {
               <AppDownload variant="compact" />
             </div>
             <p className="footer-tagline">
-              AI-Powered Dental Clinic Management, handcrafted only for dentists. Aumy coordinates your patients, people and
-              processes from the first enquiry to ongoing care — one connected platform.
-              Growing your clinic shouldn&rsquo;t mean growing your headache.
+              Stop losing patients. Modules for dental clinics — buy only what you need, or run them all as Aumy One.
             </p>
             <div className="footer-social">
               <a href="https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
@@ -81,12 +72,14 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Services Column */}
+          {/* Modules Column */}
           <div className="footer-column">
-            <h4>What Aumy Does</h4>
+            <h4>Modules</h4>
             <ul>
-              {services.map((service, index) => (
-                <li key={index}>{service}</li>
+              {modules.map((m) => (
+                <li key={m.id}>
+                  <Link to={`/modules/${m.id}`}>{m.name}</Link> — {m.outcome}
+                </li>
               ))}
             </ul>
           </div>
@@ -136,7 +129,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} AUM AI Healthcare Solutions. All rights reserved. Aumy™ and Convert. Care. Retain. Reactivate. Grow.™ are trademarks of AAUMAI Healthcare Solution Pvt Ltd.</p>
+          <p>&copy; {currentYear} AUM AI Healthcare Solutions. All rights reserved. Aumy™ is a trademark of AAUMAI Healthcare Solution Pvt Ltd.</p>
           <div className="footer-legal">
             {legal.map((item, index) => (
               <Link key={index} to={item.path}>{item.label}</Link>

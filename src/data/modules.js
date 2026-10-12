@@ -16,7 +16,7 @@
  *   AI receptionist for dental clinics  → /ai-receptionist
  *   WhatsApp automation for clinics      → /whatsapp-automation-for-clinics
  *   dental software India / cost         → /ai-dental-software-india, /pricing
- *   patient journey / follow-ups         → /ai-patient-engagement
+ *   patient journey / follow-ups         → /modules/dental-patient-follow-up (old /ai-patient-engagement 301s there)
  *
  * Every claim is checked against the product code (aum-ehr-api / aum-ehr-web,
  * 2026-10-08). Deliberately NOT claimed: missed call → WhatsApp follow-up,
@@ -95,7 +95,7 @@ const MODULES = [
       'Recalls and check-ups followed up when due; patients who drifted away invited back.',
     ],
     addons: ['Aumy Scribe', 'Approve each message first', 'Birthday & festival wishes'],
-    more: { path: '/ai-patient-engagement', label: 'The AI-powered patient journey' },
+    more: { path: '/modules/dental-patient-follow-up', label: 'See what Aumy Journey does' },
   },
   {
     id: 'whatsapp-ai-receptionist-for-dentists',
@@ -303,7 +303,7 @@ const PAGES = [
     ],
     addons: [],
     pairs: ['dental-patient-follow-up', 'dental-clinic-management-software'],
-    deep: [{ path: '/ai-dental-clinic-operations', label: 'AI for dental clinic operations' }],
+    deep: [{ path: '/modules/automate-dental-clinic-operations', label: 'Aumy One — every module as one system' }],
   },
   {
     id: 'dental-patient-follow-up',
@@ -332,7 +332,7 @@ const PAGES = [
     ],
     addons: byId('dental-patient-follow-up').addons,
     pairs: ['ai-clinical-notes-for-dentists', 'whatsapp-ai-receptionist-for-dentists', 'ai-voice-receptionist-for-dentists'],
-    deep: [{ path: '/ai-patient-engagement', label: 'The AI-powered patient journey' }],
+    deep: [{ path: '/revenue-generator', label: 'How Aumy works' }],
   },
   {
     id: 'whatsapp-ai-receptionist-for-dentists',
@@ -415,8 +415,6 @@ const PAGES = [
     pairs: ['dental-lead-management', 'dental-clinic-management-software', 'dental-patient-follow-up', 'whatsapp-ai-receptionist-for-dentists', 'ai-voice-receptionist-for-dentists'],
     deep: [
       { path: '/revenue-generator', label: 'How Aumy works' },
-      { path: '/ai-dental-clinic-operations', label: 'AI-powered dental clinic operations' },
-      { path: '/ai-patient-engagement', label: 'The AI-powered patient journey' },
     ],
   },
 ];
