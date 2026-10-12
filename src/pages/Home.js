@@ -6,6 +6,7 @@ import DemoPlaylist from '../components/DemoPlaylist';
 import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
 import HomeModules from '../components/HomeModules';
+import HomeExplainers from '../components/HomeExplainers';
 import AumyLoop from '../components/AumyLoop';
 import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
 import { MONTHLY_TEXT } from '../data/pricing';
@@ -188,6 +189,9 @@ const Home = () => {
       {/* ── Aumy is built from modules (owner 2026-10-08): every card links to
           its /modules/<id> page. Words: src/data/modules.js (HOME, PAGES). */}
       <HomeModules />
+
+      {/* ── One explainer video per module (owner 2026-10-12). Words: src/data/explainers.js. */}
+      <HomeExplainers />
 
       {/* ── Be the patient: live hands-on demo ─────────────────────────── */}
       <section className="ch-section" id="be-the-patient">

@@ -35,6 +35,8 @@ const WA = require('../src/data/whatsappAutomation');
 const COMP = require('../src/data/compliance');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
+// Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
+const EXPL = require('../src/data/explainers');
 // Home FAQ: the list src/pages/Home.js renders — crawler HTML and FAQPage JSON-LD read the same one.
 const HOME_FAQ = require('../src/data/homeFaq');
 // "Handcrafted only for dentists" (owner 2026-10-08): same words as the React pages.
@@ -290,6 +292,19 @@ const demoVideoLd = {
     logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` },
   },
 };
+
+// Module explainer videos on the home page (owner 2026-10-12) — src/data/explainers.js.
+const explainerVideoLd = EXPL.VIDEOS.map((v) => ({
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: `${v.name} explained in 90 seconds`,
+  description: v.description,
+  thumbnailUrl: `${ORIGIN}${v.poster}`,
+  contentUrl: `${ORIGIN}${v.src}`,
+  uploadDate: EXPL.UPLOAD_DATE,
+  duration: v.duration,
+  publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` } },
+}));
 
 const videoLd = {
   '@context': 'https://schema.org',
@@ -619,7 +634,7 @@ const routes = [
       'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹3,000 a month.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
-    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd],
+    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd, ...explainerVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
         <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello. Or call +91 22 6423 0581 and wait a couple of rings — Aumy Voice will pick up (demo clinic: Lumière Dental).</p>
@@ -651,6 +666,13 @@ const routes = [
           ${moduleCardsHtml(MODS.PAGES, { stores: true })}
         </ul>
         <p><a href="/modules">Compare all the modules side by side</a></p>
+      </div></section>
+      <section id="explainers"><div class="ch-container ch-narrow">
+        <h2>${esc(EXPL.TITLE)}</h2>
+        <p>${esc(EXPL.SUB)}</p>
+        <ul>
+          ${EXPL.VIDEOS.map((v) => `<li><a href="${v.src}"><strong>${esc(v.name)}</strong> explainer video</a> — ${esc(v.line)} <a href="/modules/${v.moduleId}">See what ${esc(v.name)} does</a></li>`).join('\n          ')}
+        </ul>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>A successful dental clinic doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>

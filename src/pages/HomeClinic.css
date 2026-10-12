@@ -273,6 +273,14 @@
   color: var(--c-ink-soft);
 }
 .ch-video-card figcaption strong { color: var(--c-ink); }
+/* Module explainer videos (2026-10-12) */
+.ch-explainers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 34px; }
+.ch-explainer { margin: 0; background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius); box-shadow: var(--c-shadow-lg); overflow: hidden; display: flex; flex-direction: column; }
+.ch-explainer video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #10131c; }
+.ch-explainer figcaption { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; color: var(--c-ink-soft); }
+.ch-explainer figcaption strong { font-size: 17px; color: var(--c-ink); }
+.ch-explainer figcaption a { font-weight: 600; margin-top: 4px; }
+@media (max-width: 900px) { .ch-explainers { grid-template-columns: 1fr; } }
 .ch-testimonials-col { grid-template-columns: 1fr; margin: 0; }
 
 /* WHY US */
