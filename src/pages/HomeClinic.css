@@ -274,7 +274,15 @@
 }
 .ch-video-card figcaption strong { color: var(--c-ink); }
 /* Module explainer videos (2026-10-12) */
-.ch-explainers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 34px; }
+.ch-explainers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 34px; }
+/* Hero: one product, one outcome, one line (owner 2026-10-12). */
+.ch-hero-products { list-style: none; margin: 22px 0 26px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ch-hero .ch-hero-products li { font-size: 17px; line-height: 1.45; color: rgba(255, 255, 255, 0.78); }
+.ch-hero .ch-hero-products li a { font-weight: 700; color: #fff; text-decoration: none; margin-right: 8px; }
+.ch-hero .ch-hero-products li a:hover { text-decoration: underline; }
+/* The whole-Aumy film in the hero (replaces the Aumy loop, owner 2026-10-12). */
+.ch-hero-film { margin: 0; width: 100%; border-radius: var(--radius); overflow: hidden; background: #10131c; box-shadow: var(--c-shadow-lg); }
+.ch-hero-film video { display: block; width: 100%; aspect-ratio: 16 / 9; }
 .ch-explainer { margin: 0; background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius); box-shadow: var(--c-shadow-lg); overflow: hidden; display: flex; flex-direction: column; }
 .ch-explainer video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #10131c; }
 .ch-explainer figcaption { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; color: var(--c-ink-soft); }

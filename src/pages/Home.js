@@ -7,13 +7,13 @@ import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
 import HomeModules from '../components/HomeModules';
 import HomeExplainers from '../components/HomeExplainers';
-import AumyLoop from '../components/AumyLoop';
+import { HERO_VIDEO } from '../data/explainers';
 import { SUMMARY as FOUNDER_SUMMARY } from '../data/founder';
 import { MONTHLY_TEXT } from '../data/pricing';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
 // Owner 2026-10-08: "Handcrafted only for dentists" — one copy, shared with scripts/prerender.js.
-import { HERO_MODULES, HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE } from '../data/positioning';
+import { HERO_PRODUCTS } from '../data/positioning';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -112,8 +112,7 @@ const Home = () => {
     <div className="ch-home">
       {/* HERO */}
       <section className="ch-hero lux-hero">
-        {/* Owner 2026-09-26: the background film did not suit the product.
-            The hero now shows the product itself — the Aumy loop (AumyLoop). */}
+        {/* Owner 2026-10-12: the Aumy loop is retired; the hero shows the whole-Aumy film. */}
         <span className="lux-scroll-cue" aria-hidden="true" />
         <div className="ch-container ch-hero-grid lux-hero-grid">
           <div className="ch-hero-text">
@@ -121,31 +120,15 @@ const Home = () => {
             <h1 className="ch-hero-title">
               Stop <span className="ch-hero-accent">losing patients.</span>
             </h1>
-            {/* Owner 2026-10-08: sell the loss — each leak links to the one module that stops it. */}
-            <p className="ch-hero-outcomes-title">{HERO_LEAKS_INTRO}</p>
-            <ul className="ch-hero-outcomes">
-              {HERO_LEAKS.map((l) => (
-                <li key={l.leak}>
-                  <strong>{l.leak}</strong> — <Link to={`/modules/${l.id}`}>{l.name} stops it</Link>
+            {/* Owner 2026-10-12: "keep it damn simple" — one product, one outcome, one line.
+                Words: src/data/positioning.js (HERO_PRODUCTS), mirrored in scripts/prerender.js. */}
+            <ul className="ch-hero-products">
+              {HERO_PRODUCTS.map((p) => (
+                <li key={p.id}>
+                  <Link to={`/modules/${p.id}`}>{p.name}</Link> <span>{p.outcome}</span>
                 </li>
               ))}
             </ul>
-            <p className="ch-hero-sub"><strong>{HERO_LEAKS_CLOSE}</strong></p>
-            <p className="ch-hero-sub">
-              <Link to="/modules/automate-dental-clinic-operations">{HERO_ONE_LINE}</Link>
-            </p>
-            {/* Owner-approved hero copy 2026-10-08. Words: src/data/positioning.js (HERO_MODULES),
-                mirrored in scripts/prerender.js. */}
-            <p className="ch-hero-sub ch-hero-lead">
-              <strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several —{' '}
-              {HERO_MODULES.slice(0, 5).map((m, i) => (
-                <React.Fragment key={m.id}>
-                  {i > 0 && (i === 4 ? ' or ' : ', ')}
-                  <Link to={`/modules/${m.id}`}>{m.name.replace('Aumy ', i === 0 ? 'Aumy ' : '')}</Link>
-                </React.Fragment>
-              ))}
-              {' '}— or take <Link to="/modules/automate-dental-clinic-operations">Aumy One</Link>, one system that includes everything, customised to your clinic’s needs.
-            </p>
             <div className="ch-hero-cta">
               <a href="#how-it-works" className="ch-btn ch-btn-primary">
                 See How Aumy Works
@@ -173,25 +156,29 @@ const Home = () => {
             </p>
           </div>
 
+          {/* Owner 2026-10-12: the loop is retired; the whole-Aumy film plays here. Words: src/data/explainers.js. */}
           <div className="lux-hero-loop">
-            <AumyLoop />
+            <figure className="ch-hero-film">
+              <video controls preload="none" playsInline poster={HERO_VIDEO.poster} aria-label={`${HERO_VIDEO.name} explainer video`}>
+                <source src={HERO_VIDEO.src} type="video/mp4" />
+              </video>
+            </figure>
           </div>
         </div>
       </section>
 
+      {/* ── One explainer video per module (owner 2026-10-12): immediately under the hero (owner, same day).
+          Words: src/data/explainers.js. */}
+      <HomeExplainers />
+
       {/* ── Who already runs on Aumy ───────────────────────────────────────
-          Directly under the hero: the first question a clinic owner has after
-          "what is this" is "who else uses it". Shows the cities today and
-          upgrades to named logos as each clinic's written permission lands —
-          see src/data/clinicsServed.js. */}
+          Shows the cities today and upgrades to named logos as each clinic's
+          written permission lands — see src/data/clinicsServed.js. */}
       <ClinicsServed />
 
       {/* ── Aumy is built from modules (owner 2026-10-08): every card links to
           its /modules/<id> page. Words: src/data/modules.js (HOME, PAGES). */}
       <HomeModules />
-
-      {/* ── One explainer video per module (owner 2026-10-12). Words: src/data/explainers.js. */}
-      <HomeExplainers />
 
       {/* ── Be the patient: live hands-on demo ─────────────────────────── */}
       <section className="ch-section" id="be-the-patient">

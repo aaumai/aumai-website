@@ -294,10 +294,10 @@ const demoVideoLd = {
 };
 
 // Module explainer videos on the home page (owner 2026-10-12) — src/data/explainers.js.
-const explainerVideoLd = EXPL.VIDEOS.map((v) => ({
+const explainerVideoLd = [EXPL.HERO_VIDEO, ...EXPL.VIDEOS].map((v) => ({
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: `${v.name} explained in 90 seconds`,
+  name: `${v.name} explainer video`,
   description: v.description,
   thumbnailUrl: `${ORIGIN}${v.poster}`,
   contentUrl: `${ORIGIN}${v.src}`,
@@ -643,15 +643,19 @@ const routes = [
         <p class="ch-eyebrow">AI Dental Software · India</p>
         <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
         <h1 class="ch-hero-title">Stop losing patients.</h1>
-        <p><strong>${esc(POS.HERO_LEAKS_INTRO)}</strong></p>
         <ul>
-          ${POS.HERO_LEAKS.map((l) => `<li><strong>${esc(l.leak)}</strong> — <a href="/modules/${l.id}">${esc(l.name)} stops it</a></li>`).join('\n          ')}
+          ${POS.HERO_PRODUCTS.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.name)}</strong></a> ${esc(p.outcome)}</li>`).join('\n          ')}
         </ul>
-        <p class="ch-hero-sub"><strong>${esc(POS.HERO_LEAKS_CLOSE)}</strong></p>
-        <p class="ch-hero-sub"><a href="/modules/automate-dental-clinic-operations">${esc(POS.HERO_ONE_LINE)}</a></p>
-        <p class="ch-hero-sub"><strong>Handcrafted only for dentists.</strong> Aumy is trained for dentistry. Choose one module or several — <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, <a href="/modules/ai-voice-receptionist-for-dentists">Voice</a>, <a href="/modules/dental-lead-management">Convert</a>, <a href="/modules/dental-patient-follow-up">Journey</a> or <a href="/modules/dental-clinic-management-software">Clinic</a> — or take <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, one system that includes everything, customised to your clinic’s needs.</p>
+        <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} explained</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
         <p><a href="/#how-it-works">See How Aumy Works</a> · <a href="/contact">Get started — risk-free</a> · <a href="/#be-the-patient">Try it live — WhatsApp or call our demo clinic</a></p>
         <p>no lock-in · we set everything up for you · limited implementation capacity · NVIDIA Inception member</p>
+      </div></section>
+      <section id="explainers"><div class="ch-container ch-narrow">
+        <h2>${esc(EXPL.TITLE)}</h2>
+        <p>${esc(EXPL.SUB)}</p>
+        <ul>
+          ${EXPL.VIDEOS.map((v) => `<li><a href="${v.src}"><strong>${esc(v.name)}</strong> explainer video</a> — ${esc(v.line)} <a href="/modules/${v.moduleId}">See what ${esc(v.name)} does</a></li>`).join('\n          ')}
+        </ul>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Dental clinics Aumy serves</p>
@@ -666,13 +670,6 @@ const routes = [
           ${moduleCardsHtml(MODS.PAGES, { stores: true })}
         </ul>
         <p><a href="/modules">Compare all the modules side by side</a></p>
-      </div></section>
-      <section id="explainers"><div class="ch-container ch-narrow">
-        <h2>${esc(EXPL.TITLE)}</h2>
-        <p>${esc(EXPL.SUB)}</p>
-        <ul>
-          ${EXPL.VIDEOS.map((v) => `<li><a href="${v.src}"><strong>${esc(v.name)}</strong> explainer video</a> — ${esc(v.line)} <a href="/modules/${v.moduleId}">See what ${esc(v.name)} does</a></li>`).join('\n          ')}
-        </ul>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>A successful dental clinic doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>

@@ -7,8 +7,19 @@
  * then copied to public/videos/explainers/. Posters are a frame from each video.
  */
 
-const TITLE = 'See each module in about 90 seconds';
+const TITLE = 'See each module in under two minutes';
 const SUB = 'A real clinic day, before and after Aumy. Sound on.';
+
+// The whole-Aumy film plays in the home hero (owner 2026-10-12: the Aumy loop is retired, this film replaces it).
+const HERO_VIDEO = {
+  moduleId: 'automate-dental-clinic-operations',
+  name: 'Aumy',
+  line: 'One system for the whole patient journey — buy only what you need.',
+  src: '/videos/explainers/aumy-explainer.mp4',
+  poster: '/videos/explainers/aumy-explainer.jpg',
+  duration: 'PT1M27S',
+  description: 'How Aumy works across a dental clinic: Convert follows up new enquiries, Chat answers WhatsApp, Voice answers calls, Clinic runs the chair-side records and billing, and Journey brings patients back — sold separately or together as Aumy One.',
+};
 
 const VIDEOS = [
   {
@@ -35,12 +46,21 @@ const VIDEOS = [
     line: 'Stop your clinic leaking revenue.',
     src: '/videos/explainers/aumy-journey-explainer.mp4',
     poster: '/videos/explainers/aumy-journey-explainer.jpg',
-    duration: 'PT1M41S',
-    description: 'How Aumy Journey reads every patient reply, rebooks missed visits and follows up advised and planned treatments, recalls, cleanings and patients who have not visited in a long time.',
+    duration: 'PT2M4S',
+    description: 'How Aumy Journey answers and nurtures new enquiries, reads every patient reply, rebooks missed visits and follows up advised and planned treatments, recalls, cleanings and patients who have not visited in a long time.',
+  },
+  {
+    moduleId: 'dental-lead-management',
+    name: 'Aumy Convert',
+    line: 'Every ad enquiry followed up until it books.',
+    src: '/videos/explainers/aumy-convert-explainer.mp4',
+    poster: '/videos/explainers/aumy-convert-explainer.jpg',
+    duration: 'PT1M48S',
+    description: 'How Aumy Convert answers every ad enquiry in seconds, follows up for weeks and months, shows your team the hottest leads and tells Meta which enquiries turned out serious, so your ads find more like them.',
   },
 ];
 
 const UPLOAD_DATE = '2026-10-12';
 
-module.exports = { TITLE, SUB, VIDEOS, UPLOAD_DATE };
+module.exports = { TITLE, SUB, HERO_VIDEO, VIDEOS, UPLOAD_DATE };
 module.exports.default = module.exports;

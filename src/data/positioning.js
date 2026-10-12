@@ -65,4 +65,15 @@ const HERO_LEAKS_CLOSE = 'Aumy stops every one of these leaks. Pick the one cost
 // Owner 2026-10-08: the whole-system path, shown after the leaks.
 const HERO_ONE_LINE = 'Or automate your dental clinic operations end to end with Aumy One.';
 
-module.exports = { HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
+// Home hero, owner 2026-10-12: "too congested … 1 line outcome after one product title … keep it damn simple".
+// One product, one outcome, one line each. Replaces the leaks list + paragraphs in the hero.
+const HERO_PRODUCTS = [
+  { id: 'dental-lead-management', name: 'Aumy Convert', outcome: 'Every ad enquiry followed up until it books.' },
+  { id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat', outcome: 'Every WhatsApp answered in seconds.' },
+  { id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice', outcome: 'Every call answered, day and night.' },
+  { id: 'dental-patient-follow-up', name: 'Aumy Journey', outcome: 'No-shows rebooked. Treatments finished.' },
+  { id: 'dental-clinic-management-software', name: 'Aumy Clinic', outcome: 'Appointments, records and billing in one place.' },
+  { id: 'automate-dental-clinic-operations', name: 'Aumy One', outcome: 'All of it, working as one.' },
+];
+
+module.exports = { HERO_PRODUCTS, HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
