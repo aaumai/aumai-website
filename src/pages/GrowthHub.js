@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GROWTH_CATEGORIES, growthPosts } from '../data/growthPosts';
 import { CALCULATORS } from '../data/calculators';
+import { HUB_PATH, SERIES } from '../data/runYourClinic';
 import './GrowthHub.css';
 
 // Hub for the dental-growth content engine (strategy doc:
@@ -83,6 +84,18 @@ const GrowthHub = () => {
           {sorted.length === 0 && (
             <p className="gh-empty">Articles in this category are on the way — check back soon.</p>
           )}
+
+          {/* The teaching video series (owner 2026-10-13) — words in src/data/runYourClinic.js. */}
+          <div className="gh-podcast-banner">
+            <div>
+              <span className="gh-card-category">{SERIES.eyebrow}</span>
+              <h2 className="gh-card-title" style={{ marginTop: '10px' }}>{SERIES.name}</h2>
+              <p className="gh-card-excerpt">{SERIES.hubBlurb}</p>
+            </div>
+            <Link to={HUB_PATH} className="ch-btn ch-btn-primary">
+              Watch the series
+            </Link>
+          </div>
 
           <div className="gh-podcast-banner">
             <div>
