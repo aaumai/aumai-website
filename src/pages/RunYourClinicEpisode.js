@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import {
-  HUB_PATH, SERIES, EXAMPLE_NOTE, AUMY_LINE,
+  HUB_PATH, SERIES, EXAMPLE_NOTE,
   episodeBySlug, episodePath, nextEpisode, clock, numberLead,
 } from '../data/runYourClinic';
 import './HomeClinic.css';
@@ -167,10 +167,6 @@ const RunYourClinicEpisode = () => {
                 )}
               </section>
             ))}
-
-            <p className="ryc-aumy-line">
-              {AUMY_LINE.before}<Link to="/">{AUMY_LINE.link}</Link>{AUMY_LINE.after}
-            </p>
           </div>
 
           {next && (

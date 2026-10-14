@@ -1034,7 +1034,6 @@ for (const ep of RYC.liveEpisodes()) {
         ${c.scorecard
           ? `${rycLine(c.lines[0])}${rycScorecardHtml(ep.scorecard)}${c.lines.slice(1).map(rycLine).join('')}`
           : c.lines.map(rycLine).join('')}`).join('')}
-        <p>${esc(RYC.AUMY_LINE.before)}<a href="/">${esc(RYC.AUMY_LINE.link)}</a>${esc(RYC.AUMY_LINE.after)}</p>
         ${next ? `<p>${next.live ? `Next: <a href="${RYC.episodePath(next)}">Part ${next.part}: ${esc(next.title)}</a>` : `Part ${next.part}, ${esc(next.title)}, is coming next. ${esc(next.card)}`}</p>` : ''}
         <p><a href="${RYC.HUB_PATH}">All episodes of ${esc(RYC.SERIES.name)}</a></p>
       </div></article>`,

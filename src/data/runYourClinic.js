@@ -31,13 +31,6 @@ const SERIES = {
 const EXAMPLE_NOTE =
   'The rupee figures in this episode are examples to show the arithmetic. They are not results from any clinic.';
 
-// The one line about Aumy on an episode page (links to the home page).
-const AUMY_LINE = {
-  before: 'This series is made by the team behind ',
-  link: 'Aumy',
-  after: ', the AI front office for dental clinics.',
-};
-
 const EPISODES = [
   {
     part: 1,
@@ -223,7 +216,6 @@ module.exports = {
   HUB_PATH,
   SERIES,
   EXAMPLE_NOTE,
-  AUMY_LINE,
   EPISODES,
   episodePath,
   liveEpisodes,
