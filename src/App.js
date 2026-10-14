@@ -24,6 +24,8 @@ import GrowthHub from './pages/GrowthHub';
 import DemosPage from './pages/DemosPage';
 import PodcastPage from './pages/PodcastPage';
 import GrowthArticle from './pages/GrowthArticle';
+import RunYourClinicHub from './pages/RunYourClinicHub';
+import RunYourClinicEpisode from './pages/RunYourClinicEpisode';
 import LeakCalculator from './pages/LeakCalculator';
 import SwitchPage from './pages/SwitchPage';
 import MissedCallCalculator from './pages/MissedCallCalculator';
@@ -109,6 +111,10 @@ function App() {
                 <Route path="/demos" element={<DemosPage />} />
                 <Route path="/podcast" element={<PodcastPage />} />
                 <Route path="/growth/:slug" element={<GrowthArticle />} />
+                {/* How to Run Your Clinic video series (owner 2026-10-13). Words: src/data/runYourClinic.js
+                    (shared with scripts/prerender.js). */}
+                <Route path="/run-your-clinic" element={<RunYourClinicHub />} />
+                <Route path="/run-your-clinic/:slug" element={<RunYourClinicEpisode />} />
                 <Route path="/leak-calculator" element={<LeakCalculator />} />
                 <Route path="/switch" element={<SwitchPage />} />
                 <Route path="/missed-call-calculator" element={<MissedCallCalculator />} />

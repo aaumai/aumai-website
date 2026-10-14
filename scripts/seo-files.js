@@ -29,6 +29,8 @@ const PRICING = require('../src/data/pricing');
 const POS = require('../src/data/positioning');
 // One page per module (/modules/<id>), same list the React pages and prerender read.
 const MODS = require('../src/data/modules');
+// The How to Run Your Clinic video series: hub + one page per live episode (src/data/runYourClinic.js).
+const RYC = require('../src/data/runYourClinic');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -62,6 +64,8 @@ const SITEMAPS = {
     // The two search themes (owner 2026-09-18).
     ['/growth', 0.8, 'weekly'],
     ['/podcast', 0.7, 'monthly'],
+    [RYC.HUB_PATH, 0.8, 'weekly'],
+    ...RYC.liveEpisodes().map((ep) => [RYC.episodePath(ep), 0.7, 'monthly', ep.uploadDate]),
     // Articles carry their real publish date (or the date of a substantive
     // update, `updated`) as lastmod — honest signals beat a blanket
     // "everything changed today".
@@ -163,6 +167,8 @@ ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}$
 - ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments; from ${PRICING.MONTHLY_TEXT}
 - ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: care-gap reminders, reactivation, campaigns
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, care gaps and patient reactivation for Indian dental clinics
+- ${ORIGIN}${RYC.HUB_PATH} — How to Run Your Clinic: a free video series for dental clinic owners, one system per episode and the one number that checks it
+${RYC.liveEpisodes().map((ep) => `- ${ORIGIN}${RYC.episodePath(ep)} — Part ${ep.part}: ${ep.h1} (video with chapters, full text and scorecard)`).join('\n')}
 ## Dental practice growth guides (free, no sign-up, India-focused)
 ${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s+/g, ' ')}`).join('\n')}
 - ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page front-desk checklist for practice managers

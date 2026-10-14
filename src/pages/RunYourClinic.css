@@ -1,0 +1,118 @@
+/* "How to Run Your Clinic" video series — hub + episode pages.
+   Built on the Growth Hub article styles (GrowthHub.css) and the clinic tokens (--c-*),
+   so the lux theme (src/styles/lux.css) re-skins it like every other .ch-home page. */
+
+/* ---- Hub: episode list ---- */
+.ryc-episodes { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.ryc-ep {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 20px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+a.ryc-ep:hover, a.ryc-ep:focus-visible { border-color: var(--c-accent); box-shadow: var(--c-shadow-lg); }
+.ryc-ep-thumb { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); background: #10131c; }
+.ryc-ep-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ryc-ep-title { font-size: 22px; line-height: 1.25; font-weight: 700; color: var(--c-ink); }
+.ryc-ep-text { font-size: 15.5px; color: var(--c-ink-soft); }
+.ryc-ep-cta { font-size: 15px; font-weight: 600; color: var(--c-accent-dark); }
+.ryc-ep-soon { grid-template-columns: 1fr; background: transparent; border-style: dashed; box-shadow: none; }
+.ryc-soon-tag {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+  border: 1px solid var(--c-line);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* ---- Episode: video + chapters ---- */
+.ryc-film { margin: 6px 0 0; border-radius: var(--radius); overflow: hidden; background: #10131c; box-shadow: var(--c-shadow-lg); }
+.ryc-film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #10131c; }
+
+.ryc-lead { margin: 22px 0 0; }
+.ryc-chapters { margin: 22px 0 0; padding: 18px 20px; background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius); }
+.ch-home .ryc-chapters-title { margin: 0 0 10px; font-size: 18px; font-weight: 700; color: var(--c-ink); }
+.ryc-chapters ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 18px; }
+.ryc-chapters a {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 15px;
+  color: var(--c-ink);
+  text-decoration: none;
+}
+.ryc-chapters a:hover, .ryc-chapters a:focus-visible { background: var(--c-accent-tint); }
+.ryc-chapters a.is-current { background: var(--c-accent-tint); font-weight: 600; }
+.ryc-time { flex: 0 0 auto; min-width: 38px; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--c-accent-dark); }
+
+.ryc-example-note { margin: 22px 0 0; font-size: 14.5px; color: var(--c-ink-soft); }
+.ryc-example-tag {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b4e00;
+  background: #fde68a; /* the yellow EXAMPLE tag from the video */
+  border-radius: 4px;
+  vertical-align: 1px;
+}
+
+/* ---- Episode: transcript ---- */
+.ryc-transcript { margin-top: 12px; }
+.ryc-transcript section { scroll-margin-top: 100px; }
+.ryc-play-from {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: -4px 0 14px;
+  padding: 4px 12px 4px 8px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--c-accent-dark);
+  background: transparent;
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.ryc-play-from svg { width: 14px; height: 14px; }
+.ryc-play-from:hover, .ryc-play-from:focus-visible { border-color: var(--c-accent); }
+
+/* Scorecard table (shares the article table look; the wrapper scrolls on narrow phones) */
+.ryc-table-wrap { margin: 22px 0; overflow-x: auto; }
+.gh-article-body .ryc-table { margin: 0; }
+.ryc-table caption { caption-side: top; text-align: left; padding: 0 0 10px; font-size: 14px; color: var(--c-ink-soft); }
+.gh-article-body .ryc-table tbody th { background: transparent; font-weight: 600; border-bottom: 1px solid var(--c-line); vertical-align: top; }
+.gh-article-body .ryc-table tr:last-child th { border-bottom: none; }
+.ryc-table td:first-child { width: 36px; font-variant-numeric: tabular-nums; }
+.ryc-aim { display: block; margin-top: 4px; font-size: 13.5px; color: var(--c-ink-soft); font-style: italic; }
+
+.ryc-aumy-line { margin-top: 36px !important; padding-top: 22px; border-top: 1px solid var(--c-line); font-size: 15.5px; }
+
+/* ---- Episode: next ---- */
+.ryc-next { margin-top: 40px; display: grid; gap: 14px; }
+.ryc-all { margin: 0; }
+
+@media (max-width: 640px) {
+  .ryc-ep { grid-template-columns: 1fr; gap: 16px; padding: 16px; }
+  .ryc-chapters { padding: 14px 12px; }
+  .ryc-chapters ol { grid-template-columns: 1fr; }
+  .gh-article-body .ryc-table { display: table; }
+}

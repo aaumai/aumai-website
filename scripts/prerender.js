@@ -37,6 +37,8 @@ const COMP = require('../src/data/compliance');
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
 const EXPL = require('../src/data/explainers');
+// "How to Run Your Clinic" video series (owner 2026-10-13): same file as src/pages/RunYourClinic*.js.
+const RYC = require('../src/data/runYourClinic');
 // How Aumy works (/revenue-generator, lean 2026-10-12): same file as src/pages/AumyRevenueGenerator.js.
 const HOW = require('../src/data/howItWorks');
 // Home FAQ: the list src/pages/Home.js renders — crawler HTML and FAQPage JSON-LD read the same one.
@@ -878,6 +880,7 @@ routes.push({
           `<h2><a href="/growth/${p.slug}">${esc(p.title)}</a></h2><p>${esc(p.excerpt)}</p>`
       )
       .join('') +
+    `<h2><a href="${RYC.HUB_PATH}">${esc(RYC.SERIES.name)}</a></h2><p>${esc(RYC.SERIES.eyebrow)}. ${esc(RYC.SERIES.hubBlurb)} <a href="${RYC.HUB_PATH}">Watch the series</a></p>` +
     `<p><a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Try the 60-second check</a></p>
       </div></section>`,
 });
@@ -915,6 +918,125 @@ for (const p of growthPosts) {
         ${p.body}
         <h2>Want to know what this looks like in your clinic?</h2>
         <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp Aumy</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
+      </div></article>`,
+  });
+}
+
+// ---- How to Run Your Clinic — hub + one page per episode (owner 2026-10-13) ----
+// Same words as src/pages/RunYourClinicHub.js / RunYourClinicEpisode.js (src/data/runYourClinic.js).
+// The episode HTML carries the video itself, the chapters (?t= links), the full narration with each
+// chapter as an H2, and the scorecard table — the same content people see.
+const rycLine = (line) => {
+  const lead = RYC.numberLead(line);
+  return lead ? `<p><strong>${esc(lead[0])}</strong> ${esc(lead[1])}</p>` : `<p>${esc(line)}</p>`;
+};
+const rycScorecardHtml = (rows) =>
+  `<table><caption>The clinic scorecard: each system and its one number</caption><thead><tr><th scope="col">#</th><th scope="col">System</th><th scope="col">The one number</th></tr></thead><tbody>` +
+  rows.map((r, i) => `<tr><td>${i + 1}</td><th scope="row">${esc(r.system)}</th><td>${esc(r.number)}${r.aim ? `<br><em>${esc(r.aim)}</em>` : ''}</td></tr>`).join('') +
+  `</tbody></table>`;
+const rycEpisodeCardHtml = (ep) => ep.live
+  ? `<li><a href="${RYC.episodePath(ep)}"><strong>Part ${ep.part}: ${esc(ep.title)}</strong></a> (${esc(ep.durationLabel)}) — ${esc(ep.card)}</li>`
+  : `<li><strong>Part ${ep.part}: ${esc(ep.title)}</strong> — Coming next. ${esc(ep.card)}</li>`;
+routes.push({
+  slug: RYC.HUB_PATH.slice(1),
+  title: RYC.SERIES.seoTitle,
+  description: RYC.SERIES.seoDescription,
+  canonical: `${ORIGIN}${RYC.HUB_PATH}`,
+  ogImage: `${ORIGIN}${RYC.liveEpisodes()[0].poster}`,
+  jsonld: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+        { '@type': 'ListItem', position: 2, name: RYC.SERIES.name, item: `${ORIGIN}${RYC.HUB_PATH}` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: RYC.SERIES.name,
+      itemListElement: RYC.liveEpisodes().map((ep, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${ORIGIN}${RYC.episodePath(ep)}`,
+        name: ep.h1,
+      })),
+    },
+  ],
+  content: `
+      <nav aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li>${esc(RYC.SERIES.name)}</li></ol></nav>
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(RYC.SERIES.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(RYC.SERIES.h1)}</h1>
+        <p class="ch-hero-sub">${esc(RYC.SERIES.intro)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>Episodes</h2>
+        <ol>
+          ${RYC.EPISODES.map(rycEpisodeCardHtml).join('\n          ')}
+        </ol>
+      </div></section>`,
+});
+for (const ep of RYC.liveEpisodes()) {
+  const url = `${ORIGIN}${RYC.episodePath(ep)}`;
+  const next = RYC.nextEpisode(ep);
+  routes.push({
+    slug: RYC.episodePath(ep).slice(1),
+    title: ep.seoTitle,
+    description: ep.seoDescription,
+    canonical: url,
+    ogImage: `${ORIGIN}${ep.poster}`,
+    jsonld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: ep.h1,
+        description: ep.videoDescription,
+        thumbnailUrl: `${ORIGIN}${ep.poster}`,
+        uploadDate: ep.uploadDate,
+        duration: ep.duration,
+        contentUrl: `${ORIGIN}${ep.src}`,
+        inLanguage: 'en-IN',
+        publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` } },
+        hasPart: ep.chapters.map((c, i) => ({
+          '@type': 'Clip',
+          name: c.label,
+          startOffset: c.start,
+          endOffset: RYC.chapterEnd(ep, i),
+          url: `${url}?t=${c.start}`,
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: RYC.SERIES.name, item: `${ORIGIN}${RYC.HUB_PATH}` },
+          { '@type': 'ListItem', position: 3, name: `Part ${ep.part}: ${ep.title}`, item: url },
+        ],
+      },
+    ],
+    content: `
+      <nav aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="${RYC.HUB_PATH}">${esc(RYC.SERIES.name)}</a></li><li>Part ${ep.part}</li></ol></nav>
+      <article><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(RYC.SERIES.name)} · Part ${ep.part} · ${esc(ep.durationLabel)}</p>
+        <h1 class="ch-hero-title">${esc(ep.h1)}</h1>
+        <video controls preload="none" playsinline poster="${ep.poster}" aria-label="Video: ${esc(ep.h1)}"><source src="${ep.src}" type="video/mp4"></video>
+        <p>${esc(ep.lead)}</p>
+        <h2>Chapters</h2>
+        <ol>
+          ${ep.chapters.map((c) => `<li><a href="?t=${c.start}">${RYC.clock(c.start)} ${esc(c.label)}</a></li>`).join('\n          ')}
+        </ol>
+        <p><strong>Example.</strong> ${esc(RYC.EXAMPLE_NOTE)}</p>
+        ${ep.chapters.map((c) => `
+        <h2>${esc(c.heading)}</h2>
+        ${c.scorecard
+          ? `${rycLine(c.lines[0])}${rycScorecardHtml(ep.scorecard)}${c.lines.slice(1).map(rycLine).join('')}`
+          : c.lines.map(rycLine).join('')}`).join('')}
+        <p>${esc(RYC.AUMY_LINE.before)}<a href="/">${esc(RYC.AUMY_LINE.link)}</a>${esc(RYC.AUMY_LINE.after)}</p>
+        ${next ? `<p>${next.live ? `Next: <a href="${RYC.episodePath(next)}">Part ${next.part}: ${esc(next.title)}</a>` : `Part ${next.part}, ${esc(next.title)}, is coming next. ${esc(next.card)}`}</p>` : ''}
+        <p><a href="${RYC.HUB_PATH}">All episodes of ${esc(RYC.SERIES.name)}</a></p>
       </div></article>`,
   });
 }
