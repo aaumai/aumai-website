@@ -166,6 +166,10 @@ const Home = () => {
               WhatsApp or call our live demo clinic and experience exactly what your patients would —
               the same AI, the same follow-ups, the real product.
             </p>
+            <p className="ch-sub" style={{ fontWeight: 600 }}>
+              This live demo is <strong>Aumy Chat</strong> and <strong>Aumy Voice</strong> only.
+              For a full Aumy One demo, call us on <a href="tel:+918007189868" style={{ whiteSpace: 'nowrap' }}>80071 89868</a>.
+            </p>
           </div>
           <div className="ch-why-card" style={{ display: 'block', maxWidth: 720, margin: '0 auto', padding: 28 }}>
             <p style={{ fontSize: '1.15rem', fontWeight: 700, textAlign: 'center', marginTop: 0 }}>
@@ -176,6 +180,7 @@ const Home = () => {
             </p>
             <p style={{ textAlign: 'center', color: '#5b6784', margin: '6px 0 0', fontSize: '0.95rem' }}>
               This is our demo clinic, Lumière Dental — Aumy answers as its receptionist.
+              You are trying Aumy Chat and Aumy Voice; for the full Aumy One demo, call 80071 89868.
             </p>
             <ol style={{ lineHeight: 1.9, margin: '18px 0 0', paddingLeft: 22 }}>
               <li><strong>Ask about aligners or implants</strong> — watch it answer instantly, like your best receptionist on her best day.</li>

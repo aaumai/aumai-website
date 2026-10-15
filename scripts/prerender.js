@@ -495,7 +495,7 @@ const routes = [
         <h1 class="ch-hero-title">${esc(ADS.HERO.h1)}</h1>
         <p class="ch-hero-sub">${esc(ADS.HERO.sub)}</p>
         <p><a href="/demos">Watch it work, live</a> · <a href="/pricing">See pricing in ₹</a></p>
-        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would — or call +91 22 6423 0581 and wait a couple of rings for Aumy Voice to pick up. (Demo clinic: Lumière Dental.)</p>
+        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would — or call +91 22 6423 0581 and wait a couple of rings for Aumy Voice to pick up. (Demo clinic: Lumière Dental.) That live demo is Aumy Chat and Aumy Voice only — for a full Aumy One demo, call us on +91 80071 89868.</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>What is AI dental software?</h2>
@@ -541,7 +541,7 @@ const routes = [
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd, ...explainerVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
-        <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello. Or call +91 22 6423 0581 and wait a couple of rings — Aumy Voice will pick up (demo clinic: Lumière Dental).</p>
+        <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello. Or call +91 22 6423 0581 and wait a couple of rings — Aumy Voice will pick up (demo clinic: Lumière Dental). This live demo is Aumy Chat and Aumy Voice only — for a full Aumy One demo, call us on +91 80071 89868.</p>
       </div></section>
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">AI Dental Software · India</p>
