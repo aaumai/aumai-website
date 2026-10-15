@@ -160,7 +160,6 @@ const Home = () => {
       <section className="ch-section" id="be-the-patient">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">Don&rsquo;t watch a demo</span>
             <h2 className="ch-h2">Be the patient.</h2>
             <p className="ch-sub">
               WhatsApp or call our live demo clinic and experience exactly what your patients would —
