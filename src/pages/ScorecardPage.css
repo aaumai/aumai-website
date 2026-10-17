@@ -1,0 +1,135 @@
+/* The 4C Scorecard: one narrow column; the four Cs carry their deck colours; the report prints alone on A4. */
+.sc-root {
+  --sc-bg: #F5F7FB; --sc-card: #FFFFFF; --sc-ink: #101A3E; --sc-muted: #4A5568; --sc-line: #DBE3F0;
+  --sc-accent: #2563EB; --sc-navy: #101A3E;
+  --sc-convert: #2563EB; --sc-confirm: #0F766E; --sc-care: #B45309; --sc-comeback: #BE185D;
+  --sc-chip: #EEF3FB;
+  --sc-display: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
+  background: var(--sc-bg); color: var(--sc-ink); padding-top: 88px; padding-bottom: 72px; /* 88px clears the fixed site header, as on .ch-home */
+}
+.sc-root * { box-sizing: border-box }
+.sc-wrap { max-width: 920px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+.sc-root h1, .sc-root h2, .sc-root h3 { font-family: var(--sc-display); text-wrap: balance; margin: 0 }
+.sc-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sc-accent); margin: 0 }
+.sc-hero { padding-block: 56px 28px }
+.sc-hero .sc-wrap { display: flex; flex-direction: column; gap: 14px }
+.sc-hero h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.05 }
+.sc-lead { margin: 0; font-size: 18px; line-height: 1.55; color: var(--sc-muted); max-width: 64ch }
+.sc-how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 6px }
+.sc-how div { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--sc-muted) }
+.sc-how b { display: block; color: var(--sc-ink); font-family: var(--sc-display); font-size: 20px }
+
+.sc-progress { background: var(--sc-card); border-block: 1px solid var(--sc-line); padding-block: 10px }
+.sc-progress-row { display: flex; align-items: center; gap: 14px; font-size: 14px; font-variant-numeric: tabular-nums }
+.sc-track { flex: 1; height: 8px; border-radius: 6px; background: var(--sc-line); overflow: hidden; min-width: 60px }
+.sc-fill { height: 100%; background: var(--sc-accent); transition: width .25s }
+.sc-live { font-weight: 700; white-space: nowrap }
+
+.sc-systems { display: flex; flex-direction: column; gap: 16px; padding-top: 28px }
+.sc-stage { font-size: 15px !important; letter-spacing: .12em; text-transform: uppercase; color: var(--c); padding-top: 12px }
+.sc-convert { --c: var(--sc-convert) } .sc-confirm { --c: var(--sc-confirm) } .sc-care { --c: var(--sc-care) } .sc-comeback { --c: var(--sc-comeback) }
+.sc-sys { background: var(--sc-card); border: 1px solid var(--sc-line); border-top: 4px solid var(--c); border-radius: 14px; padding: 18px 20px }
+.sc-sys-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 8px }
+.sc-sys-head h3 { font-size: 21px }
+.sc-sys-head small { display: block; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--sc-muted); margin-top: 2px }
+.sc-score { font-family: var(--sc-display); font-weight: 700; font-size: 22px; color: var(--c); white-space: nowrap; font-variant-numeric: tabular-nums }
+.sc-q { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; align-items: center; padding-block: 10px; border-top: 1px solid var(--sc-line) }
+.sc-q p { margin: 0; font-size: 15px; line-height: 1.45 }
+.sc-opts { display: flex; gap: 6px }
+.sc-opts input { position: absolute; opacity: 0; pointer-events: none }
+.sc-opts label { font-size: 13px; font-weight: 600; padding: 7px 11px; border-radius: 8px; background: var(--sc-chip); color: var(--sc-ink); cursor: pointer; white-space: nowrap; border: 1px solid transparent }
+.sc-opts input:checked + label { background: var(--sc-accent); color: #FFFFFF }
+.sc-opts input:focus-visible + label { outline: 2px solid var(--sc-accent); outline-offset: 2px }
+
+.sc-finish { display: flex; flex-direction: column; gap: 20px; padding-top: 32px }
+.sc-result-card { background: var(--sc-navy); color: #F5F7FB; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 16px }
+.sc-result-card .sc-eyebrow { color: #93BBFD }
+.sc-big { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
+.sc-big strong { font-family: var(--sc-display); font-size: 60px; line-height: 1; font-variant-numeric: tabular-nums }
+.sc-big span { font-size: 20px; color: #BFD7FE }
+.sc-band { font-size: 15px !important; font-weight: 700; padding: 6px 12px; border-radius: 999px; color: #101A3E !important }
+.sc-band-tight { background: #99F6E4 } .sc-band-better { background: #FDE68A } .sc-band-leak { background: #FBCFE8 }
+.sc-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; font-size: 14px; line-height: 1.45 }
+.sc-legend div { border: 1px solid rgba(245, 247, 251, .25); border-radius: 12px; padding: 10px 12px; color: #BFD7FE }
+.sc-legend div.on { border-color: #F5F7FB; color: #F5F7FB }
+.sc-legend b { display: block; color: #F5F7FB; font-size: 15px; margin-bottom: 2px }
+.sc-note { margin: 0; font-size: 15px; color: var(--sc-muted) }
+
+.sc-form { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px }
+.sc-form h2 { font-size: 26px }
+.sc-form > p { margin: 0; color: var(--sc-muted) }
+.sc-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px }
+.sc-fields label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600 }
+.sc-fields input, .sc-fields select { font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid var(--sc-line); border-radius: 10px; background: #FFFFFF; color: var(--sc-ink) }
+.sc-fields input:focus, .sc-fields select:focus { outline: 2px solid var(--sc-accent); outline-offset: 1px }
+.sc-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--sc-muted) }
+.sc-consent input { margin-top: 3px }
+.sc-error { margin: 0; color: #BE185D; font-weight: 600 }
+.sc-btn { display: inline-block; font: 700 16px inherit; font-family: inherit; padding: 12px 20px; border-radius: 12px; border: 0; background: var(--sc-accent); color: #FFFFFF; cursor: pointer; text-decoration: none; text-align: center }
+.sc-btn:disabled { opacity: .6; cursor: wait }
+.sc-btn:focus-visible, .sc-link:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 2px }
+.sc-btn-ghost { background: var(--sc-card); color: var(--sc-accent); border: 2px solid var(--sc-accent) }
+.sc-link { background: none; border: 0; color: var(--sc-accent); font: 600 15px inherit; font-family: inherit; cursor: pointer; text-decoration: underline }
+
+.sc-report-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding-block: 28px 16px }
+.sc-hint { margin: 0; width: 100%; font-size: 13px; color: var(--sc-muted) }
+.sc-report { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 18px; padding-block: 32px; display: flex; flex-direction: column; gap: 18px }
+.sc-report h2 { font-size: 22px; padding-top: 6px }
+.sc-report-head { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: flex-end; border-bottom: 2px solid var(--sc-ink); padding-bottom: 18px }
+.sc-report-head h1 { font-size: clamp(28px, 5vw, 40px); margin-top: 6px }
+.sc-meta { margin: 6px 0 0; color: var(--sc-muted) }
+.sc-report-score { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap }
+.sc-report-score strong { font-family: var(--sc-display); font-size: 64px; line-height: 1; font-variant-numeric: tabular-nums }
+.sc-report-score > span:not(.sc-band) { font-size: 20px; color: var(--sc-muted) }
+.sc-verdict { margin: 0; font-size: 17px }
+.sc-start { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px }
+.sc-start-card { border: 1px solid var(--sc-line); border-left: 6px solid var(--c); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 6px }
+.sc-start-card p { margin: 0; font-size: 15px; line-height: 1.5 }
+.sc-start-label { font-size: 13px !important; font-weight: 700; color: var(--c); text-transform: uppercase; letter-spacing: .08em }
+.sc-table { width: 100%; border-collapse: collapse; font-size: 15px }
+.sc-table th { text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--sc-muted); padding: 8px 6px; border-bottom: 1px solid var(--sc-line) }
+.sc-table td { padding: 10px 6px; border-bottom: 1px solid var(--sc-line); vertical-align: middle }
+.sc-table-report td:nth-child(3), .sc-cell-bar { display: flex; align-items: center; gap: 10px; min-width: 170px }
+.sc-bar { flex: 1; height: 8px; border-radius: 6px; background: var(--sc-line); overflow: hidden; min-width: 60px }
+.sc-bar div { height: 100%; background: var(--sc-accent) }
+.sc-num { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700 }
+.sc-chip { font-size: 12px; font-weight: 700; color: var(--c); background: var(--sc-chip); padding: 3px 8px; border-radius: 999px; white-space: nowrap }
+.sc-next { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; line-height: 1.5 }
+.sc-cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; background: var(--sc-bg); border-radius: 14px; padding: 18px 20px }
+.sc-cta h3 { font-size: 19px }
+.sc-cta p { margin: 4px 0 0; color: var(--sc-muted); max-width: 52ch }
+.sc-foot { margin: 0; font-size: 12px; color: var(--sc-muted) }
+
+@media (max-width: 680px) {
+  .sc-q { grid-template-columns: minmax(0, 1fr) }
+  .sc-opts { flex-wrap: wrap }
+  .sc-how, .sc-legend, .sc-fields, .sc-start { grid-template-columns: minmax(0, 1fr) }
+  .sc-table-report td:nth-child(2), .sc-table-report th:nth-child(2) { display: none }
+}
+@media (prefers-reduced-motion: reduce) { .sc-fill { transition: none } }
+
+/* Print / Save as PDF: the report alone, on A4. */
+@media print {
+  @page { size: A4; margin: 10mm }
+  html, body, #root, .App, .sc-root { background: #FFFFFF !important }
+  /* Drop everything that is not the report or one of its ancestors (site header, footer, buttons). */
+  body *:not(:has(.sc-report)):not(.sc-report):not(.sc-report *) { display: none !important }
+  body *:has(.sc-report) { padding: 0 !important; margin: 0 !important; min-height: 0 !important }
+  .sc-report { width: 100%; max-width: none; border: 0; border-radius: 0; padding: 0; gap: 12px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact }
+  .sc-report { gap: 9px }
+  .sc-report h2 { font-size: 15px; padding-top: 2px }
+  .sc-report-head { padding-bottom: 10px }
+  .sc-report-head h1 { font-size: 26px }
+  .sc-report-score strong { font-size: 40px }
+  .sc-verdict { font-size: 13px }
+  .sc-start-card { padding: 10px 12px; gap: 3px }
+  .sc-start-card h3 { font-size: 15px }
+  .sc-table { font-size: 11.5px } .sc-table td { padding: 4px } .sc-table th { padding: 4px; font-size: 10px }
+  .sc-next { gap: 4px }
+  .sc-cta { padding: 10px 14px } .sc-cta h3 { font-size: 14px } .sc-cta p { font-size: 12px }
+  .sc-cta::after { content: "Book: calendar.app.google/tecaeebTBEWSoJnV7"; font-size: 12px; font-weight: 700; color: #2563EB }
+  .sc-start-card p, .sc-next { font-size: 12px }
+  .sc-cta a { display: none }
+  .sc-start-card, .sc-table tr, .sc-cta { break-inside: avoid }
+}

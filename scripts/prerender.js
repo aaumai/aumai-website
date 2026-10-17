@@ -643,6 +643,26 @@ const routes = [
         <p>Free. No obligation. Reviewed by a person before it reaches you.</p>
       </div></section>`,
   },
+  {
+    slug: '4c-scorecard',
+    title: 'The 4C Scorecard: a free audit for dental clinics | AUM AI',
+    description:
+      'Score your dental clinic on the eight systems that keep chairs full: Convert, Confirm, Care, Come back. 40 questions, ten minutes, and a printable audit report of what to fix first.',
+    canonical: `${ORIGIN}/4c-scorecard`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">The Full Chair Method · free clinic audit</p>
+        <h1 class="ch-hero-title">The 4C Scorecard</h1>
+        <p class="ch-hero-sub">Eight systems keep a dental clinic’s chairs full. Score your clinic on each one in about ten minutes, then get a printable audit report of what to fix first.</p>
+        <ul>
+          <li>Convert: The Decision Path, Every Call Answered.</li>
+          <li>Confirm: Confirm Twice, Remind Once, Same-Week Rebook.</li>
+          <li>Care: Advised to Accepted, Finish Line, BIT (Be In Touch).</li>
+          <li>Come back: Smart Comebacks.</li>
+        </ul>
+        <p>Always scores 2, sometimes 1, never or don’t know 0. 9 to 10: running tight. 5 to 8: can do better. Below 5: leaking patients.</p>
+      </div></section>`,
+  },
   // Routes that are in the sitemap but were never prerendered (audit
   // 2026-09-18): the SPA fallback served the HOME page's title, description
   // and H1 for all six, so crawlers saw six copies of the home page. Minimal

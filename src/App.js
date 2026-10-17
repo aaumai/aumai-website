@@ -14,6 +14,8 @@ import DabbewaalaApp from './pages/DabbewaalaApp';
 import AumaiAnalytics from './pages/AumaiAnalytics';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import GrowthAudit from './pages/GrowthAudit';
+import ScorecardPage from './pages/ScorecardPage';
+import ScorecardAdmin from './pages/ScorecardAdmin';
 import PricingPage from './pages/PricingPage';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -70,6 +72,7 @@ function App() {
         {/* Standalone pages without header/footer */}
         <Route path="/dabbewaala" element={<DabbewaalaApp />} />
         <Route path="/aumaianalytics" element={<AumaiAnalytics />} />
+        <Route path="/scorecard-admin" element={<ScorecardAdmin />} />
 
         {/* Main site with header/footer */}
         <Route
@@ -94,6 +97,7 @@ function App() {
                 <Route path="/aumy" element={<Navigate to="/revenue-generator" replace />} />
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/growth-audit" element={<GrowthAudit />} />
+                <Route path="/4c-scorecard" element={<ScorecardPage />} />
                 <Route path="/pricing" element={<PricingPage />} />
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}

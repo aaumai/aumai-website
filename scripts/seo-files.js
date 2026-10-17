@@ -56,6 +56,7 @@ const SITEMAPS = {
     ['/revenue-generator', 0.9, 'weekly'],
     ['/demos', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
+    ['/4c-scorecard', 0.9, 'monthly'],
     ['/pricing', 0.9, 'monthly'],
     ['/modules', 0.9, 'monthly'],
     ...MODS.PAGES.map((p) => [`/modules/${p.id}`, 0.8, 'monthly']),
