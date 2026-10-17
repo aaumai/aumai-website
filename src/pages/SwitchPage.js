@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { INDIA_WHATSAPP } from '../config/contact';
+import FourC from '../components/FourC';
+import { LEADS } from '../data/fourC';
 import './HomeClinic.css';
 import './SwitchPage.css';
 
 // Moving-from-your-current-software landing page (2026-09-05).
 // Never names any other software vendor: the fear ("my data is locked in")
 // is universal, and naming a competitor on our own site invites a fight we
-// do not need. The page answers the fear, then shows the five pillars.
+// do not need. The page answers the fear, then shows the 4C Framework (2026-10-17; it replaced the old pillars).
 
 const WA_HREF = `https://wa.me/${INDIA_WHATSAPP.number}?text=${encodeURIComponent(
   "Hi, I'd like to move my clinic to Aumy. Can we talk about keeping my data in sync and migrating it?",
@@ -62,32 +64,7 @@ const moves = [
   ['Billing history', 'On request, depending on what your current software can export'],
 ];
 
-const pillars = [
-  {
-    stage: 'Convert',
-    title: 'Turn enquiries into booked patients',
-    body:
-      'Every enquiry, on WhatsApp, Instagram, a missed call or your website, is answered in seconds and followed up until it becomes a booking.',
-  },
-  {
-    stage: 'Care',
-    title: 'Look after patients around every visit',
-    body:
-      'Reminders and preparation before the visit, and easy rescheduling if they cannot make it, so it is a reschedule instead of a no-show. Day-by-day care instructions after every treatment. And if a patient reports something urgent, severe pain, swelling or bleeding after a procedure, Aumy does not leave it in a chat: it calls your staff immediately so a human takes over within minutes.',
-  },
-  {
-    stage: 'Retain',
-    title: 'Bring patients back for ongoing care',
-    body:
-      'Cleaning, check-up and maintenance care gaps followed up on time, every time, without anyone in the clinic having to remember.',
-  },
-  {
-    stage: 'Reactivate',
-    title: 'Win back patients who drifted away',
-    body:
-      'Patients who came once and forgot you are brought back with a campaign you approve, at a pace your team can handle.',
-  },
-];
+// What you get once you are in = the 4C Framework (owner 2026-10-17). Words: src/data/fourC.js.
 
 const faqs = [
   {
@@ -236,29 +213,14 @@ const SwitchPage = () => {
         </div>
       </section>
 
-      {/* THE FIVE PILLARS */}
-      <section className="ch-section">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">What you get once you are in</span>
-            <h2 className="ch-h2">Your clinic is growing. Don&rsquo;t let the chaos grow with it.</h2>
-          </div>
-          <div className="ch-pillars">
-            {pillars.map((p, i) => (
-              <div key={i} className="ch-pillar">
-                <span className="ch-eyebrow">{p.stage}</span>
-                <h3 className="ch-pillar-title">{p.title}</h3>
-                <p className="ch-pillar-body">{p.body}</p>
-              </div>
-            ))}
-          </div>
-          <p className="ch-note ch-center">
-            Aumy also includes a complete dental PMS: records, appointments, dental charting,
-            prescriptions, treatment plans, billing. One platform, one login, one brain.{' '}
-            <Link to="/revenue-generator">See how it works</Link>.
-          </p>
-        </div>
-      </section>
+      {/* WHAT YOU GET ONCE YOU ARE IN — the 4C Framework (owner 2026-10-17). Words: src/data/fourC.js. */}
+      <FourC id="the-4c-framework" lead={LEADS.switch}>
+        <p className="ch-note ch-center">
+          Aumy also includes a complete dental PMS: records, appointments, dental charting,
+          prescriptions, treatment plans, billing. One platform, one login, one brain.{' '}
+          <Link to="/revenue-generator">See how it works</Link>.
+        </p>
+      </FourC>
 
       {/* FAQ */}
       <section className="ch-section ch-tint">

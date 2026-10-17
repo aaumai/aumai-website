@@ -898,7 +898,7 @@ const growthPosts = [
 <h2>What changes in the numbers</h2>
 <p>Clinics measure the difference in three places: enquiry-to-booking conversion (because speed-to-reply decides who wins the patient), front-desk hours recovered (the repetitive 60% disappears from their day), and after-hours bookings that previously did not exist at all. If you run ads, there's a fourth: every ad rupee finally gets a same-minute response, which is the single biggest determinant of ad ROI for clinics.</p>
 
-<p>This is exactly what Aumy's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's where the patient journey starts — Convert, before Care, Retain and Reactivate — and it works its first night on the job.</p>`,
+<p>This is exactly what Aumy's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's where the patient journey starts — Convert, the first stage of the 4C Framework, before Confirm, Care and Come back — and it works its first night on the job.</p>`,
   },
   {
     slug: "patient-follow-up-automation-dental",
@@ -960,7 +960,7 @@ const growthPosts = [
 <p>Most clinics that go shopping for a "better PMS" are feeling the second list. They migrate everything, endure three months of pain, and discover the gaps are exactly where they were — because the gaps were never in the records.</p>
 
 <h2>The both/and answer</h2>
-<p>The architecture that works: your PMS stays the system of record; Aumy sits alongside it as the operating system for the patient journey — Convert, Care, Retain, Reactivate — over WhatsApp, calls and your Google profile. No migration, no retraining the front desk on new billing screens, live in days. Your software keeps the records. Aumy coordinates everything that happens between them, so you can grow your clinic without growing the chaos.</p>`,
+<p>The architecture that works: your PMS stays the system of record; Aumy sits alongside it as the operating system for the patient journey — the 4C Framework: Convert, Confirm, Care, Come back — over WhatsApp, calls and your Google profile. No migration, no retraining the front desk on new billing screens, live in days. Your software keeps the records. Aumy coordinates everything that happens between them, so you can grow your clinic without growing the chaos.</p>`,
   },
   {
     slug: "digital-marketing-for-dental-clinics",
@@ -994,7 +994,7 @@ const growthPosts = [
 </ul>
 
 <h2>The honest summary</h2>
-<p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> Aumy automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. It runs on the same connected platform as Convert, Care, Retain and Reactivate — so the patients your marketing brings in don't get lost in the chaos that follows.</p>`,
+<p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> Aumy automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. It runs on the same connected platform as the 4C Framework (Convert, Confirm, Care and Come back) — so the patients your marketing brings in don't get lost in the chaos that follows.</p>`,
   },
   {
     slug: "ai-software-for-dentists-india-cost-comparison",
@@ -1047,7 +1047,7 @@ const growthPosts = [
   <li>Can it <strong>show you the revenue</strong> it recovered \u2014 bookings and rupees, attributed \u2014 or just call logs?</li>
 </ol>
 
-<p>For context on where Aumy sits in that table: it is not a receptionist tool but the operating system for a growing dental clinic \u2014 24/7 AI receptionist on WhatsApp and calls, appointments and reminders, treatment-plan follow-ups, after-treatment care, care gaps and reactivation, all working from one patient record. Its <a href="/pricing">Clinic OS starts from ₹3,000 a month</a>, with the AI added on top and priced with each clinic, and underneath it runs the whole patient journey: Convert, Care, Retain, Reactivate.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>. For the full picture of AI dental software in India, see <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>.</p>`,
+<p>For context on where Aumy sits in that table: it is not a receptionist tool but the operating system for a growing dental clinic \u2014 24/7 AI receptionist on WhatsApp and calls, appointments and reminders, treatment-plan follow-ups, after-treatment care, care gaps and reactivation, all working from one patient record. Its <a href="/pricing">Clinic OS starts from ₹3,000 a month</a>, with the AI added on top and priced with each clinic, and underneath it runs the whole patient journey: the 4C Framework, Convert, Confirm, Care, Come back.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>. For the full picture of AI dental software in India, see <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>.</p>`,
   },
   {
     slug: "dental-clinic-software-stack-india-comparison",
@@ -1102,7 +1102,7 @@ const growthPosts = [
 <p>A stitched stack fails at least three of these five. Not because the tools are bad \u2014 because they were never designed to know about each other.</p>
 
 <h2>The integrated alternative</h2>
-<p>This is the reason Aumy is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, follows up care gaps and reactivation from real records, posts to your Google profile \u2014 and shows what happened to every enquiry in one dashboard. <a href="/pricing">The Clinic OS starts from ₹3,000 a month</a>, with the AI added on top, so a clinic runs one system instead of paying five vendors for overlapping pieces. That's the whole journey \u2014 Convert, Care, Retain, Reactivate \u2014 as one connected system instead of five tools that don't talk to each other.</p>
+<p>This is the reason Aumy is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, follows up care gaps and reactivation from real records, posts to your Google profile \u2014 and shows what happened to every enquiry in one dashboard. <a href="/pricing">The Clinic OS starts from ₹3,000 a month</a>, with the AI added on top, so a clinic runs one system instead of paying five vendors for overlapping pieces. That's the whole journey \u2014 the 4C Framework: Convert, Confirm, Care, Come back \u2014 as one connected system instead of five tools that don't talk to each other.</p>
 
 <p>Comparing us with the US tools instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">That comparison is here</a>. New to the category? Start with <a href="/ai-dental-software-india">what AI dental software does in an Indian clinic</a>.</p>`,
   },

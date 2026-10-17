@@ -10,6 +10,14 @@ const HOW_SEO = {
     'How Aumy works for dental clinics in India: download the app, pick the module for your biggest leak — Convert, Chat, Voice, Journey or Clinic — connect your WhatsApp or phone number and go live, with 1,000 free Aumy credits per product.',
 };
 
+// The 4C Framework is how Aumy works (owner 2026-10-17); the section words are src/data/fourC.js. This is the
+// one page-specific sentence under its strap.
+const HOW_FOURC_LEAD =
+  'Each Aumy module covers one or more of these stages. Start with the stage where your clinic loses the most patients.';
+
+// Getting set up is a different list from the 4C stages — labelled so the page never shows two competing step lists.
+const HOW_START = { eyebrow: 'Live in minutes', title: 'Getting started: three steps.' };
+
 const HOW_STEPS = [
   { title: 'Download the Aumy app', body: 'Get Aumy on the App Store or Google Play and sign in with your mobile number. No forms, no sales call.' },
   { title: 'Pick the module for your biggest leak', body: 'Missed calls? Aumy Voice. Slow WhatsApp replies? Aumy Chat. Ad enquiries going cold? Aumy Convert. Start free with 1,000 Aumy credits for each product.' },
@@ -22,5 +30,5 @@ const HOW_CONTROL = [
   { title: 'Your data stays private', body: 'Encrypted, access-controlled and private by design. Patient health details never go to ad platforms.' },
 ];
 
-module.exports = { HOW_SEO, HOW_STEPS, HOW_CONTROL };
+module.exports = { HOW_SEO, HOW_FOURC_LEAD, HOW_START, HOW_STEPS, HOW_CONTROL };
 module.exports.default = module.exports;

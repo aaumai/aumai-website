@@ -34,9 +34,10 @@ const CAPABILITIES = [
   ['Hands over to humans instantly', 'Your staff can take over any conversation with one tap; the AI steps back the moment a human joins and stays back while they chat.'],
 ];
 
+// Where the receptionist sits in the 4C Framework (owner 2026-10-17: one framework everywhere). The section
+// itself (eyebrow, title, four stages) comes from src/data/fourC.js; this is the page's own sentence under it.
 const STAGE = {
-  title: 'Converting is only stage one',
-  body: 'The receptionist is the front door of the Aumy patient journey — after it Converts an enquiry, Aumy Cares for the patient after treatment, Retains them by following up care gaps, and Reactivates them if they drift away. One connected platform coordinating the whole journey, alongside the practice software you already use.',
+  lead: 'Answering is only the first C. The receptionist runs Convert: every enquiry answered within seconds and followed up until it books. Aumy then runs the other three, Confirm, Care and Come back, on the same patient record, alongside the practice software you already use.',
 };
 
 const FAQS = [

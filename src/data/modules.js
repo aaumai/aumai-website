@@ -134,21 +134,19 @@ const MODULES = [
   },
 ];
 
+// The 4C Framework is the site's one journey model (owner 2026-10-17); it replaced the seven-step
+// "enquiry to recall" strip that used to sit here.
+const FOURC = require('./fourC');
+
 // The featured connected-system band: Aumy One.
 const CONNECTED = {
   eyebrow: 'For clinics ready to run everything',
   short: 'Aumy One',
   title: 'The Connected Dental Clinic System',
   sub: 'One system that includes everything, customised to your clinic’s needs: one patient record, from the first enquiry to the next recall.',
-  steps: [
-    { title: 'Enquiry', body: 'A patient sees your ad or finds you on Google, and messages or calls.' },
-    { title: 'Reply & booking', body: 'Aumy Chat replies in seconds or Aumy Voice answers the call, and books a real slot.' },
-    { title: 'Reminder', body: 'Forms are filled in on the phone; the patient confirms the visit with one tap.' },
-    { title: 'Visit', body: 'The doctor sees the full history, charts the treatment, and the bill is made.' },
-    { title: 'Notes', body: 'The doctor types a short note or just speaks; Aumy Scribe fills the chart to accept.' },
-    { title: 'Follow-up', body: 'After-care goes out and advised treatment is followed up. Missed visits are rebooked.' },
-    { title: 'Recall & review', body: 'A review is requested, check-ups go out when due, and drifted patients are invited back.' },
-  ],
+  // The journey strip = the four stages of the 4C Framework, words from src/data/fourC.js.
+  stepsTitle: FOURC.TITLE,
+  steps: FOURC.STAGES.map((s) => ({ title: s.name, body: s.line, systems: FOURC.systemsText(s) })),
   why: [
     ['One patient record', 'The enquiry, calls, chats, visits, treatment and bill sit on the same patient. Anyone on your team sees the whole story.'],
     ['No double entry', 'A booking made by the AI is already in the calendar. A treatment the doctor charts already drives the after-care. Nobody types anything twice.'],
@@ -404,7 +402,7 @@ const PAGES = [
     keyword: 'automate dental clinic operations',
     card: 'One system that includes everything, customised to your clinic’s needs.',
     intro: `${CONNECTED.sub} Aumy One is all-in-one dental clinic software: every module joined up, so nothing is typed twice and no patient falls between tools.`,
-    does: CONNECTED.steps.map((s) => `${s.title}: ${s.body}`),
+    does: CONNECTED.steps.map((s) => `${s.title}: ${s.body} (${s.systems})`),
     whoFor: [
       'You want one system instead of separate tools for the desk, WhatsApp, calls and follow-ups.',
       'You run several branches or doctors and want the whole picture in one place.',

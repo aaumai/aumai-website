@@ -26,7 +26,7 @@ const VIDEOS = [
   },
   {
     id: 'ggKaTSgI1RY',
-    tag: 'Reactivate',
+    tag: 'Come back',
     title: 'Tell Aumy what you want. It builds and runs the campaign.',
     blurb:
       '“Bring back patients who haven’t visited in 6–12 months for cleaning, X-ray and consultation.” Audience, messages, AI calls, follow-ups and tracking — generated and executed from one sentence.',

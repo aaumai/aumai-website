@@ -121,11 +121,14 @@ const ModulesPage = () => {
               <h2 id="one-system-title" className="md-connected-title">{CONNECTED.short}<span className="md-formal">{CONNECTED.title}</span></h2>
               <p className="md-connected-sub">{CONNECTED.sub}</p>
             </div>
+            {/* The 4C Framework (owner 2026-10-17): words from src/data/fourC.js via CONNECTED.steps. */}
+            <p className="md-strip-label">{CONNECTED.stepsTitle}</p>
             <ol className="md-strip">
               {CONNECTED.steps.map((s) => (
                 <li key={s.title} className="md-strip-step">
                   <h3>{s.title}</h3>
                   <p>{s.body}</p>
+                  <p className="md-strip-systems">{s.systems}</p>
                 </li>
               ))}
             </ol>

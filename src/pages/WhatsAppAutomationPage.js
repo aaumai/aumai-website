@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import { TITLE, DESCRIPTION, HERO, JOURNEY, STAGES, DIFFERENCE, FAQS } from '../data/whatsappAutomation';
+import { TITLE, DESCRIPTION, HERO, JOURNEY, DIFFERENCE, FAQS } from '../data/whatsappAutomation';
+import FourC from '../components/FourC';
 import { AI_TRAINED_FOR_DENTISTRY } from '../data/positioning';
 import './HomeClinic.css';
 
@@ -36,24 +37,8 @@ const WhatsAppAutomationPage = () => {
         </div>
       </section>
 
-      <section style={{ padding: '20px 0 8px' }}>
-        <div className="ch-container ch-narrow ch-center">
-          <h2 className="ch-h2" style={{ textAlign: 'center' }}>{JOURNEY.title}</h2>
-          <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>{JOURNEY.body}</p>
-        </div>
-      </section>
-
-      <section style={{ padding: '24px 0 32px' }}>
-        <div className="ch-container" style={{ display: 'grid', gap: 18, gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))' }}>
-          {STAGES.map(([stage, body], i) => (
-            <div key={stage} className="ch-why-card" style={{ display: 'block', padding: '20px 22px', borderTop: '3px solid #2563EB' }}>
-              <span className="ch-eyebrow">Stage {i + 1}</span>
-              <h3 style={{ margin: '4px 0 6px', fontSize: '1.05rem' }}>{stage}</h3>
-              <p style={{ margin: 0, color: '#5b6784' }}>{body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* The patient journey = the 4C Framework (owner 2026-10-17). Words: src/data/fourC.js. */}
+      <FourC id="the-4c-framework" lead={JOURNEY.lead} />
 
       <section style={{ padding: '8px 0 36px' }}>
         <div className="ch-container ch-narrow">

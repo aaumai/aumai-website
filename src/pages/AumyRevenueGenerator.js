@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import HomeExplainers from '../components/HomeExplainers';
 import AppDownload from '../components/AppDownload';
+import FourC from '../components/FourC';
 import { HERO_PRODUCTS } from '../data/positioning';
-import { HOW_STEPS, HOW_CONTROL, HOW_SEO } from '../data/howItWorks';
+import { HOW_STEPS, HOW_CONTROL, HOW_SEO, HOW_FOURC_LEAD, HOW_START } from '../data/howItWorks';
 import './HomeClinic.css';
 
 /**
@@ -12,6 +13,8 @@ import './HomeClinic.css';
  * positioning"): three steps to go live, the module explainers, what each module does, staying in control, proof,
  * the app. Words: src/data/howItWorks.js (shared with scripts/prerender.js). The retired page (coordination problem,
  * Convert → Care → Retain → Reactivate, Jarvis, dedicated expert, Get Found) is in git history before this commit.
+ * 2026-10-17 (owner: "make it 4C everywhere"): the 4C Framework leads the page (src/data/fourC.js); the three
+ * onboarding steps follow, labelled "Getting started" so they never read as a second journey.
  */
 const AumyRevenueGenerator = () => {
   useEffect(() => {
@@ -41,12 +44,15 @@ const AumyRevenueGenerator = () => {
         </div>
       </section>
 
-      {/* THREE STEPS */}
+      {/* THE 4C FRAMEWORK — how Aumy works */}
+      <FourC id="the-4c-framework" tint lead={HOW_FOURC_LEAD} />
+
+      {/* GETTING STARTED — three steps to go live */}
       <section className="ch-section">
         <div className="ch-container">
           <div className="ch-head">
-            <span className="ch-eyebrow">Live in minutes</span>
-            <h2 className="ch-h2">Three steps.</h2>
+            <span className="ch-eyebrow">{HOW_START.eyebrow}</span>
+            <h2 className="ch-h2">{HOW_START.title}</h2>
           </div>
           <ol className="ch-how-steps">
             {HOW_STEPS.map((s, i) => (

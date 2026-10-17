@@ -77,7 +77,7 @@ const ModuleDetailPage = () => {
 
       <section className="ch-section mp-section">
         <div className="ch-container ch-narrow">
-          <h2 className="ch-h2">{isOne ? 'How it works, from enquiry to recall' : 'What it does'}</h2>
+          <h2 className="ch-h2">{isOne ? 'How it works: the 4C Framework' : 'What it does'}</h2>
           <ul className="md-does mp-list">
             {page.does.map((d) => <li key={d}><Check /><span>{d}</span></li>)}
           </ul>

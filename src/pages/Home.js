@@ -5,6 +5,7 @@ import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
 import HomeModules from '../components/HomeModules';
 import HomeExplainers from '../components/HomeExplainers';
+import FourC from '../components/FourC';
 import { HERO_VIDEO } from '../data/explainers';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
@@ -15,8 +16,10 @@ import './HomeClinic.css';
 // "make sure we do not lose the seo advantage"). Eight sections: hero → module explainers → proof → modules →
 // be the patient → app → FAQ → one call to action. Title, description, H1, JSON-LD (org, software, FAQ, videos)
 // and every internal link are kept (HOME_EXPLORE). The retired sections (coordination problem, chaos groups,
-// two halves, Jarvis, Convert→Care→Retain→Reactivate, leak check, PMS, why it works, growth expert, Get Found,
-// why us, fit gate, 30-day offer, founder close) are in git history before this commit.
+// two halves, Jarvis, the old Convert→Care→Retain→Reactivate framework, leak check, PMS, why it works, growth
+// expert, Get Found, why us, fit gate, 30-day offer, founder close) are in git history before this commit.
+// 2026-10-17 (owner: "make it 4C everywhere"): the 4C Framework replaced that old framework site-wide and sits
+// between the proof and the modules. Words: src/data/fourC.js, mirrored in scripts/prerender.js.
 
 // Real, attributed partner-clinic testimonials (sourced from the revenue-generator page).
 const testimonials = [
@@ -152,6 +155,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ── The 4C Framework (owner 2026-10-17). Words: src/data/fourC.js. */}
+      <FourC id="the-4c-framework" tint />
 
       {/* ── Aumy is built from modules (owner 2026-10-08). Words: src/data/modules.js (HOME, PAGES). */}
       <HomeModules />

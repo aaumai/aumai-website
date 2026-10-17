@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { TITLE, DESCRIPTION, HERO, MATHS, CAPABILITIES, STAGE, FAQS } from '../data/aiReceptionist';
 import { AI_TRAINED_FOR_DENTISTRY } from '../data/positioning';
+import FourC from '../components/FourC';
 import './HomeClinic.css';
 
 const Check = () => (
@@ -59,16 +60,13 @@ const AIReceptionistPage = () => {
         </div>
       </section>
 
-      <section style={{ padding: '8px 0 40px' }}>
-        <div className="ch-container ch-narrow ch-center">
-          <h2 className="ch-h2" style={{ textAlign: 'center' }}>{STAGE.title}</h2>
-          <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>{STAGE.body}</p>
-          <div style={{ marginTop: 16 }}>
-            <Link to="/whatsapp-automation-for-clinics" className="ch-btn ch-btn-ghost">See the WhatsApp automation behind it</Link>{' '}
-            <Link to="/modules" className="ch-btn ch-btn-ghost">Buy Aumy Chat or Aumy Voice on its own</Link>
-          </div>
+      {/* Where the receptionist sits: the first C of the 4C Framework (owner 2026-10-17). Words: src/data/fourC.js. */}
+      <FourC id="the-4c-framework" lead={STAGE.lead}>
+        <div className="ch-center" style={{ textAlign: 'center', marginTop: 20 }}>
+          <Link to="/whatsapp-automation-for-clinics" className="ch-btn ch-btn-ghost">See the WhatsApp automation behind it</Link>{' '}
+          <Link to="/modules" className="ch-btn ch-btn-ghost">Buy Aumy Chat or Aumy Voice on its own</Link>
         </div>
-      </section>
+      </FourC>
 
       <section style={{ padding: '8px 0 64px' }}>
         <div className="ch-container ch-narrow">

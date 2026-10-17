@@ -154,7 +154,7 @@ Last updated: 2026-10-06
 - ${ORIGIN}/switch — moving from your current dental software: Aumy syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
-- ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
+- ${ORIGIN}/revenue-generator — how Aumy works: the 4C Framework (Convert → Confirm → Care → Come back), getting started in three steps, and the modules
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
 - ${ORIGIN}/pricing — Aumy pricing: the Clinic OS starts from ${PRICING.MONTHLY_FROM.toLocaleString("en-IN")} INR a month; the AI receptionist, AI calls and follow-ups are priced with each clinic
 - ${ORIGIN}/modules — Aumy sold module by module or as one connected system: Aumy Convert (lead nurturing & Meta ads optimisation), Aumy Clinic (dental clinic operating system) with the Aumy Scribe add-on (AI clinical documentation), Aumy Journey (clinic OS with the end-to-end patient journey), Aumy Chat (AI WhatsApp receptionist), Aumy Voice (AI voice receptionist), and Aumy One (the connected dental clinic system)

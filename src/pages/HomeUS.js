@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { setPageSeo } from '../utils/seo';
 import LeakCheck from '../components/LeakCheck';
 import DemoPlaylist from '../components/DemoPlaylist';
+import FourC from '../components/FourC';
+import { CHAIN, LEADS } from '../data/fourC';
 import './HomeClinic.css';
 import './HomeUS.css';
 
@@ -26,33 +28,8 @@ const Check = () => (
 const before = ['Growth', 'More patients', 'More calls', 'More texts', 'More follow-ups', 'More front-desk workload', 'More things falling through the cracks'];
 const withAumy = ['Growth', 'Aumy coordinates the work', 'Your team focuses on patients'];
 
-// The four stages — the architecture underneath.
-const steps = [
-  {
-    stage: 'Convert',
-    t: 'From the first call to a booking',
-    d: 'Every call, text and web enquiry answered, followed up and booked into a real slot — without someone at the front desk having to remember who asked what.',
-    m: 'AI voice agent · Texts & web chat · Lead follow-up · Booking',
-  },
-  {
-    stage: 'Care',
-    t: 'Everything around the treatment',
-    d: 'Registration and intake forms before the visit, consent signed on a phone or tablet, and after-care your doctors define — with any worrying reply routed to a person.',
-    m: 'Digital registration · Intake · Consent · After-care',
-  },
-  {
-    stage: 'Retain',
-    t: 'Keeping patients on track',
-    d: 'Confirmations, rescheduling and no-shows handled in the conversation, and every care gap — the crown after a root canal, the overdue hygiene visit — followed up on time.',
-    m: 'Confirmations · No-shows · Care gaps · Hygiene reappointment',
-  },
-  {
-    stage: 'Reactivate',
-    t: 'Bringing patients back',
-    d: 'Patients who drifted away invited back in your doctors’ own words, at a pace your team can handle — not a blast to your whole list.',
-    m: 'Inactive patients · Overdue treatment · Stalled treatment plans',
-  },
-];
+// The architecture underneath is the 4C Framework (owner 2026-10-17: one framework on every site, US included).
+// Words: src/data/fourC.js (STRAP_US says "practice"); rendered by src/components/FourC.js.
 
 // The five groups of work Aumy manages — the chaos, not features.
 const chaosGroups = [
@@ -70,7 +47,7 @@ const chaosGroups = [
   },
   {
     title: 'Patient journey',
-    items: ['Pre-treatment instructions', 'After-care', 'Care gaps', 'Doctor check-ins', 'Reactivation'],
+    items: ['Pre-treatment instructions', 'After-care', 'Care gaps', 'Doctor check-ins', 'Smart Comebacks'],
   },
   {
     title: 'Growth',
@@ -138,7 +115,7 @@ const HomeUS = () => {
             processes from the first call to ongoing care. Calls answered, texts replied to, appointments
             confirmed, follow-ups sent and care gaps closed, on one connected platform.
           </p>
-          <p className="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
+          <p className="ch-hero-chain">{CHAIN.toUpperCase()}</p>
           <div className="ch-hero-cta ch-center-cta">
             <a className="ch-btn ch-btn-primary" href={CAL_URL} target="_blank" rel="noopener noreferrer">Book a 30-minute call</a>
             <a className="ch-btn ch-btn-ghost" href="mailto:jayesh@aumyai.com">jayesh@aumyai.com</a>
@@ -178,25 +155,8 @@ const HomeUS = () => {
         </div>
       </section>
 
-      {/* THE ARCHITECTURE */}
-      <section className="ch-section ch-tint" id="how-it-works">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">The architecture underneath</span>
-            <h2 className="ch-h2">Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
-          </div>
-          <div className="ch-pillars">
-            {steps.map((s, i) => (
-              <div key={i} className="ch-pillar">
-                <span className="ch-eyebrow">{s.stage}</span>
-                <h3 className="ch-pillar-title">{s.t}</h3>
-                <p className="ch-pillar-body">{s.d}</p>
-                <p className="ch-pillar-machinery">{s.m}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* THE ARCHITECTURE — the 4C Framework (owner 2026-10-17). Words: src/data/fourC.js. */}
+      <FourC id="how-it-works" tint market="us" lead={LEADS.us} />
 
       {/* THE FIVE GROUPS OF WORK */}
       <section className="ch-section" id="what-it-manages">

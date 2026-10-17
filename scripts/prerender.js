@@ -41,6 +41,8 @@ const EXPL = require('../src/data/explainers');
 const RYC = require('../src/data/runYourClinic');
 // How Aumy works (/revenue-generator, lean 2026-10-12): same file as src/pages/AumyRevenueGenerator.js.
 const HOW = require('../src/data/howItWorks');
+// The 4C Framework (owner 2026-10-17: one framework everywhere): same file as src/components/FourC.js.
+const FOURC = require('../src/data/fourC');
 // Home FAQ: the list src/pages/Home.js renders — crawler HTML and FAQPage JSON-LD read the same one.
 const HOME_FAQ = require('../src/data/homeFaq');
 // "Handcrafted only for dentists" (owner 2026-10-08): same words as the React pages.
@@ -68,6 +70,18 @@ const creditsBarHtml = () => `<div class="credits-bar"><div class="container"><p
 // `stores`: the home cards also carry the app-store links for the self-serve modules.
 const moduleCardsHtml = (pages, { stores = false } = {}) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}${stores && STORES.isSelfServe(p.id) ? ` ${esc(STORES.START_LINE)}: ${storeLinksHtml(p.short)}` : ''}</li>`).join('\n          ');
 const pairsHtml = (pairs) => `<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('')}</ul>`;
+// Crawler twin of <FourC> (src/components/FourC.js): the 4C Framework, words from src/data/fourC.js.
+// `lead`: the page's own sentence under the strap; `us`: "practice", not "clinic".
+const fourCHtml = ({ id = 'the-4c-framework', lead = '', us = false } = {}) => `
+      <section id="${id}"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(FOURC.EYEBROW)}</p>
+        <h2>${esc(FOURC.TITLE)}</h2>
+        <p>${esc(us ? FOURC.STRAP_US : FOURC.STRAP)}</p>
+        ${lead ? `<p>${esc(lead)}</p>` : ''}
+        <ol>
+          ${FOURC.STAGES.map((s) => `<li><h3>${esc(s.name)}</h3><p>${esc(s.line)}</p><p>${esc(FOURC.systemsText(s))}</p></li>`).join('\n          ')}
+        </ol>
+      </div></section>`;
 
 const BUILD = path.join(__dirname, '..', 'build');
 // US-market build (REACT_APP_MARKET=us → aumyai.com) prerenders only the US
@@ -408,7 +422,8 @@ const routes = [
         <p>${esc(MODS.CONNECTED.eyebrow)}</p>
         <h2>${esc(MODS.CONNECTED.short)}: ${esc(MODS.CONNECTED.title)}</h2>
         <p>${esc(MODS.CONNECTED.sub)}</p>
-        <ol>${MODS.CONNECTED.steps.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></li>`).join('')}</ol>
+        <p>${esc(MODS.CONNECTED.stepsTitle)}</p>
+        <ol>${MODS.CONNECTED.steps.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p><p>${esc(s.systems)}</p></li>`).join('')}</ol>
         ${MODS.CONNECTED.why.map(([t, b]) => `<h3>${esc(t)}</h3><p>${esc(b)}</p>`).join('')}
         <p><a href="/modules/automate-dental-clinic-operations">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
       </div></section>
@@ -441,7 +456,8 @@ const routes = [
         <p>${esc(POS.AI_TRAINED_FOR_DENTISTRY)}</p>
         <h2>${esc(AIR.MATHS.title)}</h2><p>${esc(AIR.MATHS.body)}</p>
         <h2>What the AI receptionist does</h2>${pairsHtml(AIR.CAPABILITIES)}
-        <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
+      </div></section>${fourCHtml({ lead: AIR.STAGE.lead })}
+      <section><div class="ch-container ch-narrow">
         ${faqHtml(AIR.FAQS, 'AI receptionist questions, answered')}
         <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat or Aumy Voice on its own</a></p>
       </div></section>`,
@@ -458,8 +474,8 @@ const routes = [
         <h1 class="ch-hero-title">${esc(WA.HERO.title)}</h1>
         <p>${esc(WA.HERO.sub)}</p>
         <p>${esc(POS.AI_TRAINED_FOR_DENTISTRY)}</p>
-        <h2>${esc(WA.JOURNEY.title)}</h2><p>${esc(WA.JOURNEY.body)}</p>
-        ${pairsHtml(WA.STAGES)}
+      </div></section>${fourCHtml({ lead: WA.JOURNEY.lead })}
+      <section><div class="ch-container ch-narrow">
         <h2>Not another broadcast tool</h2>${pairsHtml(WA.DIFFERENCE)}
         ${faqHtml(WA.FAQS, 'WhatsApp automation questions, answered')}
         <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat on its own</a></p>
@@ -566,7 +582,7 @@ const routes = [
         ${clinicsStripHtml()}
         <h2>Busy clinics already run on Aumy.</h2>
         <p>Vinayaka Dental Care: fewer no-shows and patients coming back — "we didn't hire a single extra person to make it happen." AUM AI is an NVIDIA Inception member.</p>
-      </div></section>
+      </div></section>${fourCHtml()}
       <section id="modules"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(MODS.HOME.eyebrow)}</p>
         <h2>${esc(MODS.HOME.title)}</h2>
@@ -600,9 +616,10 @@ const routes = [
         <h1 class="ch-hero-title">Pick a module. Connect. Stop losing patients.</h1>
         <p class="ch-hero-sub">Aumy is built from modules for dental clinics. Start with the one for your biggest leak, set it up from your phone, and add more whenever you want.</p>
         <p><a href="/#get-the-app">Start free in the app</a> · <a href="/contact">Talk to our team</a></p>
-      </div></section>
+      </div></section>${fourCHtml({ lead: HOW.HOW_FOURC_LEAD })}
       <section><div class="ch-container ch-narrow">
-        <h2>Three steps.</h2>
+        <p class="ch-eyebrow">${esc(HOW.HOW_START.eyebrow)}</p>
+        <h2>${esc(HOW.HOW_START.title)}</h2>
         <ol>
           ${HOW.HOW_STEPS.map((st) => `<li><strong>${esc(st.title)}</strong> — ${esc(st.body)}</li>`).join('\n          ')}
         </ol>
@@ -762,7 +779,7 @@ const routes = [
           <li><b>Migrate when you are ready</b> — full history moved, counts verified with you, sync kept running until you switch the old system off.</li>
         </ol>
         <p><a href="/contact">Book a migration call</a> · <a href="/pricing">See pricing</a> · <a href="/revenue-generator">How Aumy works</a></p>
-      </div></section>`,
+      </div></section>${fourCHtml({ lead: FOURC.LEADS.switch })}`,
   },
   {
     slug: 'missed-call-calculator',
@@ -1093,7 +1110,7 @@ for (const p of MODS.PAGES) {
         <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
-        <h2>${p.featured ? 'How it works, from enquiry to recall' : 'What it does'}</h2>
+        <h2>${p.featured ? 'How it works: the 4C Framework' : 'What it does'}</h2>
         <ul>${p.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
         ${p.addons.length ? `<p>Add if you want: ${p.addons.map((a) => `+ ${esc(a)}`).join(' · ')}</p>` : ''}
         <h2>Who it's for</h2>
@@ -1148,22 +1165,17 @@ const usRoutes = [
         <p class="ch-eyebrow">The operating system for a growing dental practice</p>
         <h1 class="ch-hero-title">Grow your practice. Don't grow the chaos.</h1>
         <p class="ch-hero-sub">Aumy manages the chaos that comes with growth — coordinating your patients, people and processes from the first call to ongoing care. Calls answered, texts replied to, appointments confirmed, follow-ups sent and care gaps closed, on one connected platform.</p>
-        <p class="ch-hero-chain">CONVERT → CARE → RETAIN → REACTIVATE</p>
+        <p class="ch-hero-chain">${esc(FOURC.CHAIN.toUpperCase())}</p>
         <h2>A successful dental practice doesn't necessarily have a patient-acquisition problem. It often has a coordination problem.</h2>
         <p>When the schedule is full, growth creates chaos: calls, texts, enquiries, confirmations, rescheduling, cancellations, no-shows, follow-ups, paperwork, consents, X-rays, invoices and patient questions. Before Aumy: growth → more patients → more calls → more texts → more follow-ups → more front-desk workload → more things falling through the cracks. With Aumy: growth → Aumy coordinates the work → your team focuses on patients.</p>
-        <h2>Convert → Care → Retain → Reactivate. Aumy coordinates the work.</h2>
-        <ul>
-          <li><strong>Convert</strong> — every call, text and web enquiry answered, followed up and booked into a real slot.</li>
-          <li><strong>Care</strong> — registration and intake before the visit, digital consent, and after-care your doctors define.</li>
-          <li><strong>Retain</strong> — confirmations, rescheduling, no-shows and care gaps followed up on time.</li>
-          <li><strong>Reactivate</strong> — patients who drifted away invited back in your doctors' own words.</li>
-        </ul>
+      </div></section>${fourCHtml({ id: 'how-it-works', lead: FOURC.LEADS.us, us: true })}
+      <section><div class="ch-container ch-narrow">
         <h2>What Aumy manages</h2>
         <ul>
           <li><strong>Patient communication</strong> — AI voice agent, texts and web chat, reminders, follow-ups, one-tap human takeover.</li>
           <li><strong>Appointment orchestration</strong> — confirmations, rescheduling, cancellations, no-shows, waitlists, care gaps.</li>
           <li><strong>Digital practice</strong> — digital registration, intake with signature, consent, X-rays and documents, invoices.</li>
-          <li><strong>Patient journey</strong> — pre-treatment instructions, after-care, care gaps, doctor check-ins, reactivation.</li>
+          <li><strong>Patient journey</strong> — pre-treatment instructions, after-care, care gaps, doctor check-ins, Smart Comebacks.</li>
           <li><strong>Growth</strong> — Google Business Profile, reviews, ad attribution, lead capture and conversion.</li>
         </ul>
         <h2>Think of Aumy as Jarvis for your dental practice.</h2>

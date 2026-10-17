@@ -8,18 +8,13 @@ const DESCRIPTION =
   'Aumy automates your dental clinic’s WhatsApp on the official Business API: instant replies, booking, care-gap reminders, reactivation and reviews, with human takeover built in.';
 const HERO = {
   title: 'WhatsApp automation built for dental clinics',
-  sub: 'India’s patients live on WhatsApp. Aumy turns your clinic’s number into a system that answers, books, follows up, closes care gaps and reactivates — on the official WhatsApp Business API, across the whole patient journey.',
+  sub: 'India’s patients live on WhatsApp. Aumy turns your clinic’s number into a system that answers, books, confirms, follows up, closes care gaps and invites patients back — on the official WhatsApp Business API, across the whole patient journey.',
 };
+// The journey on this page is the 4C Framework (owner 2026-10-17: one framework everywhere). The four stages
+// come from src/data/fourC.js; this is only the page's own sentence under them.
 const JOURNEY = {
-  title: 'One number, the whole patient journey',
-  body: 'Most clinics use WhatsApp manually — replying when the front desk gets a minute, forgetting follow-ups by Friday. Aumy runs the entire patient journey on it, automatically.',
+  lead: 'One number, all four stages. Most clinics use WhatsApp by hand — replying when the front desk gets a minute, forgetting follow-ups by Friday. Aumy runs every stage on it, automatically.',
 };
-const STAGES = [
-  ['Convert', 'New enquiries answered in seconds and nurtured until they book — with treatment-aware follow-ups for implants, aligners, RCTs and more.'],
-  ['Care', 'Day-by-day after-treatment instructions sent automatically, matched to the procedure performed — fewer anxious calls, better outcomes.'],
-  ['Retain', 'Cleaning and check-up care gaps followed up on schedule — no register, no reminder diary, no staff time.'],
-  ['Reactivate', 'Patients who haven’t visited in months get personal win-back journeys that bring them back — patients who already know and trust you.'],
-];
 
 const DIFFERENCE = [
   ['Official WhatsApp Business API', 'Your clinic’s own verified number and branding on Meta’s approved business channel — not an unofficial bulk tool that gets numbers banned.'],
@@ -52,5 +47,5 @@ const FAQS = [
   },
 ];
 
-module.exports = { TITLE, DESCRIPTION, HERO, JOURNEY, STAGES, DIFFERENCE, FAQS };
+module.exports = { TITLE, DESCRIPTION, HERO, JOURNEY, DIFFERENCE, FAQS };
 module.exports.default = module.exports;
