@@ -27,6 +27,7 @@
 .mc-file { background: var(--sc-card); border: 1px solid var(--sc-line); border-left: 6px solid var(--c, var(--sc-accent)); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px }
 .mc-file h3 { font-size: 19px }
 .mc-file p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--sc-muted); flex: 1 }
+.mc-file p.mc-file-how { flex: 0; color: var(--sc-ink, inherit); font-weight: 600 }
 .mc-file .sc-btn { align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center }
 .mc-badge { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c, var(--sc-accent)) }
 .mc-all { display: flex; flex-wrap: wrap; gap: 12px; align-items: center }

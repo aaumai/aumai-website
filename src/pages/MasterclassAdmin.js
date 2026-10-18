@@ -200,7 +200,7 @@ export default function MasterclassAdmin() {
           <div className="sc-start-card"><p className="sc-start-label">Members</p><h3>{counts.all}</h3><p>{counts.ok} active now</p></div>
           <div className="sc-start-card"><p className="sc-start-label">Signed in</p><h3>{signedIn}</h3><p>at least once</p></div>
           <div className="sc-start-card"><p className="sc-start-label">Ended</p><h3>{counts.ended}</h3><p>month is over</p></div>
-          <div className="sc-start-card"><p className="sc-start-label">Workbooks</p><h3>{files.length}</h3><p>{files.length ? 'ready to download' : 'none on the server yet'}</p></div>
+          <div className="sc-start-card"><p className="sc-start-label">Files</p><h3>{files.length}</h3><p>{files.length ? 'ready to download' : 'none on the server yet'}</p></div>
           <div className="sc-start-card"><p className="sc-start-label">Video</p><h3 style={{ fontSize: 20 }}>{data.video.type === 'none' ? 'Not set' : data.video.type === 'embed' ? 'Link' : 'S3 file'}</h3><p>{data.video.type === 'none' ? 'members see “within 24 hours”' : 'members can watch'}</p></div>
         </div>
 
@@ -272,7 +272,7 @@ export default function MasterclassAdmin() {
           {video.type === 's3' && <div className="sc-fields" style={{ gridTemplateColumns: '1fr' }}><label>S3 key<input value={video.key} onChange={(e) => setVideo({ ...video, key: e.target.value })} placeholder="masterclass/full-chair-method.mp4" /></label></div>}
           {videoMsg && <p className="mc-ok" role="status">{videoMsg}</p>}
           <button type="submit" className="sc-btn" disabled={busy} style={{ alignSelf: 'flex-start' }}>Save video</button>
-          {files.length > 0 && <p className="mc-small" style={{ margin: 0 }}>Workbooks on the server: {files.map((f) => f.name).join(' · ')}</p>}
+          {files.length > 0 && <p className="mc-small" style={{ margin: 0 }}>Files on the server: {files.map((f) => f.name).join(' · ')}</p>}
           {files.length === 0 && <p className="sc-error" style={{ margin: 0 }}>No workbooks on the server yet. Members see “The workbooks will appear here soon”.</p>}
         </form>
 
