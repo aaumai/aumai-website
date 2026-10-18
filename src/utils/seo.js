@@ -38,3 +38,21 @@ export function setPageSeo({ title, description, canonical, image }) {
     link.setAttribute('href', canonical);
   }
 }
+
+// Private pages (masterclass members area, admin screens): robots noindex,nofollow
+// while the page is open; the previous value comes back when it unmounts.
+export function setNoindex() {
+  let el = document.head.querySelector('meta[name="robots"]');
+  const created = !el;
+  const prev = el ? el.getAttribute('content') : null;
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute('name', 'robots');
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', 'noindex, nofollow');
+  return () => {
+    if (created) el.remove();
+    else el.setAttribute('content', prev);
+  };
+}

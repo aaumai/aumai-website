@@ -132,6 +132,8 @@ function apply(html, r) {
   out = setTag(out, /<title>[\s\S]*?<\/title>/, `<title>${esc(r.title)}</title>`);
   out = setTag(out, /(<meta name="description" content=")[^"]*(")/, `$1${esc(r.description)}$2`);
   out = setTag(out, /(<link rel="canonical" href=")[^"]*(")/, `$1${r.canonical}$2`);
+  // Private pages (masterclass members area, admin): never indexed, never followed.
+  if (r.noindex) out = setTag(out, /(<meta name="robots" content=")[^"]*(")/, '$1noindex, nofollow$2');
   out = setTag(out, /(<meta property="og:title" content=")[^"]*(")/, `$1${esc(r.title)}$2`);
   out = setTag(out, /(<meta property="og:description" content=")[^"]*(")/, `$1${esc(r.description)}$2`);
   out = setTag(out, /(<meta property="og:url" content=")[^"]*(")/, `$1${r.canonical}$2`);
@@ -144,7 +146,7 @@ function apply(html, r) {
   // One Aumy product entity (#aumy-dental) on every India page — the template
   // no longer carries its own, conflicting copy (SEO review 2026-09-26).
   const ld = [...(r.jsonld || [])];
-  if (MARKET !== 'us' && !ld.includes(dentalSoftwareLd)) ld.push(dentalSoftwareLd);
+  if (MARKET !== 'us' && !r.noindex && !ld.includes(dentalSoftwareLd)) ld.push(dentalSoftwareLd);
   // Google treats FAQ markup for text that is not on the page as spam: every
   // FAQPage question must also be in the crawler HTML. Missing ones are added.
   const faqExtra = ld.filter((o) => o && o['@type'] === 'FAQPage')
@@ -661,6 +663,35 @@ const routes = [
           <li>Come back: Smart Comebacks.</li>
         </ul>
         <p>Always scores 2, sometimes 1, never or don’t know 0. 9 to 10: running tight. 5 to 8: can do better. Below 5: leaking patients.</p>
+      </div></section>`,
+  },
+  // Masterclass members area (owner 2026-10-18). Private: noindex, nofollow, kept
+  // out of seo-files.js's sitemap. Only the public sign-in words are here; the
+  // video, workbooks and member details exist only after sign-in, in the browser.
+  ...['masterclass', 'masterclass/my'].map((slug) => ({
+    slug,
+    noindex: true,
+    title: 'Masterclass members | AUM AI',
+    description: 'Sign in to The Full Chair Method masterclass members area.',
+    canonical: `${ORIGIN}/masterclass`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
+        <h1 class="ch-hero-title">Sign in to your masterclass</h1>
+        <p class="ch-hero-sub">Masterclass members sign in with the email they registered with. We email a 6-digit code; there is no password.</p>
+      </div></section>`,
+  })),
+  {
+    slug: 'masterclass-admin',
+    noindex: true,
+    title: 'Masterclass members · AUM AI admin',
+    description: 'AUM AI admin.',
+    canonical: `${ORIGIN}/masterclass-admin`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">AUM AI admin</p>
+        <h1 class="ch-hero-title">Masterclass members</h1>
+        <p class="ch-hero-sub">Enter the dashboard password to continue.</p>
       </div></section>`,
   },
   // Routes that are in the sitemap but were never prerendered (audit
