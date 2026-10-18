@@ -33,6 +33,7 @@ const FOUNDER = require('../src/data/founder');
 const AIR = require('../src/data/aiReceptionist');
 const WA = require('../src/data/whatsappAutomation');
 const COMP = require('../src/data/compliance');
+const MC_REFUND = require('../src/data/masterclassRefund');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
@@ -794,6 +795,21 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Terms and Conditions</h1>
         <p>The terms and conditions for using Aumy and the aumai.co.in website.</p>
+      </div></section>`,
+  },
+  // The refund page (src/pages/CancellationRefund.js). The masterclass rule comes
+  // from src/data/masterclassRefund.js, the same file the page reads.
+  {
+    slug: 'refund',
+    title: 'Cancellation & Refund Policy | AUM AI',
+    description: 'How cancellations and refunds work at AUM AI, including The Full Chair Method masterclass.',
+    canonical: `${ORIGIN}/refund`,
+    content: `
+      <section><div class="ch-container ch-narrow">
+        <h1 class="ch-hero-title">Cancellation &amp; Refund Policy</h1>
+        <p>Cancellations of a service agreement are handled under the terms of that agreement; write to ${esc(MC_REFUND.CONTACT_EMAIL)}.</p>
+        <h2>Masterclass: ${esc(MC_REFUND.HEADING)}</h2>
+        <ul>${MC_REFUND.RULES.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
       </div></section>`,
   },
   {

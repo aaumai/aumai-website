@@ -42,6 +42,9 @@ export default function MasterclassAdmin() {
   const [preview, setPreview] = useState(null);
   const [editing, setEditing] = useState(null); // { id, date }
   const [video, setVideo] = useState({ type: 'none', url: '', key: '' });
+  const [sess, setSess] = useState({ qa_at: '', qa_link: '', video_by: '' });
+  const [sessMsg, setSessMsg] = useState('');
+  const [editingEmail, setEditingEmail] = useState(null); // { id, email }
   const [videoMsg, setVideoMsg] = useState('');
   const [tab, setTab] = useState('members'); // members | registrations
   const [regs, setRegs] = useState(null);
@@ -70,6 +73,7 @@ export default function MasterclassAdmin() {
       const j = await req('/members', null, k);
       saveKey(k); setKey(k); setData(j);
       setVideo((v) => ({ ...v, type: j.video.type, url: j.video.type === 'embed' ? j.video.value : v.url, key: j.video.type === 's3' ? j.video.value : v.key }));
+      if (j.session) setSess({ qa_at: j.session.qa_at || '', qa_link: j.session.qa_link || '', video_by: j.session.video_by || '' });
     } catch (e) {
       setError(e.message === 'Failed to fetch' ? 'Could not reach the server. Check your connection and press Refresh.' : e.message);
     }
@@ -148,6 +152,18 @@ export default function MasterclassAdmin() {
     });
   };
   const revoke = (m) => { if (window.confirm(`Close masterclass access for ${m.name} (${m.email})? They are signed out now and cannot sign in again until you press Restore.`)) act(`/members/${m.id}/revoke`, {}, () => setFlash(`Closed access for ${m.name}.`)); };
+  const saveEmail = (m) => {
+    const to = String(editingEmail.email || '').trim().toLowerCase();
+    if (!window.confirm(`Change ${m.name}'s email from ${m.email} to ${to}? They are signed out, and the sign-in steps go to the new address.`)) return;
+    act(`/members/${m.id}/email`, { email: to }, (j) => { setEditingEmail(null); setFlash(`${m.name}'s email is now ${to}. ${welcomeWords(j.welcome)}`); });
+  };
+  const saveSession = (e) => {
+    e.preventDefault(); setSessMsg('');
+    act('/settings', sess, (j) => {
+      setData((d) => ({ ...d, session: j.session }));
+      setSessMsg(j.session.qa_label || j.session.video_by_label ? 'Saved. Members see this on their page and in new welcome emails.' : 'Cleared.');
+    });
+  };
   const resend = (m) => { if (window.confirm(`Email the sign-in details to ${m.email} again?`)) act(`/members/${m.id}/resend`, {}, (j) => setFlash(`${m.name}: ${welcomeWords(j.welcome)}`)); };
   const extend = (m) => act(`/members/${m.id}/extend`, { days: 30 }, (j) => setFlash(`${m.name} now has access until ${dateLabel(j.access_until)}.`));
   const setEnd = (m) => act(`/members/${m.id}/extend`, { access_until: editing.date }, (j) => { setEditing(null); setFlash(`${m.name} now has access until ${dateLabel(j.access_until)}.`); });
@@ -233,6 +249,18 @@ export default function MasterclassAdmin() {
           </div>
         </div>
 
+        <form className="sc-form" onSubmit={saveSession}>
+          <h2>Live Q&amp;A and video date</h2>
+          <p>Shown on the members page and in welcome emails. Leave a box empty to hide it.</p>
+          <div className="sc-fields">
+            <label>Live Q&amp;A date and time (India time)<input type="datetime-local" value={sess.qa_at} onChange={(e) => setSess({ ...sess, qa_at: e.target.value })} /></label>
+            <label>Join link<input type="url" value={sess.qa_link} onChange={(e) => setSess({ ...sess, qa_link: e.target.value })} placeholder="https://meet.google.com/…" /></label>
+            <label>Video available by<input type="date" value={sess.video_by} onChange={(e) => setSess({ ...sess, video_by: e.target.value })} /></label>
+          </div>
+          {sessMsg && <p className="mc-ok" role="status">{sessMsg}</p>}
+          <button type="submit" className="sc-btn" disabled={busy} style={{ alignSelf: 'flex-start' }}>Save</button>
+        </form>
+
         <form className="sc-form" onSubmit={saveVideo}>
           <h2>The masterclass video</h2>
           <div className="mc-radio" role="radiogroup" aria-label="Video source">
@@ -267,7 +295,15 @@ export default function MasterclassAdmin() {
                 {rows.map((m) => (
                   <tr key={m.id}>
                     <td>{m.name}{m.notes && <div className="mc-small">{m.notes}</div>}</td>
-                    <td>{m.email}</td>
+                    <td>
+                      {editingEmail && editingEmail.id === m.id ? (
+                        <span className="mc-actions">
+                          <input type="email" value={editingEmail.email} onChange={(e) => setEditingEmail({ id: m.id, email: e.target.value })} aria-label="New email" />
+                          <button type="button" onClick={() => saveEmail(m)} disabled={busy}>Save</button>
+                          <button type="button" onClick={() => setEditingEmail(null)}>Cancel</button>
+                        </span>
+                      ) : m.email}
+                    </td>
                     <td style={{ whiteSpace: 'nowrap' }}>{m.whatsapp || ''}</td>
                     <td><span className={`mc-state mc-state-${m.state}`}>{STATE_LABEL[m.state]}</span></td>
                     <td style={{ whiteSpace: 'nowrap' }}>
@@ -288,6 +324,7 @@ export default function MasterclassAdmin() {
                         <button type="button" onClick={() => extend(m)} disabled={busy}>+30 days</button>
                         <button type="button" onClick={() => setEditing({ id: m.id, date: m.access_until })} disabled={busy}>Change end date</button>
                         <button type="button" onClick={() => resend(m)} disabled={busy || m.state !== 'ok'}>Resend email</button>
+                        <button type="button" onClick={() => setEditingEmail({ id: m.id, email: m.email })} disabled={busy}>Change email</button>
                         {m.state === 'revoked'
                           ? <button type="button" onClick={() => act(`/members/${m.id}/restore`, {}, () => setFlash(`Restored access for ${m.name}.`))} disabled={busy}>Restore</button>
                           : <button type="button" className="mc-danger" onClick={() => revoke(m)} disabled={busy}>Close access</button>}
@@ -309,18 +346,32 @@ export default function MasterclassAdmin() {
 const REG_STATUS = { paid: 'Paid', created: 'Not paid yet', failed: 'Failed' };
 const rupees = (paise) => `₹${(paise / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
 
+const ACTION_WORDS = { added: 'Account made', extended: 'Existing member: access extended', closed: 'Access was closed: not reopened' };
+
 function Registrations({ data, show, setShow }) {
   if (!data) return <p className="mc-small">Loading registrations…</p>;
+  const extrasFor = (id) => (data.extra_payments || []).filter((e) => e.registration_id === id);
   const all = data.registrations;
   const rows = all.filter((r) => show === 'all' || r.status === show);
   return (
     <>
       <div className="sc-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
         <div className="sc-start-card"><p className="sc-start-label">Total paid</p><h3>{rupees(data.totals.paid_paise)}</h3><p>{data.totals.paid} payment{data.totals.paid === 1 ? '' : 's'}</p></div>
+        <div className="sc-start-card"><p className="sc-start-label">To refund</p><h3>{rupees(data.totals.extra_paise)}</h3><p>{data.totals.extra} extra payment{data.totals.extra === 1 ? '' : 's'} · {data.totals.flagged} row{data.totals.flagged === 1 ? '' : 's'} need a decision</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Not paid yet</p><h3>{data.totals.created}</h3><p>opened the payment, did not finish</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Failed</p><h3>{data.totals.failed}</h3><p>see the reason in the table</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Price now</p><h3>{data.price.label}</h3><p>{data.price.open ? 'registration is open' : 'registration closed (no Razorpay keys)'}</p></div>
       </div>
+      {data.extra_payments.length > 0 && (
+        <div className="sc-form" style={{ borderLeft: '6px solid #BE185D' }}>
+          <h2>Extra payments: refund these in Razorpay</h2>
+          <ul style={{ margin: 0, paddingLeft: 18 }}>
+            {data.extra_payments.map((e) => (
+              <li key={e.razorpay_payment_id}>Extra payment — refund {e.razorpay_payment_id}: {rupees(e.amount_paise)} from {e.name} ({e.email}), {formatIST(e.created_at)}. The first payment on this order already gave access.</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="mc-chips">
         {[['all', 'All', all.length], ['paid', 'Paid', data.totals.paid], ['created', 'Not paid yet', data.totals.created], ['failed', 'Failed', data.totals.failed]].map(([k, label, n]) => (
           <button key={k} type="button" className="mc-chip" aria-pressed={show === k} onClick={() => setShow(k)}>{label} ({n})</button>
@@ -343,7 +394,11 @@ function Registrations({ data, show, setShow }) {
                   <td className="sc-num">{rupees(r.amount_paise)}</td>
                   <td><span className={`mc-state mc-state-${r.status === 'paid' ? 'ok' : r.status === 'failed' ? 'revoked' : 'ended'}`}>{REG_STATUS[r.status] || r.status}</span></td>
                   <td>{[r.utm_source, r.utm_campaign].filter(Boolean).join(' / ') || <span className="mc-small">direct</span>}</td>
-                  <td className="mc-small">{r.status === 'paid' ? `${r.member_action === 'extended' ? 'Existing member: access extended' : 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}</td>
+                  <td className="mc-small">
+                    {r.flag && <b style={{ color: '#BE185D', display: 'block' }}>{r.flag}</b>}
+                    {r.status === 'paid' ? `${ACTION_WORDS[r.member_action] || 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}
+                    {extrasFor(r.id).map((e) => <b key={e.razorpay_payment_id} style={{ color: '#BE185D', display: 'block' }}>Extra payment — refund {e.razorpay_payment_id}</b>)}
+                  </td>
                 </tr>
               ))}
             </tbody>

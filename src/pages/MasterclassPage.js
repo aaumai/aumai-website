@@ -17,6 +17,16 @@ const EMAIL_STORE = 'aumai_mc_email';
 const readEmail = () => { try { return localStorage.getItem(EMAIL_STORE) || ''; } catch (e) { return ''; } };
 const saveEmail = (v) => { try { localStorage.setItem(EMAIL_STORE, v); } catch (e) { /* fine */ } };
 const RESEND_WAIT = 30; // seconds before "Send a new code" works again
+// The code screen survives a reload (or the mail app taking over the tab): { email, sentAt }.
+const SENT_STORE = 'aumai_mc_code_sent';
+const CODE_LIFE_MS = 15 * 60 * 1000;
+const readSent = () => {
+  try {
+    const s = JSON.parse(localStorage.getItem(SENT_STORE) || 'null');
+    return s && s.email && Date.now() - s.sentAt < CODE_LIFE_MS ? s : null;
+  } catch (e) { return null; }
+};
+const saveSent = (v) => { try { if (v) localStorage.setItem(SENT_STORE, JSON.stringify(v)); else localStorage.removeItem(SENT_STORE); } catch (e) { /* fine */ } };
 
 async function call(path, body) {
   const r = await fetch(`${API}${path}`, {
@@ -37,7 +47,7 @@ export default function MasterclassPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [stage, setStage] = useState('loading'); // loading | email | code | member | ended
-  const [email, setEmail] = useState(readEmail);
+  const [email, setEmail] = useState(() => location.state?.email || readEmail());
   const [code, setCode] = useState('');
   const [me, setMe] = useState(null);
   const [notice, setNotice] = useState('');
@@ -58,6 +68,8 @@ export default function MasterclassPage() {
       const { status, j } = await call('/me');
       if (status === 200) { setMe(j); setStage('member'); return; }
       if (status === 403) { setNotice(j.message || ''); setStage('ended'); return; }
+      const sent = readSent();
+      if (sent) { setEmail(sent.email); setNotice(`Use the code we sent to ${sent.email}.`); setStage('code'); return; }
       setStage('email');
     } catch (e) {
       setError('We could not reach the server. Check your internet connection and refresh the page.');
@@ -81,7 +93,7 @@ export default function MasterclassPage() {
     try {
       const { ok, j } = await call('/request-code', { email: clean });
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); return; }
-      saveEmail(clean); setEmail(clean);
+      saveEmail(clean); setEmail(clean); saveSent({ email: clean, sentAt: Date.now() });
       setNotice(j.message); setCode(''); setWait(RESEND_WAIT); setStage('code');
     } catch (err) {
       setError('We could not reach the server. Check your internet connection and try again.');
@@ -95,6 +107,7 @@ export default function MasterclassPage() {
     try {
       const { status, ok, j } = await call('/verify', { email, code: digits });
       if (ok) {
+        saveSent(null);
         setMe(j); setStage('member'); setNotice('');
         if (location.pathname !== '/masterclass/my') navigate('/masterclass/my', { replace: true });
         return;
@@ -114,6 +127,7 @@ export default function MasterclassPage() {
 
   const signOut = async () => {
     try { await call('/sign-out', {}); } catch (e) { /* the cookie ends anyway */ }
+    saveSent(null);
     setMe(null); setCode(''); setNotice(''); setError(''); setStage('email');
     if (location.pathname !== '/masterclass') navigate('/masterclass', { replace: true });
   };
@@ -141,11 +155,25 @@ export default function MasterclassPage() {
             </div>
             <h1>Welcome, {me.display_name}</h1>
             <p className="mc-access">Your access is open until <b>{me.access_until_label}</b> ({daysText(me.days_left)}).</p>
-            {location.state?.justPaid && <p className="mc-sent" role="status">Payment received, thank you. We have also emailed you how to sign in next time.</p>}
+            {location.state?.justPaid && (
+              <p className="mc-sent" role="status">Payment received, thank you. We emailed sign-in steps to <b>{me.email}</b>. Wrong address? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
+            )}
           </div>
         </section>
 
         <div className="sc-wrap">
+          {me.live_qa && (
+            <section className="mc-section" aria-labelledby="mc-qa-h">
+              <h2 id="mc-qa-h">Live Q&amp;A</h2>
+              <div className="mc-file">
+                <h3>{me.live_qa.label}</h3>
+                {me.live_qa.link
+                  ? <a className="sc-btn" href={me.live_qa.link} target="_blank" rel="noopener noreferrer">Join the live Q&amp;A</a>
+                  : <p>We will send the joining link before the session.</p>}
+              </div>
+            </section>
+          )}
+
           <section className="mc-section" aria-labelledby="mc-video-h">
             <h2 id="mc-video-h">The masterclass video</h2>
             {me.video && me.video.type === 'embed' && (
@@ -160,7 +188,7 @@ export default function MasterclassPage() {
               </div>
             )}
             {!me.video && (
-              <div className="mc-video mc-video-wait"><p style={{ margin: 0 }}>The video will appear here within 24 hours of the session.</p></div>
+              <div className="mc-video mc-video-wait"><p style={{ margin: 0 }}>{me.video_by_label ? `The video will be here by ${me.video_by_label}.` : 'The video will appear here soon.'}</p></div>
             )}
           </section>
 
@@ -184,6 +212,7 @@ export default function MasterclassPage() {
                   {files.length > 1 && <a className="sc-btn sc-btn-ghost" href={`${API}/download-all`}>Download all {files.length} (one zip file)</a>}
                   <p className="mc-help">Open them in Excel or Google Sheets (File › Import).</p>
                 </div>
+                <p className="mc-help">If Download does nothing, open this page in Chrome or Safari (Instagram and Facebook’s own browsers often block downloads).</p>
               </>
             )}
           </section>
@@ -202,7 +231,8 @@ export default function MasterclassPage() {
             <p className="sc-eyebrow">The Full Chair Method · Masterclass</p>
             <h2>Your access has ended</h2>
             <p>{notice || `Your masterclass access has ended. Write to us at ${contact}.`}</p>
-            <a className="sc-btn mc-btn-wide" href={`mailto:${contact}?subject=${encodeURIComponent('Masterclass access')}`} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>Write to us</a>
+            <Link className="sc-btn mc-btn-wide" to="/masterclass/register" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>Join again</Link>
+            <a className="sc-btn sc-btn-ghost mc-btn-wide" href={`mailto:${contact}?subject=${encodeURIComponent('Masterclass access')}`} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>Write to us</a>
             <button type="button" className="sc-link" onClick={signOut}>Sign in with a different email</button>
           </div>
         </div>
@@ -218,6 +248,9 @@ export default function MasterclassPage() {
         <h1>Sign in to your masterclass</h1>
         {stage === 'email' ? (
           <form className="sc-form" onSubmit={sendCode} noValidate>
+            {location.state?.justPaid && (
+              <p className="mc-sent" role="status">Payment received. Sign in with the email you used{location.state.email ? `: ${location.state.email}` : ''}.</p>
+            )}
             <p>Type the email you registered with. We will email you a 6-digit code. There is no password.</p>
             <label className="mc-label">Your email
               <input className="mc-input" type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck="false"
@@ -240,7 +273,7 @@ export default function MasterclassPage() {
               <button type="button" className="sc-link" onClick={() => sendCode()} disabled={busy || wait > 0}>
                 {wait > 0 ? `Send a new code (in ${wait}s)` : 'Send a new code'}
               </button>
-              <button type="button" className="sc-link" onClick={() => { setStage('email'); setError(''); setCode(''); }}>Use a different email</button>
+              <button type="button" className="sc-link" onClick={() => { saveSent(null); setStage('email'); setError(''); setCode(''); setNotice(''); }}>Use a different email</button>
             </div>
             <p className="mc-help" id="mc-code-help">No email after 5 minutes? Check Spam or Promotions, and check the email address above. Still nothing? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
           </form>
