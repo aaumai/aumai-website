@@ -40,7 +40,17 @@ async function call(path, body) {
 }
 
 const sysClass = (n) => (n >= 1 && n <= SYSTEMS.length ? `sc-${C_COLORS[SYSTEMS[n - 1].c]}` : '');
-const badge = (f) => (f.system === 0 ? 'Owner scorecard' : f.system ? `System ${f.system}` : 'Workbook');
+// kind comes from the backend (workbook | worksheet | skill | guide | file); the extension is the fallback.
+const kindOf = (f) => f.kind || (/.(xlsx|xls|csv)$/i.test(f.name) ? 'workbook' : 'file');
+const isWorkbook = (f) => /.xlsx$/i.test(f.name);
+const KIND_BADGE = { worksheet: 'Worksheet', skill: 'Skill file', guide: 'Guide', file: 'File' };
+const badge = (f) => {
+  const k = kindOf(f);
+  if (k !== 'workbook') return KIND_BADGE[k] || 'File';
+  return f.system === 0 ? 'Owner scorecard' : f.system ? `System ${f.system}` : 'Workbook';
+};
+// The worksheet first (it is printed before the session starts), then the skill file, then its guide.
+const EXTRA_ORDER = { worksheet: 0, skill: 1, guide: 2, file: 3 };
 const daysText = (n) => (n <= 0 ? 'today is your last day' : n === 1 ? '1 day left' : `${n} days left`);
 
 export default function MasterclassPage() {
@@ -145,6 +155,17 @@ export default function MasterclassPage() {
 
   if (stage === 'member' && me) {
     const files = me.files || [];
+    const workbooks = files.filter(isWorkbook);
+    const extras = files.filter((f) => !isWorkbook(f)).sort((a, b) => (EXTRA_ORDER[kindOf(a)] ?? 9) - (EXTRA_ORDER[kindOf(b)] ?? 9));
+    const fileCard = (f) => (
+      <li key={f.name} className={`mc-file ${sysClass(f.system)}`}>
+        <span className="mc-badge">{badge(f)}</span>
+        <h3>{f.title}</h3>
+        {f.about && <p>{f.about}</p>}
+        {kindOf(f) === 'skill' && <p className="mc-file-how">Upload it in claude.ai → Settings → Capabilities → Skills.</p>}
+        <a className="sc-btn" href={`${API}/files/${encodeURIComponent(f.name)}`}>Download</a>
+      </li>
+    );
     return (
       <div className="sc-root">
         <section className="mc-hero">
@@ -192,25 +213,23 @@ export default function MasterclassPage() {
             )}
           </section>
 
+          {extras.length > 0 && (
+            <section className="mc-section" aria-labelledby="mc-extras-h">
+              <h2 id="mc-extras-h">Your worksheet and Claude skill file</h2>
+              <ul className="mc-files">{extras.map(fileCard)}</ul>
+            </section>
+          )}
+
           <section className="mc-section" aria-labelledby="mc-files-h">
-            <h2 id="mc-files-h">{files.length ? `Your ${files.length} workbooks` : 'Your workbooks'}</h2>
+            <h2 id="mc-files-h">{workbooks.length ? `Your ${workbooks.length} workbooks` : 'Your workbooks'}</h2>
             {files.length === 0 ? (
               <p className="sc-note">The workbooks will appear here soon. Please check again later today.</p>
             ) : (
               <>
-                <ul className="mc-files">
-                  {files.map((f) => (
-                    <li key={f.name} className={`mc-file ${sysClass(f.system)}`}>
-                      <span className="mc-badge">{badge(f)}</span>
-                      <h3>{f.title}</h3>
-                      {f.about && <p>{f.about}</p>}
-                      <a className="sc-btn" href={`${API}/files/${encodeURIComponent(f.name)}`}>Download</a>
-                    </li>
-                  ))}
-                </ul>
+                {workbooks.length > 0 && <ul className="mc-files">{workbooks.map(fileCard)}</ul>}
                 <div className="mc-all">
-                  {files.length > 1 && <a className="sc-btn sc-btn-ghost" href={`${API}/download-all`}>Download all {files.length} (one zip file)</a>}
-                  <p className="mc-help">Open them in Excel or Google Sheets (File › Import).</p>
+                  {files.length > 1 && <a className="sc-btn sc-btn-ghost" href={`${API}/download-all`}>Download everything: all {files.length} files (one zip file)</a>}
+                  <p className="mc-help">Open the workbooks in Excel or Google Sheets (File › Import).</p>
                 </div>
                 <p className="mc-help">If Download does nothing, open this page in Chrome or Safari (Instagram and Facebook’s own browsers often block downloads).</p>
               </>
