@@ -1,5 +1,6 @@
 import React from 'react';
 import './Page.css';
+import MASTERCLASS_REFUND from '../data/masterclassRefund';
 
 const CancellationRefund = () => {
   return (
@@ -54,6 +55,13 @@ const CancellationRefund = () => {
             <p style={{ marginBottom: '15px' }}>
               Refund processing time is typically 7-14 business days from approval, depending on the payment method used.
             </p>
+          </section>
+
+          <section id="masterclass" style={{ marginBottom: '30px' }}>
+            <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>Masterclass: {MASTERCLASS_REFUND.HEADING}</h2>
+            <ul style={{ marginLeft: '30px', marginBottom: '15px' }}>
+              {MASTERCLASS_REFUND.RULES.map((r) => <li key={r}>{r}</li>)}
+            </ul>
           </section>
 
           <section style={{ marginBottom: '30px' }}>

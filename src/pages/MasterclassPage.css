@@ -1,0 +1,55 @@
+/* Masterclass members area: same palette and type as the 4C Scorecard (ScorecardPage.css). */
+.mc-narrow { max-width: 560px }
+.mc-hero { padding-block: 40px 20px }
+.mc-hero .sc-wrap { display: flex; flex-direction: column; gap: 12px }
+.mc-hero h1 { font-size: clamp(30px, 6vw, 46px); line-height: 1.08 }
+.mc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap }
+.mc-input { font: inherit; font-size: 18px; padding: 14px 14px; min-height: 52px; border: 1px solid var(--sc-line); border-radius: 12px; background: #FFFFFF; color: var(--sc-ink); width: 100% }
+.mc-input:focus { outline: 2px solid var(--sc-accent); outline-offset: 1px }
+.sc-fields .mc-input { font-size: 17px; padding: 13px 14px; min-height: 50px } /* beats .sc-fields input: 16px+ stops iOS zooming in */
+.mc-code { font-size: 28px; letter-spacing: .4em; text-align: center; font-variant-numeric: tabular-nums }
+.mc-label { display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600 }
+.mc-btn-wide { width: 100%; min-height: 52px; font-size: 17px }
+.mc-row-links { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center }
+.mc-row-links .sc-link { min-height: 44px }
+.mc-sent { margin: 0; background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.5 }
+.sc-form > .sc-error { color: #BE185D } .sc-form > .mc-sent { color: #065F46 } /* .sc-form > p would grey it out */
+.mc-help { margin: 0; font-size: 14px; color: var(--sc-muted); line-height: 1.5 }
+.mc-help a { color: var(--sc-accent) }
+.mc-access { margin: 0; font-size: 17px; color: var(--sc-muted) }
+.mc-access b { color: var(--sc-ink) }
+.mc-section { display: flex; flex-direction: column; gap: 14px; padding-top: 28px }
+.mc-section h2 { font-size: 24px }
+.mc-video { position: relative; width: 100%; aspect-ratio: 16 / 9; background: var(--sc-navy); border-radius: 14px; overflow: hidden }
+.mc-video iframe, .mc-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000 }
+.mc-video-wait { display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; color: #BFD7FE; font-size: 17px; line-height: 1.5 }
+.mc-files { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0 }
+.mc-file { background: var(--sc-card); border: 1px solid var(--sc-line); border-left: 6px solid var(--c, var(--sc-accent)); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px }
+.mc-file h3 { font-size: 19px }
+.mc-file p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--sc-muted); flex: 1 }
+.mc-file .sc-btn { align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center }
+.mc-badge { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c, var(--sc-accent)) }
+.mc-all { display: flex; flex-wrap: wrap; gap: 12px; align-items: center }
+.mc-all .sc-btn { min-height: 48px; display: inline-flex; align-items: center }
+.mc-ended { border-left: 6px solid var(--sc-comeback) }
+
+/* Admin */
+.mc-admin-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px }
+.mc-textarea { font: inherit; font-size: 15px; padding: 12px; border: 1px solid var(--sc-line); border-radius: 10px; width: 100%; min-height: 140px; resize: vertical; color: var(--sc-ink) }
+.mc-chips { display: flex; flex-wrap: wrap; gap: 8px }
+.mc-chip { font: 600 14px inherit; font-family: inherit; padding: 8px 14px; min-height: 40px; border-radius: 999px; border: 1px solid var(--sc-line); background: var(--sc-card); color: var(--sc-ink); cursor: pointer }
+.mc-chip[aria-pressed="true"] { background: var(--sc-accent); border-color: var(--sc-accent); color: #FFFFFF }
+.mc-small { font-size: 13px; color: var(--sc-muted) }
+.mc-actions { display: flex; flex-wrap: wrap; gap: 6px }
+.mc-actions button { font: 600 13px inherit; font-family: inherit; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--sc-line); background: var(--sc-chip); color: var(--sc-ink); cursor: pointer; white-space: nowrap }
+.mc-actions button.mc-danger { color: #BE185D }
+.mc-state { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap }
+.mc-state-ok { background: #99F6E4 } .mc-state-ended { background: #FDE68A } .mc-state-revoked { background: #FBCFE8 }
+.mc-ok { margin: 0; color: #065F46; font-weight: 600 }
+.mc-radio { display: flex; flex-direction: column; gap: 8px; font-size: 15px }
+.mc-radio label { display: flex; gap: 8px; align-items: center }
+
+@media (max-width: 680px) {
+  .mc-files, .mc-admin-grid { grid-template-columns: minmax(0, 1fr) }
+  .mc-file .sc-btn, .mc-all .sc-btn { align-self: stretch; justify-content: center; width: 100% }
+}

@@ -33,6 +33,7 @@ const FOUNDER = require('../src/data/founder');
 const AIR = require('../src/data/aiReceptionist');
 const WA = require('../src/data/whatsappAutomation');
 const COMP = require('../src/data/compliance');
+const MC_REFUND = require('../src/data/masterclassRefund');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
@@ -132,6 +133,8 @@ function apply(html, r) {
   out = setTag(out, /<title>[\s\S]*?<\/title>/, `<title>${esc(r.title)}</title>`);
   out = setTag(out, /(<meta name="description" content=")[^"]*(")/, `$1${esc(r.description)}$2`);
   out = setTag(out, /(<link rel="canonical" href=")[^"]*(")/, `$1${r.canonical}$2`);
+  // Private pages (masterclass members area, admin): never indexed, never followed.
+  if (r.noindex) out = setTag(out, /(<meta name="robots" content=")[^"]*(")/, '$1noindex, nofollow$2');
   out = setTag(out, /(<meta property="og:title" content=")[^"]*(")/, `$1${esc(r.title)}$2`);
   out = setTag(out, /(<meta property="og:description" content=")[^"]*(")/, `$1${esc(r.description)}$2`);
   out = setTag(out, /(<meta property="og:url" content=")[^"]*(")/, `$1${r.canonical}$2`);
@@ -144,7 +147,7 @@ function apply(html, r) {
   // One Aumy product entity (#aumy-dental) on every India page — the template
   // no longer carries its own, conflicting copy (SEO review 2026-09-26).
   const ld = [...(r.jsonld || [])];
-  if (MARKET !== 'us' && !ld.includes(dentalSoftwareLd)) ld.push(dentalSoftwareLd);
+  if (MARKET !== 'us' && !r.noindex && !ld.includes(dentalSoftwareLd)) ld.push(dentalSoftwareLd);
   // Google treats FAQ markup for text that is not on the page as spam: every
   // FAQPage question must also be in the crawler HTML. Missing ones are added.
   const faqExtra = ld.filter((o) => o && o['@type'] === 'FAQPage')
@@ -663,6 +666,50 @@ const routes = [
         <p>Always scores 2, sometimes 1, never or don’t know 0. 9 to 10: running tight. 5 to 8: can do better. Below 5: leaking patients.</p>
       </div></section>`,
   },
+  // Masterclass members area (owner 2026-10-18). Private: noindex, nofollow, kept
+  // out of seo-files.js's sitemap. Only the public sign-in words are here; the
+  // video, workbooks and member details exist only after sign-in, in the browser.
+  ...['masterclass', 'masterclass/my'].map((slug) => ({
+    slug,
+    noindex: true,
+    title: 'Masterclass members | AUM AI',
+    description: 'Sign in to The Full Chair Method masterclass members area.',
+    canonical: `${ORIGIN}/masterclass`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
+        <h1 class="ch-hero-title">Sign in to your masterclass</h1>
+        <p class="ch-hero-sub">Masterclass members sign in with the email they registered with. We email a 6-digit code; there is no password.</p>
+      </div></section>`,
+  })),
+  // Public and indexable, but out of the sitemap for now (owner 2026-10-18). The
+  // price comes from the backend at run time, so it is not written here.
+  {
+    slug: 'masterclass/register',
+    title: 'Join The Full Chair Method masterclass | AUM AI',
+    description: 'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, eight systems, the video and nine workbooks for a month.',
+    canonical: `${ORIGIN}/masterclass/register`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
+        <h1 class="ch-hero-title">Join the masterclass</h1>
+        <p class="ch-hero-sub">The 4C Framework: eight systems that keep your chairs full. Convert, Confirm, Care and Come back. You get the masterclass video and nine Excel workbooks, one for each system plus an owner's weekly scorecard.</p>
+        <p>Register with your name, clinic, city, email and WhatsApp number, and pay securely by Razorpay. Your account is ready the moment the payment is confirmed. Already registered? <a href="/masterclass">Sign in</a>.</p>
+      </div></section>`,
+  },
+  {
+    slug: 'masterclass-admin',
+    noindex: true,
+    title: 'Masterclass members · AUM AI admin',
+    description: 'AUM AI admin.',
+    canonical: `${ORIGIN}/masterclass-admin`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">AUM AI admin</p>
+        <h1 class="ch-hero-title">Masterclass members</h1>
+        <p class="ch-hero-sub">Enter the dashboard password to continue.</p>
+      </div></section>`,
+  },
   // Routes that are in the sitemap but were never prerendered (audit
   // 2026-09-18): the SPA fallback served the HOME page's title, description
   // and H1 for all six, so crawlers saw six copies of the home page. Minimal
@@ -748,6 +795,21 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Terms and Conditions</h1>
         <p>The terms and conditions for using Aumy and the aumai.co.in website.</p>
+      </div></section>`,
+  },
+  // The refund page (src/pages/CancellationRefund.js). The masterclass rule comes
+  // from src/data/masterclassRefund.js, the same file the page reads.
+  {
+    slug: 'refund',
+    title: 'Cancellation & Refund Policy | AUM AI',
+    description: 'How cancellations and refunds work at AUM AI, including The Full Chair Method masterclass.',
+    canonical: `${ORIGIN}/refund`,
+    content: `
+      <section><div class="ch-container ch-narrow">
+        <h1 class="ch-hero-title">Cancellation &amp; Refund Policy</h1>
+        <p>Cancellations of a service agreement are handled under the terms of that agreement; write to ${esc(MC_REFUND.CONTACT_EMAIL)}.</p>
+        <h2>Masterclass: ${esc(MC_REFUND.HEADING)}</h2>
+        <ul>${MC_REFUND.RULES.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
       </div></section>`,
   },
   {
