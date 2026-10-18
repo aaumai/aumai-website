@@ -681,6 +681,21 @@ const routes = [
         <p class="ch-hero-sub">Masterclass members sign in with the email they registered with. We email a 6-digit code; there is no password.</p>
       </div></section>`,
   })),
+  // Public and indexable, but out of the sitemap for now (owner 2026-10-18). The
+  // price comes from the backend at run time, so it is not written here.
+  {
+    slug: 'masterclass/register',
+    title: 'Join The Full Chair Method masterclass | AUM AI',
+    description: 'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, eight systems, the video and nine workbooks for a month.',
+    canonical: `${ORIGIN}/masterclass/register`,
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
+        <h1 class="ch-hero-title">Join the masterclass</h1>
+        <p class="ch-hero-sub">The 4C Framework: eight systems that keep your chairs full. Convert, Confirm, Care and Come back. You get the masterclass video and nine Excel workbooks, one for each system plus an owner's weekly scorecard.</p>
+        <p>Register with your name, clinic, city, email and WhatsApp number, and pay securely by Razorpay. Your account is ready the moment the payment is confirmed. Already registered? <a href="/masterclass">Sign in</a>.</p>
+      </div></section>`,
+  },
   {
     slug: 'masterclass-admin',
     noindex: true,

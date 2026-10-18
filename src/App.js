@@ -18,6 +18,7 @@ import ScorecardPage from './pages/ScorecardPage';
 import ScorecardAdmin from './pages/ScorecardAdmin';
 import MasterclassPage from './pages/MasterclassPage';
 import MasterclassAdmin from './pages/MasterclassAdmin';
+import MasterclassRegister from './pages/MasterclassRegister';
 import PricingPage from './pages/PricingPage';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -104,6 +105,7 @@ function App() {
                 {/* Masterclass members area (owner 2026-10-18): private, noindex, out of the sitemap. */}
                 <Route path="/masterclass" element={<MasterclassPage />} />
                 <Route path="/masterclass/my" element={<MasterclassPage />} />
+                <Route path="/masterclass/register" element={<MasterclassRegister />} />
                 <Route path="/pricing" element={<PricingPage />} />
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}

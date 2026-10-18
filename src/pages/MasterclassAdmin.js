@@ -43,6 +43,9 @@ export default function MasterclassAdmin() {
   const [editing, setEditing] = useState(null); // { id, date }
   const [video, setVideo] = useState({ type: 'none', url: '', key: '' });
   const [videoMsg, setVideoMsg] = useState('');
+  const [tab, setTab] = useState('members'); // members | registrations
+  const [regs, setRegs] = useState(null);
+  const [regShow, setRegShow] = useState('all');
 
   useEffect(() => {
     document.title = 'Masterclass members · AUM AI admin';
@@ -73,6 +76,14 @@ export default function MasterclassAdmin() {
   }, [req]);
 
   useEffect(() => { if (key) load(key); }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const loadRegs = useCallback(async () => {
+    setError('');
+    try { setRegs(await req('/registrations')); } catch (e) {
+      setError(e.message === 'Failed to fetch' ? 'Could not reach the server. Check your connection and press Refresh.' : e.message);
+    }
+  }, [req]);
+  useEffect(() => { if (tab === 'registrations' && key && data) loadRegs(); }, [tab]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Every action returns the fresh member list; the search, filter and forms stay as they are.
   const act = async (path, body, done) => {
@@ -154,12 +165,20 @@ export default function MasterclassAdmin() {
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
             <a className="sc-link" href="/masterclass" target="_blank" rel="noopener noreferrer">Open the members page</a>
-            <button type="button" className="sc-btn sc-btn-ghost" onClick={() => load(key)} disabled={busy}>Refresh</button>
+            <button type="button" className="sc-btn sc-btn-ghost" onClick={() => (tab === 'registrations' ? loadRegs() : load(key))} disabled={busy}>Refresh</button>
             <button type="button" className="sc-link" onClick={() => { saveKey(''); setKey(''); setData(null); }}>Sign out</button>
           </div>
         </div>
         {error && <p className="sc-error" role="alert">{error}</p>}
         {flash && <p className="mc-ok" role="status">{flash}</p>}
+
+        <div className="mc-chips" aria-label="View">
+          <button type="button" className="mc-chip" aria-pressed={tab === 'members'} onClick={() => setTab('members')}>Members ({counts.all})</button>
+          <button type="button" className="mc-chip" aria-pressed={tab === 'registrations'} onClick={() => setTab('registrations')}>Registrations and payments</button>
+        </div>
+
+        {tab === 'registrations' && <Registrations data={regs} show={regShow} setShow={setRegShow} />}
+        {tab === 'members' && (<>
 
         <div className="sc-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
           <div className="sc-start-card"><p className="sc-start-label">Members</p><h3>{counts.all}</h3><p>{counts.ok} active now</p></div>
@@ -281,7 +300,56 @@ export default function MasterclassAdmin() {
           )}
         </div>
         <p className="sc-hint">Members sign in at aumai.co.in/masterclass with a code sent to their email. Access runs to the end of the “Until” day, India time. “+30 days” counts from the current end date, or from today if access has already ended.</p>
+        </>)}
       </div>
     </div>
+  );
+}
+
+const REG_STATUS = { paid: 'Paid', created: 'Not paid yet', failed: 'Failed' };
+const rupees = (paise) => `₹${(paise / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
+
+function Registrations({ data, show, setShow }) {
+  if (!data) return <p className="mc-small">Loading registrations…</p>;
+  const all = data.registrations;
+  const rows = all.filter((r) => show === 'all' || r.status === show);
+  return (
+    <>
+      <div className="sc-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
+        <div className="sc-start-card"><p className="sc-start-label">Total paid</p><h3>{rupees(data.totals.paid_paise)}</h3><p>{data.totals.paid} payment{data.totals.paid === 1 ? '' : 's'}</p></div>
+        <div className="sc-start-card"><p className="sc-start-label">Not paid yet</p><h3>{data.totals.created}</h3><p>opened the payment, did not finish</p></div>
+        <div className="sc-start-card"><p className="sc-start-label">Failed</p><h3>{data.totals.failed}</h3><p>see the reason in the table</p></div>
+        <div className="sc-start-card"><p className="sc-start-label">Price now</p><h3>{data.price.label}</h3><p>{data.price.open ? 'registration is open' : 'registration closed (no Razorpay keys)'}</p></div>
+      </div>
+      <div className="mc-chips">
+        {[['all', 'All', all.length], ['paid', 'Paid', data.totals.paid], ['created', 'Not paid yet', data.totals.created], ['failed', 'Failed', data.totals.failed]].map(([k, label, n]) => (
+          <button key={k} type="button" className="mc-chip" aria-pressed={show === k} onClick={() => setShow(k)}>{label} ({n})</button>
+        ))}
+      </div>
+      <div style={{ overflowX: 'auto', background: 'var(--sc-card)', border: '1px solid var(--sc-line)', borderRadius: 14 }}>
+        {rows.length === 0 ? <p style={{ padding: 20, margin: 0 }}>{all.length ? 'None with this status. Press All.' : 'No registrations yet. They appear here as soon as someone presses Pay on aumai.co.in/masterclass/register.'}</p> : (
+          <table className="sc-table" style={{ minWidth: 1100 }}>
+            <thead><tr><th>Date</th><th>Name</th><th>Clinic</th><th>City</th><th>Email</th><th>WhatsApp</th><th>Type</th><th>Amount</th><th>Status</th><th>Came from</th><th>Notes</th></tr></thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.id}>
+                  <td style={{ whiteSpace: 'nowrap' }}>{formatIST(r.paid_at || r.created_at)}</td>
+                  <td>{r.name}</td>
+                  <td>{r.clinic}</td>
+                  <td>{r.city || ''}</td>
+                  <td>{r.email}</td>
+                  <td style={{ whiteSpace: 'nowrap' }}>{r.whatsapp}</td>
+                  <td>{data.clinic_types[r.clinic_type] || r.clinic_type}</td>
+                  <td className="sc-num">{rupees(r.amount_paise)}</td>
+                  <td><span className={`mc-state mc-state-${r.status === 'paid' ? 'ok' : r.status === 'failed' ? 'revoked' : 'ended'}`}>{REG_STATUS[r.status] || r.status}</span></td>
+                  <td>{[r.utm_source, r.utm_campaign].filter(Boolean).join(' / ') || <span className="mc-small">direct</span>}</td>
+                  <td className="mc-small">{r.status === 'paid' ? `${r.member_action === 'extended' ? 'Existing member: access extended' : 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </>
   );
 }

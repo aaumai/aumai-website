@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setNoindex } from '../utils/seo';
 import { SYSTEMS, C_COLORS } from '../data/scorecard';
 import { INDIA_OFFICE } from '../config/contact';
@@ -141,6 +141,7 @@ export default function MasterclassPage() {
             </div>
             <h1>Welcome, {me.display_name}</h1>
             <p className="mc-access">Your access is open until <b>{me.access_until_label}</b> ({daysText(me.days_left)}).</p>
+            {location.state?.justPaid && <p className="mc-sent" role="status">Payment received, thank you. We have also emailed you how to sign in next time.</p>}
           </div>
         </section>
 
@@ -243,6 +244,9 @@ export default function MasterclassPage() {
             </div>
             <p className="mc-help" id="mc-code-help">No email after 5 minutes? Check Spam or Promotions, and check the email address above. Still nothing? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
           </form>
+        )}
+        {stage === 'email' && (
+          <p className="mc-help" style={{ paddingTop: 16 }}>Not registered yet? <Link to="/masterclass/register">Join the masterclass</Link>.</p>
         )}
       </div>
     </div>
