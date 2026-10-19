@@ -29,7 +29,7 @@ const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868' };
 const SEO = {
   title: 'The Full Chair Method masterclass for clinic owners | AUM AI',
   description:
-    'A 2-hour recorded masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. 12 ready workbooks and a Claude skill file, ₹599.',
+    'A 2-hour masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. 12 ready workbooks and a Claude skill file, ₹599.',
 };
 
 const HERO = {
@@ -39,7 +39,7 @@ const HERO = {
     'Fill your chair from the patients you already have: the enquiry that never booked, the patient who didn’t turn up, the treatment you advised that never started, and the patient who stopped coming.',
   who: 'For dental and skin clinic owners, and the manager or front-desk lead who will run it with you.',
   facts: [
-    { b: 'About 2 hours', t: 'recorded video' },
+    { b: 'About 2 hours', t: 'watch any time' },
     { b: `${ACCESS_DAYS} days`, t: 'to watch, as often as you like' },
     { b: '12 workbooks', t: 'plus a Claude skill file' },
     { b: PRICE_LABEL, t: 'one payment' },
@@ -170,7 +170,7 @@ const WAYS = {
 const KIT = {
   title: 'What you get',
   items: [
-    { h: 'The masterclass video', t: `About 2 hours, recorded. Watch it in one sitting or a stage at a time, as often as you like for ${ACCESS_DAYS} days.` },
+    { h: 'The masterclass video', t: `About 2 hours. Watch it in one sitting or a stage at a time, as often as you like for ${ACCESS_DAYS} days.` },
     { h: '12 ready-made workbooks', t: 'One for every system and foundation, plus the Owner Weekly Scorecard. They open in Excel or Google Sheets, with dropdowns built in, the messages ready to copy, Claude prompts, and a “This week” tab that scores the KPI. Sample rows show you how to fill them.' },
     { h: 'The Owner Weekly Scorecard', t: 'One owner and one KPI per system, this week against last week, in green, orange or red. Your 15 minutes every Monday.' },
     { h: 'The Claude skill file', t: 'Every framework, question bank and message script from the masterclass, so Claude writes your patient messages, call scripts and weekly KPI report from your own sheets. With a short guide: five prompts to try first.' },
@@ -218,7 +218,7 @@ const TRAINER = {
 };
 
 const FAQS = [
-  { q: 'Is the masterclass live or recorded?', a: `Recorded. It runs about 2 hours, so you can watch when it suits you, pause for each “Build it now”, and watch again any time in your ${ACCESS_DAYS} days.` },
+  { q: 'When can I watch it?', a: `Any time. It runs about 2 hours, so you can watch when it suits you, pause for each “Build it now”, and watch again any time in your ${ACCESS_DAYS} days.` },
   { q: 'How long do I have access?', a: `${ACCESS_DAYS} days from your start date, which you see before you pay. Download the workbooks, the skill file and the worksheet in that time; the files are yours to keep.` },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
   { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples and workbook lists come from dental clinics, and the eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
@@ -239,14 +239,14 @@ const FINAL = {
 const REGISTER = {
   lead: 'The 4C Framework: Convert, Confirm, Care, Come back. Eight systems on three foundations that bring back the patients you already have.',
   points: [
-    `A recorded masterclass of about 2 hours, to watch for ${ACCESS_DAYS} days.`,
+    `A masterclass of about 2 hours, to watch for ${ACCESS_DAYS} days.`,
     'After every system, 2 minutes to set it up in your own clinic.',
     '12 ready-made workbooks, the Claude skill file, the Leak Calculator and a bonus Google video.',
     `24×7 Q&A on WhatsApp: ${WHATSAPP.display}.`,
   ],
 };
 const REGISTER_SEO_DESCRIPTION =
-  'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, 8 systems and 3 foundations, a 2-hour recorded video, 12 workbooks and the Claude skill file.';
+  'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, 8 systems and 3 foundations, a 2-hour video, 12 workbooks and the Claude skill file.';
 
 // The members page (owner 2026-10-19); the welcome email on the site backend says the same.
 const MEMBER_HELP = `Stuck while setting up a system? Ask us 24×7 on WhatsApp: ${WHATSAPP.display}`;
