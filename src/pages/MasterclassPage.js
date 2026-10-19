@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setNoindex } from '../utils/seo';
 import { SYSTEMS, C_COLORS } from '../data/scorecard';
 import { INDIA_OFFICE } from '../config/contact';
+import MC from '../data/masterclass';
 import './ScorecardPage.css';
 import './MasterclassPage.css';
 
@@ -139,7 +140,7 @@ export default function MasterclassPage() {
     try { await call('/sign-out', {}); } catch (e) { /* the cookie ends anyway */ }
     saveSent(null);
     setMe(null); setCode(''); setNotice(''); setError(''); setStage('email');
-    if (location.pathname !== '/masterclass') navigate('/masterclass', { replace: true });
+    if (location.pathname !== MC.PATHS.signIn) navigate(MC.PATHS.signIn, { replace: true });
   };
 
   // A presigned video link lasts 4 hours: if it has run out, fetch a fresh one once.
@@ -183,17 +184,11 @@ export default function MasterclassPage() {
         </section>
 
         <div className="sc-wrap">
-          {me.live_qa && (
-            <section className="mc-section" aria-labelledby="mc-qa-h">
-              <h2 id="mc-qa-h">Live Q&amp;A</h2>
-              <div className="mc-file">
-                <h3>{me.live_qa.label}</h3>
-                {me.live_qa.link
-                  ? <a className="sc-btn" href={me.live_qa.link} target="_blank" rel="noopener noreferrer">Join the live Q&amp;A</a>
-                  : <p>We will send the joining link before the session.</p>}
-              </div>
-            </section>
-          )}
+          {/* No live Q&A (owner 2026-10-19): questions go to WhatsApp, any time. */}
+          <p className="mc-sent mc-wa" style={{ marginTop: 20 }}>
+            {MC.MEMBER_HELP.replace(MC.WHATSAPP.display, '')}
+            <a href={MC.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{MC.WHATSAPP.display}</a>
+          </p>
 
           <section className="mc-section" aria-labelledby="mc-video-h">
             <h2 id="mc-video-h">The masterclass video</h2>
@@ -298,7 +293,7 @@ export default function MasterclassPage() {
           </form>
         )}
         {stage === 'email' && (
-          <p className="mc-help" style={{ paddingTop: 16 }}>Not registered yet? <Link to="/masterclass/register">Join the masterclass</Link>.</p>
+          <p className="mc-help" style={{ paddingTop: 16 }}>Not registered yet? <Link to={MC.PATHS.info}>See what the masterclass covers</Link> or <Link to={MC.PATHS.register}>register</Link>.</p>
         )}
       </div>
     </div>
