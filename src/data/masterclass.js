@@ -48,7 +48,7 @@ const HERO = {
 };
 
 const PROBLEM = {
-  title: 'Patients leave your clinic without a bill, so nobody counts them',
+  title: 'The patients you lose never show up in any report, so nobody counts them',
   intro:
     'Every month your clinic pays to get patients: ads, Google, referrals, and years of good work. And every month some of them quietly walk away.',
   leaks: [
