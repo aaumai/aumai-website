@@ -1,5 +1,9 @@
 /* ================================
    Header - Premium Navigation
+   Owner 2026-10-19: "too congested — logo to the left, space the menus well".
+   Logo flush left, Free Clinic Audit flush right, six roomy items in between
+   (two of them open small menus). No per-width squeezing: the same spacing holds
+   from 1201px to 1920px; below that the phone menu takes over.
    ================================ */
 
 .header {
@@ -55,20 +59,25 @@
   color: #ffffff;
 }
 
+/* The header runs wider than the page text so the logo sits at the left and the
+   button at the right, with the menu given room in between. */
+.header .header-container {
+  max-width: 1600px;
+  padding: 0 clamp(20px, 3vw, 48px);
+}
+
 .header-content {
   position: relative;
   z-index: 1;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  /* breathing room between the Aumy logo and the first menu item */
-  gap: 40px;
-  padding: 16px 0;
+  gap: 32px;
+  padding: 15px 0;
   transition: padding var(--transition-base);
 }
 
 .header.scrolled .header-content {
-  padding: 12px 0;
+  padding: 11px 0;
 }
 
 /* Logo */
@@ -84,7 +93,8 @@
 }
 
 .logo-image {
-  height: 55px;
+  display: block;
+  height: 48px;
   width: auto;
   transition: all var(--transition-base);
   /* deepen the gold so the wordmark holds contrast on the light glass header */
@@ -92,94 +102,193 @@
 }
 
 .header.scrolled .logo-image {
-  height: 45px;
+  height: 42px;
 }
 
 .logo a:hover .logo-image {
-  transform: scale(1.05);
   filter: brightness(0.95) saturate(1.25);
 }
 
-/* Navigation */
+/* Navigation: fills the space after the logo; the list sits centred in it and
+   the button is pushed to the right edge. */
 .nav {
+  flex: 1;
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
 .nav-list {
   display: flex;
+  align-items: center;
   list-style: none;
-  gap: 4px;
-  margin: 0;
+  gap: clamp(22px, 2.2vw, 34px);
+  margin: 0 auto;
   padding: 0;
+}
+
+.nav-item {
+  position: relative;
 }
 
 .nav-link {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 10px 16px;
-  /* one line per item — a wrapped label dropped below the logo's line */
+  gap: 6px;
+  padding: 10px 0;
+  /* one line per item */
   white-space: nowrap;
   color: rgba(22, 50, 79, 0.78);
+  font-family: inherit;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 15px;
+  line-height: 1.2;
   text-decoration: none;
-  border-radius: var(--radius-lg);
-  transition: all var(--transition-base);
-  overflow: hidden;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(42, 157, 143, 0.12);
-  opacity: 0;
-  border-radius: var(--radius-lg);
-  transition: opacity var(--transition-base);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color var(--transition-base);
 }
 
 .nav-link:hover,
-.nav-link.active {
-  color: #218779;
-}
-
-.nav-link:hover::before,
-.nav-link.active::before {
-  opacity: 1;
+.nav-link.active,
+.nav-dropdown.open > .nav-link {
+  color: #16324f;
 }
 
 .nav-link.active {
   font-weight: 600;
 }
 
-/* Active indicator */
+.nav-link:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 4px;
+}
+
+/* Underline: grows under the label on hover, stays under the current page's item */
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 24px;
-  height: 3px;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 2px;
   background: #2a9d8f;
-  border-radius: var(--radius-full);
+  transform: scaleX(0);
+  transform-origin: left center;
   transition: transform var(--transition-base);
 }
 
-.nav-link.active::after {
-  transform: translateX(-50%) scaleX(1);
+.nav-link:hover::after,
+.nav-link.active::after,
+.nav-dropdown.open > .nav-link::after {
+  transform: scaleX(1);
+}
+
+/* Small menus (Product, Resources) */
+.nav-chevron {
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: transform var(--transition-base);
+}
+
+.nav-dropdown.open .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-group-label {
+  display: none;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  z-index: 10;
+  min-width: 280px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid rgba(22, 50, 79, 0.12);
+  box-shadow: 0 18px 40px rgba(10, 15, 34, 0.12);
+  display: none;
+  transform: translateX(-50%);
+}
+
+/* Bridges the gap between the item and its menu so the pointer can cross it */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14px;
+  height: 14px;
+}
+
+/* Shown with display (not opacity) so a closed menu can never be seen or tabbed
+   into, and ArrowDown can move focus straight in. */
+.nav-dropdown.open .nav-dropdown-menu {
+  display: block;
+  animation: nav-dropdown-in 0.16s ease;
+}
+
+@keyframes nav-dropdown-in {
+  from { opacity: 0; transform: translate(-50%, 6px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown.open .nav-dropdown-menu { animation: none; }
+}
+
+.nav-dropdown-link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 11px 14px;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+  transition: background var(--transition-base), border-color var(--transition-base);
+}
+
+.nav-dropdown-link:hover,
+.nav-dropdown-link:focus-visible {
+  background: rgba(22, 50, 79, 0.05);
+}
+
+.nav-dropdown-link:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}
+
+.nav-dropdown-link.active {
+  border-left-color: #2a9d8f;
+}
+
+.nav-dropdown-label {
+  color: #16324f;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.nav-dropdown-hint {
+  color: rgba(22, 50, 79, 0.62);
+  font-size: 13px;
+  line-height: 1.35;
 }
 
 /* CTA Button in Nav */
 .nav-cta {
-  margin-left: 16px;
+  flex-shrink: 0;
 }
 
 .nav-cta .btn {
-  padding: 10px 24px;
+  padding: 12px 22px;
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 /* Brand accent: teal CTA (overrides the legacy blue/purple gradient .btn-primary) */
@@ -193,6 +302,19 @@
   box-shadow: 0 8px 22px rgba(42, 157, 143, 0.4);
 }
 
+/* "New" tag next to a menu item (Masterclass, owner 2026-10-19). */
+.nav-badge {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #2563EB;
+  color: #FFFFFF;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
   display: none;
@@ -201,6 +323,7 @@
   align-items: center;
   width: 44px;
   height: 44px;
+  margin-left: auto;
   background: rgba(22, 50, 79, 0.05);
   border: 1px solid rgba(22, 50, 79, 0.12);
   border-radius: var(--radius-lg);
@@ -235,51 +358,8 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Laptop widths: keep the whole menu (8 items + Free Clinic Audit) on one line next to the logo.
-   Owner 2026-10-06: after "AI receptionist" joined the menu the button overflowed the right edge at 1366px. */
-@media (min-width: 1201px) and (max-width: 1500px) {
-  .header-content {
-    gap: 16px;
-  }
-
-  .nav-list {
-    gap: 0;
-  }
-
-  .nav-link {
-    padding: 8px 8px;
-    font-size: 0.86rem;
-  }
-
-  .nav-cta {
-    margin-left: 4px;
-  }
-
-  .nav-cta .btn {
-    padding: 8px 12px;
-    font-size: 0.84rem;
-    white-space: nowrap;
-  }
-}
-
-/* Narrow laptops: one notch tighter so nothing wraps or spills */
-@media (min-width: 1201px) and (max-width: 1320px) {
-  .header-content {
-    gap: 12px;
-  }
-
-  .nav-link {
-    padding: 8px 6px;
-    font-size: 0.82rem;
-  }
-
-  .nav-cta .btn {
-    padding: 8px 10px;
-    font-size: 0.8rem;
-  }
-}
-
-/* Mobile Styles — below 1200px the eight menu items no longer fit on one line */
+/* Phones and tablets: the full menu as a scrolling sheet. The two groups are
+   listed open under a small heading, in the same order as the laptop menu. */
 @media (max-width: 1200px) {
   .mobile-menu-toggle {
     display: flex;
@@ -295,11 +375,16 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    /* clears the credits bar and the logo row */
+    padding: calc(var(--notice-h, 0px) + 96px) 24px 48px;
     opacity: 0;
     visibility: hidden;
-    transform: scale(1.1);
+    transform: scale(1.04);
     transition: all var(--transition-base);
   }
 
@@ -312,20 +397,82 @@
   .nav-list {
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
+    margin: 0;
+    width: 100%;
+  }
+
+  .nav-item {
+    width: 100%;
+    text-align: center;
   }
 
   .nav-link {
-    font-size: 1.5rem;
-    padding: 16px 32px;
+    justify-content: center;
+    font-size: 24px;
+    padding: 9px 16px;
   }
 
   .nav-link::after {
     display: none;
   }
 
+  .nav-dropdown-toggle {
+    display: none;
+  }
+
+  .nav-group-label {
+    display: block;
+    margin: 18px 0 2px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8a6a36;
+  }
+
+  .nav-dropdown-menu,
+  .nav-dropdown.open .nav-dropdown-menu {
+    display: block;
+    position: static;
+    min-width: 0;
+    padding: 0 0 10px;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    transform: none;
+    animation: none;
+  }
+
+  .nav-dropdown-menu::before {
+    display: none;
+  }
+
+  .nav-dropdown-link {
+    align-items: center;
+    padding: 9px 16px;
+    border-left: 0;
+  }
+
+  .nav-dropdown-link:hover,
+  .nav-dropdown-link:focus-visible {
+    background: none;
+  }
+
+  .nav-dropdown-label {
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  .nav-dropdown-link.active .nav-dropdown-label {
+    font-weight: 600;
+  }
+
+  .nav-dropdown-hint {
+    display: none;
+  }
+
   .nav-cta {
-    margin-left: 0;
     margin-top: 24px;
   }
 
@@ -337,54 +484,10 @@
 
 @media (max-width: 768px) {
   .logo-image {
-    height: 45px;
+    height: 44px;
   }
 
   .header.scrolled .logo-image {
     height: 40px;
   }
-}
-
-/* "New" tag next to a menu item (Masterclass, owner 2026-10-19). */
-.nav-badge {
-  margin-left: 6px;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: #2563EB;
-  color: #FFFFFF;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: .04em;
-  line-height: 1.5;
-}
-.site-lux .nav-badge { background: #b8975a; color: #0a0f22; border-radius: 0; letter-spacing: 0.1em; padding: 1px 5px; }
-
-/* Laptop widths, with Masterclass in the menu (owner 2026-10-19): ten items and the
-   Free Clinic Audit button stay on one line from 1201px up. Measured with puppeteer at
-   1201 / 1250 / 1280 / 1300 / 1366 / 1440 / 1536 / 1680 / 1920. Loaded before lux.css, so these use
-   .site-lux .header to win. */
-@media (min-width: 1201px) {
-  .site-lux .header .header-content { gap: 14px; }
-  .site-lux .header .nav-list { gap: 0; }
-  .site-lux .header .nav-link { padding: 8px 7px; font-size: 11px; letter-spacing: 0.1em; }
-  .site-lux .header .nav-cta { margin-left: 6px; }
-  .site-lux .header .nav-cta .btn { padding: 11px 14px; font-size: 11px; letter-spacing: 0.12em; white-space: nowrap; }
-}
-@media (min-width: 1201px) and (max-width: 1479px) {
-  .site-lux .header .nav-link { padding: 8px 5px; font-size: 10.5px; letter-spacing: 0.06em; }
-  .site-lux .header .nav-cta .btn { padding: 10px 10px; font-size: 10.5px; letter-spacing: 0.08em; }
-  .site-lux .header .logo-image { height: 46px; }
-}
-@media (min-width: 1201px) and (max-width: 1299px) {
-  .site-lux .header .nav-link { padding: 6px 4px; font-size: 10px; letter-spacing: 0.03em; }
-  .site-lux .header .nav-cta .btn { padding: 9px 8px; font-size: 10px; letter-spacing: 0.05em; }
-  .site-lux .header .logo-image { height: 40px; }
-  .site-lux .header .nav-badge { margin-left: 4px; }
-}
-/* Phones and tablets: ten items plus the button no longer fit a centred column on a
-   short screen (Home went under the credits bar). Start at the top and scroll. */
-@media (max-width: 1200px) {
-  .site-lux .header .nav { justify-content: flex-start; overflow-y: auto; padding: 140px 0 48px; }
-  .site-lux .header .nav-list { gap: 0; }
-  .site-lux .header .nav-link { font-size: 26px; padding: 9px 24px; }
 }

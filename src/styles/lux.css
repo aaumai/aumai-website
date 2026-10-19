@@ -304,19 +304,29 @@
 .site-lux .header.scrolled::before { background: rgba(250, 248, 244, 0.97); }
 .site-lux .onboarding-notice { background: var(--lux-navy); font-size: 12.5px; letter-spacing: 0.04em; }
 .site-lux .onboarding-notice-link { color: var(--lux-gold-2); }
+/* Menu items in sentence case at a readable size (owner 2026-10-19: the tiny
+   letter-spaced capitals read as congested). The button keeps the site's
+   letter-spaced button style. */
 .site-lux .nav-link {
   font-family: var(--lux-sans);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(10, 15, 34, 0.72);
+  letter-spacing: 0.005em;
+  text-transform: none;
+  color: rgba(10, 15, 34, 0.74);
   border-radius: 0;
 }
-.site-lux .nav-link::before { display: none; }
-.site-lux .nav-link:hover, .site-lux .nav-link.active { color: var(--lux-navy); }
-.site-lux .nav-link::after { height: 1px; width: 22px; background: var(--lux-gold); bottom: 4px; border-radius: 0; }
-.site-lux .nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+.site-lux .nav-link:hover, .site-lux .nav-link.active, .site-lux .nav-dropdown.open > .nav-link { color: var(--lux-navy); }
+.site-lux .nav-link.active { font-weight: 500; }
+.site-lux .nav-link::after { height: 1px; background: var(--lux-gold); border-radius: 0; }
+.site-lux .nav-badge { background: var(--lux-gold); color: var(--lux-navy); border-radius: 0; letter-spacing: 0.1em; padding: 1px 5px; }
+@media (min-width: 1201px) {
+  .site-lux .nav-dropdown-menu { background: #fff; border-color: var(--lux-line); box-shadow: 0 18px 40px rgba(10, 15, 34, 0.1); }
+  .site-lux .nav-dropdown-link:hover, .site-lux .nav-dropdown-link:focus-visible { background: var(--lux-mist); }
+  .site-lux .nav-dropdown-link.active { border-left-color: var(--lux-gold); }
+  .site-lux .nav-dropdown-hint { color: var(--lux-body); }
+}
+.site-lux .nav-dropdown-label { color: var(--lux-navy); }
 .site-lux .nav-cta .btn,
 .site-lux .nav-cta .btn-primary {
   border-radius: 0;
@@ -326,17 +336,16 @@
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 13px 22px;
+  padding: 14px 22px;
 }
 .site-lux .nav-cta .btn-primary:hover { background: var(--lux-navy); color: var(--lux-gold-2); box-shadow: none; }
 .site-lux .mobile-menu-toggle { border-radius: 0; background: transparent; border-color: var(--lux-line); }
 .site-lux .mobile-menu-toggle span { background: var(--lux-navy); height: 1px; }
 @media (max-width: 1200px) {
   .site-lux .nav { background: rgba(250, 248, 244, 0.99); }
-  .site-lux .nav-link { font-family: var(--lux-serif); font-size: 30px; letter-spacing: 0; text-transform: none; font-weight: 400; }
-}
-@media (min-width: 1201px) and (max-width: 1500px) {
-  .site-lux .nav-link { font-size: 11px; letter-spacing: 0.12em; }
+  .site-lux .nav-link,
+  .site-lux .nav-dropdown-label { font-family: var(--lux-serif); font-size: 26px; letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--lux-navy); }
+  .site-lux .nav-group-label { color: var(--lux-bronze); }
 }
 
 /* ── Footer ────────────────────────────────────────────────────────────── */

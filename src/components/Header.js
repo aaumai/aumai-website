@@ -1,13 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CreditsBar } from './StartInApp';
 import './Header.css';
 
+// The menu (owner 2026-10-19: "too congested — logo to the left, space the menus").
+// Six top-level items plus the Free Clinic Audit button; Home is the logo. The two
+// groups open on hover or click on laptops and are listed open in the phone menu.
+// Every page here is also in the footer, and in scripts/prerender.js SITE_LINKS.
+const NAV_ITEMS = [
+  {
+    key: 'product',
+    label: 'Product',
+    children: [
+      { path: '/revenue-generator', label: 'How it works', hint: 'Every patient, from first call to recall' },
+      // Service page (route added in its own PR, 2026-10-19).
+      // Re-enabled when /clinic-websites ships (feat/clinic-websites-service).
+      // { path: '/clinic-websites', label: 'Clinic websites', hint: 'A website that brings patients in' },
+      { path: '/demos', label: 'Watch demos', hint: 'Short videos of Aumy at work' },
+      { path: '/switch', label: 'Switching software?', hint: 'Move from your current system' },
+    ],
+  },
+  { path: '/modules', label: 'Modules' },
+  { path: '/ai-receptionist', label: 'AI receptionist' },
+  { path: '/pricing', label: 'Pricing' },
+  {
+    key: 'resources',
+    label: 'Resources',
+    children: [
+      { path: '/growth', label: 'Growth Hub', hint: 'Guides for growing your practice' },
+      { path: '/podcast', label: 'Podcast', hint: 'Be a guest on the show' },
+      { path: '/leak-calculator', label: '60-second check', hint: 'What slips through the cracks' },
+    ],
+  },
+  // The Full Chair Method masterclass (owner 2026-10-19).
+  { path: '/masterclass', label: 'Masterclass', badge: 'New' },
+  { path: '/contact', label: 'Contact' },
+];
+
+const isActive = (pathname, path) => pathname === path || pathname.startsWith(`${path}/`);
+
+// Hover-to-open only where there is a real pointer and the desktop menu is showing.
+const canHover = () =>
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(hover: hover) and (min-width: 1201px)').matches;
+
+const Chevron = () => (
+  <svg className="nav-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false">
+    <path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
   const location = useLocation();
-  // The onboarding pause is over (owner 2026-10-09): no banner, and the pricing and contact notices are gone too.
+  const navRef = useRef(null);
+  const hoverTimer = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +71,7 @@ const Header = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
+    setOpenMenu(null);
   }, [location]);
 
   // Prevent body scroll when mobile menu is open
@@ -35,73 +86,187 @@ const Header = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // A click anywhere outside the menu closes an open group.
+  useEffect(() => {
+    if (!openMenu) return undefined;
+    const onPointerDown = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) setOpenMenu(null);
+    };
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('touchstart', onPointerDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('touchstart', onPointerDown);
+    };
+  }, [openMenu]);
+
+  useEffect(() => () => clearTimeout(hoverTimer.current), []);
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+    setOpenMenu(null);
   };
 
-  // `external: true` renders a plain <a> — react-router's <Link> would treat an
-  // absolute URL as an in-app path and route to a 404 instead of leaving the site.
-  const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/revenue-generator', label: 'How it works' },
-    { path: '/modules', label: 'Modules' },
-    { path: '/ai-receptionist', label: 'AI receptionist' },
-    { path: '/demos', label: 'Watch demos' },
-    { path: '/switch', label: 'Switching software?' },
-    { path: '/pricing', label: 'Pricing' },
-    { path: '/growth', label: 'Growth Hub' },
-    // The Full Chair Method masterclass (owner 2026-10-19). Mirrored in scripts/prerender.js SITE_LINKS.
-    { path: '/masterclass', label: 'Masterclass', badge: 'New' },
-    { path: '/contact', label: 'Contact' },
-  ];
+  const menuLinks = (key) =>
+    navRef.current ? [...navRef.current.querySelectorAll(`#nav-menu-${key} a`)] : [];
+
+  const focusItem = (key, index) => {
+    const links = menuLinks(key);
+    if (!links.length) return;
+    links[(index + links.length) % links.length].focus();
+  };
+
+  const focusToggle = (key) => {
+    const btn = navRef.current && navRef.current.querySelector(`[data-menu-toggle="${key}"]`);
+    if (btn) btn.focus();
+  };
+
+  const onHoverOpen = useCallback((key) => {
+    if (!canHover()) return;
+    clearTimeout(hoverTimer.current);
+    setOpenMenu(key);
+  }, []);
+
+  const onHoverClose = useCallback(() => {
+    if (!canHover()) return;
+    clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => setOpenMenu(null), 160);
+  }, []);
+
+  const onToggleKeyDown = (e, key) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setOpenMenu(key);
+      // The list is already in the DOM (hidden by CSS); focus it once it is shown.
+      requestAnimationFrame(() => focusItem(key, 0));
+    } else if (e.key === 'Escape' && openMenu === key) {
+      setOpenMenu(null);
+    }
+  };
+
+  const onMenuKeyDown = (e, key) => {
+    const links = menuLinks(key);
+    const index = links.indexOf(document.activeElement);
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      setOpenMenu(null);
+      focusToggle(key);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      focusItem(key, index + 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      focusItem(key, index - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      focusItem(key, 0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      focusItem(key, links.length - 1);
+    }
+  };
+
+  // Tabbing out of a group closes it.
+  const onGroupBlur = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) setOpenMenu(null);
+  };
+
+  const renderLink = (link) => {
+    const active = isActive(location.pathname, link.path);
+    return (
+      <Link
+        to={link.path}
+        className={`nav-link ${active ? 'active' : ''}`}
+        aria-current={active ? 'page' : undefined}
+        onClick={closeMobileMenu}
+      >
+        {link.label}
+        {link.badge && <span className="nav-badge">{link.badge}</span>}
+      </Link>
+    );
+  };
+
+  const renderGroup = (item) => {
+    const open = openMenu === item.key;
+    const groupActive = item.children.some((c) => isActive(location.pathname, c.path));
+    return (
+      <li
+        key={item.key}
+        className={`nav-item nav-dropdown ${open ? 'open' : ''}`}
+        onMouseEnter={() => onHoverOpen(item.key)}
+        onMouseLeave={onHoverClose}
+        onBlur={onGroupBlur}
+      >
+        <button
+          type="button"
+          className={`nav-link nav-dropdown-toggle ${groupActive ? 'active' : ''}`}
+          aria-expanded={open}
+          aria-controls={`nav-menu-${item.key}`}
+          data-menu-toggle={item.key}
+          onClick={() => setOpenMenu(open ? null : item.key)}
+          onKeyDown={(e) => onToggleKeyDown(e, item.key)}
+        >
+          {item.label}
+          <Chevron />
+        </button>
+        {/* Phone menu: the group is listed open under a small heading instead. */}
+        <span className="nav-group-label" aria-hidden="true">{item.label}</span>
+        <ul
+          id={`nav-menu-${item.key}`}
+          className="nav-dropdown-menu"
+          aria-label={item.label}
+          onKeyDown={(e) => onMenuKeyDown(e, item.key)}
+        >
+          {item.children.map((child) => {
+            const active = isActive(location.pathname, child.path);
+            return (
+              <li key={child.path}>
+                <Link
+                  to={child.path}
+                  className={`nav-dropdown-link ${active ? 'active' : ''}`}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={closeMobileMenu}
+                >
+                  <span className="nav-dropdown-label">{child.label}</span>
+                  <span className="nav-dropdown-hint">{child.hint}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </li>
+    );
+  };
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       {/* Owner 2026-10-09: "1,000 Aumy credits to try each product" right at the top,
           linking to this phone's app store. Mirrored in scripts/prerender.js. */}
       <CreditsBar />
-      <div className="container">
+      <div className="container header-container">
         <div className="header-content">
           <div className="logo">
             <Link to="/" onClick={closeMobileMenu}>
               <img
                 src="/aumy-lockup-light.png"
-                alt="Aumy by AUM AI"
+                alt="Aumy by AUM AI — home"
                 className="logo-image"
               />
             </Link>
           </div>
 
-          <nav className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}>
+          <nav
+            ref={navRef}
+            id="site-nav"
+            aria-label="Main"
+            className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}
+          >
             <ul className="nav-list">
-              {navLinks.map((link) =>
-                link.external ? (
-                  <li key={link.path}>
-                    {/* Crawlable cross-market link: a real href, no rel="nofollow",
-                        so Google can follow aumai.co.in -> aumyai.com and back. */}
-                    <a href={link.path} className="nav-link" onClick={closeMobileMenu}>
-                      {link.label}
-                    </a>
-                  </li>
+              {NAV_ITEMS.map((item) =>
+                item.children ? (
+                  renderGroup(item)
                 ) : (
-                  <li key={link.path}>
-                    <Link
-                      to={link.path}
-                      className={`nav-link ${
-                        link.path === '/'
-                          ? location.pathname === '/'
-                            ? 'active'
-                            : ''
-                          : location.pathname.startsWith(link.path)
-                            ? 'active'
-                            : ''
-                      }`}
-                      onClick={closeMobileMenu}
-                    >
-                      {link.label}
-                      {link.badge && <span className="nav-badge">{link.badge}</span>}
-                    </Link>
-                  </li>
+                  <li key={item.path} className="nav-item">{renderLink(item)}</li>
                 )
               )}
             </ul>
@@ -116,6 +281,8 @@ const Header = () => {
             className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="site-nav"
           >
             <span></span>
             <span></span>
