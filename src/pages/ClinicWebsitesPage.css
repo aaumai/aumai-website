@@ -1,0 +1,110 @@
+/* Clinic websites built for search. Built on the .ch-* clinic system and the lux
+   theme (styles/lux.css), the same way as /masterclass: Cormorant headlines,
+   DM Sans body, hairlines, square edges, ivory / mist bands, navy + gold. */
+.cw-page img { max-width: 100%; height: auto; display: block; }
+.cw-page figure { margin: 0; }
+.site-lux .cw-page .ch-h2 em { font-style: italic; color: var(--lux-navy-3); }
+
+/* ── Hero ── */
+.site-lux .ch-hero.lux-hero.cw-hero { padding: 56px 0 96px; }
+.site-lux .lux-hero-grid.cw-hero-grid { grid-template-columns: 0.95fr 1.05fr; gap: 56px; align-items: center; }
+.site-lux .ch-home .cw-hero-title { font-size: clamp(34px, 4vw, 54px); line-height: 1.08; }
+.site-lux .cw-hero .ch-hero-sub { margin: 0 0 26px; }
+.cw-wa { margin: 16px 0 0; font-size: 15px; color: rgba(255, 255, 255, 0.78); }
+.site-lux .ch-home.cw-page .cw-wa a:not(.ch-btn) { color: var(--lux-gold-2); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(220, 197, 148, 0.5); }
+.cw-wa-dark { color: var(--lux-body); }
+.site-lux .ch-home.cw-page .cw-wa-dark a:not(.ch-btn) { color: var(--lux-bronze); border-bottom-color: var(--lux-gold); }
+.cw-hero-figure figcaption { margin-top: 26px; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(220, 197, 148, 0.85); text-align: center; }
+
+/* ── Devices: browser frame + phone ── */
+.cw-devices { position: relative; padding: 0 9% 7% 0; }
+.cw-browser { background: #fff; border: 1px solid rgba(220, 197, 148, 0.4); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7); }
+.cw-browser-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #eceae4; border-bottom: 1px solid #ddd8cc; }
+.cw-browser-bar i { width: 9px; height: 9px; border-radius: 50%; background: #c9c4b8; }
+.cw-browser-bar span { margin-left: 10px; flex: 1; max-width: 260px; padding: 3px 10px; border-radius: 4px; background: #fff; font-size: 11.5px; color: #5d6370; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.cw-browser img { width: 100%; aspect-ratio: 1440 / 900; object-fit: cover; }
+.cw-phone { position: absolute; right: 0; bottom: 0; width: 25%; min-width: 92px; padding: 5px; border-radius: 22px; background: #0b0d14; box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.75); border: 1px solid rgba(220, 197, 148, 0.35); }
+.cw-phone img { width: 100%; border-radius: 17px; aspect-ratio: 600 / 1100; object-fit: cover; object-position: top; }
+
+/* ── Problems ── */
+.cw-problems { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--lux-line); }
+.cw-problems li { padding: 26px 22px 6px 0; }
+.cw-problems li + li { padding-left: 22px; border-left: 1px solid var(--lux-line); }
+.cw-n { display: block; font-family: var(--lux-serif); font-size: 34px; font-weight: 300; line-height: 1; color: var(--lux-gold); }
+.site-lux .ch-home .cw-problems h3 { margin: 12px 0 8px; font-size: 24px; }
+.cw-problems p { margin: 0; font-size: 15px; line-height: 1.6; }
+
+/* ── What we build ── */
+.cw-build { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.cw-card { background: #fff; border: 1px solid var(--lux-line); padding: 26px 22px; transition: border-color 0.3s ease; }
+.cw-card:hover { border-color: var(--lux-gold); }
+.cw-icon { color: var(--lux-gold); margin-bottom: 14px; }
+.site-lux .ch-home .cw-card h3 { margin: 0 0 8px; font-size: 22px; }
+.cw-card p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+.cw-card-aumy { background: var(--lux-navy); border-color: var(--lux-navy); }
+.site-lux .ch-home .cw-card-aumy h3 { color: #fff; }
+.cw-card-aumy p { color: rgba(255, 255, 255, 0.78); }
+.cw-card-aumy .cw-icon { color: var(--lux-gold-2); }
+
+/* ── Case study ── */
+.cw-case-head { max-width: 860px; margin: 0 0 48px; }
+.cw-case-head .ch-h2 { margin: 14px 0 18px; }
+.cw-case-shot { max-width: 980px; margin: 0 auto 64px; }
+.cw-case-shot .cw-browser { border-color: var(--lux-line); box-shadow: 0 30px 60px -36px rgba(10, 15, 34, 0.45); }
+.cw-stats { list-style: none; margin: 0 0 56px; padding: 30px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--lux-line); border-bottom: 1px solid var(--lux-line); }
+.cw-stats li { padding: 0 22px 0 0; }
+.cw-stats li + li { padding-left: 22px; border-left: 1px solid var(--lux-line); }
+.site-lux .ch-home .cw-stats strong { display: block; font-family: var(--lux-serif); font-weight: 300; font-size: clamp(38px, 3.6vw, 54px); line-height: 1; color: var(--lux-navy); }
+.cw-stats span { display: block; margin-top: 10px; font-size: 14.5px; line-height: 1.5; color: var(--lux-body); }
+.cw-case-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: start; }
+.site-lux .ch-home .cw-h3 { margin: 0 0 14px; font-size: 28px; }
+.cw-did { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--lux-line); }
+.cw-did li { position: relative; padding: 13px 0 13px 28px; border-bottom: 1px solid var(--lux-line); font-size: 16px; line-height: 1.6; color: var(--lux-navy); }
+.cw-did li::before { content: ''; position: absolute; left: 4px; top: 22px; width: 11px; height: 6px; border-left: 1.5px solid var(--lux-gold); border-bottom: 1.5px solid var(--lux-gold); transform: rotate(-45deg); }
+.cw-goal { background: var(--lux-mist); border-top: 2px solid var(--lux-gold); padding: 30px 28px; }
+.site-lux .ch-home .cw-goal h3 { margin: 10px 0 12px; font-size: 26px; line-height: 1.2; }
+.cw-goal p { margin: 0 0 22px; font-size: 15.5px; line-height: 1.65; }
+.cw-goal .ch-btn { width: 100%; justify-content: center; text-align: center; }
+.cw-goal .cw-credit { margin: 14px 0 0; font-size: 12.5px; color: var(--lux-bronze); }
+
+/* ── How it works ── */
+.cw-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; counter-reset: none; }
+.cw-steps li { background: #fff; border: 1px solid var(--lux-line); border-top: 2px solid var(--lux-gold); padding: 24px 20px; }
+.cw-step-n { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lux-bronze); }
+.site-lux .ch-home .cw-steps h3 { margin: 8px 0 8px; font-size: 22px; line-height: 1.2; }
+.cw-steps p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+
+/* ── Audit ── */
+.cw-audit-grid { align-items: center; }
+.cw-audit-grid .ch-h2 { margin: 14px 0 18px; }
+
+/* The closing band: the same large serif as the other section titles. */
+.site-lux .ch-home.cw-page .ch-offer-title { font-size: clamp(34px, 4.2vw, 54px); }
+.cw-page .ch-offer .cw-wa { margin-top: 18px; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .cw-build { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cw-problems { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cw-problems li, .cw-problems li + li { padding: 24px 22px 18px 0; border-left: 0; border-bottom: 1px solid var(--lux-line); }
+  .cw-problems li:nth-child(even) { padding-left: 22px; border-left: 1px solid var(--lux-line); }
+  .cw-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 920px) {
+  .site-lux .lux-hero-grid.cw-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cw-case-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cw-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 26px; }
+  .cw-stats li:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 760px) {
+  .site-lux .ch-hero.lux-hero.cw-hero { padding: 28px 0 64px; }
+  .site-lux .cw-hero .ch-hero-sub { font-size: 16px; line-height: 1.6; }
+  .cw-hero .ch-hero-cta .ch-btn { width: 100%; text-align: center; justify-content: center; }
+  .cw-build, .cw-problems, .cw-steps { grid-template-columns: 1fr; }
+  .cw-problems li:nth-child(even) { padding-left: 0; border-left: 0; }
+  .cw-case-shot { margin-right: 8px; margin-bottom: 48px; }
+  .cw-stats li, .cw-stats li + li { padding: 0 12px 0 0; }
+  .cw-stats li:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--lux-line); }
+  .cw-goal { padding: 24px 20px; }
+}
+.cw-faq-head { margin-bottom: 8px; }

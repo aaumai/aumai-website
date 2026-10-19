@@ -20,6 +20,7 @@ import MasterclassPage from './pages/MasterclassPage';
 import MasterclassAdmin from './pages/MasterclassAdmin';
 import MasterclassRegister from './pages/MasterclassRegister';
 import MasterclassInfo from './pages/MasterclassInfo';
+import ClinicWebsitesPage from './pages/ClinicWebsitesPage';
 import PricingPage from './pages/PricingPage';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -109,6 +110,10 @@ function App() {
                 <Route path="/masterclass/sign-in" element={<MasterclassPage />} />
                 <Route path="/masterclass/my" element={<MasterclassPage />} />
                 <Route path="/masterclass/register" element={<MasterclassRegister />} />
+                {/* Clinic websites built for search (owner 2026-10-19). Words: src/data/clinicWebsites.js
+                    (shared with scripts/prerender.js). /websites is the short address. */}
+                <Route path="/clinic-websites" element={<ClinicWebsitesPage />} />
+                <Route path="/websites" element={<Navigate to="/clinic-websites" replace />} />
                 <Route path="/pricing" element={<PricingPage />} />
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}
