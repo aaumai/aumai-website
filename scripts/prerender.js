@@ -36,6 +36,8 @@ const COMP = require('../src/data/compliance');
 const MC_REFUND = require('../src/data/masterclassRefund');
 // The Full Chair Method information page (owner 2026-10-19): same file as src/pages/MasterclassInfo.js.
 const MC = require('../src/data/masterclass');
+// Clinic websites built for search (owner 2026-10-19): same file as src/pages/ClinicWebsitesPage.js.
+const CW = require('../src/data/clinicWebsites');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
@@ -103,6 +105,7 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/demos', 'Demo videos'],
   ['/growth', 'Growth Hub'],
   ['/masterclass', 'The Full Chair Method masterclass'],
+  ['/clinic-websites', 'Clinic websites built for SEO'],
   ['/compliance', 'Security & compliance'],
   ['/about', 'About the founder'],
   ['/contact', 'Contact'],
@@ -774,6 +777,90 @@ const routes = [
         <h1 class="ch-hero-title">Sign in to your masterclass</h1>
         <p class="ch-hero-sub">Masterclass members sign in with the email they registered with. We email a 6-digit code; there is no password.</p>
       </div></section>`,
+  })),
+  // Clinic websites built for search (owner 2026-10-19): public and in the sitemap.
+  // Every word comes from src/data/clinicWebsites.js, as on the React page.
+  {
+    slug: CW.PATH.slice(1),
+    title: CW.SEO.title,
+    description: CW.SEO.description,
+    canonical: `${ORIGIN}${CW.PATH}`,
+    ogImage: `${ORIGIN}${CW.IMG.desktop.src}`,
+    jsonld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': `${ORIGIN}${CW.PATH}#service`,
+        name: 'Clinic websites built for SEO and international patients',
+        serviceType: 'Clinic website design and search engine optimisation',
+        description: CW.SEO.description,
+        url: `${ORIGIN}${CW.PATH}`,
+        provider: { '@id': `${ORIGIN}/#organization` },
+        areaServed: { '@type': 'Country', name: 'India' },
+        audience: { '@type': 'BusinessAudience', audienceType: 'Dental and skin clinics' },
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: CW.BUILD.title,
+          itemListElement: CW.BUILD.items.map((b) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: b.h, description: b.t } })),
+        },
+        subjectOf: { '@type': 'WebSite', name: 'The Sterling Dental Clinic', url: CW.CASE.link.href, creator: { '@id': `${ORIGIN}/#organization` } },
+      },
+      faqPageLd(CW.FAQS),
+    ],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(CW.HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(CW.HERO.titleA)} ${esc(CW.HERO.titleB)}</h1>
+        <p class="ch-hero-sub">${esc(CW.HERO.sub)}</p>
+        <p><a href="#audit">${esc(CW.HERO.cta)}</a> · <a href="${CW.WHATSAPP.link}">WhatsApp ${esc(CW.WHATSAPP.display)}</a></p>
+        <p>${esc(CW.HERO.trust)}</p>
+        <p><img src="${CW.IMG.desktop.src}" width="${CW.IMG.desktop.w}" height="${CW.IMG.desktop.h}" alt="${esc(CW.IMG.desktop.alt)}"></p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(CW.PROBLEMS.title)}</h2>
+        <p>${esc(CW.PROBLEMS.intro)}</p>
+        <ul>${CW.PROBLEMS.items.map((p) => `<li><strong>${esc(p.h)}.</strong> ${esc(p.t)}</li>`).join('')}</ul>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(CW.BUILD.title)}: ${esc(CW.BUILD.headingA)} ${esc(CW.BUILD.headingEm)} ${esc(CW.BUILD.headingB)}</h2>
+        <p>${esc(CW.BUILD.intro)}</p>
+        <ul>${CW.BUILD.items.map((b) => `<li><strong>${esc(b.h)}.</strong> ${esc(b.t)}</li>`).join('')}</ul>
+      </div></section>
+      <section id="sterling"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(CW.CASE.eyebrow)}</p>
+        <h2>${esc(CW.CASE.title)}</h2>
+        <p>${esc(CW.CASE.intro)}</p>
+        <ul>${CW.CASE.stats.map((s) => `<li><strong>${esc(s.n)}</strong> ${esc(s.t)}</li>`).join('')}</ul>
+        <h3>What we did</h3>
+        <ul>${CW.CASE.did.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
+        <h3>${esc(CW.CASE.goalTitle)}</h3>
+        <p>${esc(CW.CASE.goal)}</p>
+        <p><a href="${CW.CASE.link.href}">${esc(CW.CASE.link.label)}</a></p>
+        <p>${esc(CW.CASE.credit)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(CW.STEPS.title)}</h2>
+        <ol>${CW.STEPS.items.map((s) => `<li><strong>${esc(s.h)}.</strong> ${esc(s.t)}</li>`).join('')}</ol>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        ${faqHtml(CW.FAQS, 'Questions, answered')}
+      </div></section>
+      <section id="audit"><div class="ch-container ch-narrow">
+        <h2>${esc(CW.AUDIT.title)}</h2>
+        <p>${esc(CW.AUDIT.intro)}</p>
+        <p><a href="${CW.WHATSAPP.link}">WhatsApp ${esc(CW.WHATSAPP.display)}</a></p>
+        <h2>${esc(CW.FINAL.title)}</h2>
+        <p>${esc(CW.FINAL.text)}</p>
+      </div></section>`,
+  },
+  // Short address: /websites → /clinic-websites (React: <Navigate>; crawlers: refresh + canonical).
+  ...CW.ALIASES.map((alias) => ({
+    slug: alias.slice(1),
+    title: CW.SEO.title,
+    description: CW.SEO.description,
+    canonical: `${ORIGIN}${CW.PATH}`,
+    refresh: CW.PATH,
+    content: `<section><div class="ch-container ch-narrow"><p>This page has moved: <a href="${CW.PATH}">${esc(CW.HERO.titleA)} ${esc(CW.HERO.titleB)}</a>.</p></div></section>`,
   })),
   // Public and indexable, but out of the sitemap for now (owner 2026-10-18). The
   // price comes from the backend at run time, so it is not written here.

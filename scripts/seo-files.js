@@ -59,6 +59,8 @@ const SITEMAPS = {
     ['/4c-scorecard', 0.9, 'monthly'],
     // The Full Chair Method information page (owner 2026-10-19). /masterclass/register stays out for now.
     ['/masterclass', 0.9, 'monthly'],
+    // Clinic websites built for search (owner 2026-10-19). /websites only redirects here.
+    ['/clinic-websites', 0.9, 'monthly'],
     ['/pricing', 0.9, 'monthly'],
     ['/modules', 0.9, 'monthly'],
     ...MODS.PAGES.map((p) => [`/modules/${p.id}`, 0.8, 'monthly']),
@@ -162,6 +164,7 @@ ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/pricing — Aumy pricing: the Clinic OS starts from ${PRICING.MONTHLY_FROM.toLocaleString("en-IN")} INR a month; the AI receptionist, AI calls and follow-ups are priced with each clinic
 - ${ORIGIN}/modules — Aumy sold module by module or as one connected system: Aumy Convert (lead nurturing & Meta ads optimisation), Aumy Clinic (dental clinic operating system) with the Aumy Scribe add-on (AI clinical documentation), Aumy Journey (clinic OS with the end-to-end patient journey), Aumy Chat (AI WhatsApp receptionist), Aumy Voice (AI voice receptionist), and Aumy One (the connected dental clinic system)
 ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}${p.addonOf ? ` (add-on to ${p.addonOf})` : ""}. ${p.card}`).join('\n')}
+- ${ORIGIN}/clinic-websites — clinic websites built for SEO and international patients: treatment, area and dental-tourism pages, weekly blogs, technical SEO and redirects that keep old rankings; case study: sterlingdentalclinic.com
 - ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
 - ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness

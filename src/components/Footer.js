@@ -32,6 +32,7 @@ const Footer = () => {
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Free Clinic Audit', path: '/growth-audit' },
     { label: 'Masterclass — The Full Chair Method', path: '/masterclass' },
+    { label: 'Clinic Websites Built for SEO', path: '/clinic-websites' },
     { label: 'What Slips Through the Cracks — 60-second Check', path: '/leak-calculator' },
     { label: 'Missed Call Calculator', path: '/missed-call-calculator' },
     { label: 'Platform Partners', path: '/platform-partner' },
