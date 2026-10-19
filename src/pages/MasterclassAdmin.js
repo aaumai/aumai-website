@@ -159,9 +159,9 @@ export default function MasterclassAdmin() {
   };
   const saveSession = (e) => {
     e.preventDefault(); setSessMsg('');
-    act('/settings', sess, (j) => {
+    act('/settings', { ...sess, qa_at: '', qa_link: '' }, (j) => { // no live Q&A any more: saving clears any old one
       setData((d) => ({ ...d, session: j.session }));
-      setSessMsg(j.session.qa_label || j.session.video_by_label ? 'Saved. Members see this on their page and in new welcome emails.' : 'Cleared.');
+      setSessMsg(j.session.video_by_label ? 'Saved. Members see this on their page and in new welcome emails.' : 'Cleared.');
     });
   };
   const resend = (m) => { if (window.confirm(`Email the sign-in details to ${m.email} again?`)) act(`/members/${m.id}/resend`, {}, (j) => setFlash(`${m.name}: ${welcomeWords(j.welcome)}`)); };
@@ -250,11 +250,9 @@ export default function MasterclassAdmin() {
         </div>
 
         <form className="sc-form" onSubmit={saveSession}>
-          <h2>Live Q&amp;A and video date</h2>
-          <p>Shown on the members page and in welcome emails. Leave a box empty to hide it.</p>
+          <h2>Video date</h2>
+          <p>Shown on the members page and in welcome emails. Leave it empty to hide it. (There is no live Q&amp;A: questions go to WhatsApp, owner 2026-10-19.)</p>
           <div className="sc-fields">
-            <label>Live Q&amp;A date and time (India time)<input type="datetime-local" value={sess.qa_at} onChange={(e) => setSess({ ...sess, qa_at: e.target.value })} /></label>
-            <label>Join link<input type="url" value={sess.qa_link} onChange={(e) => setSess({ ...sess, qa_link: e.target.value })} placeholder="https://meet.google.com/…" /></label>
             <label>Video available by<input type="date" value={sess.video_by} onChange={(e) => setSess({ ...sess, video_by: e.target.value })} /></label>
           </div>
           {sessMsg && <p className="mc-ok" role="status">{sessMsg}</p>}

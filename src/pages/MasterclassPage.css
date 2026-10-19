@@ -54,3 +54,5 @@
   .mc-files, .mc-admin-grid { grid-template-columns: minmax(0, 1fr) }
   .mc-file .sc-btn, .mc-all .sc-btn { align-self: stretch; justify-content: center; width: 100% }
 }
+.mc-points { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 16px; line-height: 1.5; color: var(--sc-ink) }
+.mc-points a, .mc-wa a { color: var(--sc-accent); font-weight: 700 }

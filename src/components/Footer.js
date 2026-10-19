@@ -31,6 +31,7 @@ const Footer = () => {
     { label: 'Podcast — Be a Guest', path: '/podcast' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Free Clinic Audit', path: '/growth-audit' },
+    { label: 'Masterclass — The Full Chair Method', path: '/masterclass' },
     { label: 'What Slips Through the Cracks — 60-second Check', path: '/leak-calculator' },
     { label: 'Missed Call Calculator', path: '/missed-call-calculator' },
     { label: 'Platform Partners', path: '/platform-partner' },

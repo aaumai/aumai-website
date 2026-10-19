@@ -34,6 +34,8 @@ const AIR = require('../src/data/aiReceptionist');
 const WA = require('../src/data/whatsappAutomation');
 const COMP = require('../src/data/compliance');
 const MC_REFUND = require('../src/data/masterclassRefund');
+// The Full Chair Method information page (owner 2026-10-19): same file as src/pages/MasterclassInfo.js.
+const MC = require('../src/data/masterclass');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
@@ -100,6 +102,7 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/switch', 'Switching dental software'],
   ['/demos', 'Demo videos'],
   ['/growth', 'Growth Hub'],
+  ['/masterclass', 'The Full Chair Method masterclass'],
   ['/compliance', 'Security & compliance'],
   ['/about', 'About the founder'],
   ['/contact', 'Contact'],
@@ -666,15 +669,105 @@ const routes = [
         <p>Always scores 2, sometimes 1, never or don’t know 0. 9 to 10: running tight. 5 to 8: can do better. Below 5: leaking patients.</p>
       </div></section>`,
   },
-  // Masterclass members area (owner 2026-10-18). Private: noindex, nofollow, kept
-  // out of seo-files.js's sitemap. Only the public sign-in words are here; the
-  // video, workbooks and member details exist only after sign-in, in the browser.
-  ...['masterclass', 'masterclass/my'].map((slug) => ({
+  // The Full Chair Method information page (owner 2026-10-19): public and in the
+  // sitemap. Every word comes from src/data/masterclass.js, as on the React page.
+  {
+    slug: 'masterclass',
+    title: MC.SEO.title,
+    description: MC.SEO.description,
+    canonical: `${ORIGIN}${MC.PATHS.info}`,
+    jsonld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        name: `${MC.TITLE}: the 4C Framework`,
+        description: MC.SEO.description,
+        inLanguage: 'en-IN',
+        provider: { '@type': 'Organization', name: 'AUM AI', sameAs: ORIGIN },
+        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}` },
+        hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'PT2H', instructor: { '@type': 'Person', name: MC.TRAINER.name } },
+      },
+      faqPageLd(MC.FAQS),
+    ],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p><a href="${MC.PATHS.signIn}">Already registered? Sign in to your masterclass</a></p>
+        <p class="ch-eyebrow">${esc(MC.HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(MC.HERO.title)}</h1>
+        <p class="ch-hero-sub">${esc(MC.HERO.promise)}</p>
+        <p>${esc(MC.HERO.who)}</p>
+        <ul>${MC.HERO.facts.map((f) => `<li><strong>${esc(f.b)}</strong> ${esc(f.t)}</li>`).join('')}</ul>
+        <p><a href="${MC.PATHS.register}">Register · ${esc(MC.PRICE_LABEL)}</a></p>
+        <p>${esc(MC.HERO.note)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.PROBLEM.title)}</h2>
+        <p>${esc(MC.PROBLEM.intro)}</p>
+        <ul>${MC.PROBLEM.leaks.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>
+        <h3>${esc(MC.PROBLEM.numbersTitle)}</h3>
+        <ul>${MC.PROBLEM.numbers.map((x) => `<li><strong>${esc(x.n)}</strong> ${esc(x.t)}</li>`).join('')}</ul>
+        <p>${esc(MC.PROBLEM.numbersNote)}</p>
+        <p>${esc(MC.PROBLEM.closeA)} ${esc(MC.PROBLEM.closeB)} ${esc(MC.PROBLEM.closeC)}</p>
+        <h3>${esc(MC.BEFORE_AFTER.title)}</h3>
+        <p>${esc(MC.BEFORE_AFTER.intro)}</p>
+        <ul>${MC.BEFORE_AFTER.rows.map((x) => `<li><strong>${esc(x.sys)}.</strong> Before: ${esc(x.before)} After: ${esc(x.after)}</li>`).join("")}</ul>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.LEARN.title)}</h2>
+        <p>${esc(MC.LEARN.intro)}</p>
+        ${MC.STAGES.map((s) => `<h3>${esc(s.c)}: ${esc(s.line)}</h3><ul>${s.items.map((it) => `<li><strong>${it.foundation ? 'Foundation' : 'System'} ${esc(it.n)} · ${esc(it.name)}.</strong> ${esc(it.t)}</li>`).join('')}</ul>`).join('')}
+        ${MC.LEARN.extras.map((x) => `<h3>${esc(x.h)}</h3><p>${esc(x.t)}</p>`).join('')}
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.WAYS.title)}</h2>
+        <p>${esc(MC.WAYS.intro)}</p>
+        <ol>${MC.WAYS.items.map((w) => `<li><strong>${esc(w.h)}.</strong> ${esc(w.t)}</li>`).join('')}</ol>
+        <p>${esc(MC.WAYS.noSoftware)}</p>
+        <h3>${esc(MC.WAYS.buildTitle)}</h3>
+        <ol>${MC.WAYS.build.map((b) => `<li>${esc(b)}</li>`).join('')}</ol>
+        <p>${esc(MC.WAYS.buildNote)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.KIT.title)}</h2>
+        <ul>${MC.KIT.items.map((k) => `<li><strong>${k.wa ? `<a href="${MC.WHATSAPP.link}">${esc(k.h)}</a>` : esc(k.h)}.</strong> ${esc(k.t)}</li>`).join('')}</ul>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.EXPECT.title)}</h2>
+        ${MC.EXPECT.items.map((x) => `<h3>${esc(x.h)}</h3><p>${esc(x.t)}</p>`).join('')}
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.FOR_WHO.title)}</h2>
+        <h3>For you if</h3><ul>${MC.FOR_WHO.yes.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+        <h3>Not for you if</h3><ul>${MC.FOR_WHO.no.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+        <p>${esc(MC.FOR_WHO.skinNote)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.TRAINER.title)}</h2>
+        <h3>${esc(MC.TRAINER.name)}, ${esc(MC.TRAINER.role)}</h3>
+        ${MC.TRAINER.bio.map((b) => `<p>${esc(b)}</p>`).join('')}
+        <p><a href="/about">More about Jayesh</a></p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        ${faqHtml(MC.FAQS, 'Questions, answered')}
+        <p><a href="/refund#masterclass">The full refund policy</a></p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(MC.FINAL.title)}</h2>
+        <p>${esc(MC.FINAL.text)}</p>
+        <p><a href="${MC.PATHS.register}">Register · ${esc(MC.PRICE_LABEL)}</a></p>
+        <p><a href="${MC.WHATSAPP.link}">${esc(MC.FINAL.questions)}</a></p>
+      </div></section>`,
+  },
+  // Masterclass members area (owner 2026-10-18; sign-in moved to /masterclass/sign-in
+  // on 2026-10-19). Private: noindex, nofollow, out of seo-files.js's sitemap. Only
+  // the public sign-in words are here; the video, workbooks and member details
+  // exist only after sign-in, in the browser.
+  ...['masterclass/sign-in', 'masterclass/my'].map((slug) => ({
     slug,
     noindex: true,
     title: 'Masterclass members | AUM AI',
     description: 'Sign in to The Full Chair Method masterclass members area.',
-    canonical: `${ORIGIN}/masterclass`,
+    canonical: `${ORIGIN}${MC.PATHS.signIn}`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
@@ -687,14 +780,16 @@ const routes = [
   {
     slug: 'masterclass/register',
     title: 'Join The Full Chair Method masterclass | AUM AI',
-    description: 'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, eight systems, the video and nine workbooks for a month.',
-    canonical: `${ORIGIN}/masterclass/register`,
+    description: MC.REGISTER_SEO_DESCRIPTION,
+    canonical: `${ORIGIN}${MC.PATHS.register}`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
         <h1 class="ch-hero-title">Join the masterclass</h1>
-        <p class="ch-hero-sub">The 4C Framework: eight systems that keep your chairs full. Convert, Confirm, Care and Come back. You get the masterclass video and nine Excel workbooks, one for each system plus an owner's weekly scorecard.</p>
-        <p>Register with your name, clinic, city, email and WhatsApp number, and pay securely by Razorpay. Your account is ready the moment the payment is confirmed. Already registered? <a href="/masterclass">Sign in</a>.</p>
+        <p class="ch-hero-sub">${esc(MC.REGISTER.lead)}</p>
+        <ul>${MC.REGISTER.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
+        <p><a href="${MC.PATHS.info}">See everything the masterclass covers</a></p>
+        <p>Register with your name, clinic, city, email and WhatsApp number, and pay securely by Razorpay. Your account is ready the moment the payment is confirmed. Already registered? <a href="${MC.PATHS.signIn}">Sign in</a>.</p>
       </div></section>`,
   },
   {

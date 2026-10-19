@@ -344,3 +344,47 @@
     height: 40px;
   }
 }
+
+/* "New" tag next to a menu item (Masterclass, owner 2026-10-19). */
+.nav-badge {
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #2563EB;
+  color: #FFFFFF;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.5;
+}
+.site-lux .nav-badge { background: #b8975a; color: #0a0f22; border-radius: 0; letter-spacing: 0.1em; padding: 1px 5px; }
+
+/* Laptop widths, with Masterclass in the menu (owner 2026-10-19): ten items and the
+   Free Clinic Audit button stay on one line from 1201px up. Measured with puppeteer at
+   1201 / 1250 / 1280 / 1300 / 1366 / 1440 / 1536 / 1680 / 1920. Loaded before lux.css, so these use
+   .site-lux .header to win. */
+@media (min-width: 1201px) {
+  .site-lux .header .header-content { gap: 14px; }
+  .site-lux .header .nav-list { gap: 0; }
+  .site-lux .header .nav-link { padding: 8px 7px; font-size: 11px; letter-spacing: 0.1em; }
+  .site-lux .header .nav-cta { margin-left: 6px; }
+  .site-lux .header .nav-cta .btn { padding: 11px 14px; font-size: 11px; letter-spacing: 0.12em; white-space: nowrap; }
+}
+@media (min-width: 1201px) and (max-width: 1479px) {
+  .site-lux .header .nav-link { padding: 8px 5px; font-size: 10.5px; letter-spacing: 0.06em; }
+  .site-lux .header .nav-cta .btn { padding: 10px 10px; font-size: 10.5px; letter-spacing: 0.08em; }
+  .site-lux .header .logo-image { height: 46px; }
+}
+@media (min-width: 1201px) and (max-width: 1299px) {
+  .site-lux .header .nav-link { padding: 6px 4px; font-size: 10px; letter-spacing: 0.03em; }
+  .site-lux .header .nav-cta .btn { padding: 9px 8px; font-size: 10px; letter-spacing: 0.05em; }
+  .site-lux .header .logo-image { height: 40px; }
+  .site-lux .header .nav-badge { margin-left: 4px; }
+}
+/* Phones and tablets: ten items plus the button no longer fit a centred column on a
+   short screen (Home went under the credits bar). Start at the top and scroll. */
+@media (max-width: 1200px) {
+  .site-lux .header .nav { justify-content: flex-start; overflow-y: auto; padding: 140px 0 48px; }
+  .site-lux .header .nav-list { gap: 0; }
+  .site-lux .header .nav-link { font-size: 26px; padding: 9px 24px; }
+}

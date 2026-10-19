@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { INDIA_OFFICE } from '../config/contact';
+import MC from '../data/masterclass';
 import './ScorecardPage.css';
 import './MasterclassPage.css';
 
@@ -70,7 +71,7 @@ export default function MasterclassRegister() {
   const landPaid = useCallback((j, email) => {
     writeJson('local', PENDING_STORE, null);
     writeJson('session', FORM_STORE, null);
-    if (j.sign_in === 'code') navigate('/masterclass', { replace: true, state: { justPaid: true, email: j.email || email } });
+    if (j.sign_in === 'code') navigate('/masterclass/sign-in', { replace: true, state: { justPaid: true, email: j.email || email } });
     else navigate('/masterclass/my', { replace: true, state: { justPaid: true } });
   }, [navigate]);
 
@@ -94,7 +95,7 @@ export default function MasterclassRegister() {
     window.scrollTo(0, 0);
     setPageSeo({
       title: 'Join The Full Chair Method masterclass | AUM AI',
-      description: 'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, eight systems, the video and nine workbooks for a month.',
+      description: MC.REGISTER_SEO_DESCRIPTION,
       canonical: 'https://aumai.co.in/masterclass/register',
     });
     try {
@@ -164,7 +165,13 @@ export default function MasterclassRegister() {
       <div className="sc-wrap mc-narrow mc-hero">
         <p className="sc-eyebrow">The Full Chair Method · Masterclass</p>
         <h1>Join the masterclass</h1>
-        <p className="mc-access">The 4C Framework: eight systems that keep your chairs full. You get the masterclass video and nine Excel workbooks{price ? ` for ${price.access_days} days` : ''}.</p>
+        <p className="mc-access">{MC.REGISTER.lead}</p>
+        <ul className="mc-points">
+          {MC.REGISTER.points.map((p) => <li key={p}>{p.includes(MC.WHATSAPP.display)
+            ? <>{p.split(MC.WHATSAPP.display)[0]}<a href={MC.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{MC.WHATSAPP.display}</a>{p.split(MC.WHATSAPP.display)[1]}</>
+            : p}</li>)}
+        </ul>
+        <p className="mc-help"><Link to={MC.PATHS.info}>See everything the masterclass covers</Link></p>
 
         {stage === 'confirming' && (
           <div className="sc-form" role="status">
@@ -224,7 +231,7 @@ export default function MasterclassRegister() {
           </>
         )}
 
-        <p className="mc-help">Already registered? <Link to="/masterclass">Sign in</Link>. Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+        <p className="mc-help">Already registered? <Link to={MC.PATHS.signIn}>Sign in</Link>. Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
       </div>
     </div>
   );

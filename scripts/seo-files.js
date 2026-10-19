@@ -57,6 +57,8 @@ const SITEMAPS = {
     ['/demos', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
     ['/4c-scorecard', 0.9, 'monthly'],
+    // The Full Chair Method information page (owner 2026-10-19). /masterclass/register stays out for now.
+    ['/masterclass', 0.9, 'monthly'],
     ['/pricing', 0.9, 'monthly'],
     ['/modules', 0.9, 'monthly'],
     ...MODS.PAGES.map((p) => [`/modules/${p.id}`, 0.8, 'monthly']),

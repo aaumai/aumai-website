@@ -19,6 +19,7 @@ import ScorecardAdmin from './pages/ScorecardAdmin';
 import MasterclassPage from './pages/MasterclassPage';
 import MasterclassAdmin from './pages/MasterclassAdmin';
 import MasterclassRegister from './pages/MasterclassRegister';
+import MasterclassInfo from './pages/MasterclassInfo';
 import PricingPage from './pages/PricingPage';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -102,8 +103,10 @@ function App() {
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/growth-audit" element={<GrowthAudit />} />
                 <Route path="/4c-scorecard" element={<ScorecardPage />} />
-                {/* Masterclass members area (owner 2026-10-18): private, noindex, out of the sitemap. */}
-                <Route path="/masterclass" element={<MasterclassPage />} />
+                {/* The Full Chair Method (owner 2026-10-19): /masterclass is the public information
+                    page; the members area (private, noindex) is /masterclass/sign-in and /masterclass/my. */}
+                <Route path="/masterclass" element={<MasterclassInfo />} />
+                <Route path="/masterclass/sign-in" element={<MasterclassPage />} />
                 <Route path="/masterclass/my" element={<MasterclassPage />} />
                 <Route path="/masterclass/register" element={<MasterclassRegister />} />
                 <Route path="/pricing" element={<PricingPage />} />

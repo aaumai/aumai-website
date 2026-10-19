@@ -50,6 +50,8 @@ const Header = () => {
     { path: '/switch', label: 'Switching software?' },
     { path: '/pricing', label: 'Pricing' },
     { path: '/growth', label: 'Growth Hub' },
+    // The Full Chair Method masterclass (owner 2026-10-19). Mirrored in scripts/prerender.js SITE_LINKS.
+    { path: '/masterclass', label: 'Masterclass', badge: 'New' },
     { path: '/contact', label: 'Contact' },
   ];
 
@@ -97,6 +99,7 @@ const Header = () => {
                       onClick={closeMobileMenu}
                     >
                       {link.label}
+                      {link.badge && <span className="nav-badge">{link.badge}</span>}
                     </Link>
                   </li>
                 )
