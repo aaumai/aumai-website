@@ -14,7 +14,8 @@ const NAV_ITEMS = [
     children: [
       { path: '/revenue-generator', label: 'How it works', hint: 'Every patient, from first call to recall' },
       // Service page (route added in its own PR, 2026-10-19).
-      { path: '/clinic-websites', label: 'Clinic websites', hint: 'A website that brings patients in' },
+      // Re-enabled when /clinic-websites ships (feat/clinic-websites-service).
+      // { path: '/clinic-websites', label: 'Clinic websites', hint: 'A website that brings patients in' },
       { path: '/demos', label: 'Watch demos', hint: 'Short videos of Aumy at work' },
       { path: '/switch', label: 'Switching software?', hint: 'Move from your current system' },
     ],
