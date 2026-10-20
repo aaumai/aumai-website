@@ -5,6 +5,7 @@ import AppDownload from '../components/AppDownload';
 import ClinicsServed from '../components/ClinicsServed';
 import HomeModules from '../components/HomeModules';
 import HomeExplainers from '../components/HomeExplainers';
+import HomeFullDemo from '../components/HomeFullDemo';
 import { HERO_VIDEO } from '../data/explainers';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
@@ -102,6 +103,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ── The full Aumy demo film (owner 2026-10-20), right under the hero. Words: src/data/explainers.js. */}
+      <HomeFullDemo />
 
       {/* ── One explainer video per module (owner 2026-10-12), immediately under the hero. Words: src/data/explainers.js. */}
       <HomeExplainers />

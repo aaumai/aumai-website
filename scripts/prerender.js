@@ -565,7 +565,7 @@ const routes = [
       'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹3,000 a month.',
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
-    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, demoVideoLd, ...explainerVideoLd],
+    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, filmVideoLd, demoVideoLd, ...explainerVideoLd],
     content: `
       <section><div class="ch-container ch-narrow">
         <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello. Or call +91 22 6423 0581 and wait a couple of rings — Aumy Voice will pick up (demo clinic: Lumière Dental). This live demo is Aumy Chat and Aumy Voice only — for a full Aumy One demo, call us on +91 80071 89868.</p>
@@ -580,6 +580,10 @@ const routes = [
         <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} explained</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
         <p><a href="/#get-the-app">Start free in the app</a> · <a href="/contact">Get started — risk-free</a> · <a href="/#be-the-patient">Try it live — WhatsApp or call our demo clinic</a></p>
         <p>1,000 free Aumy credits per product · cancel any time · NVIDIA Inception member</p>
+      </div></section>
+      <section id="full-demo"><div class="ch-container ch-narrow">
+        <h2>${esc(EXPL.FULL_DEMO.title)}</h2>
+        <p>${esc(EXPL.FULL_DEMO.blurb)} <a href="https://www.youtube.com/watch?v=${EXPL.FULL_DEMO.youtubeId}">Watch the 9-minute demo</a> · <a href="/demos">More demo videos</a></p>
       </div></section>
       <section id="explainers"><div class="ch-container ch-narrow">
         <h2>${esc(EXPL.TITLE)}</h2>

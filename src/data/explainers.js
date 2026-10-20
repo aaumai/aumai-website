@@ -21,6 +21,14 @@ const HERO_VIDEO = {
   description: 'How Aumy works across a dental clinic: Convert follows up new enquiries, Chat answers WhatsApp, Voice answers calls, Clinic runs the chair-side records and billing, and Journey brings patients back — sold separately or together as Aumy One.',
 };
 
+// The full Aumy demo film (owner 2026-10-20), on YouTube; shown on the home page under the hero and leads /demos.
+const FULL_DEMO = {
+  youtubeId: '0LE0iwNvcZQ',
+  tag: 'Full demo · 9 min',
+  title: 'Watch Aumy run a dental clinic, start to finish',
+  blurb: 'Every enquiry answered on WhatsApp and phone, appointments confirmed and reminded, missed visits rebooked, advised treatment started, lab cases and unfinished treatment tracked, patients brought back, and a weekly report of what is working.',
+};
+
 const VIDEOS = [
   {
     moduleId: 'ai-voice-receptionist-for-dentists',
@@ -62,5 +70,5 @@ const VIDEOS = [
 
 const UPLOAD_DATE = '2026-10-12';
 
-module.exports = { TITLE, SUB, HERO_VIDEO, VIDEOS, UPLOAD_DATE };
+module.exports = { FULL_DEMO, TITLE, SUB, HERO_VIDEO, VIDEOS, UPLOAD_DATE };
 module.exports.default = module.exports;
