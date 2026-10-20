@@ -6,7 +6,7 @@ import ClinicsServed from '../components/ClinicsServed';
 import HomeModules from '../components/HomeModules';
 import HomeExplainers from '../components/HomeExplainers';
 import HomeFullDemo from '../components/HomeFullDemo';
-import { HERO_VIDEO } from '../data/explainers';
+import HeroVideo from '../components/HeroVideo';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
 import { HERO_PRODUCTS, HOME_EXPLORE } from '../data/positioning';
@@ -95,11 +95,7 @@ const Home = () => {
 
           {/* Owner 2026-10-12: the loop is retired; the whole-Aumy film plays here. Words: src/data/explainers.js. */}
           <div className="lux-hero-loop">
-            <figure className="ch-hero-film">
-              <video controls preload="none" playsInline poster={HERO_VIDEO.poster} aria-label={`${HERO_VIDEO.name} explainer video`}>
-                <source src={HERO_VIDEO.src} type="video/mp4" />
-              </video>
-            </figure>
+            <HeroVideo />
           </div>
         </div>
       </section>
