@@ -19,7 +19,8 @@ const MC_REFUND = require('./masterclassRefund');
 const TITLE = 'The Full Chair Method';
 // Shown until the backend's /price answers; must match MASTERCLASS_PRICE_PAISE on the site backend.
 const PRICE_LABEL = '₹599';
-const ACCESS_DAYS = 30; // MASTERCLASS_ACCESS_DAYS default on the site backend
+// Lifetime access for every member (owner 2026-10-20); the site backend never ends it on a date.
+const ACCESS = 'Lifetime access';
 
 const PATHS = { info: '/masterclass', register: '/masterclass/register', signIn: '/masterclass/sign-in', my: '/masterclass/my' };
 
@@ -40,7 +41,7 @@ const HERO = {
   who: 'For dental and skin clinic owners, and the manager or front-desk lead who will run it with you.',
   facts: [
     { b: 'About 2 hours', t: 'watch any time' },
-    { b: `${ACCESS_DAYS} days`, t: 'to watch, as often as you like' },
+    { b: ACCESS, t: 'watch as often as you like' },
     { b: '12 workbooks', t: 'plus a Claude skill file' },
     { b: PRICE_LABEL, t: 'one payment' },
   ],
@@ -170,7 +171,7 @@ const WAYS = {
 const KIT = {
   title: 'What you get',
   items: [
-    { h: 'The masterclass video', t: `About 2 hours. Watch it in one sitting or a stage at a time, as often as you like for ${ACCESS_DAYS} days.` },
+    { h: 'The masterclass video', t: `About 2 hours. Watch it in one sitting or a stage at a time, as often as you like. Your access never ends.` },
     { h: '12 ready-made workbooks', t: 'One for every system and foundation, plus the Owner Weekly Scorecard. They open in Excel or Google Sheets, with dropdowns built in, the messages ready to copy, Claude prompts, and a “This week” tab that scores the KPI. Sample rows show you how to fill them.' },
     { h: 'The Owner Weekly Scorecard', t: 'One owner and one KPI per system, this week against last week, in green, orange or red. Your 15 minutes every Monday.' },
     { h: 'The Claude skill file', t: 'Every framework, question bank and message script from the masterclass, so Claude writes your patient messages, call scripts and weekly KPI report from your own sheets. With a short guide: five prompts to try first.' },
@@ -218,8 +219,8 @@ const TRAINER = {
 };
 
 const FAQS = [
-  { q: 'When can I watch it?', a: `Any time. It runs about 2 hours, so you can watch when it suits you, pause for each “Build it now”, and watch again any time in your ${ACCESS_DAYS} days.` },
-  { q: 'How long do I have access?', a: `${ACCESS_DAYS} days from your start date, which you see before you pay. Download the workbooks, the skill file and the worksheet in that time; the files are yours to keep.` },
+  { q: 'When can I watch it?', a: `Any time. It runs about 2 hours, so you can watch when it suits you, pause for each “Build it now”, and watch again any time: you have lifetime access.` },
+  { q: 'How long do I have access?', a: 'For life. Your access starts on the date you see before you pay and has no end date. Watch the video again whenever you like; the workbooks, the skill file and the worksheet are yours to keep.' },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
   { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples and workbook lists come from dental clinics, and the eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
   { q: 'Do I need Aumy or any other software?', a: 'No. The workbooks open in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
@@ -239,7 +240,7 @@ const FINAL = {
 const REGISTER = {
   lead: 'The 4C Framework: Convert, Confirm, Care, Come back. Eight systems on three foundations that bring back the patients you already have.',
   points: [
-    `A masterclass of about 2 hours, to watch for ${ACCESS_DAYS} days.`,
+    'A masterclass of about 2 hours, with lifetime access.',
     'After every system, 2 minutes to set it up in your own clinic.',
     '12 ready-made workbooks, the Claude skill file, the Leak Calculator and a bonus Google video.',
     `24×7 Q&A on WhatsApp: ${WHATSAPP.display}.`,
@@ -252,6 +253,6 @@ const REGISTER_SEO_DESCRIPTION =
 const MEMBER_HELP = `Stuck while setting up a system? Ask us 24×7 on WhatsApp: ${WHATSAPP.display}`;
 
 module.exports = {
-  TITLE, PRICE_LABEL, ACCESS_DAYS, PATHS, WHATSAPP, SEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, MEMBER_HELP,
+  TITLE, PRICE_LABEL, ACCESS, PATHS, WHATSAPP, SEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, MEMBER_HELP,
 };
 module.exports.default = module.exports;
