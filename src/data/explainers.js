@@ -11,14 +11,18 @@ const TITLE = 'See each module in under two minutes';
 const SUB = 'A real clinic day, before and after Aumy. Sound on.';
 
 // The whole-Aumy film plays in the home hero (owner 2026-10-12: the Aumy loop is retired, this film replaces it).
+// Home hero (owner 2026-10-20: "make this hero in our marketing website"): the whole Sterling team on Aumy,
+// upright (9:16). Was the whole-Aumy explainer (aumy-explainer.mp4), which still serves the BM day-3 nurture history.
 const HERO_VIDEO = {
   moduleId: 'automate-dental-clinic-operations',
-  name: 'Aumy',
-  line: 'One system for the whole patient journey — buy only what you need.',
-  src: '/videos/explainers/aumy-explainer.mp4',
-  poster: '/videos/explainers/aumy-explainer.jpg',
-  duration: 'PT1M27S',
-  description: 'How Aumy works across a dental clinic: Convert follows up new enquiries, Chat answers WhatsApp, Voice answers calls, Clinic runs the chair-side records and billing, and Journey brings patients back — sold separately or together as Aumy One.',
+  name: 'The Sterling Dental Clinic',
+  line: '26 years in Delhi. Their whole team on what changed with Aumy.',
+  src: '/videos/testimonials/sterling-testimonial.mp4',
+  poster: '/videos/testimonials/sterling-testimonial.jpg',
+  duration: 'PT2M11S',
+  vertical: true,
+  youtube: 'https://youtube.com/shorts/OVR7LEnd96k',
+  description: 'The Sterling Dental Clinic, Delhi (26 years): the founder, the doctor, the CRM and the MIS on moving to Aumy. Almost half of appointments confirmed by patients on WhatsApp in the first two weeks, no more Google Sheets, and everything the doctor needs on one screen.',
 };
 
 // The full Aumy demo film (owner 2026-10-20), on YouTube; shown on the home page under the hero and leads /demos.

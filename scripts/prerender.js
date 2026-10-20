@@ -577,7 +577,7 @@ const routes = [
         <ul>
           ${POS.HERO_PRODUCTS.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.name)}</strong></a> ${esc(p.outcome)}</li>`).join('\n          ')}
         </ul>
-        <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} explained</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
+        <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
         <p><a href="/#get-the-app">Start free in the app</a> · <a href="/contact">Get started — risk-free</a> · <a href="/#be-the-patient">Try it live — WhatsApp or call our demo clinic</a></p>
         <p>1,000 free Aumy credits per product · cancel any time · NVIDIA Inception member</p>
       </div></section>
