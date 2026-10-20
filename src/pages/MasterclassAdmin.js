@@ -14,15 +14,13 @@ const readKey = () => { try { return localStorage.getItem(KEY_STORE) || ''; } ca
 const saveKey = (k) => { try { if (k) localStorage.setItem(KEY_STORE, k); else localStorage.removeItem(KEY_STORE); } catch (e) { /* ignore */ } };
 
 const istToday = () => new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
-const addDays = (d, n) => new Date(Date.parse(`${d}T00:00:00Z`) + n * 86400000).toISOString().slice(0, 10);
-const dateLabel = (d) => (d ? new Date(`${d}T00:00:00Z`).toLocaleDateString('en-IN', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' }) : '');
 const formatIST = (utc) => {
   if (!utc) return '';
   return new Date(`${String(utc).replace(' ', 'T')}Z`).toLocaleString('en-IN', {
     timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true,
   });
 };
-const STATE_LABEL = { ok: 'Active', ended: 'Ended', revoked: 'Closed' };
+const STATE_LABEL = { ok: 'Active', ended: 'Ended', revoked: 'Closed' }; // 'ended' no longer happens: access is lifetime (owner 2026-10-20)
 const welcomeWords = (s) => (s === 'sent' ? 'Welcome email sent.' : s === 'simulated' ? 'Email NOT sent: the server has no email account set up.' : s === 'failed' ? 'The welcome email failed. Use Resend on their row.' : '');
 const blankForm = () => ({ name: '', email: '', whatsapp: '', starts_on: istToday(), send_welcome: true });
 
@@ -40,7 +38,6 @@ export default function MasterclassAdmin() {
   const [pasteStart, setPasteStart] = useState(istToday);
   const [pasteWelcome, setPasteWelcome] = useState(true);
   const [preview, setPreview] = useState(null);
-  const [editing, setEditing] = useState(null); // { id, date }
   const [video, setVideo] = useState({ type: 'none', url: '', key: '' });
   const [sess, setSess] = useState({ qa_at: '', qa_link: '', video_by: '' });
   const [sessMsg, setSessMsg] = useState('');
@@ -134,7 +131,7 @@ export default function MasterclassAdmin() {
   const addOne = (e) => {
     e.preventDefault();
     act('/members', form, (j) => {
-      setFlash(`Added ${form.name} (access until ${dateLabel(addDays(form.starts_on, data.access_days))}). ${form.send_welcome ? welcomeWords(j.welcome) : 'No email sent.'}`);
+      setFlash(`Added ${form.name} (lifetime access). ${form.send_welcome ? welcomeWords(j.welcome) : 'No email sent.'}`);
       setForm(blankForm());
     });
   };
@@ -165,8 +162,6 @@ export default function MasterclassAdmin() {
     });
   };
   const resend = (m) => { if (window.confirm(`Email the sign-in details to ${m.email} again?`)) act(`/members/${m.id}/resend`, {}, (j) => setFlash(`${m.name}: ${welcomeWords(j.welcome)}`)); };
-  const extend = (m) => act(`/members/${m.id}/extend`, { days: 30 }, (j) => setFlash(`${m.name} now has access until ${dateLabel(j.access_until)}.`));
-  const setEnd = (m) => act(`/members/${m.id}/extend`, { access_until: editing.date }, (j) => { setEditing(null); setFlash(`${m.name} now has access until ${dateLabel(j.access_until)}.`); });
 
   const files = data.files || [];
   const signedIn = members.filter((m) => m.last_login_at).length;
@@ -213,7 +208,7 @@ export default function MasterclassAdmin() {
               <label>WhatsApp (optional)<input type="tel" value={form.whatsapp} onChange={(e) => setForm({ ...form, whatsapp: e.target.value })} placeholder="98765 43210" /></label>
               <label>Access starts<input type="date" value={form.starts_on} onChange={(e) => setForm({ ...form, starts_on: e.target.value })} required /></label>
             </div>
-            <p className="mc-small" style={{ margin: 0 }}>Access until {dateLabel(addDays(form.starts_on || istToday(), data.access_days))} ({data.access_days} days after the start).</p>
+            <p className="mc-small" style={{ margin: 0 }}>Access: lifetime (no end date).</p>
             <label className="sc-consent"><input type="checkbox" checked={form.send_welcome} onChange={(e) => setForm({ ...form, send_welcome: e.target.checked })} /> Email them how to sign in now</label>
             <button type="submit" className="sc-btn" disabled={busy}>{form.send_welcome ? 'Add and send the email' : 'Add member'}</button>
           </form>
@@ -288,7 +283,7 @@ export default function MasterclassAdmin() {
             <p style={{ padding: 20, margin: 0 }}>{members.length ? 'No members match. Change the search or press All.' : 'No members yet. Add the first one above.'}</p>
           ) : (
             <table className="sc-table" style={{ minWidth: 1100 }}>
-              <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Access</th><th>Until</th><th>Days left</th><th>Last sign-in</th><th>Downloads</th><th>Welcome email</th><th>Actions</th></tr></thead>
+              <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Access</th><th>Until</th><th>Last sign-in</th><th>Downloads</th><th>Welcome email</th><th>Actions</th></tr></thead>
               <tbody>
                 {rows.map((m) => (
                   <tr key={m.id}>
@@ -304,23 +299,12 @@ export default function MasterclassAdmin() {
                     </td>
                     <td style={{ whiteSpace: 'nowrap' }}>{m.whatsapp || ''}</td>
                     <td><span className={`mc-state mc-state-${m.state}`}>{STATE_LABEL[m.state]}</span></td>
-                    <td style={{ whiteSpace: 'nowrap' }}>
-                      {editing && editing.id === m.id ? (
-                        <span className="mc-actions">
-                          <input type="date" value={editing.date} min={m.starts_on} onChange={(e) => setEditing({ id: m.id, date: e.target.value })} aria-label="New end date" />
-                          <button type="button" onClick={() => setEnd(m)} disabled={busy}>Save</button>
-                          <button type="button" onClick={() => setEditing(null)}>Cancel</button>
-                        </span>
-                      ) : dateLabel(m.access_until)}
-                    </td>
-                    <td className="sc-num">{m.state === 'ok' ? m.days_left : '–'}</td>
+                    <td style={{ whiteSpace: 'nowrap' }}>Lifetime</td>
                     <td style={{ whiteSpace: 'nowrap' }}>{m.last_login_at ? formatIST(m.last_login_at) : <span className="mc-small">never</span>}</td>
                     <td className="sc-num">{m.downloads}</td>
                     <td style={{ whiteSpace: 'nowrap' }}>{m.welcome_sent_at ? `${m.welcome_status === 'sent' ? 'Sent' : m.welcome_status === 'simulated' ? 'Not sent (no email set up)' : 'Failed'} ${formatIST(m.welcome_sent_at)}` : <span className="mc-small">not sent</span>}</td>
                     <td>
                       <div className="mc-actions">
-                        <button type="button" onClick={() => extend(m)} disabled={busy}>+30 days</button>
-                        <button type="button" onClick={() => setEditing({ id: m.id, date: m.access_until })} disabled={busy}>Change end date</button>
                         <button type="button" onClick={() => resend(m)} disabled={busy || m.state !== 'ok'}>Resend email</button>
                         <button type="button" onClick={() => setEditingEmail({ id: m.id, email: m.email })} disabled={busy}>Change email</button>
                         {m.state === 'revoked'
@@ -334,7 +318,7 @@ export default function MasterclassAdmin() {
             </table>
           )}
         </div>
-        <p className="sc-hint">Members sign in at aumai.co.in/masterclass with a code sent to their email. Access runs to the end of the “Until” day, India time. “+30 days” counts from the current end date, or from today if access has already ended.</p>
+        <p className="sc-hint">Members sign in at aumai.co.in/masterclass with a code sent to their email. Access is lifetime: it ends only if you press Close access.</p>
         </>)}
       </div>
     </div>

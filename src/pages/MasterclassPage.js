@@ -9,7 +9,7 @@ import './MasterclassPage.css';
 
 // Masterclass members area (owner 2026-10-18): attendees of The Full Chair Method
 // sign in with a 6-digit email code (no password), then watch the video and
-// download the workbooks for one month. Accounts are created by us at
+// download the workbooks, with lifetime access (owner 2026-10-20). Accounts are created by us at
 // /masterclass-admin. Private: noindex, and nothing here is in the prerendered HTML.
 // The session is an HttpOnly cookie set by site-api.aumai.co.in (same site).
 
@@ -54,7 +54,6 @@ const badge = (f) => {
 };
 // The worksheet first (it is printed before the session starts), then the skill file, then its guide.
 const EXTRA_ORDER = { worksheet: 0, skill: 1, guide: 2, file: 3 };
-const daysText = (n) => (n <= 0 ? 'today is your last day' : n === 1 ? '1 day left' : `${n} days left`);
 
 export default function MasterclassPage() {
   const navigate = useNavigate();
@@ -203,7 +202,7 @@ export default function MasterclassPage() {
               <button type="button" className="sc-link" onClick={signOut}>Sign out</button>
             </div>
             <h1>Welcome, {me.display_name}</h1>
-            <p className="mc-access">Your access is open until <b>{me.access_until_label}</b> ({daysText(me.days_left)}).</p>
+            <p className="mc-access">You have <b>lifetime access</b>: come back any time.</p>
             {location.state?.justPaid && (
               <p className="mc-sent" role="status">Payment received, thank you. We emailed sign-in steps to <b>{me.email}</b>. Wrong address? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
             )}
@@ -283,8 +282,8 @@ export default function MasterclassPage() {
         <div className="sc-wrap mc-narrow mc-hero">
           <div className="sc-form mc-ended" role="alert">
             <p className="sc-eyebrow">The Full Chair Method · Masterclass</p>
-            <h2>Your access has ended</h2>
-            <p>{notice || `Your masterclass access has ended. Write to us at ${contact}.`}</p>
+            <h2>Your access is closed</h2>
+            <p>{notice || `Your masterclass access is closed. Write to us at ${contact}.`}</p>
             <Link className="sc-btn mc-btn-wide" to="/masterclass/register" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>Join again</Link>
             <a className="sc-btn sc-btn-ghost mc-btn-wide" href={`mailto:${contact}?subject=${encodeURIComponent('Masterclass access')}`} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>Write to us</a>
             <button type="button" className="sc-link" onClick={signOut}>Sign in with a different email</button>

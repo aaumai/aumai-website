@@ -53,10 +53,9 @@ async function post(path, body) {
 
 export default function MasterclassRegister() {
   const navigate = useNavigate();
-  const [price, setPrice] = useState(null); // { open, label, access_days, starts_on, starts_on_label, message }
+  const [price, setPrice] = useState(null); // { open, label, lifetime, starts_on, starts_on_label, message }
   const [priceError, setPriceError] = useState('');
   const [have, setHave] = useState(null);   // already signed in: /me
-  const [addMonth, setAddMonth] = useState(false);
   const [f, setF] = useState(() => ({ ...EMPTY, ...(readJson('session', FORM_STORE) || {}), agree: false }));
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
@@ -194,16 +193,16 @@ export default function MasterclassRegister() {
               </div>
             )}
 
-            {open && have && !addMonth && (
+            {/* Lifetime access (owner 2026-10-20): a member has nothing more to buy, so no "Add a month". */}
+            {open && have && (
               <div className="sc-form" role="status">
                 <h2>You already have access</h2>
-                <p>You already have access until <b>{have.access_until_label}</b>. Open it, or add a month.</p>
+                <p>You already have <b>lifetime access</b>. Open your masterclass any time.</p>
                 <Link className="sc-btn mc-btn-wide" to="/masterclass/my" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>Open my masterclass</Link>
-                <button type="button" className="sc-btn sc-btn-ghost mc-btn-wide" onClick={() => { setAddMonth(true); setF((x) => ({ ...x, email: x.email || have.email, name: x.name || have.name })); }}>Add a month</button>
               </div>
             )}
 
-            {open && (!have || addMonth) && (
+            {open && !have && (
               <form className="sc-form" onSubmit={pay} noValidate>
                 <div className="sc-fields" style={{ gridTemplateColumns: '1fr' }}>
                   <label>Your name<input className="mc-input" value={f.name} onChange={set('name')} placeholder="Dr Meera Joshi" autoComplete="name" required /></label>
