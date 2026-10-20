@@ -68,7 +68,29 @@ export default function MasterclassPage() {
   const [busy, setBusy] = useState(false);
   const [wait, setWait] = useState(0);
   const videoRetried = useRef(false);
+  const [packError, setPackError] = useState('');
   const contact = INDIA_OFFICE.email;
+
+  // The Prompt Pack opens in a new tab (owner 2026-10-20), members only: the tab is
+  // opened on the tap itself (so no pop-up blocker), then filled with the pack fetched
+  // through the signed-in files route. Nothing is public. Pop-ups blocked → the link downloads it.
+  const openPack = async (e, f) => {
+    e.preventDefault();
+    setPackError('');
+    const w = window.open('', '_blank');
+    if (!w) { window.location.href = fileUrl(f); return; }
+    try { w.document.title = 'Prompt Pack'; w.document.body.textContent = 'Opening your Prompt Pack…'; } catch (err) { /* fine */ }
+    try {
+      const r = await fetch(fileUrl(f), { credentials: 'include', headers: { Accept: 'application/octet-stream' } });
+      if (!r.ok) throw new Error(String(r.status));
+      const blob = new Blob([await r.arrayBuffer()], { type: 'text/html;charset=utf-8' });
+      w.opener = null;
+      w.location.href = URL.createObjectURL(blob);
+    } catch (err) {
+      w.close();
+      setPackError('We could not open the Prompt Pack. Refresh this page and try again, or use Download PDF.');
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -194,10 +216,11 @@ export default function MasterclassPage() {
               <h2 id="mc-pack-h">Your Prompt Pack</h2>
               <p>Every prompt from the masterclass, grouped by system. Copy, paste into Claude, done.</p>
               <div className="mc-all">
-                {packHtml && <a className="sc-btn" href={fileUrl(packHtml)}>Open Prompt Pack (with Copy buttons)</a>}
+                {packHtml && <a className="sc-btn" href={fileUrl(packHtml)} onClick={(e) => openPack(e, packHtml)}>Open Prompt Pack (with Copy buttons)</a>}
                 {packPdf && <a className="sc-btn sc-btn-ghost" href={fileUrl(packPdf)}>Download PDF</a>}
               </div>
-              {packHtml && <p className="mc-help">The Prompt Pack saves to your Downloads. Tap it to open it in your browser; it works without internet too.</p>}
+              {packHtml && <p className="mc-help">Opens in a new tab. Tap Copy next to any prompt and paste it into Claude.</p>}
+              {packError && <p className="sc-error" role="alert">{packError}</p>}
             </section>
           )}
 
