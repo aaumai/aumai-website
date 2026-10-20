@@ -44,6 +44,8 @@ const sysClass = (n) => (n >= 1 && n <= SYSTEMS.length ? `sc-${C_COLORS[SYSTEMS[
 // kind comes from the backend (workbook | worksheet | skill | guide | file); the extension is the fallback.
 const kindOf = (f) => f.kind || (/.(xlsx|xls|csv)$/i.test(f.name) ? 'workbook' : 'file');
 const isWorkbook = (f) => /.xlsx$/i.test(f.name);
+const isPromptPack = (f) => /Prompt-Pack/i.test(f.name);
+const fileUrl = (f) => `${API}/files/${encodeURIComponent(f.name)}`;
 const KIND_BADGE = { worksheet: 'Worksheet', skill: 'Skill file', guide: 'Guide', file: 'File' };
 const badge = (f) => {
   const k = kindOf(f);
@@ -157,14 +159,17 @@ export default function MasterclassPage() {
   if (stage === 'member' && me) {
     const files = me.files || [];
     const workbooks = files.filter(isWorkbook);
-    const extras = files.filter((f) => !isWorkbook(f)).sort((a, b) => (EXTRA_ORDER[kindOf(a)] ?? 9) - (EXTRA_ORDER[kindOf(b)] ?? 9));
+    // The Prompt Pack (owner 2026-10-20) gets its own card at the top, so it is not repeated below.
+    const packHtml = files.find((f) => isPromptPack(f) && /\.html$/i.test(f.name));
+    const packPdf = files.find((f) => isPromptPack(f) && /\.pdf$/i.test(f.name));
+    const extras = files.filter((f) => !isWorkbook(f) && !isPromptPack(f)).sort((a, b) => (EXTRA_ORDER[kindOf(a)] ?? 9) - (EXTRA_ORDER[kindOf(b)] ?? 9));
     const fileCard = (f) => (
       <li key={f.name} className={`mc-file ${sysClass(f.system)}`}>
         <span className="mc-badge">{badge(f)}</span>
         <h3>{f.title}</h3>
         {f.about && <p>{f.about}</p>}
         {kindOf(f) === 'skill' && <p className="mc-file-how">Upload it in claude.ai → Settings → Capabilities → Skills.</p>}
-        <a className="sc-btn" href={`${API}/files/${encodeURIComponent(f.name)}`}>Download</a>
+        <a className="sc-btn" href={fileUrl(f)}>Download</a>
       </li>
     );
     return (
@@ -184,6 +189,18 @@ export default function MasterclassPage() {
         </section>
 
         <div className="sc-wrap">
+          {(packHtml || packPdf) && (
+            <section className="mc-section mc-pack" aria-labelledby="mc-pack-h">
+              <h2 id="mc-pack-h">Your Prompt Pack</h2>
+              <p>Every prompt from the masterclass, grouped by system. Copy, paste into Claude, done.</p>
+              <div className="mc-all">
+                {packHtml && <a className="sc-btn" href={fileUrl(packHtml)}>Open Prompt Pack (with Copy buttons)</a>}
+                {packPdf && <a className="sc-btn sc-btn-ghost" href={fileUrl(packPdf)}>Download PDF</a>}
+              </div>
+              {packHtml && <p className="mc-help">The Prompt Pack saves to your Downloads. Tap it to open it in your browser; it works without internet too.</p>}
+            </section>
+          )}
+
           {/* No live Q&A (owner 2026-10-19): questions go to WhatsApp, any time. */}
           <p className="mc-sent mc-wa" style={{ marginTop: 20 }}>
             {MC.MEMBER_HELP.replace(MC.WHATSAPP.display, '')}
