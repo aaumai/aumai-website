@@ -15,14 +15,22 @@ const VIDEOS = [
   // Revenue + patient-journey demos only (owner directive 2026-08-23): the
   // clinical clips (documentation, smile simulation, charting) are deliberately
   // NOT here — we are known for coordinating the patient journey.
-  // The hero demo leads everywhere (site, deck, AI employee).
+  // The hero demo leads everywhere (site, deck, AI employee). Since 2026-10-20 that is the
+  // full Aumy demo film (owner: "main demo video").
+  {
+    id: '0LE0iwNvcZQ',
+    tag: 'Full demo · 9 min',
+    title: 'Watch Aumy run a dental clinic, start to finish.',
+    blurb:
+      'Every enquiry answered on WhatsApp and phone, bookings confirmed and reminded, missed visits rebooked, advised treatment started, lab cases and unfinished treatment tracked, patients brought back, and a weekly report of what is working.',
+    featured: true,
+  },
   {
     id: '-qw1sp7Ub4k',
     tag: 'The patient journey',
     title: 'One patient. One journey. One connected system.',
     blurb:
       'Live and unedited on a real clinic’s WhatsApp number: a lead who says “let me think about it”, day-one aftercare, the care-gap follow-up, an eight-month-dormant patient won back with a ₹999 package, and the review ask that listens first.',
-    featured: true,
   },
   {
     id: 'ggKaTSgI1RY',

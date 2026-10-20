@@ -304,6 +304,24 @@ const demoVideoLd = {
   },
 };
 
+// Main demo video since 2026-10-20: the full Aumy demo film (leads /demos).
+const filmVideoLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'Aumy full demo: the AI front desk that fills dental chairs (WhatsApp + calls, 24x7)',
+  description:
+    'A 9-minute walkthrough of Aumy on a demo dental clinic: every WhatsApp enquiry and call answered, bookings confirmed and reminded, missed visits rebooked, advised treatment moved to accepted, lab cases and unfinished treatment tracked, patients brought back, and a weekly report for the owner.',
+  thumbnailUrl: 'https://i.ytimg.com/vi/0LE0iwNvcZQ/maxresdefault.jpg',
+  embedUrl: 'https://www.youtube.com/embed/0LE0iwNvcZQ',
+  contentUrl: 'https://www.youtube.com/watch?v=0LE0iwNvcZQ',
+  uploadDate: '2026-10-20',
+  publisher: {
+    '@type': 'Organization',
+    name: 'AUM AI',
+    logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` },
+  },
+};
+
 // Module explainer videos on the home page (owner 2026-10-12) — src/data/explainers.js.
 const explainerVideoLd = [EXPL.HERO_VIDEO, ...EXPL.VIDEOS].map((v) => ({
   '@context': 'https://schema.org',
@@ -902,12 +920,12 @@ const routes = [
     description:
       'Short, unedited demos of Aumy running a dental clinic: answering WhatsApp, booking and rescheduling, after-care, care-gap follow-ups and campaigns — the AI-powered patient journey, live.',
     canonical: `${ORIGIN}/demos`,
-    jsonld: [orgLd],
+    jsonld: [orgLd, filmVideoLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">See it, don't take our word for it</p>
         <h1 class="ch-hero-title">Watch Aumy run a clinic — live, unscripted</h1>
-        <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Prefer to feel it? WhatsApp our live demo clinic on +91 90223 12554 as if you were a patient.</p>
+        <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Start with the full 9-minute demo: <a href="https://www.youtube.com/watch?v=0LE0iwNvcZQ">watch Aumy run a dental clinic, start to finish</a>. Prefer to feel it? WhatsApp our live demo clinic on +91 90223 12554 as if you were a patient.</p>
         <p><a href="/modules/automate-dental-clinic-operations">Aumy One</a> · <a href="/modules/dental-patient-follow-up">Aumy Journey</a></p>
       </div></section>`,
   },
