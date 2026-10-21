@@ -250,8 +250,10 @@ const REGISTER_SEO_DESCRIPTION =
   'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, 8 systems and 3 foundations, a 2-hour video, the Clinic Master Sheet and the Claude skill file.';
 
 // The Clinic Master Sheet card on the members page (owner 2026-10-21: one sheet
-// replaces the 12 workbooks). The Google Sheets time-zone step is required: without
-// it the Today tab shows yesterday's date until about noon IST.
+// replaces the 12 workbooks). The Google Sheets settings step is required: without the
+// time zone the Today tab shows yesterday's date until about noon IST; without the
+// United Kingdom locale dates read month-first (owner 2026-10-21: UK, not India, whose
+// locale shows Hindi month names).
 const MASTER_SHEET = {
   title: 'Your Clinic Master Sheet',
   short: 'One Clinic Master Sheet for the whole clinic: a tab for every system, today’s to-do list and your weekly scorecard.',
@@ -260,7 +262,7 @@ const MASTER_SHEET = {
   steps: [
     'Upload it to Google Drive (drive.google.com › New › File upload), then open it.',
     'Click File › Save as Google Sheets, and work in that new copy.',
-    'Click File › Settings › Time zone › (GMT+05:30) Kolkata › Save settings. Skip this and the Today tab shows yesterday’s date until about noon.',
+    'Click File › Settings › Locale: United Kingdom, Time zone: (GMT+05:30) Kolkata › Save settings. This makes dates read day-first, like 20/10/2026, with English month names. Skip it and the Today tab shows yesterday’s date until about noon.',
   ],
   then: 'Then fill the yellow cells on the Start here tab.',
   soon: 'The Clinic Master Sheet will appear here soon. Please check again later today.',
