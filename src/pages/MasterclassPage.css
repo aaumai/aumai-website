@@ -60,3 +60,5 @@
 .mc-section.mc-pack { margin-top: 24px; padding: 20px; background: var(--sc-card); border: 1px solid var(--sc-line); border-left: 6px solid var(--sc-accent); border-radius: 14px; gap: 12px }
 .mc-pack h2 { margin: 0 }
 .mc-pack > p:not(.mc-help) { margin: 0; font-size: 17px; line-height: 1.5; color: var(--sc-ink) }
+/* The Clinic Master Sheet card (owner 2026-10-21): three numbered Google Sheets steps. */
+.mc-steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.5; color: var(--sc-ink) }

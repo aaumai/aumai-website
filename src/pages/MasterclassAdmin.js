@@ -266,7 +266,7 @@ export default function MasterclassAdmin() {
           {videoMsg && <p className="mc-ok" role="status">{videoMsg}</p>}
           <button type="submit" className="sc-btn" disabled={busy} style={{ alignSelf: 'flex-start' }}>Save video</button>
           {files.length > 0 && <p className="mc-small" style={{ margin: 0 }}>Files on the server: {files.map((f) => f.name).join(' · ')}</p>}
-          {files.length === 0 && <p className="sc-error" style={{ margin: 0 }}>No workbooks on the server yet. Members see “The workbooks will appear here soon”.</p>}
+          {files.length === 0 && <p className="sc-error" style={{ margin: 0 }}>No files on the server yet. Members see “The Clinic Master Sheet will appear here soon”.</p>}
         </form>
 
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>

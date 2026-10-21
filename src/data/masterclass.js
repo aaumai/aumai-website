@@ -30,7 +30,7 @@ const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868' };
 const SEO = {
   title: 'The Full Chair Method masterclass for clinic owners | AUM AI',
   description:
-    'A 2-hour masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. 12 ready workbooks and a Claude skill file, ₹599.',
+    'A 2-hour masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. One Clinic Master Sheet and a Claude skill file, ₹599.',
 };
 
 const HERO = {
@@ -42,7 +42,7 @@ const HERO = {
   facts: [
     { b: 'About 2 hours', t: 'watch any time' },
     { b: ACCESS, t: 'watch as often as you like' },
-    { b: '12 workbooks', t: 'plus a Claude skill file' },
+    { b: 'One Clinic Master Sheet', t: 'plus a Claude skill file' },
     { b: PRICE_LABEL, t: 'one payment' },
   ],
   note: 'Not a theory session. After every system you pause for two minutes and set it up for your own clinic.',
@@ -153,8 +153,8 @@ const WAYS = {
   title: 'Every system, three ways. You choose.',
   intro: 'After each system you see three ways to run it, side by side. Pick the one your clinic will actually keep doing.',
   items: [
-    { h: 'By hand', t: 'With its workbook, a phone and your receptionist. It works, and you see exactly what it takes.' },
-    { h: 'With Claude', t: 'Attach the workbook in claude.ai and Claude writes the patient messages, call scripts and your weekly KPI report. Two honest limits: someone still sends every message, and Claude only knows what is in the sheet.' },
+    { h: 'By hand', t: 'With the Clinic Master Sheet, a phone and your receptionist. The sheet shows who is due today; you send and call. It works, and you see exactly what it takes.' },
+    { h: 'With Claude', t: 'Connect the Clinic Master Sheet to claude.ai through Google Drive, and Claude reads today’s Due tabs and writes the patient messages, click-to-send WhatsApp links and your weekly KPI report. Two honest limits: someone still sends every message, and Claude only knows what is in the sheet.' },
     { h: 'Running on its own', t: 'The same system inside clinic software, shown on a demo clinic with our own software, Aumy. Shown, not sold: there is no offer in the masterclass.' },
   ],
   noSoftware: 'You don’t need to buy any software. The first two ways need only Excel or Google Sheets, and a Claude account if you want Claude’s help.',
@@ -172,12 +172,12 @@ const KIT = {
   title: 'What you get',
   items: [
     { h: 'The masterclass video', t: `About 2 hours. Watch it in one sitting or a stage at a time, as often as you like. Your access never ends.` },
-    { h: '12 ready-made workbooks', t: 'One for every system and foundation, plus the Owner Weekly Scorecard. They open in Excel or Google Sheets, with dropdowns built in, the messages ready to copy, Claude prompts, and a “This week” tab that scores the KPI. Sample rows show you how to fill them.' },
-    { h: 'The Owner Weekly Scorecard', t: 'One owner and one KPI per system, this week against last week, in green, orange or red. Your 15 minutes every Monday.' },
+    { h: 'The Clinic Master Sheet', t: 'Type each patient and visit once, and the sheet works out who is due for what today. A tab for every system and foundation, the Today list, the weekly Scorecard, and every rule and message we use, in English, Hindi and Marathi. Opens in Excel or Google Sheets.' },
+    { h: 'The weekly Scorecard', t: 'A tab in the Clinic Master Sheet: one owner and one KPI per system, week by week, in green, orange or red, with the list of what was missed last week. Your 15 minutes every Monday.' },
     { h: 'The Claude skill file', t: 'Every framework, question bank and message script from the masterclass, so Claude writes your patient messages, call scripts and weekly KPI report from your own sheets. With a short guide: five prompts to try first.' },
     { h: 'Message scripts in English, Hindi and Marathi', t: 'In the skill file: every follow-up message, the question banks for implants, aligners, root canal with crown and smile makeover, the missed-call script, and the doctor’s check-ins by procedure.' },
     { h: 'The Clinic Leak Calculator', t: 'A printable worksheet you fill in as you watch: your monthly leak in rupees on the front, the Monday scorecard on the back.' },
-    { h: '24×7 Q&A on WhatsApp: 80071 89868', t: 'Ask any question about the method, the workbooks or the Claude skill, any time.', wa: true },
+    { h: '24×7 Q&A on WhatsApp: 80071 89868', t: 'Ask any question about the method, the Clinic Master Sheet or the Claude skill, any time.', wa: true },
     { h: 'Bonus video: get found on Google', t: 'About 7 minutes: asking every patient for a Google review the right way, what to post on your Google profile and website each week, and how to reply to every review.' },
   ],
 };
@@ -188,7 +188,7 @@ const EXPECT = {
     { h: 'What you need', t: 'A laptop or tablet to watch, Excel or Google Sheets, and the Leak Calculator printed (or any sheet of paper). Optional: a Claude account at claude.ai, to use the skill file.' },
     { h: 'Three numbers, from memory', t: 'Your average treatment value, how many appointments you book in a week, and how many new enquiries you get in a week. A best guess is fine.' },
     { h: 'Bring the person who will run it', t: 'Watch with your manager or front-desk lead. The front desk owns most systems; the doctor owns visit notes, advised treatment, the finish line and the check-ins.' },
-    { h: 'After the video', t: 'Start with your weakest C: one workbook, one owner, one week. Then add the next system, a week at a time.' },
+    { h: 'After the video', t: 'Start with your weakest C: one system, one owner, one week. Then add the next system, a week at a time.' },
   ],
 };
 
@@ -205,7 +205,7 @@ const FOR_WHO = {
     'You want clinical training. This is about everything around the chair.',
     'You want a software demo.',
   ],
-  skinNote: 'Running a skin clinic? The examples and workbook lists come from dental clinics. The eight systems work the same way for you: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.',
+  skinNote: 'Running a skin clinic? The examples come from dental clinics; set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. The eight systems work the same way for you: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.',
 };
 
 const TRAINER = {
@@ -220,14 +220,14 @@ const TRAINER = {
 
 const FAQS = [
   { q: 'When can I watch it?', a: `Any time. It runs about 2 hours, so you can watch when it suits you, pause for each “Build it now”, and watch again any time: you have lifetime access.` },
-  { q: 'How long do I have access?', a: 'For life. Your access starts on the date you see before you pay and has no end date. Watch the video again whenever you like; the workbooks, the skill file and the worksheet are yours to keep.' },
+  { q: 'How long do I have access?', a: 'For life. Your access starts on the date you see before you pay and has no end date. Watch the video again whenever you like; the Clinic Master Sheet, the skill file and the worksheet are yours to keep.' },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
-  { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples and workbook lists come from dental clinics, and the eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
-  { q: 'Do I need Aumy or any other software?', a: 'No. The workbooks open in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
-  { q: 'Do I need a Claude account?', a: 'Only if you want Claude’s help. Everything works by hand with the workbooks. With a Claude account at claude.ai, you upload the skill file and attach your workbooks, and Claude writes the messages, call scripts and weekly KPI report.' },
+  { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples come from dental clinics; set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. The eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
+  { q: 'Do I need Aumy or any other software?', a: 'No. The Clinic Master Sheet opens in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
+  { q: 'Do I need a Claude account?', a: 'Only if you want Claude’s help. Everything works by hand with the Clinic Master Sheet. With a Claude account at claude.ai, you upload the skill file and connect the sheet through Google Drive, and Claude writes the messages, call scripts and weekly KPI report.' },
   { q: 'How do I pay, and how do I sign in?', a: 'Pay by UPI, card or net banking through Razorpay. Your account is ready the moment the payment is confirmed, and we email you. Sign in with that email: we send a 6-digit code, and there is no password.' },
   { q: 'Can I get a refund?', a: `${MC_REFUND.RULES[0]} ${MC_REFUND.RULES[1]}` },
-  { q: 'Is there a Q&A?', a: `Yes, 24×7 on WhatsApp: ${WHATSAPP.display}. Ask anything about the method, the workbooks or setting up Claude.`, wa: true },
+  { q: 'Is there a Q&A?', a: `Yes, 24×7 on WhatsApp: ${WHATSAPP.display}. Ask anything about the method, the Clinic Master Sheet or setting up Claude.`, wa: true },
 ];
 
 const FINAL = {
@@ -242,17 +242,34 @@ const REGISTER = {
   points: [
     'A masterclass of about 2 hours, with lifetime access.',
     'After every system, 2 minutes to set it up in your own clinic.',
-    '12 ready-made workbooks, the Claude skill file, the Leak Calculator and a bonus Google video.',
+    'The Clinic Master Sheet, the Claude skill file, the Leak Calculator and a bonus Google video.',
     `24×7 Q&A on WhatsApp: ${WHATSAPP.display}.`,
   ],
 };
 const REGISTER_SEO_DESCRIPTION =
-  'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, 8 systems and 3 foundations, a 2-hour video, 12 workbooks and the Claude skill file.';
+  'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, 8 systems and 3 foundations, a 2-hour video, the Clinic Master Sheet and the Claude skill file.';
+
+// The Clinic Master Sheet card on the members page (owner 2026-10-21: one sheet
+// replaces the 12 workbooks). The Google Sheets time-zone step is required: without
+// it the Today tab shows yesterday's date until about noon IST.
+const MASTER_SHEET = {
+  title: 'Your Clinic Master Sheet',
+  short: 'One Clinic Master Sheet for the whole clinic: a tab for every system, today’s to-do list and your weekly scorecard.',
+  button: 'Download the Clinic Master Sheet',
+  excel: 'It opens in Excel as it is. To use it in Google Sheets, and with Claude:',
+  steps: [
+    'Upload it to Google Drive (drive.google.com › New › File upload), then open it.',
+    'Click File › Save as Google Sheets, and work in that new copy.',
+    'Click File › Settings › Time zone › (GMT+05:30) Kolkata › Save settings. Skip this and the Today tab shows yesterday’s date until about noon.',
+  ],
+  then: 'Then fill the yellow cells on the Start here tab.',
+  soon: 'The Clinic Master Sheet will appear here soon. Please check again later today.',
+};
 
 // The members page (owner 2026-10-19); the welcome email on the site backend says the same.
 const MEMBER_HELP = `Stuck while setting up a system? Ask us 24×7 on WhatsApp: ${WHATSAPP.display}`;
 
 module.exports = {
-  TITLE, PRICE_LABEL, ACCESS, PATHS, WHATSAPP, SEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, MEMBER_HELP,
+  TITLE, PRICE_LABEL, ACCESS, PATHS, WHATSAPP, SEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, MASTER_SHEET, MEMBER_HELP,
 };
 module.exports.default = module.exports;

@@ -243,15 +243,15 @@ export default function MasterclassInfo() {
               <p>{MC.WAYS.items[1].t}</p>
               </div>
               <figure className="mi-shot">
-                <div className="mi-claude" aria-label="Example of a Claude chat with workbook 05 attached">
-                  <p className="mi-claude-you"><span className="mi-claude-file">05-Advised-Treatment.xlsx</span>Which advised treatments are at risk this week, and what should I send?</p>
+                <div className="mi-claude" aria-label="Example of a Claude chat with the Clinic Master Sheet connected">
+                  <p className="mi-claude-you"><span className="mi-claude-file">Clinic Master Sheet · Due · 5 Advised</span>Which advised treatments are at risk this week, and what should I send?</p>
                   <div className="mi-claude-ai">
                     <p><b>Manoj Tiwari</b> · root canal + crown · follow-up 1 not sent; the window closed. <b className="mi-red">Breached</b></p>
                     <p><b>Suresh Nambiar</b> · implant, ₹38,000 · follow-up 1 due today; a call is recommended. <b className="mi-amber">On track</b></p>
                     <p className="mi-claude-msg">“Namaste Manoj ji, Dr Mehta asked us to check on the crown for your root canal. We know time is short: shall we keep a 30-minute slot on Saturday morning for you?”</p>
                   </div>
                 </div>
-                <figcaption>Claude with a workbook attached (sample rows)</figcaption>
+                <figcaption>Claude with the Clinic Master Sheet connected (sample rows)</figcaption>
               </figure>
             </article>
             <article className="mi-way">

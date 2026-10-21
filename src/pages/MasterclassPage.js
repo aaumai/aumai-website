@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setNoindex } from '../utils/seo';
-import { SYSTEMS, C_COLORS } from '../data/scorecard';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
 import './ScorecardPage.css';
@@ -9,7 +8,7 @@ import './MasterclassPage.css';
 
 // Masterclass members area (owner 2026-10-18): attendees of The Full Chair Method
 // sign in with a 6-digit email code (no password), then watch the video and
-// download the workbooks, with lifetime access (owner 2026-10-20). Accounts are created by us at
+// download the Clinic Master Sheet and the other files, with lifetime access (owner 2026-10-20). Accounts are created by us at
 // /masterclass-admin. Private: noindex, and nothing here is in the prerendered HTML.
 // The session is an HttpOnly cookie set by site-api.aumai.co.in (same site).
 
@@ -40,18 +39,16 @@ async function call(path, body) {
   return { status: r.status, ok: r.ok, j };
 }
 
-const sysClass = (n) => (n >= 1 && n <= SYSTEMS.length ? `sc-${C_COLORS[SYSTEMS[n - 1].c]}` : '');
-// kind comes from the backend (workbook | worksheet | skill | guide | file); the extension is the fallback.
+// kind comes from the backend (master_sheet | worksheet | skill | guide | file); the extension is the fallback.
 const kindOf = (f) => f.kind || (/.(xlsx|xls|csv)$/i.test(f.name) ? 'workbook' : 'file');
-const isWorkbook = (f) => /.xlsx$/i.test(f.name);
+// One sheet replaces the 12 workbooks (owner 2026-10-21): the Clinic Master Sheet gets its own
+// card, and any other spreadsheet the server still lists is not shown.
+const isMasterSheet = (f) => f.kind === 'master_sheet' || /Master-Sheet/i.test(f.name);
+const isSpreadsheet = (f) => /\.(xlsx|xls|csv)$/i.test(f.name);
 const isPromptPack = (f) => /Prompt-Pack/i.test(f.name);
 const fileUrl = (f) => `${API}/files/${encodeURIComponent(f.name)}`;
 const KIND_BADGE = { worksheet: 'Worksheet', skill: 'Skill file', guide: 'Guide', file: 'File' };
-const badge = (f) => {
-  const k = kindOf(f);
-  if (k !== 'workbook') return KIND_BADGE[k] || 'File';
-  return f.system === 0 ? 'Owner scorecard' : f.system ? `System ${f.system}` : 'Workbook';
-};
+const badge = (f) => KIND_BADGE[kindOf(f)] || 'File';
 // The worksheet first (it is printed before the session starts), then the skill file, then its guide.
 const EXTRA_ORDER = { worksheet: 0, skill: 1, guide: 2, file: 3 };
 
@@ -179,13 +176,13 @@ export default function MasterclassPage() {
 
   if (stage === 'member' && me) {
     const files = me.files || [];
-    const workbooks = files.filter(isWorkbook);
+    const sheet = files.find(isMasterSheet);
     // The Prompt Pack (owner 2026-10-20) gets its own card at the top, so it is not repeated below.
     const packHtml = files.find((f) => isPromptPack(f) && /\.html$/i.test(f.name));
     const packPdf = files.find((f) => isPromptPack(f) && /\.pdf$/i.test(f.name));
-    const extras = files.filter((f) => !isWorkbook(f) && !isPromptPack(f)).sort((a, b) => (EXTRA_ORDER[kindOf(a)] ?? 9) - (EXTRA_ORDER[kindOf(b)] ?? 9));
+    const extras = files.filter((f) => !isSpreadsheet(f) && !isPromptPack(f)).sort((a, b) => (EXTRA_ORDER[kindOf(a)] ?? 9) - (EXTRA_ORDER[kindOf(b)] ?? 9));
     const fileCard = (f) => (
-      <li key={f.name} className={`mc-file ${sysClass(f.system)}`}>
+      <li key={f.name} className="mc-file">
         <span className="mc-badge">{badge(f)}</span>
         <h3>{f.title}</h3>
         {f.about && <p>{f.about}</p>}
@@ -223,6 +220,26 @@ export default function MasterclassPage() {
             </section>
           )}
 
+          {/* One sheet for the whole clinic (owner 2026-10-21): one download, then three steps for Google Sheets. */}
+          <section className="mc-section mc-pack" aria-labelledby="mc-sheet-h">
+            <h2 id="mc-sheet-h">{MC.MASTER_SHEET.title}</h2>
+            <p>{MC.MASTER_SHEET.short}</p>
+            {sheet ? (
+              <>
+                <div className="mc-all">
+                  <a className="sc-btn" href={fileUrl(sheet)}>{MC.MASTER_SHEET.button}</a>
+                </div>
+                <p className="mc-help">{MC.MASTER_SHEET.excel}</p>
+                <ol className="mc-steps">
+                  {MC.MASTER_SHEET.steps.map((s) => <li key={s}>{s}</li>)}
+                </ol>
+                <p className="mc-help">{MC.MASTER_SHEET.then}</p>
+              </>
+            ) : (
+              <p className="sc-note">{MC.MASTER_SHEET.soon}</p>
+            )}
+          </section>
+
           {/* No live Q&A (owner 2026-10-19): questions go to WhatsApp, any time. */}
           <p className="mc-sent mc-wa" style={{ marginTop: 20 }}>
             {MC.MEMBER_HELP.replace(MC.WHATSAPP.display, '')}
@@ -254,21 +271,16 @@ export default function MasterclassPage() {
             </section>
           )}
 
-          <section className="mc-section" aria-labelledby="mc-files-h">
-            <h2 id="mc-files-h">{workbooks.length ? `Your ${workbooks.length} workbooks` : 'Your workbooks'}</h2>
-            {files.length === 0 ? (
-              <p className="sc-note">The workbooks will appear here soon. Please check again later today.</p>
-            ) : (
-              <>
-                {workbooks.length > 0 && <ul className="mc-files">{workbooks.map(fileCard)}</ul>}
+          {files.length > 0 && (
+            <section className="mc-section" aria-label="Download help">
+              {files.length > 1 && (
                 <div className="mc-all">
-                  {files.length > 1 && <a className="sc-btn sc-btn-ghost" href={`${API}/download-all`}>Download everything: all {files.length} files (one zip file)</a>}
-                  <p className="mc-help">Open the workbooks in Excel or Google Sheets (File › Import).</p>
+                  <a className="sc-btn sc-btn-ghost" href={`${API}/download-all`}>Download everything: all {files.length} files (one zip file)</a>
                 </div>
-                <p className="mc-help">If Download does nothing, open this page in Chrome or Safari (Instagram and Facebook’s own browsers often block downloads).</p>
-              </>
-            )}
-          </section>
+              )}
+              <p className="mc-help">If Download does nothing, open this page in Chrome or Safari (Instagram and Facebook’s own browsers often block downloads).</p>
+            </section>
+          )}
 
           <p className="mc-help" style={{ paddingTop: 32 }}>Something not working? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
         </div>
