@@ -785,7 +785,7 @@ const routes = [
   },
   // Masterclass members area (owner 2026-10-18; sign-in moved to /masterclass/sign-in
   // on 2026-10-19). Private: noindex, nofollow, out of seo-files.js's sitemap. Only
-  // the public sign-in words are here; the video, workbooks and member details
+  // the public sign-in words are here; the video, the Clinic Master Sheet and member details
   // exist only after sign-in, in the browser.
   ...['masterclass/sign-in', 'masterclass/my'].map((slug) => ({
     slug,
