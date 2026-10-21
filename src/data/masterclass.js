@@ -33,19 +33,24 @@ const SEO = {
     'A 1-hour masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. One Clinic Master Sheet and a Claude skill file, ₹999.',
 };
 
+// The hero carries the "10 minutes every morning" ad (owner 2026-10-21; script in
+// docs/masterclass/ads/ad-script-10-minutes-999.md in the EHR project).
 const HERO = {
-  eyebrow: 'Masterclass for clinic owners · the 4C Framework',
-  title: TITLE,
+  eyebrow: 'Dental clinic owners, get ready to be mind-blown',
+  title: 'Run all your follow‑ups in 10 minutes!',
+  titleLead: 'Run all your follow‑ups in ',
+  titleAccent: '10 minutes',
+  titleTail: '!',
   promise:
-    'Fill your chair from the patients you already have: the enquiry that never booked, the patient who didn’t turn up, the treatment you advised that never started, and the patient who stopped coming.',
-  who: 'For dental and skin clinic owners, and the manager or front-desk lead who will run it with you.',
+    'Every new enquiry. Every patient with an appointment. Every patient who missed one. Every “I’ll let you know”. Every treatment left half-done. Every patient who hasn’t come back in a year.',
+  who: 'Feels like too much to do? I guarantee you can do all of it in 10 minutes every morning. In The Full Chair Method masterclass, I show you exactly how. For dental and skin clinic owners, and the manager or front-desk lead who runs it with you.',
   facts: [
     { b: 'About 1 hour', t: 'watch any time' },
     { b: ACCESS, t: 'watch as often as you like' },
-    { b: 'One Clinic Master Sheet', t: 'plus a Claude skill file' },
+    { b: 'One sheet', t: 'the Clinic Master Sheet, plus a Claude skill file' },
     { b: PRICE_LABEL, t: 'one payment' },
   ],
-  note: 'Not a theory session. After every system you pause for two minutes and set it up for your own clinic.',
+  note: 'Not a theory session. You see every system running, then a whole morning’s follow-ups done on screen, against the clock.',
 };
 
 const PROBLEM = {
