@@ -261,8 +261,10 @@ const MASTER_SHEET = {
   excel: 'It opens in Excel as it is. To use it in Google Sheets, and with Claude:',
   steps: [
     'Upload it to Google Drive (drive.google.com › New › File upload), then open it.',
-    'Click File › Save as Google Sheets, and work in that new copy.',
+    'Click File › Save as Google Sheets, and work in that new copy (it has no .XLSX badge next to its name).',
+    'Name the new copy exactly Clinic Master Sheet (Claude looks for that name), and delete the .xlsx from Drive so there is only one.',
     'Click File › Settings › Locale: United Kingdom, Time zone: (GMT+05:30) Kolkata › Save settings. This makes dates read day-first, like 20/10/2026, with English month names. Skip it and the Today tab shows yesterday’s date until about noon.',
+    'Give the new sheet a minute to work out its lists before you start.',
   ],
   then: 'Then fill the yellow cells on the Start here tab.',
   soon: 'The Clinic Master Sheet will appear here soon. Please check again later today.',
