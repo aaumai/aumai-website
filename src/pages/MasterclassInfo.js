@@ -88,7 +88,7 @@ export default function MasterclassInfo() {
           <div className="ch-hero-grid lux-hero-grid mi-hero-grid">
             <div className="ch-hero-text">
               <span className="ch-eyebrow">{MC.HERO.eyebrow}</span>
-              <h1 className="ch-hero-title">The Full Chair <span className="ch-hero-accent">Method</span></h1>
+              <h1 className="ch-hero-title">{MC.HERO.titleLead}<span className="ch-hero-accent">{MC.HERO.titleAccent}</span>{MC.HERO.titleTail}</h1>
               <p className="lux-promise">{MC.HERO.promise}</p>
               <p className="ch-hero-sub">{MC.HERO.who}</p>
               <ul className="mi-facts">

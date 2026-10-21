@@ -18,7 +18,7 @@ const MC_REFUND = require('./masterclassRefund');
 
 const TITLE = 'The Full Chair Method';
 // Shown until the backend's /price answers; must match MASTERCLASS_PRICE_PAISE on the site backend.
-const PRICE_LABEL = '₹599';
+const PRICE_LABEL = '₹999';
 // Lifetime access for every member (owner 2026-10-20); the site backend never ends it on a date.
 const ACCESS = 'Lifetime access';
 
@@ -30,22 +30,27 @@ const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868' };
 const SEO = {
   title: 'The Full Chair Method masterclass for clinic owners | AUM AI',
   description:
-    'A 2-hour masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. One Clinic Master Sheet and a Claude skill file, ₹599.',
+    'A 1-hour masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. One Clinic Master Sheet and a Claude skill file, ₹999.',
 };
 
+// The hero carries the "10 minutes every morning" ad (owner 2026-10-21; script in
+// docs/masterclass/ads/ad-script-10-minutes-999.md in the EHR project).
 const HERO = {
-  eyebrow: 'Masterclass for clinic owners · the 4C Framework',
-  title: TITLE,
+  eyebrow: 'Dental clinic owners, get ready to be mind-blown',
+  title: 'Run all your follow‑ups in 10 minutes!',
+  titleLead: 'Run all your follow‑ups in ',
+  titleAccent: '10 minutes',
+  titleTail: '!',
   promise:
-    'Fill your chair from the patients you already have: the enquiry that never booked, the patient who didn’t turn up, the treatment you advised that never started, and the patient who stopped coming.',
-  who: 'For dental and skin clinic owners, and the manager or front-desk lead who will run it with you.',
+    'Every new enquiry. Every patient with an appointment. Every patient who missed one. Every “I’ll let you know”. Every treatment left half-done. Every patient who hasn’t come back in a year.',
+  who: 'Feels like too much to do? I guarantee you can do all of it in 10 minutes every morning. In The Full Chair Method masterclass, I show you exactly how. For dental and skin clinic owners, and the manager or front-desk lead who runs it with you.',
   facts: [
-    { b: 'About 2 hours', t: 'watch any time' },
+    { b: 'About 1 hour', t: 'watch any time' },
     { b: ACCESS, t: 'watch as often as you like' },
-    { b: 'One Clinic Master Sheet', t: 'plus a Claude skill file' },
+    { b: 'One sheet', t: 'the Clinic Master Sheet, plus a Claude skill file' },
     { b: PRICE_LABEL, t: 'one payment' },
   ],
-  note: 'Not a theory session. After every system you pause for two minutes and set it up for your own clinic.',
+  note: 'Not a theory session. You see every system running, then a whole morning’s follow-ups done on screen, against the clock.',
 };
 
 const PROBLEM = {
@@ -158,20 +163,20 @@ const WAYS = {
     { h: 'Running on its own', t: 'The same system inside clinic software, shown on a demo clinic with our own software, Aumy. Shown, not sold: there is no offer in the masterclass.' },
   ],
   noSoftware: 'You don’t need to buy any software. The first two ways need only Excel or Google Sheets, and a Claude account if you want Claude’s help.',
-  buildTitle: 'Build it now: 2 minutes after every system',
+  buildTitle: 'Then: about 10 minutes every morning',
   build: [
-    'Write the name of the person who owns it.',
-    'Set the KPI it is measured on, every week.',
-    'Fill its first 3 rows from your own clinic.',
-    'Write its first message, in your doctor’s name.',
+    'Open Claude and type one line: “Today’s work”.',
+    'Every patient due today, from every system, appears on one page with the message ready.',
+    'Press Send on WhatsApp for each one, or call.',
+    'Tell Claude what you sent: your sheet and your weekly scorecard update themselves.',
   ],
-  buildNote: 'Pause the video if you need longer. By the end, every system and foundation is started in your own clinic.',
+  buildNote: 'Most days it takes about 10 minutes. On the busiest days, a little longer.',
 };
 
 const KIT = {
   title: 'What you get',
   items: [
-    { h: 'The masterclass video', t: `About 2 hours. Watch it in one sitting or a stage at a time, as often as you like. Your access never ends.` },
+    { h: 'The masterclass video', t: `About 1 hour. Watch it in one sitting or a stage at a time, as often as you like. Your access never ends.` },
     { h: 'The Clinic Master Sheet', t: 'Type each patient and visit once, and the sheet works out who is due for what today. A tab for every system and foundation, the Today list, the weekly Scorecard, and every rule and message we use, in English, Hindi and Marathi. Opens in Excel or Google Sheets.' },
     { h: 'The weekly Scorecard', t: 'A tab in the Clinic Master Sheet: one owner and one KPI per system, week by week, in green, orange or red, with the list of what was missed last week. Your 15 minutes every Monday.' },
     { h: 'The Claude skill file', t: 'Every framework, question bank and message script from the masterclass, so Claude writes your patient messages, call scripts and weekly KPI report from your own sheets. With a short guide: five prompts to try first.' },
@@ -219,7 +224,7 @@ const TRAINER = {
 };
 
 const FAQS = [
-  { q: 'When can I watch it?', a: `Any time. It runs about 2 hours, so you can watch when it suits you, pause for each “Build it now”, and watch again any time: you have lifetime access.` },
+  { q: 'When can I watch it?', a: `Any time. It runs about 1 hour, so you can watch when it suits you, pause to fill your worksheet, and watch again any time: you have lifetime access.` },
   { q: 'How long do I have access?', a: 'For life. Your access starts on the date you see before you pay and has no end date. Watch the video again whenever you like; the Clinic Master Sheet, the skill file and the worksheet are yours to keep.' },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
   { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples come from dental clinics; set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. The eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
@@ -240,18 +245,20 @@ const FINAL = {
 const REGISTER = {
   lead: 'The 4C Framework: Convert, Confirm, Care, Come back. Eight systems on three foundations that bring back the patients you already have.',
   points: [
-    'A masterclass of about 2 hours, with lifetime access.',
+    'A masterclass of about 1 hour, with lifetime access.',
     'After every system, 2 minutes to set it up in your own clinic.',
     'The Clinic Master Sheet, the Claude skill file, the Leak Calculator and a bonus Google video.',
     `24×7 Q&A on WhatsApp: ${WHATSAPP.display}.`,
   ],
 };
 const REGISTER_SEO_DESCRIPTION =
-  'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, 8 systems and 3 foundations, a 2-hour video, the Clinic Master Sheet and the Claude skill file.';
+  'Register for The Full Chair Method masterclass for clinic owners: the 4C Framework, 8 systems and 3 foundations, a 1-hour video, the Clinic Master Sheet and the Claude skill file.';
 
 // The Clinic Master Sheet card on the members page (owner 2026-10-21: one sheet
-// replaces the 12 workbooks). The Google Sheets time-zone step is required: without
-// it the Today tab shows yesterday's date until about noon IST.
+// replaces the 12 workbooks). The Google Sheets settings step is required: without the
+// time zone the Today tab shows yesterday's date until about noon IST; without the
+// United Kingdom locale dates read month-first (owner 2026-10-21: UK, not India, whose
+// locale shows Hindi month names).
 const MASTER_SHEET = {
   title: 'Your Clinic Master Sheet',
   short: 'One Clinic Master Sheet for the whole clinic: a tab for every system, today’s to-do list and your weekly scorecard.',
@@ -259,8 +266,10 @@ const MASTER_SHEET = {
   excel: 'It opens in Excel as it is. To use it in Google Sheets, and with Claude:',
   steps: [
     'Upload it to Google Drive (drive.google.com › New › File upload), then open it.',
-    'Click File › Save as Google Sheets, and work in that new copy.',
-    'Click File › Settings › Time zone › (GMT+05:30) Kolkata › Save settings. Skip this and the Today tab shows yesterday’s date until about noon.',
+    'Click File › Save as Google Sheets, and work in that new copy (it has no .XLSX badge next to its name).',
+    'Name the new copy exactly Clinic Master Sheet (Claude looks for that name), and delete the .xlsx from Drive so there is only one.',
+    'Click File › Settings › Locale: United Kingdom, Time zone: (GMT+05:30) Kolkata › Save settings. This makes dates read day-first, like 20/10/2026, with English month names. Skip it and the Today tab shows yesterday’s date until about noon.',
+    'Give the new sheet a minute to work out its lists before you start.',
   ],
   then: 'Then fill the yellow cells on the Start here tab.',
   soon: 'The Clinic Master Sheet will appear here soon. Please check again later today.',

@@ -186,7 +186,7 @@ export default function MasterclassPage() {
         <span className="mc-badge">{badge(f)}</span>
         <h3>{f.title}</h3>
         {f.about && <p>{f.about}</p>}
-        {kindOf(f) === 'skill' && <p className="mc-file-how">Upload it in claude.ai → Settings → Capabilities → Skills.</p>}
+        {kindOf(f) === 'skill' && <p className="mc-file-how">Upload it in claude.ai → Settings → Customize → Skills → + Add → Upload skill. Code execution must be on (Settings → Capabilities → Run code in the cloud).</p>}
         <a className="sc-btn" href={fileUrl(f)}>Download</a>
       </li>
     );
