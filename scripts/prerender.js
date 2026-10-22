@@ -794,7 +794,7 @@ const routes = [
         inLanguage: 'en-IN',
         provider: { '@type': 'Organization', name: 'AUM AI', sameAs: ORIGIN },
         offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}` },
-        hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'PT2H', instructor: { '@type': 'Person', name: MC.TRAINER.name } },
+        hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'PT1H30M', instructor: { '@type': 'Person', name: MC.TRAINER.name } },
       },
       faqPageLd(MC.FAQS),
     ],
