@@ -67,6 +67,19 @@ const storeLinksHtml = (name) =>
   `<a href="${STORES.APP_STORE_URL}" aria-label="Start ${esc(name)} free: download Aumy on the App Store">Download on the App Store</a> · ` +
   `<a href="${STORES.PLAY_STORE_URL}" aria-label="Start ${esc(name)} free: get Aumy on Google Play">Get it on Google Play</a>`;
 const startInAppHtml = (name) => `<p><strong>${esc(STORES.START_LINE)}</strong>. ${esc(STORES.START_FINE)}. ${storeLinksHtml(name)}</p>`;
+// What our customers say (owner 2026-10-22): the same Google reviews, word for word, that
+// src/components/GoogleReviews.js renders (src/data/googleReviews.js). Plain HTML only:
+// NO Review / AggregateRating JSON-LD (self-serving reviews break Google's guidelines).
+const GR = require('../src/data/googleReviews');
+const googleReviewsHtml = (limit) => {
+  const list = limit ? GR.GOOGLE_REVIEWS.slice(0, limit) : GR.GOOGLE_REVIEWS;
+  return `<section id="google-reviews"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">Google reviews</p>
+        <h2>What our customers say</h2>
+        ${list.map((r) => `<figure><blockquote>${esc(r.text)}</blockquote><figcaption>${esc(r.name)} · ${r.stars} out of 5 stars · ${esc(r.month)} · Google review</figcaption></figure>`).join('\n        ')}
+        <p>${esc(GR.GOOGLE_RATING)} out of 5 on Google · <a href="${GR.GOOGLE_REVIEWS_URL}">Read all reviews</a> · <a href="${GR.GOOGLE_WRITE_REVIEW_URL}">Write a review</a></p>
+      </div></section>`;
+};
 // Slim bar at the top of every India page (React: CreditsBar in the header).
 const creditsBarHtml = () => `<div class="credits-bar"><div class="container"><p class="credits-bar-text"><strong>${esc(STORES.TOP_LINE)}</strong> — ${esc(STORES.TOP_SUB)}: <a class="credits-bar-link" href="${STORES.APP_STORE_URL}">App Store</a> · <a class="credits-bar-link" href="${STORES.PLAY_STORE_URL}">Google Play</a></p></div></div>`;
 // Module cards as links to /modules/<id> (home section + "works even better with").
@@ -365,6 +378,9 @@ const routes = [
         <p>${esc(PRICE.ADDONS)}</p>
         <p><a href="/contact">Talk to us about your clinic</a>. ${esc(PRICE.GST)}</p>
         <p>Want only one part of Aumy? <a href="/modules">See the modules you can buy on their own</a>.</p>
+      </div></section>
+      ${googleReviewsHtml(3)}
+      <section><div class="ch-container ch-narrow">
         ${faqHtml(PRICE.FAQS, 'Questions clinics ask')}
       </div></section>`,
   },
@@ -598,6 +614,7 @@ const routes = [
         <h2>Busy clinics already run on Aumy.</h2>
         <p>Vinayaka Dental Care: fewer no-shows and patients coming back — "we didn't hire a single extra person to make it happen." AUM AI is an NVIDIA Inception member.</p>
       </div></section>
+      ${googleReviewsHtml()}
       <section id="modules"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(MODS.HOME.eyebrow)}</p>
         <h2>${esc(MODS.HOME.title)}</h2>

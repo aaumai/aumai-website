@@ -7,6 +7,7 @@ import HomeModules from '../components/HomeModules';
 import HomeExplainers from '../components/HomeExplainers';
 import HomeFullDemo from '../components/HomeFullDemo';
 import HeroVideo from '../components/HeroVideo';
+import GoogleReviews from '../components/GoogleReviews';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
 import { HERO_PRODUCTS, HOME_EXPLORE } from '../data/positioning';
@@ -152,6 +153,10 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ── What our customers say: every Google review, word for word (owner 2026-10-22).
+          Words: src/data/googleReviews.js, mirrored in scripts/prerender.js. */}
+      <GoogleReviews />
 
       {/* ── Aumy is built from modules (owner 2026-10-08). Words: src/data/modules.js (HOME, PAGES). */}
       <HomeModules />
