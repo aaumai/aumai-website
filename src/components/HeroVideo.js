@@ -78,7 +78,7 @@ const HeroVideo = () => {
   };
 
   return (
-    <figure className={`ch-hero-film${HERO_VIDEO.vertical ? ' ch-hero-film--vertical' : ''}`}>
+    <figure id={HERO_VIDEO.anchorId} className={`ch-hero-film${HERO_VIDEO.vertical ? ' ch-hero-film--vertical' : ''}`}>
       <div className="ch-hero-film-stage">
         <video
           ref={ref}

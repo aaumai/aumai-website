@@ -16,6 +16,8 @@ const SUB = 'A real clinic day, before and after Aumy. Sound on.';
 const HERO_VIDEO = {
   moduleId: 'automate-dental-clinic-operations',
   name: 'The Sterling Dental Clinic',
+  // Page anchor for this film; Dr Priyanka's hero Google review links "Watch her team's video" to it (googleReviews.js videoId).
+  anchorId: 'sterling-video',
   line: '26 years in Delhi. Their whole team on what changed with Aumy.',
   src: '/videos/testimonials/sterling-testimonial.mp4',
   poster: '/videos/testimonials/sterling-testimonial.jpg',
