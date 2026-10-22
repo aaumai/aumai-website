@@ -193,7 +193,8 @@ function apply(html, r) {
   // The site-wide onboarding-pause banner was removed (owner 2026-09-26),
   // here as in Header.js; pricing and contact keep their own notice.
   // The "1,000 Aumy credits" bar (owner 2026-10-09) tops every India page, as in Header.js.
-  const bar = MARKET === 'us' || r.refresh ? '' : creditsBarHtml();
+  // Owner 2026-10-22: not on the home page (slug ''), as in Header.js.
+  const bar = MARKET === 'us' || r.refresh || r.slug === '' ? '' : creditsBarHtml();
   out = out.replace(
     '<div id="root"></div>',
     `<div id="root"><div class="ch-home">${bar}${r.content}</div></div>`

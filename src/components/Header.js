@@ -240,8 +240,9 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       {/* Owner 2026-10-09: "1,000 Aumy credits to try each product" right at the top,
-          linking to this phone's app store. Mirrored in scripts/prerender.js. */}
-      <CreditsBar />
+          linking to this phone's app store. Mirrored in scripts/prerender.js.
+          Owner 2026-10-22: hidden on the home page only (outcomes as a service); every other page keeps it. */}
+      {location.pathname !== '/' && <CreditsBar />}
       <div className="container header-container">
         <div className="header-content">
           <div className="logo">
