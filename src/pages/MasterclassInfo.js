@@ -32,7 +32,7 @@ const ICONS = [
   'M5 20V10M10 20V4M15 20v-7M20 20v-11M3 20h18', // scorecard (bars)
   'M12 3l2.2 5.3L20 9l-4.4 3.8L17 18.5 12 15.6 7 18.5l1.4-5.7L4 9l5.8-.7z', // skill (star)
   'M4 5h16v10H8l-4 4zM8 9h8M8 12h5', // scripts (speech)
-  'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6', // worksheet (page)
+  'M4 4h16v16H4zM4 9h16M9 9v11M12 17v-3M15 17v-5M18 17v-2', // Leak tab (sheet with figures)
   'M12 21c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm-1-6l5-3-5-3v6z', // WhatsApp Q&A (round)
   'M12 2l3 6.5 7 .8-5.2 4.8 1.4 6.9L12 17.6 5.8 21l1.4-6.9L2 9.3l7-.8z', // bonus (star)
 ];
@@ -274,9 +274,9 @@ export default function MasterclassInfo() {
             <span className="ch-eyebrow">The kit</span>
             <h2 id="mi-kit" className="ch-h2">{MC.KIT.title}</h2>
           </div>
-          <div className="mi-showcase">
+          {/* One picture: the leak is worked out on the sheet's Leak tab, not a printed calculator (owner 2026-10-22). */}
+          <div className="mi-showcase mi-showcase-one">
             <figure className="mi-frame"><div className="mi-frame-in"><Pic img={MC.IMG.kpis} /></div><figcaption>The Owner Weekly Scorecard: KPIs and owners</figcaption></figure>
-            <figure className="mi-frame mi-frame-page"><div className="mi-frame-in"><Pic img={MC.IMG.leak} /></div><figcaption>The Clinic Leak Calculator, page 1</figcaption></figure>
           </div>
           <ul className="mi-kit">
             {MC.KIT.items.map((k, i) => (

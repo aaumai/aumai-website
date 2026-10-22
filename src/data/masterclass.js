@@ -82,7 +82,7 @@ const PROBLEM = {
 
 // Pictures (public/images/masterclass/). The people pictures are illustrations made
 // with Google's Gemini image model (owner 2026-10-19): never caption them as a real
-// clinic, doctor or patient. The workbook, worksheet and Aumy pictures are real
+// clinic, doctor or patient. The workbook and Aumy pictures are real
 // screenshots of the course kit (sample rows) and of Aumy on our demo clinic.
 const IMG = {
   hero: { src: '/images/masterclass/hero.webp', w: 1344, h: 768, alt: 'Illustration: a dentist at her clinic reception, calm, with a full waiting room behind her' },
@@ -90,7 +90,6 @@ const IMG = {
   team: { src: '/images/masterclass/team.webp', w: 1344, h: 768, alt: 'Illustration: a clinic team reviewing a green, orange and red weekly scorecard on a screen' },
   workbook: { src: '/images/masterclass/workbook-advised.webp', w: 1296, h: 440, alt: 'The Advised to Accepted workbook in Excel, with sample patients, follow-ups and a KPI status column in green, orange and red' },
   kpis: { src: '/images/masterclass/workbook-kpis.webp', w: 1377, h: 536, alt: 'The KPIs and owners tab of the Owner Weekly Scorecard: one KPI and one owner for every system' },
-  leak: { src: '/images/masterclass/leak-calculator.webp', w: 900, h: 1273, alt: 'Page 1 of the Clinic Leak Calculator worksheet: three starting numbers and eight boxes, one per leak' },
   aumy: { src: '/images/masterclass/aumy-tasks.webp', w: 1400, h: 172, alt: 'Aumy on a demo clinic: replies that need a person become tasks for the desk, such as Book these patients and Call back' },
 };
 
@@ -182,7 +181,8 @@ const KIT = {
     { h: 'The weekly Scorecard', t: 'A tab in the Clinic Master Sheet: one owner and one KPI per system, week by week, in green, orange or red, with the list of what was missed last week. Your 15 minutes every Monday.' },
     { h: 'The Claude skill file', t: 'Every framework, question bank and message script from the masterclass, so Claude writes your patient messages, call scripts and weekly KPI report from your own sheets. With a short guide: seven prompts to try first, and the Front desk screens.' },
     { h: 'Message scripts in English, Hindi and Marathi', t: 'In the skill file: every follow-up message, the question banks for implants, aligners, root canal with crown and smile makeover, the missed-call script, and the doctor’s check-ins by procedure.' },
-    { h: 'The Clinic Leak Calculator', t: 'Your monthly leak in rupees, box by box. You fill it in during the class on the Leak tab of your Clinic Master Sheet; a printable copy comes too, if you like paper.' },
+    // The leak is worked out in the sheet itself (owner 2026-10-22: no PDF, no paper copy).
+    { h: 'The Leak tab', t: 'A tab in the Clinic Master Sheet: your monthly leak in rupees, box by box, from three numbers you already know. You fill it in during the class, and the sheet shows your weakest C.' },
     { h: '24×7 Q&A on WhatsApp: 80071 89868', t: 'Ask any question about the method, the Clinic Master Sheet or the Claude skill, any time.', wa: true },
     { h: 'Bonus video: get found on Google', t: 'About 7 minutes: asking every patient for a Google review the right way, what to post on your Google profile and website each week, and how to reply to every review.' },
   ],
@@ -191,7 +191,7 @@ const KIT = {
 const EXPECT = {
   title: 'What to expect, and how to prepare',
   items: [
-    { h: 'What you need', t: 'A laptop or tablet to watch, and Google Sheets or Excel for your Clinic Master Sheet. Print the Leak Calculator only if you like paper. Optional: a Claude account at claude.ai, to use the skill file.' },
+    { h: 'What you need', t: 'A laptop or tablet to watch, and Google Sheets or Excel for your Clinic Master Sheet. Optional: a Claude account at claude.ai, to use the skill file.' },
     { h: 'Three numbers, from memory', t: 'Your average treatment value, how many appointments you book in a week, and how many new enquiries you get in a week. A best guess is fine.' },
     { h: 'Bring the person who will run it', t: 'Watch with your manager or front-desk lead. The front desk owns most systems; the doctor owns visit notes, advised treatment, the finish line and the check-ins.' },
     { h: 'After the video', t: 'Start with your weakest C: one system, one owner, one week. Then add the next system, a week at a time.' },
@@ -226,7 +226,7 @@ const TRAINER = {
 
 const FAQS = [
   { q: 'When can I watch it?', a: `Any time. It runs about 90 minutes, so you can watch when it suits you, pause to fill in your Clinic Master Sheet, and watch again any time: you have lifetime access.` },
-  { q: 'How long do I have access?', a: 'For life. Your access starts on the date you see before you pay and has no end date. Watch the video again whenever you like; the Clinic Master Sheet, the skill file and the worksheet are yours to keep.' },
+  { q: 'How long do I have access?', a: 'For life. Your access starts on the date you see before you pay and has no end date. Watch the video again whenever you like; the Clinic Master Sheet and the skill file are yours to keep.' },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
   { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples come from dental clinics; set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. The eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
   { q: 'Do I need Aumy or any other software?', a: 'No. The Clinic Master Sheet opens in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
@@ -248,7 +248,7 @@ const REGISTER = {
   points: [
     'A masterclass of about 90 minutes, with lifetime access.',
     'After every system, 2 minutes to set it up in your own clinic.',
-    'The Clinic Master Sheet, the Claude skill file, the Leak Calculator and a bonus Google video.',
+    'The Clinic Master Sheet (it works out your monthly leak on its Leak tab), the Claude skill file and a bonus Google video.',
     `24×7 Q&A on WhatsApp: ${WHATSAPP.display}.`,
   ],
 };

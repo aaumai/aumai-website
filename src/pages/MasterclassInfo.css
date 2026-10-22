@@ -118,6 +118,7 @@
 
 /* ── What you get ── */
 .mi-showcase { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 64px; align-items: center; margin: 0 14px 72px 0; }
+.mi-showcase-one { grid-template-columns: 1fr; max-width: 980px; margin-left: auto; margin-right: auto; }
 .mi-frame-page img { box-shadow: 0 24px 50px -30px rgba(10, 15, 34, 0.35); }
 .mi-kit { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .mi-kit-card { background: #fff; border: 1px solid var(--lux-line); padding: 26px 22px; transition: border-color 0.3s ease; }

@@ -48,10 +48,11 @@ const isMasterSheet = (f) => f.kind === 'master_sheet' || /Master-Sheet/i.test(f
 const isSpreadsheet = (f) => /\.(xlsx|xls|csv)$/i.test(f.name);
 const isPromptPack = (f) => /Prompt-Pack/i.test(f.name);
 const fileUrl = (f) => `${API}/files/${encodeURIComponent(f.name)}`;
-const KIND_BADGE = { worksheet: 'Worksheet', skill: 'Skill file', guide: 'Guide', file: 'File' };
+const KIND_BADGE = { skill: 'Skill file', guide: 'Guide', file: 'File' };
 const badge = (f) => KIND_BADGE[kindOf(f)] || 'File';
-// The worksheet first (it is printed before the session starts), then the skill file, then its guide.
-const EXTRA_ORDER = { worksheet: 0, skill: 1, guide: 2, file: 3 };
+// The skill file first, then its guide. No printable leak worksheet any more: the leak is
+// worked out on the Clinic Master Sheet's Leak tab (owner 2026-10-22).
+const EXTRA_ORDER = { skill: 0, guide: 1, file: 2 };
 
 export default function MasterclassPage() {
   const navigate = useNavigate();
@@ -267,7 +268,7 @@ export default function MasterclassPage() {
 
           {extras.length > 0 && (
             <section className="mc-section" aria-labelledby="mc-extras-h">
-              <h2 id="mc-extras-h">Your worksheet and Claude skill file</h2>
+              <h2 id="mc-extras-h">Your Claude skill file</h2>
               <ul className="mc-files">{extras.map(fileCard)}</ul>
             </section>
           )}
