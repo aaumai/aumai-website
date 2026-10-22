@@ -5,6 +5,7 @@ import {
   MONTHLY_FROM, inr, CLINIC_OS, HEADLINE, HEADLINE_ACCENT, SUB, ADDONS, GST, FAQS,
   SEO_TITLE, SEO_DESCRIPTION,
 } from '../data/pricing';
+import GoogleReviews from '../components/GoogleReviews';
 import './HomeClinic.css';
 import './PricingPage.css';
 
@@ -65,6 +66,9 @@ const PricingPage = () => {
           <p className="pp-notice">Want only one part of Aumy? <Link to="/modules">See the modules you can buy on their own</Link>.</p>
         </div>
       </section>
+
+      {/* Three Google reviews, word for word (owner 2026-10-22). Words: src/data/googleReviews.js. */}
+      <GoogleReviews limit={3} compact />
 
       <section className="pp-section pp-faq-section">
         <div className="ch-container ch-narrow">

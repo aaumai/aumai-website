@@ -1,0 +1,123 @@
+/* "What our customers say" — Google reviews (owner 2026-10-22).
+   Reads the HomeClinic.css tokens (--c-*), which the India site's lux layer
+   re-points at navy / ivory / gold, with plain fallbacks for anywhere else. */
+
+.gr { background: var(--c-accent-tint, #edf6f4); border-block: 1px solid var(--c-line, #ece9e3); }
+.gr .ch-h2 { margin-bottom: 0; }
+
+.gr-grid {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  text-align: left;
+}
+.gr-grid > li { flex: 0 1 calc((100% - 48px) / 3); min-width: 0; display: flex; }
+
+.gr-card {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface, #fff);
+  border: 1px solid var(--c-line, #ece9e3);
+  border-radius: var(--radius, 18px);
+  box-shadow: var(--c-shadow, none);
+  padding: 26px 26px 22px;
+}
+
+.gr-who { display: flex; align-items: center; gap: 14px; }
+.gr-avatar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lux-navy-2, var(--c-ink, #16324f));
+  color: var(--lux-gold-2, #fff);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.gr-meta { display: flex; flex-direction: column; min-width: 0; line-height: 1.35; }
+.gr-name { font-size: 16px; font-weight: 600; color: var(--c-ink, #16324f); overflow-wrap: anywhere; }
+.gr-when { font-size: 13px; color: var(--c-ink-soft, #55636e); }
+
+.gr-stars { display: inline-block; margin-top: 16px; color: var(--lux-gold, #f4b400); font-size: 17px; letter-spacing: 0.12em; line-height: 1; }
+
+.gr-text {
+  margin: 12px 0 0;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--c-ink, #16324f);
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+.gr-text--clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
+  overflow: hidden;
+}
+
+.gr-more {
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: 4px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-accent-dark, #218779);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.gr-more:focus-visible { outline: 2px solid var(--c-accent-dark, #218779); outline-offset: 2px; }
+
+.gr-foot {
+  margin: 34px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 12px;
+  font-size: 15px;
+  color: var(--c-ink-soft, #55636e);
+}
+.gr-score { display: inline-flex; align-items: center; gap: 8px; }
+.gr-score strong { color: var(--c-ink, #16324f); font-size: 17px; }
+.gr-foot .gr-stars { margin: 0; font-size: 15px; }
+.gr-foot a { color: var(--c-accent-dark, #218779); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.gr-dot { color: var(--c-line, #ccc); }
+
+/* Compact strip (/pricing): shorter cards, tighter section. */
+.gr--compact { padding: 64px 0; }
+.gr--compact .gr-text--clamped { -webkit-line-clamp: 5; line-clamp: 5; }
+
+@media (max-width: 960px) {
+  .gr-grid > li { flex-basis: calc((100% - 24px) / 2); }
+}
+@media (max-width: 640px) {
+  .gr-grid { gap: 16px; margin-top: 28px; }
+  .gr-grid > li { flex-basis: 100%; }
+  .gr-card { padding: 22px 20px 18px; }
+  .gr-dot--lead { display: none; }
+  .gr-score { flex-basis: 100%; justify-content: center; }
+}
+
+/* India site (lux): ivory band between white sections, gold hairlines. */
+.site-lux .gr { background: var(--lux-mist); }
+.site-lux .gr-card { border-radius: 0; }
+.site-lux .gr-name { font-weight: 500; color: var(--lux-navy); }
+.site-lux .gr-text { font-weight: 400; color: var(--lux-navy); }
+.site-lux .gr-more,
+.site-lux .gr-foot a { color: var(--lux-bronze); }
+.site-lux .ch-section.gr--compact { padding: 72px 0; }
