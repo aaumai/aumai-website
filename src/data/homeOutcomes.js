@@ -13,7 +13,7 @@
  *   - no lock-in / cancel-any-time claim, no review-reply counts (not confirmed by the owner);
  *   - message wording comes from The Full Chair Method skill (docs/masterclass/skill/full-chair-method in
  *     the EHR project), shortened; the promises in KPIS are that skill's default KPIs;
- *   - the masterclass is "about 1 hour" and the daily routine "about 30 minutes every morning".
+ *   - the masterclass is "about 90 minutes" (owner 2026-10-22) and the daily routine "about 30 minutes every morning".
  *
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
  */
@@ -345,7 +345,7 @@ const DIY = {
   lead: 'In The Full Chair Method masterclass, I teach the 4C Framework we use in every clinic, run by your own team with Claude and Google Sheets.',
   honest: 'How much it gives back depends on doing it every day. When you’d rather we ran it for you, we’re one message away.',
   byline: 'Jayesh Chaudhari, founder, AUM AI',
-  length: 'About 1 hour',
+  length: 'About 90 minutes',
   items: [
     ['The 4C Framework', 'Eight systems and three foundations, with every message in English, Hindi and Marathi'],
     ['The Clinic Master Sheet', 'Type each patient once, and it shows who’s due for what today'],
