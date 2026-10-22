@@ -50,6 +50,8 @@ const HOW = require('../src/data/howItWorks');
 const HOME_FAQ = require('../src/data/homeFaq');
 // "Handcrafted only for dentists" (owner 2026-10-08): same words as the React pages.
 const POS = require('../src/data/positioning');
+// Home, outcomes as a service (owner 2026-10-22): same file as src/pages/Home.js.
+const HO = require('../src/data/homeOutcomes');
 // FAQPage JSON-LD straight from a page's own FAQ list ({q, a}), so the
 // answers an assistant quotes are word for word what the page says.
 const faqPageLd = (faqs) => ({
@@ -364,6 +366,127 @@ const videoLd = {
   uploadDate: '2026-07-02',
 };
 
+// ---- home (outcomes as a service, owner 2026-10-22) -----------------------
+// Word for word what src/pages/Home.js renders, from src/data/homeOutcomes.js and src/data/homeFaq.js.
+function homeContent() {
+  const li = (arr, f) => arr.map(f).join('\n          ');
+  const chatHtml = (it) => '<ul>' + it.chat.map(([who, text, time, note]) => '<li>' + (who === 'sys'
+    ? esc(text)
+    : (who === 'in' ? esc(it.who) : 'Clinic') + (time ? ' (' + esc(time) + ')' : '') + ': ' + esc(text) + (note ? ' [' + esc(note) + ']' : '')) + '</li>').join('') + '</ul>';
+  const baHtml = (it) => '<p>Before: ' + esc(it.ba.before) + '</p>' + (it.ba.after
+    ? '<ul>' + it.ba.after.map(([w, t]) => '<li>' + esc(w) + ': ' + esc(t) + '</li>').join('') + '</ul>'
+    : '<p>' + esc(it.ba.afterLabel || 'After') + ': ' + esc(it.ba.afterText) + '</p>');
+  return `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(HO.HERO.title)}</h1>
+        <ul>
+          ${li(HO.HERO.every, (l) => '<li>' + esc(l) + '</li>')}
+        </ul>
+        <p><strong>${esc(HO.HERO.close)}</strong></p>
+        <p><a href="${HO.HERO.primary.to}">${esc(HO.HERO.primary.label)}</a> · <a href="${esc(HO.HERO.whatsapp.href)}">${esc(HO.HERO.whatsapp.label)}</a></p>
+        <p><strong>${esc(HO.HERO.proofNumber)}</strong> ${esc(HO.HERO.proofText)}</p>
+        <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
+        <p>Aumy is AI dental software for dental clinics in India, set up and run with your team: an AI receptionist on calls and WhatsApp, confirmations, follow-ups and recalls, and your clinic’s records and billing. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">Dental clinics Aumy serves</p>
+        ${clinicsStripHtml()}
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.PAIN.eyebrow)}</p>
+        <h2>${esc(HO.PAIN.titleA)} ${esc(HO.PAIN.titleB)}</h2>
+        <ul>
+          ${li(HO.PAIN.quotes, (q) => '<li>“' + esc(q) + '”</li>')}
+        </ul>
+        <p>${esc(HO.PAIN.statsLabel)} ${esc(HO.PAIN.statsSource)}</p>
+        <ul>
+          ${li(HO.PAIN.stats, (st) => '<li><strong>' + esc(st.n) + '</strong> ' + esc(st.t) + '</li>')}
+        </ul>
+        <p>${esc(HO.PAIN.close)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.VS.eyebrow)}</p>
+        <h2>${esc(HO.VS.titleA)} ${esc(HO.VS.titleB)}</h2>
+        <p>${esc(HO.VS.lead)}</p>
+        <table><thead><tr><th>${esc(HO.VS.headVendor)}</th><th>${esc(HO.VS.headUs)}</th></tr></thead><tbody>
+          ${li(HO.VS.rows, ([a, b]) => '<tr><td>' + esc(a) + '</td><td>' + esc(b) + '</td></tr>')}
+        </tbody></table>
+        ${li(HO.VS.quotes, (q) => '<blockquote>“' + esc(q.q) + '” — ' + esc(q.who) + ', ' + esc(q.where) + '</blockquote>')}
+        <p>${esc(HO.VS.closeA)} ${esc(HO.VS.closeB)}</p>
+      </div></section>
+      <section id="how-we-work"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.HOW.eyebrow)}</p>
+        <h2>${esc(HO.HOW.titleA)} ${esc(HO.HOW.titleB)}</h2>
+        <ol>
+          ${li(HO.HOW.steps, (st) => '<li><h3>' + esc(st.title) + '</h3><p>' + esc(st.body) + '</p>' + (st.pull ? '<p>“' + esc(st.pull.q) + '” — ' + esc(st.pull.who) + '</p>' : '') + '<p>' + esc(st.exTag) + ': ' + esc(st.ex) + '</p></li>')}
+        </ol>
+      </div></section>
+      <section id="the-4c-framework"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.FOURC.eyebrow)}</p>
+        <h2>${esc(HO.FOURC.titleA)} ${esc(HO.FOURC.titleB)}</h2>
+        <p>${esc(HO.FOURC.lead)}</p>
+        ${li(HO.FOURC.stages, (st) => '<h3>' + esc(st.c) + ': ' + esc(st.job) + '</h3><ul>' + st.systems.map(([n, l]) => '<li><strong>' + esc(n) + '</strong> — ' + esc(l) + '</li>').join('') + '</ul><p>The outcome: ' + esc(st.outcomeB) + (st.outcome ? ' ' + esc(st.outcome) : '') + '</p>')}
+        <p>${esc(HO.FOURC.under)}</p>
+      </div></section>
+      <section id="full-demo"><div class="ch-container ch-narrow">
+        <h2>${esc(EXPL.FULL_DEMO.title)}</h2>
+        <p>${esc(EXPL.FULL_DEMO.blurb)} <a href="https://www.youtube.com/watch?v=${EXPL.FULL_DEMO.youtubeId}">Watch the 9-minute demo</a> · <a href="/demos">More demo videos</a></p>
+      </div></section>
+      <section id="strategies"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.STRATEGIES.eyebrow)}</p>
+        <h2>${esc(HO.STRATEGIES.titleA)} ${esc(HO.STRATEGIES.titleB)}</h2>
+        <p>${esc(HO.STRATEGIES.lead)}</p>
+        ${li(HO.STRATEGIES.items, (it, i) => '<h3>' + (i + 1) + '. ' + esc(it.name) + (it.alt ? ' (' + esc(it.alt) + ')' : '') + '</h3><p>' + esc(it.body) + '</p><p>' + esc(it.tag) + ':</p>' + (it.chat ? chatHtml(it) : baHtml(it)) + '<p>' + esc(it.why) + '</p>')}
+        <h3>${esc(HO.STRATEGIES.guardTitle)}</h3>
+        <p>${esc(HO.STRATEGIES.guard)}</p>
+      </div></section>
+      <section id="kpis"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.KPIS.eyebrow)}</p>
+        <h2>${esc(HO.KPIS.titleA)} ${esc(HO.KPIS.titleB)}</h2>
+        <p>${esc(HO.KPIS.lead)}</p>
+        <table><thead><tr>${HO.KPIS.head.map((h) => '<th>' + esc(h) + '</th>').join('')}</tr></thead><tbody>
+          ${li(HO.KPIS.rows, (r) => '<tr>' + r.map((c) => '<td>' + esc(c) + '</td>').join('') + '</tr>')}
+        </tbody></table>
+        <p>${HO.KPIS.legend.map(esc).join(' · ')}. ${esc(HO.KPIS.legendNote)}</p>
+      </div></section>
+      ${googleReviewsHtml()}
+      <section><div class="ch-container ch-narrow">
+        <ul>
+          ${li(HO.STERLING_PROOF, (p) => '<li><strong>' + esc(p.n) + '</strong> ' + esc(p.t) + ' (' + esc(p.s) + ')</li>')}
+        </ul>
+        <p><a href="/videos/dr-ronak-vinayaka.mp4">Dr Ronak Oswal, Vinaykia Dental Care, Pune</a> — 37 seconds, in his own words.</p>
+      </div></section>
+      <section id="be-the-patient"><div class="ch-container ch-narrow">
+        <h2>${esc(HO.BE_PATIENT.titleA)} ${esc(HO.BE_PATIENT.titleB)}</h2>
+        <p>${esc(HO.BE_PATIENT.body)} WhatsApp ${esc(HO.BE_PATIENT.whatsapp.display)} · call ${esc(HO.BE_PATIENT.call.display)}. ${esc(HO.BE_PATIENT.note)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(HO.FIT.titleA)} ${esc(HO.FIT.titleB)}</h2>
+        <h3>${esc(HO.FIT.yesTitle)}</h3><ul>${HO.FIT.yes.map((y) => '<li>' + esc(y) + '</li>').join('')}</ul>
+        <h3>${esc(HO.FIT.noTitle)}</h3><ul>${HO.FIT.no.map((y) => '<li>' + esc(y) + '</li>').join('')}</ul>
+        <p>${esc(HO.FIT.ownerOperator)}</p>
+        ${faqHtml(HOME_FAQ.FAQS, 'Questions dental clinic owners ask')}
+      </div></section>
+      <section id="run-it-yourself"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HO.DIY.eyebrow)}</p>
+        <h2>${esc(HO.DIY.titleA)} ${esc(HO.DIY.titleB)}</h2>
+        <p>${esc(HO.DIY.lead)} ${esc(HO.DIY.honest)}</p>
+        <p>${esc(MC.PRICE_LABEL)} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
+        <ul>${HO.DIY.items.map(([b, t]) => '<li><strong>' + esc(b) + '</strong> — ' + esc(t) + '</li>').join('')}</ul>
+        <p><a href="${HO.DIY.button.to}">${esc(HO.DIY.button.label)}</a></p>
+      </div></section>
+      <section id="free-audit"><div class="ch-container ch-narrow">
+        <h2>${esc(HO.FINAL.titleA)} ${esc(HO.FINAL.titleB)}</h2>
+        <p>${esc(HO.FINAL.sub)}</p>
+        <p><a href="${HO.FINAL.primary.to}">${esc(HO.FINAL.primary.label)}</a> · <a href="${esc(HO.FINAL.whatsapp.href)}">${esc(HO.FINAL.whatsapp.label)}</a></p>
+        <p>${esc(HO.FINAL.modulesLead)} <a href="${HO.FINAL.modulesLink.to}">${esc(HO.FINAL.modulesLink.label)}</a></p>
+        <ul>
+          ${li(POS.HOME_EXPLORE, (e) => '<li><a href="' + e.to + '">' + esc(e.label) + '</a></li>')}
+        </ul>
+      </div></section>`;
+}
+
 // ---- routes ---------------------------------------------------------------
 const routes = [
   {
@@ -580,66 +703,17 @@ const routes = [
   // AIPatientEngagementPage.js) — keep this crawler copy in step with them.
   {
     slug: '',
-    // Same strings as src/pages/Home.js and public/index.html (SEO review 2026-10-06:
-    // home owns "AI dental software" + "AI receptionist"; the canonical one-line description).
-    title: 'Aumy | AI Dental Software & AI Receptionist for Dental Clinics in India',
-    description:
-      'AI dental software for dental clinics in India: an AI receptionist on calls & WhatsApp 24/7, reminders, follow-ups, records and billing. From ₹3,000 a month.',
+    // Outcomes as a service (owner 2026-10-22). Words: src/data/homeOutcomes.js + src/data/homeFaq.js, the same
+    // files src/pages/Home.js renders. SEO strings also in public/index.html. No module names on this page:
+    // the one quiet link to /modules sits in the closing band; module terms belong to the module pages.
+    title: HO.SEO.title,
+    description: HO.SEO.description,
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
-    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, filmVideoLd, demoVideoLd, ...explainerVideoLd],
-    content: `
-      <section><div class="ch-container ch-narrow">
-        <p><strong>See it for yourself — live.</strong> WhatsApp our live demo dental clinic at +91 90223 12554 and have a real conversation, the way one of your patients would — ask about a treatment, book, reschedule or cancel, 24/7. No sign-up — just say hello. Or call +91 22 6423 0581 and wait a couple of rings — Aumy Voice will pick up (demo clinic: Lumière Dental). This live demo is Aumy Chat and Aumy Voice only — for a full Aumy One demo, call us on +91 80071 89868.</p>
-      </div></section>
-      <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">AI Dental Software · India</p>
-        <p>Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
-        <h1 class="ch-hero-title">Stop losing patients.</h1>
-        <ul>
-          ${POS.HERO_PRODUCTS.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.name)}</strong></a> ${esc(p.outcome)}</li>`).join('\n          ')}
-        </ul>
-        <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
-        <p><a href="/#get-the-app">Start free in the app</a> · <a href="/contact">Get started — risk-free</a> · <a href="/#be-the-patient">Try it live — WhatsApp or call our demo clinic</a></p>
-        <p>1,000 free Aumy credits per product · cancel any time · NVIDIA Inception member</p>
-      </div></section>
-      <section id="full-demo"><div class="ch-container ch-narrow">
-        <h2>${esc(EXPL.FULL_DEMO.title)}</h2>
-        <p>${esc(EXPL.FULL_DEMO.blurb)} <a href="https://www.youtube.com/watch?v=${EXPL.FULL_DEMO.youtubeId}">Watch the 9-minute demo</a> · <a href="/demos">More demo videos</a></p>
-      </div></section>
-      <section id="explainers"><div class="ch-container ch-narrow">
-        <h2>${esc(EXPL.TITLE)}</h2>
-        <p>${esc(EXPL.SUB)}</p>
-        <ul>
-          ${EXPL.VIDEOS.map((v) => `<li><a href="${v.src}"><strong>${esc(v.name)}</strong> explainer video</a> — ${esc(v.line)} <a href="/modules/${v.moduleId}">See what ${esc(v.name)} does</a></li>`).join('\n          ')}
-        </ul>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">Dental clinics Aumy serves</p>
-        ${clinicsStripHtml()}
-        <h2>Busy clinics already run on Aumy.</h2>
-        <p>Vinayaka Dental Care: fewer no-shows and patients coming back — "we didn't hire a single extra person to make it happen." AUM AI is an NVIDIA Inception member.</p>
-      </div></section>
-      ${googleReviewsHtml()}
-      <section id="modules"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(MODS.HOME.eyebrow)}</p>
-        <h2>${esc(MODS.HOME.title)}</h2>
-        <p>${esc(MODS.HOME.sub)}</p>
-        <ul>
-          ${moduleCardsHtml(MODS.PAGES, { stores: true })}
-        </ul>
-        <p><a href="/modules">Compare all the modules side by side</a></p>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        <h2>Get the Aumy app — start free.</h2>
-        <p>Download Aumy on the App Store or Google Play, pick the module you need and set it up from your phone, with 1,000 free Aumy credits for each product. Want everything set up for you? Call our team on 80071 89868.</p>
-        ${faqHtml(HOME_FAQ.FAQS, 'Questions clinic owners ask')}
-        <h2>Stop losing patients. Start with one module.</h2>
-        <p>Pick the leak costing your clinic most and fix only that — or run every module together as <a href="/modules/automate-dental-clinic-operations">Aumy One</a>.</p>
-        <ul>
-          ${POS.HOME_EXPLORE.map((e) => `<li><a href="${e.to}">${esc(e.label)}</a></li>`).join('\n          ')}
-        </ul>
-      </div></section>`,
+    // The Sterling film (hero), Dr Ronak's video and the full demo film are on this page. The module explainer
+    // VideoObjects moved to /revenue-generator, the page that shows those videos.
+    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, filmVideoLd, explainerVideoLd[0]],
+    content: homeContent(),
   },
   {
     slug: 'revenue-generator',
@@ -648,6 +722,8 @@ const routes = [
     description: HOW.HOW_SEO.description,
     canonical: `${ORIGIN}/revenue-generator`,
     ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
+    // The module explainer videos play on this page (src/components/HomeExplainers.js); moved from home 2026-10-22.
+    jsonld: [orgLd, ...explainerVideoLd.slice(1)],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">How Aumy works</p>

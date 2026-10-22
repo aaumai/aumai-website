@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { OFFICES, ICON } from '../config/contact';
 import AppDownload from './AppDownload';
-import { HERO_PRODUCTS } from '../data/positioning';
+import { FOOTER_OUTCOMES, FOOTER_TAGLINE } from '../data/homeOutcomes';
 import './Footer.css';
 
 const Footer = () => {
@@ -12,15 +12,16 @@ const Footer = () => {
   // only; India build shows both India and US.
   const multiOffice = OFFICES.length > 1;
 
-  // The modules (owner 2026-10-12: the old "What Aumy does" list retired with the old positioning).
-  const modules = HERO_PRODUCTS;
+  // "What we fix" (owner 2026-10-22, outcomes as a service): the module pages, linked in outcome words
+  // with no product names, so every module page keeps a link from every page. Words: src/data/homeOutcomes.js.
+  const outcomes = FOOTER_OUTCOMES;
 
   // Dental-growth pages only. The legacy engineering/consulting pages (About,
   // Services, Case Studies, Insights, Engineering Partner) keep their routes
   // but are intentionally not linked anywhere on the Aumy site.
   const company = [
     { label: 'Aumy — How It Works', path: '/revenue-generator' },
-    { label: 'Modules — Buy One or All', path: '/modules' },
+    { label: 'Modules', path: '/modules' },
     { label: 'AI Dental Software India', path: '/ai-dental-software-india' },
     { label: 'AI Receptionist', path: '/ai-receptionist' },
     { label: 'WhatsApp Automation', path: '/whatsapp-automation-for-clinics' },
@@ -62,9 +63,7 @@ const Footer = () => {
               <p className="footer-apps-label">Get the Aumy app</p>
               <AppDownload variant="compact" />
             </div>
-            <p className="footer-tagline">
-              Stop losing patients. Modules for dental clinics — buy only what you need, or run them all as Aumy One.
-            </p>
+            <p className="footer-tagline">{FOOTER_TAGLINE}</p>
             <div className="footer-social">
               <a href="https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -74,13 +73,13 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Modules Column */}
+          {/* What we fix: outcome links to the module pages */}
           <div className="footer-column">
-            <h4>Modules</h4>
+            <h4>What we fix</h4>
             <ul>
-              {modules.map((m) => (
-                <li key={m.id}>
-                  <Link to={`/modules/${m.id}`}>{m.name}</Link> — {m.outcome}
+              {outcomes.map((o) => (
+                <li key={o.to}>
+                  <Link to={o.to}>{o.label}</Link>
                 </li>
               ))}
             </ul>
