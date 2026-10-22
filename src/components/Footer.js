@@ -54,7 +54,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
-              <img src="/aumy-lockup-dark.png" alt="Aumy by AUM AI" />
+              <img src="/aumy-waves-lockup-dark.png" alt="Aumy by AUM AI" />
             </Link>
             <p className="footer-byline">an AUM AI product</p>
             {/* Aumy app on both stores (owner ask, 8 Sept 2026) */}
