@@ -221,7 +221,7 @@ export default function MasterclassPage() {
             </section>
           )}
 
-          {/* One sheet for the whole clinic (owner 2026-10-21): one download, then three steps for Google Sheets. */}
+          {/* One sheet for the whole clinic (owner 2026-10-21): one download, then the steps for Google Sheets. */}
           <section className="mc-section mc-pack" aria-labelledby="mc-sheet-h">
             <h2 id="mc-sheet-h">{MC.MASTER_SHEET.title}</h2>
             <p>{MC.MASTER_SHEET.short}</p>
