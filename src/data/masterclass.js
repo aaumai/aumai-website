@@ -33,17 +33,18 @@ const SEO = {
     'A 1-hour masterclass for dental and skin clinic owners: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. One Clinic Master Sheet and a Claude skill file, ₹999.',
 };
 
-// The hero carries the "10 minutes every morning" ad (owner 2026-10-21; script in
+// The hero carries the "30 minutes every morning" ad (owner 2026-10-21; 10 → 30
+// minutes and no "guarantee", owner 2026-10-22; script in
 // docs/masterclass/ads/ad-script-10-minutes-999.md in the EHR project).
 const HERO = {
   eyebrow: 'Dental clinic owners, get ready to be mind-blown',
-  title: 'Run all your follow‑ups in 10 minutes!',
+  title: 'Run all your follow‑ups in 30 minutes!',
   titleLead: 'Run all your follow‑ups in ',
-  titleAccent: '10 minutes',
+  titleAccent: '30 minutes',
   titleTail: '!',
   promise:
     'Every new enquiry. Every patient with an appointment. Every patient who missed one. Every “I’ll let you know”. Every treatment left half-done. Every patient who hasn’t come back in a year.',
-  who: 'Feels like too much to do? I guarantee you can do all of it in 10 minutes every morning. In The Full Chair Method masterclass, I show you exactly how. For dental and skin clinic owners, and the manager or front-desk lead who runs it with you.',
+  who: 'Feels like too much to do? You can do all of it in about 30 minutes every morning. In The Full Chair Method masterclass, I show you exactly how. For dental and skin clinic owners, and the manager or front-desk lead who runs it with you.',
   facts: [
     { b: 'About 1 hour', t: 'watch any time' },
     { b: ACCESS, t: 'watch as often as you like' },
@@ -163,14 +164,14 @@ const WAYS = {
     { h: 'Running on its own', t: 'The same system inside clinic software, shown on a demo clinic with our own software, Aumy. Shown, not sold: there is no offer in the masterclass.' },
   ],
   noSoftware: 'You don’t need to buy any software. The first two ways need only Excel or Google Sheets, and a Claude account if you want Claude’s help.',
-  buildTitle: 'Then: about 10 minutes every morning',
+  buildTitle: 'Then: about 30 minutes every morning',
   build: [
     'Open Claude and type one line: “Today’s work”.',
     'Every patient due today, from every system, appears on one page with the message ready.',
     'Press Send on WhatsApp for each one, or call.',
     'Tell Claude what you sent: your sheet and your weekly scorecard update themselves.',
   ],
-  buildNote: 'Most days it takes about 10 minutes. On the busiest days, a little longer.',
+  buildNote: 'Most days it takes about half an hour. On the busiest days, a little longer.',
 };
 
 const KIT = {
