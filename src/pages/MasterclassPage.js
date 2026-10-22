@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setNoindex } from '../utils/seo';
+import { withYouTubeJsApi } from '../utils/videoFocus';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
 import './ScorecardPage.css';
@@ -250,7 +251,7 @@ export default function MasterclassPage() {
             <h2 id="mc-video-h">The masterclass video</h2>
             {me.video && me.video.type === 'embed' && (
               <div className="mc-video">
-                <iframe src={me.video.url} title="The Full Chair Method masterclass" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
+                <iframe src={withYouTubeJsApi(me.video.url)} title="The Full Chair Method masterclass" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
               </div>
             )}
             {me.video && me.video.type === 'file' && (

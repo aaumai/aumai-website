@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FULL_DEMO } from '../data/explainers';
+import { withYouTubeJsApi } from '../utils/videoFocus';
 import '../pages/DemosPage.css';
 
 /**
@@ -17,7 +18,7 @@ const HomeFullDemo = () => {
           <div className="dv-frame">
             {playing ? (
               <iframe
-                src={`https://www.youtube.com/embed/${FULL_DEMO.youtubeId}?autoplay=1&rel=0`}
+                src={withYouTubeJsApi(`https://www.youtube.com/embed/${FULL_DEMO.youtubeId}?autoplay=1&rel=0`)}
                 title={FULL_DEMO.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
