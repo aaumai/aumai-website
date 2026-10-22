@@ -71,12 +71,18 @@ const startInAppHtml = (name) => `<p><strong>${esc(STORES.START_LINE)}</strong>.
 // src/components/GoogleReviews.js renders (src/data/googleReviews.js). Plain HTML only:
 // NO Review / AggregateRating JSON-LD (self-serving reviews break Google's guidelines).
 const GR = require('../src/data/googleReviews');
+// The hero review (Dr Priyanka, owner 2026-10-22) leads the full home list under its pull-quote
+// heading; on /pricing (limit) it is just the first review. Blank lines in a review are paragraphs.
+const reviewTextHtml = (text) => {
+  const paras = text.split(/\n\s*\n/);
+  return paras.length > 1 ? paras.map((p) => `<p>${esc(p)}</p>`).join('') : esc(text);
+};
 const googleReviewsHtml = (limit) => {
   const list = limit ? GR.GOOGLE_REVIEWS.slice(0, limit) : GR.GOOGLE_REVIEWS;
   return `<section id="google-reviews"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Google reviews</p>
         <h2>What our customers say</h2>
-        ${list.map((r) => `<figure><blockquote>${esc(r.text)}</blockquote><figcaption>${esc(r.name)} · ${r.stars} out of 5 stars · ${esc(r.month)} · Google review</figcaption></figure>`).join('\n        ')}
+        ${list.map((r) => `<figure>${!limit && r.hero && r.pullQuote ? `<h3>${esc(r.pullQuote)}</h3>` : ''}<blockquote>${reviewTextHtml(r.text)}</blockquote><figcaption>${esc(r.name)}${r.clinic ? `, ${esc(r.clinic)}` : ''} · ${r.stars} out of 5 stars · ${esc(r.month)} · Google review</figcaption></figure>`).join('\n        ')}
         <p>${esc(GR.GOOGLE_RATING)} out of 5 on Google · <a href="${GR.GOOGLE_REVIEWS_URL}">Read all reviews</a> · <a href="${GR.GOOGLE_WRITE_REVIEW_URL}">Write a review</a></p>
       </div></section>`;
 };

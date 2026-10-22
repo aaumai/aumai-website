@@ -98,17 +98,88 @@
 .gr-foot a { color: var(--c-accent-dark, #218779); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .gr-dot { color: var(--c-line, #ccc); }
 
+.gr-clinic { font-size: 14px; font-weight: 500; color: var(--c-ink-soft, #55636e); }
+
+/* HERO review (owner 2026-10-22: Dr Priyanka): one wide card above the grid.
+   Desktop: her own line + who she is on the left, the full review on the right.
+   Phone: pull quote, review, then stars and name, in that order. */
+.gr-hero {
+  margin-top: 40px;
+  text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-areas: "pull body" "who body";
+  grid-template-rows: auto 1fr;
+  column-gap: 56px;
+  row-gap: 28px;
+  padding: 44px 48px 40px;
+}
+.gr-pull {
+  grid-area: pull;
+  margin: 0;
+  font-family: var(--lux-serif, Georgia, 'Times New Roman', serif);
+  font-size: clamp(26px, 2.6vw, 36px);
+  font-weight: 500;
+  line-height: 1.22;
+  color: var(--c-ink, #16324f);
+}
+.gr-pull-mark {
+  display: block;
+  height: 34px;
+  font-size: 76px;
+  line-height: 1;
+  color: var(--lux-gold, #f4b400);
+}
+.gr-hero-body { grid-area: body; min-width: 0; display: flex; flex-direction: column; }
+.gr-hero .gr-text { margin-top: 0; font-size: 18px; line-height: 1.75; }
+/* Desktop shows her whole review; tablet and phone clamp it with "Read more". */
+.gr-hero .gr-text--clamped { display: block; overflow: visible; -webkit-line-clamp: none; line-clamp: none; }
+.gr-hero-who { grid-area: who; align-self: end; }
+.gr-hero .gr-stars { margin-top: 0; font-size: 20px; }
+.gr-hero .gr-who { margin-top: 14px; }
+.gr-hero .gr-avatar { width: 52px; height: 52px; font-size: 17px; }
+.gr-hero .gr-name { font-size: 18px; }
+.gr-video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-accent-dark, #218779);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.gr-hero + .gr-grid { margin-top: 24px; }
+/* The film the hero review links to sits under the fixed header. */
+#sterling-video { scroll-margin-top: calc(110px + var(--notice-h, 0px)); }
+
 /* Compact strip (/pricing): shorter cards, tighter section. */
 .gr--compact { padding: 64px 0; }
 .gr--compact .gr-text--clamped { -webkit-line-clamp: 5; line-clamp: 5; }
 
 @media (max-width: 960px) {
   .gr-grid > li { flex-basis: calc((100% - 24px) / 2); }
+  .gr-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "pull" "body" "who";
+    grid-template-rows: auto;
+    row-gap: 20px;
+    padding: 34px 32px 30px;
+  }
+  .gr-hero-who { align-self: start; }
+  .gr-hero .gr-text--clamped { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 12; line-clamp: 12; }
 }
 @media (max-width: 640px) {
   .gr-grid { gap: 16px; margin-top: 28px; }
   .gr-grid > li { flex-basis: 100%; }
   .gr-card { padding: 22px 20px 18px; }
+  .gr-hero { margin-top: 28px; padding: 26px 20px 22px; row-gap: 16px; }
+  .gr-hero + .gr-grid { margin-top: 16px; }
+  .gr-pull { font-size: 25px; }
+  .gr-pull-mark { height: 28px; font-size: 64px; }
+  .gr-hero .gr-text { font-size: 16.5px; line-height: 1.7; }
+  .gr-hero .gr-text--clamped { -webkit-line-clamp: 10; line-clamp: 10; }
   .gr-dot--lead { display: none; }
   .gr-score { flex-basis: 100%; justify-content: center; }
 }
@@ -119,5 +190,12 @@
 .site-lux .gr-name { font-weight: 500; color: var(--lux-navy); }
 .site-lux .gr-text { font-weight: 400; color: var(--lux-navy); }
 .site-lux .gr-more,
-.site-lux .gr-foot a { color: var(--lux-bronze); }
+.site-lux .gr-foot a,
+.site-lux .gr-video-link { color: var(--lux-bronze); }
+.site-lux .gr-hero { border-top: 3px solid var(--lux-gold); }
+/* Beats ".site-lux .ch-home h3" (24px): the pull quote is the card's big line. */
+.site-lux .gr .gr-pull { font-size: clamp(30px, 2.8vw, 40px); line-height: 1.18; color: var(--lux-navy); }
+@media (max-width: 640px) {
+  .site-lux .gr .gr-pull { font-size: 27px; }
+}
 .site-lux .ch-section.gr--compact { padding: 72px 0; }
