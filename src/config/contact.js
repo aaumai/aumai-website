@@ -33,7 +33,8 @@ export const INDIA_OFFICE = {
 export const INDIA_WHATSAPP = {
   number: '918007189868',
   display: '+91 80071 89868',
-  prefill: "Hi, I'd like to see how Aumy can help grow my dental practice.",
+  // Owner 2026-10-22 (outcomes as a service): the same opener as the home page's WhatsApp buttons.
+  prefill: "Hi, I'd like a free audit of my dental clinic.",
 };
 
 // India build lists India first (home market), then the US office.

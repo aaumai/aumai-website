@@ -214,8 +214,10 @@ const orgLd = {
   '@id': `${ORIGIN}/#organization`,
   ...(MARKET === 'us' ? {} : { founder: { '@id': `${ORIGIN}/about#founder` } }),
   name: MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'AUM AI Healthcare Solutions',
+  // The new positioning, no price (owner 2026-10-22): src/data/homeOutcomes.js.
+  ...(MARKET === 'us' ? {} : { description: HO.ORG_DESCRIPTION }),
   url: `${ORIGIN}/`,
-  logo: `${ORIGIN}/aumy-mark-512.png`,
+  logo: `${ORIGIN}${HO.LOGO_URL}`,
   // Same-entity profiles (all verified live 2026-10-06). LinkedIn is deliberately absent:
   // https://www.linkedin.com/company/aumy returned 404 when checked.
   sameAs: [
@@ -250,28 +252,11 @@ const dentalSoftwareLd = {
   operatingSystem: 'Web, iOS, Android',
   '@id': `${ORIGIN}/#aumy-dental`,
   url: `${ORIGIN}/`,
-  description: `Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICE.MONTHLY_TEXT}. ${POS.LD_SUFFIX}`,
+  description: `${HO.PRODUCT_DESCRIPTION} ${POS.LD_SUFFIX}`,
   areaServed: { '@type': 'Country', name: 'India' },
   inLanguage: ['en-IN', 'hi-IN', 'mr-IN'],
   featureList: ADS.CAPABILITIES.map(([t]) => t),
-  offers: {
-    '@type': 'Offer',
-    name: 'Aumy Clinic OS',
-    description: `Starts from ${PRICE.MONTHLY_TEXT}.`,
-    price: String(PRICE.MONTHLY_FROM),
-    priceCurrency: 'INR',
-    valueAddedTaxIncluded: false,
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: String(PRICE.MONTHLY_FROM),
-      minPrice: String(PRICE.MONTHLY_FROM), // "starts from"
-      priceCurrency: 'INR',
-      unitCode: 'MON',
-      unitText: 'MONTH',
-      valueAddedTaxIncluded: false,
-    },
-    url: `${ORIGIN}/pricing`,
-  },
+  // No price in the search data (owner 2026-10-22); prices live on /pricing.
   publisher: { '@id': `${ORIGIN}/#organization` },
 };
 
@@ -321,7 +306,7 @@ const demoVideoLd = {
   publisher: {
     '@type': 'Organization',
     name: 'AUM AI',
-    logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` },
+    logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` },
   },
 };
 
@@ -339,7 +324,7 @@ const filmVideoLd = {
   publisher: {
     '@type': 'Organization',
     name: 'AUM AI',
-    logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` },
+    logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` },
   },
 };
 
@@ -353,7 +338,7 @@ const explainerVideoLd = [EXPL.HERO_VIDEO, ...EXPL.VIDEOS].map((v) => ({
   contentUrl: `${ORIGIN}${v.src}`,
   uploadDate: EXPL.UPLOAD_DATE,
   duration: v.duration,
-  publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` } },
+  publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` } },
 }));
 
 const videoLd = {
@@ -366,6 +351,17 @@ const videoLd = {
   uploadDate: '2026-07-02',
 };
 
+// The five "How we work" steps (owner 2026-10-22): word for word what src/components/HowWeWork.js renders on
+// home, /revenue-generator and /about (src/data/homeOutcomes.js, HOW).
+function howWeWorkHtml(eyebrow = HO.HOW.eyebrow) {
+  return `<section id="how-we-work"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(eyebrow)}</p>
+        <h2>${esc(HO.HOW.titleA)} ${esc(HO.HOW.titleB)}</h2>
+        <ol>
+          ${HO.HOW.steps.map((st) => '<li><h3>' + esc(st.title) + '</h3><p>' + esc(st.body) + '</p>' + (st.pull ? '<p>“' + esc(st.pull.q) + '” — ' + esc(st.pull.who) + '</p>' : '') + '<p>' + esc(st.exTag) + ': ' + esc(st.ex) + '</p></li>').join('\n          ')}
+        </ol>
+      </div></section>`;
+}
 // ---- home (outcomes as a service, owner 2026-10-22) -----------------------
 // Word for word what src/pages/Home.js renders, from src/data/homeOutcomes.js and src/data/homeFaq.js.
 function homeContent() {
@@ -415,13 +411,7 @@ function homeContent() {
         ${li(HO.VS.quotes, (q) => '<blockquote>“' + esc(q.q) + '” — ' + esc(q.who) + ', ' + esc(q.where) + '</blockquote>')}
         <p>${esc(HO.VS.closeA)} ${esc(HO.VS.closeB)}</p>
       </div></section>
-      <section id="how-we-work"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.HOW.eyebrow)}</p>
-        <h2>${esc(HO.HOW.titleA)} ${esc(HO.HOW.titleB)}</h2>
-        <ol>
-          ${li(HO.HOW.steps, (st) => '<li><h3>' + esc(st.title) + '</h3><p>' + esc(st.body) + '</p>' + (st.pull ? '<p>“' + esc(st.pull.q) + '” — ' + esc(st.pull.who) + '</p>' : '') + '<p>' + esc(st.exTag) + ': ' + esc(st.ex) + '</p></li>')}
-        </ol>
-      </div></section>
+      ${howWeWorkHtml()}
       <section id="the-4c-framework"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HO.FOURC.eyebrow)}</p>
         <h2>${esc(HO.FOURC.titleA)} ${esc(HO.FOURC.titleB)}</h2>
@@ -709,7 +699,7 @@ const routes = [
     title: HO.SEO.title,
     description: HO.SEO.description,
     canonical: `${ORIGIN}/`,
-    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
+    ogImage: `${ORIGIN}${HO.SEO.shareImage}`,
     // The Sterling film (hero), Dr Ronak's video and the full demo film are on this page. The module explainer
     // VideoObjects moved to /revenue-generator, the page that shows those videos.
     jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, filmVideoLd, explainerVideoLd[0]],
@@ -717,41 +707,35 @@ const routes = [
   },
   {
     slug: 'revenue-generator',
-    // Lean "How Aumy works" (owner 2026-10-12). Words: src/data/howItWorks.js (same file as the React page).
+    // "How Aumy works" (2026-10-22): leads with the five "How we work" steps. Words: src/data/howItWorks.js and
+    // src/data/homeOutcomes.js (same files as the React page).
     title: HOW.HOW_SEO.title,
     description: HOW.HOW_SEO.description,
     canonical: `${ORIGIN}/revenue-generator`,
-    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
+    ogImage: `${ORIGIN}${HO.SEO.shareImage}`,
     // The module explainer videos play on this page (src/components/HomeExplainers.js); moved from home 2026-10-22.
     jsonld: [orgLd, ...explainerVideoLd.slice(1)],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">How Aumy works</p>
-        <h1 class="ch-hero-title">Pick a module. Connect. Stop losing patients.</h1>
-        <p class="ch-hero-sub">Aumy is built from modules for dental clinics. Start with the one for your biggest leak, set it up from your phone, and add more whenever you want.</p>
-        <p><a href="/#get-the-app">Start free in the app</a> · <a href="/contact">Talk to our team</a></p>
+        <p class="ch-eyebrow">${esc(HOW.HOW_HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(HOW.HOW_HERO.title)}</h1>
+        <p class="ch-hero-sub">${esc(HOW.HOW_HERO.sub)}</p>
+        <p><a href="${HO.HERO.primary.to}">${esc(HO.HERO.primary.label)}</a> · <a href="${esc(HO.HERO.whatsapp.href)}">${esc(HO.HERO.whatsapp.label)}</a></p>
       </div></section>
+      ${howWeWorkHtml(HOW.HOW_HERO.stepsEyebrow)}
       <section><div class="ch-container ch-narrow">
-        <h2>Three steps.</h2>
-        <ol>
-          ${HOW.HOW_STEPS.map((st) => `<li><strong>${esc(st.title)}</strong> — ${esc(st.body)}</li>`).join('\n          ')}
-        </ol>
-        <p>Prefer it set up for you? Call our team on 80071 89868.</p>
+        <h2>We work for your team, not around it.</h2>
+        <ul>
+          ${HOW.HOW_CONTROL.map((c) => `<li><strong>${esc(c.title)}</strong> — ${esc(c.body)}</li>`).join('\n          ')}
+        </ul>
         <h2>${esc(EXPL.TITLE)}</h2>
         <ul>
           ${EXPL.VIDEOS.map((v) => `<li><a href="${v.src}"><strong>${esc(v.name)}</strong> explainer video</a> — ${esc(v.line)}</li>`).join('\n          ')}
         </ul>
-        <h2>Buy only what you need.</h2>
-        <ul>
-          ${POS.HERO_PRODUCTS.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.name)}</strong></a> ${esc(p.outcome)}</li>`).join('\n          ')}
-        </ul>
-        <p><a href="/modules">Compare all the modules side by side</a></p>
-        <h2>Aumy works for your team, not around it.</h2>
-        <ul>
-          ${HOW.HOW_CONTROL.map((c) => `<li><strong>${esc(c.title)}</strong> — ${esc(c.body)}</li>`).join('\n          ')}
-        </ul>
+        <p>${esc(HO.FINAL.modulesLead)} <a href="${HO.FINAL.modulesLink.to}">${esc(HO.FINAL.modulesLink.label)}</a></p>
         <h2>Busy clinics already run on Aumy.</h2>
-        <p>Vinayaka Dental Care: "Our revenue grew about 25% in just two months — and we didn't hire a single extra person to make it happen." <a href="/case-studies">Read the case studies</a></p>
+        <blockquote>“${esc(HOW.HOW_PROOF.quote)}” — ${esc(HOW.HOW_PROOF.who)}</blockquote>
+        <p><strong>${esc(HOW.HOW_PROOF.number)}</strong> ${esc(HOW.HOW_PROOF.numberText)} <a href="/#google-reviews">Read what clinic owners say</a></p>
       </div></section>`,
   },
   {
@@ -1182,7 +1166,7 @@ const routes = [
     title: `About Aumy & its founder, ${FOUNDER.NAME} | AI Dental Software`,
     description: `Aumy is built by ${FOUNDER.NAME}: ${FOUNDER.SUMMARY}`,
     canonical: `${ORIGIN}/about`,
-    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
+    ogImage: `${ORIGIN}${HO.SEO.shareImage}`,
     jsonld: [orgLd, {
       '@context': 'https://schema.org',
       '@type': 'Person',
@@ -1200,6 +1184,9 @@ const routes = [
         <p class="ch-eyebrow">The founder</p>
         <h1 class="ch-hero-title">${FOUNDER.YEARS} years inside healthcare. One problem, seen in clinic after clinic.</h1>
         <p class="ch-hero-sub">${esc(FOUNDER.NAME)} &middot; ${esc(FOUNDER.ROLE)}. ${esc(FOUNDER.SUMMARY)}</p>
+      </div></section>
+      ${howWeWorkHtml()}
+      <section><div class="ch-container ch-narrow">
         ${FOUNDER.STORY.map((p) => `<p>${esc(p)}</p>`).join('')}
         <h2>${esc(POS.WHY_DENTAL_ONLY.title)}</h2>
         <p>${esc(POS.WHY_DENTAL_ONLY.body)}</p>
@@ -1277,7 +1264,7 @@ for (const p of growthPosts) {
     canonical: `${ORIGIN}/growth/${p.slug}`,
     // Social shares of articles need an image; the dental hero is the site
     // default until articles get their own art.
-    ogImage: `${ORIGIN}/screenshots/roi-preview.png`,
+    ogImage: `${ORIGIN}${HO.SEO.shareImage}`,
     jsonld: [
       {
         '@context': 'https://schema.org',
@@ -1290,7 +1277,7 @@ for (const p of growthPosts) {
         publisher: {
           '@type': 'Organization',
           name: 'AUM AI Healthcare Solutions',
-          logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` },
+          logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` },
         },
         mainEntityOfPage: `${ORIGIN}/growth/${p.slug}`,
       },
@@ -1383,7 +1370,7 @@ for (const ep of RYC.liveEpisodes()) {
         duration: ep.duration,
         contentUrl: `${ORIGIN}${ep.src}`,
         inLanguage: 'en-IN',
-        publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}/aumy-mark-512.png` } },
+        publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` } },
         hasPart: ep.chapters.map((c, i) => ({
           '@type': 'Clip',
           name: c.label,

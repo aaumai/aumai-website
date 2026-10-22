@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { NAME, ROLE, YEARS, COUNTRIES, SUMMARY, STORY, EXPERTISE, CAREER, QUOTE } from '../data/founder';
 import { WHY_DENTAL_ONLY } from '../data/positioning';
+import { SEO } from '../data/homeOutcomes';
+import HowWeWork from '../components/HowWeWork';
 import './HomeClinic.css';
 
 /**
@@ -17,6 +19,7 @@ const AboutPage = () => {
       title: `About Aumy & its founder, ${NAME} | AI Dental Software`,
       description: `Aumy is built by ${NAME}: ${SUMMARY}`,
       canonical: 'https://aumai.co.in/about',
+      image: `https://aumai.co.in${SEO.shareImage}`,
     });
   }, []);
 
@@ -36,6 +39,9 @@ const AboutPage = () => {
           </ul>
         </div>
       </section>
+
+      {/* How we work with your clinic: the five steps (owner 2026-10-22), same component as home */}
+      <HowWeWork />
 
       <section className="ch-section">
         <div className="ch-container lux-about-story">
