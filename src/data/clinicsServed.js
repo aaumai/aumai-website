@@ -35,10 +35,14 @@ const clinicsServed = [
   {
     name: 'The Sterling Dental Clinic',
     city: 'New Delhi',
-    logo: '/logos/clinics/sterling.png',
-    // Their published mark is a four-line stacked wordmark. Capped to the same
-    // HEIGHT as a horizontal logo its letters come out visibly smaller, so it
-    // gets the taller cap to sit at the same optical weight as its neighbours.
+    // Their official logo from the Sterling shoot (2026-10-20), the DARK
+    // variant (dark-green + gold ink, transparent) because this strip sits on a
+    // white band; the light variant is for dark backgrounds. Owner 2026-10-22.
+    logo: '/logos/clinics/sterling.svg',
+    // Stacked mark (THE / STERLING / DENTAL CLINIC / PATIENT FIRST). Capped to
+    // the same HEIGHT as a horizontal logo its letters come out visibly smaller,
+    // so it gets the taller cap to sit at the same optical weight as its
+    // neighbours.
     tall: true,
     consent: true, // confirmed by Sterling 2026-09-20
   },
