@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { OFFICES, ICON } from '../config/contact';
 import AppDownload from './AppDownload';
 import { FOOTER_OUTCOMES, FOOTER_TAGLINE } from '../data/homeOutcomes';
@@ -7,6 +7,9 @@ import './Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  // Owner 2026-10-22: the app badges are hidden on the home page only; every other page keeps them.
+  const { pathname } = useLocation();
+  const showApps = pathname !== '/';
 
   // Contact offices come from the shared config: US build shows the US office
   // only; India build shows both India and US.
@@ -59,10 +62,12 @@ const Footer = () => {
             </Link>
             <p className="footer-byline">an AUM AI product</p>
             {/* Aumy app on both stores (owner ask, 8 Sept 2026) */}
-            <div className="footer-apps">
-              <p className="footer-apps-label">Get the Aumy app</p>
-              <AppDownload variant="compact" />
-            </div>
+            {showApps && (
+              <div className="footer-apps">
+                <p className="footer-apps-label">Get the Aumy app</p>
+                <AppDownload variant="compact" />
+              </div>
+            )}
             <p className="footer-tagline">{FOOTER_TAGLINE}</p>
             <div className="footer-social">
               <a href="https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
