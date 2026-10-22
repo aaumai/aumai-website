@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/aumy-mark-32.png" />
-    <link rel="icon" type="image/png" sizes="64x64" href="%PUBLIC_URL%/aumy-mark-64.png" />
+    <!-- Favicon: the transparent Aumy waves (owner 2026-10-22). The SVG switches navy (light tabs) / light waves
+         (dark tabs) with prefers-color-scheme; the ICO is the fallback. ?v=2 busts the old rounded mark. -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon-waves.ico?v=2" sizes="32x32" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon-waves.svg?v=2" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#16324f" />
 
@@ -24,20 +26,22 @@
     <!-- Open Graph (social / link previews) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Aumy" />
-    <meta property="og:title" content="Aumy: No patient slips through your dental clinic" />
+    <meta property="og:title" content="Stop losing patients. We make sure of it. | Aumy for dental clinics" />
     <meta property="og:description" content="We don’t sell you software and leave. A team that works with your staff, the 4C Framework, and the system that runs it, measured every Monday." />
     <meta property="og:url" content="https://aumai.co.in/" />
-    <meta property="og:image" content="https://aumai.co.in/screenshots/roi-preview.png" />
-    <meta property="og:image:alt" content="AUM AI recoverable-revenue dashboard for clinics" />
+    <meta property="og:image" content="https://aumai.co.in/og/aumy-stop-losing-patients-1200x630.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Stop losing patients. We make sure of it. Aumy for dental clinics" />
     <meta property="og:locale" content="en_IN" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Aumy: No patient slips through your dental clinic" />
+    <meta name="twitter:title" content="Stop losing patients. We make sure of it. | Aumy for dental clinics" />
     <meta name="twitter:description" content="Every enquiry answered, every appointment confirmed, every treatment finished. We make sure of it." />
-    <meta name="twitter:image" content="https://aumai.co.in/screenshots/roi-preview.png" />
+    <meta name="twitter:image" content="https://aumai.co.in/og/aumy-stop-losing-patients-1200x630.png" />
 
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/aumy-mark-256.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/aumy-waves-apple-180.png?v=2" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -53,8 +57,8 @@
           "name": "AUM AI Healthcare Solutions",
           "alternateName": ["Aumy", "AUM AI"],
           "url": "https://aumai.co.in/",
-          "logo": "https://aumai.co.in/aumy-mark-512.png",
-          "description": "Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ₹3,000 a month. Handcrafted only for dentists and trained for dentistry: Aumy knows dental treatments, tooth numbers, recalls and how a dental clinic’s day runs.",
+          "logo": "https://aumai.co.in/aumy-logo-512.png",
+          "description": "AUM AI makes sure no patient slips through a dental clinic: a team that works with the clinic’s own staff, the 4C Framework (Convert, Confirm, Care, Come back), and Aumy, the AI dental software that runs it every day, with KPIs reported every Monday.",
           "sameAs": [
             "https://aumai.co.in/",
             "https://aumyai.com/",
@@ -95,10 +99,7 @@
   </head>
   <body>
     <noscript>
-      Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ₹3,000 a month. Aumy coordinates your
-      patients, people and processes from the first enquiry to ongoing care: calls, WhatsApp, appointments,
-      follow-ups, intake, consent and care gaps on one connected platform. Please enable
-      JavaScript to view the site, or visit https://aumai.co.in/revenue-generator.
+      AUM AI makes sure no patient slips through a dental clinic: a team that works with the clinic’s own staff, the 4C Framework (Convert, Confirm, Care, Come back), and Aumy, the AI dental software that runs it every day, with KPIs reported every Monday. Please enable JavaScript to view the site, or visit https://aumai.co.in/revenue-generator.
     </noscript>
     <div id="root"></div>
   </body>

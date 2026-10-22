@@ -3,22 +3,22 @@
   "name": "Aumy by AUM AI",
   "icons": [
     {
-      "src": "aumy-mark-32.png",
+      "src": "aumy-waves-32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "aumy-mark-64.png",
+      "src": "aumy-waves-64.png",
       "sizes": "64x64",
       "type": "image/png"
     },
     {
-      "src": "aumy-mark-256.png",
+      "src": "aumy-waves-256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "aumy-mark-512.png",
+      "src": "aumy-waves-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

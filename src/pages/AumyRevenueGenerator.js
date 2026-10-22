@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import HomeExplainers from '../components/HomeExplainers';
 import AppDownload from '../components/AppDownload';
-import { HERO_PRODUCTS } from '../data/positioning';
-import { HOW_STEPS, HOW_CONTROL, HOW_SEO } from '../data/howItWorks';
+import HowWeWork from '../components/HowWeWork';
+import { HOW_SEO, HOW_HERO, HOW_CONTROL, HOW_PROOF } from '../data/howItWorks';
+import { HERO as HOME_HERO, FINAL, SEO } from '../data/homeOutcomes';
 import './HomeClinic.css';
 
 /**
- * /revenue-generator — "How Aumy works" in the top menu. Rebuilt lean on 2026-10-12 (owner: "get rid of our old
- * positioning"): three steps to go live, the module explainers, what each module does, staying in control, proof,
- * the app. Words: src/data/howItWorks.js (shared with scripts/prerender.js). The retired page (coordination problem,
- * Convert → Care → Retain → Reactivate, Jarvis, dedicated expert, Get Found) is in git history before this commit.
+ * /revenue-generator — "How Aumy works" in the top menu. 2026-10-22 (outcomes as a service): leads with the five
+ * "How we work" steps (the same component as home), then staying in control, the module explainer videos lower
+ * down with one quiet link to /modules, real proof and the app. Words: src/data/howItWorks.js and
+ * src/data/homeOutcomes.js (shared with scripts/prerender.js). The 2026-10-12 app-first page is in git history.
  */
 const AumyRevenueGenerator = () => {
   useEffect(() => {
@@ -19,7 +20,7 @@ const AumyRevenueGenerator = () => {
       title: HOW_SEO.title,
       description: HOW_SEO.description,
       canonical: 'https://aumai.co.in/revenue-generator',
-      image: 'https://aumai.co.in/screenshots/roi-preview.png',
+      image: `https://aumai.co.in${SEO.shareImage}`,
     });
   }, []);
 
@@ -28,70 +29,27 @@ const AumyRevenueGenerator = () => {
       {/* HERO */}
       <section className="ch-hero">
         <div className="ch-container ch-narrow ch-center">
-          <span className="ch-eyebrow">How Aumy works</span>
-          <h1 className="ch-hero-title">Pick a module. Connect. Stop losing patients.</h1>
-          <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            Aumy is built from modules for dental clinics. Start with the one for your biggest leak, set it up from
-            your phone, and add more whenever you want.
-          </p>
+          <span className="ch-eyebrow">{HOW_HERO.eyebrow}</span>
+          <h1 className="ch-hero-title">{HOW_HERO.title}</h1>
+          <p className="ch-hero-sub" style={{ marginLeft: 'auto', marginRight: 'auto' }}>{HOW_HERO.sub}</p>
           <div className="ch-hero-cta ch-center-cta">
-            <a href="#get-the-app" className="ch-btn ch-btn-primary">Start free in the app</a>
-            <Link to="/contact" className="ch-btn ch-btn-ghost">Talk to our team</Link>
+            <Link to={HOME_HERO.primary.to} className="ch-btn ch-btn-primary">{HOME_HERO.primary.label}</Link>
+            <a href={HOME_HERO.whatsapp.href} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">
+              {HOME_HERO.whatsapp.label}
+            </a>
           </div>
         </div>
       </section>
 
-      {/* THREE STEPS */}
-      <section className="ch-section">
-        <div className="ch-container">
-          <div className="ch-head">
-            <span className="ch-eyebrow">Live in minutes</span>
-            <h2 className="ch-h2">Three steps.</h2>
-          </div>
-          <ol className="ch-how-steps">
-            {HOW_STEPS.map((s, i) => (
-              <li key={s.title} className="ch-why-card">
-                <span className="ch-how-num">{i + 1}</span>
-                <div>
-                  <h3 className="ch-why-title">{s.title}</h3>
-                  <p className="ch-why-body">{s.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <p className="ch-note ch-center">
-            Prefer it set up for you? Call our team on <a href="tel:+918007189868">80071 89868</a>.
-          </p>
-        </div>
-      </section>
-
-      {/* THE MODULE EXPLAINERS */}
-      <HomeExplainers />
-
-      {/* WHAT EACH MODULE DOES */}
-      <section className="ch-section ch-tint">
-        <div className="ch-container ch-narrow">
-          <div className="ch-head">
-            <span className="ch-eyebrow">The modules</span>
-            <h2 className="ch-h2">Buy only what you need.</h2>
-          </div>
-          <ul className="ch-how-modules">
-            {HERO_PRODUCTS.map((p) => (
-              <li key={p.id}>
-                <Link to={`/modules/${p.id}`}>{p.name}</Link> <span>{p.outcome}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="ch-center"><Link to="/modules">Compare all the modules side by side &rarr;</Link></p>
-        </div>
-      </section>
+      {/* THE FIVE STEPS, each with an example */}
+      <HowWeWork eyebrow={HOW_HERO.stepsEyebrow} />
 
       {/* STAYING IN CONTROL */}
       <section className="ch-section">
         <div className="ch-container">
           <div className="ch-head">
             <span className="ch-eyebrow">Your clinic stays in control</span>
-            <h2 className="ch-h2">Aumy works for your team, not around it.</h2>
+            <h2 className="ch-h2">We work for your team, not around it.</h2>
           </div>
           <div className="ch-why">
             {HOW_CONTROL.map((c) => (
@@ -106,16 +64,22 @@ const AumyRevenueGenerator = () => {
         </div>
       </section>
 
+      {/* THE MODULE EXPLAINERS, lower down, with one quiet link to /modules */}
+      <HomeExplainers />
+      <p className="ch-center" style={{ marginTop: -40, marginBottom: 80 }}>
+        {FINAL.modulesLead} <Link to={FINAL.modulesLink.to}>{FINAL.modulesLink.label}</Link>
+      </p>
+
       {/* PROOF */}
       <section className="ch-section ch-tint">
         <div className="ch-container ch-narrow ch-center">
           <h2 className="ch-h2">Busy clinics already run on Aumy.</h2>
           <blockquote className="ch-founder">
-            &ldquo;Our revenue grew about 25% in just two months — and we didn&rsquo;t hire a single extra person to
-            make it happen.&rdquo;
-            <cite>— Vinayaka Dental Care</cite>
+            &ldquo;{HOW_PROOF.quote}&rdquo;
+            <cite>— {HOW_PROOF.who}</cite>
           </blockquote>
-          <Link to="/case-studies" className="ch-btn ch-btn-ghost">Read the case studies</Link>
+          <p className="ch-lead"><strong>{HOW_PROOF.number}</strong> {HOW_PROOF.numberText}</p>
+          <Link to="/#google-reviews" className="ch-btn ch-btn-ghost">Read what clinic owners say</Link>
         </div>
       </section>
 

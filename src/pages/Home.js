@@ -5,12 +5,13 @@ import ClinicsServed from '../components/ClinicsServed';
 import HomeFullDemo from '../components/HomeFullDemo';
 import HeroVideo from '../components/HeroVideo';
 import GoogleReviews from '../components/GoogleReviews';
+import HowWeWork from '../components/HowWeWork';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
 import { HOME_EXPLORE } from '../data/positioning';
 import { PRICE_LABEL, ACCESS } from '../data/masterclass';
 import {
-  HERO, PAIN, VS, HOW, FOURC, STRATEGIES, KPIS, STERLING_PROOF, BE_PATIENT, FIT, DIY, FINAL, SEO,
+  HERO, PAIN, VS, FOURC, STRATEGIES, KPIS, STERLING_PROOF, BE_PATIENT, FIT, DIY, FINAL, SEO,
 } from '../data/homeOutcomes';
 import './HomeClinic.css';
 import './HomeOutcomes.css';
@@ -94,7 +95,7 @@ const Home = () => {
       title: SEO.title,
       description: SEO.description,
       canonical: 'https://aumai.co.in/',
-      image: 'https://aumai.co.in/screenshots/roi-preview.png',
+      image: `https://aumai.co.in${SEO.shareImage}`,
     });
   }, []);
 
@@ -192,33 +193,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* HOW WE WORK WITH YOUR CLINIC: five steps, each with an example */}
-      <section className="ch-section ch-tint" id="how-we-work" aria-labelledby="ho-how-title">
-        <div className="ch-container">
-          <div className="ho-head">
-            <span className="ch-eyebrow">{HOW.eyebrow}</span>
-            <h2 id="ho-how-title" className="ch-h2">{HOW.titleA} <em>{HOW.titleB}</em></h2>
-          </div>
-          <ol className="ho-steps">
-            {HOW.steps.map((st, i) => (
-              <li key={st.title} className="ho-step">
-                <span className="ho-step-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>{st.title}</h3>
-                  <p>{st.body}</p>
-                  {st.pull && (
-                    <p className="ho-step-pull">“{st.pull.q}” <span>{st.pull.who}</span></p>
-                  )}
-                </div>
-                <div className="ho-ex">
-                  <span className="ho-tag">{st.exTag}</span>
-                  <p>{st.ex}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* HOW WE WORK WITH YOUR CLINIC: five steps, each with an example (shared with /revenue-generator and /about) */}
+      <HowWeWork />
 
       {/* THE 4C FRAMEWORK: each C, its systems, the outcome it moves */}
       <section className="ch-section" id="the-4c-framework" aria-labelledby="ho-4c-title">

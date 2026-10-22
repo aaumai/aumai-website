@@ -21,9 +21,11 @@
 const WHATSAPP_LINK = 'https://wa.me/918007189868?text=' + encodeURIComponent("Hi, I'd like a free audit of my dental clinic.");
 
 // Hero words are the owner's, approved exactly (2026-10-22): the H1, the six "Every…" lines, the close line.
+// H1 back to "Stop losing patients." (owner 2026-10-22: "short and powerful"); "dental clinic" stays in the
+// eyebrow, the title and the meta for SEO.
 const HERO = {
   eyebrow: 'For dental clinic owners · India',
-  title: 'No patient slips through your dental clinic.',
+  title: 'Stop losing patients.',
   every: [
     'Every new enquiry, answered.',
     'Every appointment, confirmed.',
@@ -373,15 +375,25 @@ const FOOTER_OUTCOMES = [
   { to: '/modules/dental-clinic-management-software', label: 'Records and billing in one place' },
   { to: '/modules/automate-dental-clinic-operations', label: 'All of it, run together' },
 ];
-const FOOTER_TAGLINE = 'No patient slips through your dental clinic. A team, the 4C Framework, and the system that runs it.';
+const FOOTER_TAGLINE = 'Stop losing patients. A team, the 4C Framework, and the system that runs it, for dental clinics.';
 
 // SEO (same strings in scripts/prerender.js slug '' and public/index.html).
 const SEO = {
   title: 'Aumy | AI Dental Software & AI Receptionist, Run For Your Dental Clinic in India',
   description: 'For dental clinics in India: AI dental software plus a team that runs it with your staff. Every call answered, visits confirmed, treatment finished, patients back.',
+  // Social share card (1200×630, made from the hero; source in AUMY Brand Assets/02-Covers-Banners).
+  shareImage: '/og/aumy-stop-losing-patients-1200x630.png',
+  shareTitle: 'Stop losing patients. We make sure of it. | Aumy for dental clinics',
 };
+
+// Hidden search data (JSON-LD, llms.txt, noscript), 2026-10-22: the new positioning, no price.
+// public/index.html carries a typed copy of ORG_DESCRIPTION (it cannot require this file).
+const ORG_DESCRIPTION = 'AUM AI makes sure no patient slips through a dental clinic: a team that works with the clinic’s own staff, the 4C Framework (Convert, Confirm, Care, Come back), and Aumy, the AI dental software that runs it every day, with KPIs reported every Monday.';
+const PRODUCT_DESCRIPTION = 'Aumy is AI dental software for dental clinics in India, set up and run with the clinic’s own team by AUM AI: an AI receptionist on calls and WhatsApp, appointment confirmations, rebooking, treatment follow-ups, recalls and clinic records, organised by the 4C Framework (Convert, Confirm, Care, Come back) and measured every Monday.';
+// The square logo for search results: the transparent Aumy waves logo (navy), the only Aumy logo since 2026-10-22.
+const LOGO_URL = '/aumy-logo-512.png';
 
 module.exports = {
   WHATSAPP_LINK, HERO, PAIN, VS, HOW, FOURC, STRATEGIES, KPIS, STERLING_PROOF, BE_PATIENT, FIT, DIY, FINAL,
-  FOOTER_OUTCOMES, FOOTER_TAGLINE, SEO,
+  FOOTER_OUTCOMES, FOOTER_TAGLINE, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION, LOGO_URL,
 };

@@ -27,6 +27,8 @@ const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The one pricing file the /pricing page reads, so llms.txt quotes the same numbers.
 const PRICING = require('../src/data/pricing');
 const POS = require('../src/data/positioning');
+// Outcomes as a service (owner 2026-10-22): the same words the home page and the JSON-LD use.
+const HO = require('../src/data/homeOutcomes');
 // One page per module (/modules/<id>), same list the React pages and prerender read.
 const MODS = require('../src/data/modules');
 // The How to Run Your Clinic video series: hub + one page per live episode (src/data/runYourClinic.js).
@@ -136,9 +138,12 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 // an assistant summarising us should get the same facts a human would.
 const LLMS = {
   in: `# AUM AI — Aumy for dental clinics (India)
-Last updated: 2026-10-06
+Last updated: 2026-10-22
 
-> Aumy is AI dental software for dental clinics in India: an AI receptionist that answers calls and WhatsApp 24/7, appointment reminders and follow-ups, and complete clinic management (records, charting, billing). From ${PRICING.MONTHLY_TEXT}. ${POS.LD_SUFFIX}
+> AUM AI runs patient follow-up for dental clinics in India as a service: a team that works with the clinic's staff, the 4C Framework (Convert, Confirm, Care, Come back) and Aumy, the AI dental software that runs it, with KPIs reported every Monday. ${POS.LD_SUFFIX}
+
+## How AUM AI works with a clinic
+${HO.HOW.steps.map((st, i) => `${i + 1}. ${st.title} ${st.body}`).join('\n')}
 
 ## Key facts
 - Setup and data migration are done for you; a named Aumy contact supports the clinic after go-live.
@@ -149,19 +154,19 @@ Last updated: 2026-10-06
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
 - Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
-- Priced in rupees: the Clinic OS (appointments, patient records, dental charting, billing, staff and doctor logins) starts from ${PRICING.MONTHLY_FROM.toLocaleString("en-IN")} INR a month. The AI receptionist, AI calls and patient follow-up automation are added on top and priced with each clinic. Prices exclude GST.
+- Priced in rupees, per clinic, after a free clinic audit; prices excluding GST are on ${ORIGIN}/pricing.
 - Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages
-- ${ORIGIN}/ — overview for clinic owners
+- ${ORIGIN}/ — for dental clinic owners: outcomes as a service, the 4C Framework, the strategies with examples, the KPIs measured every Monday, Google reviews and FAQs
 - ${ORIGIN}/ai-dental-software-india — AI dental software in India: what it is, what Aumy's AI does in a dental clinic, how it compares with traditional dental software, how to choose, pricing and FAQs
 - ${ORIGIN}/leak-calculator — 60-second check estimating what slips through the cracks in a stretched clinic: missed enquiries, no-shows and lapsed patients
 - ${ORIGIN}/switch — moving from your current dental software: Aumy syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images) for a one-time fee, no downtime
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
-- ${ORIGIN}/revenue-generator — how Aumy works: the coordination problem, Convert → Care → Retain → Reactivate, and the five groups of work it manages
+- ${ORIGIN}/revenue-generator — how we work with a dental clinic: free clinic audit, the clinic's plan in the doctor's name, set up with the staff, run and tuned every week, KPIs every Monday
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
-- ${ORIGIN}/pricing — Aumy pricing: the Clinic OS starts from ${PRICING.MONTHLY_FROM.toLocaleString("en-IN")} INR a month; the AI receptionist, AI calls and follow-ups are priced with each clinic
+- ${ORIGIN}/pricing — Aumy pricing in rupees
 - ${ORIGIN}/modules — Aumy sold module by module or as one connected system: Aumy Convert (lead nurturing & Meta ads optimisation), Aumy Clinic (dental clinic operating system) with the Aumy Scribe add-on (AI clinical documentation), Aumy Journey (clinic OS with the end-to-end patient journey), Aumy Chat (AI WhatsApp receptionist), Aumy Voice (AI voice receptionist), and Aumy One (the connected dental clinic system)
 ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}${p.addonOf ? ` (add-on to ${p.addonOf})` : ""}. ${p.card}`).join('\n')}
 - ${ORIGIN}/clinic-websites — clinic websites built for SEO and international patients: treatment, area and dental-tourism pages, weekly blogs, technical SEO and redirects that keep old rankings; case study: sterlingdentalclinic.com
@@ -170,7 +175,7 @@ ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}$
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
 - ${ORIGIN}/contact — talk to the Aumy team
 - ${ORIGIN}/podcast — the Dental Growth podcast
-- ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments; from ${PRICING.MONTHLY_TEXT}
+- ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments
 - ${ORIGIN}/whatsapp-automation-for-clinics — WhatsApp automation on the official Business API: care-gap reminders, reactivation, campaigns
 - ${ORIGIN}/growth — Dental Practice Growth Hub: practical guides on missed calls, lead follow-up, care gaps and patient reactivation for Indian dental clinics
 - ${ORIGIN}${RYC.HUB_PATH} — How to Run Your Clinic: a free video series for dental clinic owners, one system per episode and the one number that checks it
