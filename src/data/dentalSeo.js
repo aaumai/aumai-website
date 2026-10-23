@@ -81,8 +81,8 @@ const WORK = {
     {
       name: 'The Sterling Dental Clinic',
       place: 'Vasant Vihar, New Delhi',
-      tag: 'Website and SEO · live since 15 Oct 2026',
-      text: 'An implant-led clinic that treats patients from many countries. We built sterlingdentalclinic.com and run its SEO: a new article every Saturday, an SEO check every Monday, its Google profile, and a monthly Search Console report across five countries, measured against the baseline we took in October 2026.',
+      tag: 'Website and SEO',
+      text: 'An implant-led clinic that treats patients from many countries. We built sterlingdentalclinic.com and run its SEO: a new article every Saturday, an SEO check every Monday, its Google profile, and a monthly Search Console report across five countries, measured against the baseline we took before launch.',
       link: { href: '/clinic-websites#sterling', label: 'Read the Sterling case study', internal: true },
     },
     {
@@ -98,7 +98,7 @@ const WORK = {
       text: 'A rebuild of the clinic’s website on the same standard, keeping every page address the old site had.',
     },
   ],
-  note: 'Good SEO takes months, not days. Sterling’s new site went live in October 2026, so its first monthly report is still to come. We will share numbers when they are measured, not before.',
+  note: 'Good SEO takes months, not days. We share numbers only once a monthly report has measured them, not before.',
 };
 
 const STEPS = {
