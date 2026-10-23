@@ -280,6 +280,54 @@
   line-height: 1.35;
 }
 
+/* "Product & services": two labelled columns, Aumy first, then Services. Opens to the
+   right of its item so it never runs past the logo side of the screen. */
+.nav-dropdown.open .nav-dropdown-menu-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 600px;
+  left: -14px;
+  transform: none;
+  animation-name: nav-dropdown-in-left;
+}
+
+@keyframes nav-dropdown-in-left {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.nav-dropdown-section {
+  padding: 6px 4px 4px;
+}
+
+.nav-dropdown-section + .nav-dropdown-section {
+  border-left: 1px solid rgba(22, 50, 79, 0.1);
+  padding-left: 8px;
+}
+
+.nav-dropdown-section-label {
+  display: block;
+  padding: 6px 14px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a6a36;
+}
+
+.nav-dropdown-section-note {
+  letter-spacing: 0.06em;
+  text-transform: none;
+  font-weight: 500;
+  color: rgba(22, 50, 79, 0.55);
+}
+
+.nav-dropdown-sublist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 /* CTA Button in Nav */
 .nav-cta {
   flex-shrink: 0;
@@ -356,6 +404,26 @@
 
 .mobile-menu-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Narrow laptops: "Product & services" is a longer label, so tighten the row a little
+   and keep clear space before the Free Clinic Audit button (owner 2026-10-23). */
+@media (min-width: 1201px) and (max-width: 1360px) {
+  .nav-list {
+    gap: 20px;
+  }
+
+  .nav-cta {
+    margin-left: 20px;
+  }
+
+  .nav-link {
+    font-size: 14.5px;
+  }
+
+  .nav-cta .btn {
+    padding: 12px 18px;
+  }
 }
 
 /* Phones and tablets: the full menu as a scrolling sheet. The two groups are
@@ -446,6 +514,28 @@
 
   .nav-dropdown-menu::before {
     display: none;
+  }
+
+  /* Product & services: the two sections listed one under the other. */
+  .nav-dropdown-menu-sections,
+  .nav-dropdown.open .nav-dropdown-menu-sections {
+    display: block;
+    width: auto;
+  }
+
+  .nav-dropdown-section,
+  .nav-dropdown-section + .nav-dropdown-section {
+    padding: 0;
+    border-left: 0;
+  }
+
+  .nav-dropdown-section-label {
+    padding: 8px 16px 0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: rgba(22, 50, 79, 0.55);
   }
 
   .nav-dropdown-link {

@@ -1,0 +1,82 @@
+/* The service pages (/dental-seo, /dental-ads), owner 2026-10-23. Reuses the clinic system
+   (.ch-*) and the /clinic-websites pieces (.cw-*, ClinicWebsitesPage.css) under the lux theme;
+   only what those don't have lives here. */
+
+/* Hero H1 is a short sentence: a little larger than /clinic-websites' long one. */
+.site-lux .ch-home.sv-page .cw-hero-title { font-size: clamp(36px, 4.4vw, 60px); line-height: 1.06; }
+
+/* ── Hero picture for ads: from an ad to a booked visit ── */
+.sv-journey { margin: 0; padding: 30px 30px 24px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(220, 197, 148, 0.35); }
+.sv-journey-title { margin: 0 0 18px; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lux-gold-2); }
+.sv-journey ol { list-style: none; margin: 0; padding: 0; }
+.sv-journey li { position: relative; display: flex; gap: 16px; align-items: flex-start; padding: 0 0 20px; }
+.sv-journey li:not(:last-child)::after { content: ''; position: absolute; left: 15px; top: 34px; bottom: 2px; width: 1px; background: rgba(220, 197, 148, 0.35); }
+.sv-journey-dot { flex: 0 0 32px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(220, 197, 148, 0.6); border-radius: 50%; font-size: 13px; color: var(--lux-gold-2); }
+.sv-journey-text { display: flex; flex-direction: column; gap: 2px; padding-top: 4px; }
+.site-lux .ch-home .sv-journey-text strong { font-family: var(--lux-serif); font-size: 22px; font-weight: 500; line-height: 1.2; color: #fff; }
+.sv-journey-text span { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
+.sv-journey-done .sv-journey-dot { background: var(--lux-gold-2); border-color: var(--lux-gold-2); color: var(--lux-navy); font-weight: 700; }
+.site-lux .ch-home .sv-journey-done .sv-journey-text strong { color: var(--lux-gold-2); }
+.sv-journey figcaption { margin-top: 4px; padding-top: 16px; border-top: 1px solid rgba(220, 197, 148, 0.25); font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(220, 197, 148, 0.85); }
+
+/* ── What we do: six cards, three across ── */
+.cw-build.sv-build { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* ── Numbered points (international patients / why ads disappoint) ── */
+.sv-points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--lux-line); }
+.sv-points li { padding: 26px 22px 22px 0; border-bottom: 1px solid var(--lux-line); }
+.sv-points li:not(:nth-child(4n + 1)) { padding-left: 22px; border-left: 1px solid var(--lux-line); }
+.site-lux .ch-home .sv-points h3 { margin: 12px 0 8px; font-size: 23px; line-height: 1.2; }
+.sv-points p { margin: 0; font-size: 15px; line-height: 1.6; }
+.sv-read { margin: 30px 0 0; text-align: center; font-size: 15.5px; color: var(--lux-body); }
+.site-lux .ch-home.sv-page .sv-read a { color: var(--lux-navy-3); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--lux-gold); }
+
+/* ── Our work ── */
+.sv-cases { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.sv-cases li { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--lux-line); border-top: 2px solid var(--lux-gold); padding: 26px 24px; }
+.sv-case-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lux-bronze); }
+.site-lux .ch-home .sv-cases h3 { margin: 10px 0 4px; font-size: 25px; line-height: 1.2; }
+.sv-case-place { margin: 0 0 12px; font-size: 14px; color: var(--lux-bronze); }
+.sv-cases p { margin: 0 0 16px; font-size: 15px; line-height: 1.6; }
+.site-lux .ch-home.sv-page .sv-case-link { margin-top: auto; color: var(--lux-navy-3); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--lux-gold); align-self: flex-start; }
+.sv-note { max-width: 760px; margin: 28px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--lux-body); font-style: italic; }
+
+/* ── Every month + who it's for ── */
+.site-lux .ch-home .sv-h2-left { margin: 14px 0 22px; }
+.sv-fit { list-style: none; margin: 0 0 18px; padding: 0; }
+.sv-fit li { position: relative; padding: 8px 0 8px 22px; font-size: 15px; line-height: 1.55; color: var(--lux-navy); }
+.sv-fit li::before { content: ''; position: absolute; left: 2px; top: 15px; width: 9px; height: 5px; border-left: 1.5px solid var(--lux-gold); border-bottom: 1.5px solid var(--lux-gold); transform: rotate(-45deg); }
+.cw-goal .sv-notfit { margin: 0 0 22px; padding-top: 14px; border-top: 1px solid var(--lux-line); font-size: 14.5px; font-style: italic; }
+.cw-goal .sv-aside-h { margin: 0 0 6px; font-weight: 600; color: var(--lux-navy); }
+.cw-goal .sv-aside-t { margin: 0; font-size: 14.5px; }
+
+/* ── With Aumy, or on its own ── */
+.sv-aumy { padding: 0 0 84px; }
+.sv-aumy-inner { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; padding: 40px 44px; background: var(--lux-navy); border-top: 2px solid var(--lux-gold); }
+.site-lux .sv-aumy .ch-eyebrow { color: var(--lux-gold-2); }
+.site-lux .ch-home .sv-aumy-title { margin: 12px 0 12px; font-family: var(--lux-serif); font-weight: 400; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; color: #fff; }
+.sv-aumy-inner p { margin: 0; max-width: 720px; font-size: 16px; line-height: 1.65; color: rgba(255, 255, 255, 0.78); }
+.sv-aumy-inner .ch-btn { white-space: nowrap; }
+
+/* ── Sibling links in the closing band ── */
+.sv-siblings { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; margin-top: 34px; padding-top: 24px; border-top: 1px solid rgba(220, 197, 148, 0.25); }
+.site-lux .ch-home.sv-page .sv-siblings a { font-size: 14.5px; color: rgba(255, 255, 255, 0.82); text-decoration: none; border-bottom: 1px solid rgba(220, 197, 148, 0.45); }
+.site-lux .ch-home.sv-page .sv-siblings a:hover { color: #fff; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .cw-build.sv-build { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-points li:not(:nth-child(4n + 1)) { padding-left: 0; border-left: 0; }
+  .sv-points li:nth-child(even) { padding-left: 22px; border-left: 1px solid var(--lux-line); }
+  .sv-cases { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .cw-build.sv-build, .sv-points { grid-template-columns: 1fr; }
+  .sv-points li, .sv-points li:nth-child(even) { padding-left: 0; border-left: 0; }
+  .sv-journey { padding: 24px 20px 18px; }
+  .site-lux .ch-home .sv-journey-text strong { font-size: 20px; }
+  .sv-aumy { padding-bottom: 64px; }
+  .sv-aumy-inner { grid-template-columns: 1fr; gap: 24px; padding: 30px 22px; }
+  .sv-aumy-inner .ch-btn { width: 100%; justify-content: center; text-align: center; white-space: normal; }
+}

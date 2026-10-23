@@ -24,7 +24,7 @@ const HERO_VIDEO = {
   duration: 'PT2M10S',
   vertical: true,
   youtube: 'https://youtube.com/shorts/OVR7LEnd96k',
-  description: 'The Sterling Dental Clinic, Delhi (26 years): the founder, the doctor, the CRM and the MIS on moving to Aumy. Almost half of appointments confirmed by patients on WhatsApp in the first two weeks, no more Google Sheets, and everything the doctor needs on one screen.',
+  description: 'The Sterling Dental Clinic, Delhi (26 years): the founder, the doctor, the CRM and the MIS on moving to Aumy. 2 in 3 patients now confirm their appointment themselves on WhatsApp, no more Google Sheets, and everything the doctor needs on one screen.',
 };
 
 // The full Aumy demo film (owner 2026-10-20), on YouTube; shown on the home page under the hero and leads /demos.
