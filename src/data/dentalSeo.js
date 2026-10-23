@@ -8,7 +8,7 @@
  *
  * Honest proof only. Sterling: we built sterlingdentalclinic.com (live 15 Oct 2026) and run its
  * SEO: a blog post every Saturday, an SEO routine every Monday, a monthly Search Console report
- * across five countries against the 6 Oct 2026 baseline. Vinaykia's site and one unnamed implant clinic's (no naming consent; owner 2026-10-23) are being
+ * across five countries against the 6 Oct 2026 baseline. Vinaykia and Dr Rajat's sites are being
  * built. NO traffic, ranking or enquiry numbers until a report measures them, NO review or rating
  * markup, NO price (we quote after the free audit).
  *
@@ -86,9 +86,10 @@ const WORK = {
       link: { href: '/clinic-websites#sterling', label: 'Read the Sterling case study', internal: true },
     },
     {
-      name: 'A dental implant clinic’s new site',
+      name: 'Dr Rajat Sachdeva’s dental implant clinic',
+      place: 'Ashok Vihar, Delhi',
       tag: 'Website and SEO · being built',
-      text: 'A new website and SEO for an implant-led clinic, built to keep every ranking the old site already has.',
+      text: 'A new website for dentalimplantindia.co.in, focused on implants and smile makeovers, built to keep every ranking the old site already has.',
     },
     {
       name: 'Vinaykia Dental Care',
