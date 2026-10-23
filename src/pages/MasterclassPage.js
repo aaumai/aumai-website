@@ -40,13 +40,15 @@ async function call(path, body) {
   return { status: r.status, ok: r.ok, j };
 }
 
-// kind comes from the backend (master_sheet | worksheet | skill | guide | file); the extension is the fallback.
+// kind comes from the backend (master_sheet | worksheet | skill | guide | slides | file); the extension is the fallback.
 const kindOf = (f) => f.kind || (/.(xlsx|xls|csv)$/i.test(f.name) ? 'workbook' : 'file');
 // One sheet replaces the 12 workbooks (owner 2026-10-21): the Clinic Master Sheet gets its own
 // card, and any other spreadsheet the server still lists is not shown.
 const isMasterSheet = (f) => f.kind === 'master_sheet' || /Master-Sheet/i.test(f.name);
 const isSpreadsheet = (f) => /\.(xlsx|xls|csv)$/i.test(f.name);
 const isPromptPack = (f) => /Prompt-Pack/i.test(f.name);
+// The class slides as a PDF (owner 2026-10-23): shown under the video, not with the skill file.
+const isSlides = (f) => f.kind === 'slides' || /Presentation/i.test(f.name);
 const fileUrl = (f) => `${API}/files/${encodeURIComponent(f.name)}`;
 const KIND_BADGE = { skill: 'Skill file', guide: 'Guide', file: 'File' };
 const badge = (f) => KIND_BADGE[kindOf(f)] || 'File';
@@ -182,7 +184,8 @@ export default function MasterclassPage() {
     // The Prompt Pack (owner 2026-10-20) gets its own card at the top, so it is not repeated below.
     const packHtml = files.find((f) => isPromptPack(f) && /\.html$/i.test(f.name));
     const packPdf = files.find((f) => isPromptPack(f) && /\.pdf$/i.test(f.name));
-    const extras = files.filter((f) => !isSpreadsheet(f) && !isPromptPack(f)).sort((a, b) => (EXTRA_ORDER[kindOf(a)] ?? 9) - (EXTRA_ORDER[kindOf(b)] ?? 9));
+    const slides = files.find(isSlides);
+    const extras = files.filter((f) => !isSpreadsheet(f) && !isPromptPack(f) && !isSlides(f)).sort((a, b) => (EXTRA_ORDER[kindOf(a)] ?? 9) - (EXTRA_ORDER[kindOf(b)] ?? 9));
     const fileCard = (f) => (
       <li key={f.name} className="mc-file">
         <span className="mc-badge">{badge(f)}</span>
@@ -265,6 +268,16 @@ export default function MasterclassPage() {
               <div className="mc-video mc-video-wait"><p style={{ margin: 0 }}>{me.video_by_label ? `The video will be here by ${me.video_by_label}.` : 'The video will appear here soon.'}</p></div>
             )}
           </section>
+
+          {slides && (
+            <section className="mc-section mc-pack" aria-labelledby="mc-slides-h">
+              <h2 id="mc-slides-h">{slides.title || 'The Full Chair Method — the presentation'}</h2>
+              <p>{slides.about || 'Every slide from the class, to refer to any time.'}</p>
+              <div className="mc-all">
+                <a className="sc-btn" href={fileUrl(slides)}>Download the slides (PDF)</a>
+              </div>
+            </section>
+          )}
 
           {extras.length > 0 && (
             <section className="mc-section" aria-labelledby="mc-extras-h">
