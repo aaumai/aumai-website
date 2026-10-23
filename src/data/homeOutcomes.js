@@ -308,7 +308,7 @@ const KPIS = {
 
 // Sterling's proof strip, under the reviews. Real numbers only.
 const STERLING_PROOF = [
-  { n: '2 in 3', t: 'patients confirm on WhatsApp themselves', s: 'The Sterling Dental Clinic, live from 23 Sep 2026' },
+  { n: '2 in 3', t: 'patients confirm on WhatsApp themselves', s: 'The Sterling Dental Clinic, New Delhi' },
   { n: '26 years', t: 'of running the clinic before they moved to Aumy', s: 'Their whole team is in the film' },
 ];
 

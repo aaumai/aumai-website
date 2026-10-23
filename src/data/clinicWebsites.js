@@ -34,7 +34,7 @@ const HERO = {
   sub: 'For dental and skin clinics. Every treatment, every area you serve and every country your patients fly in from gets its own page, written for the way people search, and launched without losing the Google rankings you already have.',
   cta: 'Get a website audit',
   trust: 'Free audit. We look at your current site and Search Console, and tell you what is costing you patients.',
-  caption: 'sterlingdentalclinic.com · built by AUM AI · live since 15 Oct 2026',
+  caption: 'sterlingdentalclinic.com · built by AUM AI',
 };
 
 const IMG = {
@@ -75,7 +75,7 @@ const BUILD = {
 const CASE = {
   eyebrow: 'Case study',
   title: 'The Sterling Dental Clinic, Vasant Vihar, New Delhi',
-  intro: 'An implant-led clinic in South Delhi, established in 2001, with patients from 97+ countries (the clinic’s own figure). We rebuilt sterlingdentalclinic.com from scratch as a fast static Next.js site and launched it on 15 October 2026, moving the old PHP pages and WordPress blog without dropping a single indexed address.',
+  intro: 'An implant-led clinic in South Delhi, established in 2001, with patients from 97+ countries (the clinic’s own figure). We rebuilt sterlingdentalclinic.com from scratch as a fast static Next.js site, moving the old PHP pages and WordPress blog without dropping a single indexed address.',
   stats: [
     { n: '204', t: 'pages in the sitemap' },
     { n: '25', t: 'in-depth implant and treatment-travel guides' },
@@ -93,7 +93,7 @@ const CASE = {
     'A blog post every Saturday and an SEO routine every Monday, measured against the baseline we took before launch.',
   ],
   goalTitle: 'The goal: international implant patients',
-  goal: 'Before the rebuild, Search Console showed the old site was already being seen in searches from the USA, the UK, Canada, Australia and the UAE, but its implant pages sat far down the results, around positions 40 to 90. The new site is built to turn that interest into enquiries, with a guide for every question an overseas implant patient asks. It went live on 15 October 2026, so we will report results once they are measured, not before.',
+  goal: 'Before the rebuild, Search Console showed the old site was already being seen in searches from the USA, the UK, Canada, Australia and the UAE, but its implant pages sat far down the results, around positions 40 to 90. The new site is built to turn that interest into enquiries, with a guide for every question an overseas implant patient asks. We will report results once they are measured, not before.',
   link: { href: 'https://sterlingdentalclinic.com/', label: 'Visit sterlingdentalclinic.com' },
   credit: 'Shown with the clinic’s permission. The site carries a “Website by AUM AI” credit.',
 };
