@@ -66,6 +66,18 @@
   overflow: hidden;
 }
 
+/* Under an excerpt (owner 2026-10-23): the full review lives on Google. */
+.gr-full-link {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-accent-dark, #218779);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .gr-more {
   align-self: flex-start;
   margin-top: 10px;

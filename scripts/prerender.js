@@ -87,7 +87,7 @@ const googleReviewsHtml = (limit) => {
   return `<section id="google-reviews"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Google reviews</p>
         <h2>What our customers say</h2>
-        ${list.map((r) => `<figure>${!limit && r.hero && r.pullQuote ? `<h3>${esc(r.pullQuote)}</h3>` : ''}<blockquote>${reviewTextHtml(r.text)}</blockquote><figcaption>${esc(r.name)}${r.clinic ? `, ${esc(r.clinic)}` : ''} · ${r.stars} out of 5 stars · ${esc(r.month)} · Google review</figcaption></figure>`).join('\n        ')}
+        ${list.map((r) => `<figure>${!limit && r.hero && r.pullQuote ? `<h3>${esc(r.pullQuote)}</h3>` : ''}<blockquote>${reviewTextHtml((limit && r.excerptShort) || r.excerpt || r.text)}</blockquote>${r.excerpt && r.fullReviewUrl ? `<p><a href="${r.fullReviewUrl}">Read her full review on Google →</a></p>` : ''}<figcaption>${esc(r.name)}${r.clinic ? `, ${esc(r.clinic)}` : ''} · ${r.stars} out of 5 stars${r.hideMonth ? '' : ` · ${esc(r.month)}`} · Google review</figcaption></figure>`).join('\n        ')}
         <p>${esc(GR.GOOGLE_RATING)} out of 5 on Google · <a href="${GR.GOOGLE_REVIEWS_URL}">Read all reviews</a> · <a href="${GR.GOOGLE_WRITE_REVIEW_URL}">Write a review</a></p>
       </div></section>`;
 };

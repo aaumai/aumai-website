@@ -33,13 +33,28 @@ const Stars = ({ count }) => (
   </span>
 );
 
+// The words shown on a card: an excerpt (her exact sentences, owner 2026-10-23) when the row has one,
+// the short excerpt in the compact /pricing strip, otherwise the full review.
+const shownText = (review, compact = false) =>
+  (compact && review.excerptShort) || review.excerpt || review.text;
+
+// "Read her full review on Google" under an excerpt.
+const FullReviewLink = ({ review }) =>
+  review.excerpt && review.fullReviewUrl ? (
+    <a className="gr-full-link" href={review.fullReviewUrl} target="_blank" rel="noopener noreferrer">
+      Read her full review on Google <span aria-hidden="true">→</span>
+    </a>
+  ) : null;
+
 const Who = ({ review, featured = false }) => (
   <figcaption className="gr-who">
     <span className="gr-avatar" aria-hidden="true">{initials(review.name)}</span>
     <span className="gr-meta">
       <span className="gr-name">{review.name}</span>
       {review.clinic && <span className="gr-clinic">{review.clinic}</span>}
-      <span className="gr-when">{featured ? `Google review · ${review.month}` : `${review.month} · Google review`}</span>
+      <span className="gr-when">
+        {review.hideMonth ? 'Google review' : featured ? `Google review · ${review.month}` : `${review.month} · Google review`}
+      </span>
     </span>
   </figcaption>
 );
@@ -82,14 +97,15 @@ function MoreButton({ open, setOpen, clamped }) {
   );
 }
 
-function ReviewCard({ review }) {
+function ReviewCard({ review, compact }) {
   const { ref, open, setOpen, clamped } = useClamp();
   return (
     <figure className="gr-card">
       <Who review={review} />
       <Stars count={review.stars} />
-      <ReviewText text={review.text} clampRef={ref} open={open} />
+      <ReviewText text={shownText(review, compact)} clampRef={ref} open={open} />
       <MoreButton open={open} setOpen={setOpen} clamped={clamped} />
+      <FullReviewLink review={review} />
     </figure>
   );
 }
@@ -110,8 +126,9 @@ function HeroReviewCard({ review }) {
         {review.pullQuote}
       </h3>
       <div className="gr-hero-body">
-        <ReviewText text={review.text} clampRef={ref} open={open} />
+        <ReviewText text={shownText(review)} clampRef={ref} open={open} />
         <MoreButton open={open} setOpen={setOpen} clamped={clamped} />
+        <FullReviewLink review={review} />
       </div>
       <div className="gr-hero-who">
         <Stars count={review.stars} />
@@ -146,7 +163,7 @@ export default function GoogleReviews({ limit, compact = false }) {
         <ul className="gr-grid">
           {cards.map((r) => (
             <li key={r.name}>
-              <ReviewCard review={r} />
+              <ReviewCard review={r} compact={compact} />
             </li>
           ))}
         </ul>
