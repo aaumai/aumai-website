@@ -7,16 +7,31 @@ import './Header.css';
 // Six top-level items plus the Free Clinic Audit button; Home is the logo. The two
 // groups open on hover or click on laptops and are listed open in the phone menu.
 // Every page here is also in the footer, and in scripts/prerender.js SITE_LINKS.
+// "Product & services" (owner 2026-10-23): Aumy, the main product, first; then the three
+// services. A group with `sections` shows them as labelled columns on laptops and as labelled
+// lists in the phone menu.
 const NAV_ITEMS = [
   {
     key: 'product',
-    label: 'Product',
-    children: [
-      { path: '/revenue-generator', label: 'How it works', hint: 'Every patient, from first call to recall' },
-      // Service page: clinic websites built for search (owner 2026-10-19).
-      { path: '/clinic-websites', label: 'Clinic websites', hint: 'A website that brings patients in' },
-      { path: '/demos', label: 'Watch demos', hint: 'Short videos of Aumy at work' },
-      { path: '/switch', label: 'Switching software?', hint: 'Move from your current system' },
+    label: 'Product & services',
+    sections: [
+      {
+        label: 'Aumy',
+        note: 'our main product',
+        children: [
+          { path: '/revenue-generator', label: 'How it works', hint: 'Every patient, from first call to recall' },
+          { path: '/demos', label: 'Watch demos', hint: 'Short videos of Aumy at work' },
+          { path: '/switch', label: 'Switching software?', hint: 'Move from your current system' },
+        ],
+      },
+      {
+        label: 'Services',
+        children: [
+          { path: '/dental-seo', label: 'Dental SEO', hint: 'More patients find you on Google, from India and abroad' },
+          { path: '/clinic-websites', label: 'Dental websites', hint: 'Websites built to be found on Google' },
+          { path: '/dental-ads', label: 'Dental ads (Meta & Google)', hint: 'Ads judged by booked patients, not leads' },
+        ],
+      },
     ],
   },
   { path: '/modules', label: 'Modules' },
@@ -185,9 +200,27 @@ const Header = () => {
     );
   };
 
+  const renderChild = (child) => {
+    const active = isActive(location.pathname, child.path);
+    return (
+      <li key={child.path}>
+        <Link
+          to={child.path}
+          className={`nav-dropdown-link ${active ? 'active' : ''}`}
+          aria-current={active ? 'page' : undefined}
+          onClick={closeMobileMenu}
+        >
+          <span className="nav-dropdown-label">{child.label}</span>
+          <span className="nav-dropdown-hint">{child.hint}</span>
+        </Link>
+      </li>
+    );
+  };
+
   const renderGroup = (item) => {
     const open = openMenu === item.key;
-    const groupActive = item.children.some((c) => isActive(location.pathname, c.path));
+    const allChildren = item.sections ? item.sections.flatMap((s) => s.children) : item.children;
+    const groupActive = allChildren.some((c) => isActive(location.pathname, c.path));
     return (
       <li
         key={item.key}
@@ -212,26 +245,23 @@ const Header = () => {
         <span className="nav-group-label" aria-hidden="true">{item.label}</span>
         <ul
           id={`nav-menu-${item.key}`}
-          className="nav-dropdown-menu"
+          className={`nav-dropdown-menu ${item.sections ? 'nav-dropdown-menu-sections' : ''}`}
           aria-label={item.label}
           onKeyDown={(e) => onMenuKeyDown(e, item.key)}
         >
-          {item.children.map((child) => {
-            const active = isActive(location.pathname, child.path);
-            return (
-              <li key={child.path}>
-                <Link
-                  to={child.path}
-                  className={`nav-dropdown-link ${active ? 'active' : ''}`}
-                  aria-current={active ? 'page' : undefined}
-                  onClick={closeMobileMenu}
-                >
-                  <span className="nav-dropdown-label">{child.label}</span>
-                  <span className="nav-dropdown-hint">{child.hint}</span>
-                </Link>
-              </li>
-            );
-          })}
+          {item.sections
+            ? item.sections.map((section) => (
+                <li key={section.label} className="nav-dropdown-section">
+                  <span className="nav-dropdown-section-label" id={`nav-section-${item.key}-${section.label}`}>
+                    {section.label}
+                    {section.note && <span className="nav-dropdown-section-note"> · {section.note}</span>}
+                  </span>
+                  <ul className="nav-dropdown-sublist" aria-labelledby={`nav-section-${item.key}-${section.label}`}>
+                    {section.children.map(renderChild)}
+                  </ul>
+                </li>
+              ))
+            : item.children.map(renderChild)}
         </ul>
       </li>
     );
@@ -263,7 +293,7 @@ const Header = () => {
           >
             <ul className="nav-list">
               {NAV_ITEMS.map((item) =>
-                item.children ? (
+                item.children || item.sections ? (
                   renderGroup(item)
                 ) : (
                   <li key={item.path} className="nav-item">{renderLink(item)}</li>

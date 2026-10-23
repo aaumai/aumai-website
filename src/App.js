@@ -21,6 +21,9 @@ import MasterclassAdmin from './pages/MasterclassAdmin';
 import MasterclassRegister from './pages/MasterclassRegister';
 import MasterclassInfo from './pages/MasterclassInfo';
 import ClinicWebsitesPage from './pages/ClinicWebsitesPage';
+import ServicePage from './pages/ServicePage';
+import DENTAL_SEO from './data/dentalSeo';
+import DENTAL_ADS from './data/dentalAds';
 import PricingPage from './pages/PricingPage';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -114,6 +117,10 @@ function App() {
                     (shared with scripts/prerender.js). /websites is the short address. */}
                 <Route path="/clinic-websites" element={<ClinicWebsitesPage />} />
                 <Route path="/websites" element={<Navigate to="/clinic-websites" replace />} />
+                {/* Services (owner 2026-10-23): Dental SEO and Dental ads, under "Product & services".
+                    Words: src/data/dentalSeo.js and src/data/dentalAds.js (shared with scripts/prerender.js). */}
+                <Route path="/dental-seo" element={<ServicePage data={DENTAL_SEO} />} />
+                <Route path="/dental-ads" element={<ServicePage data={DENTAL_ADS} />} />
                 <Route path="/pricing" element={<PricingPage />} />
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}

@@ -38,6 +38,9 @@ const MC_REFUND = require('../src/data/masterclassRefund');
 const MC = require('../src/data/masterclass');
 // Clinic websites built for search (owner 2026-10-19): same file as src/pages/ClinicWebsitesPage.js.
 const CW = require('../src/data/clinicWebsites');
+// Services (owner 2026-10-23): same files as src/pages/ServicePage.js on /dental-seo and /dental-ads.
+const DSEO = require('../src/data/dentalSeo');
+const DADS = require('../src/data/dentalAds');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
@@ -126,7 +129,10 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/demos', 'Demo videos'],
   ['/growth', 'Growth Hub'],
   ['/masterclass', 'The Full Chair Method masterclass'],
-  ['/clinic-websites', 'Clinic websites built for SEO'],
+  // Product & services (owner 2026-10-23): the three services, as in the header.
+  ['/dental-seo', 'Dental SEO for international patients'],
+  ['/clinic-websites', 'Dental websites built for SEO'],
+  ['/dental-ads', 'Dental ads (Meta & Google)'],
   ['/compliance', 'Security & compliance'],
   ['/about', 'About the founder'],
   ['/contact', 'Contact'],
@@ -476,6 +482,97 @@ function homeContent() {
           ${li(POS.HOME_EXPLORE, (e) => '<li><a href="' + e.to + '">' + esc(e.label) + '</a></li>')}
         </ul>
       </div></section>`;
+}
+
+// Service pages under "Product & services" (owner 2026-10-23): /dental-seo and /dental-ads.
+// Every word comes from the page's data file, as on the React page (src/pages/ServicePage.js).
+// Service JSON-LD + FAQPage only: no review or rating markup, no price.
+function serviceRoute(D) {
+  const url = `${ORIGIN}${D.PATH}`;
+  return {
+    slug: D.PATH.slice(1),
+    title: D.SEO.title,
+    description: D.SEO.description,
+    canonical: url,
+    ogImage: D.VISUAL.kind === 'devices' ? `${ORIGIN}${D.VISUAL.desktop.src}` : undefined,
+    jsonld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': `${url}#service`,
+        name: D.SCHEMA.name,
+        serviceType: D.SCHEMA.serviceType,
+        description: D.SEO.description,
+        url,
+        provider: { '@id': `${ORIGIN}/#organization` },
+        areaServed: { '@type': 'Country', name: 'India' },
+        audience: { '@type': 'BusinessAudience', audienceType: D.SCHEMA.audience },
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: D.WHAT.title,
+          itemListElement: D.WHAT.items.map((b) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: b.h, description: b.t } })),
+        },
+      },
+      faqPageLd(D.FAQS),
+    ],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(D.HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(D.HERO.title)}</h1>
+        <p class="ch-hero-sub">${esc(D.HERO.sub)}</p>
+        <p><a href="#audit">${esc(D.HERO.cta)}</a> · <a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a></p>
+        <p>${esc(D.HERO.trust)}</p>
+        ${D.VISUAL.kind === 'devices'
+          ? `<p><img src="${D.VISUAL.desktop.src}" width="${D.VISUAL.desktop.w}" height="${D.VISUAL.desktop.h}" alt="${esc(D.VISUAL.desktop.alt)}"></p><p>${esc(D.VISUAL.caption)}</p>`
+          : `<h2>${esc(D.VISUAL.title)}</h2><ol>${D.VISUAL.steps.map((s) => `<li><strong>${esc(s.h)}</strong> — ${esc(s.t)}</li>`).join('')}</ol>`}
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(D.WHAT.title)}</h2>
+        <p>${esc(D.WHAT.intro)}</p>
+        <ul>${D.WHAT.items.map((b) => `<li><strong>${esc(b.h)}.</strong> ${esc(b.t)}</li>`).join('')}</ul>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(D.POINTS.eyebrow)}</p>
+        <h2>${esc(D.POINTS.title)}</h2>
+        <p>${esc(D.POINTS.intro)}</p>
+        <ol>${D.POINTS.items.map((p) => `<li><strong>${esc(p.h)}.</strong> ${esc(p.t)}</li>`).join('')}</ol>
+        ${D.POINTS.link ? `<p>Read the guide: <a href="${D.POINTS.link.href}">${esc(D.POINTS.link.label)}</a></p>` : ''}
+      </div></section>
+      <section id="work"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(D.WORK.eyebrow)}</p>
+        <h2>${esc(D.WORK.title)}</h2>
+        <p>${esc(D.WORK.intro)}</p>
+        ${D.WORK.cases.map((c) => `<h3>${esc(c.name)}${c.place ? `, ${esc(c.place)}` : ''}</h3><p><em>${esc(c.tag)}.</em> ${esc(c.text)}${c.link ? ` <a href="${c.link.href}">${esc(c.link.label)}</a>` : ''}</p>`).join('')}
+        ${D.WORK.note ? `<p>${esc(D.WORK.note)}</p>` : ''}
+      </div></section>
+      <section id="how"><div class="ch-container ch-narrow">
+        <h2>${esc(D.STEPS.title)}</h2>
+        <ol>${D.STEPS.items.map((s) => `<li><strong>${esc(s.h)}.</strong> ${esc(s.t)}</li>`).join('')}</ol>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(D.MONTHLY.title)}</h2>
+        <ul>${D.MONTHLY.items.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
+        <p><strong>${esc(D.MONTHLY.asideTitle)}.</strong> ${esc(D.MONTHLY.aside)}</p>
+        <h2>${esc(D.FIT.eyebrow)}: ${esc(D.FIT.title)}</h2>
+        <ul>${D.FIT.items.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+        <p>${esc(D.FIT.notFit)}</p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(D.WITH_AUMY.title)}</h2>
+        <p>${esc(D.WITH_AUMY.text)} <a href="${D.WITH_AUMY.link.to}">${esc(D.WITH_AUMY.link.label)}</a></p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        ${faqHtml(D.FAQS, 'Questions, answered')}
+      </div></section>
+      <section id="audit"><div class="ch-container ch-narrow">
+        <h2>${esc(D.AUDIT.title)}</h2>
+        <p>${esc(D.AUDIT.intro)}</p>
+        <p><a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a> · <a href="/growth-audit">Free clinic audit</a></p>
+        <h2>${esc(D.FINAL.title)}</h2>
+        <p>${esc(D.FINAL.text)}</p>
+        <p>Also from AUM AI: <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a> · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a> · <a href="/revenue-generator">Aumy, our main product</a></p>
+      </div></section>`,
+  };
 }
 
 // ---- routes ---------------------------------------------------------------
@@ -968,6 +1065,9 @@ const routes = [
     refresh: CW.PATH,
     content: `<section><div class="ch-container ch-narrow"><p>This page has moved: <a href="${CW.PATH}">${esc(CW.HERO.titleA)} ${esc(CW.HERO.titleB)}</a>.</p></div></section>`,
   })),
+  // Services (owner 2026-10-23): public and in the sitemap.
+  serviceRoute(DSEO),
+  serviceRoute(DADS),
   // Public and indexable, but out of the sitemap for now (owner 2026-10-18). The
   // price comes from the backend at run time, so it is not written here.
   {

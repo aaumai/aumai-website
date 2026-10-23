@@ -105,6 +105,10 @@
   letter-spacing: 0.02em;
 }
 
+.footer-column h4.footer-subhead {
+  margin-top: 32px;
+}
+
 .footer-column ul {
   list-style: none;
   padding: 0;

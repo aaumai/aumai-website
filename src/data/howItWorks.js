@@ -27,12 +27,12 @@ const HOW_CONTROL = [
   { title: 'Your data stays private', body: 'Encrypted, access-controlled and private by design. Patient health details never go to ad platforms.' },
 ];
 
-// Proof, real words only: Dr Priyanka's Google review (src/data/googleReviews.js) and Sterling's first two weeks.
+// Proof, real words only: Dr Priyanka's Google review (src/data/googleReviews.js) and Sterling's WhatsApp confirmations (2 in 3, owner-approved 2026-10-23).
 const HOW_PROOF = {
   quote: 'Thank you, Jayesh ji, and your team. You were with us at every step.',
   who: 'Dr Priyanka Giroti, The Sterling Dental Clinic, New Delhi',
-  number: '281 of 603',
-  numberText: 'appointments at Sterling were confirmed by the patients themselves on WhatsApp in the first two weeks.',
+  number: '2 in 3',
+  numberText: 'patients at The Sterling Dental Clinic, Delhi, now confirm their appointment themselves on WhatsApp.',
 };
 
 module.exports = { HOW_SEO, HOW_HERO, HOW_CONTROL, HOW_PROOF };

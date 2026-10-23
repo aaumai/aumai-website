@@ -7,7 +7,7 @@
  * Rules for these words (owner-approved draft, 2026-10-22):
  *   - no module names and no module cards on the home page; the only pointer is one quiet link to /modules;
  *   - every example is labelled "Example"; names, times and fees in examples are made up for illustration
- *     (the strategies' lead line says so). The ONLY real figures: Sterling's 281 of 603 and 26 years, the
+ *     (the strategies' lead line says so). The ONLY real figures: Sterling's "2 in 3 confirm on WhatsApp" (62–69% measured on prod, owner-approved 2026-10-23) and 26 years, the
  *     clinic figures measured from the clinics' own records (the same ones the masterclass page uses), and
  *     the Google rating (src/data/googleReviews.js);
  *   - no lock-in / cancel-any-time claim, no review-reply counts (not confirmed by the owner);
@@ -37,8 +37,8 @@ const HERO = {
   close: 'We make sure of it.',
   primary: { label: 'Get a free clinic audit', to: '/growth-audit' },
   whatsapp: { label: 'WhatsApp us · 80071 89868', href: WHATSAPP_LINK },
-  proofNumber: '281 of 603',
-  proofText: 'appointments at The Sterling Dental Clinic, Delhi, were confirmed by the patients themselves on WhatsApp in the first two weeks.',
+  proofNumber: '2 in 3',
+  proofText: 'patients at The Sterling Dental Clinic, Delhi, now confirm their appointment themselves on WhatsApp.',
 };
 
 const PAIN = {
@@ -308,7 +308,7 @@ const KPIS = {
 
 // Sterling's proof strip, under the reviews. Real numbers only.
 const STERLING_PROOF = [
-  { n: '281 of 603', t: 'appointments confirmed by patients on WhatsApp in the first two weeks', s: 'The Sterling Dental Clinic, live from 23 Sep 2026' },
+  { n: '2 in 3', t: 'patients confirm on WhatsApp themselves', s: 'The Sterling Dental Clinic, live from 23 Sep 2026' },
   { n: '26 years', t: 'of running the clinic before they moved to Aumy', s: 'Their whole team is in the film' },
 ];
 

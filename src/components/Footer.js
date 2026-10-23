@@ -5,6 +5,13 @@ import AppDownload from './AppDownload';
 import { FOOTER_OUTCOMES, FOOTER_TAGLINE } from '../data/homeOutcomes';
 import './Footer.css';
 
+// The three services, in the header's order (also in scripts/prerender.js SITE_LINKS).
+const SERVICES = [
+  { label: 'Dental SEO', path: '/dental-seo' },
+  { label: 'Dental Websites', path: '/clinic-websites' },
+  { label: 'Dental Ads (Meta & Google)', path: '/dental-ads' },
+];
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   // Owner 2026-10-22: the app badges are hidden on the home page only; every other page keeps them.
@@ -36,7 +43,6 @@ const Footer = () => {
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
     { label: 'Free Clinic Audit', path: '/growth-audit' },
     { label: 'Masterclass — The Full Chair Method', path: '/masterclass' },
-    { label: 'Clinic Websites Built for SEO', path: '/clinic-websites' },
     { label: 'What Slips Through the Cracks — 60-second Check', path: '/leak-calculator' },
     { label: 'Missed Call Calculator', path: '/missed-call-calculator' },
     { label: 'Platform Partners', path: '/platform-partner' },
@@ -85,6 +91,15 @@ const Footer = () => {
               {outcomes.map((o) => (
                 <li key={o.to}>
                   <Link to={o.to}>{o.label}</Link>
+                </li>
+              ))}
+            </ul>
+            {/* Services (owner 2026-10-23), as under "Product & services" in the header. */}
+            <h4 className="footer-subhead">Services</h4>
+            <ul>
+              {SERVICES.map((s) => (
+                <li key={s.path}>
+                  <Link to={s.path}>{s.label}</Link>
                 </li>
               ))}
             </ul>
