@@ -369,7 +369,7 @@ const Home = () => {
             <p className="ho-note">{DIY.byline}</p>
           </div>
           <div className="ho-diy-card">
-            <p className="ho-diy-price"><strong>{PRICE_LABEL}</strong><span>{DIY.length} · {ACCESS.toLowerCase()}</span></p>
+            <p className="ho-diy-price"><strong>{DIY.free}</strong><span>{DIY.kit.replace('{price}', PRICE_LABEL)} · {DIY.length} · {ACCESS.toLowerCase()}</span></p>
             <ul>
               {DIY.items.map(([b, t]) => (
                 <li key={b}><strong>{b}</strong>{t}</li>
