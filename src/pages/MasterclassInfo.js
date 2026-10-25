@@ -9,9 +9,11 @@ import './MasterclassInfo.css';
 // masterclass is, what it is worth, what to expect. Built from the site's own
 // clinic system (.ch-*) under the "quiet luxury" theme (styles/lux.css), so it
 // reads like every other page. Every word is in src/data/masterclass.js, shared
-// with scripts/prerender.js. Register goes to /masterclass/register; members
-// sign in at /masterclass/sign-in (the welcome email used to send them here, so
-// the sign-in link sits at the very top).
+// with scripts/prerender.js. Owner 2026-10-25: the masterclass is free to watch
+// ("Watch free" → the free-account form at /masterclass/sign-in#create) and the kit
+// is one payment ("Get the kit · ₹999" → /masterclass/register); members sign in at
+// /masterclass/sign-in (the welcome email used to send them here, so the sign-in
+// link sits at the very top).
 
 const API = `${process.env.REACT_APP_SITE_API || 'https://site-api.aumai.co.in'}/api/aumai/masterclass`;
 const C_KEY = { Convert: 'convert', Confirm: 'confirm', Care: 'care', 'Come back': 'comeback' };
@@ -73,7 +75,14 @@ export default function MasterclassInfo() {
   // Old links: a just-paid buyer used to land on /masterclass to sign in.
   if (location.state?.justPaid) return <Navigate to={MC.PATHS.signIn} replace state={location.state} />;
 
-  const registerBtn = (extra = '') => <Link className={`ch-btn ch-btn-primary ${extra}`} to={MC.PATHS.register}>Register · {price}</Link>;
+  // Watch free first (a signed-in member goes straight to their page); the kit second.
+  const watchTo = member ? MC.PATHS.my : MC.PATHS.create;
+  const ctas = (extra = '') => (
+    <>
+      <Link className={`ch-btn ch-btn-primary ${extra}`} to={watchTo}>{MC.CTA.watch}</Link>
+      <Link className={`ch-btn ch-btn-ghost ${extra}`} to={MC.PATHS.register}>{MC.CTA.kit.replace(MC.PRICE_LABEL, price)}</Link>
+    </>
+  );
 
   return (
     <div className="ch-home mi-page">
@@ -83,7 +92,7 @@ export default function MasterclassInfo() {
           <p className="mi-member">
             {member
               ? <>You are signed in. <Link to={MC.PATHS.my}>Open my masterclass</Link></>
-              : <>Already registered? <Link to={MC.PATHS.signIn}>Sign in</Link></>}
+              : <>Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link></>}
           </p>
           <div className="ch-hero-grid lux-hero-grid mi-hero-grid">
             <div className="ch-hero-text">
@@ -92,11 +101,10 @@ export default function MasterclassInfo() {
               <p className="lux-promise">{MC.HERO.promise}</p>
               <p className="ch-hero-sub">{MC.HERO.who}</p>
               <ul className="mi-facts">
-                {MC.HERO.facts.map((f) => <li key={f.b}><strong>{f.b === MC.PRICE_LABEL ? price : f.b}</strong><span>{f.t}</span></li>)}
+                {MC.HERO.facts.map((f) => <li key={f.b}><strong>{f.price ? f.b.replace(MC.PRICE_LABEL, price) : f.b}</strong><span>{f.t}</span></li>)}
               </ul>
               <div className="ch-hero-cta" ref={heroCta}>
-                {registerBtn()}
-                <a className="ch-btn ch-btn-ghost" href="#learn">See what you’ll learn</a>
+                {ctas()}
               </div>
               <p className="ch-hero-trust">{MC.HERO.note}</p>
             </div>
@@ -273,6 +281,7 @@ export default function MasterclassInfo() {
           <div className="ch-head">
             <span className="ch-eyebrow">The kit</span>
             <h2 id="mi-kit" className="ch-h2">{MC.KIT.title}</h2>
+            <p className="ch-lead ch-center-lead">{MC.KIT.intro.replace(MC.PRICE_LABEL, price)}</p>
           </div>
           {/* One picture: the leak is worked out on the sheet's Leak tab, not a printed calculator (owner 2026-10-22). */}
           <div className="mi-showcase mi-showcase-one">
@@ -287,7 +296,7 @@ export default function MasterclassInfo() {
               </li>
             ))}
           </ul>
-          <div className="ch-hero-cta ch-center-cta mi-mid-cta">{registerBtn()}</div>
+          <div className="ch-hero-cta ch-center-cta mi-mid-cta">{ctas()}</div>
         </div>
       </section>
 
@@ -358,16 +367,16 @@ export default function MasterclassInfo() {
           <span className="ch-eyebrow">{MC.TITLE}</span>
           <h2 className="ch-offer-title">{MC.FINAL.title}</h2>
           <p className="ch-offer-sub">{MC.FINAL.text}</p>
-          <div className="ch-hero-cta ch-center-cta">{registerBtn()}</div>
+          <div className="ch-hero-cta ch-center-cta">{ctas()}</div>
           <p className="mi-final-q"><WaLink>{MC.FINAL.questions}</WaLink></p>
-          <p className="mi-final-q">Already registered? <Link to={MC.PATHS.signIn}>Sign in</Link></p>
+          <p className="mi-final-q">Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link></p>
         </div>
       </section>
 
-      {/* Phones: Register stays one tap away. */}
+      {/* Phones: Watch free stays one tap away. */}
       <div className={`mi-sticky${sticky ? ' is-on' : ''}`} aria-hidden={!sticky}>
-        <span><b>{MC.TITLE}</b> · {price}</span>
-        <Link className="ch-btn ch-btn-primary" to={MC.PATHS.register} tabIndex={sticky ? 0 : -1}>Register</Link>
+        <span><b>{MC.TITLE}</b> · {MC.CTA.freeLine} · {MC.CTA.kitLine.replace(MC.PRICE_LABEL, price)}</span>
+        <Link className="ch-btn ch-btn-primary" to={watchTo} tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</Link>
       </div>
     </div>
   );
