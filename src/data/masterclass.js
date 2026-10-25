@@ -63,7 +63,7 @@ const HERO = {
   // Free to watch · Kit ₹999, once · Lifetime access (owner 2026-10-25). `price: true` marks the
   // fact whose PRICE_LABEL the page swaps for the backend's live label.
   facts: [
-    { b: 'About 90 minutes', t: 'watch any time' },
+    { b: '90 minutes', t: 'about, watch any time' },
     { b: CTA.freeLine, t: 'create a free account and press play' },
     { b: CTA.kitLine, t: 'unlocks every download', price: true },
     { b: ACCESS, t: 'to the video, and to the kit' },

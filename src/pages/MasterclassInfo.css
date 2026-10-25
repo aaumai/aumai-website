@@ -20,10 +20,11 @@
 .site-lux .lux-hero-grid.mi-hero-grid { grid-template-columns: 1.02fr 0.98fr; gap: 56px; align-items: center; }
 .site-lux .mi-hero .lux-promise { font-size: 23px; }
 .site-lux .mi-hero .ch-hero-sub { margin: 0 0 22px; }
+/* Four facts; titles may wrap and never run into the next cell (fixed 2026-10-25). */
 .mi-facts { list-style: none; margin: 0 0 28px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(220, 197, 148, 0.28); border-bottom: 1px solid rgba(220, 197, 148, 0.28); }
-.mi-facts li { padding: 14px 14px 14px 0; }
-.mi-facts li + li { padding-left: 14px; border-left: 1px solid rgba(220, 197, 148, 0.2); }
-.site-lux .ch-home .mi-facts strong { display: block; font-family: var(--lux-serif); font-weight: 400; font-size: 22px; line-height: 1.15; color: var(--lux-gold-2); white-space: nowrap; }
+.mi-facts li { min-width: 0; padding: 14px 12px 14px 0; overflow-wrap: anywhere; }
+.mi-facts li + li { padding-left: 12px; border-left: 1px solid rgba(220, 197, 148, 0.2); }
+.site-lux .ch-home .mi-facts strong { display: block; font-family: var(--lux-serif); font-weight: 400; font-size: clamp(17px, 1.25vw, 20px); line-height: 1.15; color: var(--lux-gold-2); text-wrap: balance; }
 .mi-facts span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.4; color: rgba(255, 255, 255, 0.72); }
 .mi-hero-figure { position: relative; }
 .mi-hero-img { width: 100%; aspect-ratio: 1344 / 768; object-fit: cover; border: 1px solid rgba(220, 197, 148, 0.35); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7); }
