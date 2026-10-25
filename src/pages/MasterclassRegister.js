@@ -50,7 +50,7 @@ export default function MasterclassRegister() {
       UTM_KEYS.forEach((k) => { if (q.get(k)) utm.current[k] = q.get(k).slice(0, 160); });
     } catch (e) { /* no utm */ }
     fetch(`${API}${EP.price}`).then((r) => r.json()).then(setPrice)
-      .catch(() => setPriceError('We could not reach the server. Check your internet connection and refresh the page.'));
+      .catch(() => setPriceError('We could not connect. Check your internet connection and refresh the page.'));
     fetch(`${API}${EP.me}`, { credentials: 'include' }).then((r) => (r.ok ? r.json() : null)).then((j) => { if (j && j.ok) setHave(j); }).catch(() => { /* not signed in */ });
   }, []);
 
@@ -97,7 +97,7 @@ export default function MasterclassRegister() {
             {priceError && <p className="sc-error" role="alert">{priceError}</p>}
             {price && !open && !freeMember && (
               <div className="sc-form" role="status">
-                <h2>The kit opens soon</h2>
+                <h2>The kit is not on sale right now</h2>
                 <p>{price.message || 'Please check again later.'} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
               </div>
             )}
@@ -140,14 +140,14 @@ export default function MasterclassRegister() {
                 </label>
                 {validEmail(f.email) && <p className="mc-help" style={{ color: 'var(--sc-ink)' }}>Your sign-in code will go to: <b>{f.email.trim().toLowerCase()}</b></p>}
                 {co.error && <p className="sc-error" role="alert">{co.error}</p>}
-                <button type="submit" className="sc-btn mc-btn-wide" disabled={co.busy}>{co.busy ? 'Opening the payment…' : `Get the kit · ${label} once`}</button>
+                <button type="submit" className="sc-btn mc-btn-wide" disabled={co.busy}>{co.busy ? 'Opening the payment…' : `Pay ${label} once`}</button>
                 <p className="mc-help">Secure payment by Razorpay: UPI, card or net banking. Your access starts {price.starts_on <= todayIst ? 'today' : `on ${price.starts_on_label}`}, and we email you how to sign in.</p>
               </form>
             )}
           </>
         )}
 
-        <p className="mc-help">Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link>. Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+        <p className="mc-help">{!have && <>Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link>. </>}Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
       </div>
     </div>
   );
