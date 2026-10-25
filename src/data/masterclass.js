@@ -63,7 +63,7 @@ const HERO = {
   // Free to watch · Kit ₹999, once · Lifetime access (owner 2026-10-25). `price: true` marks the
   // fact whose PRICE_LABEL the page swaps for the backend's live label.
   facts: [
-    { b: '90 minutes', t: 'about, watch any time' },
+    { b: 'About 90 min', t: 'watch any time' },
     { b: CTA.freeLine, t: 'create a free account and press play' },
     { b: CTA.kitLine, t: 'unlocks every download', price: true },
     { b: ACCESS, t: 'to the video, and to the kit' },
@@ -265,7 +265,7 @@ const FINAL = {
 // away" path (owner 2026-10-25). The masterclass itself is free to watch.
 const REGISTER = {
   title: CTA.kitOnce,
-  lead: 'Everything that runs the 4C Framework in your clinic, with lifetime access. One payment, and every download opens.',
+  lead: 'Everything that runs the 4C Framework in your clinic, with lifetime access. One payment, and every download opens. The masterclass video itself is free to watch; this is the kit.',
   points: [
     'The Clinic Master Sheet: type each patient once, and it shows who is due for what today. It works out your monthly leak on its Leak tab.',
     'The Claude skill file and its guide: Claude writes your patient messages, call scripts and weekly KPI report from your own sheet.',
@@ -276,6 +276,16 @@ const REGISTER = {
 };
 const REGISTER_SEO_DESCRIPTION =
   'Get The Full Chair Method kit for ₹999, once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides. The 90-minute masterclass itself is free to watch.';
+
+// The sign-in page (owner 2026-10-25): two paths on one screen. Same words in prerender.js.
+const SIGNIN = {
+  title: 'Watch the masterclass',
+  sub: `Free to watch, with a free account. The kit is ${PRICE_LABEL}, once, whenever you want it.`,
+  signInTitle: 'Sign in',
+  signInBlurb: 'Already have an account? Type your email and we will send you a 6-digit code. There is no password.',
+  createTitle: 'Create your free account',
+  createBlurb: 'Watch the whole masterclass, free, as often as you like. We email you a code to get in: no password, no card.',
+};
 
 // The members page for a FREE member (owner 2026-10-25): the video first, then the kit, locked.
 const MEMBER = {
@@ -318,6 +328,6 @@ const MASTER_SHEET = {
 const MEMBER_HELP = `Stuck while setting up a system? Ask us 24×7 on WhatsApp: ${WHATSAPP.display}`;
 
 module.exports = {
-  TITLE, PRICE_LABEL, ACCESS, PATHS, CTA, WHATSAPP, SEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, MEMBER, MASTER_SHEET, MEMBER_HELP,
+  TITLE, PRICE_LABEL, ACCESS, PATHS, CTA, WHATSAPP, SEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, SIGNIN, MEMBER, MASTER_SHEET, MEMBER_HELP,
 };
 module.exports.default = module.exports;

@@ -9,7 +9,7 @@ import HowWeWork from '../components/HowWeWork';
 // One FAQ list for the visible page, the crawler HTML and the FAQPage JSON-LD (scripts/prerender.js).
 import { FAQS as HOME_FAQ } from '../data/homeFaq';
 import { HOME_EXPLORE } from '../data/positioning';
-import { PRICE_LABEL, ACCESS } from '../data/masterclass';
+import { ACCESS } from '../data/masterclass';
 import {
   HERO, PAIN, VS, FOURC, STRATEGIES, KPIS, STERLING_PROOF, BE_PATIENT, FIT, DIY, FINAL, SEO,
 } from '../data/homeOutcomes';
@@ -369,7 +369,7 @@ const Home = () => {
             <p className="ho-note">{DIY.byline}</p>
           </div>
           <div className="ho-diy-card">
-            <p className="ho-diy-price"><strong>{DIY.free}</strong><span>{DIY.kit.replace('{price}', PRICE_LABEL)} · {DIY.length} · {ACCESS.toLowerCase()}</span></p>
+            <p className="ho-diy-price"><strong>{DIY.free}</strong><span>{DIY.length} · {ACCESS.toLowerCase()}</span></p>
             <ul>
               {DIY.items.map(([b, t]) => (
                 <li key={b}><strong>{b}</strong>{t}</li>

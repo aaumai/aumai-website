@@ -469,7 +469,7 @@ function homeContent() {
         <p class="ch-eyebrow">${esc(HO.DIY.eyebrow)}</p>
         <h2>${esc(HO.DIY.titleA)} ${esc(HO.DIY.titleB)}</h2>
         <p>${esc(HO.DIY.lead)} ${esc(HO.DIY.honest)}</p>
-        <p>${esc(HO.DIY.free)} · ${esc(HO.DIY.kit.replace('{price}', MC.PRICE_LABEL))} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
+        <p>${esc(HO.DIY.free)} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
         <ul>${HO.DIY.items.map(([b, t]) => '<li><strong>' + esc(b) + '</strong> — ' + esc(t) + '</li>').join('')}</ul>
         <p><a href="${HO.DIY.button.to}">${esc(HO.DIY.button.label)}</a></p>
       </div></section>
@@ -891,7 +891,7 @@ const routes = [
         inLanguage: 'en-IN',
         provider: { '@type': 'Organization', name: 'AUM AI', sameAs: ORIGIN },
         // The video is free to watch; the offer is the kit, paid once (owner 2026-10-25).
-        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `The masterclass video is free to watch with a free account. This one-time offer is the kit: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access.` },
+        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `This offer is the kit, paid once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access. The masterclass video is free to watch with a free account.` },
         hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'PT1H30M', instructor: { '@type': 'Person', name: MC.TRAINER.name } },
       },
       faqPageLd(MC.FAQS),
@@ -979,12 +979,12 @@ const routes = [
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
-        <h1 class="ch-hero-title">Watch the masterclass</h1>
-        <p class="ch-hero-sub">Free to watch, with a free account. The kit is ${esc(MC.PRICE_LABEL)}, once, whenever you want it.</p>
-        <h2>Sign in</h2>
-        <p>Already have an account? Type your email and we will send you a 6-digit code. There is no password.</p>
-        <h2>Create your free account</h2>
-        <p>Your name, clinic, WhatsApp number and email. We email you a code to get in: no password, no card.</p>
+        <h1 class="ch-hero-title">${esc(MC.SIGNIN.title)}</h1>
+        <p class="ch-hero-sub">${esc(MC.SIGNIN.sub)}</p>
+        <h2>${esc(MC.SIGNIN.signInTitle)}</h2>
+        <p>${esc(MC.SIGNIN.signInBlurb)}</p>
+        <h2>${esc(MC.SIGNIN.createTitle)}</h2>
+        <p>${esc(MC.SIGNIN.createBlurb)}</p>
       </div></section>`,
   })),
   // Clinic websites built for search (owner 2026-10-19): public and in the sitemap.
