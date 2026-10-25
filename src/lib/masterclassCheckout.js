@@ -100,13 +100,14 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
     setChecking(true); setError('');
     try {
       const { status, j } = await call(EP.orderStatus, { order_id: p.order_id, claim: p.claim });
-      if (j.paid && (j.ok || j.sign_in)) { landPaid(j, p.email); return; }
-      if (status === 403 && j.paid) { clearPending(); setError(j.error); return; }
+      const booked = !!(j.payment_booked || j.paid); // the backend's name is payment_booked; paid is its old alias
+      if (booked && (j.ok || j.sign_in)) { landPaid(j, p.email); return; }
+      if (status === 403 && booked) { clearPending(); setError(j.error); return; }
       if (j.unknown) { clearPending(); setStage('form'); return; }
       if (j.failed) { clearPending(); setError(j.error); return; }
       setConfirmMsg(j.message || j.error || 'We are checking your payment. This can take a few minutes.');
     } catch (e) {
-      setConfirmMsg('We could not reach the server. Check your internet connection and press Check again.');
+      setConfirmMsg('We could not connect. Check your internet connection and press Check again.');
     } finally { setChecking(false); }
   }, [landPaid]);
 
@@ -154,7 +155,7 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
       });
       rz.open();
     } catch (err) {
-      setError('We could not reach the server. Check your internet connection and try again.');
+      setError('We could not connect. Check your internet connection and try again.');
       setBusy(false);
     }
   };
