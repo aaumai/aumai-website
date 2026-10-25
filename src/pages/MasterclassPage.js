@@ -32,7 +32,8 @@ const readSent = () => {
   } catch (e) { return null; }
 };
 const saveSent = (v) => { try { if (v) localStorage.setItem(SENT_STORE, JSON.stringify(v)); else localStorage.removeItem(SENT_STORE); } catch (e) { /* fine */ } };
-const EMPTY_CREATE = { name: '', clinic: '', whatsapp: '', email: '' };
+// `website` is a honeypot: never shown, never prefilled; the backend drops a sign-up that fills it.
+const EMPTY_CREATE = { name: '', clinic: '', whatsapp: '', email: '', website: '' };
 
 // kind comes from the backend (master_sheet | worksheet | skill | guide | slides | file); the extension is the fallback.
 const kindOf = (f) => f.kind || (/.(xlsx|xls|csv)$/i.test(f.name) ? 'workbook' : 'file');
@@ -124,7 +125,7 @@ export default function MasterclassPage() {
       if (sent) { setEmail(sent.email); setSentVia(sent.via || 'sign-in'); setNotice(`Use the code we sent to ${sent.email}.`); setStage('code'); return null; }
       setStage('email');
     } catch (e) {
-      setError('We could not reach the server. Check your internet connection and refresh the page.');
+      setError('We could not connect. Check your internet connection and refresh the page.');
       setStage('email');
     }
     return null;
@@ -162,7 +163,7 @@ export default function MasterclassPage() {
       saveEmail(clean); setEmail(clean); saveSent({ email: clean, sentAt: Date.now(), via: 'sign-in' }); setSentVia('sign-in');
       setNotice(j.message); setCode(''); setWait(RESEND_WAIT); setStage('code');
     } catch (err) {
-      setError('We could not reach the server. Check your internet connection and try again.');
+      setError('We could not connect. Check your internet connection and try again.');
     } finally { setBusy(false); }
   };
 
@@ -176,13 +177,13 @@ export default function MasterclassPage() {
     if (!validEmail(clean)) { setCreateError('Please type your email address, for example name@gmail.com.'); return; }
     setBusy(true); setCreateError('');
     try {
-      const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), clinic: cf.clinic.trim() || undefined });
+      const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), clinic: cf.clinic.trim() || undefined, website: cf.website || '' });
       if (!ok) { setCreateError(j.error || 'Something went wrong. Please try again.'); return; }
       saveEmail(clean); setEmail(clean); saveSent({ email: clean, sentAt: Date.now(), via: 'sign-up' }); setSentVia('sign-up');
       setNotice(j.message || `We've emailed your code to ${clean}.`); setCode(''); setError(''); setWait(RESEND_WAIT); setStage('code');
       if (location.hash) navigate(MC.PATHS.signIn, { replace: true });
     } catch (err) {
-      setCreateError('We could not reach the server. Check your internet connection and try again.');
+      setCreateError('We could not connect. Check your internet connection and try again.');
     } finally { setBusy(false); }
   };
 
@@ -201,7 +202,7 @@ export default function MasterclassPage() {
       if (status === 403) { setNotice(j.error); setStage('ended'); return; }
       setError(j.error || 'That did not work. Please try again.');
     } catch (err) {
-      setError('We could not reach the server. Check your internet connection and try again.');
+      setError('We could not connect. Check your internet connection and try again.');
     } finally { setBusy(false); }
   };
 
@@ -300,16 +301,22 @@ export default function MasterclassPage() {
               {kit.map((k) => (
                 <li key={k.key}>
                   <LockIcon />
-                  <div><h3>{k.title}</h3>{k.about && <p>{k.about}</p>}</div>
+                  <div><h3><span className="mc-sr">Locked: </span>{k.title}</h3>{k.about && <p>{k.about}</p>}</div>
                 </li>
               ))}
             </ul>
-            {!showUnlock ? (
+            {justUnlocked && !showUnlock && (
+              <div className="mc-all">
+                <button type="button" className="sc-btn sc-btn-ghost mc-btn-wide mc-unlock-btn" onClick={loadMe}>Check again</button>
+              </div>
+            )}
+            {!justUnlocked && !showUnlock && (
               <div className="mc-all">
                 <button type="button" className="sc-btn mc-btn-wide mc-unlock-btn" onClick={() => setShowUnlock(true)}>{(me.price && me.price.label) ? `Unlock the kit · ${me.price.label} once` : MC.CTA.unlock}</button>
               </div>
-            ) : (
-              <MasterclassUnlockForm me={me} price={me.price} onPaid={onUnlocked} onAlreadyPaid={onUnlocked} contact={contact} />
+            )}
+            {showUnlock && (
+              <MasterclassUnlockForm me={me} price={me.price} onPaid={onUnlocked} onAlreadyPaid={onUnlocked} onCancel={() => setShowUnlock(false)} contact={contact} />
             )}
           </section>
 
@@ -471,12 +478,15 @@ export default function MasterclassPage() {
           <h1>{sentVia === 'sign-up' ? 'One more step' : 'Sign in to your masterclass'}</h1>
           <form className="sc-form" onSubmit={(e) => { e.preventDefault(); verify(); }} noValidate>
             {notice && <p className="mc-sent" role="status">{notice}</p>}
-            <label className="mc-label">The 6-digit code we sent to {email}
+            <label className="mc-label">The 6-digit code for {email}
               <input className="mc-input mc-code" type="text" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]*" maxLength={6}
                 value={code} onChange={(e) => onCode(e.target.value)} placeholder="______" autoFocus aria-describedby="mc-code-help" />
             </label>
             {error && <p className="sc-error" role="alert">{error}</p>}
             <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'Checking…' : (sentVia === 'sign-up' ? 'Open my masterclass' : 'Sign in')}</button>
+            {sentVia !== 'sign-up' && (
+              <p className="mc-help" style={{ fontSize: 15, color: 'var(--sc-ink)' }}>No account yet? <button type="button" className="sc-link" onClick={() => backToStart(true)}>Create your free account</button>: it takes a minute, and the code arrives straight away.</p>
+            )}
             <div className="mc-row-links">
               <button type="button" className="sc-link" onClick={() => sendCode()} disabled={busy || wait > 0}>
                 {wait > 0 ? `Send a new code (in ${wait}s)` : 'Send a new code'}
@@ -484,9 +494,6 @@ export default function MasterclassPage() {
               <button type="button" className="sc-link" onClick={() => backToStart(false)}>Use a different email</button>
             </div>
             <p className="mc-help" id="mc-code-help">No email after 5 minutes? Check Spam or Promotions, and check the email address above. Still nothing? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
-            {sentVia !== 'sign-up' && (
-              <p className="mc-help">No account yet? <button type="button" className="sc-link" onClick={() => backToStart(true)}>Create your free account</button>: it takes a minute, and the code arrives straight away.</p>
-            )}
           </form>
         </div>
       </div>
@@ -500,15 +507,15 @@ export default function MasterclassPage() {
     <div className="sc-root">
       <div className="sc-wrap mc-wide mc-hero">
         <p className="sc-eyebrow">The Full Chair Method · Masterclass</p>
-        <h1>Watch the masterclass</h1>
-        <p className="mc-access">Free to watch, with a free account. The kit is <b>{MC.PRICE_LABEL}, once</b>, whenever you want it.</p>
+        <h1>{MC.SIGNIN.title}</h1>
+        <p className="mc-access">{MC.SIGNIN.sub}</p>
         {location.state?.justPaid && (
           <p className="mc-sent" role="status">Payment received. Sign in with the email you used{location.state.email ? `: ${location.state.email}` : ''}.</p>
         )}
-        <div className="mc-two">
+        <div className={`mc-two${focusCreate ? ' mc-create-first' : ''}`}>
           <form className="sc-form" onSubmit={sendCode} noValidate aria-labelledby="mc-signin-h">
-            <h2 id="mc-signin-h">Sign in</h2>
-            <p>Already have an account? Type your email and we will send you a 6-digit code. There is no password.</p>
+            <h2 id="mc-signin-h">{MC.SIGNIN.signInTitle}</h2>
+            <p>{MC.SIGNIN.signInBlurb}</p>
             <label className="mc-label">Your email
               <input className="mc-input" type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck="false"
                 value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@gmail.com" autoFocus={!focusCreate && !email} />
@@ -519,13 +526,18 @@ export default function MasterclassPage() {
           </form>
 
           <form className="sc-form mc-create" id="create" ref={createRef} onSubmit={createAccount} noValidate aria-labelledby="mc-create-h">
-            <h2 id="mc-create-h">Create your free account</h2>
-            <p>Watch the whole masterclass, free, as often as you like. We email you a code to get in: no password, no card.</p>
+            <h2 id="mc-create-h">{MC.SIGNIN.createTitle}</h2>
+            <p>{MC.SIGNIN.createBlurb}</p>
             <div className="sc-fields" style={{ gridTemplateColumns: '1fr' }}>
               <label>Your name<input className="mc-input" value={cf.name} onChange={setC('name')} placeholder="Dr Meera Joshi" autoComplete="name" autoFocus={focusCreate} required /></label>
               <label>Clinic name<input className="mc-input" value={cf.clinic} onChange={setC('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" /></label>
               <label>WhatsApp number<input className="mc-input" type="tel" inputMode="tel" value={cf.whatsapp} onChange={setC('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>
               <label>Email (your code comes here)<input className="mc-input" type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={cf.email} onChange={setC('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
+            </div>
+            {/* Honeypot: off-screen, not focusable, never prefilled. A real person never fills it. */}
+            <div className="mc-hp" aria-hidden="true">
+              <label htmlFor="mc-website">Website</label>
+              <input id="mc-website" name="website" type="text" tabIndex={-1} autoComplete="off" value={cf.website} onChange={setC('website')} />
             </div>
             {createError && <p className="sc-error" role="alert">{createError}</p>}
             <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'One moment…' : 'Create my free account'}</button>

@@ -65,6 +65,9 @@
 
 /* Free to watch, kit paid once (owner 2026-10-25). */
 .mc-wide { max-width: 920px }
+#create, #unlock { scroll-margin-top: 104px } /* clears the fixed site header */
+.mc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+.mc-hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden } /* honeypot field */
 .mc-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; margin-top: 8px }
 .mc-two .sc-form > p:not(.sc-error):not(.mc-help) { font-size: 15px; line-height: 1.5 }
 .mc-create { border-left: 6px solid var(--sc-accent) }
@@ -86,4 +89,7 @@
 @media (max-width: 680px) {
   .mc-two { grid-template-columns: minmax(0, 1fr) }
   .mc-unlock-btn { max-width: none }
+}
+@media (max-width: 640px) {
+  .mc-two.mc-create-first .mc-create { order: -1 } /* arrived by #create: the free-account card comes first */
 }

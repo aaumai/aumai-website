@@ -13,7 +13,7 @@ import { CLINIC_TYPES, useMasterclassCheckout } from '../lib/masterclassCheckout
 // onPaid(j), onAlreadyPaid(j) (409 already_paid: refetch /me), contact (email),
 // utm (object, optional). `price.open === false` shows why Pay is not offered.
 
-export default function MasterclassUnlockForm({ me, price, onPaid, onAlreadyPaid, contact, utm }) {
+export default function MasterclassUnlockForm({ me, price, onPaid, onAlreadyPaid, onCancel, contact, utm }) {
   const [f, setF] = useState({ clinic: me.clinic || '', city: me.city || '', clinic_type: me.clinic_type || '', agree: false });
   const co = useMasterclassCheckout({ onPaid, onAlreadyPaid, contact });
   const name = me.name || me.display_name || '';
@@ -72,6 +72,7 @@ export default function MasterclassUnlockForm({ me, price, onPaid, onAlreadyPaid
       {co.error && <p className="sc-error" role="alert">{co.error}</p>}
       <button type="submit" className="sc-btn mc-btn-wide" disabled={co.busy}>{co.busy ? 'Opening the payment…' : `Pay ${label} once`}</button>
       <p className="mc-help">{MC.MEMBER.unlockHelp}</p>
+      {onCancel && <button type="button" className="sc-link" onClick={onCancel} style={{ alignSelf: 'flex-start' }}>Not now</button>}
     </form>
   );
 }
