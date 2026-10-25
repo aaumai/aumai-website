@@ -3,10 +3,12 @@ import { setNoindex } from '../utils/seo';
 import './ScorecardPage.css';
 import './MasterclassPage.css';
 
-// Admin: masterclass members (owner 2026-10-18). We create each attendee's
-// account here; they sign in at aumai.co.in/masterclass with an email code.
-// Opens with the analytics dashboard's master password (same stored key as
-// /aumaianalytics and /scorecard-admin); a clinic's own password is refused.
+// Admin: masterclass members (owner 2026-10-18). Members sign in at
+// aumai.co.in/masterclass/sign-in with an email code. Owner 2026-10-25: anyone can
+// create a FREE account there (watch only); one payment unlocks the kit. This page
+// shows who is paid and who is free, and can mark a member paid by hand (a bank
+// transfer, a gift). Opens with the analytics dashboard's master password (same
+// stored key as /aumaianalytics and /scorecard-admin); a clinic's own password is refused.
 
 const API = `${process.env.REACT_APP_SITE_API || 'https://site-api.aumai.co.in'}/api/aumai/masterclass/admin`;
 const KEY_STORE = 'aumai_dash_key';
@@ -20,6 +22,12 @@ const formatIST = (utc) => {
     timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true,
   });
 };
+const formatISTDate = (utc) => {
+  if (!utc) return '';
+  return new Date(`${String(utc).replace(' ', 'T')}Z`).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', year: 'numeric' });
+};
+// Members from before 2026-10-25 may come without paid_at from an older backend: only an explicit null/false is free.
+const isPaidMember = (m) => !!m.paid_at || m.paid === true;
 const STATE_LABEL = { ok: 'Active', ended: 'Ended', revoked: 'Closed' }; // 'ended' no longer happens: access is lifetime (owner 2026-10-20)
 const welcomeWords = (s) => (s === 'sent' ? 'Welcome email sent.' : s === 'simulated' ? 'Email NOT sent: the server has no email account set up.' : s === 'failed' ? 'The welcome email failed. Use Resend on their row.' : '');
 const blankForm = () => ({ name: '', email: '', whatsapp: '', starts_on: istToday(), send_welcome: true });
@@ -104,11 +112,14 @@ export default function MasterclassAdmin() {
     ok: members.filter((m) => m.state === 'ok').length,
     ended: members.filter((m) => m.state === 'ended').length,
     revoked: members.filter((m) => m.state === 'revoked').length,
+    paid: members.filter(isPaidMember).length,
+    free: members.filter((m) => !isPaidMember(m)).length,
   }), [members]);
   const rows = useMemo(() => {
     const s = q.trim().toLowerCase();
     const digits = s.replace(/\D/g, '');
-    return members.filter((m) => (show === 'all' || m.state === show) && (!s
+    const inShow = (m) => show === 'all' || (show === 'paid' ? isPaidMember(m) : show === 'free' ? !isPaidMember(m) : m.state === show);
+    return members.filter((m) => inShow(m) && (!s
       || m.name.toLowerCase().includes(s) || m.email.includes(s) || (digits.length >= 3 && (m.whatsapp || '').replace(/\D/g, '').includes(digits))));
   }, [members, q, show]);
 
@@ -162,6 +173,8 @@ export default function MasterclassAdmin() {
     });
   };
   const resend = (m) => { if (window.confirm(`Email the sign-in details to ${m.email} again?`)) act(`/members/${m.id}/resend`, {}, (j) => setFlash(`${m.name}: ${welcomeWords(j.welcome)}`)); };
+  // Paid by hand (owner 2026-10-25): every download opens for them the moment this is saved.
+  const markPaid = (m) => { if (window.confirm(`Mark ${m.name} (${m.email}) as paid? Every download opens for them straight away. Use this only when the money came another way (bank transfer, gift).`)) act(`/members/${m.id}/mark-paid`, { via: 'admin' }, () => setFlash(`${m.name} is now paid: the kit is open for them.`)); };
 
   const files = data.files || [];
   const signedIn = members.filter((m) => m.last_login_at).length;
@@ -175,7 +188,7 @@ export default function MasterclassAdmin() {
             <h1 style={{ fontSize: 34 }}>Masterclass members</h1>
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-            <a className="sc-link" href="/masterclass" target="_blank" rel="noopener noreferrer">Open the members page</a>
+            <a className="sc-link" href="/masterclass/sign-in" target="_blank" rel="noopener noreferrer">Open the members page</a>
             <button type="button" className="sc-btn sc-btn-ghost" onClick={() => (tab === 'registrations' ? loadRegs() : load(key))} disabled={busy}>Refresh</button>
             <button type="button" className="sc-link" onClick={() => { saveKey(''); setKey(''); setData(null); }}>Sign out</button>
           </div>
@@ -184,7 +197,7 @@ export default function MasterclassAdmin() {
         {flash && <p className="mc-ok" role="status">{flash}</p>}
 
         <div className="mc-chips" aria-label="View">
-          <button type="button" className="mc-chip" aria-pressed={tab === 'members'} onClick={() => setTab('members')}>Members ({counts.all})</button>
+          <button type="button" className="mc-chip" aria-pressed={tab === 'members'} onClick={() => setTab('members')}>Members {counts.all} · Paid {counts.paid} · Free {counts.free}</button>
           <button type="button" className="mc-chip" aria-pressed={tab === 'registrations'} onClick={() => setTab('registrations')}>Registrations and payments</button>
         </div>
 
@@ -193,6 +206,8 @@ export default function MasterclassAdmin() {
 
         <div className="sc-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
           <div className="sc-start-card"><p className="sc-start-label">Members</p><h3>{counts.all}</h3><p>{counts.ok} active now</p></div>
+          <div className="sc-start-card"><p className="sc-start-label">Paid</p><h3>{counts.paid}</h3><p>have the kit</p></div>
+          <div className="sc-start-card"><p className="sc-start-label">Free</p><h3>{counts.free}</h3><p>watch only</p></div>
           <div className="sc-start-card"><p className="sc-start-label">Signed in</p><h3>{signedIn}</h3><p>at least once</p></div>
           <div className="sc-start-card"><p className="sc-start-label">Ended</p><h3>{counts.ended}</h3><p>month is over</p></div>
           <div className="sc-start-card"><p className="sc-start-label">Files</p><h3>{files.length}</h3><p>{files.length ? 'ready to download' : 'none on the server yet'}</p></div>
@@ -272,7 +287,7 @@ export default function MasterclassAdmin() {
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
           <input className="mc-input" style={{ maxWidth: 360, fontSize: 16, minHeight: 44, padding: '10px 12px' }} type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search name, email or WhatsApp" aria-label="Search members" />
           <div className="mc-chips">
-            {[['all', 'All'], ['ok', 'Active'], ['ended', 'Ended'], ['revoked', 'Closed']].map(([k, label]) => (
+            {[['all', 'All'], ['paid', 'Paid'], ['free', 'Free'], ['ok', 'Active'], ['ended', 'Ended'], ['revoked', 'Closed']].map(([k, label]) => (
               <button key={k} type="button" className="mc-chip" aria-pressed={show === k} onClick={() => setShow(k)}>{label} ({counts[k]})</button>
             ))}
           </div>
@@ -283,7 +298,7 @@ export default function MasterclassAdmin() {
             <p style={{ padding: 20, margin: 0 }}>{members.length ? 'No members match. Change the search or press All.' : 'No members yet. Add the first one above.'}</p>
           ) : (
             <table className="sc-table" style={{ minWidth: 1100 }}>
-              <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Access</th><th>Until</th><th>Last sign-in</th><th>Downloads</th><th>Welcome email</th><th>Actions</th></tr></thead>
+              <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Access</th><th>Paid</th><th>Until</th><th>Last sign-in</th><th>Downloads</th><th>Welcome email</th><th>Actions</th></tr></thead>
               <tbody>
                 {rows.map((m) => (
                   <tr key={m.id}>
@@ -299,6 +314,7 @@ export default function MasterclassAdmin() {
                     </td>
                     <td style={{ whiteSpace: 'nowrap' }}>{m.whatsapp || ''}</td>
                     <td><span className={`mc-state mc-state-${m.state}`}>{STATE_LABEL[m.state]}</span></td>
+                    <td style={{ whiteSpace: 'nowrap' }}>{isPaidMember(m) ? (m.paid_at ? formatISTDate(m.paid_at) : 'Paid') : <span className="mc-state mc-state-ended">Free</span>}</td>
                     <td style={{ whiteSpace: 'nowrap' }}>Lifetime</td>
                     <td style={{ whiteSpace: 'nowrap' }}>{m.last_login_at ? formatIST(m.last_login_at) : <span className="mc-small">never</span>}</td>
                     <td className="sc-num">{m.downloads}</td>
@@ -307,6 +323,7 @@ export default function MasterclassAdmin() {
                       <div className="mc-actions">
                         <button type="button" onClick={() => resend(m)} disabled={busy || m.state !== 'ok'}>Resend email</button>
                         <button type="button" onClick={() => setEditingEmail({ id: m.id, email: m.email })} disabled={busy}>Change email</button>
+                        {!isPaidMember(m) && <button type="button" onClick={() => markPaid(m)} disabled={busy || m.state === 'revoked'}>Mark paid</button>}
                         {m.state === 'revoked'
                           ? <button type="button" onClick={() => act(`/members/${m.id}/restore`, {}, () => setFlash(`Restored access for ${m.name}.`))} disabled={busy}>Restore</button>
                           : <button type="button" className="mc-danger" onClick={() => revoke(m)} disabled={busy}>Close access</button>}
@@ -318,7 +335,7 @@ export default function MasterclassAdmin() {
             </table>
           )}
         </div>
-        <p className="sc-hint">Members sign in at aumai.co.in/masterclass with a code sent to their email. Access is lifetime: it ends only if you press Close access.</p>
+        <p className="sc-hint">Members sign in at aumai.co.in/masterclass/sign-in with a code sent to their email. Anyone can create a free account there and watch; Paid members also have every download. Access is lifetime: it ends only if you press Close access.</p>
         </>)}
       </div>
     </div>
@@ -342,7 +359,10 @@ function Registrations({ data, show, setShow }) {
         <div className="sc-start-card"><p className="sc-start-label">To refund</p><h3>{rupees(data.totals.extra_paise)}</h3><p>{data.totals.extra} extra payment{data.totals.extra === 1 ? '' : 's'} · {data.totals.flagged} row{data.totals.flagged === 1 ? '' : 's'} need a decision</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Not paid yet</p><h3>{data.totals.created}</h3><p>opened the payment, did not finish</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Failed</p><h3>{data.totals.failed}</h3><p>see the reason in the table</p></div>
-        <div className="sc-start-card"><p className="sc-start-label">Price now</p><h3>{data.price.label}</h3><p>{data.price.open ? 'registration is open' : 'registration closed (no Razorpay keys)'}</p></div>
+        <div className="sc-start-card"><p className="sc-start-label">Price now</p><h3>{data.price.label}</h3><p>{data.price.open ? 'the kit is on sale' : 'kit sales closed (no Razorpay keys)'}</p></div>
+        {data.totals.paid_members != null && <div className="sc-start-card"><p className="sc-start-label">Paid members</p><h3>{data.totals.paid_members}</h3><p>have the kit</p></div>}
+        {data.totals.free_members != null && <div className="sc-start-card"><p className="sc-start-label">Free members</p><h3>{data.totals.free_members}</h3><p>watch only</p></div>}
+        {data.totals.blocked_downloads_7d != null && <div className="sc-start-card"><p className="sc-start-label">Locked downloads</p><h3>{data.totals.blocked_downloads_7d}</h3><p>tried by free members, last 7 days</p></div>}
       </div>
       {data.extra_payments.length > 0 && (
         <div className="sc-form" style={{ borderLeft: '6px solid #BE185D' }}>
@@ -360,7 +380,7 @@ function Registrations({ data, show, setShow }) {
         ))}
       </div>
       <div style={{ overflowX: 'auto', background: 'var(--sc-card)', border: '1px solid var(--sc-line)', borderRadius: 14 }}>
-        {rows.length === 0 ? <p style={{ padding: 20, margin: 0 }}>{all.length ? 'None with this status. Press All.' : 'No registrations yet. They appear here as soon as someone presses Pay on aumai.co.in/masterclass/register.'}</p> : (
+        {rows.length === 0 ? <p style={{ padding: 20, margin: 0 }}>{all.length ? 'None with this status. Press All.' : 'No payments yet. They appear here as soon as someone presses Pay on aumai.co.in/masterclass/register or Unlock the kit on their masterclass page.'}</p> : (
           <table className="sc-table" style={{ minWidth: 1100 }}>
             <thead><tr><th>Date</th><th>Name</th><th>Clinic</th><th>City</th><th>Email</th><th>WhatsApp</th><th>Type</th><th>Amount</th><th>Status</th><th>Came from</th><th>Notes</th></tr></thead>
             <tbody>
