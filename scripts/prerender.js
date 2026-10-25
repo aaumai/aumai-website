@@ -469,7 +469,7 @@ function homeContent() {
         <p class="ch-eyebrow">${esc(HO.DIY.eyebrow)}</p>
         <h2>${esc(HO.DIY.titleA)} ${esc(HO.DIY.titleB)}</h2>
         <p>${esc(HO.DIY.lead)} ${esc(HO.DIY.honest)}</p>
-        <p>${esc(MC.PRICE_LABEL)} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
+        <p>${esc(HO.DIY.free)} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
         <ul>${HO.DIY.items.map(([b, t]) => '<li><strong>' + esc(b) + '</strong> — ' + esc(t) + '</li>').join('')}</ul>
         <p><a href="${HO.DIY.button.to}">${esc(HO.DIY.button.label)}</a></p>
       </div></section>
@@ -890,21 +890,45 @@ const routes = [
         description: MC.SEO.description,
         inLanguage: 'en-IN',
         provider: { '@type': 'Organization', name: 'AUM AI', sameAs: ORIGIN },
-        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}` },
-        hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'PT1H30M', instructor: { '@type': 'Person', name: MC.TRAINER.name } },
+        // The video is free to watch; the offer is the kit, paid once (owner 2026-10-25).
+        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `This offer is the kit, paid once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access. The masterclass video is free to watch on this page.` },
+        hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: MC.VIDEO.duration, instructor: { '@type': 'Person', name: MC.TRAINER.name } },
       },
       faqPageLd(MC.FAQS),
+      // The full masterclass, public on YouTube and embedded below (owner 2026-10-25).
+      {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: MC.VIDEO.name,
+        description: MC.VIDEO.description,
+        thumbnailUrl: [`https://i.ytimg.com/vi/${MC.VIDEO.youtubeId}/maxresdefault.jpg`, `https://i.ytimg.com/vi/${MC.VIDEO.youtubeId}/hqdefault.jpg`],
+        uploadDate: MC.VIDEO.uploadDate,
+        duration: MC.VIDEO.duration,
+        embedUrl: `https://www.youtube.com/embed/${MC.VIDEO.youtubeId}`,
+        url: `https://www.youtube.com/watch?v=${MC.VIDEO.youtubeId}`,
+        inLanguage: 'en',
+        isFamilyFriendly: true,
+        publisher: { '@type': 'Organization', name: 'AUM AI', url: ORIGIN },
+        author: { '@type': 'Person', name: MC.TRAINER.name },
+      },
     ],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p><a href="${MC.PATHS.signIn}">Already registered? Sign in to your masterclass</a></p>
+        <p><a href="${MC.PATHS.signIn}">Already have an account? Sign in to your masterclass</a></p>
         <p class="ch-eyebrow">${esc(MC.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(MC.HERO.title)}</h1>
         <p class="ch-hero-sub">${esc(MC.HERO.promise)}</p>
         <p>${esc(MC.HERO.who)}</p>
         <ul>${MC.HERO.facts.map((f) => `<li><strong>${esc(f.b)}</strong> ${esc(f.t)}</li>`).join('')}</ul>
-        <p><a href="${MC.PATHS.register}">Register · ${esc(MC.PRICE_LABEL)}</a></p>
+        <p><a href="#watch">${esc(MC.CTA.watch)}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
         <p>${esc(MC.HERO.note)}</p>
+      </div></section>
+      <section id="watch"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(MC.VIDEO.eyebrow)}</p>
+        <h2>${esc(MC.VIDEO.title)}</h2>
+        <p>${esc(MC.VIDEO.intro)}</p>
+        <iframe src="https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&amp;modestbranding=1" title="${esc(MC.VIDEO.name)}" width="1040" height="585" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <p>${esc(MC.VIDEO.kitNote)} <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.PROBLEM.title)}</h2>
@@ -935,6 +959,7 @@ const routes = [
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.KIT.title)}</h2>
+        <p>${esc(MC.KIT.intro)}</p>
         <ul>${MC.KIT.items.map((k) => `<li><strong>${k.wa ? `<a href="${MC.WHATSAPP.link}">${esc(k.h)}</a>` : esc(k.h)}.</strong> ${esc(k.t)}</li>`).join('')}</ul>
       </div></section>
       <section><div class="ch-container ch-narrow">
@@ -960,25 +985,29 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.FINAL.title)}</h2>
         <p>${esc(MC.FINAL.text)}</p>
-        <p><a href="${MC.PATHS.register}">Register · ${esc(MC.PRICE_LABEL)}</a></p>
+        <p><a href="#watch">${esc(MC.CTA.watch)}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
         <p><a href="${MC.WHATSAPP.link}">${esc(MC.FINAL.questions)}</a></p>
       </div></section>`,
   },
   // Masterclass members area (owner 2026-10-18; sign-in moved to /masterclass/sign-in
-  // on 2026-10-19). Private: noindex, nofollow, out of seo-files.js's sitemap. Only
-  // the public sign-in words are here; the video, the Clinic Master Sheet and member details
-  // exist only after sign-in, in the browser.
+  // on 2026-10-19; free accounts, owner 2026-10-25). Private: noindex, nofollow, out of
+  // seo-files.js's sitemap. Only the public sign-in words are here; the video, the
+  // Clinic Master Sheet and member details exist only after sign-in, in the browser.
   ...['masterclass/sign-in', 'masterclass/my'].map((slug) => ({
     slug,
     noindex: true,
     title: 'Masterclass members | AUM AI',
-    description: 'Sign in to The Full Chair Method masterclass members area.',
+    description: 'Watch The Full Chair Method masterclass free: sign in, or create your free account.',
     canonical: `${ORIGIN}${MC.PATHS.signIn}`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
-        <h1 class="ch-hero-title">Sign in to your masterclass</h1>
-        <p class="ch-hero-sub">Masterclass members sign in with the email they registered with. We email a 6-digit code; there is no password.</p>
+        <h1 class="ch-hero-title">${esc(MC.SIGNIN.title)}</h1>
+        <p class="ch-hero-sub">${esc(MC.SIGNIN.sub)}</p>
+        <h2>${esc(MC.SIGNIN.signInTitle)}</h2>
+        <p>${esc(MC.SIGNIN.signInBlurb)}</p>
+        <h2>${esc(MC.SIGNIN.createTitle)}</h2>
+        <p>${esc(MC.SIGNIN.createBlurb)}</p>
       </div></section>`,
   })),
   // Clinic websites built for search (owner 2026-10-19): public and in the sitemap.
@@ -1069,20 +1098,21 @@ const routes = [
   serviceRoute(DSEO),
   serviceRoute(DADS),
   // Public and indexable, but out of the sitemap for now (owner 2026-10-18). The
-  // price comes from the backend at run time, so it is not written here.
+  // price comes from the backend at run time; the default label is written here.
   {
     slug: 'masterclass/register',
-    title: 'Join The Full Chair Method masterclass | AUM AI',
+    title: 'Get The Full Chair Method kit | AUM AI',
     description: MC.REGISTER_SEO_DESCRIPTION,
     canonical: `${ORIGIN}${MC.PATHS.register}`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">The Full Chair Method · Masterclass</p>
-        <h1 class="ch-hero-title">Join the masterclass</h1>
+        <h1 class="ch-hero-title">${esc(MC.REGISTER.title)}</h1>
         <p class="ch-hero-sub">${esc(MC.REGISTER.lead)}</p>
         <ul>${MC.REGISTER.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
         <p><a href="${MC.PATHS.info}">See everything the masterclass covers</a></p>
-        <p>Register with your name, clinic, city, email and WhatsApp number, and pay securely by Razorpay. Your account is ready the moment the payment is confirmed. Already registered? <a href="${MC.PATHS.signIn}">Sign in</a>.</p>
+        <p><a href="${MC.PATHS.info}#watch">${esc(MC.REGISTER.watchFree)}</a></p>
+        <p>Type your name, clinic, city, email and WhatsApp number, and pay ${esc(MC.PRICE_LABEL)} once, securely by Razorpay. Your account and every download are ready the moment the payment is confirmed. Already have an account? <a href="${MC.PATHS.signIn}">Sign in</a>.</p>
       </div></section>`,
   },
   {
