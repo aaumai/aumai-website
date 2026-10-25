@@ -115,7 +115,7 @@ export default function MasterclassRegister() {
             {freeMember && price && (
               <>
                 <p className="mc-sent" role="status">You are signed in as <b>{have.email}</b>. Unlock the kit below, and every download opens on your masterclass page.</p>
-                <MasterclassUnlockForm me={have} price={price} onPaid={() => navigate(MC.PATHS.my, { replace: true, state: { justUnlocked: true } })} contact={contact} utm={utm.current} />
+                <MasterclassUnlockForm me={have} price={price} onPaid={() => navigate(MC.PATHS.my, { replace: true, state: { justUnlocked: true } })} onAlreadyPaid={() => setHave((h) => ({ ...h, paid: true }))} contact={contact} utm={utm.current} />
               </>
             )}
 

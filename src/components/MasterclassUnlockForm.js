@@ -4,23 +4,25 @@ import MC from '../data/masterclass';
 import { CLINIC_TYPES, useMasterclassCheckout } from '../lib/masterclassCheckout';
 
 // A signed-in FREE member buys the kit (owner 2026-10-25): clinic, city, clinic type and
-// the non-refundable agree box; name, email and WhatsApp come from /me and are shown,
-// not typed. Used on /masterclass/my (inline, under "Your kit") and on
-// /masterclass/register (when a free member lands there). One payment, no renewal.
+// the non-refundable agree box; name, email and WhatsApp come from the account (the
+// backend takes them from the member cookie, so they are shown, not sent). Used on
+// /masterclass/my (inline, under "Your kit") and on /masterclass/register (when a free
+// member lands there). One payment, no renewal.
 //
-// Props: me (from /me), price (from /me.price or /price), onPaid(j), contact (email),
+// Props: me (from /me), price (from /me.price or /price: { open, label, one_time }),
+// onPaid(j), onAlreadyPaid(j) (409 already_paid: refetch /me), contact (email),
 // utm (object, optional). `price.open === false` shows why Pay is not offered.
 
-export default function MasterclassUnlockForm({ me, price, onPaid, contact, utm }) {
-  const [f, setF] = useState({ clinic: me.clinic || '', city: me.city || '', clinic_type: me.clinic_type || '', whatsapp: me.whatsapp || '', agree: false });
-  const co = useMasterclassCheckout({ onPaid, contact });
+export default function MasterclassUnlockForm({ me, price, onPaid, onAlreadyPaid, contact, utm }) {
+  const [f, setF] = useState({ clinic: me.clinic || '', city: me.city || '', clinic_type: me.clinic_type || '', agree: false });
+  const co = useMasterclassCheckout({ onPaid, onAlreadyPaid, contact });
   const name = me.name || me.display_name || '';
   const set = (k) => (e) => setF({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
   const label = (price && price.label) || MC.PRICE_LABEL;
 
   const submit = (e) => {
     e.preventDefault();
-    co.pay({ name, email: me.email, whatsapp: f.whatsapp, clinic: f.clinic, city: f.city, clinic_type: f.clinic_type, agree: f.agree, utm: utm || {}, referrer: document.referrer || null });
+    co.pay({ clinic: f.clinic, city: f.city, clinic_type: f.clinic_type, agree: f.agree, utm: utm || {}, referrer: document.referrer || null });
   };
 
   if (co.stage === 'confirming') {
@@ -54,7 +56,6 @@ export default function MasterclassUnlockForm({ me, price, onPaid, contact, utm 
         {me.whatsapp && <div><dt>WhatsApp</dt><dd>{me.whatsapp}</dd></div>}
       </dl>
       <div className="sc-fields" style={{ gridTemplateColumns: '1fr' }}>
-        {!me.whatsapp && <label>WhatsApp number<input className="mc-input" type="tel" inputMode="tel" value={f.whatsapp} onChange={set('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>}
         <label>Clinic name<input className="mc-input" value={f.clinic} onChange={set('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" required /></label>
         <label>City<input className="mc-input" value={f.city} onChange={set('city')} placeholder="Pune" autoComplete="address-level2" required /></label>
         <label>Clinic type

@@ -78,14 +78,15 @@ export function loadCheckout() {
  * Returns { stage: 'form' | 'confirming', confirmMsg, error, setError, busy, checking,
  *           pay(body), checkStatus(), startAgain(), contactLine }.
  */
-export function useMasterclassCheckout({ onPaid, contact }) {
+export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
   const [stage, setStage] = useState(() => (readPending() ? 'confirming' : 'form'));
   const [confirmMsg, setConfirmMsg] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [checking, setChecking] = useState(false);
   const onPaidRef = useRef(onPaid);
-  useEffect(() => { onPaidRef.current = onPaid; }, [onPaid]);
+  const onAlreadyPaidRef = useRef(onAlreadyPaid);
+  useEffect(() => { onPaidRef.current = onPaid; onAlreadyPaidRef.current = onAlreadyPaid; }, [onPaid, onAlreadyPaid]);
 
   const landPaid = useCallback((j, email) => {
     clearPending();
@@ -127,12 +128,16 @@ export function useMasterclassCheckout({ onPaid, contact }) {
     } finally { setBusy(false); }
   };
 
-  // `body` is what /order needs: name, clinic, city, email, whatsapp, clinic_type, agree (+ utm, referrer).
+  // `body` is what /order needs: name, clinic, city, email, whatsapp, clinic_type, agree (+ utm,
+  // referrer). For a signed-in member the backend takes name, email and WhatsApp from the
+  // account, so only clinic, city, clinic_type and agree are sent. A member who already paid
+  // gets 409 { already_paid: true }: nothing to buy, so the page refetches /me instead.
   const pay = async (body) => {
     setError('');
     setBusy(true);
     try {
-      const { ok, j } = await call(EP.order, body);
+      const { status, ok, j } = await call(EP.order, body);
+      if (status === 409 && j.already_paid) { setBusy(false); if (onAlreadyPaidRef.current) onAlreadyPaidRef.current(j); else setError(j.error || 'You already have access.'); return; }
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
       if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and press Pay again.'); setBusy(false); return; }
       // Kept BEFORE the window opens: a UPI app switch may reload this page.

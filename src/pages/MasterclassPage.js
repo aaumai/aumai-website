@@ -179,7 +179,7 @@ export default function MasterclassPage() {
       const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), clinic: cf.clinic.trim() || undefined });
       if (!ok) { setCreateError(j.error || 'Something went wrong. Please try again.'); return; }
       saveEmail(clean); setEmail(clean); saveSent({ email: clean, sentAt: Date.now(), via: 'sign-up' }); setSentVia('sign-up');
-      setNotice(`We've emailed your code to ${clean}.`); setCode(''); setError(''); setWait(RESEND_WAIT); setStage('code');
+      setNotice(j.message || `We've emailed your code to ${clean}.`); setCode(''); setError(''); setWait(RESEND_WAIT); setStage('code');
       if (location.hash) navigate(MC.PATHS.signIn, { replace: true });
     } catch (err) {
       setCreateError('We could not reach the server. Check your internet connection and try again.');
@@ -309,7 +309,7 @@ export default function MasterclassPage() {
                 <button type="button" className="sc-btn mc-btn-wide mc-unlock-btn" onClick={() => setShowUnlock(true)}>{(me.price && me.price.label) ? `Unlock the kit · ${me.price.label} once` : MC.CTA.unlock}</button>
               </div>
             ) : (
-              <MasterclassUnlockForm me={me} price={me.price} onPaid={onUnlocked} contact={contact} />
+              <MasterclassUnlockForm me={me} price={me.price} onPaid={onUnlocked} onAlreadyPaid={onUnlocked} contact={contact} />
             )}
           </section>
 
