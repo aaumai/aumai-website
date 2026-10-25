@@ -79,7 +79,7 @@ export default function MasterclassRegister() {
             : p}</li>)}
         </ul>
         <p className="mc-help"><Link to={MC.PATHS.info}>See everything the masterclass covers</Link></p>
-        {!have && <p className="mc-watch-free"><Link to={MC.PATHS.create}>{MC.REGISTER.watchFree}</Link></p>}
+        {!have && <p className="mc-watch-free"><Link to={`${MC.PATHS.info}#watch`}>{MC.REGISTER.watchFree}</Link></p>}
 
         {co.stage === 'confirming' && (
           <div className="sc-form" role="status">

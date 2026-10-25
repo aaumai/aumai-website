@@ -59,12 +59,19 @@ export default function MasterclassInfo() {
     fetch(`${API}/me`, { credentials: 'include' }).then((r) => (r.ok ? r.json() : null)).then((j) => { if (j && j.ok) setMember(true); }).catch(() => { /* not signed in */ });
   }, []);
 
-  // Phones: a Register bar slides up whenever the hero's own button is off screen.
+  // Phones: a Watch free bar slides up whenever the hero's own button is off screen, and steps aside while the
+  // video itself is on screen (it would cover the kit line under it).
   useEffect(() => {
     const el = heroCta.current;
+    const video = document.getElementById('watch');
     if (!el || typeof IntersectionObserver === 'undefined') return undefined;
-    const io = new IntersectionObserver(([e]) => setSticky(!e.isIntersecting));
+    const seen = new Map();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => seen.set(e.target, e.isIntersecting));
+      setSticky(!seen.get(el) && !(video && seen.get(video)));
+    });
     io.observe(el);
+    if (video) io.observe(video);
     return () => io.disconnect();
   }, []);
   useEffect(() => {
@@ -75,11 +82,13 @@ export default function MasterclassInfo() {
   // Old links: a just-paid buyer used to land on /masterclass to sign in.
   if (location.state?.justPaid) return <Navigate to={MC.PATHS.signIn} replace state={location.state} />;
 
-  // Watch free first (a signed-in member goes straight to their page); the kit second.
-  const watchTo = member ? MC.PATHS.my : MC.PATHS.create;
+  // Watch free first: the video is on this page (owner 2026-10-25, public on YouTube), so the button scrolls to
+  // it; a signed-in member still goes straight to their page. The kit second.
   const ctas = (extra = '') => (
     <>
-      <Link className={`ch-btn ch-btn-primary ${extra}`} to={watchTo}>{MC.CTA.watch}</Link>
+      {member
+        ? <Link className={`ch-btn ch-btn-primary ${extra}`} to={MC.PATHS.my}>{MC.CTA.watch}</Link>
+        : <a className={`ch-btn ch-btn-primary ${extra}`} href="#watch">{MC.CTA.watch}</a>}
       <Link className={`ch-btn ch-btn-ghost ${extra}`} to={MC.PATHS.register}>{MC.CTA.kit.replace(MC.PRICE_LABEL, price)}</Link>
     </>
   );
@@ -115,6 +124,27 @@ export default function MasterclassInfo() {
               </ul>
             </figure>
           </div>
+        </div>
+      </section>
+
+      {/* The masterclass itself, free to watch (owner 2026-10-25). A real iframe, not a click-to-load picture, so
+          Google sees the video on the page; it loads only when it comes near the screen. */}
+      <section id="watch" className="ch-section mi-watch" aria-labelledby="mi-watch">
+        <div className="ch-container">
+          <span className="ch-eyebrow">{MC.VIDEO.eyebrow}</span>
+          <h2 id="mi-watch" className="ch-h2">{MC.VIDEO.title}</h2>
+          <p className="ch-lead">{MC.VIDEO.intro}</p>
+          <div className="mi-video">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&modestbranding=1`}
+              title={MC.VIDEO.name}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+          <p className="mi-watch-kit">{MC.VIDEO.kitNote} <Link to={MC.PATHS.register}>{MC.CTA.kit.replace(MC.PRICE_LABEL, price)}</Link></p>
         </div>
       </section>
 
@@ -376,7 +406,9 @@ export default function MasterclassInfo() {
       {/* Phones: Watch free stays one tap away. */}
       <div className={`mi-sticky${sticky ? ' is-on' : ''}`} aria-hidden={!sticky}>
         <span><b>{MC.TITLE}</b> · {MC.CTA.freeLine} · {MC.CTA.kitLine.replace(MC.PRICE_LABEL, price)}</span>
-        <Link className="ch-btn ch-btn-primary" to={watchTo} tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</Link>
+        {member
+          ? <Link className="ch-btn ch-btn-primary" to={MC.PATHS.my} tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</Link>
+          : <a className="ch-btn ch-btn-primary" href="#watch" tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</a>}
       </div>
     </div>
   );

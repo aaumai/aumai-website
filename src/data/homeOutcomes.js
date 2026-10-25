@@ -13,7 +13,7 @@
  *   - no lock-in / cancel-any-time claim, no review-reply counts (not confirmed by the owner);
  *   - message wording comes from The Full Chair Method skill (docs/masterclass/skill/full-chair-method in
  *     the EHR project), shortened; the promises in KPIS are that skill's default KPIs;
- *   - the masterclass is "about 90 minutes" (owner 2026-10-22) and the daily routine "about 30 minutes every morning".
+ *   - the masterclass is "about an hour" (the final cut is 65 minutes, owner 2026-10-25) and the daily routine "about 30 minutes every morning".
  *
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
  */
@@ -347,7 +347,7 @@ const DIY = {
   // Free to watch (owner 2026-10-25). No price on the home page: the kit is priced on the masterclass pages only.
   free: 'Free to watch',
   byline: 'Jayesh Chaudhari, founder, AUM AI',
-  length: 'About 90 minutes',
+  length: 'About an hour',
   items: [
     ['The 4C Framework', 'Eight systems and three foundations, with every message in English, Hindi and Marathi'],
     ['The Clinic Master Sheet', 'Type each patient once, and it shows who’s due for what today'],

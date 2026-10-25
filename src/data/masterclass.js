@@ -42,10 +42,29 @@ const CTA = {
 // Questions go to WhatsApp (owner 2026-10-19).
 const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868' };
 
+// Search words clinic owners actually type (YouTube and Google suggestions, 25 Oct 2026): "ai for dentists",
+// "ai automation for clinics", "patient follow up", "reduce no shows", "how to get more dental patients",
+// "claude for dentists". The title leads with them; the brand comes last.
 const SEO = {
-  title: 'The Full Chair Method masterclass for clinic owners | AUM AI',
+  title: 'AI for Dentists & Clinics: Free Patient Follow-Up Masterclass | AUM AI',
   description:
-    'A 90-minute masterclass for dental and skin clinic owners, free to watch: the 4C Framework, 8 systems and 3 foundations that bring back the patients you already have. The kit (the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides) is ₹999, once.',
+    'Free masterclass: run patient follow-ups with AI and Claude, reduce no-shows and get more patients from your own list. For dental, skin and aesthetic clinics.',
+};
+
+// The full masterclass on YouTube, public (owner 2026-10-25): embedded on this page, so it can be watched
+// without an account and Google can list it as a video. Duration and upload date are YouTube's own.
+const VIDEO = {
+  youtubeId: 'fVLAcs-lBRw',
+  eyebrow: 'Watch it free',
+  title: 'AI for dentists and clinics: run patient follow-ups with Claude',
+  intro:
+    'The full masterclass, about an hour, free to watch right here. See how dental, skin and aesthetic clinics use AI and a Google Sheet to answer every enquiry, reduce no-shows, bring patients back for advised treatment and recalls, and do it all in about 30 minutes every morning.',
+  name: 'AI for Dentists & Clinics: Run Patient Follow-Ups with Claude',
+  description:
+    'The Full Chair Method masterclass by Jayesh Chaudhari, AUM AI: how dental, skin and aesthetic clinics run patient follow-ups with AI and Claude on a Google Sheet, reduce no-shows and get more patients from their existing list, with the 4C Framework (Convert, Confirm, Care, Come back).',
+  uploadDate: '2026-10-25T09:45:09-07:00',
+  duration: 'PT1H5M14S',
+  kitNote: 'Want to start tomorrow morning? The kit has everything you see in the video, ready to use.',
 };
 
 // The hero carries the "30 minutes every morning" ad (owner 2026-10-21; 10 → 30
@@ -63,8 +82,8 @@ const HERO = {
   // Free to watch · Kit ₹999, once · Lifetime access (owner 2026-10-25). `price: true` marks the
   // fact whose PRICE_LABEL the page swaps for the backend's live label.
   facts: [
-    { b: 'About 90 min', t: 'watch any time' },
-    { b: CTA.freeLine, t: 'create a free account and press play' },
+    { b: 'About 1 hour', t: 'watch any time' },
+    { b: CTA.freeLine, t: 'press play right here' },
     { b: CTA.kitLine, t: 'unlocks every download', price: true },
     { b: ACCESS, t: 'to the video, and to the kit' },
   ],
@@ -194,7 +213,7 @@ const KIT = {
   title: 'What you get',
   intro: `The masterclass video is free to watch, with a free account. The kit is ${PRICE_LABEL}, paid once: it unlocks every download, whenever you want it.`,
   items: [
-    { h: 'The masterclass video', t: `About 90 minutes, free to watch. Watch it in one sitting or a stage at a time, as often as you like. Your access never ends.` },
+    { h: 'The masterclass video', t: `About an hour, free to watch. Watch it in one sitting or a stage at a time, as often as you like. Your access never ends.` },
     { h: 'The Clinic Master Sheet', t: 'Type each patient and visit once, and the sheet works out who is due for what today. A tab for every system and foundation, the Today list, the weekly Scorecard, and every rule and message we use, in English, Hindi and Marathi. Opens in Excel or Google Sheets.' },
     { h: 'The weekly Scorecard', t: 'A tab in the Clinic Master Sheet: one owner and one KPI per system, week by week, in green, orange or red, with the list of what was missed last week. Your 15 minutes every Monday.' },
     { h: 'The Claude skill file', t: 'Every framework, question bank and message script from the masterclass, so Claude writes your patient messages, call scripts and weekly KPI report from your own sheets. With a short guide: seven prompts to try first, and the Front desk screens.' },
@@ -244,7 +263,7 @@ const TRAINER = {
 
 const FAQS = [
   { q: 'Is it really free?', a: `Yes. Create a free account with your name, clinic, WhatsApp number and email, and watch the whole masterclass as often as you like. No card, no trial. The kit (the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides) is ${PRICE_LABEL}, paid once, and unlocks every download, whenever you want it.` },
-  { q: 'When can I watch it?', a: `Any time. It runs about 90 minutes, so you can watch when it suits you, pause to fill in your Clinic Master Sheet, and watch again any time: you have lifetime access.` },
+  { q: 'When can I watch it?', a: `Any time. It runs about an hour, so you can watch when it suits you, pause to fill in your Clinic Master Sheet, and watch again any time: you have lifetime access.` },
   { q: 'How long do I have access?', a: 'For life. Your free account has no end date, and neither does the kit once you buy it. Watch the video again whenever you like; the Clinic Master Sheet and the skill file are yours to keep.' },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
   { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples come from dental clinics; set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. The eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
@@ -272,10 +291,10 @@ const REGISTER = {
     'The Prompt Pack, and every slide from the class as a PDF.',
     `24×7 Q&A on WhatsApp: ${WHATSAPP.display}.`,
   ],
-  watchFree: 'Just want to watch? Create your free account',
+  watchFree: 'Just want to watch? It’s free, right on the masterclass page',
 };
 const REGISTER_SEO_DESCRIPTION =
-  'Get The Full Chair Method kit for ₹999, once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides. The 90-minute masterclass itself is free to watch.';
+  'Get The Full Chair Method kit for ₹999, once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides. The hour-long masterclass itself is free to watch.';
 
 // The sign-in page (owner 2026-10-25): two paths on one screen. Same words in prerender.js.
 const SIGNIN = {
@@ -328,6 +347,6 @@ const MASTER_SHEET = {
 const MEMBER_HELP = `Stuck while setting up a system? Ask us 24×7 on WhatsApp: ${WHATSAPP.display}`;
 
 module.exports = {
-  TITLE, PRICE_LABEL, ACCESS, PATHS, CTA, WHATSAPP, SEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, SIGNIN, MEMBER, MASTER_SHEET, MEMBER_HELP,
+  TITLE, PRICE_LABEL, ACCESS, PATHS, CTA, WHATSAPP, SEO, VIDEO, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, SIGNIN, MEMBER, MASTER_SHEET, MEMBER_HELP,
 };
 module.exports.default = module.exports;
