@@ -62,3 +62,28 @@
 .mc-pack > p:not(.mc-help) { margin: 0; font-size: 17px; line-height: 1.5; color: var(--sc-ink) }
 /* The Clinic Master Sheet card (owner 2026-10-21): three numbered Google Sheets steps. */
 .mc-steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.5; color: var(--sc-ink) }
+
+/* Free to watch, kit paid once (owner 2026-10-25). */
+.mc-wide { max-width: 920px }
+.mc-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; margin-top: 8px }
+.mc-two .sc-form > p:not(.sc-error):not(.mc-help) { font-size: 15px; line-height: 1.5 }
+.mc-create { border-left: 6px solid var(--sc-accent) }
+.mc-help .sc-link { font-size: 14px; padding: 0 }
+.mc-watch-free { margin: 0; font-size: 16px } .mc-watch-free a { color: var(--sc-accent); font-weight: 700 }
+.mc-kit-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column }
+.mc-kit-list li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--sc-line) }
+.mc-kit-list li:last-child { border-bottom: 1px solid var(--sc-line) }
+.mc-kit-list h3 { font-size: 17px; margin: 0 }
+.mc-kit-list p { margin: 3px 0 0; font-size: 14px; line-height: 1.5; color: var(--sc-muted) }
+.mc-lock { flex: none; margin-top: 3px; color: var(--sc-muted) }
+.mc-unlock-btn { max-width: 420px }
+.mc-unlock { padding: 18px; border-radius: 14px; gap: 12px }
+.mc-unlock h3 { font-size: 20px }
+.mc-readonly { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px 16px; padding: 12px 14px; background: var(--sc-chip); border-radius: 10px }
+.mc-readonly div { min-width: 0 }
+.mc-readonly dt { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sc-muted) }
+.mc-readonly dd { margin: 2px 0 0; font-size: 15px; color: var(--sc-ink); overflow-wrap: anywhere }
+@media (max-width: 680px) {
+  .mc-two { grid-template-columns: minmax(0, 1fr) }
+  .mc-unlock-btn { max-width: none }
+}
