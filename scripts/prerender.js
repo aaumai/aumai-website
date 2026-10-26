@@ -103,6 +103,8 @@ const BUILD = path.join(__dirname, '..', 'build');
 // landing route with US metadata; default is the India site unchanged.
 const MARKET = process.env.REACT_APP_MARKET || 'in';
 const ORIGIN = MARKET === 'us' ? 'https://aumyai.com' : 'https://aumai.co.in';
+// schema.org uploadDate: Google flags a bare date ("missing a timezone"), so YYYY-MM-DD goes out as midnight IST.
+const isoDateTime = (d) => (/^\d{4}-\d{2}-\d{2}$/.test(d) ? `${d}T00:00:00+05:30` : d);
 const template = fs.readFileSync(path.join(BUILD, 'index.html'), 'utf8');
 
 const esc = (s) =>
@@ -309,7 +311,7 @@ const demoVideoLd = {
   thumbnailUrl: 'https://i.ytimg.com/vi/-qw1sp7Ub4k/maxresdefault.jpg',
   embedUrl: 'https://www.youtube.com/embed/-qw1sp7Ub4k',
   contentUrl: 'https://www.youtube.com/watch?v=-qw1sp7Ub4k',
-  uploadDate: '2026-08-23',
+  uploadDate: isoDateTime('2026-08-23'),
   publisher: {
     '@type': 'Organization',
     name: 'AUM AI',
@@ -327,7 +329,7 @@ const filmVideoLd = {
   thumbnailUrl: 'https://i.ytimg.com/vi/0LE0iwNvcZQ/maxresdefault.jpg',
   embedUrl: 'https://www.youtube.com/embed/0LE0iwNvcZQ',
   contentUrl: 'https://www.youtube.com/watch?v=0LE0iwNvcZQ',
-  uploadDate: '2026-10-20',
+  uploadDate: isoDateTime('2026-10-20'),
   publisher: {
     '@type': 'Organization',
     name: 'AUM AI',
@@ -343,7 +345,7 @@ const explainerVideoLd = [EXPL.HERO_VIDEO, ...EXPL.VIDEOS].map((v) => ({
   description: v.description,
   thumbnailUrl: `${ORIGIN}${v.poster}`,
   contentUrl: `${ORIGIN}${v.src}`,
-  uploadDate: EXPL.UPLOAD_DATE,
+  uploadDate: isoDateTime(EXPL.UPLOAD_DATE),
   duration: v.duration,
   publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` } },
 }));
@@ -355,7 +357,7 @@ const videoLd = {
   description: 'A dental clinic owner describes how Aumy reduced no-shows, brought recall patients back, and grew the clinic 20–25% in 2–3 months.',
   thumbnailUrl: `${ORIGIN}/videos/dr-ronak-poster.jpg`,
   contentUrl: `${ORIGIN}/videos/dr-ronak-vinayaka.mp4`,
-  uploadDate: '2026-07-02',
+  uploadDate: isoDateTime('2026-07-02'),
 };
 
 // The five "How we work" steps (owner 2026-10-22): word for word what src/components/HowWeWork.js renders on
@@ -902,14 +904,14 @@ const routes = [
         name: MC.VIDEO.name,
         description: MC.VIDEO.description,
         thumbnailUrl: [`https://i.ytimg.com/vi/${MC.VIDEO.youtubeId}/maxresdefault.jpg`, `https://i.ytimg.com/vi/${MC.VIDEO.youtubeId}/hqdefault.jpg`],
-        uploadDate: MC.VIDEO.uploadDate,
+        uploadDate: isoDateTime(MC.VIDEO.uploadDate),
         duration: MC.VIDEO.duration,
         embedUrl: `https://www.youtube.com/embed/${MC.VIDEO.youtubeId}`,
         url: `https://www.youtube.com/watch?v=${MC.VIDEO.youtubeId}`,
         inLanguage: 'en',
         isFamilyFriendly: true,
         publisher: { '@type': 'Organization', name: 'AUM AI', url: ORIGIN },
-        author: { '@type': 'Person', name: MC.TRAINER.name },
+        author: { '@type': 'Person', '@id': `${ORIGIN}/about#founder`, name: MC.TRAINER.name, url: `${ORIGIN}/about` },
       },
     ],
     content: `
@@ -1404,7 +1406,10 @@ for (const p of growthPosts) {
         description: p.description,
         datePublished: p.date,
         dateModified: p.updated || p.date,
-        author: { '@type': 'Person', name: p.author },
+        // Google wants author.url (Search Console, 26 Oct); every guide is by the founder (/about#founder).
+        author: p.author === FOUNDER.NAME
+          ? { '@type': 'Person', '@id': `${ORIGIN}/about#founder`, name: p.author, url: `${ORIGIN}/about` }
+          : { '@type': 'Person', name: p.author },
         publisher: {
           '@type': 'Organization',
           name: 'AUM AI Healthcare Solutions',
@@ -1497,7 +1502,7 @@ for (const ep of RYC.liveEpisodes()) {
         name: ep.h1,
         description: ep.videoDescription,
         thumbnailUrl: `${ORIGIN}${ep.poster}`,
-        uploadDate: ep.uploadDate,
+        uploadDate: isoDateTime(ep.uploadDate),
         duration: ep.duration,
         contentUrl: `${ORIGIN}${ep.src}`,
         inLanguage: 'en-IN',
