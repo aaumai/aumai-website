@@ -34,6 +34,36 @@
 .site-lux .ch-home .mi-hero-4c b { display: block; font-family: var(--lux-serif); font-size: 21px; font-weight: 500; line-height: 1.1; color: var(--lux-navy); }
 .mi-hero-4c span { display: block; margin-top: 4px; font-size: 12.5px; line-height: 1.35; color: var(--lux-body); }
 
+/* ── Hero: the title, then the masterclass (owner 2026-10-26) ── */
+.mi-hero-top { max-width: 900px; margin: 0 auto; text-align: center; }
+.site-lux .ch-home .mi-hero-top .ch-eyebrow { justify-content: center; }
+.site-lux .ch-home .mi-hero-top .ch-hero-title { margin-left: auto; margin-right: auto; }
+.mi-watch { max-width: 1040px; margin: 30px auto 0; scroll-margin-top: 90px; }
+.mi-hero .mi-video { margin: 0; }
+.mi-hero .mi-facts { max-width: 1040px; margin: 28px auto 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mi-hero .mi-watch-kit { max-width: 1040px; margin: 18px auto 0; color: rgba(255, 255, 255, 0.82); }
+.site-lux .ch-home .mi-hero .mi-watch-kit a:not(.ch-btn) { color: var(--lux-gold-2); }
+.mi-gate { background: rgba(250, 248, 244, 0.98); color: var(--lux-navy); border: 1px solid var(--lux-line); padding: 32px 36px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7); }
+.site-lux .ch-home .mi-gate h2 { margin: 0 0 6px; font-family: var(--lux-serif); font-weight: 400; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; color: var(--lux-navy); }
+.mi-gate-blurb { margin: 0 0 20px; font-size: 17px; line-height: 1.5; color: var(--lux-body); }
+.mi-gate-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
+.mi-gate label { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lux-bronze); }
+.mi-gate input { font: inherit; font-size: 17px; letter-spacing: 0; text-transform: none; padding: 12px 14px; min-height: 50px; border: 1px solid var(--lux-line); border-radius: 0; background: #fff; color: var(--lux-navy); width: 100%; }
+.mi-gate input:focus { outline: 2px solid var(--lux-navy); outline-offset: 1px; }
+.mi-gate-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.mi-gate-error { margin: 14px 0 0; color: #be185d; font-weight: 600; }
+.mi-gate .mi-gate-btn { margin-top: 20px; width: 100%; justify-content: center; }
+.mi-gate-consent { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--lux-body); }
+.mi-intro .mi-promise { margin: 18px 0 12px; font-size: 20px; line-height: 1.5; color: var(--lux-navy); }
+.mi-intro .mi-note { font-size: 15px; color: var(--lux-bronze); }
+.mi-intro .mi-intro-cta { margin-top: 24px; }
+@media (max-width: 760px) {
+  .mi-gate { padding: 22px 18px; }
+  .mi-gate-grid { grid-template-columns: minmax(0, 1fr); }
+  .mi-hero .mi-facts { grid-template-columns: minmax(0, 1fr); }
+  .mi-hero .mi-facts li + li { padding-left: 0; border-left: 0; border-top: 1px solid rgba(220, 197, 148, 0.2); }
+}
+
 /* ── Split rows: text + picture ── */
 .mi-split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
 .mi-split-rev { grid-template-columns: 0.95fr 1.05fr; margin-bottom: 56px; }

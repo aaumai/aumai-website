@@ -13,7 +13,7 @@
 const CONTACT_EMAIL = 'jayesh.chaudhari@aumai.co.in';
 const HEADING = 'The Full Chair Method masterclass';
 const NON_REFUNDABLE = 'The kit is paid once and is non-refundable once paid.';
-const FREE_ACCOUNT = 'Watching the masterclass is free: a free account costs nothing, so there is nothing to refund.';
+const FREE_ACCOUNT = 'Watching the masterclass costs nothing, so there is nothing to refund for it.';
 const DUPLICATE = 'If you were charged more than once for the same kit by mistake, we return the extra payment in full to the same payment method, usually within 5–7 working days.';
 const RULES = [
   NON_REFUNDABLE,

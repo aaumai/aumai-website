@@ -469,7 +469,7 @@ function homeContent() {
         <p class="ch-eyebrow">${esc(HO.DIY.eyebrow)}</p>
         <h2>${esc(HO.DIY.titleA)} ${esc(HO.DIY.titleB)}</h2>
         <p>${esc(HO.DIY.lead)} ${esc(HO.DIY.honest)}</p>
-        <p>${esc(HO.DIY.free)} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
+        <p>${esc(HO.DIY.watch)} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
         <ul>${HO.DIY.items.map(([b, t]) => '<li><strong>' + esc(b) + '</strong> — ' + esc(t) + '</li>').join('')}</ul>
         <p><a href="${HO.DIY.button.to}">${esc(HO.DIY.button.label)}</a></p>
       </div></section>
@@ -890,12 +890,12 @@ const routes = [
         description: MC.SEO.description,
         inLanguage: 'en-IN',
         provider: { '@type': 'Organization', name: 'AUM AI', sameAs: ORIGIN },
-        // The video is free to watch; the offer is the kit, paid once (owner 2026-10-25).
-        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `This offer is the kit, paid once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access. The masterclass video is free to watch on this page.` },
+        // The offer is the kit, paid once (owner 2026-10-25); the video plays on the page with an account.
+        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `This offer is the kit, paid once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access. The masterclass video plays on this page with an account.` },
         hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: MC.VIDEO.duration, instructor: { '@type': 'Person', name: MC.TRAINER.name } },
       },
       faqPageLd(MC.FAQS),
-      // The full masterclass, public on YouTube and embedded below (owner 2026-10-25).
+      // The full masterclass, on YouTube and embedded right under the title (owner 2026-10-25, 2026-10-26).
       {
         '@context': 'https://schema.org',
         '@type': 'VideoObject',
@@ -917,18 +917,20 @@ const routes = [
         <p><a href="${MC.PATHS.signIn}">Already have an account? Sign in to your masterclass</a></p>
         <p class="ch-eyebrow">${esc(MC.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(MC.HERO.title)}</h1>
+        <div id="watch">
+          <h2>${esc(MC.VIDEO.title)}</h2>
+          <p>${esc(MC.VIDEO.intro)}</p>
+          <p>${esc(MC.GATE.blurb)} <a href="${MC.PATHS.signIn}">${esc(MC.GATE.title)}</a></p>
+          <iframe src="https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&amp;modestbranding=1" title="${esc(MC.VIDEO.name)}" width="1040" height="585" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <ul>${MC.HERO.facts.map((f) => `<li><strong>${esc(f.b)}</strong> ${esc(f.t)}</li>`).join('')}</ul>
+        <p>${esc(MC.VIDEO.kitNote)} <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
         <p class="ch-hero-sub">${esc(MC.HERO.promise)}</p>
         <p>${esc(MC.HERO.who)}</p>
-        <ul>${MC.HERO.facts.map((f) => `<li><strong>${esc(f.b)}</strong> ${esc(f.t)}</li>`).join('')}</ul>
-        <p><a href="#watch">${esc(MC.CTA.watch)}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
         <p>${esc(MC.HERO.note)}</p>
-      </div></section>
-      <section id="watch"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(MC.VIDEO.eyebrow)}</p>
-        <h2>${esc(MC.VIDEO.title)}</h2>
-        <p>${esc(MC.VIDEO.intro)}</p>
-        <iframe src="https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&amp;modestbranding=1" title="${esc(MC.VIDEO.name)}" width="1040" height="585" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <p>${esc(MC.VIDEO.kitNote)} <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
+        <ul>${MC.STAGES.map((s) => `<li><strong>${esc(s.c)}.</strong> ${esc(s.line)}</li>`).join('')}</ul>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.PROBLEM.title)}</h2>
@@ -997,7 +999,7 @@ const routes = [
     slug,
     noindex: true,
     title: 'Masterclass members | AUM AI',
-    description: 'Watch The Full Chair Method masterclass free: sign in, or create your free account.',
+    description: 'Watch The Full Chair Method masterclass: sign in, or create your account.',
     canonical: `${ORIGIN}${MC.PATHS.signIn}`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
@@ -1111,7 +1113,7 @@ const routes = [
         <p class="ch-hero-sub">${esc(MC.REGISTER.lead)}</p>
         <ul>${MC.REGISTER.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
         <p><a href="${MC.PATHS.info}">See everything the masterclass covers</a></p>
-        <p><a href="${MC.PATHS.info}#watch">${esc(MC.REGISTER.watchFree)}</a></p>
+        <p><a href="${MC.PATHS.info}#watch">${esc(MC.REGISTER.watchLink)}</a></p>
         <p>Type your name, clinic, city, email and WhatsApp number, and pay ${esc(MC.PRICE_LABEL)} once, securely by Razorpay. Your account and every download are ready the moment the payment is confirmed. Already have an account? <a href="${MC.PATHS.signIn}">Sign in</a>.</p>
       </div></section>`,
   },

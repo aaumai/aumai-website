@@ -10,8 +10,8 @@ import './MasterclassPage.css';
 
 // Get the kit (owner 2026-10-18, re-worded 2026-10-25): the "pay straight away" path.
 // One screen: create the account and pay through Razorpay Checkout in one go; the
-// account is made the moment the payment is confirmed. The masterclass itself is free
-// to watch (a free account on /masterclass/sign-in); this page sells the kit, once.
+// account is made the moment the payment is confirmed. The masterclass itself plays on
+// /masterclass once the visitor has typed who they are; this page sells the kit, once.
 // A signed-in FREE member who lands here gets the unlock form, prefilled. A paid
 // member sees "You already have access". The price and whether the kit is on sale come
 // from the site backend; nothing about money is typed into this page. Out of the
@@ -79,7 +79,7 @@ export default function MasterclassRegister() {
             : p}</li>)}
         </ul>
         <p className="mc-help"><Link to={MC.PATHS.info}>See everything the masterclass covers</Link></p>
-        {!have && <p className="mc-watch-free"><Link to={`${MC.PATHS.info}#watch`}>{MC.REGISTER.watchFree}</Link></p>}
+        {!have && <p className="mc-watch-free"><Link to={`${MC.PATHS.info}#watch`}>{MC.REGISTER.watchLink}</Link></p>}
 
         {co.stage === 'confirming' && (
           <div className="sc-form" role="status">
