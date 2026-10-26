@@ -328,7 +328,7 @@ const SIGNIN = {
 // The members page for a member without the kit (owner 2026-10-25): the video first, then the kit, locked.
 const MEMBER = {
   // Owner 2026-10-26: one licence line wherever the masterclass or kit is shown.
-  licence: `© ${new Date().getFullYear()} AUM AI. Licensed for use in your own clinic only. Not for resale, sharing or reproduction, including by AI tools.`,
+  licence: `© ${new Date().getFullYear()} AAUMAI Healthcare Solution Pvt Ltd (AUM AI). Licensed for use in your own clinic only. Not for resale, sharing or reproduction, including by AI tools.`,
   welcomeFree: `Watch the masterclass below. The kit is ${PRICE_LABEL}, once, whenever you want it.`,
   kitTitle: 'Your kit',
   kitLead: `Every download below opens with one payment of ${PRICE_LABEL}. Yours for life.`,
