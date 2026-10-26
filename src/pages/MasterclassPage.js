@@ -327,6 +327,7 @@ export default function MasterclassPage() {
           </section>
 
           <p className="mc-help" style={{ paddingTop: 32 }}>Something not working? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
+          <p className="mc-help" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
         </div>
       </div>
     );
@@ -453,6 +454,7 @@ export default function MasterclassPage() {
           )}
 
           <p className="mc-help" style={{ paddingTop: 32 }}>Something not working? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
+          <p className="mc-help" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
         </div>
       </div>
     );
@@ -500,6 +502,7 @@ export default function MasterclassPage() {
               <button type="button" className="sc-link" onClick={() => backToStart(false)}>Use a different email</button>
             </div>
             <p className="mc-help" id="mc-code-help">No email after 5 minutes? Check Spam or Promotions, and check the email address above. Still nothing? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
+          <p className="mc-help" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
           </form>
         </div>
       </div>

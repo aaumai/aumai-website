@@ -484,6 +484,7 @@ export default function MasterclassInfo() {
           <div className="ch-hero-cta ch-center-cta">{ctas()}</div>
           <p className="mi-final-q"><WaLink>{MC.FINAL.questions}</WaLink></p>
           <p className="mi-final-q">Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link></p>
+          <p className="mi-final-q" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
         </div>
       </section>
 

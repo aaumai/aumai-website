@@ -989,6 +989,7 @@ const routes = [
         <p>${esc(MC.FINAL.text)}</p>
         <p><a href="#watch">${esc(MC.CTA.watch)}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
         <p><a href="${MC.WHATSAPP.link}">${esc(MC.FINAL.questions)}</a></p>
+        <p>${esc(MC.MEMBER.licence)}</p>
       </div></section>`,
   },
   // Masterclass members area (owner 2026-10-18; sign-in moved to /masterclass/sign-in
