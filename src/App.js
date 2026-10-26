@@ -24,6 +24,7 @@ import ClinicWebsitesPage from './pages/ClinicWebsitesPage';
 import ServicePage from './pages/ServicePage';
 import DENTAL_SEO from './data/dentalSeo';
 import DENTAL_ADS from './data/dentalAds';
+import MANAGED_FOLLOW_UPS from './data/managedFollowUps';
 import PricingPage from './pages/PricingPage';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -121,6 +122,7 @@ function App() {
                     Words: src/data/dentalSeo.js and src/data/dentalAds.js (shared with scripts/prerender.js). */}
                 <Route path="/dental-seo" element={<ServicePage data={DENTAL_SEO} />} />
                 <Route path="/dental-ads" element={<ServicePage data={DENTAL_ADS} />} />
+                <Route path="/managed-follow-ups" element={<ServicePage data={MANAGED_FOLLOW_UPS} />} />
                 <Route path="/pricing" element={<PricingPage />} />
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}

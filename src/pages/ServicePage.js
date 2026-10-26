@@ -39,6 +39,7 @@ const DataLink = ({ link, className }) => (link.internal
 
 // The other services and Aumy, so every service page links to its siblings.
 const SIBLINGS = [
+  { to: '/managed-follow-ups', label: 'Managed follow-ups' },
   { to: '/dental-seo', label: 'Dental SEO' },
   { to: '/clinic-websites', label: 'Dental websites' },
   { to: '/dental-ads', label: 'Dental ads (Meta & Google)' },

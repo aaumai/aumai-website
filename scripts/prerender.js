@@ -41,6 +41,7 @@ const CW = require('../src/data/clinicWebsites');
 // Services (owner 2026-10-23): same files as src/pages/ServicePage.js on /dental-seo and /dental-ads.
 const DSEO = require('../src/data/dentalSeo');
 const DADS = require('../src/data/dentalAds');
+const DMANAGED = require('../src/data/managedFollowUps');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
@@ -131,7 +132,8 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/demos', 'Demo videos'],
   ['/growth', 'Growth Hub'],
   ['/masterclass', 'The Full Chair Method masterclass'],
-  // Product & services (owner 2026-10-23): the three services, as in the header.
+  // Product & services (owner 2026-10-23, managed follow-ups 2026-10-26): the services, as in the header.
+  ['/managed-follow-ups', 'Managed patient follow-ups'],
   ['/dental-seo', 'Dental SEO for international patients'],
   ['/clinic-websites', 'Dental websites built for SEO'],
   ['/dental-ads', 'Dental ads (Meta & Google)'],
@@ -572,7 +574,7 @@ function serviceRoute(D) {
         <p><a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a> · <a href="/growth-audit">Free clinic audit</a></p>
         <h2>${esc(D.FINAL.title)}</h2>
         <p>${esc(D.FINAL.text)}</p>
-        <p>Also from AUM AI: <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a> · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a> · <a href="/revenue-generator">Aumy, our main product</a></p>
+        <p>Also from AUM AI: <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a> · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a> · <a href="/revenue-generator">Aumy, our main product</a></p>
       </div></section>`,
   };
 }
@@ -1102,6 +1104,7 @@ const routes = [
   // Services (owner 2026-10-23): public and in the sitemap.
   serviceRoute(DSEO),
   serviceRoute(DADS),
+  serviceRoute(DMANAGED),
   // Public and indexable, but out of the sitemap for now (owner 2026-10-18). The
   // price comes from the backend at run time; the default label is written here.
   {
