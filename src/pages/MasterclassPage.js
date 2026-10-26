@@ -167,8 +167,9 @@ export default function MasterclassPage() {
     } finally { setBusy(false); }
   };
 
-  // The free account (owner 2026-10-25): sign-up answers the same whether or not the
-  // email is new, then the code step takes over.
+  // The account (owner 2026-10-25; owner 2026-10-26): a NEW email is signed in by the
+  // sign-up reply itself (signed_in: true, the /me payload), so the members page opens at
+  // once. An email that already has an account gets a code instead (signed_in: false).
   const createAccount = async (e) => {
     e.preventDefault();
     const clean = cf.email.trim().toLowerCase();
@@ -179,6 +180,11 @@ export default function MasterclassPage() {
     try {
       const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), clinic: cf.clinic.trim() || undefined, website: cf.website || '' });
       if (!ok) { setCreateError(j.error || 'Something went wrong. Please try again.'); return; }
+      if (j.signed_in) {
+        saveEmail(clean); setEmail(clean); saveSent(null); setMe(j); setStage('member'); setNotice(''); setError('');
+        navigate(MC.PATHS.my, { replace: true });
+        return;
+      }
       saveEmail(clean); setEmail(clean); saveSent({ email: clean, sentAt: Date.now(), via: 'sign-up' }); setSentVia('sign-up');
       setNotice(j.message || `We've emailed your code to ${clean}.`); setCode(''); setError(''); setWait(RESEND_WAIT); setStage('code');
       if (location.hash) navigate(MC.PATHS.signIn, { replace: true });
@@ -321,6 +327,7 @@ export default function MasterclassPage() {
           </section>
 
           <p className="mc-help" style={{ paddingTop: 32 }}>Something not working? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
+          <p className="mc-help" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
         </div>
       </div>
     );
@@ -447,6 +454,7 @@ export default function MasterclassPage() {
           )}
 
           <p className="mc-help" style={{ paddingTop: 32 }}>Something not working? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
+          <p className="mc-help" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
         </div>
       </div>
     );
@@ -485,7 +493,7 @@ export default function MasterclassPage() {
             {error && <p className="sc-error" role="alert">{error}</p>}
             <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'Checking…' : (sentVia === 'sign-up' ? 'Open my masterclass' : 'Sign in')}</button>
             {sentVia !== 'sign-up' && (
-              <p className="mc-help" style={{ fontSize: 15, color: 'var(--sc-ink)' }}>No account yet? <button type="button" className="sc-link" onClick={() => backToStart(true)}>Create your free account</button>: it takes a minute, and the code arrives straight away.</p>
+              <p className="mc-help" style={{ fontSize: 15, color: 'var(--sc-ink)' }}>No account yet? <button type="button" className="sc-link" onClick={() => backToStart(true)}>Create your account</button>: it takes a minute, and the video opens straight away.</p>
             )}
             <div className="mc-row-links">
               <button type="button" className="sc-link" onClick={() => sendCode()} disabled={busy || wait > 0}>
@@ -494,6 +502,7 @@ export default function MasterclassPage() {
               <button type="button" className="sc-link" onClick={() => backToStart(false)}>Use a different email</button>
             </div>
             <p className="mc-help" id="mc-code-help">No email after 5 minutes? Check Spam or Promotions, and check the email address above. Still nothing? Write to us at <a href={`mailto:${contact}`}>{contact}</a>.</p>
+          <p className="mc-help" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
           </form>
         </div>
       </div>
@@ -540,7 +549,7 @@ export default function MasterclassPage() {
               <input id="mc-website" name="website" type="text" tabIndex={-1} autoComplete="off" value={cf.website} onChange={setC('website')} />
             </div>
             {createError && <p className="sc-error" role="alert">{createError}</p>}
-            <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'One moment…' : 'Create my free account'}</button>
+            <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'One moment…' : 'Watch the masterclass'}</button>
             <p className="mc-help">Want the kit straight away? <Link to={MC.PATHS.register}>{MC.CTA.kitOnce}</Link>.</p>
           </form>
         </div>

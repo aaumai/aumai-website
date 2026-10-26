@@ -344,8 +344,8 @@ const DIY = {
   titleB: 'and run it yourself.',
   lead: 'In The Full Chair Method masterclass, I teach the 4C Framework we use in every clinic, run by your own team with Claude and Google Sheets.',
   honest: 'How much it gives back depends on doing it every day. When you’d rather we ran it for you, we’re one message away.',
-  // Free to watch (owner 2026-10-25). No price on the home page: the kit is priced on the masterclass pages only.
-  free: 'Free to watch',
+  // No "free" and no price on the home page (owner 2026-10-26): the kit is priced on the masterclass pages only.
+  watch: 'Watch it online',
   byline: 'Jayesh Chaudhari, founder, AUM AI',
   length: 'About an hour',
   items: [

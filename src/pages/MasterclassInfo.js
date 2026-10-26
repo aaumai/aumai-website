@@ -9,8 +9,8 @@ import './MasterclassInfo.css';
 // masterclass is, what it is worth, what to expect. Built from the site's own
 // clinic system (.ch-*) under the "quiet luxury" theme (styles/lux.css), so it
 // reads like every other page. Every word is in src/data/masterclass.js, shared
-// with scripts/prerender.js. Owner 2026-10-25: the masterclass is free to watch
-// ("Watch free" → the free-account form at /masterclass/sign-in#create) and the kit
+// with scripts/prerender.js. Owner 2026-10-25: the masterclass plays with an account
+// (owner 2026-10-26: the form sits where the video is, right under the title) and the kit
 // is one payment ("Get the kit · ₹999" → /masterclass/register); members sign in at
 // /masterclass/sign-in (the welcome email used to send them here, so the sign-in
 // link sits at the very top).
@@ -45,12 +45,97 @@ const Pic = ({ img, eager, className }) => (
   <img className={className} src={img.src} width={img.w} height={img.h} alt={img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
 );
 
+
+/**
+ * The form that sits where the video is (owner 2026-10-26: "land on the sign up page, enter their
+ * info, watch the video"). POST /sign-up: a new email is signed in by the reply (signed_in: true) and
+ * the video takes the form's place at once; an email that already has an account gets the code step
+ * (the site backend never signs an existing account in from here). `website` is a honeypot the
+ * visitor never sees.
+ */
+function WatchGate({ onMember }) {
+  const [f, setF] = useState({ name: '', clinic: '', whatsapp: '', email: '', website: '' });
+  const [step, setStep] = useState('form'); // form | code
+  const [code, setCode] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const set = (k) => (e) => setF((x) => ({ ...x, [k]: e.target.value }));
+  const post = async (path, body) => {
+    const r = await fetch(`${API}${path}`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    let j = {};
+    try { j = await r.json(); } catch (e) { /* no body */ }
+    return { ok: r.ok, j };
+  };
+  const submit = async (e) => {
+    e.preventDefault();
+    const email = f.email.trim().toLowerCase();
+    const digits = f.whatsapp.replace(/\D/g, '');
+    if (f.name.trim().length < 2) { setError('Please type your name.'); return; }
+    if (!f.clinic.trim()) { setError('Please type your clinic’s name.'); return; }
+    if (digits.length < 10 || digits.length > 13) { setError('Please type your WhatsApp number, 10 digits.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Please type your email address, for example name@gmail.com.'); return; }
+    setBusy(true); setError('');
+    try {
+      const { ok, j } = await post('/sign-up', { name: f.name.trim(), clinic: f.clinic.trim(), whatsapp: f.whatsapp.trim(), email, website: f.website });
+      if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); return; }
+      if (j.signed_in) { onMember(); return; }
+      setF((x) => ({ ...x, email })); setStep('code');
+    } catch (err) {
+      setError('We could not connect. Check your internet connection and try again.');
+    } finally { setBusy(false); }
+  };
+  const verify = async (e) => {
+    e.preventDefault();
+    const digits = code.replace(/\D/g, '');
+    if (digits.length !== 6) { setError('Type the 6-digit code from our email.'); return; }
+    setBusy(true); setError('');
+    try {
+      const { ok, j } = await post('/verify', { email: f.email, code: digits });
+      if (!ok) { setError(j.error || 'That code is not right or has expired. Check the newest email.'); return; }
+      onMember();
+    } catch (err) {
+      setError('We could not connect. Check your internet connection and try again.');
+    } finally { setBusy(false); }
+  };
+  return (
+    <div className="mi-gate" data-testid="mi-gate">
+      {step === 'form' ? (
+        <form onSubmit={submit} noValidate>
+          <h2 id="mi-gate-h">{MC.GATE.title}</h2>
+          <p className="mi-gate-blurb">{MC.GATE.blurb}</p>
+          <div className="mi-gate-grid">
+            <label>Your name<input value={f.name} onChange={set('name')} placeholder="Dr Meera Joshi" autoComplete="name" required /></label>
+            <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" required /></label>
+            <label>WhatsApp number<input type="tel" inputMode="tel" value={f.whatsapp} onChange={set('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>
+            <label>Email<input type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={f.email} onChange={set('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
+          </div>
+          <input className="mi-gate-hp" type="text" name="website" value={f.website} onChange={set('website')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
+          {error && <p className="mi-gate-error" role="alert">{error}</p>}
+          <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? MC.GATE.busy : MC.GATE.button}</button>
+          <p className="mi-gate-consent">{MC.GATE.consent}</p>
+        </form>
+      ) : (
+        <form onSubmit={verify} noValidate>
+          <h2 id="mi-gate-h">{MC.GATE.codeTitle}</h2>
+          <p className="mi-gate-blurb">{MC.GATE.codeBlurb} <b>{f.email}</b>. {MC.GATE.codeHelp}</p>
+          <div className="mi-gate-grid">
+            <label>6-digit code<input inputMode="numeric" autoComplete="one-time-code" value={code} onChange={(e) => setCode(e.target.value)} maxLength={7} required /></label>
+          </div>
+          {error && <p className="mi-gate-error" role="alert">{error}</p>}
+          <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? MC.GATE.busy : MC.GATE.codeButton}</button>
+        </form>
+      )}
+    </div>
+  );
+}
+
 export default function MasterclassInfo() {
   const location = useLocation();
   const [price, setPrice] = useState(MC.PRICE_LABEL);
   const [member, setMember] = useState(false);
+  const [justIn, setJustIn] = useState(false); // signed in on this page just now: the video starts by itself
   const [sticky, setSticky] = useState(false);
-  const heroCta = useRef(null);
+  const watchRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,19 +144,12 @@ export default function MasterclassInfo() {
     fetch(`${API}/me`, { credentials: 'include' }).then((r) => (r.ok ? r.json() : null)).then((j) => { if (j && j.ok) setMember(true); }).catch(() => { /* not signed in */ });
   }, []);
 
-  // Phones: a Watch free bar slides up whenever the hero's own button is off screen, and steps aside while the
-  // video itself is on screen (it would cover the kit line under it).
+  // Phones: a bar slides up whenever the masterclass block (video or form) is off screen.
   useEffect(() => {
-    const el = heroCta.current;
-    const video = document.getElementById('watch');
+    const el = watchRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') return undefined;
-    const seen = new Map();
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => seen.set(e.target, e.isIntersecting));
-      setSticky(!seen.get(el) && !(video && seen.get(video)));
-    });
+    const io = new IntersectionObserver((entries) => { entries.forEach((e) => setSticky(!e.isIntersecting)); });
     io.observe(el);
-    if (video) io.observe(video);
     return () => io.disconnect();
   }, []);
   useEffect(() => {
@@ -82,8 +160,8 @@ export default function MasterclassInfo() {
   // Old links: a just-paid buyer used to land on /masterclass to sign in.
   if (location.state?.justPaid) return <Navigate to={MC.PATHS.signIn} replace state={location.state} />;
 
-  // Watch free first: the video is on this page (owner 2026-10-25, public on YouTube), so the button scrolls to
-  // it; a signed-in member still goes straight to their page. The kit second.
+  // The video is at the top of this page, so the main button scrolls to it; a signed-in member still goes
+  // straight to their page. The kit second.
   const ctas = (extra = '') => (
     <>
       {member
@@ -95,56 +173,62 @@ export default function MasterclassInfo() {
 
   return (
     <div className="ch-home mi-page">
-      {/* Hero */}
+      {/* Hero: the title, then the masterclass itself (owner 2026-10-26: "the video is the first thing after
+          the title, and everything else below"). Until the visitor has told us who they are, the form sits
+          where the video is; the moment they have, the video plays in its place. */}
       <section className="ch-hero lux-hero mi-hero">
         <div className="ch-container">
           <p className="mi-member">
             {member
-              ? <>You are signed in. <Link to={MC.PATHS.my}>Open my masterclass</Link></>
+              ? <>{MC.GATE.signedIn} <Link to={MC.PATHS.my}>Open my masterclass</Link></>
               : <>Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link></>}
           </p>
-          <div className="ch-hero-grid lux-hero-grid mi-hero-grid">
-            <div className="ch-hero-text">
-              <span className="ch-eyebrow">{MC.HERO.eyebrow}</span>
-              <h1 className="ch-hero-title">{MC.HERO.titleLead}<span className="ch-hero-accent">{MC.HERO.titleAccent}</span>{MC.HERO.titleTail}</h1>
-              <p className="lux-promise">{MC.HERO.promise}</p>
-              <p className="ch-hero-sub">{MC.HERO.who}</p>
-              <ul className="mi-facts">
-                {MC.HERO.facts.map((f) => <li key={f.b}><strong>{f.price ? f.b.replace(MC.PRICE_LABEL, price) : f.b}</strong><span>{f.t}</span></li>)}
-              </ul>
-              <div className="ch-hero-cta" ref={heroCta}>
-                {ctas()}
+          <div className="mi-hero-top">
+            <span className="ch-eyebrow">{MC.HERO.eyebrow}</span>
+            <h1 className="ch-hero-title">{MC.HERO.titleLead}<span className="ch-hero-accent">{MC.HERO.titleAccent}</span>{MC.HERO.titleTail}</h1>
+          </div>
+          <div id="watch" className="mi-watch" ref={watchRef}>
+            {member ? (
+              <div className="mi-video">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&modestbranding=1${justIn ? '&autoplay=1' : ''}`}
+                  title={MC.VIDEO.name}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
               </div>
-              <p className="ch-hero-trust">{MC.HERO.note}</p>
+            ) : (
+              <WatchGate onMember={() => { setJustIn(true); setMember(true); }} />
+            )}
+          </div>
+          <ul className="mi-facts">
+            {MC.HERO.facts.map((f) => <li key={f.b}><strong>{f.price ? f.b.replace(MC.PRICE_LABEL, price) : f.b}</strong><span>{f.t}</span></li>)}
+          </ul>
+          <p className="mi-watch-kit">{MC.VIDEO.kitNote} <Link to={MC.PATHS.register}>{MC.CTA.kit.replace(MC.PRICE_LABEL, price)}</Link></p>
+        </div>
+      </section>
+
+      {/* What it is: the promise, who it is for and the four Cs, under the video now. */}
+      <section className="ch-section mi-intro" aria-labelledby="mi-intro-h">
+        <div className="ch-container">
+          <div className="mi-split">
+            <div>
+              <span className="ch-eyebrow">{MC.VIDEO.eyebrow}</span>
+              <h2 id="mi-intro-h" className="ch-h2">{MC.VIDEO.title}</h2>
+              <p className="ch-lead">{MC.VIDEO.intro}</p>
+              <p className="mi-promise">{MC.HERO.promise}</p>
+              <p>{MC.HERO.who}</p>
+              <p className="mi-note">{MC.HERO.note}</p>
+              <div className="ch-hero-cta mi-intro-cta">{ctas()}</div>
             </div>
             <figure className="mi-hero-figure">
-              <Pic img={MC.IMG.hero} eager className="mi-hero-img" />
+              <Pic img={MC.IMG.hero} className="mi-hero-img" />
               <ul className="mi-hero-4c" aria-label="The 4C Framework">
                 {MC.STAGES.map((s) => <li key={s.c} className={`mi-c-${C_KEY[s.c]}`}><b>{s.c}</b><span>{s.line}</span></li>)}
               </ul>
             </figure>
           </div>
-        </div>
-      </section>
-
-      {/* The masterclass itself, free to watch (owner 2026-10-25). A real iframe, not a click-to-load picture, so
-          Google sees the video on the page; it loads only when it comes near the screen. */}
-      <section id="watch" className="ch-section mi-watch" aria-labelledby="mi-watch">
-        <div className="ch-container">
-          <span className="ch-eyebrow">{MC.VIDEO.eyebrow}</span>
-          <h2 id="mi-watch" className="ch-h2">{MC.VIDEO.title}</h2>
-          <p className="ch-lead">{MC.VIDEO.intro}</p>
-          <div className="mi-video">
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&modestbranding=1`}
-              title={MC.VIDEO.name}
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
-          </div>
-          <p className="mi-watch-kit">{MC.VIDEO.kitNote} <Link to={MC.PATHS.register}>{MC.CTA.kit.replace(MC.PRICE_LABEL, price)}</Link></p>
         </div>
       </section>
 
@@ -400,12 +484,13 @@ export default function MasterclassInfo() {
           <div className="ch-hero-cta ch-center-cta">{ctas()}</div>
           <p className="mi-final-q"><WaLink>{MC.FINAL.questions}</WaLink></p>
           <p className="mi-final-q">Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link></p>
+          <p className="mi-final-q" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
         </div>
       </section>
 
-      {/* Phones: Watch free stays one tap away. */}
+      {/* Phones: the masterclass stays one tap away. */}
       <div className={`mi-sticky${sticky ? ' is-on' : ''}`} aria-hidden={!sticky}>
-        <span><b>{MC.TITLE}</b> · {MC.CTA.freeLine} · {MC.CTA.kitLine.replace(MC.PRICE_LABEL, price)}</span>
+        <span><b>{MC.TITLE}</b> · {MC.CTA.watchLine} · {MC.CTA.kitLine.replace(MC.PRICE_LABEL, price)}</span>
         {member
           ? <Link className="ch-btn ch-btn-primary" to={MC.PATHS.my} tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</Link>
           : <a className="ch-btn ch-btn-primary" href="#watch" tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</a>}
