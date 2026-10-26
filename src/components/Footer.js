@@ -150,7 +150,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} AUM AI Healthcare Solutions. All rights reserved. Aumy™ is a trademark of AAUMAI Healthcare Solution Pvt Ltd.</p>
+          <p>&copy; {currentYear} AAUMAI Healthcare Solution Pvt Ltd. All rights reserved. Aumy™ is a trademark of AAUMAI Healthcare Solution Pvt Ltd.</p>
           <div className="footer-legal">
             {legal.map((item, index) => (
               <Link key={index} to={item.path}>{item.label}</Link>

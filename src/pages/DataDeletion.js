@@ -12,7 +12,7 @@ const DataDeletion = () => {
         <div className="container">
           <h1 className="page-title">Data &amp; Account Deletion</h1>
           <p className="page-subtitle">
-            How to request deletion of your account and personal data from Aaumai Healthcare Solutions PVT LTD
+            How to request deletion of your account and personal data from AAUMAI Healthcare Solution Pvt Ltd
           </p>
         </div>
       </div>
@@ -32,8 +32,8 @@ const DataDeletion = () => {
           <p style={{ marginBottom: '20px' }}>
             This page explains how to request deletion of your account and associated personal data
             from the AUM AI / Aumy platform, including the <strong>Aumy</strong> mobile app and our
-            hosted applications (such as aumy.aumai.co.in). Aaumai Healthcare Solutions PVT LTD
-            ("Aaumai", "AUM AI", "we") provides a B2B healthcare platform: most accounts are created
+            hosted applications (such as aumy.aumai.co.in). AAUMAI Healthcare Solution Pvt Ltd
+            ("AUM AI", "we") provides a B2B healthcare platform: most accounts are created
             and managed by the clinic ("clinic customer") you belong to, so the deletion path depends
             on who you are.
           </p>
@@ -64,9 +64,9 @@ const DataDeletion = () => {
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>2. Patients</h2>
             <p style={{ marginBottom: '15px' }}>
               If you are a patient of a clinic that uses our platform, your clinic is the data
-              controller of your medical record and Aaumai processes that data on the clinic's behalf.
+              controller of your medical record and AUM AI processes that data on the clinic's behalf.
               Please direct deletion or correction requests to your clinic. Once the clinic verifies
-              and authorises the request, Aaumai will delete the relevant data from our systems,
+              and authorises the request, AUM AI will delete the relevant data from our systems,
               subject to the medical-record retention obligations the clinic is bound by. You may also
               email <a href={`mailto:${CONTACT}?subject=Patient%20Data%20Deletion`} style={{ color: '#4f46e5' }}>{CONTACT}</a> and we will route your request to the correct clinic.
             </p>

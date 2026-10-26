@@ -28,7 +28,7 @@ const ShippingPolicy = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>Digital Services Delivery</h2>
             <p style={{ marginBottom: '15px' }}>
-              AUM AI Healthcare Solutions provides digital healthcare technology services. 
+              AUM AI provides digital healthcare technology services. 
               As our services are digital in nature, there is no physical shipping involved.
             </p>
             <p style={{ marginBottom: '15px' }}>

@@ -220,7 +220,7 @@ const orgLd = {
   // Same entity as the template node in public/index.html (merged by @id).
   '@id': `${ORIGIN}/#organization`,
   ...(MARKET === 'us' ? {} : { founder: { '@id': `${ORIGIN}/about#founder` } }),
-  name: MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'AUM AI Healthcare Solutions',
+  name: MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'AUM AI',
   // The new positioning, no price (owner 2026-10-22): src/data/homeOutcomes.js.
   ...(MARKET === 'us' ? {} : { description: HO.ORG_DESCRIPTION }),
   url: `${ORIGIN}/`,
@@ -1196,12 +1196,12 @@ const routes = [
   {
     slug: 'privacy',
     title: 'Privacy Policy | AUM AI',
-    description: 'How AUM AI Healthcare Solutions collects, uses and protects personal data across Aumy and aumai.co.in.',
+    description: 'How AUM AI collects, uses and protects personal data across Aumy and aumai.co.in.',
     canonical: `${ORIGIN}/privacy`,
     content: `
       <section><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Privacy Policy</h1>
-        <p>How AUM AI Healthcare Solutions collects, uses and protects personal data across Aumy and aumai.co.in.</p>
+        <p>How AUM AI collects, uses and protects personal data across Aumy and aumai.co.in.</p>
       </div></section>`,
   },
   {
@@ -1288,7 +1288,7 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <h1 class="ch-hero-title">Get in touch.</h1>
         <p class="ch-hero-sub">Tell us what you need — a growth strategy call for your clinic, or a build partner for your product. We reply within 24 hours.</p>
-        <p><strong>India:</strong> AUM AI Healthcare Solutions &middot; Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar, Pune, Maharashtra 411028, India &middot; jayesh.chaudhari@aumai.co.in &middot; +91 800 718 9868</p>
+        <p><strong>India:</strong> AAUMAI Healthcare Solution Pvt Ltd &middot; Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar, Pune, Maharashtra 411028, India &middot; jayesh.chaudhari@aumai.co.in &middot; +91 800 718 9868</p>
         <p><strong>United States:</strong> AUM AI Healthcare Technology LLC &middot; 30 N Gould St, Ste N, Sheridan, WY 82801 &middot; jayesh@aumyai.com &middot; +1 (307) 263-5098</p>
       </div></section>`,
   },
@@ -1305,7 +1305,7 @@ const routes = [
       name: FOUNDER.NAME,
       jobTitle: FOUNDER.ROLE,
       description: FOUNDER.SUMMARY,
-      worksFor: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
+      worksFor: { '@type': 'Organization', name: 'AUM AI', url: `${ORIGIN}/` },
       knowsAbout: FOUNDER.EXPERTISE.map((e) => e.title),
       url: `${ORIGIN}/about`,
       sameAs: ['https://www.linkedin.com/in/chaudhari-jayesh-b9762a3b/'],
@@ -1407,7 +1407,7 @@ for (const p of growthPosts) {
         author: { '@type': 'Person', name: p.author },
         publisher: {
           '@type': 'Organization',
-          name: 'AUM AI Healthcare Solutions',
+          name: 'AUM AI',
           logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` },
         },
         mainEntityOfPage: `${ORIGIN}/growth/${p.slug}`,
@@ -1580,7 +1580,7 @@ for (const p of MODS.PAGES) {
         featureList: p.does,
         audience: { '@type': 'BusinessAudience', audienceType: 'Dental clinics' },
         isPartOf: { '@id': `${ORIGIN}/#aumy-dental` },
-        provider: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
+        provider: { '@type': 'Organization', name: 'AUM AI', url: `${ORIGIN}/` },
       },
     ],
     content: `

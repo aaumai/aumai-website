@@ -44,7 +44,7 @@ const SocialMessaging = () => {
           color: '#334155',
         }}>
           <p style={{ marginBottom: '24px', fontSize: '1.1rem' }}>
-            <strong>AUM AI Healthcare Solutions</strong> provides dental and other
+            <strong>AUM AI</strong> provides dental and other
             healthcare clinics with an AI-assisted receptionist. Part of that service connects to a
             clinic&rsquo;s own <strong>Facebook Page</strong> and linked <strong>Instagram
             professional account</strong>, so the clinic can respond to patient enquiries on those
@@ -121,7 +121,7 @@ const SocialMessaging = () => {
           <section style={sec}>
             <h2 style={h2}>About the business providing this service</h2>
             <p style={lead}>
-              This service is provided by <strong>Aaumai Healthcare Solutions Pvt Ltd</strong>{' '}
+              This service is provided by <strong>AAUMAI Healthcare Solution Pvt Ltd</strong>{' '}
               (&ldquo;AUM AI&rdquo;), a healthcare technology company building growth, automation and
               clinic-management software for dental and healthcare clinics in India and
               the UAE.

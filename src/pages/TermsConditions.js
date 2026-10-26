@@ -29,7 +29,7 @@ const TermsConditions = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>1. Acceptance of Terms</h2>
             <p style={{ marginBottom: '15px' }}>
-              By accessing and using the services of AUM AI Healthcare Solutions, you accept and agree to be bound by 
+              By accessing and using the services of AAUMAI Healthcare Solution Pvt Ltd ("AUM AI"), you accept and agree to be bound by 
               the terms and provision of this agreement. If you do not agree to these terms, please do not use our services.
             </p>
           </section>
@@ -37,7 +37,7 @@ const TermsConditions = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>2. Services</h2>
             <p style={{ marginBottom: '15px' }}>
-              AUM AI Healthcare Solutions provides healthcare technology services including but not limited to:
+              AUM AI provides healthcare technology services including but not limited to:
             </p>
             <ul style={{ marginLeft: '30px', marginBottom: '15px' }}>
               <li>EHR Integrations and Custom Development</li>
@@ -62,7 +62,7 @@ const TermsConditions = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>4. Intellectual Property</h2>
             <p style={{ marginBottom: '15px' }}>
-              All intellectual property rights in the services and deliverables remain with AUM AI Healthcare Solutions 
+              All intellectual property rights in the services and deliverables remain with AUM AI 
               unless otherwise specified in your service agreement. Client data and proprietary information remain the 
               property of the client.
             </p>
@@ -79,7 +79,7 @@ const TermsConditions = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>6. Limitation of Liability</h2>
             <p style={{ marginBottom: '15px' }}>
-              AUM AI Healthcare Solutions shall not be liable for any indirect, incidental, special, or consequential 
+              AUM AI shall not be liable for any indirect, incidental, special, or consequential 
               damages arising out of or in connection with the use of our services.
             </p>
           </section>

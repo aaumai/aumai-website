@@ -3,7 +3,7 @@ import { IS_US, PRIMARY_OFFICE } from '../config/contact';
 import './Page.css';
 
 // The registered data controller differs by market (India Pvt Ltd vs US LLC).
-const CONTROLLER_ENTITY = IS_US ? 'AUM AI Healthcare Technology LLC' : 'Aaumai Healthcare Solutions PVT LTD';
+const CONTROLLER_ENTITY = IS_US ? 'AUM AI Healthcare Technology LLC' : 'AAUMAI Healthcare Solution Pvt Ltd';
 const CONTROLLER_SITE = IS_US ? 'https://aumyai.com' : 'https://aumai.co.in';
 
 const PrivacyPolicy = () => {
@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
         <div className="container">
           <h1 className="page-title">Privacy Policy</h1>
           <p className="page-subtitle">
-            How Aaumai Healthcare Solutions PVT LTD collects, uses, and protects your information
+            How AAUMAI Healthcare Solution Pvt Ltd collects, uses, and protects your information
           </p>
         </div>
       </div>
@@ -31,7 +31,7 @@ const PrivacyPolicy = () => {
           </p>
 
           <p style={{ marginBottom: '20px' }}>
-            Aaumai Healthcare Solutions PVT LTD ("Aaumai", "AUM AI", "we", "us", "our") provides
+            AAUMAI Healthcare Solution Pvt Ltd ("AUM AI", "we", "us", "our") provides
             healthcare technology services including electronic health record (EHR) software, AI
             clinical tools, predictive retention analytics, telehealth, and patient-communication
             automation over channels such as WhatsApp. This Privacy Policy explains what
@@ -44,10 +44,10 @@ const PrivacyPolicy = () => {
           <section style={{ marginBottom: '30px' }}>
             <h2 style={{ color: '#0f172a', marginBottom: '15px', fontSize: '1.8rem' }}>1. Who is responsible for your data</h2>
             <p style={{ marginBottom: '15px' }}>
-              For visitors to our marketing website and contact-form submissions, Aaumai is the
+              For visitors to our marketing website and contact-form submissions, AUM AI is the
               data controller. For data processed inside our hosted clinical platform on behalf
               of a clinic customer (including patient, appointment, clinical-note, and message
-              data), the clinic is the data controller and Aaumai acts as the data processor
+              data), the clinic is the data controller and AUM AI acts as the data processor
               under a separate service agreement (a Business Associate Agreement in
               HIPAA-covered engagements, an equivalent data-processing agreement under India's
               Digital Personal Data Protection Act 2023, UAE PDPL, and Dubai Health Authority
@@ -84,7 +84,7 @@ const PrivacyPolicy = () => {
               never message a patient who has opted out. Outbound message sending is performed
               by our Business Solution Provider (MSG91) on behalf of the clinic; template
               management (create, submit for Meta approval, status tracking, delete) is
-              performed directly by Aaumai against Meta's WhatsApp Business Management API on
+              performed directly by AUM AI against Meta's WhatsApp Business Management API on
               WhatsApp Business Accounts owned by our Aaumai Meta Business Manager.
             </p>
             <p style={{ marginBottom: '10px' }}>
