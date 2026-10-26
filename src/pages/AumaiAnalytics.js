@@ -102,6 +102,19 @@ const AumaiAnalytics = () => {
     fetchData();
   }, [fetchData]);
 
+  // Masterclass funnel (owner 2026-10-26: "did anybody sign up for the masterclass yet?"). Loaded on its own so
+  // a problem here never blanks the rest of the page; a failed refresh keeps the last numbers on screen.
+  const [mc, setMc] = useState(null);
+  useEffect(() => {
+    if (!dashKey) return undefined;
+    let gone = false;
+    fetch(`${API_BASE}/masterclass-stats?days=${days}`, { headers: { 'X-Dashboard-Key': dashKey } })
+      .then((r) => (r.status === 403 ? null : r.ok ? r.json() : undefined)) // 403: a clinic key, no masterclass
+      .then((j) => { if (!gone && j !== undefined) setMc(j); })
+      .catch(() => {});
+    return () => { gone = true; };
+  }, [days, dashKey]);
+
   const login = (e) => {
     e.preventDefault();
     const k = pwInput.trim();
@@ -225,6 +238,94 @@ const AumaiAnalytics = () => {
                 <span style={styles.statLabel}>Avg Session Duration</span>
               </div>
             </div>
+
+            {/* Masterclass funnel: who came, who made an account, who bought the kit (India site only) */}
+            {mc && site !== 'aumyai.com' && (
+              <div style={styles.section}>
+                <h2 style={styles.sectionTitle}>Masterclass, last {days} day{days === 1 ? '' : 's'}</h2>
+                <p style={styles.hint}>
+                  All time: {mc.totals.accounts} account{mc.totals.accounts === 1 ? '' : 's'} · {mc.totals.kit_purchases} kit
+                  {mc.totals.kit_purchases === 1 ? '' : 's'} sold · ₹{Number(mc.totals.revenue_rupees).toLocaleString('en-IN')}.
+                  Our own @aumai.co.in accounts are not counted.
+                </p>
+                <div style={styles.statsGrid}>
+                  <div style={{ ...styles.statCard, borderTopColor: '#3b82f6' }}>
+                    <span style={{ ...styles.statValue, color: '#3b82f6' }}>{mc.period.visitors}</span>
+                    <span style={styles.statLabel}>Visited the masterclass page</span>
+                  </div>
+                  <div style={{ ...styles.statCard, borderTopColor: '#8b5cf6' }}>
+                    <span style={{ ...styles.statValue, color: '#8b5cf6' }}>{mc.period.accounts}</span>
+                    <span style={styles.statLabel}>Signed up (accounts)</span>
+                  </div>
+                  <div style={{ ...styles.statCard, borderTopColor: '#10b981' }}>
+                    <span style={{ ...styles.statValue, color: '#10b981' }}>{mc.period.kit_purchases}</span>
+                    <span style={styles.statLabel}>Bought the kit</span>
+                  </div>
+                  <div style={{ ...styles.statCard, borderTopColor: '#f59e0b' }}>
+                    <span style={{ ...styles.statValue, color: '#f59e0b' }}>₹{Number(mc.period.revenue_rupees).toLocaleString('en-IN')}</span>
+                    <span style={styles.statLabel}>Kit revenue</span>
+                  </div>
+                </div>
+                {mc.sources.length > 0 && (
+                  <p style={styles.hint}>
+                    Kit sales by source: {mc.sources.map((s) => `${s.source} ${s.kit_purchases}`).join(' · ')}
+                  </p>
+                )}
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={styles.table}>
+                    <thead>
+                      <tr>
+                        <th style={styles.th}>Day</th>
+                        <th style={styles.th}>Visited</th>
+                        <th style={styles.th}>Signed up</th>
+                        <th style={styles.th}>Bought the kit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {mc.daily.map((d, i) => (
+                        <tr key={d.date} style={i % 2 === 0 ? styles.trEven : {}}>
+                          <td style={styles.td}>{d.date}</td>
+                          <td style={styles.td}>{d.visitors}</td>
+                          <td style={styles.td}>{d.accounts}</td>
+                          <td style={styles.td}>{d.kit_purchases}</td>
+                        </tr>
+                      ))}
+                      {mc.daily.length === 0 && (
+                        <tr><td style={styles.td} colSpan={4}>No masterclass visits or sign-ups in this period. Pick a longer period above.</td></tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+                <h3 style={{ ...styles.sectionTitle, fontSize: '1rem', marginTop: '1.25rem' }}>Latest sign-ups (all time)</h3>
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={styles.table}>
+                    <thead>
+                      <tr>
+                        <th style={styles.th}>Name</th>
+                        <th style={styles.th}>Clinic</th>
+                        <th style={styles.th}>Joined</th>
+                        <th style={styles.th}>Kit</th>
+                        <th style={styles.th}>Signed in</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {mc.recent.map((r, i) => (
+                        <tr key={`${r.name}-${r.joined_on}-${i}`} style={i % 2 === 0 ? styles.trEven : {}}>
+                          <td style={styles.td}>{r.name}</td>
+                          <td style={styles.td}>{r.clinic || '—'}</td>
+                          <td style={styles.td}>{r.joined_on}</td>
+                          <td style={styles.td}>{r.has_kit ? 'Bought' : 'Free'}</td>
+                          <td style={styles.td}>{r.signed_in ? 'Yes' : 'Not yet'}</td>
+                        </tr>
+                      ))}
+                      {mc.recent.length === 0 && (
+                        <tr><td style={styles.td} colSpan={5}>Nobody has signed up yet.</td></tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
 
             {/* Visitors — one row per visit, named so returning people are recognisable */}
             <div style={styles.section}>
