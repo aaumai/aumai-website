@@ -10,7 +10,7 @@ const CaseStudyDetail = () => {
 
   useEffect(() => {
     if (cs) {
-      document.title = `${cs.title} | AUM AI Healthcare Solutions`;
+      document.title = `${cs.title} | AUM AI`;
     }
   }, [cs]);
 

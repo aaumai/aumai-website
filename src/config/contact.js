@@ -22,7 +22,7 @@ export const US_OFFICE = {
 export const INDIA_OFFICE = {
   key: 'india',
   label: 'India',
-  entity: 'AUM AI Healthcare Solutions',
+  entity: 'AAUMAI Healthcare Solution Pvt Ltd',
   address: 'Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar, Pune, Maharashtra 411028, India',
   email: 'jayesh.chaudhari@aumai.co.in',
   phone: '+91 800 718 9868',

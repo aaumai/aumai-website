@@ -6,7 +6,7 @@ import './CaseStudiesPage.css';
 
 const CaseStudiesPage = () => {
   useEffect(() => {
-    document.title = 'Case Studies | AUM AI Healthcare Solutions';
+    document.title = 'Case Studies | AUM AI';
   }, []);
 
   return (

@@ -154,7 +154,7 @@ ${HO.HOW.steps.map((st, i) => `${i + 1}. ${st.title} ${st.body}`).join('\n')}
 - Clinics can start free in the Aumy app (App Store / Google Play) with 1,000 Aumy credits per product. Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
 - Founder: Jayesh Chaudhari — 18 years in healthcare technology (clinic workflows, revenue cycle, compliance, interoperability, AI); built Aumy after working closely with dental clinics in the USA, Dubai and India. https://aumai.co.in/about
-- Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
+- Category: AI dental software / dental practice management software, built in and for India (AUM AI, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
 - Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
 - Priced in rupees, per clinic, after a free clinic audit; prices excluding GST are on ${ORIGIN}/pricing.
@@ -190,7 +190,7 @@ ${growthPosts.map((p) => `- ${ORIGIN}/growth/${p.slug} — ${p.title.replace(/\s
 - ${ORIGIN}/downloads/dental-clinic-revenue-leak-checklist.pdf — printable one-page front-desk checklist for practice managers
 
 ## Contact
-AUM AI Healthcare Solutions, Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar, Pune, Maharashtra 411028, India — jayesh.chaudhari@aumai.co.in
+AAUMAI Healthcare Solution Pvt Ltd, Sr. No. 78, Sasane Nagar, Lane 1, Hadapsar, Pune, Maharashtra 411028, India — jayesh.chaudhari@aumai.co.in
 `,
   us: `# Aumy by AUM AI (United States)
 
