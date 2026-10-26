@@ -5,8 +5,9 @@ import AppDownload from './AppDownload';
 import { FOOTER_OUTCOMES, FOOTER_TAGLINE } from '../data/homeOutcomes';
 import './Footer.css';
 
-// The three services, in the header's order (also in scripts/prerender.js SITE_LINKS).
+// The services, in the header's order (also in scripts/prerender.js SITE_LINKS).
 const SERVICES = [
+  { label: 'Managed Follow-Ups', path: '/managed-follow-ups' },
   { label: 'Dental SEO', path: '/dental-seo' },
   { label: 'Dental Websites', path: '/clinic-websites' },
   { label: 'Dental Ads (Meta & Google)', path: '/dental-ads' },

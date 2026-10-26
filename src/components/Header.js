@@ -27,6 +27,7 @@ const NAV_ITEMS = [
       {
         label: 'Services',
         children: [
+          { path: '/managed-follow-ups', label: 'Managed follow-ups', hint: 'We follow up your enquiries and patients, by WhatsApp and calls' },
           { path: '/dental-seo', label: 'Dental SEO', hint: 'More patients find you on Google, from India and abroad' },
           { path: '/clinic-websites', label: 'Dental websites', hint: 'Websites built to be found on Google' },
           { path: '/dental-ads', label: 'Dental ads (Meta & Google)', hint: 'Ads judged by booked patients, not leads' },

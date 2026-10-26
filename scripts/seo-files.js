@@ -66,6 +66,7 @@ const SITEMAPS = {
     // Services (owner 2026-10-23), under "Product & services" in the header.
     ['/dental-seo', 0.9, 'monthly'],
     ['/dental-ads', 0.9, 'monthly'],
+    ['/managed-follow-ups', 0.9, 'monthly'],
     ['/pricing', 0.9, 'monthly'],
     ['/modules', 0.9, 'monthly'],
     ...MODS.PAGES.map((p) => [`/modules/${p.id}`, 0.8, 'monthly']),
@@ -175,6 +176,7 @@ ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}$
 - ${ORIGIN}/dental-seo — Dental SEO for international patients (service): pages overseas patients search for (treatment plus "in Delhi/India", costs, short-stay timelines, the doctor's credentials), Google Business Profile looked after every week (posts, review replies, photos), new articles on a fixed day, rankings kept on a redesign, and a monthly Search Console report by country; work: The Sterling Dental Clinic, New Delhi
 - ${ORIGIN}/clinic-websites — Dental websites (service): clinic websites built for SEO and international patients: treatment, area and dental-tourism pages, weekly blogs, technical SEO and redirects that keep old rankings; case study: sterlingdentalclinic.com
 - ${ORIGIN}/dental-ads — Dental ads, Meta and Google (service): Meta ads for dental clinics on Facebook and Instagram and Google ads for dentists, judged by booked patients rather than leads, with every enquiry answered and followed up in Aumy; monthly report on spend, enquiries, booked visits and cost per booked visit
+- ${ORIGIN}/managed-follow-ups — Managed patient follow-ups (service): we run a dental clinic's follow-ups for it — new enquiries (lead nurturing), appointment reminders, missed visits, advised treatment (treatment acceptance), check-ups, unfinished treatment and Google reviews — by WhatsApp (Silver) or WhatsApp plus phone calls and escalations (Gold), inside the clinic's Aumy; quoted after a free clinic audit
 - ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
 - ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
