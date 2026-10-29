@@ -34,6 +34,8 @@ const START_FINE = '14-day trial · no card needed to start';
 // to try each product" right at the top of the site).
 const TOP_LINE = '1,000 Aumy credits to try each product';
 const TOP_SUB = 'start free in the Aumy app';
+// The same bar on the masterclass pages, which never say "free" (owner 2026-10-26, 2026-10-29).
+const TOP_SUB_MASTERCLASS = 'get them in the Aumy app';
 
 module.exports = {
   APP_STORE_URL,
@@ -44,5 +46,6 @@ module.exports = {
   START_FINE,
   TOP_LINE,
   TOP_SUB,
+  TOP_SUB_MASTERCLASS,
 };
 module.exports.default = module.exports;

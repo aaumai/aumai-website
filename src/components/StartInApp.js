@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StoreBadge, APP_STORE_URL, PLAY_STORE_URL } from './AppDownload';
-import { START_LINE, START_FINE, TOP_LINE, TOP_SUB } from '../data/appStores';
+import { START_LINE, START_FINE, TOP_LINE, TOP_SUB, TOP_SUB_MASTERCLASS } from '../data/appStores';
 import './StartInApp.css';
 
 /**
@@ -62,8 +62,10 @@ const StartInApp = ({ moduleName, variant = 'card' }) => {
  * Its height (it wraps on narrow phones) is published as --notice-h, which
  * .App in App.css uses to push the page down below the fixed header.
  */
-export const CreditsBar = () => {
+export const CreditsBar = ({ noFree = false }) => {
   const store = useStore();
+  // The masterclass pages never say "free" (owner 2026-10-29): same bar, other words.
+  const sub = noFree ? TOP_SUB_MASTERCLASS : TOP_SUB;
   const ref = useRef(null);
 
   useEffect(() => {
@@ -88,7 +90,7 @@ export const CreditsBar = () => {
         {store === 'both' ? (
           <p className="credits-bar-text">
             <strong>{TOP_LINE}</strong>
-            <span className="credits-bar-sub"> &mdash; {TOP_SUB}:</span>{' '}
+            <span className="credits-bar-sub"> &mdash; {sub}:</span>{' '}
             <a href={APP_STORE_URL} className="credits-bar-link" target="_blank" rel="noopener noreferrer" aria-label="Download Aumy on the App Store">App Store</a>
             <span className="credits-bar-sep" aria-hidden="true"> · </span>
             <a href={PLAY_STORE_URL} className="credits-bar-link" target="_blank" rel="noopener noreferrer" aria-label="Get Aumy on Google Play">Google Play</a>

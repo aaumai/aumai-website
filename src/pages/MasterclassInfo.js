@@ -105,7 +105,7 @@ function WatchGate({ onMember }) {
           <p className="mi-gate-blurb">{MC.GATE.blurb}</p>
           <div className="mi-gate-grid">
             <label>Your name<input value={f.name} onChange={set('name')} placeholder="Dr Meera Joshi" autoComplete="name" required /></label>
-            <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" required /></label>
+            <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Joshi Clinic" autoComplete="organization" required /></label>
             <label>WhatsApp number<input type="tel" inputMode="tel" value={f.whatsapp} onChange={set('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>
             <label>Email<input type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={f.email} onChange={set('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
           </div>
