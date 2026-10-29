@@ -19,6 +19,18 @@ const HERO = {
   sub: `Aumy’s AI receptionist for dental clinics in India answers every call and WhatsApp message in seconds, 24/7, in the patient’s own language, and books the appointment into your calendar. The Clinic OS starts from ${PRICING.MONTHLY_TEXT}; the AI receptionist is priced on top.`,
 };
 
+// The direct answer, straight under the H1 (owner 2026-10-29): the sentence a search engine or an AI answer can lift whole.
+const ANSWER = {
+  q: 'What is an AI receptionist for a dental clinic?',
+  a: 'An AI receptionist for a dental clinic is software that answers patients’ WhatsApp messages and phone calls for the clinic, at any hour. It answers from the clinic’s own treatments, timings and prices, books the appointment into the clinic’s calendar, sends the reminders, and passes anything clinical or sensitive to the team.',
+};
+
+// One receptionist, two channels, each sold on its own (the module pages own "WhatsApp AI receptionist" and "AI voice receptionist").
+const CHANNELS = [
+  { path: '/modules/whatsapp-ai-receptionist-for-dentists', label: 'WhatsApp AI receptionist (Aumy Chat)' },
+  { path: '/modules/ai-voice-receptionist-for-dentists', label: 'AI voice receptionist for calls (Aumy Voice)' },
+];
+
 const MATHS = {
   title: 'The maths your front desk already knows',
   body: 'A busy clinic misses 20–30% of its calls, and most enquiries after 8 pm are never answered at all. Every missed enquiry is a patient who books with the next clinic on Google. An implant enquiry lost this way isn’t a missed call — it’s lakhs of treatment revenue walking to a competitor.',
@@ -44,9 +56,11 @@ const FAQS = [
   { q: 'Will patients realise they’re talking to AI — and mind?', a: 'Patients care about getting a helpful answer at 11 pm, not about who typed it. Aumy replies naturally in the patient’s own language and hands anything sensitive to your team immediately.' },
   { q: 'Which languages does it speak?', a: 'It replies in the language the patient writes in — English, Hindi, Marathi and more — switching automatically mid-conversation if the patient does.' },
   { q: 'What happens when the AI doesn’t know an answer?', a: 'It never guesses about clinical matters. Unknown or sensitive questions are handed to your staff with full context, and the patient is told a team member will respond shortly.' },
+  { q: 'Does it answer phone calls as well as WhatsApp?', a: 'Yes. Aumy Chat answers WhatsApp and Aumy Voice answers phone calls. Both book into the same calendar and follow the same clinic rules, so a patient gets the same answer whichever way they reach you.' },
+  { q: 'Can I take only the WhatsApp or only the phone receptionist?', a: 'Yes. Aumy Chat and Aumy Voice are each sold on their own. Start with the channel where you lose the most patients today and add the other later.' },
   { q: 'How much does an AI receptionist cost for a dental clinic in India?', a: 'Aumy starts from ₹3,000 a month for the Clinic OS. The AI receptionist on WhatsApp and calls is added on top, priced with you once we know which channels and how many enquiries your clinic has.' },
   { q: 'How long does setup take?', a: 'Onboarding is done for you — WhatsApp connection, your treatments and FAQs configured in your doctors’ own words. Most clinics are live within a week.' },
 ];
 
-module.exports = { TITLE, DESCRIPTION, HERO, MATHS, CAPABILITIES, STAGE, FAQS };
+module.exports = { TITLE, DESCRIPTION, HERO, ANSWER, CHANNELS, MATHS, CAPABILITIES, STAGE, FAQS };
 module.exports.default = module.exports;
