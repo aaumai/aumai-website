@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { isMasterclassPath } from '../data/masterclass';
 import { OFFICES, ICON } from '../config/contact';
 import AppDownload from './AppDownload';
 import { FOOTER_OUTCOMES, FOOTER_TAGLINE } from '../data/homeOutcomes';
@@ -42,7 +43,8 @@ const Footer = () => {
     { label: 'Dental Practice Growth Hub', path: '/growth' },
     { label: 'Podcast — Be a Guest', path: '/podcast' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
-    { label: 'Free Clinic Audit', path: '/growth-audit' },
+    // No "free" on the masterclass pages (owner 2026-10-29).
+    { label: isMasterclassPath(pathname) ? 'Clinic Audit' : 'Free Clinic Audit', path: '/growth-audit' },
     { label: 'Masterclass — The Full Chair Method', path: '/masterclass' },
     { label: 'What Slips Through the Cracks — 60-second Check', path: '/leak-calculator' },
     { label: 'Missed Call Calculator', path: '/missed-call-calculator' },

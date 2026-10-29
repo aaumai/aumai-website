@@ -29,6 +29,9 @@ const PRICE_LABEL = '₹999';
 // Lifetime access for every member (owner 2026-10-20); the site backend never ends it on a date.
 const ACCESS = 'Lifetime access';
 
+// Every masterclass page (owner 2026-10-29: no "free" anywhere on them, including the shared header bar).
+const isMasterclassPath = (p) => p === '/masterclass' || String(p || '').startsWith('/masterclass/');
+
 const PATHS = { info: '/masterclass', register: '/masterclass/register', signIn: '/masterclass/sign-in', create: '/masterclass/sign-in#create', my: '/masterclass/my' };
 
 // The two calls to action, everywhere (owner 2026-10-25): watch first; the kit second.
@@ -47,10 +50,18 @@ const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868' };
 // Search words clinic owners actually type (YouTube and Google suggestions, 25 Oct 2026): "ai for dentists",
 // "ai automation for clinics", "patient follow up", "reduce no shows", "how to get more dental patients",
 // "claude for dentists". The title leads with them; the brand comes last.
+// Owner 2026-10-29: the masterclass is for EVERY clinic owner (dental, skin, any clinic), as in the ad
+// "For clinic owners · Dental · Skin · Every clinic". Dental appears only as an example, next to a skin one.
+// Never "free" on these pages (owner 2026-10-26).
 const SEO = {
-  title: 'AI for Dentists & Clinics: Patient Follow-Up Masterclass | AUM AI',
+  title: 'AI for Clinic Owners: Patient Follow-Up Masterclass | AUM AI',
   description:
-    'The Full Chair Method masterclass: run patient follow-ups with AI and Claude, reduce no-shows and get more patients from your own list. For dental, skin and aesthetic clinics.',
+    'The Full Chair Method masterclass: run patient follow-ups with AI and Claude, reduce no-shows and get more patients from your own list. For every clinic owner: dental, skin and every other clinic.',
+  keywords:
+    'AI for clinics, AI for clinic owners, patient follow-up, reduce no-shows, clinic WhatsApp follow-up, Claude for clinics, AI for dentists, AI for dermatologists, skin clinic patient follow-up, dental clinic patient follow-up, The Full Chair Method, 4C Framework',
+  // The link preview when the page is shared (WhatsApp, Facebook, LinkedIn): 1200×630, no "free", no price.
+  shareImage: '/og/masterclass-full-chair-method-1200x630.png',
+  shareImageAlt: 'The Full Chair Method masterclass, AI for clinic owners: dental, skin, every clinic. About an hour.',
 };
 
 // The full masterclass on YouTube (owner 2026-10-25), embedded right under the title (owner 2026-10-26).
@@ -59,12 +70,12 @@ const SEO = {
 const VIDEO = {
   youtubeId: 'fVLAcs-lBRw',
   eyebrow: 'The masterclass',
-  title: 'AI for dentists and clinics: run patient follow-ups with Claude',
+  title: 'AI for clinic owners: run patient follow-ups with Claude',
   intro:
-    'The full masterclass, about an hour. See how dental, skin and aesthetic clinics use AI and a Google Sheet to answer every enquiry, reduce no-shows, bring patients back for advised treatment and recalls, and do it all in about 30 minutes every morning.',
-  name: 'AI for Dentists & Clinics: Run Patient Follow-Ups with Claude',
+    'The full masterclass, about an hour. See how clinics of every kind, dental, skin and more, use AI and a Google Sheet to answer every enquiry, reduce no-shows, bring patients back for advised treatment and recalls, and do it all in about 30 minutes every morning.',
+  name: 'AI for Clinic Owners: Run Patient Follow-Ups with Claude',
   description:
-    'The Full Chair Method masterclass by Jayesh Chaudhari, AUM AI: how dental, skin and aesthetic clinics run patient follow-ups with AI and Claude on a Google Sheet, reduce no-shows and get more patients from their existing list, with the 4C Framework (Convert, Confirm, Care, Come back).',
+    'The Full Chair Method masterclass by Jayesh Chaudhari, AUM AI: how clinic owners (dental, skin and every other clinic) run patient follow-ups with AI and Claude on a Google Sheet, reduce no-shows and get more patients from their existing list, with the 4C Framework (Convert, Confirm, Care, Come back).',
   uploadDate: '2026-10-25T09:45:09-07:00',
   duration: 'PT1H5M14S',
   kitNote: 'Want to start tomorrow morning? The kit has everything you see in the video, ready to use.',
@@ -91,14 +102,14 @@ const GATE = {
 // minutes and no "guarantee", owner 2026-10-22; script in
 // docs/masterclass/ads/ad-script-10-minutes-999.md in the EHR project).
 const HERO = {
-  eyebrow: 'Dental clinic owners, get ready to be mind-blown',
+  eyebrow: 'Clinic owners, get ready to be mind-blown',
   title: 'Run all your follow‑ups in 30 minutes!',
   titleLead: 'Run all your follow‑ups in ',
   titleAccent: '30 minutes',
   titleTail: '!',
   promise:
     'Every new enquiry. Every patient with an appointment. Every patient who missed one. Every “I’ll let you know”. Every treatment left half-done. Every patient who hasn’t come back in a year.',
-  who: 'Feels like too much to do? You can do all of it in about 30 minutes every morning. In The Full Chair Method masterclass, I show you exactly how. For dental and skin clinic owners, and the manager or front-desk lead who runs it with you.',
+  who: 'Feels like too much to do? You can do all of it in about 30 minutes every morning. In The Full Chair Method masterclass, I show you exactly how. For clinic owners (dental, skin or any other clinic), and the manager or front-desk lead who runs it with you.',
   // About 1 hour · Kit ₹999, once · Lifetime access (owner 2026-10-25; no "free" line, owner 2026-10-26).
   // `price: true` marks the fact whose PRICE_LABEL the page swaps for the backend's live label.
   facts: [
@@ -115,11 +126,11 @@ const PROBLEM = {
     'Every month your clinic pays to get patients: ads, Google, referrals, and years of good work. And every month some of them quietly walk away.',
   leaks: [
     'The call nobody picked up at 11:40, because the desk was busy with a patient.',
-    'The WhatsApp enquiry about implants that got its reply the next evening.',
+    'The WhatsApp enquiry about implants or a laser treatment that got its reply the next evening.',
     'The patient who didn’t turn up on Thursday, and nobody called to rebook.',
     '“I’ll think about it.” The treatment you advised, never started.',
-    'The root canal done, and the crown never fitted.',
-    'The patient who came once for a cleaning and never came back.',
+    'The root canal done and the crown never fitted; the skin course stopped after two sessions.',
+    'The patient who came once for a cleaning or a facial and never came back.',
     'Happy patients who never left a Google review, because nobody asked.',
   ],
   numbersTitle: 'What we see in real clinics',
@@ -140,8 +151,8 @@ const PROBLEM = {
 // clinic, doctor or patient. The workbook and Aumy pictures are real
 // screenshots of the course kit (sample rows) and of Aumy on our demo clinic.
 const IMG = {
-  hero: { src: '/images/masterclass/hero.webp', w: 1344, h: 768, alt: 'Illustration: a dentist at her clinic reception, calm, with a full waiting room behind her' },
-  leaks: { src: '/images/masterclass/leaks.webp', w: 1184, h: 864, alt: 'Illustration: a phone full of unanswered messages on a reception desk, an empty dental chair behind it' },
+  hero: { src: '/images/masterclass/hero.webp', w: 1344, h: 768, alt: 'Illustration: a doctor at her clinic reception, calm, with a full waiting room behind her' },
+  leaks: { src: '/images/masterclass/leaks.webp', w: 1184, h: 864, alt: 'Illustration: a phone full of unanswered messages on a reception desk, an empty treatment chair behind it' },
   team: { src: '/images/masterclass/team.webp', w: 1344, h: 768, alt: 'Illustration: a clinic team reviewing a green, orange and red weekly scorecard on a screen' },
   workbook: { src: '/images/masterclass/workbook-advised.webp', w: 1296, h: 440, alt: 'The Advised to Accepted workbook in Excel, with sample patients, follow-ups and a KPI status column in green, orange and red' },
   kpis: { src: '/images/masterclass/workbook-kpis.webp', w: 1377, h: 536, alt: 'The KPIs and owners tab of the Owner Weekly Scorecard: one KPI and one owner for every system' },
@@ -154,11 +165,11 @@ const BEFORE_AFTER = {
   intro: 'Every leak has a system in the masterclass that closes it. Here is what changes.',
   rows: [
     { before: 'The 11:40 call rings out. The patient calls the next clinic.', after: 'A WhatsApp within 5 minutes, a call back within 4 opening hours.', sys: 'Every Call Answered' },
-    { before: 'The implant enquiry gets one reply, then silence.', after: 'Fast answers to the three fears, and useful follow-ups for 2 to 4 weeks.', sys: 'The Decision Path' },
+    { before: 'The implant or laser enquiry gets one reply, then silence.', after: 'Fast answers to the three fears, and useful follow-ups for 2 to 4 weeks.', sys: 'The Decision Path' },
     { before: 'Thursday’s patient doesn’t turn up. Nobody notices until evening.', after: 'A yes the day before, a nudge at 1 pm, a reminder on the day.', sys: 'Confirm Twice, Remind Once' },
     { before: 'The no-show is never called again.', after: 'Kind messages and a way back within the week.', sys: 'Same-Week Rebook' },
     { before: '“I’ll think about it”, and the plan is forgotten.', after: 'The advice in writing, the real worry answered, two touches in 14 days.', sys: 'Advised to Accepted' },
-    { before: 'The root canal is done; the crown never happens.', after: 'Every half-done treatment on a list, followed until the last step.', sys: 'Finish Line' },
+    { before: 'The root canal is done; the crown never happens. The skin course stops halfway.', after: 'Every half-done treatment on a list, followed until the last step.', sys: 'Finish Line' },
     { before: 'Last year’s patients drift to another clinic.', after: 'The likeliest to return are asked back first, each with their own reason.', sys: 'Smart Comebacks' },
   ],
 };
@@ -168,7 +179,7 @@ const STAGES = [
   {
     c: 'Convert', line: 'An enquiry becomes a booking.', img: '/images/masterclass/convert.webp', alt: 'Illustration: a receptionist replying to a patient on WhatsApp',
     items: [
-      { n: '1', name: 'The Decision Path', t: 'Turn implant, aligner and smile-makeover enquiries into bookings: reply fast, answer the three fears (pain, money, regret), and stay useful for the 2 to 4 weeks the patient takes to decide.' },
+      { n: '1', name: 'The Decision Path', t: 'Turn big-treatment enquiries (implants, aligners, laser and skin treatments) into bookings: reply fast, answer the three fears (pain, money, regret), and stay useful for the 2 to 4 weeks the patient takes to decide.' },
       { n: '2', name: 'Every Call Answered', t: 'Count your missed calls. Every missed caller gets a WhatsApp within 5 minutes and a call back within 4 opening hours.' },
     ],
   },
@@ -181,12 +192,12 @@ const STAGES = [
     ],
   },
   {
-    c: 'Care', line: 'The treatment is accepted, and finished.', img: '/images/masterclass/care.webp', alt: 'Illustration: a dentist explaining a treatment plan to a patient on a tablet',
+    c: 'Care', line: 'The treatment is accepted, and finished.', img: '/images/masterclass/care.webp', alt: 'Illustration: a doctor explaining a treatment plan to a patient on a tablet',
     items: [
       { n: 'F2', foundation: true, name: 'Visit documentation', t: 'Every visit written down the same day: advised, planned, done, declined, and the next step. Nobody can follow up what was never written down.' },
       { n: '5', name: 'Advised to Accepted', t: '“I’ll think about it” gets an answer: the doctor’s advice in writing, the real worry answered, and two touches in 14 days.' },
       { n: 'F3', foundation: true, name: 'Lab order management', t: 'Every lab case tracked from sent to received, and the patient booked within a day of it arriving.' },
-      { n: '6', name: 'Finish Line', t: 'Half-done treatment gets finished: the crown after the root canal, the implant crown, the last aligner.' },
+      { n: '6', name: 'Finish Line', t: 'Half-done treatment gets finished: the crown after the root canal, the last aligner, the remaining skin sessions.' },
       { n: '7', name: 'BIT: Be In Touch', t: 'A check-in in the doctor’s name within 2 days of the visit, about the procedure they had, and what to do with every reply.' },
     ],
   },
@@ -257,7 +268,7 @@ const EXPECT = {
 const FOR_WHO = {
   title: 'Who it’s for',
   yes: [
-    'You own a dental clinic, or a skin or aesthetic clinic.',
+    'You own a clinic: dental, skin, aesthetic or any other clinic that runs on appointments.',
     'You run the clinic yourself and want follow-ups, WhatsApp and calls handled without hiring more people.',
     'You’re the manager or front-desk lead who will run these systems.',
     'You want simple systems your team keeps doing every week, with a number that shows whether they did.',
@@ -267,7 +278,7 @@ const FOR_WHO = {
     'You want clinical training. This is about everything around the chair.',
     'You want a software demo.',
   ],
-  skinNote: 'Running a skin clinic? The examples come from dental clinics; set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. The eight systems work the same way for you: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.',
+  skinNote: 'Not a dental clinic? Many examples come from dental clinics, where we measured them. Running a skin clinic? Set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. For every clinic, the eight systems work the same way: enquiries, confirmations, treatment plans, the day-after check-in and bringing patients back.',
 };
 
 const TRAINER = {
@@ -285,7 +296,7 @@ const FAQS = [
   { q: 'When can I watch it?', a: `Any time. It runs about an hour, so you can watch when it suits you, pause to fill in your Clinic Master Sheet, and watch again any time: you have lifetime access.` },
   { q: 'How long do I have access?', a: 'For life. Your account has no end date, and neither does the kit once you buy it. Watch the video again whenever you like; the Clinic Master Sheet and the skill file are yours to keep.' },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
-  { q: 'I run a skin or aesthetic clinic. Is this for me?', a: 'Yes. The examples come from dental clinics; set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. The eight systems work the same way for a skin clinic: enquiries, confirmations, session plans, the day-after check-in and bringing patients back.' },
+  { q: 'I don’t run a dental clinic. Is this for me?', a: 'Yes. It is for every clinic owner: dental, skin, aesthetic or any other clinic. Many examples come from dental clinics, where we measured them. Running a skin or aesthetic clinic? Set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. For every clinic, the eight systems work the same way: enquiries, confirmations, treatment plans, the day-after check-in and bringing patients back.' },
   { q: 'Do I need Aumy or any other software?', a: 'No. The Clinic Master Sheet opens in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
   { q: 'Do I need a Claude account?', a: 'Only if you want Claude’s help. Everything works by hand with the Clinic Master Sheet. With a Claude account at claude.ai, you upload the skill file and connect the sheet through Google Drive, and Claude writes the messages, call scripts and weekly KPI report.' },
   { q: 'How do I get the kit, and how do I sign in?', a: `Sign in with your email: we send a 6-digit code, and there is no password. The kit is ${PRICE_LABEL}, once, by UPI, card or net banking through Razorpay: press Unlock the kit on your masterclass page, or Get the kit on this page, and every download opens the moment the payment is confirmed.` },
@@ -368,6 +379,6 @@ const MASTER_SHEET = {
 const MEMBER_HELP = `Stuck while setting up a system? Ask us 24×7 on WhatsApp: ${WHATSAPP.display}`;
 
 module.exports = {
-  TITLE, PRICE_LABEL, ACCESS, PATHS, CTA, WHATSAPP, SEO, VIDEO, GATE, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, SIGNIN, MEMBER, MASTER_SHEET, MEMBER_HELP,
+  TITLE, PRICE_LABEL, ACCESS, PATHS, isMasterclassPath, CTA, WHATSAPP, SEO, VIDEO, GATE, IMG, HERO, PROBLEM, BEFORE_AFTER, STAGES, LEARN, WAYS, KIT, EXPECT, FOR_WHO, TRAINER, FAQS, FINAL, REGISTER, REGISTER_SEO_DESCRIPTION, SIGNIN, MEMBER, MASTER_SHEET, MEMBER_HELP,
 };
 module.exports.default = module.exports;

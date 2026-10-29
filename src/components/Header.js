@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CreditsBar } from './StartInApp';
+import { isMasterclassPath } from '../data/masterclass';
 import './Header.css';
 
 // The menu (owner 2026-10-19: "too congested — logo to the left, space the menus").
@@ -273,7 +274,7 @@ const Header = () => {
       {/* Owner 2026-10-09: "1,000 Aumy credits to try each product" right at the top,
           linking to this phone's app store. Mirrored in scripts/prerender.js.
           Owner 2026-10-22: hidden on the home page only (outcomes as a service); every other page keeps it. */}
-      {location.pathname !== '/' && <CreditsBar />}
+      {location.pathname !== '/' && <CreditsBar noFree={isMasterclassPath(location.pathname)} />}
       <div className="container header-container">
         <div className="header-content">
           <div className="logo">
@@ -303,7 +304,8 @@ const Header = () => {
             </ul>
             <div className="nav-cta">
               <Link to="/growth-audit" className="btn btn-primary" onClick={closeMobileMenu}>
-                Free Clinic Audit
+                {/* No "free" on the masterclass pages (owner 2026-10-29). */}
+                {isMasterclassPath(location.pathname) ? 'Clinic Audit' : 'Free Clinic Audit'}
               </Link>
             </div>
           </nav>

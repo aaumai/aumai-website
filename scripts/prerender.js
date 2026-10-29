@@ -93,7 +93,8 @@ const googleReviewsHtml = (limit) => {
       </div></section>`;
 };
 // Slim bar at the top of every India page (React: CreditsBar in the header).
-const creditsBarHtml = () => `<div class="credits-bar"><div class="container"><p class="credits-bar-text"><strong>${esc(STORES.TOP_LINE)}</strong> — ${esc(STORES.TOP_SUB)}: <a class="credits-bar-link" href="${STORES.APP_STORE_URL}">App Store</a> · <a class="credits-bar-link" href="${STORES.PLAY_STORE_URL}">Google Play</a></p></div></div>`;
+// The masterclass pages never say "free" (owner 2026-10-29): same bar, other words, as in Header.js.
+const creditsBarHtml = (noFree = false) => `<div class="credits-bar"><div class="container"><p class="credits-bar-text"><strong>${esc(STORES.TOP_LINE)}</strong> — ${esc(noFree ? STORES.TOP_SUB_MASTERCLASS : STORES.TOP_SUB)}: <a class="credits-bar-link" href="${STORES.APP_STORE_URL}">App Store</a> · <a class="credits-bar-link" href="${STORES.PLAY_STORE_URL}">Google Play</a></p></div></div>`;
 // Module cards as links to /modules/<id> (home section + "works even better with").
 // `stores`: the home cards also carry the app-store links for the self-serve modules.
 const moduleCardsHtml = (pages, { stores = false } = {}) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}${stores && STORES.isSelfServe(p.id) ? ` ${esc(STORES.START_LINE)}: ${storeLinksHtml(p.short)}` : ''}</li>`).join('\n          ');
@@ -177,6 +178,9 @@ function apply(html, r) {
   out = setTag(out, /(<meta property="og:url" content=")[^"]*(")/, `$1${r.canonical}$2`);
   out = setTag(out, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(r.title)}$2`);
   out = setTag(out, /(<meta name="twitter:description" content=")[^"]*(")/, `$1${esc(r.description)}$2`);
+  // A page's own keywords and share-image words (the masterclass, owner 2026-10-29: every clinic, not dental only).
+  if (r.keywords) out = setTag(out, /(<meta\s+name="keywords"\s+content=")[^"]*(")/, `$1${esc(r.keywords)}$2`);
+  if (r.ogImageAlt) out = setTag(out, /(<meta property="og:image:alt" content=")[^"]*(")/, `$1${esc(r.ogImageAlt)}$2`);
   if (r.ogImage) {
     out = setTag(out, /(<meta property="og:image" content=")[^"]*(")/, `$1${r.ogImage}$2`);
     out = setTag(out, /(<meta name="twitter:image" content=")[^"]*(")/, `$1${r.ogImage}$2`);
@@ -204,7 +208,7 @@ function apply(html, r) {
   // here as in Header.js; pricing and contact keep their own notice.
   // The "1,000 Aumy credits" bar (owner 2026-10-09) tops every India page, as in Header.js.
   // Owner 2026-10-22: not on the home page (slug ''), as in Header.js.
-  const bar = MARKET === 'us' || r.refresh || r.slug === '' ? '' : creditsBarHtml();
+  const bar = MARKET === 'us' || r.refresh || r.slug === '' ? '' : creditsBarHtml(MC.isMasterclassPath(`/${r.slug}`));
   out = out.replace(
     '<div id="root"></div>',
     `<div id="root"><div class="ch-home">${bar}${r.content}</div></div>`
@@ -886,6 +890,9 @@ const routes = [
     title: MC.SEO.title,
     description: MC.SEO.description,
     canonical: `${ORIGIN}${MC.PATHS.info}`,
+    keywords: MC.SEO.keywords,
+    ogImage: `${ORIGIN}${MC.SEO.shareImage}`,
+    ogImageAlt: MC.SEO.shareImageAlt,
     jsonld: [
       {
         '@context': 'https://schema.org',
