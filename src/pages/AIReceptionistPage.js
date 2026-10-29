@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import { TITLE, DESCRIPTION, HERO, MATHS, CAPABILITIES, STAGE, FAQS } from '../data/aiReceptionist';
+import { TITLE, DESCRIPTION, HERO, ANSWER, CHANNELS, MATHS, CAPABILITIES, STAGE, FAQS } from '../data/aiReceptionist';
 import { AI_TRAINED_FOR_DENTISTRY } from '../data/positioning';
 import './HomeClinic.css';
 
@@ -32,6 +32,20 @@ const AIReceptionistPage = () => {
           <div style={{ marginTop: 18, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/demos" className="ch-btn ch-btn-primary">Watch it handle a real clinic&rsquo;s WhatsApp</Link>
             <Link to="/growth-audit" className="ch-btn ch-btn-ghost">Get a free Growth Audit</Link>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ padding: '8px 0 8px' }}>
+        <div className="ch-container ch-narrow">
+          <div className="ch-why-card" style={{ display: 'block', padding: '18px 22px' }}>
+            <h2 style={{ margin: '0 0 6px', fontSize: '1.1rem' }}>{ANSWER.q}</h2>
+            <p style={{ margin: 0, color: '#5b6784' }}>{ANSWER.a}</p>
+            <p style={{ margin: '10px 0 0' }}>
+              {CHANNELS.map((c, i) => (
+                <React.Fragment key={c.path}>{i > 0 && ' · '}<Link to={c.path}>{c.label}</Link></React.Fragment>
+              ))}
+            </p>
           </div>
         </div>
       </section>

@@ -707,6 +707,8 @@ const routes = [
         <h1 class="ch-hero-title">${esc(AIR.HERO.title)}</h1>
         <p>${esc(AIR.HERO.sub)}</p>
         <p>${esc(POS.AI_TRAINED_FOR_DENTISTRY)}</p>
+        <h2>${esc(AIR.ANSWER.q)}</h2><p>${esc(AIR.ANSWER.a)}</p>
+        <p>${AIR.CHANNELS.map((c) => '<a href="' + c.path + '">' + esc(c.label) + '</a>').join(' · ')}</p>
         <h2>${esc(AIR.MATHS.title)}</h2><p>${esc(AIR.MATHS.body)}</p>
         <h2>What the AI receptionist does</h2>${pairsHtml(AIR.CAPABILITIES)}
         <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
@@ -790,7 +792,7 @@ const routes = [
         </ol>
         <h2>AI dental software questions, answered</h2>
         ${ADS.FAQS.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')}
-        <p>Last updated ${esc(ADS.UPDATED)}. Comparing named products? <a href="/growth/best-dental-software-india">Best dental software in India (2026): an honest comparison</a>. See also <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, <a href="/modules/dental-patient-follow-up">Aumy Journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">the modules you can buy on their own</a>.</p>
+        <p>Last updated ${esc(ADS.UPDATED)}. Comparing named products? <a href="/growth/best-dental-software-india">Best dental software in India (2026): an honest comparison</a>. See also <a href="/ai-receptionist">AI receptionist for dental clinics</a>, <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, <a href="/modules/dental-patient-follow-up">Aumy Journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">the modules you can buy on their own</a>.</p>
         <p><a href="/contact">Talk to us</a></p>
       </div></section>`,
   },
