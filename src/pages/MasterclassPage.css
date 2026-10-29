@@ -81,6 +81,7 @@
 .mc-lock { flex: none; margin-top: 3px; color: var(--sc-muted) }
 .mc-unlock-btn { max-width: 420px }
 .mc-unlock { padding: 18px; border-radius: 14px; gap: 12px }
+.mc-join-qa { align-self: flex-start; margin: 0; padding: 6px 12px; border-radius: 8px; font-size: 15px; font-weight: 600; color: #14532d; background: #dcfce7; border: 1px solid #86efac }
 .mc-unlock h3 { font-size: 20px }
 .mc-readonly { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px 16px; padding: 12px 14px; background: var(--sc-chip); border-radius: 10px }
 .mc-readonly div { min-width: 0 }

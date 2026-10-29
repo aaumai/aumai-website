@@ -4,15 +4,17 @@ import { setPageSeo } from '../utils/seo';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
 import MasterclassUnlockForm from '../components/MasterclassUnlockForm';
-import { API, EP, CLINIC_TYPES, isPaid, readJson, writeJson, useMasterclassCheckout, validEmail } from '../lib/masterclassCheckout';
+import { API, EP, CLINIC_TYPES, accessLevel, priceLabels, readJson, writeJson, useMasterclassCheckout, validEmail } from '../lib/masterclassCheckout';
 import './ScorecardPage.css';
 import './MasterclassPage.css';
 
-// Get the kit (owner 2026-10-18, re-worded 2026-10-25): the "pay straight away" path.
+// Get the kit (owner 2026-10-18, re-worded 2026-10-25): the "pay straight away" path. The kit
+// is product 'kit' (owner 2026-10-30): ₹999, watching the masterclass included; a signed-in member
+// who joined for ₹299 pays ₹700 more (the backend decides the amount; /me.price says it).
 // One screen: create the account and pay through Razorpay Checkout in one go; the
 // account is made the moment the payment is confirmed. The masterclass itself plays on
-// /masterclass once the visitor has typed who they are; this page sells the kit, once.
-// A signed-in FREE member who lands here gets the unlock form, prefilled. A paid
+// /masterclass once the member has joined; this page sells the kit, once.
+// A signed-in member without the kit who lands here gets the unlock form, prefilled. A kit
 // member sees "You already have access". The price and whether the kit is on sale come
 // from the site backend; nothing about money is typed into this page. Out of the
 // sitemap for now. The Razorpay flow itself lives in src/lib/masterclassCheckout.js.
@@ -61,17 +63,19 @@ export default function MasterclassRegister() {
     writeJson('session', FORM_STORE, keep);
   };
 
-  const pay = (e) => { e.preventDefault(); co.pay({ ...f, utm: utm.current, referrer: document.referrer || null }); };
+  const pay = (e) => { e.preventDefault(); co.pay({ product: 'kit', ...f, utm: utm.current, referrer: document.referrer || null }); };
 
   const open = price && price.open;
-  const label = (price && price.label) || MC.PRICE_LABEL;
+  const L = priceLabels(have, price);
+  const label = L.kit;
   const todayIst = new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
-  const freeMember = have && !isPaid(have);
+  const hasKit = have && accessLevel(have) === 'kit';
+  const freeMember = have && !hasKit; // signed in, kit not bought yet (joined or not)
   return (
     <div className="sc-root">
       <div className="sc-wrap mc-narrow mc-hero">
         <p className="sc-eyebrow">The Full Chair Method · Masterclass</p>
-        <h1>{`Get the kit · ${label} once`}</h1>
+        <h1>{L.kitUpgrade ? `Get the kit · ${label} more` : `Get the kit · ${label} once`}</h1>
         <p className="mc-access">{MC.REGISTER.lead}</p>
         <ul className="mc-points">
           {MC.REGISTER.points.map((p) => <li key={p}>{p.includes(MC.WHATSAPP.display)
@@ -103,7 +107,7 @@ export default function MasterclassRegister() {
             )}
 
             {/* Lifetime access (owner 2026-10-20): a paid member has nothing more to buy. */}
-            {have && isPaid(have) && (
+            {hasKit && (
               <div className="sc-form" role="status">
                 <h2>You already have access</h2>
                 <p>You already have <b>lifetime access</b>, kit included. Open your masterclass any time.</p>
@@ -115,7 +119,7 @@ export default function MasterclassRegister() {
             {freeMember && price && (
               <>
                 <p className="mc-sent" role="status">You are signed in as <b>{have.email}</b>. Unlock the kit below, and every download opens on your masterclass page.</p>
-                <MasterclassUnlockForm me={have} price={price} onPaid={() => navigate(MC.PATHS.my, { replace: true, state: { justUnlocked: true } })} onAlreadyPaid={() => setHave((h) => ({ ...h, paid: true }))} contact={contact} utm={utm.current} />
+                <MasterclassUnlockForm me={have} price={price} onPaid={() => navigate(MC.PATHS.my, { replace: true, state: { justUnlocked: true } })} onAlreadyPaid={() => setHave((h) => ({ ...h, paid: true, access_level: 'kit', can_watch: true }))} contact={contact} utm={utm.current} />
               </>
             )}
 

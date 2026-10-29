@@ -1,55 +1,62 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MC from '../data/masterclass';
-import { CLINIC_TYPES, useMasterclassCheckout } from '../lib/masterclassCheckout';
+import { CLINIC_TYPES, priceLabels, useMasterclassCheckout } from '../lib/masterclassCheckout';
 
-// A signed-in FREE member buys the kit (owner 2026-10-25): clinic, city, clinic type and
-// the non-refundable agree box; name, email and WhatsApp come from the account (the
-// backend takes them from the member cookie, so they are shown, not sent). Used on
-// /masterclass/my (inline, under "Your kit") and on /masterclass/register (when a free
-// member lands there). One payment, no renewal.
+// A signed-in member pays (owner 2026-10-25; two products since 2026-10-30):
+//   product 'entry': join for ₹299, once, to watch the masterclass with 24×7 WhatsApp Q&A;
+//   product 'kit':   unlock the kit, ₹700 more for a member who joined, ₹999 otherwise.
+// Clinic, city, clinic type and the non-refundable agree box; name, email and WhatsApp come
+// from the account (the backend takes them from the member cookie, so they are shown, not
+// sent). Used on /masterclass/my (the join step, and inline under "Your kit") and on
+// /masterclass/register (when a signed-in member without the kit lands there). Paid once.
 //
-// Props: me (from /me), price (from /me.price or /price: { open, label, one_time }),
-// onPaid(j), onAlreadyPaid(j) (409 already_paid: refetch /me), contact (email),
-// utm (object, optional). `price.open === false` shows why Pay is not offered.
+// Props: me (from /me), price (the /price payload, optional: /me's own labels win),
+// product ('entry' | 'kit', default 'kit'), onPaid(j), onAlreadyPaid(j) (409: refetch /me),
+// onCancel, contact (email), utm (object, optional).
 
-export default function MasterclassUnlockForm({ me, price, onPaid, onAlreadyPaid, onCancel, contact, utm }) {
+export default function MasterclassUnlockForm({ me, price, product = 'kit', onPaid, onAlreadyPaid, onCancel, contact, utm }) {
   const [f, setF] = useState({ clinic: me.clinic || '', city: me.city || '', clinic_type: me.clinic_type || '', agree: false });
   const co = useMasterclassCheckout({ onPaid, onAlreadyPaid, contact });
   const name = me.name || me.display_name || '';
   const set = (k) => (e) => setF({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
-  const label = (price && price.label) || MC.PRICE_LABEL;
+  const L = priceLabels(me, price);
+  const entry = product === 'entry';
 
   const submit = (e) => {
     e.preventDefault();
-    co.pay({ clinic: f.clinic, city: f.city, clinic_type: f.clinic_type, agree: f.agree, utm: utm || {}, referrer: document.referrer || null });
+    co.pay({ product, clinic: f.clinic, city: f.city, clinic_type: f.clinic_type, agree: f.agree, utm: utm || {}, referrer: document.referrer || null });
   };
 
   if (co.stage === 'confirming') {
+    const forEntry = (co.pendingProduct || product) === 'entry';
     return (
       <div className="sc-form mc-unlock" role="status">
-        <h3>Payment received — we are confirming it</h3>
+        <h3>{MC.JOIN.confirmTitle}</h3>
         <p>{co.confirmMsg || 'We are checking your payment. This can take a few minutes.'}</p>
         {co.error && <p className="sc-error" role="alert">{co.error}</p>}
         <button type="button" className="sc-btn mc-btn-wide" onClick={co.checkStatus} disabled={co.checking}>{co.checking ? 'Checking…' : 'Check again'}</button>
-        <p className="mc-help">You do not need to pay again. Your downloads open as soon as the payment is confirmed. Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+        <p className="mc-help">{forEntry ? MC.JOIN.confirmHelp : 'You do not need to pay again. Your downloads open as soon as the payment is confirmed.'} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
         {co.hasPending && <button type="button" className="sc-link" onClick={co.startAgain}>I did not pay. Start again</button>}
       </div>
     );
   }
 
-  if (price && price.open === false) {
+  if (entry ? !L.entryOpen : !L.kitOpen) {
+    const msg = (entry ? (me.entry_price && me.entry_price.message) : (price && price.message)) || 'Please check again later.';
     return (
       <div className="sc-form mc-unlock" role="status">
-        <h3>The kit is not on sale right now</h3>
-        <p>{price.message || 'Please check again later.'} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+        <h3>{entry ? MC.JOIN.closed : 'The kit is not on sale right now'}</h3>
+        <p>{msg} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
       </div>
     );
   }
 
   return (
-    <form className="sc-form mc-unlock" onSubmit={submit} noValidate aria-label="Unlock the kit">
-      <h3>Unlock the kit</h3>
+    <form className="sc-form mc-unlock" onSubmit={submit} noValidate aria-label={entry ? MC.JOIN.title(L.entry) : 'Unlock the kit'}>
+      <h3>{entry ? MC.JOIN.title(L.entry) : 'Unlock the kit'}</h3>
+      {entry && <p className="mc-join-qa">{MC.JOIN.qa}</p>}
+      {!entry && L.kitUpgrade && <p className="mc-help" style={{ color: 'var(--sc-ink)' }}>The kit is {L.kitTotal} in total; you have paid {L.entry}.</p>}
       <dl className="mc-readonly">
         <div><dt>Name</dt><dd>{name}</dd></div>
         <div><dt>Email</dt><dd>{me.email}</dd></div>
@@ -67,11 +74,13 @@ export default function MasterclassUnlockForm({ me, price, onPaid, onAlreadyPaid
       </div>
       <label className="sc-consent" style={{ fontSize: 15 }}>
         <input type="checkbox" checked={f.agree} onChange={set('agree')} style={{ width: 22, height: 22 }} />
-        <span>I understand the kit fee is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>
+        <span>I understand the {entry ? `${L.entry} fee` : 'kit fee'} is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>
       </label>
       {co.error && <p className="sc-error" role="alert">{co.error}</p>}
-      <button type="submit" className="sc-btn mc-btn-wide" disabled={co.busy}>{co.busy ? 'Opening the payment…' : `Pay ${label} once`}</button>
-      <p className="mc-help">{MC.MEMBER.unlockHelp}</p>
+      <button type="submit" className="sc-btn mc-btn-wide" disabled={co.busy}>
+        {co.busy ? MC.JOIN.busy : (entry ? MC.JOIN.button(L.entry) : `Pay ${L.kit}${L.kitUpgrade ? '' : ' once'}`)}
+      </button>
+      <p className="mc-help">{entry ? MC.JOIN.help : MC.MEMBER.unlockHelp}</p>
       {onCancel && <button type="button" className="sc-link" onClick={onCancel} style={{ alignSelf: 'flex-start' }}>Not now</button>}
     </form>
   );

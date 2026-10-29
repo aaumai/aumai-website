@@ -901,27 +901,15 @@ const routes = [
         description: MC.SEO.description,
         inLanguage: 'en-IN',
         provider: { '@type': 'Organization', name: 'AUM AI', sameAs: ORIGIN },
-        // The offer is the kit, paid once (owner 2026-10-25); the video plays on the page with an account.
-        offers: { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `This offer is the kit, paid once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access. The masterclass video plays on this page with an account.` },
+        // Two one-time offers (owner 2026-10-30): join to watch, and the kit (watching included).
+        // No VideoObject any more: the video is for members only, and its id is never in public files.
+        offers: [
+          { '@type': 'Offer', price: MC.ENTRY_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.info}#watch`, description: 'Join to watch the masterclass (about an hour), paid once, with 24×7 Q&A on WhatsApp and lifetime access.' },
+          { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `The kit, paid once, watching included: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access. After joining, the kit is ${MC.UPGRADE_LABEL} more.` },
+        ],
         hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: MC.VIDEO.duration, instructor: { '@type': 'Person', name: MC.TRAINER.name } },
       },
       faqPageLd(MC.FAQS),
-      // The full masterclass, on YouTube and embedded right under the title (owner 2026-10-25, 2026-10-26).
-      {
-        '@context': 'https://schema.org',
-        '@type': 'VideoObject',
-        name: MC.VIDEO.name,
-        description: MC.VIDEO.description,
-        thumbnailUrl: [`https://i.ytimg.com/vi/${MC.VIDEO.youtubeId}/maxresdefault.jpg`, `https://i.ytimg.com/vi/${MC.VIDEO.youtubeId}/hqdefault.jpg`],
-        uploadDate: isoDateTime(MC.VIDEO.uploadDate),
-        duration: MC.VIDEO.duration,
-        embedUrl: `https://www.youtube.com/embed/${MC.VIDEO.youtubeId}`,
-        url: `https://www.youtube.com/watch?v=${MC.VIDEO.youtubeId}`,
-        inLanguage: 'en',
-        isFamilyFriendly: true,
-        publisher: { '@type': 'Organization', name: 'AUM AI', url: ORIGIN },
-        author: { '@type': 'Person', '@id': `${ORIGIN}/about#founder`, name: MC.TRAINER.name, url: `${ORIGIN}/about` },
-      },
     ],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
@@ -931,8 +919,8 @@ const routes = [
         <div id="watch">
           <h2>${esc(MC.VIDEO.title)}</h2>
           <p>${esc(MC.VIDEO.intro)}</p>
-          <p>${esc(MC.GATE.blurb)} <a href="${MC.PATHS.signIn}">${esc(MC.GATE.title)}</a></p>
-          <iframe src="https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&amp;modestbranding=1" title="${esc(MC.VIDEO.name)}" width="1040" height="585" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <p>${esc(MC.GATE.blurb())} <a href="${MC.PATHS.create}">${esc(MC.CTA.join())}</a></p>
+          <p>${esc(MC.JOIN.qa)}. ${esc(MC.JOIN.kit())}</p>
         </div>
         <ul>${MC.HERO.facts.map((f) => `<li><strong>${esc(f.b)}</strong> ${esc(f.t)}</li>`).join('')}</ul>
         <p>${esc(MC.VIDEO.kitNote)} <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
@@ -998,7 +986,7 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.FINAL.title)}</h2>
         <p>${esc(MC.FINAL.text)}</p>
-        <p><a href="#watch">${esc(MC.CTA.watch)}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
+        <p><a href="#watch">${esc(MC.CTA.join())}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
         <p><a href="${MC.WHATSAPP.link}">${esc(MC.FINAL.questions)}</a></p>
         <p>${esc(MC.MEMBER.licence)}</p>
       </div></section>`,
@@ -1127,7 +1115,7 @@ const routes = [
         <ul>${MC.REGISTER.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
         <p><a href="${MC.PATHS.info}">See everything the masterclass covers</a></p>
         <p><a href="${MC.PATHS.info}#watch">${esc(MC.REGISTER.watchLink)}</a></p>
-        <p>Type your name, clinic, city, email and WhatsApp number, and pay ${esc(MC.PRICE_LABEL)} once, securely by Razorpay. Your account and every download are ready the moment the payment is confirmed. Already have an account? <a href="${MC.PATHS.signIn}">Sign in</a>.</p>
+        <p>Type your name, clinic, city, email and WhatsApp number, and pay ${esc(MC.PRICE_LABEL)} once, securely by Razorpay. Your account, the masterclass video and every download are ready the moment the payment is confirmed. Already have an account? <a href="${MC.PATHS.signIn}">Sign in</a>.</p>
       </div></section>`,
   },
   {

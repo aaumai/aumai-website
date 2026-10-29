@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import MC from '../data/masterclass';
 
 // The Full Chair Method: ONE copy of the site-API paths and of the Razorpay checkout
-// flow (owner 2026-10-25: the masterclass is free to watch; a one-time payment unlocks
-// the kit). Used by /masterclass/register (pay straight away) and by /masterclass/my
-// (a free member unlocking the kit). Nothing about money is typed into the pages:
-// the price and whether the kit can be bought come from the backend.
+// flow. Two products (owner 2026-10-30, contract: site backend docs/masterclass-paid-entry.md):
+// 'entry' (₹299 once: watch + 24×7 WhatsApp Q&A) and 'kit' (₹999 in total; ₹700 for a member
+// who joined). Used by /masterclass (the join step), /masterclass/register (the kit straight
+// away) and /masterclass/my (join, or unlock the kit). The amounts and whether a product can
+// be bought come from the backend; src/data/masterclass.js only holds the fallback labels.
 //
 // Once Razorpay says "paid", a page never offers Pay again. A UPI app switch on
 // Android can reload the page before Razorpay's handler runs: the order id and its
@@ -33,11 +35,35 @@ export const FAILED_COPY = 'If money left your account, your bank returns it aut
 export const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || '').trim());
 export const fileUrl = (f) => `${API}${EP.files}/${encodeURIComponent(f.name)}`;
 export const downloadAllUrl = () => `${API}${EP.downloadAll}`;
-// Members from before 2026-10-25 have no `paid` flag: every one of them paid, so only an explicit false is free.
+// Members from before 2026-10-25 have no `paid` flag: every one of them paid, so only an explicit false is unpaid.
 export const isPaid = (me) => !!me && me.paid !== false;
+// 'none' | 'watch' | 'kit' (owner 2026-10-30). A backend from before that change sends no
+// access_level and lets every account watch, so the fallback keeps that behaviour.
+export const accessLevel = (me) => {
+  if (!me) return 'none';
+  if (me.access_level === 'none' || me.access_level === 'watch' || me.access_level === 'kit') return me.access_level;
+  return isPaid(me) ? 'kit' : 'watch';
+};
+export const canWatch = (me) => !!me && (typeof me.can_watch === 'boolean' ? me.can_watch : accessLevel(me) !== 'none');
+// The labels, from the API when it has them; the constants in src/data/masterclass.js otherwise.
+// `kit` is what THIS member pays for the kit (₹700 for a `watch` member, ₹999 otherwise).
+export const priceLabels = (me, pricePayload) => {
+  const kit = (me && me.price) || pricePayload || {};
+  const entry = (me && me.entry_price) || (pricePayload && pricePayload.entry) || {};
+  return {
+    entry: entry.label || MC.ENTRY_LABEL,
+    entryOpen: entry.open !== false,
+    kit: kit.label || MC.PRICE_LABEL,
+    kitUpgrade: !!kit.upgrade,
+    kitTotal: kit.kit_total_label || (kit.upgrade ? MC.PRICE_LABEL : kit.label) || MC.PRICE_LABEL,
+    // The kit after joining (/price.kit_upgrade, or /me.price for a `watch` member).
+    upgrade: (kit.upgrade && kit.label) || (pricePayload && pricePayload.kit_upgrade && pricePayload.kit_upgrade.label) || MC.UPGRADE_LABEL,
+    kitOpen: kit.open !== false,
+  };
+};
 
 const CHECKOUT_JS = 'https://checkout.razorpay.com/v1/checkout.js';
-const PENDING_STORE = 'aumai_mc_pending'; // localStorage: { order_id, claim, email, at }
+const PENDING_STORE = 'aumai_mc_pending'; // localStorage: { order_id, claim, email, product, at }
 const PENDING_MAX_MS = 48 * 3600 * 1000;
 
 const store = (kind) => { try { return kind === 'session' ? window.sessionStorage : window.localStorage; } catch (e) { return null; } };
@@ -129,20 +155,21 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
     } finally { setBusy(false); }
   };
 
-  // `body` is what /order needs: name, clinic, city, email, whatsapp, clinic_type, agree (+ utm,
-  // referrer). For a signed-in member the backend takes name, email and WhatsApp from the
-  // account, so only clinic, city, clinic_type and agree are sent. A member who already paid
-  // gets 409 { already_paid: true }: nothing to buy, so the page refetches /me instead.
+  // `body` is what /order needs: product ('entry' | 'kit'; the backend's default is 'kit'),
+  // name, clinic, city, email, whatsapp, clinic_type, agree (+ utm, referrer). For a signed-in
+  // member the backend takes name, email and WhatsApp from the account, so only clinic, city,
+  // clinic_type and agree are sent. Nothing left to buy (409 already_paid for the kit,
+  // 409 already_watching for entry): the page refetches /me instead.
   const pay = async (body) => {
     setError('');
     setBusy(true);
     try {
       const { status, ok, j } = await call(EP.order, body);
-      if (status === 409 && j.already_paid) { setBusy(false); if (onAlreadyPaidRef.current) onAlreadyPaidRef.current(j); else setError(j.error || 'You already have access.'); return; }
+      if (status === 409 && (j.already_paid || j.already_watching)) { setBusy(false); if (onAlreadyPaidRef.current) onAlreadyPaidRef.current(j); else setError(j.error || 'You already have access.'); return; }
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
       if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and press Pay again.'); setBusy(false); return; }
       // Kept BEFORE the window opens: a UPI app switch may reload this page.
-      writeJson('local', PENDING_STORE, { order_id: j.order_id, claim: j.claim, email: j.prefill.email, at: Date.now() });
+      writeJson('local', PENDING_STORE, { order_id: j.order_id, claim: j.claim, email: j.prefill.email, product: body.product || 'kit', at: Date.now() });
       const rz = new window.Razorpay({
         key: j.key_id, amount: j.amount, currency: j.currency, order_id: j.order_id,
         name: j.name, description: j.description, prefill: j.prefill, notes: j.notes,
@@ -162,5 +189,6 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
 
   const startAgain = () => { clearPending(); setStage('form'); setConfirmMsg(''); setError(''); };
 
-  return { stage, confirmMsg, error, setError, busy, checking, pay, checkStatus, startAgain, hasPending: !!readPending() };
+  const pending = readPending();
+  return { stage, confirmMsg, error, setError, busy, checking, pay, checkStatus, startAgain, hasPending: !!pending, pendingProduct: pending ? (pending.product || 'kit') : null };
 }

@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import { withYouTubeJsApi } from '../utils/videoFocus';
+import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
+import { API, EP, CLINIC_TYPES, accessLevel, call, canWatch, priceLabels, useMasterclassCheckout } from '../lib/masterclassCheckout';
 import './HomeClinic.css';
 import './MasterclassInfo.css';
 
@@ -9,13 +12,11 @@ import './MasterclassInfo.css';
 // masterclass is, what it is worth, what to expect. Built from the site's own
 // clinic system (.ch-*) under the "quiet luxury" theme (styles/lux.css), so it
 // reads like every other page. Every word is in src/data/masterclass.js, shared
-// with scripts/prerender.js. Owner 2026-10-25: the masterclass plays with an account
-// (owner 2026-10-26: the form sits where the video is, right under the title) and the kit
-// is one payment ("Get the kit · ₹999" → /masterclass/register); members sign in at
-// /masterclass/sign-in (the welcome email used to send them here, so the sign-in
-// link sits at the very top).
+// with scripts/prerender.js. Right under the title (owner 2026-10-30): step 1, the
+// sign-up form (an account, signed in); step 2, "Join for ₹299" (Razorpay); then the
+// video plays in place. The video URL comes only from /me.video. The kit is ₹999 in
+// total (₹700 more after joining); members sign in at /masterclass/sign-in.
 
-const API = `${process.env.REACT_APP_SITE_API || 'https://site-api.aumai.co.in'}/api/aumai/masterclass`;
 const C_KEY = { Convert: 'convert', Confirm: 'confirm', Care: 'care', 'Come back': 'comeback' };
 
 const WaLink = ({ children, className }) => (
@@ -46,14 +47,20 @@ const Pic = ({ img, eager, className }) => (
 );
 
 
+// The API's labels swapped into the shared words (the words carry the fallback constants).
+const live = (text, L) => String(text)
+  .split(MC.ENTRY_LABEL).join(L.entry)
+  .split(MC.UPGRADE_LABEL).join(L.upgrade)
+  .split(MC.PRICE_LABEL).join(L.kitTotal);
+
 /**
- * The form that sits where the video is (owner 2026-10-26: "land on the sign up page, enter their
- * info, watch the video"). POST /sign-up: a new email is signed in by the reply (signed_in: true) and
- * the video takes the form's place at once; an email that already has an account gets the code step
+ * Step 1, where the video is (owner 2026-10-26; the pay step follows since 2026-10-30).
+ * POST /sign-up: a new email is signed in by the reply (signed_in: true, the /me payload), and
+ * the join step takes the form's place; an email that already has an account gets the code step
  * (the site backend never signs an existing account in from here). `website` is a honeypot the
  * visitor never sees.
  */
-function WatchGate({ onMember }) {
+function WatchGate({ onMember, entryLabel }) {
   const [f, setF] = useState({ name: '', clinic: '', whatsapp: '', email: '', website: '' });
   const [step, setStep] = useState('form'); // form | code
   const [code, setCode] = useState('');
@@ -78,7 +85,7 @@ function WatchGate({ onMember }) {
     try {
       const { ok, j } = await post('/sign-up', { name: f.name.trim(), clinic: f.clinic.trim(), whatsapp: f.whatsapp.trim(), email, website: f.website });
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); return; }
-      if (j.signed_in) { onMember(); return; }
+      if (j.signed_in) { onMember(j); return; }
       setF((x) => ({ ...x, email })); setStep('code');
     } catch (err) {
       setError('We could not connect. Check your internet connection and try again.');
@@ -92,7 +99,7 @@ function WatchGate({ onMember }) {
     try {
       const { ok, j } = await post('/verify', { email: f.email, code: digits });
       if (!ok) { setError(j.error || 'That code is not right or has expired. Check the newest email.'); return; }
-      onMember();
+      onMember(j);
     } catch (err) {
       setError('We could not connect. Check your internet connection and try again.');
     } finally { setBusy(false); }
@@ -101,8 +108,9 @@ function WatchGate({ onMember }) {
     <div className="mi-gate" data-testid="mi-gate">
       {step === 'form' ? (
         <form onSubmit={submit} noValidate>
+          <p className="mi-gate-step">{MC.GATE.step}</p>
           <h2 id="mi-gate-h">{MC.GATE.title}</h2>
-          <p className="mi-gate-blurb">{MC.GATE.blurb}</p>
+          <p className="mi-gate-blurb">{MC.GATE.blurb(entryLabel)}</p>
           <div className="mi-gate-grid">
             <label>Your name<input value={f.name} onChange={set('name')} placeholder="Dr Meera Joshi" autoComplete="name" required /></label>
             <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Joshi Clinic" autoComplete="organization" required /></label>
@@ -129,20 +137,135 @@ function WatchGate({ onMember }) {
   );
 }
 
+/**
+ * Step 2 (owner 2026-10-30): a signed-in member who cannot watch yet joins for ₹299 through
+ * Razorpay Checkout (src/lib/masterclassCheckout.js: the same flow as the kit, product 'entry').
+ * After a UPI app switch reloads the page, the hook finds the pending order and asks order-status.
+ * Name, email and WhatsApp come from the account; clinic, city, clinic type and the tick are typed.
+ */
+function JoinStep({ me, L, onPaid, onAlreadyIn, contact }) {
+  const [f, setF] = useState({ clinic: me.clinic || '', city: me.city || '', clinic_type: me.clinic_type || '', agree: false });
+  const co = useMasterclassCheckout({ onPaid, onAlreadyPaid: onAlreadyIn, contact });
+  const set = (k) => (e) => setF((x) => ({ ...x, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
+  const submit = (e) => {
+    e.preventDefault();
+    co.pay({ product: 'entry', clinic: f.clinic.trim(), city: f.city.trim(), clinic_type: f.clinic_type, agree: f.agree, utm: {}, referrer: document.referrer || null });
+  };
+
+  if (co.stage === 'confirming') {
+    return (
+      <div className="mi-gate" role="status" data-testid="mi-join">
+        <p className="mi-gate-step">{MC.JOIN.step}</p>
+        <h2 id="mi-gate-h">{MC.JOIN.confirmTitle}</h2>
+        <p className="mi-gate-blurb">{co.confirmMsg || 'We are checking your payment. This can take a few minutes.'}</p>
+        {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
+        <button type="button" className="ch-btn ch-btn-primary mi-gate-btn" onClick={co.checkStatus} disabled={co.checking}>{co.checking ? 'Checking…' : 'Check again'}</button>
+        <p className="mi-gate-consent">{MC.JOIN.confirmHelp} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+        {co.hasPending && <button type="button" className="mi-gate-link" onClick={co.startAgain}>I did not pay. Start again</button>}
+      </div>
+    );
+  }
+
+  if (!L.entryOpen) {
+    return (
+      <div className="mi-gate" role="status" data-testid="mi-join">
+        <h2 id="mi-gate-h">{MC.JOIN.closed}</h2>
+        <p className="mi-gate-blurb">{(me.entry_price && me.entry_price.message) || 'Please check again later.'} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mi-gate" data-testid="mi-join">
+      <form onSubmit={submit} noValidate>
+        <p className="mi-gate-step">{MC.JOIN.step}</p>
+        <h2 id="mi-gate-h">{MC.JOIN.title(L.entry)}</h2>
+        <p className="mi-gate-blurb">{MC.JOIN.blurb(L.entry)}</p>
+        <p className="mi-gate-qa">{MC.JOIN.qa}</p>
+        <p className="mi-gate-who">Signed in as <b>{me.name || me.display_name}</b> · {me.email}</p>
+        <div className="mi-gate-grid">
+          <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Joshi Clinic" autoComplete="organization" required /></label>
+          <label>City<input value={f.city} onChange={set('city')} placeholder="Pune" autoComplete="address-level2" required /></label>
+          <label>Clinic type
+            <select value={f.clinic_type} onChange={set('clinic_type')} required>
+              <option value="">Choose one</option>
+              {CLINIC_TYPES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </select>
+          </label>
+        </div>
+        <label className="mi-gate-agree">
+          <input type="checkbox" checked={f.agree} onChange={set('agree')} />
+          <span>I understand the {L.entry} fee is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>
+        </label>
+        {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
+        <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={co.busy}>{co.busy ? MC.JOIN.busy : MC.JOIN.button(L.entry)}</button>
+        <p className="mi-gate-consent">{MC.JOIN.help} {MC.JOIN.kit(L.kitTotal, L.upgrade)}</p>
+      </form>
+    </div>
+  );
+}
+
+// The video, only ever from /me.video (owner 2026-10-30): an embed or a presigned file.
+function MemberVideo({ video, autoplay, onError }) {
+  if (video && video.type === 'embed') {
+    const src = withYouTubeJsApi(video.url);
+    return (
+      <div className="mi-video">
+        <iframe
+          src={autoplay ? `${src}${src.includes('?') ? '&' : '?'}autoplay=1` : src}
+          title={MC.VIDEO.name}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
+      </div>
+    );
+  }
+  if (video && video.type === 'file') {
+    return (
+      <div className="mi-video">
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <video src={video.url} controls playsInline preload="metadata" controlsList="nodownload" autoPlay={!!autoplay} onError={onError} />
+      </div>
+    );
+  }
+  return <div className="mi-video mi-video-wait"><p>{MC.VIDEO.soon}</p></div>;
+}
+
 export default function MasterclassInfo() {
   const location = useLocation();
-  const [price, setPrice] = useState(MC.PRICE_LABEL);
-  const [member, setMember] = useState(false);
-  const [justIn, setJustIn] = useState(false); // signed in on this page just now: the video starts by itself
+  const [pricePayload, setPricePayload] = useState(null); // /price: the kit, plus entry and kit_upgrade
+  const [me, setMe] = useState(null); // /me when signed in
+  const [justIn, setJustIn] = useState(false); // joined on this page just now: the video starts by itself
   const [sticky, setSticky] = useState(false);
   const watchRef = useRef(null);
+  const videoRetried = useRef(false);
+  const contact = INDIA_OFFICE.email;
+
+  const loadMe = useCallback(async () => {
+    try {
+      const { status, j } = await call(EP.me);
+      setMe(status === 200 && j && j.ok ? j : null);
+    } catch (e) { /* not signed in, or offline: the form stays */ }
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setPageSeo({ title: MC.SEO.title, description: MC.SEO.description, canonical: `https://aumai.co.in${MC.PATHS.info}` });
-    fetch(`${API}/price`).then((r) => r.json()).then((j) => { if (j && j.label) setPrice(j.label); }).catch(() => { /* keep the default */ });
-    fetch(`${API}/me`, { credentials: 'include' }).then((r) => (r.ok ? r.json() : null)).then((j) => { if (j && j.ok) setMember(true); }).catch(() => { /* not signed in */ });
-  }, []);
+    fetch(`${API}${EP.price}`).then((r) => r.json()).then((j) => { if (j && j.label) setPricePayload(j); }).catch(() => { /* keep the defaults */ });
+    loadMe();
+  }, [loadMe]);
+
+  const member = !!me;
+  const level = accessLevel(me);
+  const watching = canWatch(me);
+  const L = priceLabels(me, pricePayload);
+  // Signed up or signed in on this page: the reply is the /me payload; anything else, ask /me.
+  const onMember = (j) => { if (j && j.ok && j.email) setMe(j); else loadMe(); };
+  // Paid: /me now says watch (or kit), and the video starts by itself.
+  const onJoined = async () => { setJustIn(true); await loadMe(); };
+  // A presigned file link lasts hours: if it ran out, fetch a fresh one once.
+  const onVideoError = () => { if (!videoRetried.current) { videoRetried.current = true; loadMe(); } };
 
   // Phones: a bar slides up whenever the masterclass block (video or form) is off screen.
   useEffect(() => {
@@ -160,22 +283,26 @@ export default function MasterclassInfo() {
   // Old links: a just-paid buyer used to land on /masterclass to sign in.
   if (location.state?.justPaid) return <Navigate to={MC.PATHS.signIn} replace state={location.state} />;
 
-  // The video is at the top of this page, so the main button scrolls to it; a signed-in member still goes
-  // straight to their page. The kit second.
+  // The masterclass is at the top of this page, so the main button scrolls to it: "Join for ₹299"
+  // until the member can watch. The kit second: ₹999 straight away, ₹700 more after joining, or
+  // the member's own page once it is theirs.
+  const kitLink = (cls) => {
+    if (level === 'kit') return <Link className={cls} to={MC.PATHS.my}>Open my kit</Link>;
+    if (member && level === 'watch') return <Link className={cls} to={`${MC.PATHS.my}#unlock`}>{`Get the kit · ${L.upgrade} more`}</Link>;
+    return <Link className={cls} to={MC.PATHS.register}>{`Get the kit · ${L.kitTotal}`}</Link>;
+  };
   const ctas = (extra = '') => (
     <>
-      {member
-        ? <Link className={`ch-btn ch-btn-primary ${extra}`} to={MC.PATHS.my}>{MC.CTA.watch}</Link>
-        : <a className={`ch-btn ch-btn-primary ${extra}`} href="#watch">{MC.CTA.watch}</a>}
-      <Link className={`ch-btn ch-btn-ghost ${extra}`} to={MC.PATHS.register}>{MC.CTA.kit.replace(MC.PRICE_LABEL, price)}</Link>
+      <a className={`ch-btn ch-btn-primary ${extra}`} href="#watch">{watching ? MC.CTA.watch : MC.CTA.join(L.entry)}</a>
+      {kitLink(`ch-btn ch-btn-ghost ${extra}`)}
     </>
   );
 
   return (
     <div className="ch-home mi-page">
       {/* Hero: the title, then the masterclass itself (owner 2026-10-26: "the video is the first thing after
-          the title, and everything else below"). Until the visitor has told us who they are, the form sits
-          where the video is; the moment they have, the video plays in its place. */}
+          the title, and everything else below"). Owner 2026-10-30: the sign-up form, then "Join for ₹299",
+          then the video plays in their place. */}
       <section className="ch-hero lux-hero mi-hero">
         <div className="ch-container">
           <p className="mi-member">
@@ -188,24 +315,21 @@ export default function MasterclassInfo() {
             <h1 className="ch-hero-title">{MC.HERO.titleLead}<span className="ch-hero-accent">{MC.HERO.titleAccent}</span>{MC.HERO.titleTail}</h1>
           </div>
           <div id="watch" className="mi-watch" ref={watchRef}>
-            {member ? (
-              <div className="mi-video">
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${MC.VIDEO.youtubeId}?rel=0&modestbranding=1${justIn ? '&autoplay=1' : ''}`}
-                  title={MC.VIDEO.name}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
-            ) : (
-              <WatchGate onMember={() => { setJustIn(true); setMember(true); }} />
+            {!member && <WatchGate onMember={onMember} entryLabel={L.entry} />}
+            {member && !watching && <JoinStep me={me} L={L} onPaid={onJoined} onAlreadyIn={onJoined} contact={contact} />}
+            {member && watching && (
+              <>
+                <MemberVideo video={me.video} autoplay={justIn} onError={onVideoError} />
+                {me.whatsapp_qa && me.whatsapp_qa.link && (
+                  <p className="mi-watch-qa">{MC.MEMBER.qaLine} <a href={me.whatsapp_qa.link} target="_blank" rel="noopener noreferrer">{me.whatsapp_qa.display}</a></p>
+                )}
+              </>
             )}
           </div>
           <ul className="mi-facts">
-            {MC.HERO.facts.map((f) => <li key={f.b}><strong>{f.price ? f.b.replace(MC.PRICE_LABEL, price) : f.b}</strong><span>{f.t}</span></li>)}
+            {MC.HERO.facts.map((f) => <li key={f.b}><strong>{(f.entry || f.price) ? live(f.b, L) : f.b}</strong><span>{f.t}</span></li>)}
           </ul>
-          <p className="mi-watch-kit">{MC.VIDEO.kitNote} <Link to={MC.PATHS.register}>{MC.CTA.kit.replace(MC.PRICE_LABEL, price)}</Link></p>
+          {level !== 'kit' && <p className="mi-watch-kit">{MC.VIDEO.kitNote} {kitLink('')}</p>}
         </div>
       </section>
 
@@ -395,7 +519,7 @@ export default function MasterclassInfo() {
           <div className="ch-head">
             <span className="ch-eyebrow">The kit</span>
             <h2 id="mi-kit" className="ch-h2">{MC.KIT.title}</h2>
-            <p className="ch-lead ch-center-lead">{MC.KIT.intro.replace(MC.PRICE_LABEL, price)}</p>
+            <p className="ch-lead ch-center-lead">{live(MC.KIT.intro, L)}</p>
           </div>
           {/* One picture: the leak is worked out on the sheet's Leak tab, not a printed calculator (owner 2026-10-22). */}
           <div className="mi-showcase mi-showcase-one">
@@ -467,7 +591,7 @@ export default function MasterclassInfo() {
             {MC.FAQS.map((f) => (
               <details key={f.q} className="ch-faq-item">
                 <summary>{f.q}</summary>
-                <p>{withWa(f.a)}</p>
+                <p>{withWa(live(f.a, L))}</p>
                 {f.q === 'Can I get a refund?' && <p><Link to="/refund#masterclass">The full refund policy</Link></p>}
               </details>
             ))}
@@ -490,10 +614,8 @@ export default function MasterclassInfo() {
 
       {/* Phones: the masterclass stays one tap away. */}
       <div className={`mi-sticky${sticky ? ' is-on' : ''}`} aria-hidden={!sticky}>
-        <span><b>{MC.TITLE}</b> · {MC.CTA.watchLine} · {MC.CTA.kitLine.replace(MC.PRICE_LABEL, price)}</span>
-        {member
-          ? <Link className="ch-btn ch-btn-primary" to={MC.PATHS.my} tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</Link>
-          : <a className="ch-btn ch-btn-primary" href="#watch" tabIndex={sticky ? 0 : -1}>{MC.CTA.watch}</a>}
+        <span><b>{MC.TITLE}</b> · {MC.CTA.watchLine}</span>
+        <a className="ch-btn ch-btn-primary" href="#watch" tabIndex={sticky ? 0 : -1}>{watching ? MC.CTA.watch : MC.CTA.join(L.entry)}</a>
       </div>
     </div>
   );
