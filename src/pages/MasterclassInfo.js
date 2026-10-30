@@ -57,11 +57,11 @@ const live = (text, L) => String(text)
  * Step 1, where the video is (owner 2026-10-26; the pay step follows since 2026-10-30).
  * POST /sign-up: a new email is signed in by the reply (signed_in: true, the /me payload), and
  * the join step takes the form's place; an email that already has an account gets the code step
- * (the site backend never signs an existing account in from here). `website` is a honeypot the
+ * (the site backend never signs an existing account in from here). `mc_trap` is a honeypot the
  * visitor never sees.
  */
 function WatchGate({ onMember, entryLabel }) {
-  const [f, setF] = useState({ name: '', clinic: '', whatsapp: '', email: '', website: '' });
+  const [f, setF] = useState({ name: '', clinic: '', whatsapp: '', email: '', mc_trap: '' });
   const [step, setStep] = useState('form'); // form | code
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
@@ -83,7 +83,7 @@ function WatchGate({ onMember, entryLabel }) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Please type your email address, for example name@gmail.com.'); return; }
     setBusy(true); setError('');
     try {
-      const { ok, j } = await post('/sign-up', { name: f.name.trim(), clinic: f.clinic.trim(), whatsapp: f.whatsapp.trim(), email, website: f.website });
+      const { ok, j } = await post('/sign-up', { name: f.name.trim(), clinic: f.clinic.trim(), whatsapp: f.whatsapp.trim(), email, mc_trap: f.mc_trap });
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); return; }
       if (j.signed_in) { onMember(j); return; }
       setF((x) => ({ ...x, email })); setStep('code');
@@ -117,7 +117,7 @@ function WatchGate({ onMember, entryLabel }) {
             <label>WhatsApp number<input type="tel" inputMode="tel" value={f.whatsapp} onChange={set('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>
             <label>Email<input type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={f.email} onChange={set('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
           </div>
-          <input className="mi-gate-hp" type="text" name="website" value={f.website} onChange={set('website')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
+          <input className="mi-gate-hp" type="text" name="mc_trap" value={f.mc_trap} onChange={set('mc_trap')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
           {error && <p className="mi-gate-error" role="alert">{error}</p>}
           <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? MC.GATE.busy : MC.GATE.button}</button>
           <p className="mi-gate-consent">{MC.GATE.consent}</p>
