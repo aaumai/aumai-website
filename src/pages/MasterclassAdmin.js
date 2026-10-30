@@ -416,7 +416,7 @@ export default function MasterclassAdmin() {
 
 const REG_STATUS = { paid: 'Paid', created: 'Not paid yet', failed: 'Failed', refunded: 'Refunded' };
 const REFUND_ACCESS = { watch: 'watching closed', kit: 'kit closed', none: 'access unchanged (this payment bought nothing)', kept: 'access unchanged (another payment covers it)', no_member: 'no account linked' };
-const CLOSED_WORDS = { watch: 'their access to the video is closed.', kit: 'the kit downloads are closed.', none: 'their access did not change.', kept: 'their access did not change (another payment covers it).', no_member: '' };
+const CLOSED_WORDS = { retry: 'the refund was sent again (their access was already closed).', watch: 'their access to the video is closed.', kit: 'the kit downloads are closed.', none: 'their access did not change.', kept: 'their access did not change (another payment covers it).', no_member: '' };
 const REFUND_EMAIL = { sent: 'emailed', simulated: 'email NOT sent (no email set up)', failed: 'email failed', skipped: 'not emailed' };
 const rupees = (paise) => `₹${(paise / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
 
@@ -432,7 +432,7 @@ function Registrations({ data, show, setShow, onRefund, busy }) {
       <div className="sc-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
         <div className="sc-start-card"><p className="sc-start-label">Total paid</p><h3>{rupees(data.totals.paid_paise)}</h3><p>{data.totals.paid} payment{data.totals.paid === 1 ? '' : 's'}</p></div>
         <div className="sc-start-card"><p className="sc-start-label">To refund</p><h3>{rupees(data.totals.extra_paise)}</h3><p>{data.totals.extra} extra payment{data.totals.extra === 1 ? '' : 's'} · {data.totals.flagged} row{data.totals.flagged === 1 ? '' : 's'} need a decision</p></div>
-        {data.totals.refunded != null && <div className="sc-start-card"><p className="sc-start-label">Refunded</p><h3>{rupees(data.totals.refunded_paise)}</h3><p>{data.totals.refunded} refund{data.totals.refunded === 1 ? '' : 's'}</p></div>}
+        {data.totals.refunded != null && <div className="sc-start-card"><p className="sc-start-label">Refunded</p><h3>{rupees(data.totals.refunded_paise)}</h3><p>{data.totals.refunded} refund{data.totals.refunded === 1 ? '' : 's'}{data.totals.refund_failed ? ` · ${data.totals.refund_failed} failed at Razorpay: refund again` : ''}</p></div>}
         <div className="sc-start-card"><p className="sc-start-label">Not paid yet</p><h3>{data.totals.created}</h3><p>opened the payment, did not finish</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Failed</p><h3>{data.totals.failed}</h3><p>see the reason in the table</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Price now</p><h3>{data.price.label}</h3><p>{data.price.open ? `the kit is on sale${data.price.entry && data.price.entry.label ? ` · join ${data.price.entry.label}` : ''}` : 'sales closed (no Razorpay keys)'}</p></div>
@@ -478,7 +478,7 @@ function Registrations({ data, show, setShow, onRefund, busy }) {
                   <td>{[r.utm_source, r.utm_campaign].filter(Boolean).join(' / ') || <span className="mc-small">direct</span>}</td>
                   <td className="mc-small">
                     {r.flag && r.status !== 'refunded' && <b style={{ color: '#BE185D', display: 'block' }}>{r.flag}</b>}
-                    {r.status === 'refunded' && r.refund_rz_status === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Razorpay FAILED this refund: the money did not go back. Refund them in the Razorpay dashboard.</b>}
+                    {r.status === 'refunded' && r.refund_rz_status === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Razorpay FAILED this refund: the money did not go back. Press Refund again to send it again.</b>}
                     {r.status === 'refunded'
                       ? `Refunded ${rupees(r.refund_amount_paise || r.amount_paise)} · ${r.refund_id}${r.refund_rz_status === 'pending' ? ' (Razorpay still processing)' : ''} · ${REFUND_ACCESS[r.refund_access] || ''}${r.refund_email_status ? ` · ${REFUND_EMAIL[r.refund_email_status] || r.refund_email_status}` : ''}`
                       : r.status === 'paid' ? `${ACTION_WORDS[r.member_action] || 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}
@@ -487,7 +487,7 @@ function Registrations({ data, show, setShow, onRefund, busy }) {
                     {extrasFor(r.id).map((e) => <b key={e.razorpay_payment_id} style={{ color: '#BE185D', display: 'block' }}>Extra payment — refund {e.razorpay_payment_id}</b>)}
                   </td>
                   <td>
-                    {r.status === 'paid' && r.razorpay_payment_id && r.refund_state !== 'pending' && (
+                    {(r.status === 'paid' || (r.status === 'refunded' && r.refund_rz_status === 'failed')) && r.razorpay_payment_id && r.refund_state !== 'pending' && (
                       <div className="mc-actions"><button type="button" className="mc-danger" onClick={() => onRefund(r)} disabled={busy}>Refund {rupees(r.amount_paise)}</button></div>
                     )}
                   </td>
