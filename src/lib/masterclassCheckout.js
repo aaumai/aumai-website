@@ -124,6 +124,31 @@ export function loadCheckout() {
 }
 
 /**
+ * Meta conversions through the Aumy tag the site already loads (index.html, bm.aumyai.com tag.js → Meta
+ * CAPI + browser pixel, pixel "Aumy"). Checkout started when the payment window opens; Purchase once the
+ * backend confirms the payment. The order id is the event id, so the reload path (order-status) and
+ * Razorpay's handler cannot count one payment twice. No Lead here: BM already sends one when the lead is
+ * created. Never throws: tracking must not stop a payment.
+ */
+function metaTrack(code, order) {
+  try {
+    if (typeof window.aumy !== 'function' || !order || !order.order_id) return;
+    window.aumy('track', code, {
+      value: Number(order.amount) / 100, currency: order.currency || 'INR',
+      content_name: order.product === 'entry' ? 'masterclass_entry' : 'masterclass_kit',
+      order_id: order.order_id, event_id: `${code}_${order.order_id}`,
+    });
+  } catch (e) { /* tracking only */ }
+}
+
+function metaIdentify(prefill, name) {
+  try {
+    if (typeof window.aumy !== 'function' || !prefill) return;
+    window.aumy('identify', { email: prefill.email || null, phone: prefill.contact || null, first_name: (name || prefill.name || '').split(' ')[0] || null });
+  } catch (e) { /* tracking only */ }
+}
+
+/**
  * The checkout flow as a hook. `onPaid(j, email, product)` runs once the backend confirms the
  * payment (from Razorpay's handler, or from order-status after a reload), with the product of
  * THAT order ('entry' | 'kit'). `j.sign_in === 'code'` means the payment is booked but did not
@@ -143,6 +168,8 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
   useEffect(() => { onPaidRef.current = onPaid; onAlreadyPaidRef.current = onAlreadyPaid; }, [onPaid, onAlreadyPaid]);
 
   const landPaid = useCallback((j, email, product) => {
+    const p = readPending();
+    if (p) metaTrack('purchase', p); // before clearPending: the order's amount and id live there
     clearPending();
     setStage('form'); setConfirmMsg(''); setError('');
     onPaidRef.current(j, email, product || 'kit');
@@ -197,7 +224,10 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
       if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and press Pay again.'); setBusy(false); return; }
       // Kept BEFORE the window opens: a UPI app switch may reload this page.
-      writeJson('local', PENDING_STORE, { order_id: j.order_id, claim: j.claim, email: j.prefill.email, product: body.product || 'kit', at: Date.now() });
+      const pendingOrder = { order_id: j.order_id, claim: j.claim, email: j.prefill.email, product: body.product || 'kit', amount: j.amount, currency: j.currency, at: Date.now() };
+      writeJson('local', PENDING_STORE, pendingOrder);
+      metaIdentify(j.prefill, body.name);
+      metaTrack('initiate_checkout', pendingOrder);
       const rz = new window.Razorpay({
         key: j.key_id, amount: j.amount, currency: j.currency, order_id: j.order_id,
         name: j.name, description: j.description, prefill: j.prefill, notes: j.notes,
