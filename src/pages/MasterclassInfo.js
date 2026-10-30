@@ -195,7 +195,7 @@ function JoinStep({ me, L, onPaid, onAlreadyIn, contact, utm }) {
         </div>
         <label className="mi-gate-agree">
           <input type="checkbox" checked={f.agree} onChange={set('agree')} />
-          <span>I understand the {L.entry} fee is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>
+          <span>I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>. If I feel the masterclass did not add value, I get my {L.entry} fee back, <Link to="/refund#masterclass" target="_blank" rel="noopener">no questions asked</Link>.</span>
         </label>
         {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
         <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={co.busy}>{co.busy ? MC.JOIN.busy : MC.JOIN.button(L.entry)}</button>
