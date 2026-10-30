@@ -478,12 +478,12 @@ function Registrations({ data, show, setShow, onRefund, busy }) {
                   <td>{[r.utm_source, r.utm_campaign].filter(Boolean).join(' / ') || <span className="mc-small">direct</span>}</td>
                   <td className="mc-small">
                     {r.flag && r.status !== 'refunded' && <b style={{ color: '#BE185D', display: 'block' }}>{r.flag}</b>}
-                    {r.status === 'refunded' && r.refund_rz_status === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Razorpay FAILED this refund: the money did not go back. Press Refund again to send it again.</b>}
+                    {r.status === 'refunded' && r.refund_rz_status === 'failed' && r.refund_state !== 'pending' && <b style={{ color: '#BE185D', display: 'block' }}>Razorpay FAILED this refund: the money did not go back. Press Refund again to send it again.</b>}
                     {r.status === 'refunded'
                       ? `Refunded ${rupees(r.refund_amount_paise || r.amount_paise)} · ${r.refund_id}${r.refund_rz_status === 'pending' ? ' (Razorpay still processing)' : ''} · ${REFUND_ACCESS[r.refund_access] || ''}${r.refund_email_status ? ` · ${REFUND_EMAIL[r.refund_email_status] || r.refund_email_status}` : ''}`
                       : r.status === 'paid' ? `${ACTION_WORDS[r.member_action] || 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}
-                    {r.status === 'paid' && r.refund_state === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Refund did not go through: {r.refund_error}</b>}
-                    {r.status === 'paid' && r.refund_state === 'pending' && <b style={{ display: 'block' }}>Refund being checked with Razorpay: press Refresh in 15 minutes. Do not refund it in Razorpay.</b>}
+                    {(r.status === 'paid' || r.status === 'refunded') && r.refund_state === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Refund did not go through: {r.refund_error}</b>}
+                    {(r.status === 'paid' || r.status === 'refunded') && r.refund_state === 'pending' && <b style={{ display: 'block' }}>Refund being checked with Razorpay: press Refresh in 15 minutes. Do not refund it in Razorpay.</b>}
                     {extrasFor(r.id).map((e) => <b key={e.razorpay_payment_id} style={{ color: '#BE185D', display: 'block' }}>Extra payment — refund {e.razorpay_payment_id}</b>)}
                   </td>
                   <td>
