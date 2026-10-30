@@ -4,6 +4,8 @@ import { setNoindex } from '../utils/seo';
 import { withYouTubeJsApi } from '../utils/videoFocus';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
+import WhatsAppNumberField from '../components/WhatsAppNumberField';
+import { defaultWhatsappCountry } from '../data/whatsappCountries';
 import MasterclassUnlockForm from '../components/MasterclassUnlockForm';
 import { API, EP, accessLevel, call, canWatch, fileUrl, downloadAllUrl, pendingProduct, priceLabels, readPending, settlePending, validEmail } from '../lib/masterclassCheckout';
 import './ScorecardPage.css';
@@ -75,6 +77,7 @@ export default function MasterclassPage() {
   const [stage, setStage] = useState('loading'); // loading | email | code | member | ended
   const [email, setEmail] = useState(() => location.state?.email || readEmail());
   const [cf, setCf] = useState(EMPTY_CREATE); // the create-account form
+  const [waCountry, setWaCountry] = useState(defaultWhatsappCountry);
   const [code, setCode] = useState('');
   const [sentVia, setSentVia] = useState(''); // 'sign-in' | 'sign-up': which path sent the code
   const [me, setMe] = useState(null);
@@ -189,7 +192,7 @@ export default function MasterclassPage() {
     if (!validEmail(clean)) { setCreateError('Please type your email address, for example name@gmail.com.'); return; }
     setBusy(true); setCreateError('');
     try {
-      const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), clinic: cf.clinic.trim() || undefined, mc_trap: cf.mc_trap || '' });
+      const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), whatsapp_country: waCountry, clinic: cf.clinic.trim() || undefined, mc_trap: cf.mc_trap || '' });
       if (!ok) { setCreateError(j.error || 'Something went wrong. Please try again.'); return; }
       if (j.signed_in) {
         saveEmail(clean); setEmail(clean); saveSent(null); setMe(j); setStage('member'); setNotice(''); setError('');
@@ -609,7 +612,7 @@ export default function MasterclassPage() {
             <div className="sc-fields" style={{ gridTemplateColumns: '1fr' }}>
               <label>Your name<input className="mc-input" value={cf.name} onChange={setC('name')} placeholder="Dr Meera Joshi" autoComplete="name" autoFocus={focusCreate} required /></label>
               <label>Clinic name<input className="mc-input" value={cf.clinic} onChange={setC('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" /></label>
-              <label>WhatsApp number<input className="mc-input" type="tel" inputMode="tel" value={cf.whatsapp} onChange={setC('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>
+              <WhatsAppNumberField inputClassName="mc-input" value={cf.whatsapp} country={waCountry} onNumber={(v) => setCf((x) => ({ ...x, whatsapp: v }))} onCountry={setWaCountry} />
               <label>Email (your code comes here)<input className="mc-input" type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={cf.email} onChange={setC('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
             </div>
             {/* Honeypot: off-screen, not focusable, never prefilled. A real person never fills it. */}

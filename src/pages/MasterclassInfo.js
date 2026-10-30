@@ -4,6 +4,8 @@ import { setPageSeo } from '../utils/seo';
 import { withYouTubeJsApi } from '../utils/videoFocus';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
+import WhatsAppNumberField from '../components/WhatsAppNumberField';
+import { defaultWhatsappCountry } from '../data/whatsappCountries';
 import { API, EP, CLINIC_TYPES, accessLevel, call, canWatch, priceLabels, readUtm, settlePending, useMasterclassCheckout } from '../lib/masterclassCheckout';
 import './HomeClinic.css';
 import './MasterclassInfo.css';
@@ -62,6 +64,7 @@ const live = (text, L) => String(text)
  */
 function WatchGate({ onMember, entryLabel }) {
   const [f, setF] = useState({ name: '', clinic: '', whatsapp: '', email: '', mc_trap: '' });
+  const [waCountry, setWaCountry] = useState(defaultWhatsappCountry);
   const [step, setStep] = useState('form'); // form | code
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
@@ -79,11 +82,11 @@ function WatchGate({ onMember, entryLabel }) {
     const digits = f.whatsapp.replace(/\D/g, '');
     if (f.name.trim().length < 2) { setError('Please type your name.'); return; }
     if (!f.clinic.trim()) { setError('Please type your clinic’s name.'); return; }
-    if (digits.length < 10 || digits.length > 13) { setError('Please type your WhatsApp number, 10 digits.'); return; }
+    if (digits.length < 7 || digits.length > 15) { setError('Please type your WhatsApp number.'); return; } // the backend checks it for the country
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Please type your email address, for example name@gmail.com.'); return; }
     setBusy(true); setError('');
     try {
-      const { ok, j } = await post('/sign-up', { name: f.name.trim(), clinic: f.clinic.trim(), whatsapp: f.whatsapp.trim(), email, mc_trap: f.mc_trap });
+      const { ok, j } = await post('/sign-up', { name: f.name.trim(), clinic: f.clinic.trim(), whatsapp: f.whatsapp.trim(), whatsapp_country: waCountry, email, mc_trap: f.mc_trap });
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); return; }
       if (j.signed_in) { onMember(j); return; }
       setF((x) => ({ ...x, email })); setStep('code');
@@ -114,7 +117,7 @@ function WatchGate({ onMember, entryLabel }) {
           <div className="mi-gate-grid">
             <label>Your name<input value={f.name} onChange={set('name')} placeholder="Dr Meera Joshi" autoComplete="name" required /></label>
             <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Joshi Clinic" autoComplete="organization" required /></label>
-            <label>WhatsApp number<input type="tel" inputMode="tel" value={f.whatsapp} onChange={set('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>
+            <WhatsAppNumberField value={f.whatsapp} country={waCountry} onNumber={(v) => setF((x) => ({ ...x, whatsapp: v }))} onCountry={setWaCountry} />
             <label>Email<input type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={f.email} onChange={set('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
           </div>
           <input className="mi-gate-hp" type="text" name="mc_trap" value={f.mc_trap} onChange={set('mc_trap')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
