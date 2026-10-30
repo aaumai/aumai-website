@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
+import WhatsAppNumberField from '../components/WhatsAppNumberField';
+import { defaultWhatsappCountry } from '../data/whatsappCountries';
 import MasterclassUnlockForm from '../components/MasterclassUnlockForm';
 import { API, EP, CLINIC_TYPES, accessLevel, priceLabels, readJson, readUtm, writeJson, useMasterclassCheckout, validEmail } from '../lib/masterclassCheckout';
 import './ScorecardPage.css';
@@ -59,7 +61,8 @@ export default function MasterclassRegister() {
     writeJson('session', FORM_STORE, keep);
   };
 
-  const pay = (e) => { e.preventDefault(); co.pay({ product: 'kit', ...f, utm: utm.current, referrer: document.referrer || null }); };
+  const [waCountry, setWaCountry] = useState(defaultWhatsappCountry);
+  const pay = (e) => { e.preventDefault(); co.pay({ product: 'kit', ...f, whatsapp_country: waCountry, utm: utm.current, referrer: document.referrer || null }); };
 
   const open = price && price.open;
   const L = priceLabels(have, price);
@@ -127,7 +130,7 @@ export default function MasterclassRegister() {
                   <label>Clinic name<input className="mc-input" value={f.clinic} onChange={set('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" required /></label>
                   <label>City<input className="mc-input" value={f.city} onChange={set('city')} placeholder="Pune" autoComplete="address-level2" required /></label>
                   <label>Email (your sign-in code comes here)<input className="mc-input" type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={f.email} onChange={set('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
-                  <label>WhatsApp number<input className="mc-input" type="tel" inputMode="tel" value={f.whatsapp} onChange={set('whatsapp')} placeholder="98765 43210" autoComplete="tel-national" required /></label>
+                  <WhatsAppNumberField inputClassName="mc-input" value={f.whatsapp} country={waCountry} onNumber={(v) => set('whatsapp')({ target: { type: 'tel', value: v } })} onCountry={setWaCountry} />
                   <label>Clinic type
                     <select className="mc-input" value={f.clinic_type} onChange={set('clinic_type')} required>
                       <option value="">Choose one</option>
