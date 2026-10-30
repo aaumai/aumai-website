@@ -5,17 +5,18 @@ import { withYouTubeJsApi } from '../utils/videoFocus';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
 import MasterclassUnlockForm from '../components/MasterclassUnlockForm';
-import { EP, call, fileUrl, downloadAllUrl, isPaid, validEmail } from '../lib/masterclassCheckout';
+import { API, EP, accessLevel, call, canWatch, fileUrl, downloadAllUrl, pendingProduct, priceLabels, readPending, settlePending, validEmail } from '../lib/masterclassCheckout';
 import './ScorecardPage.css';
 import './MasterclassPage.css';
 
 // Masterclass members area (owner 2026-10-18): members sign in with a 6-digit email
-// code (no password). Owner 2026-10-25: anyone creates a FREE account here (name,
-// clinic, WhatsApp, email) and watches the masterclass; one payment of the kit price
-// unlocks every download. A free member sees the video first and the kit locked, with
-// one Unlock button (#unlock). A paid member sees exactly the page from before
-// 2026-10-25. Lifetime access (owner 2026-10-20). Private: noindex, and nothing here
-// is in the prerendered HTML. The session is an HttpOnly cookie set by
+// code (no password). Anyone creates an account here (name, clinic, WhatsApp, email).
+// By access level (owner 2026-10-30; /me.access_level):
+//   none  → the "Join for ₹299" pay step where the video would be, the kit locked below;
+//   watch → the video, the 24×7 WhatsApp Q&A line, the kit locked with "Unlock the kit · ₹700 more";
+//   kit   → exactly the page from before (every download, the video).
+// Every amount is the API's label. Lifetime access (owner 2026-10-20). Private: noindex,
+// and nothing here is in the prerendered HTML. The session is an HttpOnly cookie set by
 // site-api.aumai.co.in (same site).
 
 const EMAIL_STORE = 'aumai_mc_email';
@@ -50,7 +51,7 @@ const badge = (f) => KIND_BADGE[kindOf(f)] || 'File';
 // worked out on the Clinic Master Sheet's Leak tab (owner 2026-10-22).
 const EXTRA_ORDER = { skill: 0, guide: 1, file: 2 };
 
-// The kit as a free member sees it (owner 2026-10-25): the same files, in the paid page's
+// The kit as a member without it sees it (owner 2026-10-25): the same files, in the paid page's
 // order, one line each, no links. The Prompt Pack's HTML and PDF are one item. Until the
 // server has the files, the public kit list stands in.
 const kitListFor = (files) => {
@@ -72,7 +73,7 @@ export default function MasterclassPage() {
   const location = useLocation();
   const [stage, setStage] = useState('loading'); // loading | email | code | member | ended
   const [email, setEmail] = useState(() => location.state?.email || readEmail());
-  const [cf, setCf] = useState(EMPTY_CREATE); // the free-account form
+  const [cf, setCf] = useState(EMPTY_CREATE); // the create-account form
   const [code, setCode] = useState('');
   const [sentVia, setSentVia] = useState(''); // 'sign-in' | 'sign-up': which path sent the code
   const [me, setMe] = useState(null);
@@ -83,8 +84,16 @@ export default function MasterclassPage() {
   const [wait, setWait] = useState(0);
   const videoRetried = useRef(false);
   const [packError, setPackError] = useState('');
-  const [showUnlock, setShowUnlock] = useState(() => location.hash === '#unlock');
+  // The kit form opens on #unlock, and after a UPI app switch reloaded the page mid-payment
+  // (its pending order is then checked at once).
+  // #unlock opens the kit form, unless an order is waiting for confirmation (that order's own form checks it).
+  const [showUnlock, setShowUnlock] = useState(() => location.hash === '#unlock' && !readPending());
+  // A KIT order waiting after a UPI app switch reloaded the page: the kit form reopens and checks it.
+  // A ₹299 order never does (review 2026-10-30): the join form owns it, or settlePending clears it.
+  const [resumeKit, setResumeKit] = useState(() => pendingProduct() === 'kit');
+  const [pricePayload, setPricePayload] = useState(null); // /price: kit_upgrade and entry labels
   const [justUnlocked, setJustUnlocked] = useState(!!location.state?.justUnlocked);
+  const [justJoined, setJustJoined] = useState(false);
   const createRef = useRef(null);
   const unlockRef = useRef(null);
   const contact = INDIA_OFFICE.email;
@@ -113,13 +122,14 @@ export default function MasterclassPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = 'Masterclass members · AUM AI';
+    fetch(`${API}${EP.price}`).then((r) => r.json()).then((j) => { if (j && j.label) setPricePayload(j); }).catch(() => { /* the labels in /me are enough */ });
     return setNoindex();
   }, []);
 
   const loadMe = useCallback(async () => {
     try {
       const { status, j } = await call(EP.me);
-      if (status === 200) { setMe(j); setStage('member'); return j; }
+      if (status === 200) { settlePending(j); setMe(j); setStage('member'); return j; }
       if (status === 403) { setNotice(j.message || ''); setStage('ended'); return null; }
       const sent = readSent();
       if (sent) { setEmail(sent.email); setSentVia(sent.via || 'sign-in'); setNotice(`Use the code we sent to ${sent.email}.`); setStage('code'); return null; }
@@ -139,7 +149,7 @@ export default function MasterclassPage() {
     return () => clearTimeout(t);
   }, [wait]);
 
-  // #create (from "Watch free" on the sales page) lands on the free-account form;
+  // #create (from the sign-in links) lands on the create-account form;
   // #unlock (from a locked download) lands on the Unlock button.
   useEffect(() => {
     if (location.hash === '#create' && stage === 'email' && createRef.current) {
@@ -240,19 +250,52 @@ export default function MasterclassPage() {
   // The payment is confirmed: the same session is now paid, so /me says so.
   const onUnlocked = async () => {
     await loadMe();
-    setShowUnlock(false);
+    setShowUnlock(false); setResumeKit(false);
     setJustUnlocked(true);
     window.scrollTo(0, 0);
+  };
+  // Joined for ₹299: /me now says watch.
+  const onJoined = async () => {
+    await loadMe();
+    setShowUnlock(false); setResumeKit(false);
+    setJustJoined(true);
+    window.scrollTo(0, 0);
+  };
+  // Every pay step on this page lands here, routed by the product of the order that was paid (not by
+  // the form that happened to check it). sign_in: 'code' (backend 2026-10-30) = booked, but this browser
+  // was not signed in by it: if /me does not show the purchase, the buyer signs in with the emailed code.
+  const onAnyPaid = async (j, email, product) => {
+    if (j && j.sign_in === 'code') {
+      const fresh = await loadMe();
+      const done = product === 'entry' ? canWatch(fresh) : accessLevel(fresh) === 'kit';
+      if (!done) {
+        try { await call(EP.signOut, {}); } catch (e) { /* the code sign-in replaces the session anyway */ }
+        saveSent(null);
+        setMe(null); setCode(''); setError(''); setNotice(''); setEmail(j.email || email || ''); setStage('email');
+        navigate(MC.PATHS.signIn, { replace: true, state: { justPaid: true, email: j.email || email } });
+        return;
+      }
+    }
+    if (product === 'entry') await onJoined(); else await onUnlocked();
   };
 
   if (stage === 'loading') {
     return <div className="sc-root"><div className="sc-wrap mc-narrow mc-hero"><p className="mc-help" role="status">Opening your masterclass…</p></div></div>;
   }
 
-  if (stage === 'member' && me && !isPaid(me)) {
+  if (stage === 'member' && me && accessLevel(me) !== 'kit') {
     const files = me.files || [];
     const kit = kitListFor(files);
     const qa = me.live_qa && (me.live_qa.at_label || me.live_qa.at || me.live_qa.link) ? me.live_qa : null;
+    const level = accessLevel(me);
+    const L = priceLabels(me, pricePayload);
+    const wa = me.whatsapp_qa || MC.WHATSAPP;
+    // A pending order from before the reload: for a member who has not joined, the join form above
+    // checks it; for a `watch` member, the kit form reopens by itself and checks it.
+    const kitFormOpen = showUnlock || (resumeKit && level === 'watch');
+    // Never both pay forms at once (review 2026-10-30): a member who has not joined and opens the kit
+    // form sees the kit form only (the kit includes watching), with a way back to the ₹299 step.
+    const joinFormOpen = level === 'none' && !kitFormOpen;
     return (
       <div className="sc-root">
         <section className="mc-hero">
@@ -262,12 +305,32 @@ export default function MasterclassPage() {
               <button type="button" className="sc-link" onClick={signOut}>Sign out</button>
             </div>
             <h1>Welcome, {me.display_name}</h1>
-            <p className="mc-access">{MC.MEMBER.welcomeFree}</p>
+            <p className="mc-access">{level === 'none' ? MC.MEMBER.welcomeNone(L.entry) : MC.MEMBER.welcomeWatch}</p>
+            {justJoined && level === 'watch' && <p className="mc-sent" role="status">Payment received, thank you. The masterclass is yours: press play below.</p>}
             {justUnlocked && <p className="mc-sent" role="status">Payment received, thank you. Your kit is opening: if it still shows as locked, refresh this page in a minute.</p>}
           </div>
         </section>
 
         <div className="sc-wrap">
+          {/* Not joined yet (owner 2026-10-30): the ₹299 pay step stands where the video would be. */}
+          {level === 'none' && (
+            <section className="mc-section" aria-labelledby="mc-join-h" style={{ paddingTop: 8 }}>
+              <h2 id="mc-join-h">The masterclass video</h2>
+              {joinFormOpen ? (
+                <>
+                  <MasterclassUnlockForm me={me} price={pricePayload} product="entry" onPaid={onAnyPaid} onAlreadyPaid={onJoined} contact={contact} />
+                  <p className="mc-help">{MC.JOIN.kit(L.kitTotal, L.upgrade)}</p>
+                </>
+              ) : (
+                <p className="mc-help" style={{ color: 'var(--sc-ink)' }}>
+                  The kit below includes watching the masterclass.{' '}
+                  <button type="button" className="sc-link" onClick={() => { setShowUnlock(false); setResumeKit(false); }}>{`Just watch? ${MC.CTA.join(L.entry)}`}</button>
+                </p>
+              )}
+            </section>
+          )}
+
+          {level !== 'none' && (
           <section className="mc-section" aria-labelledby="mc-video-h" style={{ paddingTop: 8 }}>
             <h2 id="mc-video-h">The masterclass video</h2>
             {me.video && me.video.type === 'embed' && (
@@ -285,8 +348,9 @@ export default function MasterclassPage() {
               <div className="mc-video mc-video-wait"><p style={{ margin: 0 }}>{me.video_by_label ? `The video will be here by ${me.video_by_label}.` : 'The video will appear here soon.'}</p></div>
             )}
           </section>
+          )}
 
-          {qa && (
+          {qa && level !== 'none' && (
             <section className="mc-section mc-pack" aria-labelledby="mc-qa-h">
               <h2 id="mc-qa-h">{qa.title || 'Live Q&A'}</h2>
               <p>{qa.at_label || qa.at}{qa.note ? ` · ${qa.note}` : ''}</p>
@@ -294,15 +358,19 @@ export default function MasterclassPage() {
             </section>
           )}
 
-          <p className="mc-sent mc-wa" style={{ marginTop: 20 }}>
-            {MC.MEMBER_HELP.replace(MC.WHATSAPP.display, '')}
-            <a href={MC.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{MC.WHATSAPP.display}</a>
-          </p>
+          {/* 24×7 Q&A on WhatsApp comes with joining (owner 2026-10-30). */}
+          {level !== 'none' && (
+            <p className="mc-sent mc-wa" style={{ marginTop: 20 }}>
+              {MC.MEMBER.qaLine}{' '}
+              <a href={wa.link} target="_blank" rel="noopener noreferrer">{wa.display}</a>
+            </p>
+          )}
 
-          {/* The kit, locked: titles and one line each, no download links at all (owner 2026-10-25). */}
+          {/* The kit, locked: titles and one line each, no download links at all (owner 2026-10-25).
+              A `watch` member pays the difference (owner 2026-10-30): "₹700 more; ₹999 in total". */}
           <section className="mc-section mc-pack mc-kit" id="unlock" ref={unlockRef} aria-labelledby="mc-kit-h">
             <h2 id="mc-kit-h">{MC.MEMBER.kitTitle}</h2>
-            <p>{MC.MEMBER.kitLead}</p>
+            <p>{L.kitUpgrade ? MC.MEMBER.kitLeadUpgrade(L.kit, L.kitTotal, L.entry) : MC.MEMBER.kitLead(L.kitTotal)}</p>
             <ul className="mc-kit-list">
               {kit.map((k) => (
                 <li key={k.key}>
@@ -311,18 +379,18 @@ export default function MasterclassPage() {
                 </li>
               ))}
             </ul>
-            {justUnlocked && !showUnlock && (
+            {justUnlocked && !kitFormOpen && (
               <div className="mc-all">
                 <button type="button" className="sc-btn sc-btn-ghost mc-btn-wide mc-unlock-btn" onClick={loadMe}>Check again</button>
               </div>
             )}
-            {!justUnlocked && !showUnlock && (
+            {!justUnlocked && !kitFormOpen && (
               <div className="mc-all">
-                <button type="button" className="sc-btn mc-btn-wide mc-unlock-btn" onClick={() => setShowUnlock(true)}>{(me.price && me.price.label) ? `Unlock the kit · ${me.price.label} once` : MC.CTA.unlock}</button>
+                <button type="button" className={`sc-btn mc-btn-wide mc-unlock-btn${level === 'none' ? ' sc-btn-ghost' : ''}`} onClick={() => setShowUnlock(true)}>{MC.MEMBER.unlockButton(L.kit, L.kitUpgrade)}</button>
               </div>
             )}
-            {showUnlock && (
-              <MasterclassUnlockForm me={me} price={me.price} onPaid={onUnlocked} onAlreadyPaid={onUnlocked} onCancel={() => setShowUnlock(false)} contact={contact} />
+            {kitFormOpen && (
+              <MasterclassUnlockForm me={me} price={pricePayload} product="kit" onPaid={onAnyPaid} onAlreadyPaid={onUnlocked} onCancel={() => { setShowUnlock(false); setResumeKit(false); }} contact={contact} />
             )}
           </section>
 
@@ -477,7 +545,7 @@ export default function MasterclassPage() {
     );
   }
 
-  // The code step (after Sign in or Create your free account).
+  // The code step (after Sign in or Create your account).
   if (stage === 'code') {
     return (
       <div className="sc-root">
@@ -493,7 +561,7 @@ export default function MasterclassPage() {
             {error && <p className="sc-error" role="alert">{error}</p>}
             <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'Checking…' : (sentVia === 'sign-up' ? 'Open my masterclass' : 'Sign in')}</button>
             {sentVia !== 'sign-up' && (
-              <p className="mc-help" style={{ fontSize: 15, color: 'var(--sc-ink)' }}>No account yet? <button type="button" className="sc-link" onClick={() => backToStart(true)}>Create your account</button>: it takes a minute, and the video opens straight away.</p>
+              <p className="mc-help" style={{ fontSize: 15, color: 'var(--sc-ink)' }}>No account yet? <button type="button" className="sc-link" onClick={() => backToStart(true)}>Create your account</button>: it takes a minute.</p>
             )}
             <div className="mc-row-links">
               <button type="button" className="sc-link" onClick={() => sendCode()} disabled={busy || wait > 0}>
@@ -509,7 +577,7 @@ export default function MasterclassPage() {
     );
   }
 
-  // Two paths on one screen (owner 2026-10-25): sign in, or create a free account.
+  // Two paths on one screen (owner 2026-10-25): sign in, or create an account.
   const setC = (k) => (e) => setCf({ ...cf, [k]: e.target.value });
   const focusCreate = location.hash === '#create';
   return (
@@ -519,7 +587,7 @@ export default function MasterclassPage() {
         <h1>{MC.SIGNIN.title}</h1>
         <p className="mc-access">{MC.SIGNIN.sub}</p>
         {location.state?.justPaid && (
-          <p className="mc-sent" role="status">Payment received. Sign in with the email you used{location.state.email ? `: ${location.state.email}` : ''}.</p>
+          <p className="mc-sent" role="status">{MC.SIGNIN.paidSignIn(location.state.email)}</p>
         )}
         <div className={`mc-two${focusCreate ? ' mc-create-first' : ''}`}>
           <form className="sc-form" onSubmit={sendCode} noValidate aria-labelledby="mc-signin-h">
@@ -549,7 +617,7 @@ export default function MasterclassPage() {
               <input id="mc-website" name="website" type="text" tabIndex={-1} autoComplete="off" value={cf.website} onChange={setC('website')} />
             </div>
             {createError && <p className="sc-error" role="alert">{createError}</p>}
-            <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'One moment…' : 'Watch the masterclass'}</button>
+            <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'One moment…' : MC.SIGNIN.createButton}</button>
             <p className="mc-help">Want the kit straight away? <Link to={MC.PATHS.register}>{MC.CTA.kitOnce}</Link>.</p>
           </form>
         </div>
