@@ -47,17 +47,22 @@ export const accessLevel = (me) => {
 export const canWatch = (me) => !!me && (typeof me.can_watch === 'boolean' ? me.can_watch : accessLevel(me) !== 'none');
 // The labels, from the API when it has them; the constants in src/data/masterclass.js otherwise.
 // `kit` is what THIS member pays for the kit (₹700 for a `watch` member, ₹999 otherwise).
+// `pricePayload` is GET /price; pass it wherever the page has it (the constants are only for the
+// moment before the API answers).
 export const priceLabels = (me, pricePayload) => {
   const kit = (me && me.price) || pricePayload || {};
   const entry = (me && me.entry_price) || (pricePayload && pricePayload.entry) || {};
+  const upgradeApi = (kit.upgrade && kit.label) || (pricePayload && pricePayload.kit_upgrade && pricePayload.kit_upgrade.label)
+    || (me && me.kit_upgrade && me.kit_upgrade.label) || null;
   return {
     entry: entry.label || MC.ENTRY_LABEL,
     entryOpen: entry.open !== false,
+    entryMessage: entry.message || null,
     kit: kit.label || MC.PRICE_LABEL,
     kitUpgrade: !!kit.upgrade,
     kitTotal: kit.kit_total_label || (kit.upgrade ? MC.PRICE_LABEL : kit.label) || MC.PRICE_LABEL,
-    // The kit after joining (/price.kit_upgrade, or /me.price for a `watch` member).
-    upgrade: (kit.upgrade && kit.label) || (pricePayload && pricePayload.kit_upgrade && pricePayload.kit_upgrade.label) || MC.UPGRADE_LABEL,
+    // The kit after joining: /me.price for a `watch` member, else /price.kit_upgrade.
+    upgrade: upgradeApi || MC.UPGRADE_LABEL,
     kitOpen: kit.open !== false,
   };
 };
@@ -74,6 +79,28 @@ export const readPending = () => {
   return p && p.order_id && p.claim && Date.now() - p.at < PENDING_MAX_MS ? p : null;
 };
 export const clearPending = () => writeJson('local', PENDING_STORE, null);
+// Product of the order waiting for confirmation ('entry' | 'kit'), or null. Orders saved before
+// 2026-10-30 carry no product: they were all the kit.
+export const pendingProduct = () => { const p = readPending(); return p ? (p.product || 'kit') : null; };
+// A pending order that /me already shows as done (the ₹299 when the member can watch; any order
+// once they have the kit) is cleared, so no form reopens on it and offers "Check again".
+export const settlePending = (me) => {
+  const prod = pendingProduct();
+  if (!prod || !me) return;
+  const level = accessLevel(me);
+  if (level === 'kit' || (prod === 'entry' && canWatch(me))) clearPending();
+};
+
+// UTM tags from the landing URL, so a payment records where the buyer came from.
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+export const readUtm = () => {
+  const utm = {};
+  try {
+    const q = new URLSearchParams(window.location.search);
+    UTM_KEYS.forEach((k) => { if (q.get(k)) utm[k] = q.get(k).slice(0, 160); });
+  } catch (e) { /* no utm */ }
+  return utm;
+};
 
 export async function call(path, body, method) {
   const r = await fetch(`${API}${path}`, {
@@ -97,9 +124,10 @@ export function loadCheckout() {
 }
 
 /**
- * The checkout flow as a hook. `onPaid(j, email)` runs once the backend confirms the
- * payment (from Razorpay's handler, or from order-status after a reload); it must
- * clear the pending order itself if it leaves the page (clearPending()).
+ * The checkout flow as a hook. `onPaid(j, email, product)` runs once the backend confirms the
+ * payment (from Razorpay's handler, or from order-status after a reload), with the product of
+ * THAT order ('entry' | 'kit'). `j.sign_in === 'code'` means the payment is booked but did not
+ * sign this browser in (backend 2026-10-30): the page sends the buyer to the code sign-in.
  *
  * Returns { stage: 'form' | 'confirming', confirmMsg, error, setError, busy, checking,
  *           pay(body), checkStatus(), startAgain(), contactLine }.
@@ -114,10 +142,10 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
   const onAlreadyPaidRef = useRef(onAlreadyPaid);
   useEffect(() => { onPaidRef.current = onPaid; onAlreadyPaidRef.current = onAlreadyPaid; }, [onPaid, onAlreadyPaid]);
 
-  const landPaid = useCallback((j, email) => {
+  const landPaid = useCallback((j, email, product) => {
     clearPending();
     setStage('form'); setConfirmMsg(''); setError('');
-    onPaidRef.current(j, email);
+    onPaidRef.current(j, email, product || 'kit');
   }, []);
 
   const checkStatus = useCallback(async () => {
@@ -127,7 +155,7 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
     try {
       const { status, j } = await call(EP.orderStatus, { order_id: p.order_id, claim: p.claim });
       const booked = !!(j.payment_booked || j.paid); // the backend's name is payment_booked; paid is its old alias
-      if (booked && (j.ok || j.sign_in)) { landPaid(j, p.email); return; }
+      if (booked && (j.ok || j.sign_in)) { landPaid(j, p.email, p.product); return; }
       if (status === 403 && booked) { clearPending(); setError(j.error); return; }
       if (j.unknown) { clearPending(); setStage('form'); return; }
       if (j.failed) { clearPending(); setError(j.error); return; }
@@ -143,11 +171,11 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
   }, [checkStatus]);
 
   // Razorpay's success handler: from here on the page never offers Pay again.
-  const onRazorpayPaid = async (resp, email) => {
+  const onRazorpayPaid = async (resp, email, product) => {
     setStage('confirming'); setConfirmMsg('Payment received — we are confirming it.'); setError('');
     try {
       const { status, ok, j } = await call(EP.paymentVerify, resp);
-      if (ok) { landPaid(j, email); return; }
+      if (ok) { landPaid(j, email, product); return; }
       if (status === 409) { setConfirmMsg(j.error); return; }
       setError(j.error || `We could not confirm the payment yet. If money left your account, it is safe: write to us at ${contact}.`);
     } catch (e) {
@@ -174,7 +202,7 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
         key: j.key_id, amount: j.amount, currency: j.currency, order_id: j.order_id,
         name: j.name, description: j.description, prefill: j.prefill, notes: j.notes,
         theme: { color: '#2563EB' },
-        handler: (resp) => onRazorpayPaid(resp, j.prefill.email),
+        handler: (resp) => onRazorpayPaid(resp, j.prefill.email, body.product || 'kit'),
         modal: { ondismiss: () => { clearPending(); setBusy(false); } },
       });
       rz.on('payment.failed', (r) => {
@@ -190,5 +218,5 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
   const startAgain = () => { clearPending(); setStage('form'); setConfirmMsg(''); setError(''); };
 
   const pending = readPending();
-  return { stage, confirmMsg, error, setError, busy, checking, pay, checkStatus, startAgain, hasPending: !!pending, pendingProduct: pending ? (pending.product || 'kit') : null };
+  return { stage, confirmMsg, error, setError, busy, checking, pay, checkStatus, startAgain, hasPending: !!pending, pendingProduct: pendingProduct() };
 }

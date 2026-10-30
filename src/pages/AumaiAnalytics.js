@@ -244,7 +244,7 @@ const AumaiAnalytics = () => {
               <div style={styles.section}>
                 <h2 style={styles.sectionTitle}>Masterclass, last {days} day{days === 1 ? '' : 's'}</h2>
                 <p style={styles.hint}>
-                  All time: {mc.totals.accounts} account{mc.totals.accounts === 1 ? '' : 's'} · {mc.totals.kit_purchases} kit
+                  All time: {mc.totals.accounts} account{mc.totals.accounts === 1 ? '' : 's'} · {mc.totals.entries || 0} joined (₹299) · {mc.totals.kit_purchases} kit
                   {mc.totals.kit_purchases === 1 ? '' : 's'} sold · ₹{Number(mc.totals.revenue_rupees).toLocaleString('en-IN')}.
                   Our own @aumai.co.in accounts are not counted.
                 </p>
@@ -257,13 +257,18 @@ const AumaiAnalytics = () => {
                     <span style={{ ...styles.statValue, color: '#8b5cf6' }}>{mc.period.accounts}</span>
                     <span style={styles.statLabel}>Signed up (accounts)</span>
                   </div>
+                  {/* ₹299 to watch (owner 2026-10-30): counted on their own, next to the kit. */}
+                  <div style={{ ...styles.statCard, borderTopColor: '#0ea5e9' }}>
+                    <span style={{ ...styles.statValue, color: '#0ea5e9' }}>{mc.period.entries || 0}</span>
+                    <span style={styles.statLabel}>Joined (₹299, watching)</span>
+                  </div>
                   <div style={{ ...styles.statCard, borderTopColor: '#10b981' }}>
                     <span style={{ ...styles.statValue, color: '#10b981' }}>{mc.period.kit_purchases}</span>
                     <span style={styles.statLabel}>Bought the kit</span>
                   </div>
                   <div style={{ ...styles.statCard, borderTopColor: '#f59e0b' }}>
                     <span style={{ ...styles.statValue, color: '#f59e0b' }}>₹{Number(mc.period.revenue_rupees).toLocaleString('en-IN')}</span>
-                    <span style={styles.statLabel}>Kit revenue</span>
+                    <span style={styles.statLabel}>Masterclass revenue (₹299 + kit)</span>
                   </div>
                 </div>
                 {mc.sources.length > 0 && (
@@ -278,6 +283,7 @@ const AumaiAnalytics = () => {
                         <th style={styles.th}>Day</th>
                         <th style={styles.th}>Visited</th>
                         <th style={styles.th}>Signed up</th>
+                        <th style={styles.th}>Joined (₹299)</th>
                         <th style={styles.th}>Bought the kit</th>
                       </tr>
                     </thead>
@@ -287,11 +293,12 @@ const AumaiAnalytics = () => {
                           <td style={styles.td}>{d.date}</td>
                           <td style={styles.td}>{d.visitors}</td>
                           <td style={styles.td}>{d.accounts}</td>
+                          <td style={styles.td}>{d.entries || 0}</td>
                           <td style={styles.td}>{d.kit_purchases}</td>
                         </tr>
                       ))}
                       {mc.daily.length === 0 && (
-                        <tr><td style={styles.td} colSpan={4}>No masterclass visits or sign-ups in this period. Pick a longer period above.</td></tr>
+                        <tr><td style={styles.td} colSpan={5}>No masterclass visits or sign-ups in this period. Pick a longer period above.</td></tr>
                       )}
                     </tbody>
                   </table>
@@ -304,7 +311,7 @@ const AumaiAnalytics = () => {
                         <th style={styles.th}>Name</th>
                         <th style={styles.th}>Clinic</th>
                         <th style={styles.th}>Joined</th>
-                        <th style={styles.th}>Kit</th>
+                        <th style={styles.th}>Access</th>
                         <th style={styles.th}>Signed in</th>
                       </tr>
                     </thead>
@@ -314,7 +321,7 @@ const AumaiAnalytics = () => {
                           <td style={styles.td}>{r.name}</td>
                           <td style={styles.td}>{r.clinic || '—'}</td>
                           <td style={styles.td}>{r.joined_on}</td>
-                          <td style={styles.td}>{r.has_kit ? 'Bought' : 'Free'}</td>
+                          <td style={styles.td}>{r.has_kit ? 'Kit' : r.can_watch ? 'Watching (₹299)' : 'Not paid'}</td>
                           <td style={styles.td}>{r.signed_in ? 'Yes' : 'Not yet'}</td>
                         </tr>
                       ))}

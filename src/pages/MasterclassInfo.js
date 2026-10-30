@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import { withYouTubeJsApi } from '../utils/videoFocus';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
-import { API, EP, CLINIC_TYPES, accessLevel, call, canWatch, priceLabels, useMasterclassCheckout } from '../lib/masterclassCheckout';
+import { API, EP, CLINIC_TYPES, accessLevel, call, canWatch, priceLabels, readUtm, settlePending, useMasterclassCheckout } from '../lib/masterclassCheckout';
 import './HomeClinic.css';
 import './MasterclassInfo.css';
 
@@ -143,13 +143,13 @@ function WatchGate({ onMember, entryLabel }) {
  * After a UPI app switch reloads the page, the hook finds the pending order and asks order-status.
  * Name, email and WhatsApp come from the account; clinic, city, clinic type and the tick are typed.
  */
-function JoinStep({ me, L, onPaid, onAlreadyIn, contact }) {
+function JoinStep({ me, L, onPaid, onAlreadyIn, contact, utm }) {
   const [f, setF] = useState({ clinic: me.clinic || '', city: me.city || '', clinic_type: me.clinic_type || '', agree: false });
   const co = useMasterclassCheckout({ onPaid, onAlreadyPaid: onAlreadyIn, contact });
   const set = (k) => (e) => setF((x) => ({ ...x, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
   const submit = (e) => {
     e.preventDefault();
-    co.pay({ product: 'entry', clinic: f.clinic.trim(), city: f.city.trim(), clinic_type: f.clinic_type, agree: f.agree, utm: {}, referrer: document.referrer || null });
+    co.pay({ product: 'entry', clinic: f.clinic.trim(), city: f.city.trim(), clinic_type: f.clinic_type, agree: f.agree, utm: utm || {}, referrer: document.referrer || null });
   };
 
   if (co.stage === 'confirming') {
@@ -170,7 +170,7 @@ function JoinStep({ me, L, onPaid, onAlreadyIn, contact }) {
     return (
       <div className="mi-gate" role="status" data-testid="mi-join">
         <h2 id="mi-gate-h">{MC.JOIN.closed}</h2>
-        <p className="mi-gate-blurb">{(me.entry_price && me.entry_price.message) || 'Please check again later.'} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+        <p className="mi-gate-blurb">{L.entryMessage || MC.JOIN.closedText} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
       </div>
     );
   }
@@ -234,6 +234,9 @@ function MemberVideo({ video, autoplay, onError }) {
 
 export default function MasterclassInfo() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const utm = useRef(null);
+  if (utm.current === null) utm.current = readUtm(); // the landing URL's UTM tags, recorded with a ₹299 payment
   const [pricePayload, setPricePayload] = useState(null); // /price: the kit, plus entry and kit_upgrade
   const [me, setMe] = useState(null); // /me when signed in
   const [justIn, setJustIn] = useState(false); // joined on this page just now: the video starts by itself
@@ -245,8 +248,12 @@ export default function MasterclassInfo() {
   const loadMe = useCallback(async () => {
     try {
       const { status, j } = await call(EP.me);
-      setMe(status === 200 && j && j.ok ? j : null);
+      const fresh = status === 200 && j && j.ok ? j : null;
+      settlePending(fresh); // a ₹299 order /me already shows as paid is never offered "Check again"
+      setMe(fresh);
+      return fresh;
     } catch (e) { /* not signed in, or offline: the form stays */ }
+    return null;
   }, []);
 
   useEffect(() => {
@@ -262,8 +269,15 @@ export default function MasterclassInfo() {
   const L = priceLabels(me, pricePayload);
   // Signed up or signed in on this page: the reply is the /me payload; anything else, ask /me.
   const onMember = (j) => { if (j && j.ok && j.email) setMe(j); else loadMe(); };
-  // Paid: /me now says watch (or kit), and the video starts by itself.
-  const onJoined = async () => { setJustIn(true); await loadMe(); };
+  // Paid: /me now says watch (or kit), and the video starts by itself. A payment that did not sign this
+  // browser in (sign_in: 'code', backend 2026-10-30) sends the buyer to the code sign-in.
+  const onJoined = async (j, email) => {
+    setJustIn(true);
+    const fresh = await loadMe();
+    if (j && j.sign_in === 'code' && !canWatch(fresh)) {
+      navigate(MC.PATHS.signIn, { replace: true, state: { justPaid: true, email: j.email || email } });
+    }
+  };
   // A presigned file link lasts hours: if it ran out, fetch a fresh one once.
   const onVideoError = () => { if (!videoRetried.current) { videoRetried.current = true; loadMe(); } };
 
@@ -315,8 +329,15 @@ export default function MasterclassInfo() {
             <h1 className="ch-hero-title">{MC.HERO.titleLead}<span className="ch-hero-accent">{MC.HERO.titleAccent}</span>{MC.HERO.titleTail}</h1>
           </div>
           <div id="watch" className="mi-watch" ref={watchRef}>
-            {!member && <WatchGate onMember={onMember} entryLabel={L.entry} />}
-            {member && !watching && <JoinStep me={me} L={L} onPaid={onJoined} onAlreadyIn={onJoined} contact={contact} />}
+            {/* Joining closed (price.entry.open === false): no promise of "Next, join for ₹299". */}
+            {!member && !L.entryOpen && (
+              <div className="mi-gate" role="status" data-testid="mi-closed">
+                <h2 id="mi-gate-h">{MC.JOIN.closed}</h2>
+                <p className="mi-gate-blurb">{L.entryMessage || MC.JOIN.closedText} <WaLink>{MC.WHATSAPP.display}</WaLink></p>
+              </div>
+            )}
+            {!member && L.entryOpen && <WatchGate onMember={onMember} entryLabel={L.entry} />}
+            {member && !watching && <JoinStep me={me} L={L} onPaid={onJoined} onAlreadyIn={onJoined} contact={contact} utm={utm.current} />}
             {member && watching && (
               <>
                 <MemberVideo video={me.video} autoplay={justIn} onError={onVideoError} />

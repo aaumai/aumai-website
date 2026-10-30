@@ -116,6 +116,7 @@ const JOIN = {
   confirmTitle: 'Payment received. We are confirming it',
   confirmHelp: 'You do not need to pay again. The video plays as soon as the payment is confirmed.',
   closed: 'Joining is not open right now',
+  closedText: 'Please check again later. Questions? WhatsApp us any time.',
 };
 
 // The hero carries the "30 minutes every morning" ad (owner 2026-10-21; 10 → 30
@@ -344,6 +345,9 @@ const REGISTER = {
     'The Prompt Pack, and every slide from the class as a PDF.',
     `24×7 Q&A on WhatsApp: ${WHATSAPP.display}.`,
   ],
+  // A member who joined already watches and has the Q&A (owner 2026-10-30): sell only the kit, for the difference.
+  leadUpgrade: (more = UPGRADE_LABEL, total = PRICE_LABEL, entry = ENTRY_LABEL) => `You already watch the masterclass. The kit is ${more} more: ${total} in total, and your ${entry} counts towards it. One payment, and every download opens, for life.`,
+  pointsKitOnly: (points) => points.filter((p) => !/masterclass video|Q&A on WhatsApp/.test(p)),
   watchLink: `Just want to watch? Join for ${ENTRY_LABEL} on the masterclass page`,
 };
 const REGISTER_SEO_DESCRIPTION =
@@ -358,6 +362,8 @@ const SIGNIN = {
   createTitle: 'Create your account',
   createBlurb: `Tell us who you are, then join for ${ENTRY_LABEL}, once, and the whole masterclass plays, as often as you like. No password.`,
   createButton: 'Continue',
+  // After a payment that did not sign this browser in (backend 2026-10-30): the code sign-in.
+  paidSignIn: (email) => `Payment received. Sign in with your email to watch${email ? `: ${email}` : ''}.`,
 };
 
 // The members page for a member without the kit (owner 2026-10-25): the video first, then the kit, locked.
