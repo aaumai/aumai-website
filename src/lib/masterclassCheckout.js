@@ -88,7 +88,12 @@ export const settlePending = (me) => {
   const prod = pendingProduct();
   if (!prod || !me) return;
   const level = accessLevel(me);
-  if (level === 'kit' || (prod === 'entry' && canWatch(me))) clearPending();
+  if (level === 'kit' || (prod === 'entry' && canWatch(me))) {
+    // A UPI app switch can reload the page after the webhook booked the payment: /me already shows it, so the
+    // order-status path never runs. Purchase goes from here too (same event id: Meta counts it once).
+    metaTrack('purchase', readPending());
+    clearPending();
+  }
 };
 
 // UTM tags from the landing URL, so a payment records where the buyer came from.
@@ -133,8 +138,9 @@ export function loadCheckout() {
 function metaTrack(code, order) {
   try {
     if (typeof window.aumy !== 'function' || !order || !order.order_id) return;
+    const rupees = Number(order.amount) / 100; // orders saved before 30 Oct carry no amount: no value then
     window.aumy('track', code, {
-      value: Number(order.amount) / 100, currency: order.currency || 'INR',
+      ...(Number.isFinite(rupees) && rupees > 0 ? { value: rupees, currency: order.currency || 'INR' } : {}),
       content_name: order.product === 'entry' ? 'masterclass_entry' : 'masterclass_kit',
       order_id: order.order_id, event_id: `${code}_${order.order_id}`,
     });
