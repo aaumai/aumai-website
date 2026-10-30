@@ -33,8 +33,9 @@ const readSent = () => {
   } catch (e) { return null; }
 };
 const saveSent = (v) => { try { if (v) localStorage.setItem(SENT_STORE, JSON.stringify(v)); else localStorage.removeItem(SENT_STORE); } catch (e) { /* fine */ } };
-// `website` is a honeypot: never shown, never prefilled; the backend drops a sign-up that fills it.
-const EMPTY_CREATE = { name: '', clinic: '', whatsapp: '', email: '', website: '' };
+// `mc_trap` is a honeypot: never shown; the backend drops a sign-up that fills it. Never call it website, url,
+// company or anything else autofill knows: browsers fill those despite autocomplete=off (30 Oct 2026).
+const EMPTY_CREATE = { name: '', clinic: '', whatsapp: '', email: '', mc_trap: '' };
 
 // kind comes from the backend (master_sheet | worksheet | skill | guide | slides | file); the extension is the fallback.
 const kindOf = (f) => f.kind || (/.(xlsx|xls|csv)$/i.test(f.name) ? 'workbook' : 'file');
@@ -188,7 +189,7 @@ export default function MasterclassPage() {
     if (!validEmail(clean)) { setCreateError('Please type your email address, for example name@gmail.com.'); return; }
     setBusy(true); setCreateError('');
     try {
-      const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), clinic: cf.clinic.trim() || undefined, website: cf.website || '' });
+      const { ok, j } = await call(EP.signUp, { name: cf.name.trim(), email: clean, whatsapp: cf.whatsapp.trim(), clinic: cf.clinic.trim() || undefined, mc_trap: cf.mc_trap || '' });
       if (!ok) { setCreateError(j.error || 'Something went wrong. Please try again.'); return; }
       if (j.signed_in) {
         saveEmail(clean); setEmail(clean); saveSent(null); setMe(j); setStage('member'); setNotice(''); setError('');
@@ -613,8 +614,7 @@ export default function MasterclassPage() {
             </div>
             {/* Honeypot: off-screen, not focusable, never prefilled. A real person never fills it. */}
             <div className="mc-hp" aria-hidden="true">
-              <label htmlFor="mc-website">Website</label>
-              <input id="mc-website" name="website" type="text" tabIndex={-1} autoComplete="off" value={cf.website} onChange={setC('website')} />
+              <input id="mc-trap" name="mc_trap" type="text" tabIndex={-1} autoComplete="off" value={cf.mc_trap} onChange={setC('mc_trap')} />
             </div>
             {createError && <p className="sc-error" role="alert">{createError}</p>}
             <button type="submit" className="sc-btn mc-btn-wide" disabled={busy}>{busy ? 'One moment…' : MC.SIGNIN.createButton}</button>
