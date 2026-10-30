@@ -118,6 +118,7 @@ export default function MasterclassAdmin() {
       setRefundEmail(true); setRefundAsk(j.refund);
     } catch (e) {
       setError(e.message === 'Failed to fetch' ? 'Could not reach the server. Nothing was changed. Try again.' : e.message);
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // the message shows at the top; the row may be far down
     } finally { setBusy(false); }
   };
   const doRefund = async () => {
@@ -126,8 +127,11 @@ export default function MasterclassAdmin() {
     try {
       const j = await req(`/registrations/${r.id}/refund`, { amount_paise: r.amount_paise, send_email: refundEmail });
       setRefundAsk(null);
-      setFlash(`Refunded ${r.amount_label} to ${r.name}. Razorpay reference ${j.refund_id}; it reaches their account in 5–7 working days.${refundEmail ? ` ${j.email === 'sent' ? 'They have been emailed.' : j.email === 'simulated' ? 'Email NOT sent: the server has no email account set up.' : 'The email to them failed.'}` : ' No email sent.'}`);
-      loadRegs(); load(key);
+      setFlash(`Refunded ${r.amount_label} to ${r.name}: ${CLOSED_WORDS[j.closes] || ''} Razorpay reference ${j.refund_id}; it reaches their account in 5–7 working days.${refundEmail ? ` ${j.email === 'sent' ? 'They have been emailed.' : j.email === 'simulated' ? 'Email NOT sent: the server has no email account set up.' : 'The email to them failed.'}` : ' No email sent.'}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      loadRegs();
+      // Only the member list: a full reload would overwrite unsaved edits in the settings forms.
+      req('/members').then((m) => setData((d) => ({ ...d, members: m.members }))).catch(() => {});
     } catch (e) {
       setRefundErr(e.message === 'Failed to fetch' ? 'Could not reach the server. Press Refresh to see whether the refund went through before trying again.' : e.message);
       loadRegs();
@@ -412,6 +416,7 @@ export default function MasterclassAdmin() {
 
 const REG_STATUS = { paid: 'Paid', created: 'Not paid yet', failed: 'Failed', refunded: 'Refunded' };
 const REFUND_ACCESS = { watch: 'watching closed', kit: 'kit closed', none: 'access unchanged (this payment bought nothing)', kept: 'access unchanged (another payment covers it)', no_member: 'no account linked' };
+const CLOSED_WORDS = { watch: 'their access to the video is closed.', kit: 'the kit downloads are closed.', none: 'their access did not change.', kept: 'their access did not change (another payment covers it).', no_member: '' };
 const REFUND_EMAIL = { sent: 'emailed', simulated: 'email NOT sent (no email set up)', failed: 'email failed', skipped: 'not emailed' };
 const rupees = (paise) => `₹${(paise / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
 
@@ -467,21 +472,22 @@ function Registrations({ data, show, setShow, onRefund, busy }) {
                   <td style={{ whiteSpace: 'nowrap' }}>{PRODUCT_LABEL[r.product] || PRODUCT_LABEL.kit}</td>
                   <td className="sc-num">{rupees(r.amount_paise)}</td>
                   <td style={{ whiteSpace: 'nowrap' }}>
-                    <span className={`mc-state mc-state-${r.status === 'paid' ? 'ok' : r.status === 'failed' || r.status === 'refunded' ? 'revoked' : 'ended'}`}>{REG_STATUS[r.status] || r.status}</span>
+                    <span className={`mc-state mc-state-${r.status === 'paid' ? 'ok' : r.status === 'failed' ? 'revoked' : 'ended'}`} style={r.status === 'refunded' ? { background: '#E0E7FF' } : undefined}>{REG_STATUS[r.status] || r.status}</span>
                     {r.status === 'refunded' && <div className="mc-small">{formatISTDate(r.refunded_at)}</div>}
                   </td>
                   <td>{[r.utm_source, r.utm_campaign].filter(Boolean).join(' / ') || <span className="mc-small">direct</span>}</td>
                   <td className="mc-small">
                     {r.flag && r.status !== 'refunded' && <b style={{ color: '#BE185D', display: 'block' }}>{r.flag}</b>}
+                    {r.status === 'refunded' && r.refund_rz_status === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Razorpay FAILED this refund: the money did not go back. Refund them in the Razorpay dashboard.</b>}
                     {r.status === 'refunded'
-                      ? `Refunded ${rupees(r.refund_amount_paise || r.amount_paise)} · ${r.refund_id} · ${REFUND_ACCESS[r.refund_access] || ''}${r.refund_email_status ? ` · ${REFUND_EMAIL[r.refund_email_status] || r.refund_email_status}` : ''}`
+                      ? `Refunded ${rupees(r.refund_amount_paise || r.amount_paise)} · ${r.refund_id}${r.refund_rz_status === 'pending' ? ' (Razorpay still processing)' : ''} · ${REFUND_ACCESS[r.refund_access] || ''}${r.refund_email_status ? ` · ${REFUND_EMAIL[r.refund_email_status] || r.refund_email_status}` : ''}`
                       : r.status === 'paid' ? `${ACTION_WORDS[r.member_action] || 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}
                     {r.status === 'paid' && r.refund_state === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Refund did not go through: {r.refund_error}</b>}
-                    {r.status === 'paid' && r.refund_state === 'pending' && <b style={{ display: 'block' }}>Refund on its way: press Refresh in a minute</b>}
+                    {r.status === 'paid' && r.refund_state === 'pending' && <b style={{ display: 'block' }}>Refund being checked with Razorpay: press Refresh in 15 minutes. Do not refund it in Razorpay.</b>}
                     {extrasFor(r.id).map((e) => <b key={e.razorpay_payment_id} style={{ color: '#BE185D', display: 'block' }}>Extra payment — refund {e.razorpay_payment_id}</b>)}
                   </td>
                   <td>
-                    {r.status === 'paid' && r.razorpay_payment_id && (
+                    {r.status === 'paid' && r.razorpay_payment_id && r.refund_state !== 'pending' && (
                       <div className="mc-actions"><button type="button" className="mc-danger" onClick={() => onRefund(r)} disabled={busy}>Refund {rupees(r.amount_paise)}</button></div>
                     )}
                   </td>
