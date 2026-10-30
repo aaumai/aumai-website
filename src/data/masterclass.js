@@ -323,7 +323,7 @@ const FAQS = [
   { q: 'Do I need Aumy or any other software?', a: 'No. The Clinic Master Sheet opens in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
   { q: 'Do I need a Claude account?', a: 'Only if you want Claude’s help. Everything works by hand with the Clinic Master Sheet. With a Claude account at claude.ai, you upload the skill file and connect the sheet through Google Drive, and Claude writes the messages, call scripts and weekly KPI report.' },
   { q: 'How do I get the kit, and how do I sign in?', a: `Sign in with your email: we send a 6-digit code, and there is no password. The kit is ${PRICE_LABEL} in total, by UPI, card or net banking through Razorpay. Joined already? Press Unlock the kit on your masterclass page and pay ${UPGRADE_LABEL} more. Or press Get the kit on this page and pay ${PRICE_LABEL}, watching included. Every download opens the moment the payment is confirmed.` },
-  { q: 'Can I get a refund?', a: `${MC_REFUND.NON_REFUNDABLE} ${MC_REFUND.DUPLICATE}` },
+  { q: 'Can I get a refund?', a: `${MC_REFUND.JOIN_MONEY_BACK} ${MC_REFUND.NON_REFUNDABLE} ${MC_REFUND.DUPLICATE}` },
   { q: 'Is there a Q&A?', a: `Yes, 24×7 on WhatsApp: ${WHATSAPP.display}, included when you join. Ask anything about the method, the Clinic Master Sheet or setting up Claude.`, wa: true },
 ];
 

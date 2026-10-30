@@ -74,7 +74,9 @@ export default function MasterclassUnlockForm({ me, price, product = 'kit', onPa
       </div>
       <label className="sc-consent" style={{ fontSize: 15 }}>
         <input type="checkbox" checked={f.agree} onChange={set('agree')} style={{ width: 22, height: 22 }} />
-        <span>I understand the {entry ? `${L.entry} fee` : 'kit fee'} is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>
+        {entry
+          ? <span>I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>. If I feel the masterclass did not add value, I get my {L.entry} fee back, <Link to="/refund#masterclass" target="_blank" rel="noopener">no questions asked</Link>.</span>
+          : <span>I understand the kit fee is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>}
       </label>
       {co.error && <p className="sc-error" role="alert">{co.error}</p>}
       <button type="submit" className="sc-btn mc-btn-wide" disabled={co.busy}>
