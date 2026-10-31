@@ -20,6 +20,8 @@ export const EP = {
   price: '/price',
   me: '/me',
   signUp: '/sign-up',
+  join: '/join', // the one-field form (owner 2026-10-31): email in, the ₹299 Checkout out
+
   requestCode: '/request-code',
   verify: '/verify',
   signOut: '/sign-out',
@@ -130,10 +132,12 @@ export function loadCheckout() {
 
 /**
  * Meta conversions through the Aumy tag the site already loads (index.html, bm.aumyai.com tag.js → Meta
- * CAPI + browser pixel, pixel "Aumy"). Checkout started when the payment window opens; Purchase once the
- * backend confirms the payment. The order id is the event id, so the reload path (order-status) and
- * Razorpay's handler cannot count one payment twice. No Lead here: BM already sends one when the lead is
- * created. Never throws: tracking must not stop a payment.
+ * CAPI + browser pixel, pixel "Aumy"; the tag sends both with ONE event id, so Meta counts each once).
+ * Lead when the one-field form is sent (owner 2026-10-31; BM can no longer send it: an email-only sign-up
+ * has no phone), Checkout started when the payment window opens, Purchase once the backend confirms the
+ * payment. Purchase and Checkout use the order id in the event id, so the reload path (order-status) and
+ * Razorpay's handler cannot count one payment twice; Lead uses the email, so pressing Continue again does
+ * not count a second sign-up. Never throws: tracking must not stop a payment.
  */
 function metaTrack(code, order) {
   try {
@@ -144,6 +148,25 @@ function metaTrack(code, order) {
       content_name: order.product === 'entry' ? 'masterclass_entry' : 'masterclass_kit',
       order_id: order.order_id, event_id: `${code}_${order.order_id}`,
     });
+  } catch (e) { /* tracking only */ }
+}
+
+// A short, stable id for one email (djb2): the same sign-up always carries the same Lead event id.
+const emailKey = (email) => {
+  let h = 5381;
+  const s = String(email || '').trim().toLowerCase();
+  for (let i = 0; i < s.length; i += 1) h = ((h * 33) ^ s.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+};
+const LEAD_STORE = 'aumai_mc_lead'; // localStorage: the emails this browser has already sent a Lead for
+function metaLead(email) {
+  try {
+    if (typeof window.aumy !== 'function' || !email) return;
+    const key = emailKey(email);
+    const done = readJson('local', LEAD_STORE) || [];
+    if (done.includes(key)) return;
+    window.aumy('track', 'lead', { content_name: 'masterclass_signup', event_id: `lead_mc_${key}` });
+    writeJson('local', LEAD_STORE, [...done, key].slice(-20));
   } catch (e) { /* tracking only */ }
 }
 
@@ -163,7 +186,7 @@ function metaIdentify(prefill, name) {
  * Returns { stage: 'form' | 'confirming', confirmMsg, error, setError, busy, checking,
  *           pay(body), checkStatus(), startAgain(), contactLine }.
  */
-export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
+export function useMasterclassCheckout({ onPaid, onAlreadyPaid, onAlreadyMember, onDismiss, contact }) {
   const [stage, setStage] = useState(() => (readPending() ? 'confirming' : 'form'));
   const [confirmMsg, setConfirmMsg] = useState('');
   const [error, setError] = useState('');
@@ -171,7 +194,12 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
   const [checking, setChecking] = useState(false);
   const onPaidRef = useRef(onPaid);
   const onAlreadyPaidRef = useRef(onAlreadyPaid);
-  useEffect(() => { onPaidRef.current = onPaid; onAlreadyPaidRef.current = onAlreadyPaid; }, [onPaid, onAlreadyPaid]);
+  const onAlreadyMemberRef = useRef(onAlreadyMember);
+  const onDismissRef = useRef(onDismiss);
+  useEffect(() => {
+    onPaidRef.current = onPaid; onAlreadyPaidRef.current = onAlreadyPaid;
+    onAlreadyMemberRef.current = onAlreadyMember; onDismissRef.current = onDismiss;
+  }, [onPaid, onAlreadyPaid, onAlreadyMember, onDismiss]);
 
   const landPaid = useCallback((j, email, product) => {
     const p = readPending();
@@ -218,28 +246,37 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
 
   // `body` is what /order needs: product ('entry' | 'kit'; the backend's default is 'kit'),
   // name, clinic, city, email, whatsapp, clinic_type, agree (+ utm, referrer). For a signed-in
-  // member the backend takes name, email and WhatsApp from the account, so only clinic, city,
-  // clinic_type and agree are sent. Nothing left to buy (409 already_paid for the kit,
-  // 409 already_watching for entry): the page refetches /me instead.
-  const pay = async (body) => {
+  // member the backend takes name, email and WhatsApp from the account. The ₹299 needs only
+  // agree (owner 2026-10-31). Nothing left to buy (409 already_paid for the kit, 409
+  // already_watching for entry): the page refetches /me instead.
+  // opts.path = EP.join for the one-field form: { email } in, the same Checkout reply out (plus
+  // signed_in), or 409 already_member (a sign-in code was emailed: onAlreadyMember). opts.lead
+  // sends Meta's Lead once the sign-up is booked. opts.onReply(j) sees the order reply.
+  const pay = async (body, opts = {}) => {
     setError('');
     setBusy(true);
     try {
-      const { status, ok, j } = await call(EP.order, body);
+      const { status, ok, j } = await call(opts.path || EP.order, body);
+      if (status === 409 && j.already_member && onAlreadyMemberRef.current) { setBusy(false); onAlreadyMemberRef.current(j); return; }
       if (status === 409 && (j.already_paid || j.already_watching)) { setBusy(false); if (onAlreadyPaidRef.current) onAlreadyPaidRef.current(j); else setError(j.error || 'You already have access.'); return; }
       if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
+      if (opts.onReply) opts.onReply(j);
       if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and press Pay again.'); setBusy(false); return; }
       // Kept BEFORE the window opens: a UPI app switch may reload this page.
       const pendingOrder = { order_id: j.order_id, claim: j.claim, email: j.prefill.email, product: body.product || 'kit', amount: j.amount, currency: j.currency, at: Date.now() };
       writeJson('local', PENDING_STORE, pendingOrder);
       metaIdentify(j.prefill, body.name);
+      if (opts.lead) metaLead(j.prefill.email);
       metaTrack('initiate_checkout', pendingOrder);
       const rz = new window.Razorpay({
         key: j.key_id, amount: j.amount, currency: j.currency, order_id: j.order_id,
         name: j.name, description: j.description, prefill: j.prefill, notes: j.notes,
+        // The account is the email typed on our page, so Checkout must not change it. Razorpay asks for
+        // the phone itself (its contact field is required unless Razorpay turns on "optional contact").
+        readonly: { email: true },
         theme: { color: '#2563EB' },
         handler: (resp) => onRazorpayPaid(resp, j.prefill.email, body.product || 'kit'),
-        modal: { ondismiss: () => { clearPending(); setBusy(false); } },
+        modal: { ondismiss: () => { clearPending(); setBusy(false); if (onDismissRef.current) onDismissRef.current(j); } },
       });
       rz.on('payment.failed', (r) => {
         setError(`The payment did not go through${r?.error?.description ? `: ${r.error.description}` : ''}. ${FAILED_COPY}`);

@@ -916,10 +916,25 @@ const routes = [
         <p><a href="${MC.PATHS.signIn}">Already have an account? Sign in to your masterclass</a></p>
         <p class="ch-eyebrow">${esc(MC.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(MC.HERO.title)}</h1>
-        <div id="watch">
+        <div id="watch" class="mi-watch">
+          <!-- The one-field form (owner 2026-10-31), in the HTML so it shows before the 900 KB script.
+               Same words and classes as WatchGate in src/pages/MasterclassInfo.js. Typed text carries
+               over when the script starts (id mi-pre-email); sent before that, it comes back as ?email=. -->
+          <div class="mi-gate mi-gate-one">
+            <form action="${MC.PATHS.info}#watch" method="get" aria-labelledby="mi-gate-h">
+              <h2 id="mi-gate-h">${esc(MC.GATE.title)}</h2>
+              <p class="mi-gate-blurb">${esc(MC.GATE.blurb())}</p>
+              <label class="mi-gate-one-label" for="mi-pre-email">${esc(MC.GATE.label)}</label>
+              <div class="mi-gate-row">
+                <input id="mi-pre-email" type="email" name="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="name@gmail.com" autocomplete="email" required>
+                <button type="submit" class="ch-btn ch-btn-primary mi-gate-btn">${esc(MC.GATE.button)}</button>
+              </div>
+              <p class="mi-gate-money">${esc(MC.GATE.moneyBack())}</p>
+              <p class="mi-gate-consent">${esc(MC.GATE.terms)} <a href="/terms">Terms</a> · <a href="/refund#masterclass">Money-back promise</a>. ${esc(MC.GATE.consent)}</p>
+            </form>
+          </div>
           <h2>${esc(MC.VIDEO.title)}</h2>
           <p>${esc(MC.VIDEO.intro)}</p>
-          <p>${esc(MC.GATE.blurb())} <a href="${MC.PATHS.create}">${esc(MC.CTA.join())}</a></p>
           <p>${esc(MC.JOIN.qa)}. ${esc(MC.JOIN.kit())}</p>
         </div>
         <ul>${MC.HERO.facts.map((f) => `<li><strong>${esc(f.b)}</strong> ${esc(f.t)}</li>`).join('')}</ul>

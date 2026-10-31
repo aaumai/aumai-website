@@ -85,27 +85,32 @@ const VIDEO = {
   soon: 'The video will appear here soon. Please check again later today.',
 };
 
-// Step 1 of 2, where the video is (owner 2026-10-26; 2026-10-30: then the pay step). Four fields,
-// one button. An email that already has an account gets the code step instead (the site backend
-// never signs an existing account in from this form).
+// Where the video is (owner 2026-10-31: "just allow them to sign up with email directly"). ONE field,
+// the email, and Continue opens the Razorpay payment at once: no code first, no name, clinic or phone
+// (Razorpay asks for the phone). An email that already has the masterclass pays nothing: it gets a
+// real sign-in code. The same words are in scripts/prerender.js, so the form is in the page's HTML.
 const GATE = {
-  step: 'Step 1 of 2 · Your details',
   title: 'Watch the masterclass',
-  blurb: (l = ENTRY_LABEL) => `Tell us who you are. Next, join for ${l}, once, and the video plays right here.`,
+  blurb: (l = ENTRY_LABEL) => `Type your email and join for ${l}, once. The video plays right here.`,
+  label: 'Your email',
   button: 'Continue',
-  busy: 'One moment…',
-  codeTitle: 'You already have an account',
-  codeBlurb: 'We have emailed a 6-digit code to',
+  busy: 'Opening the payment…',
+  // The ad's own words (owner 2026-10-31), right under the button.
+  moneyBack: (l = ENTRY_LABEL) => `${l} · 1 hour · money back if it didn’t help`,
+  terms: 'Secure payment by Razorpay: UPI, card or net banking. By continuing you agree to the terms.',
+  dismissed: 'The payment window was closed, so nothing was paid. Press Continue to try again.',
+  codeTitle: 'You already have the masterclass',
+  codeBlurb: 'There is nothing to pay. We have emailed a 6-digit sign-in code to',
   codeHelp: 'It can take a minute. Check Spam or Promotions too.',
   codeButton: 'Open the masterclass',
   consent: 'We may message you on WhatsApp about the masterclass and the kit. No spam; reply STOP any time.',
   signedIn: 'You are signed in.',
 };
 
-// Step 2 of 2: the pay step for a signed-in member who cannot watch yet (owner 2026-10-30).
-// Same fields and checks as the kit: city, clinic type, the non-refundable tick.
+// The pay step for a signed-in member who cannot watch yet (owner 2026-10-30), e.g. one who closed the
+// payment window. Owner 2026-10-31: one button, no fields; Razorpay asks for the phone.
 const JOIN = {
-  step: 'Step 2 of 2 · Join',
+  step: 'One step left',
   title: (l = ENTRY_LABEL) => `Join for ${l}`,
   blurb: (l = ENTRY_LABEL) => `One payment of ${l}, and the whole masterclass plays right here, as often as you like.`,
   qa: 'Includes 24×7 Q&A on WhatsApp',
@@ -314,7 +319,7 @@ const TRAINER = {
 };
 
 const FAQS = [
-  { q: 'How do I watch it?', a: `Type your name, clinic, WhatsApp number and email at the top of this page, then join for ${ENTRY_LABEL}, once, by UPI, card or net banking. The video plays right there, as often as you like, and you can ask us questions 24×7 on WhatsApp.` },
+  { q: 'How do I watch it?', a: `Type your email at the top of this page and join for ${ENTRY_LABEL}, once, by UPI, card or net banking. The video plays right there, as often as you like, and you can ask us questions 24×7 on WhatsApp.` },
   { q: 'What does it cost?', a: `${ENTRY_LABEL}, once, to watch the masterclass, with 24×7 Q&A on WhatsApp. The kit (the Clinic Master Sheet, the Claude skill file, the Prompt Pack, the slides and the guides) is ${PRICE_LABEL} in total, also paid once: ${UPGRADE_LABEL} more after you have joined, or ${PRICE_LABEL} straight away, which includes watching. Nothing renews.` },
   { q: 'When can I watch it?', a: `Any time after you join. It runs about an hour, so you can watch when it suits you, pause to fill in your Clinic Master Sheet, and watch again any time: you have lifetime access.` },
   { q: 'How long do I have access?', a: 'For life. Once you join, your access has no end date, and neither does the kit once you buy it. Watch the video again whenever you like; the Clinic Master Sheet and the skill file are yours to keep.' },
