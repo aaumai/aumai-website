@@ -68,6 +68,26 @@
 .mi-gate .mi-gate-agree { flex-direction: row; align-items: flex-start; gap: 10px; margin-top: 18px; font-size: 15px; letter-spacing: 0; text-transform: none; line-height: 1.5; color: var(--lux-body); }
 .mi-gate .mi-gate-agree input { flex: none; width: 22px; height: 22px; min-height: 0; padding: 0; margin: 1px 0 0; }
 .mi-gate-link { margin-top: 12px; padding: 0; border: 0; background: none; font: inherit; font-size: 15px; color: var(--lux-navy); text-decoration: underline; cursor: pointer; }
+/* The one-field form (owner 2026-10-31): email + Continue on one row, the money-back line under it.
+   The same markup is in the page's HTML (scripts/prerender.js), so it shows before the script loads. */
+.mi-gate-one { max-width: 760px; margin: 0 auto; }
+.mi-gate .mi-gate-one-label { margin: 0 0 6px; }
+.mi-gate-row { display: flex; gap: 12px; align-items: stretch; }
+.mi-gate-row input { flex: 1 1 auto; min-width: 0; }
+.mi-gate .mi-gate-row .mi-gate-btn { margin-top: 0; width: auto; flex: none; min-height: 50px; padding-left: 28px; padding-right: 28px; }
+.mi-gate-money { margin: 12px 0 0; font-size: 15px; font-weight: 600; color: var(--lux-navy); }
+.mi-gate-note { margin: 12px 0 0; font-size: 15px; color: var(--lux-body); }
+.mi-gate-consent a { color: inherit; }
+@media (max-width: 760px) {
+  /* A 390 px phone: the button stays above the fold. */
+  .site-lux .ch-hero.lux-hero.mi-hero { padding-top: 18px; }
+  .mi-hero .mi-member { margin-bottom: 12px; }
+  .mi-watch { margin-top: 16px; }
+  .site-lux .ch-home .mi-gate-one h2 { font-size: 26px; }
+  .mi-gate-one .mi-gate-blurb { margin-bottom: 12px; font-size: 16px; }
+  .mi-gate-row { flex-direction: column; gap: 10px; }
+  .mi-gate .mi-gate-row .mi-gate-btn { width: 100%; }
+}
 .mi-video-wait { display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; }
 .mi-video-wait p { margin: 0; color: rgba(255, 255, 255, 0.85); font-size: 17px; }
 .mi-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
