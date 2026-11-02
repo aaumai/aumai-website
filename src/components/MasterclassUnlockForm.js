@@ -6,7 +6,8 @@ import { CLINIC_TYPES, priceLabels, useMasterclassCheckout } from '../lib/master
 // A signed-in member pays (owner 2026-10-25; two products since 2026-10-30):
 //   product 'entry': join for ₹299, once, to watch the masterclass with 24×7 WhatsApp Q&A;
 //   product 'kit':   unlock the kit, ₹700 more for a member who joined, ₹999 otherwise.
-// Clinic, city, clinic type and the non-refundable agree box; name, email and WhatsApp come
+// The kit: clinic, city, clinic type and the non-refundable agree box. The ₹299: one button
+// (owner 2026-10-31; Razorpay asks for the phone). Name, email and WhatsApp come
 // from the account (the backend takes them from the member cookie, so they are shown, not
 // sent). Used on /masterclass/my (the join step, and inline under "Your kit") and on
 // /masterclass/register (when a signed-in member without the kit lands there). Paid once.
@@ -23,8 +24,11 @@ export default function MasterclassUnlockForm({ me, price, product = 'kit', onPa
   const L = priceLabels(me, price);
   const entry = product === 'entry';
 
+  // ₹299 (owner 2026-10-31): one button, no fields; pressing it is the agreement (the terms line sits
+  // above it) and Razorpay asks for the phone. The kit keeps its fields and the non-refundable tick.
   const submit = (e) => {
     e.preventDefault();
+    if (entry) { co.pay({ product, agree: true, utm: utm || {}, referrer: document.referrer || null }); return; }
     co.pay({ product, clinic: f.clinic, city: f.city, clinic_type: f.clinic_type, agree: f.agree, utm: utm || {}, referrer: document.referrer || null });
   };
 
@@ -58,26 +62,32 @@ export default function MasterclassUnlockForm({ me, price, product = 'kit', onPa
       {entry && <p className="mc-join-qa">{MC.JOIN.qa}</p>}
       {!entry && L.kitUpgrade && <p className="mc-help" style={{ color: 'var(--sc-ink)' }}>The kit is {L.kitTotal} in total; you have paid {L.entry}.</p>}
       <dl className="mc-readonly">
-        <div><dt>Name</dt><dd>{name}</dd></div>
+        {name && <div><dt>Name</dt><dd>{name}</dd></div>}
         <div><dt>Email</dt><dd>{me.email}</dd></div>
         {me.whatsapp && <div><dt>WhatsApp</dt><dd>{me.whatsapp}</dd></div>}
       </dl>
-      <div className="sc-fields" style={{ gridTemplateColumns: '1fr' }}>
-        <label>Clinic name<input className="mc-input" value={f.clinic} onChange={set('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" required /></label>
-        <label>City<input className="mc-input" value={f.city} onChange={set('city')} placeholder="Pune" autoComplete="address-level2" required /></label>
-        <label>Clinic type
-          <select className="mc-input" value={f.clinic_type} onChange={set('clinic_type')} required>
-            <option value="">Choose one</option>
-            {CLINIC_TYPES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-          </select>
-        </label>
-      </div>
-      <label className="sc-consent" style={{ fontSize: 15 }}>
-        <input type="checkbox" checked={f.agree} onChange={set('agree')} style={{ width: 22, height: 22 }} />
-        {entry
-          ? <span>I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>. If I feel the masterclass did not add value, I get my {L.entry} fee back, <Link to="/refund#masterclass" target="_blank" rel="noopener">no questions asked</Link>.</span>
-          : <span>I understand the kit fee is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>}
-      </label>
+      {entry ? (
+        <p className="mc-help" style={{ color: 'var(--sc-ink)' }}>
+          <b>{MC.GATE.moneyBack(L.entry)}</b>. By paying you agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>; if the masterclass did not add value, you get your {L.entry} back, <Link to="/refund#masterclass" target="_blank" rel="noopener">no questions asked</Link>.
+        </p>
+      ) : (
+        <>
+          <div className="sc-fields" style={{ gridTemplateColumns: '1fr' }}>
+            <label>Clinic name<input className="mc-input" value={f.clinic} onChange={set('clinic')} placeholder="Smile Care Clinic" autoComplete="organization" required /></label>
+            <label>City<input className="mc-input" value={f.city} onChange={set('city')} placeholder="Pune" autoComplete="address-level2" required /></label>
+            <label>Clinic type
+              <select className="mc-input" value={f.clinic_type} onChange={set('clinic_type')} required>
+                <option value="">Choose one</option>
+                {CLINIC_TYPES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+              </select>
+            </label>
+          </div>
+          <label className="sc-consent" style={{ fontSize: 15 }}>
+            <input type="checkbox" checked={f.agree} onChange={set('agree')} style={{ width: 22, height: 22 }} />
+            <span>I understand the kit fee is <Link to="/refund#masterclass" target="_blank" rel="noopener">non-refundable</Link>, and I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>.</span>
+          </label>
+        </>
+      )}
       {co.error && <p className="sc-error" role="alert">{co.error}</p>}
       <button type="submit" className="sc-btn mc-btn-wide" disabled={co.busy}>
         {co.busy ? MC.JOIN.busy : (entry ? MC.JOIN.button(L.entry) : `Pay ${L.kit}${L.kitUpgrade ? '' : ' once'}`)}

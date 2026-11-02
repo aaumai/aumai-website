@@ -4,9 +4,7 @@ import { setPageSeo } from '../utils/seo';
 import { withYouTubeJsApi } from '../utils/videoFocus';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
-import WhatsAppNumberField from '../components/WhatsAppNumberField';
-import { defaultWhatsappCountry } from '../data/whatsappCountries';
-import { API, EP, CLINIC_TYPES, accessLevel, call, canWatch, priceLabels, readUtm, settlePending, useMasterclassCheckout } from '../lib/masterclassCheckout';
+import { API, EP, accessLevel, call, canWatch, emailTypoHint, priceLabels, readUtm, settlePending, useMasterclassCheckout, validEmail } from '../lib/masterclassCheckout';
 import './HomeClinic.css';
 import './MasterclassInfo.css';
 
@@ -14,8 +12,8 @@ import './MasterclassInfo.css';
 // masterclass is, what it is worth, what to expect. Built from the site's own
 // clinic system (.ch-*) under the "quiet luxury" theme (styles/lux.css), so it
 // reads like every other page. Every word is in src/data/masterclass.js, shared
-// with scripts/prerender.js. Right under the title (owner 2026-10-30): step 1, the
-// sign-up form (an account, signed in); step 2, "Join for ₹299" (Razorpay); then the
+// with scripts/prerender.js. Right under the title (owner 2026-10-31): one field, the
+// email; Continue opens the ₹299 Razorpay payment at once (no code first); then the
 // video plays in place. The video URL comes only from /me.video. The kit is ₹999 in
 // total (₹700 more after joining); members sign in at /masterclass/sign-in.
 
@@ -55,104 +53,216 @@ const live = (text, L) => String(text)
   .split(MC.UPGRADE_LABEL).join(L.upgrade)
   .split(MC.PRICE_LABEL).join(L.kitTotal);
 
+// The money-back line and the terms, under every ₹299 button (owner 2026-10-31: the ad's words).
+const PayTerms = ({ entry }) => (
+  <>
+    <p className="mi-gate-money">{MC.GATE.moneyBack(entry)}</p>
+    <p className="mi-gate-consent">
+      Secure payment by Razorpay: UPI, card or net banking. By continuing you agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link> and
+      the <Link to="/refund#masterclass" target="_blank" rel="noopener">money-back promise</Link>. {MC.GATE.consent}
+    </p>
+  </>
+);
+
+// What was typed into the form in the page's HTML before this script arrived (scripts/prerender.js puts the
+// same form there, id mi-pre-email). Read during the first render, while that HTML is still on screen.
+// The address never goes into the URL (review 2026-10-31: a URL reaches server logs, analytics and Meta's
+// PageView): that form's input has no name, and pressing Continue there only marks the form data-sent
+// (no page load), so Continue is pressed again here once the script runs (`sent`). A ?email= from the
+// older HTML (cached before this change) is still read once and stripped.
+const earlyEmail = () => {
+  try {
+    const el = document.getElementById('mi-pre-email');
+    const typed = el && el.value ? { email: el.value, focus: document.activeElement === el, sent: !!(el.form && el.form.dataset.sent) } : null;
+    const q = new URLSearchParams(window.location.search);
+    const fromUrl = q.get('email');
+    if (fromUrl) {
+      q.delete('email');
+      const rest = q.toString();
+      window.history.replaceState(window.history.state, '', `${window.location.pathname}${rest ? `?${rest}` : ''}${window.location.hash || '#watch'}`);
+    }
+    if (typed) return typed;
+    if (fromUrl) return { email: fromUrl.slice(0, 160), focus: false, sent: false };
+  } catch (e) { /* nothing typed yet */ }
+  return { email: '', focus: false, sent: false };
+};
+
 /**
- * Step 1, where the video is (owner 2026-10-26; the pay step follows since 2026-10-30).
- * POST /sign-up: a new email is signed in by the reply (signed_in: true, the /me payload), and
- * the join step takes the form's place; an email that already has an account gets the code step
- * (the site backend never signs an existing account in from here). `mc_trap` is a honeypot the
- * visitor never sees.
+ * Where the video is (owner 2026-10-31: "just allow them to sign up with email directly"). ONE field:
+ * Continue → POST /join → the ₹299 Razorpay Checkout opens at once, email prefilled and locked, and
+ * Razorpay asks for the phone. No code before paying, and no account or session either (site backend
+ * review 2026-10-31): the payment makes the account and signs this browser in, so the video plays here.
+ * Closing the payment window keeps the form with "nothing was paid" (a browser already signed in to
+ * that account gets the one-button pay step). An email that already has the masterclass pays nothing:
+ * the backend emails a real sign-in code (200 check_email) and the code step shows, worded the same
+ * whether or not the address has paid. A refusal (honeypot, too many tries) is shown as it is, never
+ * as "check your email". A likely typo in the address (gmial.com) is offered for correction before
+ * the payment, because Razorpay locks the email. `mc_trap` is a honeypot the visitor never sees.
  */
-function WatchGate({ onMember, entryLabel }) {
-  const [f, setF] = useState({ name: '', clinic: '', whatsapp: '', email: '', mc_trap: '' });
-  const [waCountry, setWaCountry] = useState(defaultWhatsappCountry);
+function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
+  const [early] = useState(earlyEmail);
+  const [email, setEmail] = useState(early.email);
+  const [trap, setTrap] = useState('');
   const [step, setStep] = useState('form'); // form | code
   const [code, setCode] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const set = (k) => (e) => setF((x) => ({ ...x, [k]: e.target.value }));
-  const post = async (path, body) => {
-    const r = await fetch(`${API}${path}`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-    let j = {};
-    try { j = await r.json(); } catch (e) { /* no body */ }
-    return { ok: r.ok, j };
+  const [codeEmail, setCodeEmail] = useState('');
+  const [codeMsg, setCodeMsg] = useState(''); // the backend's own "we have emailed a code" words
+  const [note, setNote] = useState('');
+  const [busy, setBusy] = useState(false); // the code check
+  const [error, setError] = useState(''); // the code step's own error
+  // Typo hint: shown for the address it was checked on (on leaving the field, or on Continue).
+  const [hintFor, setHintFor] = useState('');
+  const [hintFromSubmit, setHintFromSubmit] = useState(false);
+  const [typoOk, setTypoOk] = useState(''); // "No, mine is right" for this address
+  const inputRef = useRef(null);
+  const joined = useRef(null); // the /join reply: was this browser signed in by it?
+  const autoSent = useRef(false);
+  const co = useMasterclassCheckout({
+    onPaid,
+    contact,
+    onAlreadyPaid: () => onMember(null), // their own session can already watch: /me shows the video
+    onAlreadyMember: (j) => { setCodeEmail(j.email || email.trim().toLowerCase()); setCodeMsg(j.message || ''); setCode(''); setError(''); setStep('code'); },
+    // Closed the payment window: a browser signed in to this account gets the one-button pay step; otherwise the form stays.
+    onDismiss: () => { if (joined.current && joined.current.signed_in) onMember(null); else setNote(MC.GATE.dismissed); },
+  });
+  const clean = email.trim().toLowerCase();
+  const suggestion = hintFor && hintFor === email && typoOk !== clean ? emailTypoHint(clean) : null;
+
+  const go = (address) => {
+    setNote(''); setHintFor(''); setHintFromSubmit(false);
+    co.pay(
+      { product: 'entry', agree: true, email: address, mc_trap: trap, utm: utm || {}, referrer: document.referrer || null },
+      { path: EP.join, registration: true, onReply: (j) => { joined.current = j; } },
+    );
   };
-  const submit = async (e) => {
-    e.preventDefault();
-    const email = f.email.trim().toLowerCase();
-    const digits = f.whatsapp.replace(/\D/g, '');
-    if (f.name.trim().length < 2) { setError('Please type your name.'); return; }
-    if (!f.clinic.trim()) { setError('Please type your clinic’s name.'); return; }
-    if (digits.length < 7 || digits.length > 15) { setError('Please type your WhatsApp number.'); return; } // the backend checks it for the country
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Please type your email address, for example name@gmail.com.'); return; }
+  const submit = (e) => {
+    if (e) e.preventDefault();
+    setNote('');
+    if (!validEmail(clean)) { co.setError('Please type your email address, for example name@gmail.com.'); return; }
+    if (typoOk !== clean && emailTypoHint(clean)) { co.setError(''); setHintFor(email); setHintFromSubmit(true); return; }
+    go(clean);
+  };
+  // After either answer the hint box goes, so focus returns to the field (not lost to the page).
+  const takeSuggestion = () => {
+    const s = suggestion;
+    setEmail(s); setHintFor('');
+    if (inputRef.current) inputRef.current.focus();
+    if (hintFromSubmit) go(s);
+  };
+  const keepTyped = () => {
+    setTypoOk(clean); setHintFor('');
+    if (inputRef.current) inputRef.current.focus();
+    if (hintFromSubmit) go(clean);
+  };
+  const resend = async () => {
     setBusy(true); setError('');
     try {
-      const { ok, j } = await post('/sign-up', { name: f.name.trim(), clinic: f.clinic.trim(), whatsapp: f.whatsapp.trim(), whatsapp_country: waCountry, email, mc_trap: f.mc_trap });
-      if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); return; }
-      if (j.signed_in) { onMember(j); return; }
-      setF((x) => ({ ...x, email })); setStep('code');
+      const { ok, j } = await call(EP.requestCode, { email: codeEmail });
+      if (!ok) setError(j.error || 'Something went wrong. Please try again.'); else { setCode(''); setCodeMsg(MC.GATE.resent); }
     } catch (err) {
       setError('We could not connect. Check your internet connection and try again.');
     } finally { setBusy(false); }
   };
+
+  useEffect(() => {
+    if (early.focus && inputRef.current) {
+      inputRef.current.focus();
+      try { const n = inputRef.current.value.length; inputRef.current.setSelectionRange(n, n); } catch (e) { /* type=email has no caret API */ }
+    }
+  }, [early.focus]);
+  // Continue was pressed on the page's HTML form before this script ran: press it now, once.
+  useEffect(() => {
+    // Not over a payment already waiting for its confirmation (a UPI reload): that one is checked instead.
+    if (early.sent && !autoSent.current && !co.hasPending) { autoSent.current = true; submit(); }
+  }, [early.sent]); // eslint-disable-line react-hooks/exhaustive-deps
   const verify = async (e) => {
     e.preventDefault();
     const digits = code.replace(/\D/g, '');
     if (digits.length !== 6) { setError('Type the 6-digit code from our email.'); return; }
     setBusy(true); setError('');
     try {
-      const { ok, j } = await post('/verify', { email: f.email, code: digits });
+      const { ok, j } = await call(EP.verify, { email: codeEmail, code: digits });
       if (!ok) { setError(j.error || 'That code is not right or has expired. Check the newest email.'); return; }
       onMember(j);
     } catch (err) {
       setError('We could not connect. Check your internet connection and try again.');
     } finally { setBusy(false); }
   };
-  return (
-    <div className="mi-gate" data-testid="mi-gate">
-      {step === 'form' ? (
-        <form onSubmit={submit} noValidate>
-          <p className="mi-gate-step">{MC.GATE.step}</p>
-          <h2 id="mi-gate-h">{MC.GATE.title}</h2>
-          <p className="mi-gate-blurb">{MC.GATE.blurb(entryLabel)}</p>
-          <div className="mi-gate-grid">
-            <label>Your name<input value={f.name} onChange={set('name')} placeholder="Dr Meera Joshi" autoComplete="name" required /></label>
-            <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Joshi Clinic" autoComplete="organization" required /></label>
-            <WhatsAppNumberField value={f.whatsapp} country={waCountry} onNumber={(v) => setF((x) => ({ ...x, whatsapp: v }))} onCountry={setWaCountry} />
-            <label>Email<input type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={f.email} onChange={set('email')} placeholder="name@gmail.com" autoComplete="email" required /></label>
-          </div>
-          <input className="mi-gate-hp" type="text" name="mc_trap" value={f.mc_trap} onChange={set('mc_trap')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
-          {error && <p className="mi-gate-error" role="alert">{error}</p>}
-          <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? MC.GATE.busy : MC.GATE.button}</button>
-          <p className="mi-gate-consent">{MC.GATE.consent}</p>
-        </form>
-      ) : (
+
+  if (co.stage === 'confirming') {
+    return (
+      <div className="mi-gate" role="status" data-testid="mi-gate">
+        <h2 id="mi-gate-h">{MC.JOIN.confirmTitle}</h2>
+        <p className="mi-gate-blurb">{co.confirmMsg || 'We are checking your payment. This can take a few minutes.'}</p>
+        {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
+        <button type="button" className="ch-btn ch-btn-primary mi-gate-btn" onClick={co.checkStatus} disabled={co.checking}>{co.checking ? 'Checking…' : 'Check again'}</button>
+        <p className="mi-gate-consent">{MC.JOIN.confirmHelp} Questions: <a href={`mailto:${contact}`}>{contact}</a>.</p>
+        {co.hasPending && <button type="button" className="mi-gate-link" onClick={co.startAgain}>I did not pay. Start again</button>}
+      </div>
+    );
+  }
+
+  if (step === 'code') {
+    return (
+      <div className="mi-gate" data-testid="mi-gate">
         <form onSubmit={verify} noValidate>
           <h2 id="mi-gate-h">{MC.GATE.codeTitle}</h2>
-          <p className="mi-gate-blurb">{MC.GATE.codeBlurb} <b>{f.email}</b>. {MC.GATE.codeHelp}</p>
-          <div className="mi-gate-grid">
-            <label>6-digit code<input inputMode="numeric" autoComplete="one-time-code" value={code} onChange={(e) => setCode(e.target.value)} maxLength={7} required /></label>
-          </div>
+          <p className="mi-gate-blurb">{codeMsg || <>{MC.GATE.codeBlurb} <b>{codeEmail}</b>. {MC.GATE.codeHelp}</>}</p>
+          <label className="mi-gate-one-label">6-digit code<input inputMode="numeric" autoComplete="one-time-code" value={code} onChange={(e) => setCode(e.target.value)} maxLength={7} required autoFocus /></label>
           {error && <p className="mi-gate-error" role="alert">{error}</p>}
-          <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? MC.GATE.busy : MC.GATE.codeButton}</button>
+          <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? 'Checking…' : MC.GATE.codeButton}</button>
+          <div className="mi-gate-typo-actions">
+            <button type="button" className="mi-gate-link" onClick={resend} disabled={busy}>{MC.GATE.resend}</button>
+            <button type="button" className="mi-gate-link" onClick={() => { setStep('form'); setError(''); }}>Use a different email</button>
+          </div>
         </form>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mi-gate mi-gate-one" data-testid="mi-gate">
+      <form onSubmit={submit} noValidate aria-labelledby="mi-gate-h">
+        <h2 id="mi-gate-h">{MC.GATE.title}</h2>
+        <p className="mi-gate-blurb">{MC.GATE.blurb(entryLabel)}</p>
+        <label className="mi-gate-one-label" htmlFor="mi-email">{MC.GATE.label}</label>
+        <div className="mi-gate-row">
+          <input id="mi-email" ref={inputRef} type="email" name="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={email}
+            onChange={(e) => { setEmail(e.target.value); setHintFromSubmit(false); }} onBlur={() => { if (validEmail(email)) setHintFor(email); }}
+            placeholder="name@gmail.com" autoComplete="email" required aria-describedby={suggestion ? 'mi-typo' : undefined} />
+          <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={co.busy}>{co.busy ? MC.GATE.busy : MC.GATE.button}</button>
+        </div>
+        <input className="mi-gate-hp" type="text" name="mc_trap" value={trap} onChange={(e) => setTrap(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" />
+        {suggestion && (
+          <div className="mi-gate-typo" id="mi-typo" role="alert">
+            {hintFromSubmit && <p className="mi-gate-typo-stop">{MC.GATE.typoStop}</p>}
+            <p>{MC.GATE.typo} <b>{suggestion}</b>?</p>
+            <div className="mi-gate-typo-actions">
+              <button type="button" className="mi-gate-typo-yes" onClick={takeSuggestion}>{MC.GATE.typoUse}</button>
+              <button type="button" className="mi-gate-link" onClick={keepTyped}>{MC.GATE.typoKeep}</button>
+            </div>
+          </div>
+        )}
+        {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
+        {co.error && <p className="mi-gate-note">{MC.GATE.haveCode} <Link to={MC.PATHS.signIn}>Sign in</Link></p>}
+        {note && !co.error && <p className="mi-gate-note" role="status">{note}</p>}
+        <PayTerms entry={entryLabel} />
+      </form>
     </div>
   );
 }
 
 /**
- * Step 2 (owner 2026-10-30): a signed-in member who cannot watch yet joins for ₹299 through
- * Razorpay Checkout (src/lib/masterclassCheckout.js: the same flow as the kit, product 'entry').
- * After a UPI app switch reloads the page, the hook finds the pending order and asks order-status.
- * Name, email and WhatsApp come from the account; clinic, city, clinic type and the tick are typed.
+ * The pay step for a signed-in member who cannot watch yet (owner 2026-10-30): someone who closed the
+ * payment window, or signed in to an unpaid account. Owner 2026-10-31: one button, no fields; Razorpay
+ * asks for the phone. After a UPI app switch reloads the page, the hook finds the pending order and asks
+ * order-status.
  */
 function JoinStep({ me, L, onPaid, onAlreadyIn, contact, utm }) {
-  const [f, setF] = useState({ clinic: me.clinic || '', city: me.city || '', clinic_type: me.clinic_type || '', agree: false });
   const co = useMasterclassCheckout({ onPaid, onAlreadyPaid: onAlreadyIn, contact });
-  const set = (k) => (e) => setF((x) => ({ ...x, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
   const submit = (e) => {
     e.preventDefault();
-    co.pay({ product: 'entry', clinic: f.clinic.trim(), city: f.city.trim(), clinic_type: f.clinic_type, agree: f.agree, utm: utm || {}, referrer: document.referrer || null });
+    co.pay({ product: 'entry', agree: true, utm: utm || {}, referrer: document.referrer || null });
   };
 
   if (co.stage === 'confirming') {
@@ -185,24 +295,11 @@ function JoinStep({ me, L, onPaid, onAlreadyIn, contact, utm }) {
         <h2 id="mi-gate-h">{MC.JOIN.title(L.entry)}</h2>
         <p className="mi-gate-blurb">{MC.JOIN.blurb(L.entry)}</p>
         <p className="mi-gate-qa">{MC.JOIN.qa}</p>
-        <p className="mi-gate-who">Signed in as <b>{me.name || me.display_name}</b> · {me.email}</p>
-        <div className="mi-gate-grid">
-          <label>Clinic name<input value={f.clinic} onChange={set('clinic')} placeholder="Joshi Clinic" autoComplete="organization" required /></label>
-          <label>City<input value={f.city} onChange={set('city')} placeholder="Pune" autoComplete="address-level2" required /></label>
-          <label>Clinic type
-            <select value={f.clinic_type} onChange={set('clinic_type')} required>
-              <option value="">Choose one</option>
-              {CLINIC_TYPES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
-          </label>
-        </div>
-        <label className="mi-gate-agree">
-          <input type="checkbox" checked={f.agree} onChange={set('agree')} />
-          <span>I agree to the <Link to="/terms" target="_blank" rel="noopener">terms</Link>. If I feel the masterclass did not add value, I get my {L.entry} fee back, <Link to="/refund#masterclass" target="_blank" rel="noopener">no questions asked</Link>.</span>
-        </label>
+        <p className="mi-gate-who">Signed in as <b>{me.name || me.email}</b>{me.name ? ` · ${me.email}` : ''}</p>
         {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
         <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={co.busy}>{co.busy ? MC.JOIN.busy : MC.JOIN.button(L.entry)}</button>
-        <p className="mi-gate-consent">{MC.JOIN.help} {MC.JOIN.kit(L.kitTotal, L.upgrade)}</p>
+        <PayTerms entry={L.entry} />
+        <p className="mi-gate-consent">{MC.JOIN.kit(L.kitTotal, L.upgrade)}</p>
       </form>
     </div>
   );
@@ -339,7 +436,7 @@ export default function MasterclassInfo() {
                 <p className="mi-gate-blurb">{L.entryMessage || MC.JOIN.closedText} <WaLink>{MC.WHATSAPP.display}</WaLink></p>
               </div>
             )}
-            {!member && L.entryOpen && <WatchGate onMember={onMember} entryLabel={L.entry} />}
+            {!member && L.entryOpen && <WatchGate onMember={onMember} onPaid={onJoined} entryLabel={L.entry} contact={contact} utm={utm.current} />}
             {member && !watching && <JoinStep me={me} L={L} onPaid={onJoined} onAlreadyIn={onJoined} contact={contact} utm={utm.current} />}
             {member && watching && (
               <>

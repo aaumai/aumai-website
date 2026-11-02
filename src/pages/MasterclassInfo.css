@@ -50,7 +50,7 @@
 .site-lux .ch-home .mi-hero .mi-watch-kit a:not(.ch-btn) { color: var(--lux-gold-2); }
 .mi-gate { background: rgba(250, 248, 244, 0.98); color: var(--lux-navy); border: 1px solid var(--lux-line); padding: 32px 36px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7); }
 .site-lux .ch-home .mi-gate h2 { margin: 0 0 6px; font-family: var(--lux-serif); font-weight: 400; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; color: var(--lux-navy); }
-.mi-gate-blurb { margin: 0 0 20px; font-size: 17px; line-height: 1.5; color: var(--lux-body); }
+.mi-gate-blurb { margin: 0 0 20px; font-size: 17px; line-height: 1.5; color: var(--lux-body); overflow-wrap: anywhere; }
 .mi-gate-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
 .mi-gate label { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lux-bronze); }
 .mi-gate input { font: inherit; font-size: 17px; letter-spacing: 0; text-transform: none; padding: 12px 14px; min-height: 50px; border: 1px solid var(--lux-line); border-radius: 0; background: #fff; color: var(--lux-navy); width: 100%; }
@@ -68,6 +68,56 @@
 .mi-gate .mi-gate-agree { flex-direction: row; align-items: flex-start; gap: 10px; margin-top: 18px; font-size: 15px; letter-spacing: 0; text-transform: none; line-height: 1.5; color: var(--lux-body); }
 .mi-gate .mi-gate-agree input { flex: none; width: 22px; height: 22px; min-height: 0; padding: 0; margin: 1px 0 0; }
 .mi-gate-link { margin-top: 12px; padding: 0; border: 0; background: none; font: inherit; font-size: 15px; color: var(--lux-navy); text-decoration: underline; cursor: pointer; }
+/* The one-field form (owner 2026-10-31): email + Continue on one row, the money-back line under it.
+   The same markup is in the page's HTML (scripts/prerender.js), so it shows before the script loads. */
+.mi-gate-one { max-width: 760px; margin: 0 auto; }
+.mi-gate .mi-gate-one-label { margin: 0 0 6px; }
+.mi-gate-row { display: flex; gap: 12px; align-items: stretch; }
+.mi-gate-row input { flex: 1 1 auto; min-width: 0; }
+.mi-gate .mi-gate-row .mi-gate-btn { margin-top: 0; width: auto; flex: none; min-height: 50px; padding-left: 28px; padding-right: 28px; }
+.mi-gate-money { margin: 12px 0 0; font-size: 15px; font-weight: 600; color: var(--lux-navy); }
+.mi-gate-note { margin: 12px 0 0; font-size: 15px; color: var(--lux-body); }
+.mi-gate-consent a { color: inherit; }
+@media (max-width: 760px) {
+  /* A 390 px phone: the button stays above the fold. */
+  .site-lux .ch-hero.lux-hero.mi-hero { padding-top: 18px; }
+  .mi-hero .mi-member { margin-bottom: 12px; }
+  .mi-watch { margin-top: 16px; }
+  .site-lux .ch-home .mi-gate-one h2 { font-size: 26px; }
+  .mi-gate-one .mi-gate-blurb { margin-bottom: 12px; font-size: 16px; }
+  .mi-gate-row { flex-direction: column; gap: 10px; }
+  .mi-gate .mi-gate-row .mi-gate-btn { width: 100%; }
+}
+/* A 360 px phone (360×640, most Android phones in India; review 2026-10-31): Continue must sit above the fold
+   with the browser's own bars on screen too. The title runs on two lines, the eyebrow on one, less air. */
+@media (max-width: 420px) {
+  .site-lux .ch-hero.lux-hero.mi-hero { padding-top: 10px; }
+  .mi-hero .mi-member { margin-bottom: 4px; font-size: 12.5px; }
+  .site-lux .ch-home .mi-hero-top .ch-eyebrow { gap: 8px; font-size: 10px; letter-spacing: 0.14em; }
+  .site-lux .ch-home .mi-hero-top .ch-eyebrow::before { width: 16px; }
+  .site-lux .ch-home .mi-hero .mi-hero-top .ch-hero-title { font-size: 33px; line-height: 1.05; margin: 6px auto 0; }
+  .mi-watch { margin-top: 12px; }
+  .mi-gate.mi-gate-one { padding: 16px 16px 18px; }
+  .site-lux .ch-home .mi-gate-one h2 { font-size: 24px; margin-bottom: 4px; }
+  .mi-gate-one .mi-gate-blurb { margin-bottom: 8px; font-size: 15px; line-height: 1.45; }
+  .mi-gate .mi-gate-one-label { margin-bottom: 4px; }
+  .mi-gate-row { gap: 8px; }
+  .mi-gate-one .mi-gate-row input, .mi-gate .mi-gate-row .mi-gate-btn { min-height: 48px; }
+  .mi-gate-money { margin-top: 10px; font-size: 14px; }
+  /* The page's HTML before the script (scripts/prerender.js, section .mi-pre): the same squeeze. */
+  .mi-pre .mi-pre-signin { margin: 0 0 6px; font-size: 13px; }
+  .mi-pre .ch-eyebrow { margin-bottom: 8px; padding: 4px 10px; font-size: 10.5px; letter-spacing: 0.06em; }
+  .mi-pre .ch-hero-title { font-size: 30px; margin-bottom: 0; }
+}
+/* The typo hint under the email (review 2026-10-31): Razorpay locks the address, so a likely slip is caught here. */
+.mi-gate-typo { margin: 10px 0 0; padding: 10px 12px; border: 1px solid #f59e0b; background: #fffbeb; color: var(--lux-navy); font-size: 15px; line-height: 1.45; }
+.mi-gate-typo p { margin: 0; }
+.mi-gate-typo b { overflow-wrap: anywhere; }
+.mi-gate-typo .mi-gate-typo-stop { margin-bottom: 4px; font-weight: 600; color: #92400e; }
+.mi-gate-typo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin-top: 8px; }
+.mi-gate-typo-yes { min-height: 40px; padding: 8px 16px; border: 1px solid var(--lux-navy); background: var(--lux-navy); color: #fff; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+.mi-gate-typo-yes:focus-visible { outline: 2px solid var(--lux-navy); outline-offset: 2px; }
+.mi-gate-typo .mi-gate-link { margin-top: 0; }
 .mi-video-wait { display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; }
 .mi-video-wait p { margin: 0; color: rgba(255, 255, 255, 0.85); font-size: 17px; }
 .mi-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }

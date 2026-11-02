@@ -20,6 +20,8 @@ export const EP = {
   price: '/price',
   me: '/me',
   signUp: '/sign-up',
+  join: '/join', // the one-field form (owner 2026-10-31): email in, the ₹299 Checkout out
+
   requestCode: '/request-code',
   verify: '/verify',
   signOut: '/sign-out',
@@ -31,8 +33,52 @@ export const EP = {
 };
 
 export const CLINIC_TYPES = [['dental', 'Dental'], ['skin', 'Skin / aesthetic'], ['other', 'Other']];
-export const FAILED_COPY = 'If money left your account, your bank returns it automatically within 5–7 working days. You can press Pay again.';
+export const FAILED_COPY = 'If money left your account, your bank returns it automatically within 5–7 working days. You can try again.';
 export const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || '').trim());
+
+// A likely typo in the email's domain → the corrected address, or null (review 2026-10-31). The ₹299 payment
+// is locked to the address typed (Razorpay shows it read-only), so "gmial.com" means no code, no receipt and
+// no way back in. Only the big providers are suggested; any domain we know is real is left alone.
+const POPULAR = ['gmail.com', 'yahoo.com', 'yahoo.co.in', 'hotmail.com', 'outlook.com', 'rediffmail.com', 'icloud.com', 'live.com'];
+const REAL = new Set([...POPULAR, 'mail.com', 'email.com', 'gmx.com', 'ymail.com', 'msn.com', 'aol.com', 'zoho.com', 'zohomail.in',
+  'protonmail.com', 'proton.me', 'yahoo.in', 'outlook.in', 'hotmail.co.uk', 'live.in', 'me.com', 'mac.com', 'googlemail.com', 'aumai.co.in']);
+const TYPO_ENDINGS = new Set(['con', 'cmo', 'cpm', 'cim', 'vom', 'xom', 'co', 'cm', 'om', 'comm', 'coom', 'comn', 'c', 'ocm', 'com.', 'co.']);
+// Edit distance with swaps of two neighbouring letters (gmial → gmail is one step).
+function editDistance(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j += 1) d[0][j] = j;
+  for (let i = 1; i <= a.length; i += 1) {
+    for (let j = 1; j <= b.length; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+  }
+  return d[a.length][b.length];
+}
+export function emailTypoHint(email) {
+  const s = String(email || '').trim().toLowerCase();
+  const at = s.lastIndexOf('@');
+  if (at < 1) return null;
+  const domain = s.slice(at + 1);
+  if (domain.length < 4 || REAL.has(domain)) return null;
+  // The provider's own name with another ending (yahoo.co.uk, live.ca, gmail.in): a real country domain, left
+  // alone (review 2026-11-02). Only a mistyped ".com" ending is corrected (gmail.con, hotmail.co).
+  const dot = domain.indexOf('.');
+  const name = dot > 0 ? domain.slice(0, dot) : domain;
+  const ending = dot > 0 ? domain.slice(dot + 1) : '';
+  const own = POPULAR.find((p) => p.split('.')[0] === name);
+  if (own && dot > 0) return TYPO_ENDINGS.has(ending) ? `${s.slice(0, at)}@${own}` : null;
+  let best = null;
+  let bestD = 3;
+  for (const p of POPULAR) {
+    const dist = editDistance(domain, p);
+    if (dist < bestD) { best = p; bestD = dist; }
+  }
+  // Two edits only on a longer domain ("gmal.co" → gmail.com), never on a short one that may be a real company.
+  if (!best || (bestD === 2 && domain.length < 7)) return null;
+  return `${s.slice(0, at)}@${best}`;
+}
 export const fileUrl = (f) => `${API}${EP.files}/${encodeURIComponent(f.name)}`;
 export const downloadAllUrl = () => `${API}${EP.downloadAll}`;
 // Members from before 2026-10-25 have no `paid` flag: every one of them paid, so only an explicit false is unpaid.
@@ -118,22 +164,30 @@ export async function call(path, body, method) {
   return { status: r.status, ok: r.ok, j };
 }
 
+// Review 2026-11-02: the page loads checkout.js on arrival, so a failed first load (a 3G blip) must not leave a dead
+// <script> behind that the next Continue waits on for ever: a failed tag is removed, and every wait gives up after 15 s.
 export function loadCheckout() {
   if (window.Razorpay) return Promise.resolve(true);
   return new Promise((resolve) => {
     let s = document.querySelector(`script[src="${CHECKOUT_JS}"]`);
+    if (s && s.dataset.failed) { s.remove(); s = null; }
     if (!s) { s = document.createElement('script'); s.src = CHECKOUT_JS; s.async = true; document.body.appendChild(s); }
-    s.addEventListener('load', () => resolve(true));
-    s.addEventListener('error', () => resolve(false));
+    const el = s;
+    const timer = setTimeout(() => resolve(!!window.Razorpay), 15000);
+    el.addEventListener('load', () => { clearTimeout(timer); resolve(true); });
+    el.addEventListener('error', () => { clearTimeout(timer); el.dataset.failed = '1'; resolve(false); });
   });
 }
 
 /**
  * Meta conversions through the Aumy tag the site already loads (index.html, bm.aumyai.com tag.js → Meta
- * CAPI + browser pixel, pixel "Aumy"). Checkout started when the payment window opens; Purchase once the
- * backend confirms the payment. The order id is the event id, so the reload path (order-status) and
- * Razorpay's handler cannot count one payment twice. No Lead here: BM already sends one when the lead is
- * created. Never throws: tracking must not stop a payment.
+ * CAPI + browser pixel, pixel "Aumy"; the tag sends both with ONE event id, so Meta counts each once).
+ * CompleteRegistration when the one-field form is sent (review 2026-10-31: not Lead, which stays for BM's
+ * qualified WhatsApp leads, so the masterclass sign-ups never inflate the product ads' Lead count),
+ * Checkout started when the payment window opens, Purchase once the backend confirms the payment.
+ * Purchase and Checkout use the order id in the event id, so the reload path (order-status) and Razorpay's
+ * handler cannot count one payment twice; CompleteRegistration uses the email, so pressing Continue again
+ * does not count a second sign-up. Never throws: tracking must not stop a payment.
  */
 function metaTrack(code, order) {
   try {
@@ -144,6 +198,27 @@ function metaTrack(code, order) {
       content_name: order.product === 'entry' ? 'masterclass_entry' : 'masterclass_kit',
       order_id: order.order_id, event_id: `${code}_${order.order_id}`,
     });
+  } catch (e) { /* tracking only */ }
+}
+
+// A short, stable id for one email (djb2): the same sign-up always carries the same event id.
+const emailKey = (email) => {
+  let h = 5381;
+  const s = String(email || '').trim().toLowerCase();
+  for (let i = 0; i < s.length; i += 1) h = ((h * 33) ^ s.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+};
+const REG_STORE = 'aumai_mc_reg'; // localStorage: the emails this browser has already sent CompleteRegistration for
+function metaRegistration(email) {
+  try {
+    if (typeof window.aumy !== 'function' || !email) return;
+    const key = emailKey(email); // kept only in this browser, never sent: a bare hash of an email could be matched
+    const done = readJson('local', REG_STORE) || [];
+    if (done.includes(key)) return;
+    // The Aumy tag maps complete_registration to Meta's CompleteRegistration (pixel + CAPI, one event id).
+    const rand = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+    window.aumy('track', 'complete_registration', { content_name: 'masterclass_signup', event_id: `reg_mc_${rand}` });
+    writeJson('local', REG_STORE, [...done, key].slice(-20));
   } catch (e) { /* tracking only */ }
 }
 
@@ -163,7 +238,7 @@ function metaIdentify(prefill, name) {
  * Returns { stage: 'form' | 'confirming', confirmMsg, error, setError, busy, checking,
  *           pay(body), checkStatus(), startAgain(), contactLine }.
  */
-export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
+export function useMasterclassCheckout({ onPaid, onAlreadyPaid, onAlreadyMember, onDismiss, contact }) {
   const [stage, setStage] = useState(() => (readPending() ? 'confirming' : 'form'));
   const [confirmMsg, setConfirmMsg] = useState('');
   const [error, setError] = useState('');
@@ -171,7 +246,12 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
   const [checking, setChecking] = useState(false);
   const onPaidRef = useRef(onPaid);
   const onAlreadyPaidRef = useRef(onAlreadyPaid);
-  useEffect(() => { onPaidRef.current = onPaid; onAlreadyPaidRef.current = onAlreadyPaid; }, [onPaid, onAlreadyPaid]);
+  const onAlreadyMemberRef = useRef(onAlreadyMember);
+  const onDismissRef = useRef(onDismiss);
+  useEffect(() => {
+    onPaidRef.current = onPaid; onAlreadyPaidRef.current = onAlreadyPaid;
+    onAlreadyMemberRef.current = onAlreadyMember; onDismissRef.current = onDismiss;
+  }, [onPaid, onAlreadyPaid, onAlreadyMember, onDismiss]);
 
   const landPaid = useCallback((j, email, product) => {
     const p = readPending();
@@ -189,9 +269,9 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
       const { status, j } = await call(EP.orderStatus, { order_id: p.order_id, claim: p.claim });
       const booked = !!(j.payment_booked || j.paid); // the backend's name is payment_booked; paid is its old alias
       if (booked && (j.ok || j.sign_in)) { landPaid(j, p.email, p.product); return; }
-      if (status === 403 && booked) { clearPending(); setError(j.error); return; }
+      if (status === 403 && booked) { clearPending(); setStage('form'); setError(j.error); return; }
       if (j.unknown) { clearPending(); setStage('form'); return; }
-      if (j.failed) { clearPending(); setError(j.error); return; }
+      if (j.failed) { clearPending(); setStage('form'); setError(j.error); return; }
       setConfirmMsg(j.message || j.error || 'We are checking your payment. This can take a few minutes.');
     } catch (e) {
       setConfirmMsg('We could not connect. Check your internet connection and press Check again.');
@@ -218,28 +298,42 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, contact }) {
 
   // `body` is what /order needs: product ('entry' | 'kit'; the backend's default is 'kit'),
   // name, clinic, city, email, whatsapp, clinic_type, agree (+ utm, referrer). For a signed-in
-  // member the backend takes name, email and WhatsApp from the account, so only clinic, city,
-  // clinic_type and agree are sent. Nothing left to buy (409 already_paid for the kit,
-  // 409 already_watching for entry): the page refetches /me instead.
-  const pay = async (body) => {
+  // member the backend takes name, email and WhatsApp from the account. The ₹299 needs only
+  // agree (owner 2026-10-31). Nothing left to buy (409 already_paid for the kit, 409
+  // already_watching for entry): the page refetches /me instead.
+  // opts.path = EP.join for the one-field form: { email } in, the same Checkout reply out (plus
+  // signed_in), or 200 check_email (nothing to pay: a sign-in code was emailed, worded the same
+  // whether or not the address has paid: onAlreadyMember). opts.registration sends Meta's
+  // CompleteRegistration once the order exists. opts.onReply(j) sees the order reply.
+  const pay = async (body, opts = {}) => {
     setError('');
     setBusy(true);
     try {
-      const { status, ok, j } = await call(EP.order, body);
+      const { status, ok, j } = await call(opts.path || EP.order, body);
+      if (ok && j.check_email) {
+        setBusy(false);
+        if (onAlreadyMemberRef.current) onAlreadyMemberRef.current(j); else setError(j.message || 'Check your email for a sign-in code.');
+        return;
+      }
       if (status === 409 && (j.already_paid || j.already_watching)) { setBusy(false); if (onAlreadyPaidRef.current) onAlreadyPaidRef.current(j); else setError(j.error || 'You already have access.'); return; }
-      if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
-      if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and press Pay again.'); setBusy(false); return; }
+      if (!ok || !j.order_id) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
+      if (opts.onReply) opts.onReply(j);
+      if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and try again.'); setBusy(false); return; }
       // Kept BEFORE the window opens: a UPI app switch may reload this page.
       const pendingOrder = { order_id: j.order_id, claim: j.claim, email: j.prefill.email, product: body.product || 'kit', amount: j.amount, currency: j.currency, at: Date.now() };
       writeJson('local', PENDING_STORE, pendingOrder);
       metaIdentify(j.prefill, body.name);
+      if (opts.registration) metaRegistration(j.prefill.email);
       metaTrack('initiate_checkout', pendingOrder);
       const rz = new window.Razorpay({
         key: j.key_id, amount: j.amount, currency: j.currency, order_id: j.order_id,
         name: j.name, description: j.description, prefill: j.prefill, notes: j.notes,
+        // The account is the email typed on our page, so Checkout must not change it. Razorpay asks for
+        // the phone itself (its contact field is required unless Razorpay turns on "optional contact").
+        readonly: { email: true },
         theme: { color: '#2563EB' },
         handler: (resp) => onRazorpayPaid(resp, j.prefill.email, body.product || 'kit'),
-        modal: { ondismiss: () => { clearPending(); setBusy(false); } },
+        modal: { ondismiss: () => { clearPending(); setBusy(false); if (onDismissRef.current) onDismissRef.current(j); } },
       });
       rz.on('payment.failed', (r) => {
         setError(`The payment did not go through${r?.error?.description ? `: ${r.error.description}` : ''}. ${FAILED_COPY}`);
