@@ -8,7 +8,9 @@ import './MasterclassPage.css';
 // alone cannot watch; ₹299 once lets a member watch (with 24×7 WhatsApp Q&A), and the
 // kit is ₹999 in total (₹700 more after ₹299). This page shows each member's access
 // level (none / watch / kit, from the backend's access_level), and can mark a member's
-// kit paid by hand (a bank transfer, a gift). Opens with the analytics dashboard's master password (same
+// kit paid by hand (a bank transfer, a gift). Registrations and payments: Refund on a paid row
+// (owner 2026-10-31) returns the full amount through Razorpay and closes the access that payment
+// bought, after a confirm box that says exactly what will happen. Opens with the analytics dashboard's master password (same
 // stored key as /aumaianalytics and /scorecard-admin); a clinic's own password is refused.
 
 const API = `${process.env.REACT_APP_SITE_API || 'https://site-api.aumai.co.in'}/api/aumai/masterclass/admin`;
@@ -59,6 +61,9 @@ export default function MasterclassAdmin() {
   const [tab, setTab] = useState('members'); // members | registrations
   const [regs, setRegs] = useState(null);
   const [regShow, setRegShow] = useState('all');
+  const [refundAsk, setRefundAsk] = useState(null); // the backend's preview of one refund, while the confirm box is open
+  const [refundEmail, setRefundEmail] = useState(true);
+  const [refundErr, setRefundErr] = useState('');
 
   useEffect(() => {
     document.title = 'Masterclass members · AUM AI admin';
@@ -98,6 +103,40 @@ export default function MasterclassAdmin() {
     }
   }, [req]);
   useEffect(() => { if (tab === 'registrations' && key && data) loadRegs(); }, [tab]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!refundAsk) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape' && !busy) setRefundAsk(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [refundAsk, busy]);
+
+  // Refund (owner 2026-10-31): the backend first says what it will do (amount, the access it closes), the owner confirms.
+  const askRefund = async (r) => {
+    setBusy(true); setError(''); setFlash(''); setRefundErr('');
+    try {
+      const j = await req(`/registrations/${r.id}/refund`);
+      setRefundEmail(true); setRefundAsk(j.refund);
+    } catch (e) {
+      setError(e.message === 'Failed to fetch' ? 'Could not reach the server. Nothing was changed. Try again.' : e.message);
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // the message shows at the top; the row may be far down
+    } finally { setBusy(false); }
+  };
+  const doRefund = async () => {
+    const r = refundAsk;
+    setBusy(true); setRefundErr('');
+    try {
+      const j = await req(`/registrations/${r.id}/refund`, { amount_paise: r.amount_paise, send_email: refundEmail });
+      setRefundAsk(null);
+      setFlash(`Refunded ${r.amount_label} to ${r.name}: ${CLOSED_WORDS[j.closes] || ''} Razorpay reference ${j.refund_id}; it reaches their account in 5–7 working days.${refundEmail ? ` ${j.email === 'sent' ? 'They have been emailed.' : j.email === 'simulated' ? 'Email NOT sent: the server has no email account set up.' : 'The email to them failed.'}` : ' No email sent.'}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      loadRegs();
+      // Only the member list: a full reload would overwrite unsaved edits in the settings forms.
+      req('/members').then((m) => setData((d) => ({ ...d, members: m.members }))).catch(() => {});
+    } catch (e) {
+      setRefundErr(e.message === 'Failed to fetch' ? 'Could not reach the server. Press Refresh to see whether the refund went through before trying again.' : e.message);
+      loadRegs();
+    } finally { setBusy(false); }
+  };
 
   // Every action returns the fresh member list; the search, filter and forms stay as they are.
   const act = async (path, body, done) => {
@@ -207,7 +246,29 @@ export default function MasterclassAdmin() {
           <button type="button" className="mc-chip" aria-pressed={tab === 'registrations'} onClick={() => setTab('registrations')}>Registrations and payments</button>
         </div>
 
-        {tab === 'registrations' && <Registrations data={regs} show={regShow} setShow={setRegShow} />}
+        {tab === 'registrations' && <Registrations data={regs} show={regShow} setShow={setRegShow} onRefund={askRefund} busy={busy} />}
+        {refundAsk && (
+          <div role="presentation" onClick={() => { if (!busy) setRefundAsk(null); }}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(16,26,62,0.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, zIndex: 50 }}>
+            <div className="sc-form" role="dialog" aria-modal="true" aria-labelledby="refund-title" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 520, width: '100%' }}>
+              <h2 id="refund-title">Refund {refundAsk.amount_label} to {refundAsk.name}?</h2>
+              <p style={{ margin: 0 }}>
+                {refundAsk.email}{refundAsk.clinic ? ` · ${refundAsk.clinic}` : ''}<br />
+                Paid {refundAsk.amount_label} {refundAsk.what} on {formatIST(refundAsk.paid_at)} · Razorpay payment {refundAsk.payment_id}
+              </p>
+              <p style={{ margin: 0 }}><b>{refundAsk.message}</b></p>
+              <p className="mc-small" style={{ margin: 0 }}>The full {refundAsk.amount_label} goes back to the card, UPI or bank account they paid with, usually within 5–7 working days. This cannot be undone.</p>
+              {refundAsk.flag && <p style={{ margin: 0, color: '#BE185D' }}><b>{refundAsk.flag}</b></p>}
+              {refundAsk.last_error && <p className="mc-small" style={{ margin: 0 }}>The last try did not go through: {refundAsk.last_error}</p>}
+              <label className="sc-consent"><input type="checkbox" checked={refundEmail} onChange={(e) => setRefundEmail(e.target.checked)} /> Email them that the refund is on its way</label>
+              {refundErr && <p className="sc-error" role="alert" style={{ margin: 0 }}>{refundErr}</p>}
+              <div className="mc-row-links">
+                <button type="button" className="sc-btn" style={{ background: '#BE185D', borderColor: '#BE185D' }} onClick={doRefund} disabled={busy}>{busy ? 'Refunding…' : `Refund ${refundAsk.amount_label}`}</button>
+                <button type="button" className="sc-link" onClick={() => setRefundAsk(null)} disabled={busy}>Cancel</button>
+              </div>
+            </div>
+          </div>
+        )}
         {tab === 'members' && (<>
 
         <div className="sc-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
@@ -353,12 +414,15 @@ export default function MasterclassAdmin() {
   );
 }
 
-const REG_STATUS = { paid: 'Paid', created: 'Not paid yet', failed: 'Failed' };
+const REG_STATUS = { paid: 'Paid', created: 'Not paid yet', failed: 'Failed', refunded: 'Refunded' };
+const REFUND_ACCESS = { watch: 'watching closed', kit: 'kit closed', none: 'access unchanged (this payment bought nothing)', kept: 'access unchanged (another payment covers it)', no_member: 'no account linked' };
+const CLOSED_WORDS = { retry: 'the refund was sent again (their access was already closed).', watch: 'their access to the video is closed.', kit: 'the kit downloads are closed.', none: 'their access did not change.', kept: 'their access did not change (another payment covers it).', no_member: '' };
+const REFUND_EMAIL = { sent: 'emailed', simulated: 'email NOT sent (no email set up)', failed: 'email failed', skipped: 'not emailed' };
 const rupees = (paise) => `₹${(paise / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
 
 const ACTION_WORDS = { added: 'Account made', extended: 'Existing member: access extended', closed: 'Access was closed: not reopened' };
 
-function Registrations({ data, show, setShow }) {
+function Registrations({ data, show, setShow, onRefund, busy }) {
   if (!data) return <p className="mc-small">Loading registrations…</p>;
   const extrasFor = (id) => (data.extra_payments || []).filter((e) => e.registration_id === id);
   const all = data.registrations;
@@ -368,6 +432,7 @@ function Registrations({ data, show, setShow }) {
       <div className="sc-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
         <div className="sc-start-card"><p className="sc-start-label">Total paid</p><h3>{rupees(data.totals.paid_paise)}</h3><p>{data.totals.paid} payment{data.totals.paid === 1 ? '' : 's'}</p></div>
         <div className="sc-start-card"><p className="sc-start-label">To refund</p><h3>{rupees(data.totals.extra_paise)}</h3><p>{data.totals.extra} extra payment{data.totals.extra === 1 ? '' : 's'} · {data.totals.flagged} row{data.totals.flagged === 1 ? '' : 's'} need a decision</p></div>
+        {data.totals.refunded != null && <div className="sc-start-card"><p className="sc-start-label">Refunded</p><h3>{rupees(data.totals.refunded_paise)}</h3><p>{data.totals.refunded} refund{data.totals.refunded === 1 ? '' : 's'}{data.totals.refund_failed ? ` · ${data.totals.refund_failed} failed at Razorpay: refund again` : ''}</p></div>}
         <div className="sc-start-card"><p className="sc-start-label">Not paid yet</p><h3>{data.totals.created}</h3><p>opened the payment, did not finish</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Failed</p><h3>{data.totals.failed}</h3><p>see the reason in the table</p></div>
         <div className="sc-start-card"><p className="sc-start-label">Price now</p><h3>{data.price.label}</h3><p>{data.price.open ? `the kit is on sale${data.price.entry && data.price.entry.label ? ` · join ${data.price.entry.label}` : ''}` : 'sales closed (no Razorpay keys)'}</p></div>
@@ -386,14 +451,14 @@ function Registrations({ data, show, setShow }) {
         </div>
       )}
       <div className="mc-chips">
-        {[['all', 'All', all.length], ['paid', 'Paid', data.totals.paid], ['created', 'Not paid yet', data.totals.created], ['failed', 'Failed', data.totals.failed]].map(([k, label, n]) => (
+        {[['all', 'All', all.length], ['paid', 'Paid', data.totals.paid], ['refunded', 'Refunded', data.totals.refunded || 0], ['created', 'Not paid yet', data.totals.created], ['failed', 'Failed', data.totals.failed]].map(([k, label, n]) => (
           <button key={k} type="button" className="mc-chip" aria-pressed={show === k} onClick={() => setShow(k)}>{label} ({n})</button>
         ))}
       </div>
       <div style={{ overflowX: 'auto', background: 'var(--sc-card)', border: '1px solid var(--sc-line)', borderRadius: 14 }}>
         {rows.length === 0 ? <p style={{ padding: 20, margin: 0 }}>{all.length ? 'None with this status. Press All.' : 'No payments yet. They appear here as soon as someone presses Pay ₹299 on aumai.co.in/masterclass, Pay on /masterclass/register or Unlock the kit on their masterclass page.'}</p> : (
           <table className="sc-table" style={{ minWidth: 1100 }}>
-            <thead><tr><th>Date</th><th>Name</th><th>Clinic</th><th>City</th><th>Email</th><th>WhatsApp</th><th>Type</th><th>Bought</th><th>Amount</th><th>Status</th><th>Came from</th><th>Notes</th></tr></thead>
+            <thead><tr><th>Date</th><th>Name</th><th>Clinic</th><th>City</th><th>Email</th><th>WhatsApp</th><th>Type</th><th>Bought</th><th>Amount</th><th>Status</th><th>Came from</th><th>Notes</th><th>Actions</th></tr></thead>
             <tbody>
               {rows.map((r) => (
                 <tr key={r.id}>
@@ -406,12 +471,25 @@ function Registrations({ data, show, setShow }) {
                   <td>{data.clinic_types[r.clinic_type] || r.clinic_type}</td>
                   <td style={{ whiteSpace: 'nowrap' }}>{PRODUCT_LABEL[r.product] || PRODUCT_LABEL.kit}</td>
                   <td className="sc-num">{rupees(r.amount_paise)}</td>
-                  <td><span className={`mc-state mc-state-${r.status === 'paid' ? 'ok' : r.status === 'failed' ? 'revoked' : 'ended'}`}>{REG_STATUS[r.status] || r.status}</span></td>
+                  <td style={{ whiteSpace: 'nowrap' }}>
+                    <span className={`mc-state mc-state-${r.status === 'paid' ? 'ok' : r.status === 'failed' ? 'revoked' : 'ended'}`} style={r.status === 'refunded' ? { background: '#E0E7FF' } : undefined}>{REG_STATUS[r.status] || r.status}</span>
+                    {r.status === 'refunded' && <div className="mc-small">{formatISTDate(r.refunded_at)}</div>}
+                  </td>
                   <td>{[r.utm_source, r.utm_campaign].filter(Boolean).join(' / ') || <span className="mc-small">direct</span>}</td>
                   <td className="mc-small">
-                    {r.flag && <b style={{ color: '#BE185D', display: 'block' }}>{r.flag}</b>}
-                    {r.status === 'paid' ? `${ACTION_WORDS[r.member_action] || 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}
+                    {r.flag && r.status !== 'refunded' && <b style={{ color: '#BE185D', display: 'block' }}>{r.flag}</b>}
+                    {r.status === 'refunded' && r.refund_rz_status === 'failed' && r.refund_state !== 'pending' && <b style={{ color: '#BE185D', display: 'block' }}>Razorpay FAILED this refund: the money did not go back. Press Refund again to send it again.</b>}
+                    {r.status === 'refunded'
+                      ? `Refunded ${rupees(r.refund_amount_paise || r.amount_paise)} · ${r.refund_id}${r.refund_rz_status === 'pending' ? ' (Razorpay still processing)' : ''} · ${REFUND_ACCESS[r.refund_access] || ''}${r.refund_email_status ? ` · ${REFUND_EMAIL[r.refund_email_status] || r.refund_email_status}` : ''}`
+                      : r.status === 'paid' ? `${ACTION_WORDS[r.member_action] || 'Account made'}${r.paid_via && r.paid_via !== 'checkout' ? ` (found by ${r.paid_via})` : ''}` : (r.error || '')}
+                    {(r.status === 'paid' || r.status === 'refunded') && r.refund_state === 'failed' && <b style={{ color: '#BE185D', display: 'block' }}>Refund did not go through: {r.refund_error}</b>}
+                    {(r.status === 'paid' || r.status === 'refunded') && r.refund_state === 'pending' && <b style={{ display: 'block' }}>Refund being checked with Razorpay: press Refresh in 15 minutes. Do not refund it in Razorpay.</b>}
                     {extrasFor(r.id).map((e) => <b key={e.razorpay_payment_id} style={{ color: '#BE185D', display: 'block' }}>Extra payment — refund {e.razorpay_payment_id}</b>)}
+                  </td>
+                  <td>
+                    {(r.status === 'paid' || (r.status === 'refunded' && r.refund_rz_status === 'failed')) && r.razorpay_payment_id && r.refund_state !== 'pending' && (
+                      <div className="mc-actions"><button type="button" className="mc-danger" onClick={() => onRefund(r)} disabled={busy}>Refund {rupees(r.amount_paise)}</button></div>
+                    )}
                   </td>
                 </tr>
               ))}
