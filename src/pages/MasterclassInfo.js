@@ -142,14 +142,26 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
     if (typoOk !== clean && emailTypoHint(clean)) { co.setError(''); setHintFor(email); setHintFromSubmit(true); return; }
     go(clean);
   };
+  // After either answer the hint box goes, so focus returns to the field (not lost to the page).
   const takeSuggestion = () => {
     const s = suggestion;
     setEmail(s); setHintFor('');
-    if (hintFromSubmit) go(s); else if (inputRef.current) inputRef.current.focus();
+    if (inputRef.current) inputRef.current.focus();
+    if (hintFromSubmit) go(s);
   };
   const keepTyped = () => {
     setTypoOk(clean); setHintFor('');
+    if (inputRef.current) inputRef.current.focus();
     if (hintFromSubmit) go(clean);
+  };
+  const resend = async () => {
+    setBusy(true); setError('');
+    try {
+      const { ok, j } = await call(EP.requestCode, { email: codeEmail });
+      if (!ok) setError(j.error || 'Something went wrong. Please try again.'); else { setCode(''); setCodeMsg(MC.GATE.resent); }
+    } catch (err) {
+      setError('We could not connect. Check your internet connection and try again.');
+    } finally { setBusy(false); }
   };
 
   useEffect(() => {
@@ -160,7 +172,8 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
   }, [early.focus]);
   // Continue was pressed on the page's HTML form before this script ran: press it now, once.
   useEffect(() => {
-    if (early.sent && !autoSent.current) { autoSent.current = true; submit(); }
+    // Not over a payment already waiting for its confirmation (a UPI reload): that one is checked instead.
+    if (early.sent && !autoSent.current && !co.hasPending) { autoSent.current = true; submit(); }
   }, [early.sent]); // eslint-disable-line react-hooks/exhaustive-deps
   const verify = async (e) => {
     e.preventDefault();
@@ -198,7 +211,10 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
           <label className="mi-gate-one-label">6-digit code<input inputMode="numeric" autoComplete="one-time-code" value={code} onChange={(e) => setCode(e.target.value)} maxLength={7} required autoFocus /></label>
           {error && <p className="mi-gate-error" role="alert">{error}</p>}
           <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? 'Checking…' : MC.GATE.codeButton}</button>
-          <button type="button" className="mi-gate-link" onClick={() => { setStep('form'); setError(''); }}>Use a different email</button>
+          <div className="mi-gate-typo-actions">
+            <button type="button" className="mi-gate-link" onClick={resend} disabled={busy}>{MC.GATE.resend}</button>
+            <button type="button" className="mi-gate-link" onClick={() => { setStep('form'); setError(''); }}>Use a different email</button>
+          </div>
         </form>
       </div>
     );
@@ -212,7 +228,7 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
         <label className="mi-gate-one-label" htmlFor="mi-email">{MC.GATE.label}</label>
         <div className="mi-gate-row">
           <input id="mi-email" ref={inputRef} type="email" name="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={email}
-            onChange={(e) => setEmail(e.target.value)} onBlur={() => { if (validEmail(email)) setHintFor(email); }}
+            onChange={(e) => { setEmail(e.target.value); setHintFromSubmit(false); }} onBlur={() => { if (validEmail(email)) setHintFor(email); }}
             placeholder="name@gmail.com" autoComplete="email" required aria-describedby={suggestion ? 'mi-typo' : undefined} />
           <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={co.busy}>{co.busy ? MC.GATE.busy : MC.GATE.button}</button>
         </div>
@@ -228,6 +244,7 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
           </div>
         )}
         {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
+        {co.error && <p className="mi-gate-note">{MC.GATE.haveCode} <Link to={MC.PATHS.signIn}>Sign in</Link></p>}
         {note && !co.error && <p className="mi-gate-note" role="status">{note}</p>}
         <PayTerms entry={entryLabel} />
       </form>

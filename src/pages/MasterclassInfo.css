@@ -50,7 +50,7 @@
 .site-lux .ch-home .mi-hero .mi-watch-kit a:not(.ch-btn) { color: var(--lux-gold-2); }
 .mi-gate { background: rgba(250, 248, 244, 0.98); color: var(--lux-navy); border: 1px solid var(--lux-line); padding: 32px 36px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7); }
 .site-lux .ch-home .mi-gate h2 { margin: 0 0 6px; font-family: var(--lux-serif); font-weight: 400; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; color: var(--lux-navy); }
-.mi-gate-blurb { margin: 0 0 20px; font-size: 17px; line-height: 1.5; color: var(--lux-body); }
+.mi-gate-blurb { margin: 0 0 20px; font-size: 17px; line-height: 1.5; color: var(--lux-body); overflow-wrap: anywhere; }
 .mi-gate-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
 .mi-gate label { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lux-bronze); }
 .mi-gate input { font: inherit; font-size: 17px; letter-spacing: 0; text-transform: none; padding: 12px 14px; min-height: 50px; border: 1px solid var(--lux-line); border-radius: 0; background: #fff; color: var(--lux-navy); width: 100%; }

@@ -100,7 +100,12 @@ const GATE = {
   // The ad's own words (owner 2026-10-31), right under the button.
   moneyBack: (l = ENTRY_LABEL) => `${l} · 1 hour · money back if it didn’t help`,
   terms: 'Secure payment by Razorpay: UPI, card or net banking. By continuing you agree to the terms.',
-  dismissed: 'The payment window was closed, so nothing was paid. Press Continue to try again.',
+  // Never "nothing was paid" (review 2026-11-02): a UPI request approved in the app can land after the window closed.
+  dismissed: 'The payment window was closed. If you did not pay, press Continue to try again. If money left your account, press Continue too: we will email you a code to open the masterclass.',
+  haveCode: 'Already have a code?',
+  resend: 'Send a new code',
+  resent: 'A new code is on its way. Use the newest email.',
+  noScript: `The payment needs JavaScript. Please turn it on in your browser, or WhatsApp us on ${WHATSAPP.display}.`,
   // Typed before the script started (scripts/prerender.js), Continue is pressed for them once it runs.
   preBusy: 'One moment…',
   // A likely typo in the address (gmial.com, gmail.con …): the payment is locked to the email typed here.

@@ -33,7 +33,7 @@ export const EP = {
 };
 
 export const CLINIC_TYPES = [['dental', 'Dental'], ['skin', 'Skin / aesthetic'], ['other', 'Other']];
-export const FAILED_COPY = 'If money left your account, your bank returns it automatically within 5–7 working days. You can press Pay again.';
+export const FAILED_COPY = 'If money left your account, your bank returns it automatically within 5–7 working days. You can try again.';
 export const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || '').trim());
 
 // A likely typo in the email's domain → the corrected address, or null (review 2026-10-31). The ₹299 payment
@@ -42,6 +42,7 @@ export const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || '
 const POPULAR = ['gmail.com', 'yahoo.com', 'yahoo.co.in', 'hotmail.com', 'outlook.com', 'rediffmail.com', 'icloud.com', 'live.com'];
 const REAL = new Set([...POPULAR, 'mail.com', 'email.com', 'gmx.com', 'ymail.com', 'msn.com', 'aol.com', 'zoho.com', 'zohomail.in',
   'protonmail.com', 'proton.me', 'yahoo.in', 'outlook.in', 'hotmail.co.uk', 'live.in', 'me.com', 'mac.com', 'googlemail.com', 'aumai.co.in']);
+const TYPO_ENDINGS = new Set(['con', 'cmo', 'cpm', 'cim', 'vom', 'xom', 'co', 'cm', 'om', 'comm', 'coom', 'comn', 'c', 'ocm', 'com.', 'co.']);
 // Edit distance with swaps of two neighbouring letters (gmial → gmail is one step).
 function editDistance(a, b) {
   const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
@@ -61,6 +62,13 @@ export function emailTypoHint(email) {
   if (at < 1) return null;
   const domain = s.slice(at + 1);
   if (domain.length < 4 || REAL.has(domain)) return null;
+  // The provider's own name with another ending (yahoo.co.uk, live.ca, gmail.in): a real country domain, left
+  // alone (review 2026-11-02). Only a mistyped ".com" ending is corrected (gmail.con, hotmail.co).
+  const dot = domain.indexOf('.');
+  const name = dot > 0 ? domain.slice(0, dot) : domain;
+  const ending = dot > 0 ? domain.slice(dot + 1) : '';
+  const own = POPULAR.find((p) => p.split('.')[0] === name);
+  if (own && dot > 0) return TYPO_ENDINGS.has(ending) ? `${s.slice(0, at)}@${own}` : null;
   let best = null;
   let bestD = 3;
   for (const p of POPULAR) {
@@ -156,13 +164,18 @@ export async function call(path, body, method) {
   return { status: r.status, ok: r.ok, j };
 }
 
+// Review 2026-11-02: the page loads checkout.js on arrival, so a failed first load (a 3G blip) must not leave a dead
+// <script> behind that the next Continue waits on for ever: a failed tag is removed, and every wait gives up after 15 s.
 export function loadCheckout() {
   if (window.Razorpay) return Promise.resolve(true);
   return new Promise((resolve) => {
     let s = document.querySelector(`script[src="${CHECKOUT_JS}"]`);
+    if (s && s.dataset.failed) { s.remove(); s = null; }
     if (!s) { s = document.createElement('script'); s.src = CHECKOUT_JS; s.async = true; document.body.appendChild(s); }
-    s.addEventListener('load', () => resolve(true));
-    s.addEventListener('error', () => resolve(false));
+    const el = s;
+    const timer = setTimeout(() => resolve(!!window.Razorpay), 15000);
+    el.addEventListener('load', () => { clearTimeout(timer); resolve(true); });
+    el.addEventListener('error', () => { clearTimeout(timer); el.dataset.failed = '1'; resolve(false); });
   });
 }
 
@@ -199,11 +212,12 @@ const REG_STORE = 'aumai_mc_reg'; // localStorage: the emails this browser has a
 function metaRegistration(email) {
   try {
     if (typeof window.aumy !== 'function' || !email) return;
-    const key = emailKey(email);
+    const key = emailKey(email); // kept only in this browser, never sent: a bare hash of an email could be matched
     const done = readJson('local', REG_STORE) || [];
     if (done.includes(key)) return;
     // The Aumy tag maps complete_registration to Meta's CompleteRegistration (pixel + CAPI, one event id).
-    window.aumy('track', 'complete_registration', { content_name: 'masterclass_signup', event_id: `reg_mc_${key}` });
+    const rand = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+    window.aumy('track', 'complete_registration', { content_name: 'masterclass_signup', event_id: `reg_mc_${rand}` });
     writeJson('local', REG_STORE, [...done, key].slice(-20));
   } catch (e) { /* tracking only */ }
 }
@@ -255,9 +269,9 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, onAlreadyMember,
       const { status, j } = await call(EP.orderStatus, { order_id: p.order_id, claim: p.claim });
       const booked = !!(j.payment_booked || j.paid); // the backend's name is payment_booked; paid is its old alias
       if (booked && (j.ok || j.sign_in)) { landPaid(j, p.email, p.product); return; }
-      if (status === 403 && booked) { clearPending(); setError(j.error); return; }
+      if (status === 403 && booked) { clearPending(); setStage('form'); setError(j.error); return; }
       if (j.unknown) { clearPending(); setStage('form'); return; }
-      if (j.failed) { clearPending(); setError(j.error); return; }
+      if (j.failed) { clearPending(); setStage('form'); setError(j.error); return; }
       setConfirmMsg(j.message || j.error || 'We are checking your payment. This can take a few minutes.');
     } catch (e) {
       setConfirmMsg('We could not connect. Check your internet connection and press Check again.');
@@ -304,7 +318,7 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, onAlreadyMember,
       if (status === 409 && (j.already_paid || j.already_watching)) { setBusy(false); if (onAlreadyPaidRef.current) onAlreadyPaidRef.current(j); else setError(j.error || 'You already have access.'); return; }
       if (!ok || !j.order_id) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
       if (opts.onReply) opts.onReply(j);
-      if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and press Pay again.'); setBusy(false); return; }
+      if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and try again.'); setBusy(false); return; }
       // Kept BEFORE the window opens: a UPI app switch may reload this page.
       const pendingOrder = { order_id: j.order_id, claim: j.claim, email: j.prefill.email, product: body.product || 'kit', amount: j.amount, currency: j.currency, at: Date.now() };
       writeJson('local', PENDING_STORE, pendingOrder);

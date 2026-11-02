@@ -925,7 +925,8 @@ const routes = [
                starts. Without JavaScript the form reloads the page with nothing in the URL. -->
           <div class="mi-gate mi-gate-one">
             <form action="${MC.PATHS.info}#watch" method="get" aria-labelledby="mi-gate-h"
-              onsubmit="this.dataset.sent='1';var b=this.querySelector('button');if(b){b.disabled=true;b.textContent=${esc(JSON.stringify(MC.GATE.preBusy))};}return false;">
+              onsubmit="this.dataset.sent='1';var b=this.querySelector('button');if(b){var t=b.textContent;b.disabled=true;b.textContent=${esc(JSON.stringify(MC.GATE.preBusy))};setTimeout(function(){b.disabled=false;b.textContent=t;},20000);}return false;">
+              <noscript><p class="mi-gate-note">${esc(MC.GATE.noScript)}</p></noscript>
               <h2 id="mi-gate-h">${esc(MC.GATE.title)}</h2>
               <p class="mi-gate-blurb">${esc(MC.GATE.blurb())}</p>
               <label class="mi-gate-one-label" for="mi-pre-email">${esc(MC.GATE.label)}</label>
