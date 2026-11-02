@@ -61,15 +61,17 @@ const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868' };
 // Search words clinic owners actually type (YouTube and Google suggestions, 25 Oct 2026): "ai for dentists",
 // "ai automation for clinics", "patient follow up", "reduce no shows", "how to get more dental patients",
 // "claude for dentists". The title leads with them; the brand comes last.
+// Owner 2026-11-02: dentists and clinic owners who want to AUTOMATE their clinic with Claude must find this page, so the
+// title and description lead with "Claude for dentists & clinic owners" + "automate", and an FAQ answers it in plain words.
 // Owner 2026-10-29: the masterclass is for EVERY clinic owner (dental, skin, any clinic), as in the ad
 // "For clinic owners · Dental · Skin · Every clinic". Dental appears only as an example, next to a skin one.
 // Free to watch (owner 2026-11-02, replacing the 26 Oct "never free" rule for the masterclass itself).
 const SEO = {
-  title: 'AI for Clinic Owners: Patient Follow-Up Masterclass | AUM AI',
+  title: 'Claude for Dentists & Clinic Owners: Automate Follow-Ups | AUM AI',
   description:
-    `The Full Chair Method masterclass, about an hour: run patient follow-ups with AI and Claude, reduce no-shows and get more patients from your own list. For every clinic owner: dental, skin and every other clinic. Free to watch.`,
+    `Free masterclass for dentists and clinic owners: automate patient follow-ups with Claude AI. Claude writes your reminders, recall messages and weekly report from a Google Sheet, so you reduce no-shows and bring patients back. Dental, skin, every clinic.`,
   keywords:
-    'AI for clinics, AI for clinic owners, patient follow-up, reduce no-shows, clinic WhatsApp follow-up, Claude for clinics, AI for dentists, AI for dermatologists, skin clinic patient follow-up, dental clinic patient follow-up, The Full Chair Method, 4C Framework',
+    'Claude for dentists, Claude AI for dental clinics, Claude for clinic owners, automate dental clinic with AI, automate clinic with Claude, Claude skills for clinics, how to use Claude in a clinic, AI automation for dental practice, dental clinic automation, AI for clinics, AI for clinic owners, patient follow-up, reduce no-shows, clinic WhatsApp follow-up, Claude for clinics, AI for dentists, AI for dermatologists, skin clinic patient follow-up, dental clinic patient follow-up, The Full Chair Method, 4C Framework',
   // The link preview when the page is shared (WhatsApp, Facebook, LinkedIn): 1200×630, no "free", no price.
   shareImage: '/og/masterclass-full-chair-method-1200x630.png',
   shareImageAlt: 'The Full Chair Method masterclass, AI for clinic owners: dental, skin, every clinic. About an hour.',
@@ -327,6 +329,7 @@ const FAQS = [
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
   { q: 'I don’t run a dental clinic. Is this for me?', a: 'Yes. It is for every clinic owner: dental, skin, aesthetic or any other clinic. Many examples come from dental clinics, where we measured them. Running a skin or aesthetic clinic? Set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. For every clinic, the eight systems work the same way: enquiries, confirmations, treatment plans, the day-after check-in and bringing patients back.' },
   { q: 'Do I need Aumy or any other software?', a: 'No. The Clinic Master Sheet opens in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
+  { q: 'Can I automate my clinic with Claude?', a: 'Yes, the daily follow-up work. Upload the Claude skill file to claude.ai and connect your Clinic Master Sheet through Google Drive. Type “Today’s work” and Claude lists who is due, writes each WhatsApp message and call script in English, Hindi or Marathi, gives you click-to-send links and updates your weekly KPI report. It takes about 30 minutes a morning. Someone at the clinic still presses send, and Claude only knows what is in your sheet.' },
   { q: 'Do I need a Claude account?', a: 'Only if you want Claude’s help. Everything works by hand with the Clinic Master Sheet. With a Claude account at claude.ai, you upload the skill file and connect the sheet through Google Drive, and Claude writes the messages, call scripts and weekly KPI report.' },
   { q: 'How do I get the kit, and how do I sign in?', a: `Sign in with your email: we send a 6-digit code, and there is no password. The kit is ${PRICE_LABEL}, paid once, by UPI, card or net banking through Razorpay. Press Unlock the kit on your masterclass page, or Get the kit on this page. Every download opens the moment the payment is confirmed.` },
   { q: 'Can I get a refund?', a: `Watching is free, so there is nothing to refund for it. ${MC_REFUND.NON_REFUNDABLE} ${MC_REFUND.DUPLICATE}` },
