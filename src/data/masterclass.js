@@ -88,7 +88,9 @@ const VIDEO = {
 // Where the video is (owner 2026-10-31: "just allow them to sign up with email directly"). ONE field,
 // the email, and Continue opens the Razorpay payment at once: no code first, no name, clinic or phone
 // (Razorpay asks for the phone). An email that already has the masterclass pays nothing: it gets a
-// real sign-in code. The same words are in scripts/prerender.js, so the form is in the page's HTML.
+// real sign-in code, and the page says "check your email" in words that never tell whether that address
+// has paid (site backend review 2026-10-31). The same words are in scripts/prerender.js, so the form is
+// in the page's HTML.
 const GATE = {
   title: 'Watch the masterclass',
   blurb: (l = ENTRY_LABEL) => `Type your email and join for ${l}, once. The video plays right here.`,
@@ -99,8 +101,15 @@ const GATE = {
   moneyBack: (l = ENTRY_LABEL) => `${l} · 1 hour · money back if it didn’t help`,
   terms: 'Secure payment by Razorpay: UPI, card or net banking. By continuing you agree to the terms.',
   dismissed: 'The payment window was closed, so nothing was paid. Press Continue to try again.',
-  codeTitle: 'You already have the masterclass',
-  codeBlurb: 'There is nothing to pay. We have emailed a 6-digit sign-in code to',
+  // Typed before the script started (scripts/prerender.js), Continue is pressed for them once it runs.
+  preBusy: 'One moment…',
+  // A likely typo in the address (gmial.com, gmail.con …): the payment is locked to the email typed here.
+  typo: 'Did you mean',
+  typoUse: 'Yes, use it',
+  typoKeep: 'No, mine is right',
+  typoStop: 'Please check your email address first: your sign-in and receipt go there.',
+  codeTitle: 'Check your email',
+  codeBlurb: 'We have emailed a 6-digit code to', // the backend's own message is shown when it sends one
   codeHelp: 'It can take a minute. Check Spam or Promotions too.',
   codeButton: 'Open the masterclass',
   consent: 'We may message you on WhatsApp about the masterclass and the kit. No spam; reply STOP any time.',

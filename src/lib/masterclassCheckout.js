@@ -35,6 +35,42 @@ export const EP = {
 export const CLINIC_TYPES = [['dental', 'Dental'], ['skin', 'Skin / aesthetic'], ['other', 'Other']];
 export const FAILED_COPY = 'If money left your account, your bank returns it automatically within 5–7 working days. You can press Pay again.';
 export const validEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || '').trim());
+
+// A likely typo in the email's domain → the corrected address, or null (review 2026-10-31). The ₹299 payment
+// is locked to the address typed (Razorpay shows it read-only), so "gmial.com" means no code, no receipt and
+// no way back in. Only the big providers are suggested; any domain we know is real is left alone.
+const POPULAR = ['gmail.com', 'yahoo.com', 'yahoo.co.in', 'hotmail.com', 'outlook.com', 'rediffmail.com', 'icloud.com', 'live.com'];
+const REAL = new Set([...POPULAR, 'mail.com', 'email.com', 'gmx.com', 'ymail.com', 'msn.com', 'aol.com', 'zoho.com', 'zohomail.in',
+  'protonmail.com', 'proton.me', 'yahoo.in', 'outlook.in', 'hotmail.co.uk', 'live.in', 'me.com', 'mac.com', 'googlemail.com', 'aumai.co.in']);
+// Edit distance with swaps of two neighbouring letters (gmial → gmail is one step).
+function editDistance(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j += 1) d[0][j] = j;
+  for (let i = 1; i <= a.length; i += 1) {
+    for (let j = 1; j <= b.length; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+  }
+  return d[a.length][b.length];
+}
+export function emailTypoHint(email) {
+  const s = String(email || '').trim().toLowerCase();
+  const at = s.lastIndexOf('@');
+  if (at < 1) return null;
+  const domain = s.slice(at + 1);
+  if (domain.length < 4 || REAL.has(domain)) return null;
+  let best = null;
+  let bestD = 3;
+  for (const p of POPULAR) {
+    const dist = editDistance(domain, p);
+    if (dist < bestD) { best = p; bestD = dist; }
+  }
+  // Two edits only on a longer domain ("gmal.co" → gmail.com), never on a short one that may be a real company.
+  if (!best || (bestD === 2 && domain.length < 7)) return null;
+  return `${s.slice(0, at)}@${best}`;
+}
 export const fileUrl = (f) => `${API}${EP.files}/${encodeURIComponent(f.name)}`;
 export const downloadAllUrl = () => `${API}${EP.downloadAll}`;
 // Members from before 2026-10-25 have no `paid` flag: every one of them paid, so only an explicit false is unpaid.
@@ -133,11 +169,12 @@ export function loadCheckout() {
 /**
  * Meta conversions through the Aumy tag the site already loads (index.html, bm.aumyai.com tag.js → Meta
  * CAPI + browser pixel, pixel "Aumy"; the tag sends both with ONE event id, so Meta counts each once).
- * Lead when the one-field form is sent (owner 2026-10-31; BM can no longer send it: an email-only sign-up
- * has no phone), Checkout started when the payment window opens, Purchase once the backend confirms the
- * payment. Purchase and Checkout use the order id in the event id, so the reload path (order-status) and
- * Razorpay's handler cannot count one payment twice; Lead uses the email, so pressing Continue again does
- * not count a second sign-up. Never throws: tracking must not stop a payment.
+ * CompleteRegistration when the one-field form is sent (review 2026-10-31: not Lead, which stays for BM's
+ * qualified WhatsApp leads, so the masterclass sign-ups never inflate the product ads' Lead count),
+ * Checkout started when the payment window opens, Purchase once the backend confirms the payment.
+ * Purchase and Checkout use the order id in the event id, so the reload path (order-status) and Razorpay's
+ * handler cannot count one payment twice; CompleteRegistration uses the email, so pressing Continue again
+ * does not count a second sign-up. Never throws: tracking must not stop a payment.
  */
 function metaTrack(code, order) {
   try {
@@ -151,22 +188,23 @@ function metaTrack(code, order) {
   } catch (e) { /* tracking only */ }
 }
 
-// A short, stable id for one email (djb2): the same sign-up always carries the same Lead event id.
+// A short, stable id for one email (djb2): the same sign-up always carries the same event id.
 const emailKey = (email) => {
   let h = 5381;
   const s = String(email || '').trim().toLowerCase();
   for (let i = 0; i < s.length; i += 1) h = ((h * 33) ^ s.charCodeAt(i)) >>> 0;
   return h.toString(36);
 };
-const LEAD_STORE = 'aumai_mc_lead'; // localStorage: the emails this browser has already sent a Lead for
-function metaLead(email) {
+const REG_STORE = 'aumai_mc_reg'; // localStorage: the emails this browser has already sent CompleteRegistration for
+function metaRegistration(email) {
   try {
     if (typeof window.aumy !== 'function' || !email) return;
     const key = emailKey(email);
-    const done = readJson('local', LEAD_STORE) || [];
+    const done = readJson('local', REG_STORE) || [];
     if (done.includes(key)) return;
-    window.aumy('track', 'lead', { content_name: 'masterclass_signup', event_id: `lead_mc_${key}` });
-    writeJson('local', LEAD_STORE, [...done, key].slice(-20));
+    // The Aumy tag maps complete_registration to Meta's CompleteRegistration (pixel + CAPI, one event id).
+    window.aumy('track', 'complete_registration', { content_name: 'masterclass_signup', event_id: `reg_mc_${key}` });
+    writeJson('local', REG_STORE, [...done, key].slice(-20));
   } catch (e) { /* tracking only */ }
 }
 
@@ -250,23 +288,28 @@ export function useMasterclassCheckout({ onPaid, onAlreadyPaid, onAlreadyMember,
   // agree (owner 2026-10-31). Nothing left to buy (409 already_paid for the kit, 409
   // already_watching for entry): the page refetches /me instead.
   // opts.path = EP.join for the one-field form: { email } in, the same Checkout reply out (plus
-  // signed_in), or 409 already_member (a sign-in code was emailed: onAlreadyMember). opts.lead
-  // sends Meta's Lead once the sign-up is booked. opts.onReply(j) sees the order reply.
+  // signed_in), or 200 check_email (nothing to pay: a sign-in code was emailed, worded the same
+  // whether or not the address has paid: onAlreadyMember). opts.registration sends Meta's
+  // CompleteRegistration once the order exists. opts.onReply(j) sees the order reply.
   const pay = async (body, opts = {}) => {
     setError('');
     setBusy(true);
     try {
       const { status, ok, j } = await call(opts.path || EP.order, body);
-      if (status === 409 && j.already_member && onAlreadyMemberRef.current) { setBusy(false); onAlreadyMemberRef.current(j); return; }
+      if (ok && j.check_email) {
+        setBusy(false);
+        if (onAlreadyMemberRef.current) onAlreadyMemberRef.current(j); else setError(j.message || 'Check your email for a sign-in code.');
+        return;
+      }
       if (status === 409 && (j.already_paid || j.already_watching)) { setBusy(false); if (onAlreadyPaidRef.current) onAlreadyPaidRef.current(j); else setError(j.error || 'You already have access.'); return; }
-      if (!ok) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
+      if (!ok || !j.order_id) { setError(j.error || 'Something went wrong. Please try again.'); setBusy(false); return; }
       if (opts.onReply) opts.onReply(j);
       if (!(await loadCheckout())) { setError('The payment window could not open. Check your internet connection and press Pay again.'); setBusy(false); return; }
       // Kept BEFORE the window opens: a UPI app switch may reload this page.
       const pendingOrder = { order_id: j.order_id, claim: j.claim, email: j.prefill.email, product: body.product || 'kit', amount: j.amount, currency: j.currency, at: Date.now() };
       writeJson('local', PENDING_STORE, pendingOrder);
       metaIdentify(j.prefill, body.name);
-      if (opts.lead) metaLead(j.prefill.email);
+      if (opts.registration) metaRegistration(j.prefill.email);
       metaTrack('initiate_checkout', pendingOrder);
       const rz = new window.Razorpay({
         key: j.key_id, amount: j.amount, currency: j.currency, order_id: j.order_id,

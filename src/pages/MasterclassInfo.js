@@ -4,7 +4,7 @@ import { setPageSeo } from '../utils/seo';
 import { withYouTubeJsApi } from '../utils/videoFocus';
 import { INDIA_OFFICE } from '../config/contact';
 import MC from '../data/masterclass';
-import { API, EP, accessLevel, call, canWatch, priceLabels, readUtm, settlePending, useMasterclassCheckout, validEmail } from '../lib/masterclassCheckout';
+import { API, EP, accessLevel, call, canWatch, emailTypoHint, priceLabels, readUtm, settlePending, useMasterclassCheckout, validEmail } from '../lib/masterclassCheckout';
 import './HomeClinic.css';
 import './MasterclassInfo.css';
 
@@ -65,12 +65,15 @@ const PayTerms = ({ entry }) => (
 );
 
 // What was typed into the form in the page's HTML before this script arrived (scripts/prerender.js puts the
-// same form there, id mi-pre-email), or ?email= from that form sent before the script loaded. Read during
-// the first render, while that HTML is still on screen. The address leaves the URL at once.
+// same form there, id mi-pre-email). Read during the first render, while that HTML is still on screen.
+// The address never goes into the URL (review 2026-10-31: a URL reaches server logs, analytics and Meta's
+// PageView): that form's input has no name, and pressing Continue there only marks the form data-sent
+// (no page load), so Continue is pressed again here once the script runs (`sent`). A ?email= from the
+// older HTML (cached before this change) is still read once and stripped.
 const earlyEmail = () => {
   try {
     const el = document.getElementById('mi-pre-email');
-    const typed = el && el.value ? { email: el.value, focus: document.activeElement === el } : null;
+    const typed = el && el.value ? { email: el.value, focus: document.activeElement === el, sent: !!(el.form && el.form.dataset.sent) } : null;
     const q = new URLSearchParams(window.location.search);
     const fromUrl = q.get('email');
     if (fromUrl) {
@@ -79,19 +82,22 @@ const earlyEmail = () => {
       window.history.replaceState(window.history.state, '', `${window.location.pathname}${rest ? `?${rest}` : ''}${window.location.hash || '#watch'}`);
     }
     if (typed) return typed;
-    if (fromUrl) return { email: fromUrl.slice(0, 160), focus: false };
+    if (fromUrl) return { email: fromUrl.slice(0, 160), focus: false, sent: false };
   } catch (e) { /* nothing typed yet */ }
-  return { email: '', focus: false };
+  return { email: '', focus: false, sent: false };
 };
 
 /**
  * Where the video is (owner 2026-10-31: "just allow them to sign up with email directly"). ONE field:
  * Continue → POST /join → the ₹299 Razorpay Checkout opens at once, email prefilled and locked, and
- * Razorpay asks for the phone. No code before paying. A new email is signed in by that reply, so when
- * the payment lands the video plays here; closing the payment window shows the one-button pay step.
- * An email that already has the masterclass pays nothing: the backend emails a real sign-in code and
- * the code step shows (409 already_member). A refusal (honeypot, too many tries) is shown as it is,
- * never as "check your email". `mc_trap` is a honeypot the visitor never sees.
+ * Razorpay asks for the phone. No code before paying, and no account or session either (site backend
+ * review 2026-10-31): the payment makes the account and signs this browser in, so the video plays here.
+ * Closing the payment window keeps the form with "nothing was paid" (a browser already signed in to
+ * that account gets the one-button pay step). An email that already has the masterclass pays nothing:
+ * the backend emails a real sign-in code (200 check_email) and the code step shows, worded the same
+ * whether or not the address has paid. A refusal (honeypot, too many tries) is shown as it is, never
+ * as "check your email". A likely typo in the address (gmial.com) is offered for correction before
+ * the payment, because Razorpay locks the email. `mc_trap` is a honeypot the visitor never sees.
  */
 function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
   const [early] = useState(earlyEmail);
@@ -100,36 +106,62 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
   const [step, setStep] = useState('form'); // form | code
   const [code, setCode] = useState('');
   const [codeEmail, setCodeEmail] = useState('');
+  const [codeMsg, setCodeMsg] = useState(''); // the backend's own "we have emailed a code" words
   const [note, setNote] = useState('');
   const [busy, setBusy] = useState(false); // the code check
   const [error, setError] = useState(''); // the code step's own error
+  // Typo hint: shown for the address it was checked on (on leaving the field, or on Continue).
+  const [hintFor, setHintFor] = useState('');
+  const [hintFromSubmit, setHintFromSubmit] = useState(false);
+  const [typoOk, setTypoOk] = useState(''); // "No, mine is right" for this address
   const inputRef = useRef(null);
   const joined = useRef(null); // the /join reply: was this browser signed in by it?
+  const autoSent = useRef(false);
   const co = useMasterclassCheckout({
     onPaid,
     contact,
     onAlreadyPaid: () => onMember(null), // their own session can already watch: /me shows the video
-    onAlreadyMember: (j) => { setCodeEmail(j.email || email.trim().toLowerCase()); setCode(''); setError(''); setStep('code'); },
-    // Closed the payment window: a signed-in new account gets the one-button pay step; otherwise the form stays.
+    onAlreadyMember: (j) => { setCodeEmail(j.email || email.trim().toLowerCase()); setCodeMsg(j.message || ''); setCode(''); setError(''); setStep('code'); },
+    // Closed the payment window: a browser signed in to this account gets the one-button pay step; otherwise the form stays.
     onDismiss: () => { if (joined.current && joined.current.signed_in) onMember(null); else setNote(MC.GATE.dismissed); },
   });
+  const clean = email.trim().toLowerCase();
+  const suggestion = hintFor && hintFor === email && typoOk !== clean ? emailTypoHint(clean) : null;
+
+  const go = (address) => {
+    setNote(''); setHintFor(''); setHintFromSubmit(false);
+    co.pay(
+      { product: 'entry', agree: true, email: address, mc_trap: trap, utm: utm || {}, referrer: document.referrer || null },
+      { path: EP.join, registration: true, onReply: (j) => { joined.current = j; } },
+    );
+  };
+  const submit = (e) => {
+    if (e) e.preventDefault();
+    setNote('');
+    if (!validEmail(clean)) { co.setError('Please type your email address, for example name@gmail.com.'); return; }
+    if (typoOk !== clean && emailTypoHint(clean)) { co.setError(''); setHintFor(email); setHintFromSubmit(true); return; }
+    go(clean);
+  };
+  const takeSuggestion = () => {
+    const s = suggestion;
+    setEmail(s); setHintFor('');
+    if (hintFromSubmit) go(s); else if (inputRef.current) inputRef.current.focus();
+  };
+  const keepTyped = () => {
+    setTypoOk(clean); setHintFor('');
+    if (hintFromSubmit) go(clean);
+  };
+
   useEffect(() => {
     if (early.focus && inputRef.current) {
       inputRef.current.focus();
       try { const n = inputRef.current.value.length; inputRef.current.setSelectionRange(n, n); } catch (e) { /* type=email has no caret API */ }
     }
   }, [early.focus]);
-
-  const submit = (e) => {
-    e.preventDefault();
-    const clean = email.trim().toLowerCase();
-    setNote('');
-    if (!validEmail(clean)) { co.setError('Please type your email address, for example name@gmail.com.'); return; }
-    co.pay(
-      { product: 'entry', agree: true, email: clean, mc_trap: trap, utm: utm || {}, referrer: document.referrer || null },
-      { path: EP.join, lead: true, onReply: (j) => { joined.current = j; } },
-    );
-  };
+  // Continue was pressed on the page's HTML form before this script ran: press it now, once.
+  useEffect(() => {
+    if (early.sent && !autoSent.current) { autoSent.current = true; submit(); }
+  }, [early.sent]); // eslint-disable-line react-hooks/exhaustive-deps
   const verify = async (e) => {
     e.preventDefault();
     const digits = code.replace(/\D/g, '');
@@ -162,7 +194,7 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
       <div className="mi-gate" data-testid="mi-gate">
         <form onSubmit={verify} noValidate>
           <h2 id="mi-gate-h">{MC.GATE.codeTitle}</h2>
-          <p className="mi-gate-blurb">{MC.GATE.codeBlurb} <b>{codeEmail}</b>. {MC.GATE.codeHelp}</p>
+          <p className="mi-gate-blurb">{codeMsg || <>{MC.GATE.codeBlurb} <b>{codeEmail}</b>. {MC.GATE.codeHelp}</>}</p>
           <label className="mi-gate-one-label">6-digit code<input inputMode="numeric" autoComplete="one-time-code" value={code} onChange={(e) => setCode(e.target.value)} maxLength={7} required autoFocus /></label>
           {error && <p className="mi-gate-error" role="alert">{error}</p>}
           <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={busy}>{busy ? 'Checking…' : MC.GATE.codeButton}</button>
@@ -179,10 +211,22 @@ function WatchGate({ onMember, onPaid, entryLabel, contact, utm }) {
         <p className="mi-gate-blurb">{MC.GATE.blurb(entryLabel)}</p>
         <label className="mi-gate-one-label" htmlFor="mi-email">{MC.GATE.label}</label>
         <div className="mi-gate-row">
-          <input id="mi-email" ref={inputRef} type="email" name="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@gmail.com" autoComplete="email" required />
+          <input id="mi-email" ref={inputRef} type="email" name="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={email}
+            onChange={(e) => setEmail(e.target.value)} onBlur={() => { if (validEmail(email)) setHintFor(email); }}
+            placeholder="name@gmail.com" autoComplete="email" required aria-describedby={suggestion ? 'mi-typo' : undefined} />
           <button type="submit" className="ch-btn ch-btn-primary mi-gate-btn" disabled={co.busy}>{co.busy ? MC.GATE.busy : MC.GATE.button}</button>
         </div>
         <input className="mi-gate-hp" type="text" name="mc_trap" value={trap} onChange={(e) => setTrap(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" />
+        {suggestion && (
+          <div className="mi-gate-typo" id="mi-typo" role="alert">
+            {hintFromSubmit && <p className="mi-gate-typo-stop">{MC.GATE.typoStop}</p>}
+            <p>{MC.GATE.typo} <b>{suggestion}</b>?</p>
+            <div className="mi-gate-typo-actions">
+              <button type="button" className="mi-gate-typo-yes" onClick={takeSuggestion}>{MC.GATE.typoUse}</button>
+              <button type="button" className="mi-gate-link" onClick={keepTyped}>{MC.GATE.typoKeep}</button>
+            </div>
+          </div>
+        )}
         {co.error && <p className="mi-gate-error" role="alert">{co.error}</p>}
         {note && !co.error && <p className="mi-gate-note" role="status">{note}</p>}
         <PayTerms entry={entryLabel} />
