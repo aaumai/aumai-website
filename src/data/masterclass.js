@@ -369,7 +369,7 @@ const SIGNIN = {
   createBlurb: 'Tell us who you are, and the whole masterclass plays, free, as often as you like. No password.',
   createButton: 'Continue',
   // After a payment that did not sign this browser in (backend 2026-10-30): the code sign-in.
-  paidSignIn: (email) => `Payment received. Sign in with your email to watch${email ? `: ${email}` : ''}.`,
+  paidSignIn: (email) => `Payment received. Sign in with your email to open your kit${email ? `: ${email}` : ''}.`,
 };
 
 // The members page for a member without the kit (owner 2026-10-25): the video first, then the kit, locked.
@@ -383,7 +383,7 @@ const MEMBER = {
   kitTitle: 'Your kit',
   // A `watch` member pays the difference: "the kit is ₹999 in total; you have paid ₹299".
   kitLeadUpgrade: (more = UPGRADE_LABEL, total = PRICE_LABEL, entry = ENTRY_LABEL) => `Every download below opens for ${more} more: the kit is ${total} in total, and you have paid ${entry}. Yours for life.`,
-  kitLead: (total = PRICE_LABEL) => `Every download below opens with one payment of ${total}, watching included. Yours for life.`,
+  kitLead: (total = PRICE_LABEL) => `Every download below opens with one payment of ${total}, with 24×7 Q&A on WhatsApp. Yours for life.`,
   unlockButton: (label = PRICE_LABEL, upgrade = false) => (upgrade ? `Unlock the kit · ${label} more` : `Unlock the kit · ${label} once`),
   unlocked: 'Your kit is unlocked. Every download below is yours, for life.',
   unlockHelp: 'Secure payment by Razorpay: UPI, card or net banking. Your downloads open the moment the payment is confirmed.',

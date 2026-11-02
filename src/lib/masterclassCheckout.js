@@ -96,6 +96,10 @@ export const settlePending = (me) => {
     // order-status path never runs. Purchase goes from here too (same event id: Meta counts it once).
     metaTrack('purchase', readPending());
     clearPending();
+  } else if (prod === 'entry' && me.entry_price && me.entry_price.open === false) {
+    // A ₹299 checkout left over from before 2026-11-02 (watching is free now): drop it, so the kit form is never
+    // stuck on "Check again". If it was paid after all, the webhook or the reconciler still books it (review 2026-11-02).
+    clearPending();
   }
 };
 
