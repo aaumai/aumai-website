@@ -33,7 +33,7 @@ const formatISTDate = (utc) => {
 const isPaidMember = (m) => !!m.paid_at || m.paid === true;
 // none (signed up, not paid) | watch (₹299) | kit. An older backend sends no access_level: everyone watched then.
 const levelOf = (m) => m.access_level || (isPaidMember(m) ? 'kit' : 'watch');
-const LEVEL_LABEL = { none: 'Not paid', watch: 'Watching (₹299)', kit: 'Kit' };
+const LEVEL_LABEL = { none: 'Watching free', watch: 'Paid ₹299 (before 2 Nov)', kit: 'Kit' };
 const PRODUCT_LABEL = { entry: 'Join (₹299)', kit: 'Kit' };
 const STATE_LABEL = { ok: 'Active', ended: 'Ended', revoked: 'Closed' }; // 'ended' no longer happens: access is lifetime (owner 2026-10-20)
 const welcomeWords = (s) => (s === 'sent' ? 'Welcome email sent.' : s === 'simulated' ? 'Email NOT sent: the server has no email account set up.' : s === 'failed' ? 'The welcome email failed. Use Resend on their row.' : '');
@@ -407,7 +407,7 @@ export default function MasterclassAdmin() {
             </table>
           )}
         </div>
-        <p className="sc-hint">Members sign in at aumai.co.in/masterclass/sign-in with a code sent to their email. Signing up makes an account; it watches only after paying ₹299 once (with 24×7 WhatsApp Q&A). Kit members (₹999 in total, or ₹700 more after ₹299) also have every download. Mark paid opens the kit. Access is lifetime: it ends only if you press Close access.</p>
+        <p className="sc-hint">Members sign in at aumai.co.in/masterclass/sign-in with a code sent to their email. Signing up makes an account that watches free (owner 2026-11-02). Kit members (₹999 once, or ₹700 more for anyone who paid ₹299 before 2 Nov) also have every download and the 24×7 WhatsApp Q&A. Mark paid opens the kit. Access is lifetime: it ends only if you press Close access.</p>
         </>)}
       </div>
     </div>

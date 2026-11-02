@@ -901,11 +901,11 @@ const routes = [
         description: MC.SEO.description,
         inLanguage: 'en-IN',
         provider: { '@type': 'Organization', name: 'AUM AI', sameAs: ORIGIN },
-        // Two one-time offers (owner 2026-10-30): join to watch, and the kit (watching included).
-        // No VideoObject any more: the video is for members only, and its id is never in public files.
+        // Free to watch after a short sign-up; the kit for the downloads (owner 2026-11-02).
+        // No VideoObject: the video plays after the sign-up only, and its id is never in public files.
         offers: [
-          { '@type': 'Offer', price: MC.ENTRY_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.info}#watch`, description: 'Join to watch the masterclass (about an hour), paid once, with 24×7 Q&A on WhatsApp and lifetime access.' },
-          { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: `The kit, paid once, watching included: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with lifetime access. After joining, the kit is ${MC.UPGRADE_LABEL} more.` },
+          { '@type': 'Offer', price: '0', priceCurrency: 'INR', category: 'Free', url: `${ORIGIN}${MC.PATHS.info}#watch`, description: 'Watch the masterclass (about an hour) free, after a short sign-up, with lifetime access.' },
+          { '@type': 'Offer', price: MC.PRICE_LABEL.replace(/[^\d.]/g, ''), priceCurrency: 'INR', category: 'Paid', url: `${ORIGIN}${MC.PATHS.register}`, description: 'The kit, paid once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with 24×7 Q&A on WhatsApp and lifetime access.' },
         ],
         hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: MC.VIDEO.duration, instructor: { '@type': 'Person', name: MC.TRAINER.name } },
       },
@@ -919,8 +919,7 @@ const routes = [
         <div id="watch">
           <h2>${esc(MC.VIDEO.title)}</h2>
           <p>${esc(MC.VIDEO.intro)}</p>
-          <p>${esc(MC.GATE.blurb())} <a href="${MC.PATHS.create}">${esc(MC.CTA.join())}</a></p>
-          <p>${esc(MC.JOIN.qa)}. ${esc(MC.JOIN.kit())}</p>
+          <p>${esc(MC.GATE.step)}. ${esc(MC.GATE.blurb())} <a href="${MC.PATHS.create}">${esc(MC.CTA.watch)}</a></p>
         </div>
         <ul>${MC.HERO.facts.map((f) => `<li><strong>${esc(f.b)}</strong> ${esc(f.t)}</li>`).join('')}</ul>
         <p>${esc(MC.VIDEO.kitNote)} <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
@@ -986,7 +985,7 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.FINAL.title)}</h2>
         <p>${esc(MC.FINAL.text)}</p>
-        <p><a href="#watch">${esc(MC.CTA.join())}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
+        <p><a href="#watch">${esc(MC.CTA.watch)}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
         <p><a href="${MC.WHATSAPP.link}">${esc(MC.FINAL.questions)}</a></p>
         <p>${esc(MC.MEMBER.licence)}</p>
       </div></section>`,

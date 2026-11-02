@@ -8,6 +8,9 @@ import MC from '../data/masterclass';
 // away) and /masterclass/my (join, or unlock the kit). The amounts and whether a product can
 // be bought come from the backend; src/data/masterclass.js only holds the fallback labels.
 //
+// Since 2026-11-02 the masterclass is free to watch: the pages sell only the kit; 'entry' stays for a
+// ₹299 order made before then.
+//
 // Once Razorpay says "paid", a page never offers Pay again. A UPI app switch on
 // Android can reload the page before Razorpay's handler runs: the order id and its
 // claim token are kept in localStorage first, and on load the page asks the backend
@@ -82,13 +85,13 @@ export const clearPending = () => writeJson('local', PENDING_STORE, null);
 // Product of the order waiting for confirmation ('entry' | 'kit'), or null. Orders saved before
 // 2026-10-30 carry no product: they were all the kit.
 export const pendingProduct = () => { const p = readPending(); return p ? (p.product || 'kit') : null; };
-// A pending order that /me already shows as done (the ₹299 when the member can watch; any order
-// once they have the kit) is cleared, so no form reopens on it and offers "Check again".
+// A pending order that /me already shows as done (a ₹299 once /me shows it paid; any order once they
+// have the kit) is cleared, so no form reopens on it and offers "Check again".
 export const settlePending = (me) => {
   const prod = pendingProduct();
   if (!prod || !me) return;
   const level = accessLevel(me);
-  if (level === 'kit' || (prod === 'entry' && canWatch(me))) {
+  if (level === 'kit' || (prod === 'entry' && level === 'watch')) { // every member can watch free since 2026-11-02: only a paid ₹299 settles an entry order
     // A UPI app switch can reload the page after the webhook booked the payment: /me already shows it, so the
     // order-status path never runs. Purchase goes from here too (same event id: Meta counts it once).
     metaTrack('purchase', readPending());
