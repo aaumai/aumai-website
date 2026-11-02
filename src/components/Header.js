@@ -4,52 +4,16 @@ import { CreditsBar } from './StartInApp';
 import { isMasterclassPath } from '../data/masterclass';
 import './Header.css';
 
-// The menu (owner 2026-10-19: "too congested — logo to the left, space the menus").
-// Six top-level items plus the Free Clinic Audit button; Home is the logo. The two
-// groups open on hover or click on laptops and are listed open in the phone menu.
-// Every page here is also in the footer, and in scripts/prerender.js SITE_LINKS.
-// "Product & services" (owner 2026-10-23): Aumy, the main product, first; then the three
-// services. A group with `sections` shows them as labelled columns on laptops and as labelled
-// lists in the phone menu.
+// The menu (owner 2026-11-02: Aumy is ONE product; "the website is very noisy … keep it clean simple").
+// Four plain links plus the one call to action; Home (Aumy) is the logo. No module names, no services
+// dropdown and no pricing (owner 2026-11-02: "no pricing on website at all"). The module pages, the
+// services, the Growth Hub, the podcast and the calculators keep their URLs and are linked from the footer
+// and from scripts/prerender.js SITE_LINKS. The group code below stays for any future dropdown.
 const NAV_ITEMS = [
-  {
-    key: 'product',
-    label: 'Product & services',
-    sections: [
-      {
-        label: 'Aumy',
-        note: 'our main product',
-        children: [
-          { path: '/revenue-generator', label: 'How it works', hint: 'Every patient, from first call to recall' },
-          { path: '/demos', label: 'Watch demos', hint: 'Short videos of Aumy at work' },
-          { path: '/switch', label: 'Switching software?', hint: 'Move from your current system' },
-        ],
-      },
-      {
-        label: 'Services',
-        children: [
-          { path: '/managed-follow-ups', label: 'Managed follow-ups', hint: 'We follow up your enquiries and patients, by WhatsApp and calls' },
-          { path: '/dental-seo', label: 'Dental SEO', hint: 'More patients find you on Google, from India and abroad' },
-          { path: '/clinic-websites', label: 'Dental websites', hint: 'Websites built to be found on Google' },
-          { path: '/dental-ads', label: 'Dental ads (Meta & Google)', hint: 'Ads judged by booked patients, not leads' },
-        ],
-      },
-    ],
-  },
-  { path: '/modules', label: 'Modules' },
-  { path: '/ai-receptionist', label: 'AI receptionist' },
-  { path: '/pricing', label: 'Pricing' },
-  {
-    key: 'resources',
-    label: 'Resources',
-    children: [
-      { path: '/growth', label: 'Growth Hub', hint: 'Guides for growing your practice' },
-      { path: '/podcast', label: 'Podcast', hint: 'Be a guest on the show' },
-      { path: '/leak-calculator', label: '60-second check', hint: 'What slips through the cracks' },
-    ],
-  },
+  { path: '/revenue-generator', label: 'How it works' },
+  { path: '/demos', label: 'Watch demos' },
   // The Full Chair Method masterclass (owner 2026-10-19).
-  { path: '/masterclass', label: 'Masterclass', badge: 'New' },
+  { path: '/masterclass', label: 'Masterclass' },
   { path: '/contact', label: 'Contact' },
 ];
 

@@ -13,8 +13,8 @@ import './ModulesPage.css';
 /**
  * /modules — every Aumy module sold on its own, or all of it as one connected
  * system (owner 2026-10-08). Every word lives in src/data/modules.js, shared
- * with scripts/prerender.js — edit it there, never here. No prices here:
- * /pricing owns them.
+ * with scripts/prerender.js — edit it there, never here. No prices anywhere on
+ * the website (owner 2026-11-02).
  */
 
 const Check = () => (
@@ -180,10 +180,6 @@ const ModulesPage = () => {
               </tbody>
             </table>
           </div>
-          <p className="md-price-note">
-            Prices: the Clinic OS starting price is on our <Link to="/pricing">pricing page</Link>; the AI
-            modules are priced with you.
-          </p>
         </div>
       </section>
 

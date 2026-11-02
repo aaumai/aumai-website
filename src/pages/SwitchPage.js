@@ -49,7 +49,7 @@ const steps = [
     n: '3',
     title: 'Migrate when you are ready',
     body:
-      'When you want one connected platform, we migrate your full history from your current software into Aumy for a one-time migration fee, verify the counts with you, and keep the sync running until you switch the old system off.',
+      'When you want one connected platform, we migrate your full history from your current software into Aumy, verify the counts with you, and keep the sync running until you switch the old system off.',
   },
 ];
 
@@ -99,8 +99,8 @@ const faqs = [
     a: 'No. Your current software keeps running throughout. Aumy syncs with it first, the migration runs in the background, and we verify the record counts together before you switch anything off.',
   },
   {
-    q: 'What does the migration cost?',
-    a: 'Syncing is included. A full migration into Aumy carries a one-time migration fee, scoped on the call once we know how many years of records and images you have. Plans are on the pricing page.',
+    q: 'How long does a migration take?',
+    a: 'We scope it on a call once we know how many years of records and images you have, and agree the plan with you before anything moves. Syncing with your current software runs from day one.',
   },
   {
     q: 'What if some data does not map cleanly?',
@@ -121,7 +121,7 @@ const SwitchPage = () => {
     setPageSeo({
       title: 'Switch Dental Software Without Losing a Single Record — Move to Aumy | AUM AI',
       description:
-        'Whatever dental software your clinic uses today, Aumy keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into Aumy for a one-time migration fee. No downtime.',
+        'Whatever dental software your clinic uses today, Aumy keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into Aumy. No downtime.',
       canonical: 'https://aumai.co.in/switch',
       image: 'https://aumai.co.in/screenshots/automation.png',
     });
@@ -165,7 +165,7 @@ const SwitchPage = () => {
                 No matter what practice-management software you use, we keep your data in sync.
               </strong>{' '}
               And if you want to move completely to one connected platform, we migrate your data
-              from your current software into Aumy, for a one-time migration fee.
+              from your current software into Aumy.
             </p>
           </div>
         </div>
@@ -292,7 +292,7 @@ const SwitchPage = () => {
             <a href={WA_HREF} target="_blank" rel="noopener noreferrer" className="ch-btn ch-btn-primary">
               Talk to us about moving
             </a>
-            <Link to="/pricing" className="ch-btn ch-btn-ghost">See pricing</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-ghost">Get a free clinic audit</Link>
           </div>
         </div>
       </section>

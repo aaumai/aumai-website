@@ -24,9 +24,8 @@ const { CALCULATORS } = require('../src/data/calculators');
 // clinic that has NOT given permission (or withdraws it) can never survive in
 // the crawler-visible HTML after the app stops showing it.
 const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
-// Prices: one file shared with the React /pricing page (owner 2026-10-04:
-// "starts from ₹3,000 a month" — no calculator, no rate card). Never typed here.
-const PRICE = require('../src/data/pricing');
+// No prices anywhere on the site (owner 2026-11-02: "no pricing on website at all"): /pricing redirects to
+// the free clinic audit (route 'pricing' below), and src/data/pricing.js is gone.
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The founder: same words as the About page (src/data/founder.js).
 const FOUNDER = require('../src/data/founder');
@@ -50,8 +49,8 @@ const EXPL = require('../src/data/explainers');
 const RYC = require('../src/data/runYourClinic');
 // How Aumy works (/revenue-generator, lean 2026-10-12): same file as src/pages/AumyRevenueGenerator.js.
 const HOW = require('../src/data/howItWorks');
-// Home FAQ: the list src/pages/Home.js renders — crawler HTML and FAQPage JSON-LD read the same one.
-const HOME_FAQ = require('../src/data/homeFaq');
+// Home, Aumy as ONE product (owner 2026-11-02): same file as src/pages/Home.js.
+const HOME = require('../src/data/homeOneProduct');
 // "Handcrafted only for dentists" (owner 2026-10-08): same words as the React pages.
 const POS = require('../src/data/positioning');
 // Home, outcomes as a service (owner 2026-10-22): same file as src/pages/Home.js.
@@ -73,25 +72,9 @@ const storeLinksHtml = (name) =>
   `<a href="${STORES.APP_STORE_URL}" aria-label="Start ${esc(name)} free: download Aumy on the App Store">Download on the App Store</a> · ` +
   `<a href="${STORES.PLAY_STORE_URL}" aria-label="Start ${esc(name)} free: get Aumy on Google Play">Get it on Google Play</a>`;
 const startInAppHtml = (name) => `<p><strong>${esc(STORES.START_LINE)}</strong>. ${esc(STORES.START_FINE)}. ${storeLinksHtml(name)}</p>`;
-// What our customers say (owner 2026-10-22): the same Google reviews, word for word, that
-// src/components/GoogleReviews.js renders (src/data/googleReviews.js). Plain HTML only:
+// Google reviews (src/data/googleReviews.js): the home links to them. Plain HTML only:
 // NO Review / AggregateRating JSON-LD (self-serving reviews break Google's guidelines).
 const GR = require('../src/data/googleReviews');
-// The hero review (Dr Priyanka, owner 2026-10-22) leads the full home list under its pull-quote
-// heading; on /pricing (limit) it is just the first review. Blank lines in a review are paragraphs.
-const reviewTextHtml = (text) => {
-  const paras = text.split(/\n\s*\n/);
-  return paras.length > 1 ? paras.map((p) => `<p>${esc(p)}</p>`).join('') : esc(text);
-};
-const googleReviewsHtml = (limit) => {
-  const list = limit ? GR.GOOGLE_REVIEWS.slice(0, limit) : GR.GOOGLE_REVIEWS;
-  return `<section id="google-reviews"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">Google reviews</p>
-        <h2>What our customers say</h2>
-        ${list.map((r) => `<figure>${!limit && r.hero && r.pullQuote ? `<h3>${esc(r.pullQuote)}</h3>` : ''}<blockquote>${reviewTextHtml((limit && r.excerptShort) || r.excerpt || r.text)}</blockquote>${r.excerpt && r.fullReviewUrl ? `<p><a href="${r.fullReviewUrl}">Read her full review on Google →</a></p>` : ''}<figcaption>${esc(r.name)}${r.clinic ? `, ${esc(r.clinic)}` : ''} · ${r.stars} out of 5 stars${r.hideMonth ? '' : ` · ${esc(r.month)}`} · Google review</figcaption></figure>`).join('\n        ')}
-        <p>${esc(GR.GOOGLE_RATING)} out of 5 on Google · <a href="${GR.GOOGLE_REVIEWS_URL}">Read all reviews</a> · <a href="${GR.GOOGLE_WRITE_REVIEW_URL}">Write a review</a></p>
-      </div></section>`;
-};
 // Slim bar at the top of every India page (React: CreditsBar in the header).
 // The masterclass pages never say "free" (owner 2026-10-29): same bar, other words, as in Header.js.
 const creditsBarHtml = (noFree = false) => `<div class="credits-bar"><div class="container"><p class="credits-bar-text"><strong>${esc(STORES.TOP_LINE)}</strong> — ${esc(noFree ? STORES.TOP_SUB_MASTERCLASS : STORES.TOP_SUB)}: <a class="credits-bar-link" href="${STORES.APP_STORE_URL}">App Store</a> · <a class="credits-bar-link" href="${STORES.PLAY_STORE_URL}">Google Play</a></p></div></div>`;
@@ -128,7 +111,6 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/whatsapp-automation-for-clinics', 'WhatsApp automation for clinics'],
   ['/modules', 'Dental clinic software modules'],
   ['/revenue-generator', 'How Aumy works'],
-  ['/pricing', 'Pricing'],
   ['/switch', 'Switching dental software'],
   ['/demos', 'Demo videos'],
   ['/growth', 'Growth Hub'],
@@ -217,8 +199,6 @@ function apply(html, r) {
 }
 
 // ---- shared JSON-LD helpers ----------------------------------------------
-// Home FAQPage: word for word the list src/pages/Home.js shows (src/data/homeFaq.js).
-const faqLd = faqPageLd(HOME_FAQ.FAQS);
 // Organization: ties both hosts to one legal entity and declares the
 // cross-market relationship, so Google treats aumai.co.in and aumyai.com as
 // sister sites rather than duplicate competitors.
@@ -255,8 +235,7 @@ const orgLd = {
 };
 
 // Aumy (dental, India) as a product entity. AI assistants answering "AI dental
-// software in India" and "how much does it cost" read this; the price comes
-// from src/data/pricing.js, the same file the pricing page uses.
+// software in India" read this. No price and no offers (owner 2026-11-02: no pricing on the website).
 const dentalSoftwareLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -271,7 +250,6 @@ const dentalSoftwareLd = {
   areaServed: { '@type': 'Country', name: 'India' },
   inLanguage: ['en-IN', 'hi-IN', 'mr-IN'],
   featureList: ADS.CAPABILITIES.map(([t]) => t),
-  // No price in the search data (owner 2026-10-22); prices live on /pricing.
   publisher: { '@id': `${ORIGIN}/#organization` },
 };
 
@@ -356,18 +334,8 @@ const explainerVideoLd = [EXPL.HERO_VIDEO, ...EXPL.VIDEOS].map((v) => ({
   publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` } },
 }));
 
-const videoLd = {
-  '@context': 'https://schema.org',
-  '@type': 'VideoObject',
-  name: 'Dr. Ronak, Vinayaka Dental Care — patient growth with Aumy',
-  description: 'A dental clinic owner describes how Aumy reduced no-shows, brought recall patients back, and grew the clinic 20–25% in 2–3 months.',
-  thumbnailUrl: `${ORIGIN}/videos/dr-ronak-poster.jpg`,
-  contentUrl: `${ORIGIN}/videos/dr-ronak-vinayaka.mp4`,
-  uploadDate: isoDateTime('2026-07-02'),
-};
-
 // The five "How we work" steps (owner 2026-10-22): word for word what src/components/HowWeWork.js renders on
-// home, /revenue-generator and /about (src/data/homeOutcomes.js, HOW).
+// /revenue-generator and /about (src/data/homeOutcomes.js, HOW).
 function howWeWorkHtml(eyebrow = HO.HOW.eyebrow) {
   return `<section id="how-we-work"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(eyebrow)}</p>
@@ -377,118 +345,54 @@ function howWeWorkHtml(eyebrow = HO.HOW.eyebrow) {
         </ol>
       </div></section>`;
 }
-// ---- home (outcomes as a service, owner 2026-10-22) -----------------------
-// Word for word what src/pages/Home.js renders, from src/data/homeOutcomes.js and src/data/homeFaq.js.
+// ---- home (Aumy as ONE product, owner 2026-11-02) ---------------------------
+// Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js.
 function homeContent() {
-  const li = (arr, f) => arr.map(f).join('\n          ');
-  const chatHtml = (it) => '<ul>' + it.chat.map(([who, text, time, note]) => '<li>' + (who === 'sys'
-    ? esc(text)
-    : (who === 'in' ? esc(it.who) : 'Clinic') + (time ? ' (' + esc(time) + ')' : '') + ': ' + esc(text) + (note ? ' [' + esc(note) + ']' : '')) + '</li>').join('') + '</ul>';
-  const baHtml = (it) => '<p>Before: ' + esc(it.ba.before) + '</p>' + (it.ba.after
-    ? '<ul>' + it.ba.after.map(([w, t]) => '<li>' + esc(w) + ': ' + esc(t) + '</li>').join('') + '</ul>'
-    : '<p>' + esc(it.ba.afterLabel || 'After') + ': ' + esc(it.ba.afterText) + '</p>');
+  const { HERO, THREE, FOLLOW_UPS, PROOF, FIT, FINAL } = HOME;
   return `
       <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.HERO.eyebrow)}</p>
-        <h1 class="ch-hero-title">${esc(HO.HERO.title)}</h1>
-        <ul>
-          ${li(HO.HERO.every, (l) => '<li>' + esc(l) + '</li>')}
-        </ul>
-        <p><strong>${esc(HO.HERO.close)}</strong></p>
-        <p><a href="${HO.HERO.primary.to}">${esc(HO.HERO.primary.label)}</a> · <a href="${esc(HO.HERO.whatsapp.href)}">${esc(HO.HERO.whatsapp.label)}</a></p>
-        <p><strong>${esc(HO.HERO.proofNumber)}</strong> ${esc(HO.HERO.proofText)}</p>
+        <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(HERO.title)}</h1>
+        <p class="ch-hero-sub">${esc(HERO.subLead)}</p>
+        <ul>${HERO.parts.map((p) => '<li>' + esc(p) + '</li>').join('')}</ul>
+        <p>${esc(HERO.subClose)}</p>
+        <p><strong>${esc(HERO.loss)}</strong></p>
+        <p><a href="${HERO.cta.to}">${esc(HERO.cta.label)}</a></p>
+        <p>${esc(HERO.ctaNote)}</p>
         <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
-        <p>Aumy is AI dental software for dental clinics in India, set up and run with your team: an AI receptionist on calls and WhatsApp, confirmations, follow-ups and recalls, and your clinic’s records and billing. <a href="/ai-dental-software-india">What AI dental software does in an Indian clinic</a>.</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Dental clinics Aumy serves</p>
         ${clinicsStripHtml()}
       </div></section>
-      <section><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.PAIN.eyebrow)}</p>
-        <h2>${esc(HO.PAIN.titleA)} ${esc(HO.PAIN.titleB)}</h2>
+      <section id="what-aumy-does"><div class="ch-container ch-narrow">
+        <h2>${esc(THREE.title)} ${esc(THREE.titleB)}</h2>
+        <ol>
+          ${THREE.items.map((it) => '<li><h3>' + esc(it.name) + '</h3><p>' + esc(it.line) + '</p><ul>' + it.bullets.map((b) => '<li>' + esc(b) + '</li>').join('') + '</ul></li>').join('\n          ')}
+        </ol>
+      </div></section>
+      <section id="follow-ups"><div class="ch-container ch-narrow">
+        <h2>${esc(FOLLOW_UPS.title)} ${esc(FOLLOW_UPS.titleB)}</h2>
+        <p>${esc(FOLLOW_UPS.lead)}</p>
         <ul>
-          ${li(HO.PAIN.quotes, (q) => '<li>“' + esc(q) + '”</li>')}
+          ${[...FOLLOW_UPS.rows, FOLLOW_UPS.closer].map(([when, done]) => '<li>' + esc(when) + ' <strong>' + esc(done) + '</strong></li>').join('\n          ')}
         </ul>
-        <p>${esc(HO.PAIN.statsLabel)} ${esc(HO.PAIN.statsSource)}</p>
-        <ul>
-          ${li(HO.PAIN.stats, (st) => '<li><strong>' + esc(st.n) + '</strong> ' + esc(st.t) + '</li>')}
-        </ul>
-        <p>${esc(HO.PAIN.close)}</p>
+        <p>${esc(FOLLOW_UPS.note)}</p>
+      </div></section>
+      <section id="google-reviews"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(PROOF.eyebrow)}</p>
+        <blockquote>“${esc(PROOF.quote)}” — ${esc(PROOF.who)}, ${esc(PROOF.where)}</blockquote>
+        <p><strong>${esc(PROOF.statN)}</strong> ${esc(PROOF.statT)} ${esc(PROOF.statS)}</p>
+        <p><a href="${GR.GOOGLE_REVIEWS_URL}">${esc(PROOF.reviewsLink)}</a> · ${esc(GR.GOOGLE_RATING)} out of 5 on Google</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.VS.eyebrow)}</p>
-        <h2>${esc(HO.VS.titleA)} ${esc(HO.VS.titleB)}</h2>
-        <p>${esc(HO.VS.lead)}</p>
-        <table><thead><tr><th>${esc(HO.VS.headVendor)}</th><th>${esc(HO.VS.headUs)}</th></tr></thead><tbody>
-          ${li(HO.VS.rows, ([a, b]) => '<tr><td>' + esc(a) + '</td><td>' + esc(b) + '</td></tr>')}
-        </tbody></table>
-        ${li(HO.VS.quotes, (q) => '<blockquote>“' + esc(q.q) + '” — ' + esc(q.who) + ', ' + esc(q.where) + '</blockquote>')}
-        <p>${esc(HO.VS.closeA)} ${esc(HO.VS.closeB)}</p>
-      </div></section>
-      ${howWeWorkHtml()}
-      <section id="the-4c-framework"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.FOURC.eyebrow)}</p>
-        <h2>${esc(HO.FOURC.titleA)} ${esc(HO.FOURC.titleB)}</h2>
-        <p>${esc(HO.FOURC.lead)}</p>
-        ${li(HO.FOURC.stages, (st) => '<h3>' + esc(st.c) + ': ' + esc(st.job) + '</h3><ul>' + st.systems.map(([n, l]) => '<li><strong>' + esc(n) + '</strong> — ' + esc(l) + '</li>').join('') + '</ul><p>The outcome: ' + esc(st.outcomeB) + (st.outcome ? ' ' + esc(st.outcome) : '') + '</p>')}
-        <p>${esc(HO.FOURC.under)}</p>
-      </div></section>
-      <section id="full-demo"><div class="ch-container ch-narrow">
-        <h2>${esc(EXPL.FULL_DEMO.title)}</h2>
-        <p>${esc(EXPL.FULL_DEMO.blurb)} <a href="https://www.youtube.com/watch?v=${EXPL.FULL_DEMO.youtubeId}">Watch the 9-minute demo</a> · <a href="/demos">More demo videos</a></p>
-      </div></section>
-      <section id="strategies"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.STRATEGIES.eyebrow)}</p>
-        <h2>${esc(HO.STRATEGIES.titleA)} ${esc(HO.STRATEGIES.titleB)}</h2>
-        <p>${esc(HO.STRATEGIES.lead)}</p>
-        ${li(HO.STRATEGIES.items, (it, i) => '<h3>' + (i + 1) + '. ' + esc(it.name) + (it.alt ? ' (' + esc(it.alt) + ')' : '') + '</h3><p>' + esc(it.body) + '</p><p>' + esc(it.tag) + ':</p>' + (it.chat ? chatHtml(it) : baHtml(it)) + '<p>' + esc(it.why) + '</p>')}
-        <h3>${esc(HO.STRATEGIES.guardTitle)}</h3>
-        <p>${esc(HO.STRATEGIES.guard)}</p>
-      </div></section>
-      <section id="kpis"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.KPIS.eyebrow)}</p>
-        <h2>${esc(HO.KPIS.titleA)} ${esc(HO.KPIS.titleB)}</h2>
-        <p>${esc(HO.KPIS.lead)}</p>
-        <table><thead><tr>${HO.KPIS.head.map((h) => '<th>' + esc(h) + '</th>').join('')}</tr></thead><tbody>
-          ${li(HO.KPIS.rows, (r) => '<tr>' + r.map((c) => '<td>' + esc(c) + '</td>').join('') + '</tr>')}
-        </tbody></table>
-        <p>${HO.KPIS.legend.map(esc).join(' · ')}. ${esc(HO.KPIS.legendNote)}</p>
-      </div></section>
-      ${googleReviewsHtml()}
-      <section><div class="ch-container ch-narrow">
-        <ul>
-          ${li(HO.STERLING_PROOF, (p) => '<li><strong>' + esc(p.n) + '</strong> ' + esc(p.t) + ' (' + esc(p.s) + ')</li>')}
-        </ul>
-        <p><a href="/videos/dr-ronak-vinayaka.mp4">Dr Ronak Oswal, Vinaykia Dental Care, Pune</a> — 37 seconds, in his own words.</p>
-      </div></section>
-      <section id="be-the-patient"><div class="ch-container ch-narrow">
-        <h2>${esc(HO.BE_PATIENT.titleA)} ${esc(HO.BE_PATIENT.titleB)}</h2>
-        <p>${esc(HO.BE_PATIENT.body)} WhatsApp ${esc(HO.BE_PATIENT.whatsapp.display)} · call ${esc(HO.BE_PATIENT.call.display)}. ${esc(HO.BE_PATIENT.note)}</p>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        <h2>${esc(HO.FIT.titleA)} ${esc(HO.FIT.titleB)}</h2>
-        <h3>${esc(HO.FIT.yesTitle)}</h3><ul>${HO.FIT.yes.map((y) => '<li>' + esc(y) + '</li>').join('')}</ul>
-        <h3>${esc(HO.FIT.noTitle)}</h3><ul>${HO.FIT.no.map((y) => '<li>' + esc(y) + '</li>').join('')}</ul>
-        <p>${esc(HO.FIT.ownerOperator)}</p>
-        ${faqHtml(HOME_FAQ.FAQS, 'Questions dental clinic owners ask')}
-      </div></section>
-      <section id="run-it-yourself"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HO.DIY.eyebrow)}</p>
-        <h2>${esc(HO.DIY.titleA)} ${esc(HO.DIY.titleB)}</h2>
-        <p>${esc(HO.DIY.lead)} ${esc(HO.DIY.honest)}</p>
-        <p>${esc(HO.DIY.watch)} · ${esc(HO.DIY.length)} · ${esc(MC.ACCESS)}</p>
-        <ul>${HO.DIY.items.map(([b, t]) => '<li><strong>' + esc(b) + '</strong> — ' + esc(t) + '</li>').join('')}</ul>
-        <p><a href="${HO.DIY.button.to}">${esc(HO.DIY.button.label)}</a></p>
+        <h2>${esc(FIT.title)}</h2>
+        <p>${esc(FIT.body)}</p>
       </div></section>
       <section id="free-audit"><div class="ch-container ch-narrow">
-        <h2>${esc(HO.FINAL.titleA)} ${esc(HO.FINAL.titleB)}</h2>
-        <p>${esc(HO.FINAL.sub)}</p>
-        <p><a href="${HO.FINAL.primary.to}">${esc(HO.FINAL.primary.label)}</a> · <a href="${esc(HO.FINAL.whatsapp.href)}">${esc(HO.FINAL.whatsapp.label)}</a></p>
-        <p>${esc(HO.FINAL.modulesLead)} <a href="${HO.FINAL.modulesLink.to}">${esc(HO.FINAL.modulesLink.label)}</a></p>
-        <ul>
-          ${li(POS.HOME_EXPLORE, (e) => '<li><a href="' + e.to + '">' + esc(e.label) + '</a></li>')}
-        </ul>
+        <h2>${esc(FINAL.title)}</h2>
+        <p>${esc(FINAL.sub)}</p>
+        <p><a href="${FINAL.cta.to}">${esc(FINAL.cta.label)}</a></p>
       </div></section>`;
 }
 
@@ -586,28 +490,13 @@ function serviceRoute(D) {
 // ---- routes ---------------------------------------------------------------
 const routes = [
   {
+    // No pricing on the website (owner 2026-11-02). Old links and search results land on the free clinic audit.
     slug: 'pricing',
-    title: PRICE.SEO_TITLE,
-    description: PRICE.SEO_DESCRIPTION,
-    canonical: `${ORIGIN}/pricing`,
-    jsonld: [orgLd, dentalSoftwareLd, faqPageLd(PRICE.FAQS)],
-    content: `
-      <section><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">Pricing</p>
-        <h1 class="ch-hero-title">${esc(PRICE.HEADLINE)} <em>${esc(PRICE.HEADLINE_ACCENT)}</em></h1>
-        <p>${esc(PRICE.SUB)}</p>
-        <h2>Aumy Clinic OS &mdash; starts from ${esc(PRICE.inr(PRICE.MONTHLY_FROM))} / month</h2>
-        <ul>
-          ${PRICE.CLINIC_OS.map((item) => `<li>${esc(item)}</li>`).join('\n          ')}
-        </ul>
-        <p>${esc(PRICE.ADDONS)}</p>
-        <p><a href="/contact">Talk to us about your clinic</a>. ${esc(PRICE.GST)}</p>
-        <p>Want only one part of Aumy? <a href="/modules">See the modules you can buy on their own</a>.</p>
-      </div></section>
-      ${googleReviewsHtml(3)}
-      <section><div class="ch-container ch-narrow">
-        ${faqHtml(PRICE.FAQS, 'Questions clinics ask')}
-      </div></section>`,
+    title: 'Free Clinic Audit for Dental Clinics | AUM AI',
+    description: 'Tell us your dental clinic and city. Within 24 hours a free audit reaches you on WhatsApp, prepared and checked by a person.',
+    canonical: `${ORIGIN}/growth-audit`,
+    refresh: '/growth-audit',
+    content: `<section><div class="ch-container ch-narrow"><p>This page has moved: <a href="/growth-audit">get a free clinic audit</a>.</p></div></section>`,
   },
   {
     // /modules — words from src/data/modules.js (same file the React page renders).
@@ -688,7 +577,6 @@ const routes = [
           <thead><tr><th>What it covers</th>${MODS.TABLE.cols.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead>
           <tbody>${MODS.TABLE.rows.map(([label, cells]) => `<tr><th>${esc(label)}</th>${cells.map((v) => `<td>${{ yes: 'Included', opt: 'Add-on', no: '—' }[v]}</td>`).join('')}</tr>`).join('')}</tbody>
         </table>
-        <p>Prices: the Clinic OS starting price is on our <a href="/pricing">pricing page</a>; the AI modules are priced with you.</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         ${faqHtml(MODS.FAQS, 'Questions clinics ask about the modules')}
@@ -711,7 +599,7 @@ const routes = [
         <h2>What the AI receptionist does</h2>${pairsHtml(AIR.CAPABILITIES)}
         <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
         ${faqHtml(AIR.FAQS, 'AI receptionist questions, answered')}
-        <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat or Aumy Voice on its own</a></p>
+        <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/growth-audit">Free clinic audit</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat or Aumy Voice on its own</a></p>
       </div></section>`,
   },
   {
@@ -730,7 +618,7 @@ const routes = [
         ${pairsHtml(WA.STAGES)}
         <h2>Not another broadcast tool</h2>${pairsHtml(WA.DIFFERENCE)}
         ${faqHtml(WA.FAQS, 'WhatsApp automation questions, answered')}
-        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/pricing">Pricing</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat on its own</a></p>
+        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/growth-audit">Free clinic audit</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat on its own</a></p>
       </div></section>`,
   },
   {
@@ -762,7 +650,7 @@ const routes = [
         <p class="ch-eyebrow">${esc(ADS.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(ADS.HERO.h1)}</h1>
         <p class="ch-hero-sub">${esc(ADS.HERO.sub)}</p>
-        <p><a href="/demos">Watch it work, live</a> · <a href="/pricing">See pricing in ₹</a></p>
+        <p><a href="/demos">Watch it work, live</a> · <a href="/growth-audit">Get a free clinic audit</a></p>
         <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would — or call +91 22 6423 0581 and wait a couple of rings for Aumy Voice to pick up. (Demo clinic: Lumière Dental.) That live demo is Aumy Chat and Aumy Voice only — for a full Aumy One demo, call us on +91 80071 89868.</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
@@ -799,16 +687,14 @@ const routes = [
   // AIPatientEngagementPage.js) — keep this crawler copy in step with them.
   {
     slug: '',
-    // Outcomes as a service (owner 2026-10-22). Words: src/data/homeOutcomes.js + src/data/homeFaq.js, the same
-    // files src/pages/Home.js renders. SEO strings also in public/index.html. No module names on this page:
-    // the one quiet link to /modules sits in the closing band; module terms belong to the module pages.
-    title: HO.SEO.title,
-    description: HO.SEO.description,
+    // Aumy as ONE product (owner 2026-11-02). Words: src/data/homeOneProduct.js, the same file src/pages/Home.js
+    // renders. SEO strings also in public/index.html. No module names and no prices on this page.
+    title: HOME.SEO.title,
+    description: HOME.SEO.description,
     canonical: `${ORIGIN}/`,
-    ogImage: `${ORIGIN}${HO.SEO.shareImage}`,
-    // The Sterling film (hero), Dr Ronak's video and the full demo film are on this page. The module explainer
-    // VideoObjects moved to /revenue-generator, the page that shows those videos.
-    jsonld: [orgLd, dentalSoftwareLd, faqLd, videoLd, filmVideoLd, explainerVideoLd[0]],
+    ogImage: `${ORIGIN}${HOME.SEO.shareImage}`,
+    // Only the Sterling film (hero) plays on this page now.
+    jsonld: [orgLd, dentalSoftwareLd, explainerVideoLd[0]],
     content: homeContent(),
   },
   {
@@ -1250,20 +1136,20 @@ const routes = [
     slug: 'switch',
     title: 'Switch Dental Software Without Losing a Single Record — Move to Aumy | AUM AI',
     description:
-      'Whatever dental software your clinic uses today, Aumy keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into Aumy for a one-time migration fee. No downtime.',
+      'Whatever dental software your clinic uses today, Aumy keeps your data in sync from day one. Ready for one connected platform? We migrate patients, appointments, treatment history, notes and images into Aumy. No downtime.',
     canonical: `${ORIGIN}/switch`,
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Moving from your current dental software</p>
         <h1 class="ch-hero-title">Switch without losing a single patient record.</h1>
-        <p class="ch-hero-sub">Your data is not locked in. Whatever software your clinic runs today, Aumy keeps your data in sync with it from day one. When you are ready for one connected platform, we migrate patients, appointment history, treatment history, clinical notes, X-rays and images into Aumy for a one-time migration fee — with no downtime and nothing re-typed.</p>
+        <p class="ch-hero-sub">Your data is not locked in. Whatever software your clinic runs today, Aumy keeps your data in sync with it from day one. When you are ready for one connected platform, we migrate patients, appointment history, treatment history, clinical notes, X-rays and images into Aumy — with no downtime and nothing re-typed.</p>
         <h2>How the move works</h2>
         <ol>
           <li><b>Sync</b> — Aumy keeps your current software and Aumy in step from day one.</li>
           <li><b>Run on top</b> — the Aumy modules you pick start working on the synced data.</li>
           <li><b>Migrate when you are ready</b> — full history moved, counts verified with you, sync kept running until you switch the old system off.</li>
         </ol>
-        <p><a href="/contact">Book a migration call</a> · <a href="/pricing">See pricing</a> · <a href="/revenue-generator">How Aumy works</a></p>
+        <p><a href="/contact">Book a migration call</a> · <a href="/revenue-generator">How Aumy works</a></p>
       </div></section>`,
   },
   {
@@ -1572,7 +1458,7 @@ for (const p of MODS.PAGES) {
         ],
       },
       {
-        // No offers/prices: /pricing owns them, and the AI modules are priced per clinic.
+        // No offers and no prices (owner 2026-11-02: no pricing on the website).
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
         '@id': `${url}#software`,
