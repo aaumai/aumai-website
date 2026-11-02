@@ -7,16 +7,17 @@ import MC from '../data/masterclass';
 import WhatsAppNumberField from '../components/WhatsAppNumberField';
 import { defaultWhatsappCountry } from '../data/whatsappCountries';
 import MasterclassUnlockForm from '../components/MasterclassUnlockForm';
-import { API, EP, accessLevel, call, canWatch, fileUrl, downloadAllUrl, pendingProduct, priceLabels, readPending, settlePending, validEmail } from '../lib/masterclassCheckout';
+import { API, EP, accessLevel, call, fileUrl, downloadAllUrl, pendingProduct, priceLabels, settlePending, validEmail } from '../lib/masterclassCheckout';
 import './ScorecardPage.css';
 import './MasterclassPage.css';
 
 // Masterclass members area (owner 2026-10-18): members sign in with a 6-digit email
 // code (no password). Anyone creates an account here (name, clinic, WhatsApp, email).
-// By access level (owner 2026-10-30; /me.access_level):
-//   none  → the "Join for ₹299" pay step where the video would be, the kit locked below;
-//   watch → the video, the 24×7 WhatsApp Q&A line, the kit locked with "Unlock the kit · ₹700 more";
+// By access level (/me.access_level; free to watch since owner 2026-11-02):
+//   none  → the video (free), the kit locked below with "Unlock the kit · ₹999 once";
+//   watch → paid ₹299 before 2 Nov: the video, the 24×7 WhatsApp Q&A line, "Unlock the kit · ₹700 more";
 //   kit   → exactly the page from before (every download, the video).
+// The WhatsApp Q&A line shows only when /me.whatsapp_qa says so (the kit, or a ₹299 paid before 2 Nov).
 // Every amount is the API's label. Lifetime access (owner 2026-10-20). Private: noindex,
 // and nothing here is in the prerendered HTML. The session is an HttpOnly cookie set by
 // site-api.aumai.co.in (same site).
@@ -91,7 +92,7 @@ export default function MasterclassPage() {
   // The kit form opens on #unlock, and after a UPI app switch reloaded the page mid-payment
   // (its pending order is then checked at once).
   // #unlock opens the kit form, unless an order is waiting for confirmation (that order's own form checks it).
-  const [showUnlock, setShowUnlock] = useState(() => location.hash === '#unlock' && !readPending());
+  const [showUnlock, setShowUnlock] = useState(() => location.hash === '#unlock'); // one pay form only (the kit) since 2026-11-02
   // A KIT order waiting after a UPI app switch reloaded the page: the kit form reopens and checks it.
   // A ₹299 order never does (review 2026-10-30): the join form owns it, or settlePending clears it.
   const [resumeKit, setResumeKit] = useState(() => pendingProduct() === 'kit');
@@ -271,7 +272,7 @@ export default function MasterclassPage() {
   const onAnyPaid = async (j, email, product) => {
     if (j && j.sign_in === 'code') {
       const fresh = await loadMe();
-      const done = product === 'entry' ? canWatch(fresh) : accessLevel(fresh) === 'kit';
+      const done = product === 'entry' ? accessLevel(fresh) !== 'none' : accessLevel(fresh) === 'kit';
       if (!done) {
         try { await call(EP.signOut, {}); } catch (e) { /* the code sign-in replaces the session anyway */ }
         saveSent(null);
@@ -293,13 +294,9 @@ export default function MasterclassPage() {
     const qa = me.live_qa && (me.live_qa.at_label || me.live_qa.at || me.live_qa.link) ? me.live_qa : null;
     const level = accessLevel(me);
     const L = priceLabels(me, pricePayload);
-    const wa = me.whatsapp_qa || MC.WHATSAPP;
-    // A pending order from before the reload: for a member who has not joined, the join form above
-    // checks it; for a `watch` member, the kit form reopens by itself and checks it.
-    const kitFormOpen = showUnlock || (resumeKit && level === 'watch');
-    // Never both pay forms at once (review 2026-10-30): a member who has not joined and opens the kit
-    // form sees the kit form only (the kit includes watching), with a way back to the ₹299 step.
-    const joinFormOpen = level === 'none' && !kitFormOpen;
+    const wa = me.whatsapp_qa && me.whatsapp_qa.link ? me.whatsapp_qa : null;
+    // A pending kit order from before the reload: the kit form reopens by itself and checks it.
+    const kitFormOpen = showUnlock || resumeKit;
     return (
       <div className="sc-root">
         <section className="mc-hero">
@@ -309,32 +306,14 @@ export default function MasterclassPage() {
               <button type="button" className="sc-link" onClick={signOut}>Sign out</button>
             </div>
             <h1>Welcome, {me.display_name}</h1>
-            <p className="mc-access">{level === 'none' ? MC.MEMBER.welcomeNone(L.entry) : MC.MEMBER.welcomeWatch}</p>
+            <p className="mc-access">{level === 'none' ? MC.MEMBER.welcomeNone() : MC.MEMBER.welcomeWatch}</p>
             {justJoined && level === 'watch' && <p className="mc-sent" role="status">Payment received, thank you. The masterclass is yours: press play below.</p>}
             {justUnlocked && <p className="mc-sent" role="status">Payment received, thank you. Your kit is opening: if it still shows as locked, refresh this page in a minute.</p>}
           </div>
         </section>
 
         <div className="sc-wrap">
-          {/* Not joined yet (owner 2026-10-30): the ₹299 pay step stands where the video would be. */}
-          {level === 'none' && (
-            <section className="mc-section" aria-labelledby="mc-join-h" style={{ paddingTop: 8 }}>
-              <h2 id="mc-join-h">The masterclass video</h2>
-              {joinFormOpen ? (
-                <>
-                  <MasterclassUnlockForm me={me} price={pricePayload} product="entry" onPaid={onAnyPaid} onAlreadyPaid={onJoined} contact={contact} />
-                  <p className="mc-help">{MC.JOIN.kit(L.kitTotal, L.upgrade)}</p>
-                </>
-              ) : (
-                <p className="mc-help" style={{ color: 'var(--sc-ink)' }}>
-                  The kit below includes watching the masterclass.{' '}
-                  <button type="button" className="sc-link" onClick={() => { setShowUnlock(false); setResumeKit(false); }}>{`Just watch? ${MC.CTA.join(L.entry)}`}</button>
-                </p>
-              )}
-            </section>
-          )}
-
-          {level !== 'none' && (
+          {/* Free to watch for every member (owner 2026-11-02). */}
           <section className="mc-section" aria-labelledby="mc-video-h" style={{ paddingTop: 8 }}>
             <h2 id="mc-video-h">The masterclass video</h2>
             {me.video && me.video.type === 'embed' && (
@@ -352,7 +331,6 @@ export default function MasterclassPage() {
               <div className="mc-video mc-video-wait"><p style={{ margin: 0 }}>{me.video_by_label ? `The video will be here by ${me.video_by_label}.` : 'The video will appear here soon.'}</p></div>
             )}
           </section>
-          )}
 
           {qa && level !== 'none' && (
             <section className="mc-section mc-pack" aria-labelledby="mc-qa-h">
@@ -362,8 +340,8 @@ export default function MasterclassPage() {
             </section>
           )}
 
-          {/* 24×7 Q&A on WhatsApp comes with joining (owner 2026-10-30). */}
-          {level !== 'none' && (
+          {/* 24×7 Q&A on WhatsApp comes with the kit (owner 2026-11-02), and with a ₹299 paid before 2 Nov. */}
+          {wa && (
             <p className="mc-sent mc-wa" style={{ marginTop: 20 }}>
               {MC.MEMBER.qaLine}{' '}
               <a href={wa.link} target="_blank" rel="noopener noreferrer">{wa.display}</a>
@@ -390,7 +368,7 @@ export default function MasterclassPage() {
             )}
             {!justUnlocked && !kitFormOpen && (
               <div className="mc-all">
-                <button type="button" className={`sc-btn mc-btn-wide mc-unlock-btn${level === 'none' ? ' sc-btn-ghost' : ''}`} onClick={() => setShowUnlock(true)}>{MC.MEMBER.unlockButton(L.kit, L.kitUpgrade)}</button>
+                <button type="button" className="sc-btn mc-btn-wide mc-unlock-btn" onClick={() => setShowUnlock(true)}>{MC.MEMBER.unlockButton(L.kit, L.kitUpgrade)}</button>
               </div>
             )}
             {kitFormOpen && (

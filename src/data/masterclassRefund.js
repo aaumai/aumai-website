@@ -13,7 +13,8 @@
  */
 const CONTACT_EMAIL = 'jayesh.chaudhari@aumai.co.in';
 const HEADING = 'The Full Chair Method masterclass';
-const JOIN_MONEY_BACK = 'Joining the masterclass: if you watch it and feel it did not add value, write to us and we return your joining fee in full, no questions asked.';
+// Watching is free since 2026-11-02; the joining fee (30 Oct–2 Nov) is still returned on request to anyone who paid it.
+const JOIN_MONEY_BACK = 'Watching the masterclass is free. If you paid a fee to join it before 2 November 2026 and feel it did not add value, write to us and we return that fee in full, no questions asked.';
 const NON_REFUNDABLE = 'The kit fee is paid once and is non-refundable once paid.';
 const DUPLICATE = 'If you were charged more than once for the same thing by mistake, we return the extra payment in full to the same payment method, usually within 5–7 working days.';
 const RULES = [

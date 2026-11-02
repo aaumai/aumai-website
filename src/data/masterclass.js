@@ -17,8 +17,14 @@
  * slides, guides) is PRICE_LABEL in total: UPGRADE_LABEL more after joining, or PRICE_LABEL
  * outright, watching included. Flow on /masterclass: the sign-up form (an account, signed in), then
  * the pay step, then the video plays in place. No renewal words anywhere: both are paid once.
- * The pages never say "free". The YouTube id is NEVER in this file or any public file: the video
- * URL comes only from the site backend's /me.video, for members who can watch.
+ * The YouTube id is NEVER in this file or any public file: the video URL comes only from the site
+ * backend's /me.video, for members who can watch.
+ *
+ * Owner 2026-11-02 (replaces the ₹299 entry of 30 Oct): "make masterclass free to watch on our website
+ * the 999 fee remains for file downloads". The short form stays first (every viewer is a BM lead), then
+ * the video plays at once. The kit is PRICE_LABEL, once, for the downloads, with the 24×7 WhatsApp Q&A.
+ * Nothing on these pages offers a ₹299 step any more. ENTRY_LABEL / UPGRADE_LABEL stay only for a member
+ * who paid ₹299 before 2 Nov: the kit is UPGRADE_LABEL more for them (the backend decides).
  *
  * `module.exports` on purpose: the prerender script is plain Node.
  */
@@ -27,7 +33,7 @@ const MC_REFUND = require('./masterclassRefund');
 const TITLE = 'The Full Chair Method';
 // The ONE place amounts are typed. Shown only until the site backend answers (/me, /price), which
 // is the source of truth: MASTERCLASS_ENTRY_PRICE_PAISE and MASTERCLASS_PRICE_PAISE.
-const ENTRY_LABEL = '₹299';   // watch + 24×7 WhatsApp Q&A
+const ENTRY_LABEL = '₹299';   // the old entry (30 Oct–2 Nov 2026), only for members who paid it
 const PRICE_LABEL = '₹999';   // the kit, in total (includes watching)
 const UPGRADE_LABEL = '₹700'; // the kit for someone who paid ENTRY_LABEL
 // Lifetime access for every member (owner 2026-10-20); the site backend never ends it on a date.
@@ -55,22 +61,24 @@ const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868' };
 // Search words clinic owners actually type (YouTube and Google suggestions, 25 Oct 2026): "ai for dentists",
 // "ai automation for clinics", "patient follow up", "reduce no shows", "how to get more dental patients",
 // "claude for dentists". The title leads with them; the brand comes last.
+// Owner 2026-11-02: dentists and clinic owners who want to AUTOMATE their clinic with Claude must find this page, so the
+// title and description lead with "Claude for dentists & clinic owners" + "automate", and an FAQ answers it in plain words.
 // Owner 2026-10-29: the masterclass is for EVERY clinic owner (dental, skin, any clinic), as in the ad
 // "For clinic owners · Dental · Skin · Every clinic". Dental appears only as an example, next to a skin one.
-// Never "free" on these pages (owner 2026-10-26).
+// Free to watch (owner 2026-11-02, replacing the 26 Oct "never free" rule for the masterclass itself).
 const SEO = {
-  title: 'AI for Clinic Owners: Patient Follow-Up Masterclass | AUM AI',
+  title: 'Claude for Dentists & Clinic Owners: Automate Follow-Ups | AUM AI',
   description:
-    `The Full Chair Method masterclass, about an hour: run patient follow-ups with AI and Claude, reduce no-shows and get more patients from your own list. For every clinic owner: dental, skin and every other clinic. Join for ${ENTRY_LABEL}.`,
+    `Free masterclass for dentists and clinic owners: automate patient follow-ups with Claude AI. Claude writes your reminders, recall messages and weekly report from a Google Sheet, so you reduce no-shows and bring patients back. Dental, skin, every clinic.`,
   keywords:
-    'AI for clinics, AI for clinic owners, patient follow-up, reduce no-shows, clinic WhatsApp follow-up, Claude for clinics, AI for dentists, AI for dermatologists, skin clinic patient follow-up, dental clinic patient follow-up, The Full Chair Method, 4C Framework',
+    'Claude for dentists, Claude AI for dental clinics, Claude for clinic owners, automate dental clinic with AI, automate clinic with Claude, Claude skills for clinics, how to use Claude in a clinic, AI automation for dental practice, dental clinic automation, AI for clinics, AI for clinic owners, patient follow-up, reduce no-shows, clinic WhatsApp follow-up, Claude for clinics, AI for dentists, AI for dermatologists, skin clinic patient follow-up, dental clinic patient follow-up, The Full Chair Method, 4C Framework',
   // The link preview when the page is shared (WhatsApp, Facebook, LinkedIn): 1200×630, no "free", no price.
   shareImage: '/og/masterclass-full-chair-method-1200x630.png',
   shareImageAlt: 'The Full Chair Method masterclass, AI for clinic owners: dental, skin, every clinic. About an hour.',
 };
 
-// The full masterclass, right under the title (owner 2026-10-26). It plays in place for a member who
-// can watch (joined for ENTRY_LABEL, or has the kit). The video URL comes ONLY from /me.video (owner
+// The full masterclass, right under the title (owner 2026-10-26). It plays in place for every member,
+// free (owner 2026-11-02). The video URL comes ONLY from /me.video (owner
 // 2026-10-30: the YouTube id never appears in the public website). Duration is the final cut's.
 const VIDEO = {
   eyebrow: 'The masterclass',
@@ -85,14 +93,14 @@ const VIDEO = {
   soon: 'The video will appear here soon. Please check again later today.',
 };
 
-// Step 1 of 2, where the video is (owner 2026-10-26; 2026-10-30: then the pay step). Four fields,
-// one button. An email that already has an account gets the code step instead (the site backend
+// The form where the video is (owner 2026-10-26; free to watch since 2026-11-02: the video plays at once).
+// Four fields, one button. An email that already has an account gets the code step instead (the site backend
 // never signs an existing account in from this form).
 const GATE = {
-  step: 'Step 1 of 2 · Your details',
+  step: 'Free to watch · About an hour',
   title: 'Watch the masterclass',
-  blurb: (l = ENTRY_LABEL) => `Tell us who you are. Next, join for ${l}, once, and the video plays right here.`,
-  button: 'Continue',
+  blurb: () => 'Tell us who you are, and the whole masterclass plays right here, as often as you like.',
+  button: 'Watch now',
   busy: 'One moment…',
   codeTitle: 'You already have an account',
   codeBlurb: 'We have emailed a 6-digit code to',
@@ -102,8 +110,8 @@ const GATE = {
   signedIn: 'You are signed in.',
 };
 
-// Step 2 of 2: the pay step for a signed-in member who cannot watch yet (owner 2026-10-30).
-// Same fields and checks as the kit: city, clinic type, the non-refundable tick.
+// The ₹299 pay step (owner 2026-10-30). OFF SALE since 2026-11-02 (free to watch): no page shows it; the words
+// stay for MasterclassUnlockForm's product 'entry' only, in case the backend's rollback switch is used.
 const JOIN = {
   step: 'Step 2 of 2 · Join',
   title: (l = ENTRY_LABEL) => `Join for ${l}`,
@@ -131,12 +139,12 @@ const HERO = {
   promise:
     'Every new enquiry. Every patient with an appointment. Every patient who missed one. Every “I’ll let you know”. Every treatment left half-done. Every patient who hasn’t come back in a year.',
   who: 'Feels like too much to do? You can do all of it in about 30 minutes every morning. In The Full Chair Method masterclass, I show you exactly how. For clinic owners (dental, skin or any other clinic), and the manager or front-desk lead who runs it with you.',
-  // About an hour · Join ₹299 · Kit ₹999 in total · Lifetime access (owner 2026-10-30). `entry` / `price`
-  // mark the facts whose label the page swaps for the backend's live one.
+  // Free to watch · About an hour · Kit ₹999 once · Lifetime access (owner 2026-11-02). `price` marks the
+  // fact whose label the page swaps for the backend's live one.
   facts: [
-    { b: 'About an hour', t: 'watch any time, right here' },
-    { b: `Join for ${ENTRY_LABEL}`, t: 'once, with 24×7 Q&A on WhatsApp', entry: true },
-    { b: `Kit ${PRICE_LABEL} in total`, t: 'every download; your joining fee counts towards it', price: true },
+    { b: 'Free to watch', t: 'sign up and it plays right here' },
+    { b: 'About an hour', t: 'watch any time, as often as you like' },
+    { b: `Kit ${PRICE_LABEL}, once`, t: 'every download, with 24×7 Q&A on WhatsApp', price: true },
     { b: ACCESS, t: 'to the video, and to the kit' },
   ],
   note: 'Not a theory session. You see every system running, then a whole morning’s follow-ups done on screen, against the clock.',
@@ -263,16 +271,16 @@ const WAYS = {
 
 const KIT = {
   title: 'What you get',
-  intro: `Join for ${ENTRY_LABEL}, once: the masterclass plays on this page, with 24×7 Q&A on WhatsApp. The kit is ${PRICE_LABEL} in total, paid once, and unlocks every download: ${UPGRADE_LABEL} more after you join, or ${PRICE_LABEL} straight away, watching included.`,
+  intro: `The masterclass is free to watch on this page. The kit is ${PRICE_LABEL}, paid once: it unlocks every download, with 24×7 Q&A on WhatsApp.`,
   items: [
-    { h: 'The masterclass video', t: `About an hour. Watch it in one sitting or a stage at a time, as often as you like. Your access never ends.` },
+    { h: 'The masterclass video', t: 'Free to watch. About an hour: watch it in one sitting or a stage at a time, as often as you like. Your access never ends.' },
     { h: 'The Clinic Master Sheet', t: 'Type each patient and visit once, and the sheet works out who is due for what today. A tab for every system and foundation, the Today list, the weekly Scorecard, and every rule and message we use, in English, Hindi and Marathi. Opens in Excel or Google Sheets.' },
     { h: 'The weekly Scorecard', t: 'A tab in the Clinic Master Sheet: one owner and one KPI per system, week by week, in green, orange or red, with the list of what was missed last week. Your 15 minutes every Monday.' },
     { h: 'The Claude skill file', t: 'Every framework, question bank and message script from the masterclass, so Claude writes your patient messages, call scripts and weekly KPI report from your own sheets. With a short guide: seven prompts to try first, and the Front desk screens.' },
     { h: 'Message scripts in English, Hindi and Marathi', t: 'In the skill file: every follow-up message, the question banks for implants, aligners, root canal with crown and smile makeover, the missed-call script, and the doctor’s check-ins by procedure.' },
     // The leak is worked out in the sheet itself (owner 2026-10-22: no PDF, no paper copy).
     { h: 'The Leak tab', t: 'A tab in the Clinic Master Sheet: your monthly leak in rupees, box by box, from three numbers you already know. You fill it in during the class, and the sheet shows your weakest C.' },
-    { h: '24×7 Q&A on WhatsApp: 80071 89868', t: 'Included when you join. Ask any question about the method, the Clinic Master Sheet or the Claude skill, any time.', wa: true },
+    { h: '24×7 Q&A on WhatsApp: 80071 89868', t: 'Included with the kit. Ask any question about the method, the Clinic Master Sheet or the Claude skill, any time.', wa: true },
     { h: 'Bonus video: get found on Google', t: 'About 7 minutes: asking every patient for a Google review the right way, what to post on your Google profile and website each week, and how to reply to every review.' },
   ],
 };
@@ -314,17 +322,18 @@ const TRAINER = {
 };
 
 const FAQS = [
-  { q: 'How do I watch it?', a: `Type your name, clinic, WhatsApp number and email at the top of this page, then join for ${ENTRY_LABEL}, once, by UPI, card or net banking. The video plays right there, as often as you like, and you can ask us questions 24×7 on WhatsApp.` },
-  { q: 'What does it cost?', a: `${ENTRY_LABEL}, once, to watch the masterclass, with 24×7 Q&A on WhatsApp. The kit (the Clinic Master Sheet, the Claude skill file, the Prompt Pack, the slides and the guides) is ${PRICE_LABEL} in total, also paid once: ${UPGRADE_LABEL} more after you have joined, or ${PRICE_LABEL} straight away, which includes watching. Nothing renews.` },
-  { q: 'When can I watch it?', a: `Any time after you join. It runs about an hour, so you can watch when it suits you, pause to fill in your Clinic Master Sheet, and watch again any time: you have lifetime access.` },
-  { q: 'How long do I have access?', a: 'For life. Once you join, your access has no end date, and neither does the kit once you buy it. Watch the video again whenever you like; the Clinic Master Sheet and the skill file are yours to keep.' },
+  { q: 'How do I watch it?', a: 'Type your name, clinic, WhatsApp number and email at the top of this page and press Watch now. The video plays right there, free, as often as you like.' },
+  { q: 'What does it cost?', a: `Watching the masterclass is free. The kit (the Clinic Master Sheet, the Claude skill file, the Prompt Pack, the slides and the guides) is ${PRICE_LABEL}, paid once, with 24×7 Q&A on WhatsApp. Nothing renews.` },
+  { q: 'When can I watch it?', a: `Any time after you sign up. It runs about an hour, so you can watch when it suits you, pause to fill in your Clinic Master Sheet, and watch again any time: you have lifetime access.` },
+  { q: 'How long do I have access?', a: 'For life. Once you sign up, your access has no end date, and neither does the kit once you buy it. Watch the video again whenever you like; the Clinic Master Sheet and the skill file are yours to keep.' },
   { q: 'What language is it in?', a: 'Simple English. The message scripts in the skill file come in English, Hindi and Marathi.' },
   { q: 'I don’t run a dental clinic. Is this for me?', a: 'Yes. It is for every clinic owner: dental, skin, aesthetic or any other clinic. Many examples come from dental clinics, where we measured them. Running a skin or aesthetic clinic? Set your clinic type in the Clinic Master Sheet and its treatment lists and check-ins switch to skin. For every clinic, the eight systems work the same way: enquiries, confirmations, treatment plans, the day-after check-in and bringing patients back.' },
   { q: 'Do I need Aumy or any other software?', a: 'No. The Clinic Master Sheet opens in Excel or Google Sheets, and Claude is optional. Aumy appears only as one of the three ways, on a demo clinic. There is nothing to buy in the masterclass.' },
+  { q: 'Can I automate my clinic with Claude?', a: 'Yes, the daily follow-up work. Upload the Claude skill file to claude.ai and connect your Clinic Master Sheet through Google Drive. Type “Today’s work” and Claude lists who is due, writes each WhatsApp message and call script in English, Hindi or Marathi, gives you click-to-send links and updates your weekly KPI report. It takes about 30 minutes a morning. Someone at the clinic still presses send, and Claude only knows what is in your sheet.' },
   { q: 'Do I need a Claude account?', a: 'Only if you want Claude’s help. Everything works by hand with the Clinic Master Sheet. With a Claude account at claude.ai, you upload the skill file and connect the sheet through Google Drive, and Claude writes the messages, call scripts and weekly KPI report.' },
-  { q: 'How do I get the kit, and how do I sign in?', a: `Sign in with your email: we send a 6-digit code, and there is no password. The kit is ${PRICE_LABEL} in total, by UPI, card or net banking through Razorpay. Joined already? Press Unlock the kit on your masterclass page and pay ${UPGRADE_LABEL} more. Or press Get the kit on this page and pay ${PRICE_LABEL}, watching included. Every download opens the moment the payment is confirmed.` },
-  { q: 'Can I get a refund?', a: `${MC_REFUND.JOIN_MONEY_BACK} ${MC_REFUND.NON_REFUNDABLE} ${MC_REFUND.DUPLICATE}` },
-  { q: 'Is there a Q&A?', a: `Yes, 24×7 on WhatsApp: ${WHATSAPP.display}, included when you join. Ask anything about the method, the Clinic Master Sheet or setting up Claude.`, wa: true },
+  { q: 'How do I get the kit, and how do I sign in?', a: `Sign in with your email: we send a 6-digit code, and there is no password. The kit is ${PRICE_LABEL}, paid once, by UPI, card or net banking through Razorpay. Press Unlock the kit on your masterclass page, or Get the kit on this page. Every download opens the moment the payment is confirmed.` },
+  { q: 'Can I get a refund?', a: `Watching is free, so there is nothing to refund for it. ${MC_REFUND.NON_REFUNDABLE} ${MC_REFUND.DUPLICATE}` },
+  { q: 'Is there a Q&A?', a: `Yes, 24×7 on WhatsApp: ${WHATSAPP.display}, included with the kit. Ask anything about the method, the Clinic Master Sheet or setting up Claude.`, wa: true },
 ];
 
 const FINAL = {
@@ -337,9 +346,9 @@ const FINAL = {
 // away" path (owner 2026-10-25). The masterclass itself plays on the masterclass page.
 const REGISTER = {
   title: CTA.kitOnce,
-  lead: `Everything that runs the 4C Framework in your clinic, with lifetime access, and watching the masterclass is included. One payment of ${PRICE_LABEL}, and the video and every download open.`,
+  lead: `Everything that runs the 4C Framework in your clinic, with lifetime access. One payment of ${PRICE_LABEL}, and every download opens. The masterclass itself is free to watch.`,
   points: [
-    'The masterclass video, about an hour, to watch as often as you like.',
+    'The masterclass video, about an hour (free to watch for everyone).',
     'The Clinic Master Sheet: type each patient once, and it shows who is due for what today. It works out your monthly leak on its Leak tab.',
     'The Claude skill file and its guide: Claude writes your patient messages, call scripts and weekly KPI report from your own sheet.',
     'The Prompt Pack, and every slide from the class as a PDF.',
@@ -348,36 +357,36 @@ const REGISTER = {
   // A member who joined already watches and has the Q&A (owner 2026-10-30): sell only the kit, for the difference.
   leadUpgrade: (more = UPGRADE_LABEL, total = PRICE_LABEL, entry = ENTRY_LABEL) => `You already watch the masterclass. The kit is ${more} more: ${total} in total, and your ${entry} counts towards it. One payment, and every download opens, for life.`,
   pointsKitOnly: (points) => points.filter((p) => !/masterclass video|Q&A on WhatsApp/.test(p)),
-  watchLink: `Just want to watch? Join for ${ENTRY_LABEL} on the masterclass page`,
+  watchLink: 'Just want to watch? It is free on the masterclass page',
 };
 const REGISTER_SEO_DESCRIPTION =
-  `Get The Full Chair Method kit for ${PRICE_LABEL}, once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with the masterclass (about an hour) included.`;
+  `Get The Full Chair Method kit for ${PRICE_LABEL}, once: the Clinic Master Sheet, the Claude skill file, the Prompt Pack and the slides, with 24×7 Q&A on WhatsApp. The masterclass (about an hour) is free to watch.`;
 
 // The sign-in page (owner 2026-10-25): two paths on one screen. Same words in prerender.js.
 const SIGNIN = {
   title: 'Watch the masterclass',
-  sub: `About an hour. Join for ${ENTRY_LABEL}, once, to watch, with 24×7 Q&A on WhatsApp. The kit is ${PRICE_LABEL} in total.`,
+  sub: `About an hour, free to watch. The kit of downloads is ${PRICE_LABEL}, once, with 24×7 Q&A on WhatsApp.`,
   signInTitle: 'Sign in',
   signInBlurb: 'Already have an account? Type your email and we will send you a 6-digit code. There is no password.',
   createTitle: 'Create your account',
-  createBlurb: `Tell us who you are, then join for ${ENTRY_LABEL}, once, and the whole masterclass plays, as often as you like. No password.`,
+  createBlurb: 'Tell us who you are, and the whole masterclass plays, free, as often as you like. No password.',
   createButton: 'Continue',
   // After a payment that did not sign this browser in (backend 2026-10-30): the code sign-in.
-  paidSignIn: (email) => `Payment received. Sign in with your email to watch${email ? `: ${email}` : ''}.`,
+  paidSignIn: (email) => `Payment received. Sign in with your email to open your kit${email ? `: ${email}` : ''}.`,
 };
 
 // The members page for a member without the kit (owner 2026-10-25): the video first, then the kit, locked.
 const MEMBER = {
   // Owner 2026-10-26: one licence line wherever the masterclass or kit is shown.
   licence: `© ${new Date().getFullYear()} AAUMAI Healthcare Solution Pvt Ltd (AUM AI). Licensed for use in your own clinic only. Not for resale, sharing or reproduction, including by AI tools.`,
-  // By access level (owner 2026-10-30). Amounts are the API's labels, passed in.
-  welcomeNone: (entry = ENTRY_LABEL) => `Join for ${entry}, once, and the masterclass plays right here, with 24×7 Q&A on WhatsApp.`,
+  // By access level. none = watching free (owner 2026-11-02); watch = paid ₹299 before 2 Nov. Amounts are the API's labels.
+  welcomeNone: () => 'Watch the masterclass below, free, as often as you like.',
   welcomeWatch: 'Watch the masterclass below, as often as you like.',
   qaLine: 'Questions? Ask us 24×7 on WhatsApp:',
   kitTitle: 'Your kit',
   // A `watch` member pays the difference: "the kit is ₹999 in total; you have paid ₹299".
   kitLeadUpgrade: (more = UPGRADE_LABEL, total = PRICE_LABEL, entry = ENTRY_LABEL) => `Every download below opens for ${more} more: the kit is ${total} in total, and you have paid ${entry}. Yours for life.`,
-  kitLead: (total = PRICE_LABEL) => `Every download below opens with one payment of ${total}, watching included. Yours for life.`,
+  kitLead: (total = PRICE_LABEL) => `Every download below opens with one payment of ${total}, with 24×7 Q&A on WhatsApp. Yours for life.`,
   unlockButton: (label = PRICE_LABEL, upgrade = false) => (upgrade ? `Unlock the kit · ${label} more` : `Unlock the kit · ${label} once`),
   unlocked: 'Your kit is unlocked. Every download below is yours, for life.',
   unlockHelp: 'Secure payment by Razorpay: UPI, card or net banking. Your downloads open the moment the payment is confirmed.',
