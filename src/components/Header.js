@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { CreditsBar } from './StartInApp';
 import { isMasterclassPath } from '../data/masterclass';
 import './Header.css';
 
@@ -235,10 +234,7 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      {/* Owner 2026-10-09: "1,000 Aumy credits to try each product" right at the top,
-          linking to this phone's app store. Mirrored in scripts/prerender.js.
-          Owner 2026-10-22: hidden on the home page only (outcomes as a service); every other page keeps it. */}
-      {location.pathname !== '/' && <CreditsBar noFree={isMasterclassPath(location.pathname)} />}
+      {/* The "1,000 Aumy credits" bar was removed on every page (owner 2026-11-03: no pricing, trial or credits). */}
       <div className="container header-container">
         <div className="header-content">
           <div className="logo">

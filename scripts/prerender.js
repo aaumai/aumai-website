@@ -69,15 +69,12 @@ const faqHtml = (faqs, heading) => `<h2>${esc(heading)}</h2>${faqs.map((f) => `<
 // the crawler / no-JS HTML always lists both.
 const STORES = require('../src/data/appStores');
 const storeLinksHtml = (name) =>
-  `<a href="${STORES.APP_STORE_URL}" aria-label="Start ${esc(name)} free: download Aumy on the App Store">Download on the App Store</a> · ` +
-  `<a href="${STORES.PLAY_STORE_URL}" aria-label="Start ${esc(name)} free: get Aumy on Google Play">Get it on Google Play</a>`;
-const startInAppHtml = (name) => `<p><strong>${esc(STORES.START_LINE)}</strong>. ${esc(STORES.START_FINE)}. ${storeLinksHtml(name)}</p>`;
+  `<a href="${STORES.APP_STORE_URL}" aria-label="Start ${esc(name)}: download Aumy on the App Store">Download on the App Store</a> · ` +
+  `<a href="${STORES.PLAY_STORE_URL}" aria-label="Start ${esc(name)}: get Aumy on Google Play">Get it on Google Play</a>`;
+const startInAppHtml = (name) => `<p><strong>${esc(STORES.START_LINE)}</strong>: ${storeLinksHtml(name)}</p>`;
 // Google reviews (src/data/googleReviews.js): the home links to them. Plain HTML only:
 // NO Review / AggregateRating JSON-LD (self-serving reviews break Google's guidelines).
 const GR = require('../src/data/googleReviews');
-// Slim bar at the top of every India page (React: CreditsBar in the header).
-// The masterclass pages never say "free" (owner 2026-10-29): same bar, other words, as in Header.js.
-const creditsBarHtml = (noFree = false) => `<div class="credits-bar"><div class="container"><p class="credits-bar-text"><strong>${esc(STORES.TOP_LINE)}</strong> — ${esc(noFree ? STORES.TOP_SUB_MASTERCLASS : STORES.TOP_SUB)}: <a class="credits-bar-link" href="${STORES.APP_STORE_URL}">App Store</a> · <a class="credits-bar-link" href="${STORES.PLAY_STORE_URL}">Google Play</a></p></div></div>`;
 // Module cards as links to /modules/<id> (home section + "works even better with").
 // `stores`: the home cards also carry the app-store links for the self-serve modules.
 const moduleCardsHtml = (pages, { stores = false } = {}) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}${stores && STORES.isSelfServe(p.id) ? ` ${esc(STORES.START_LINE)}: ${storeLinksHtml(p.short)}` : ''}</li>`).join('\n          ');
@@ -138,7 +135,8 @@ function clinicsStripHtml() {
       return `<li>${esc(c.name)}${lead} — ${where}${branches}</li>`;
     })
     .join('\n          ');
-  return `<h2>Trusted by growing dental clinics across India.</h2>
+  // Owner 2026-11-03: same words as src/components/ClinicsServed.js.
+  return `<h2>Dental clinics that run on Aumy</h2>
         <ul>
           ${items}
         </ul>`;
@@ -188,12 +186,10 @@ function apply(html, r) {
   }
   // The site-wide onboarding-pause banner was removed (owner 2026-09-26),
   // here as in Header.js; pricing and contact keep their own notice.
-  // The "1,000 Aumy credits" bar (owner 2026-10-09) tops every India page, as in Header.js.
-  // Owner 2026-10-22: not on the home page (slug ''), as in Header.js.
-  const bar = MARKET === 'us' || r.refresh || r.slug === '' ? '' : creditsBarHtml(MC.isMasterclassPath(`/${r.slug}`));
+  // The "1,000 Aumy credits" bar was removed on every page (owner 2026-11-03).
   out = out.replace(
     '<div id="root"></div>',
-    `<div id="root"><div class="ch-home">${bar}${r.content}</div></div>`
+    `<div id="root"><div class="ch-home">${r.content}</div></div>`
   );
   return out;
 }
@@ -362,7 +358,7 @@ function homeContent() {
         <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">Dental clinics Aumy serves</p>
+        <p class="ch-eyebrow">Across India</p>
         ${clinicsStripHtml()}
       </div></section>
       <section id="what-aumy-does"><div class="ch-container ch-narrow">

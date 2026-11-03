@@ -7,9 +7,10 @@
  * ONE copy of the words: src/pages/ServicePage.js renders them and scripts/prerender.js writes the same
  * words into the crawler HTML, the Service JSON-LD and the FAQPage JSON-LD.
  *
- * Plans are the owner's (25 Oct): Silver = we run every follow-up by WhatsApp; Gold = Silver plus calls,
- * treatment acceptance and escalations. NO price, NO client results, NO promised hours, languages or call
- * volumes (staffing is still the owner's decision) — we quote after the free audit.
+ * Two ways to hand it over (owner 25 Oct): we run every follow-up by WhatsApp; or WhatsApp plus calls,
+ * treatment acceptance and escalations. NO plan names (owner 2026-11-03: the Silver / Gold names are gone),
+ * NO price, NO client results, NO promised hours, languages or call volumes (staffing is still the owner's
+ * decision) — we quote after the free audit.
  *
  * `module.exports` on purpose: the prerender script is plain Node.
  */
@@ -78,11 +79,11 @@ const POINTS = {
 
 const WORK = {
   eyebrow: 'Two ways to hand it over',
-  title: 'Silver or Gold',
-  intro: 'Pick how much you want us to take on. You can move from Silver to Gold at any time.',
+  title: 'By WhatsApp, or WhatsApp and calls',
+  intro: 'Pick how much you want us to take on. You can add calls at any time.',
   cases: [
-    { name: 'Silver', tag: 'We follow up by WhatsApp', text: 'Every follow-up run for you by message: new enquiries, appointment reminders, missed visits, advised treatment, check-ups, unfinished treatment, patients not seen in a while, and Google review requests. Replies come back to us; anything that needs your clinic comes to your desk.' },
-    { name: 'Gold', tag: 'WhatsApp and phone calls', text: 'Everything in Silver, plus phone calls. We call patients who don’t reply, call advised-treatment patients to help them decide, handle unhappy patients and other escalations, and book the visit while they’re on the line.' },
+    { name: 'By WhatsApp', tag: 'We follow up by message', text: 'Every follow-up run for you by message: new enquiries, appointment reminders, missed visits, advised treatment, check-ups, unfinished treatment, patients not seen in a while, and Google review requests. Replies come back to us; anything that needs your clinic comes to your desk.' },
+    { name: 'WhatsApp and calls', tag: 'Messages and phone calls', text: 'Everything above, plus phone calls. We call patients who don’t reply, call advised-treatment patients to help them decide, handle unhappy patients and other escalations, and book the visit while they’re on the line.' },
   ],
   note: 'Both are run in your clinic’s name, inside your clinic’s Aumy, so your team sees every message, every call and every booking.',
 };
@@ -105,7 +106,7 @@ const MONTHLY = {
   items: [
     'Every new enquiry answered and followed up until it books or says no.',
     'Tomorrow’s visits confirmed, and missed visits rebooked.',
-    'Advised and unfinished treatment followed up, with Gold adding calls to help patients decide.',
+    'Advised and unfinished treatment followed up, with calls to help patients decide if you add them.',
     'Check-ups due, patients not seen in a while and Google review requests, all handled.',
     'A weekly report in plain words, and every message and call visible in your clinic’s Aumy.',
   ],
@@ -133,11 +134,11 @@ const WITH_AUMY = {
 
 const FAQS = [
   { q: 'What does “fully managed” mean?', a: 'We run your clinic’s follow-ups for you, every day: new enquiries, reminders, missed visits, advised treatment, check-ups and Google reviews. Your team treats patients; we make sure they come in.' },
-  { q: 'Do you call our patients?', a: 'With Gold, yes. We call patients who don’t reply to messages, help advised-treatment patients decide, handle escalations and book visits on the call. With Silver, we follow up by WhatsApp only.' },
+  { q: 'Do you call our patients?', a: 'If you add calls, yes. We call patients who don’t reply to messages, help advised-treatment patients decide, handle escalations and book visits on the call. Otherwise we follow up by WhatsApp only.' },
   { q: 'Will patients know it isn’t our front desk?', a: 'Every message and call is made in your clinic’s name, in the words we agree with you. Anything that needs your clinic, such as a clinical question or a complaint, comes straight to your team.' },
   { q: 'How do you help with treatment acceptance?', a: 'Patients who were advised treatment are followed up with answers to the questions that hold them back, such as time, cost or worry about pain, using the information and payment options your clinic gives us. The decision is always the patient’s.' },
   { q: 'Do we need Aumy?', a: 'Yes. Everything is run inside your clinic’s Aumy, so you can see every message and call. We set it up for you.' },
-  { q: 'How much does it cost?', a: 'It depends on your clinic’s size and whether you choose Silver or Gold, so we quote after the free clinic audit. WhatsApp 80071 89868 to start.' },
+  { q: 'How much does it cost?', a: 'It depends on your clinic’s size and how much you hand over, so we quote after the free clinic audit. WhatsApp 80071 89868 to start.' },
 ];
 
 const AUDIT = {

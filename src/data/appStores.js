@@ -3,9 +3,10 @@
  * from the app (owner 2026-10-09: "I want the users to be taken to the App
  * Store and Play Store from the module cards on the marketing site").
  *
- * Clinics sign up THEMSELVES in the Aumy mobile app and start free with 1,000
- * Aumy credits per product — only for the four modules below. Aumy Journey and
- * Aumy One are set up with our team, so they keep Book a demo / WhatsApp us.
+ * Clinics can sign up THEMSELVES in the Aumy mobile app for the four modules
+ * below. Aumy Journey and Aumy One are set up with our team, so they keep Book a
+ * demo / WhatsApp us. No credits, trial or price wording anywhere (owner
+ * 2026-11-02/03: "no pricing on website at all"; the credits bar was removed).
  *
  * ONE copy of the store links and the words: the React components
  * (src/components/AppDownload.js, src/components/StartInApp.js) and the crawler
@@ -27,15 +28,7 @@ const SELF_SERVE_IDS = [
 const isSelfServe = (id) => SELF_SERVE_IDS.includes(id);
 
 // Module cards and module pages.
-const START_LINE = 'Start free in the app — 1,000 Aumy credits';
-const START_FINE = '14-day trial · no card needed to start';
-
-// The slim bar at the very top of every page (owner ask: "1,000 Aumy credits
-// to try each product" right at the top of the site).
-const TOP_LINE = '1,000 Aumy credits to try each product';
-const TOP_SUB = 'start free in the Aumy app';
-// The same bar on the masterclass pages, which never say "free" (owner 2026-10-26, 2026-10-29).
-const TOP_SUB_MASTERCLASS = 'get them in the Aumy app';
+const START_LINE = 'Sign up in the Aumy app';
 
 module.exports = {
   APP_STORE_URL,
@@ -43,9 +36,5 @@ module.exports = {
   SELF_SERVE_IDS,
   isSelfServe,
   START_LINE,
-  START_FINE,
-  TOP_LINE,
-  TOP_SUB,
-  TOP_SUB_MASTERCLASS,
 };
 module.exports.default = module.exports;

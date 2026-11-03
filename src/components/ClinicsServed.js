@@ -33,12 +33,13 @@ export default function ClinicsServed() {
   return (
     <section className="cs" aria-labelledby="cs-title">
       <div className="ch-container">
-        <p className="cs-eyebrow">Dental clinics Aumy serves</p>
+        <p className="cs-eyebrow">Across India</p>
 
         {named.length > 0 ? (
           <>
             <h2 id="cs-title" className="cs-title">
-              Trusted by growing dental clinics across India.
+              {/* Owner 2026-11-03: matches the established-practice persona (was "Trusted by growing dental clinics across India."). */}
+              Dental clinics that run on Aumy
             </h2>
             <ul className="cs-logos">
               {named.map((c) => (

@@ -150,7 +150,7 @@ ${HO.HOW.steps.map((st, i) => `${i + 1}. ${st.title} ${st.body}`).join('\n')}
 ## Key facts
 - Setup and data migration are done for you; a named Aumy contact supports the clinic after go-live.
 - Works alongside existing practice software — no rip-and-replace. FHIR R4 sync or guided import.
-- Clinics can start free in the Aumy app (App Store / Google Play) with 1,000 Aumy credits per product. Data encrypted in transit and at rest, role-based access.
+- Clinics can also sign up in the Aumy app (App Store / Google Play). Data encrypted in transit and at rest, role-based access.
 - AUM AI is an NVIDIA Inception member.
 - Founder: Jayesh Chaudhari — 18 years in healthcare technology (clinic workflows, revenue cycle, compliance, interoperability, AI); built Aumy after working closely with dental clinics in the USA, Dubai and India. https://aumai.co.in/about
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
@@ -173,7 +173,7 @@ ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}$
 - ${ORIGIN}/dental-seo — Dental SEO for international patients (service): pages overseas patients search for (treatment plus "in Delhi/India", costs, short-stay timelines, the doctor's credentials), Google Business Profile looked after every week (posts, review replies, photos), new articles on a fixed day, rankings kept on a redesign, and a monthly Search Console report by country; work: The Sterling Dental Clinic, New Delhi
 - ${ORIGIN}/clinic-websites — Dental websites (service): clinic websites built for SEO and international patients: treatment, area and dental-tourism pages, weekly blogs, technical SEO and redirects that keep old rankings; case study: sterlingdentalclinic.com
 - ${ORIGIN}/dental-ads — Dental ads, Meta and Google (service): Meta ads for dental clinics on Facebook and Instagram and Google ads for dentists, judged by booked patients rather than leads, with every enquiry answered and followed up in Aumy; monthly report on spend, enquiries, booked visits and cost per booked visit
-- ${ORIGIN}/managed-follow-ups — Managed patient follow-ups (service): we run a dental clinic's follow-ups for it — new enquiries (lead nurturing), appointment reminders, missed visits, advised treatment (treatment acceptance), check-ups, unfinished treatment and Google reviews — by WhatsApp (Silver) or WhatsApp plus phone calls and escalations (Gold), inside the clinic's Aumy; quoted after a free clinic audit
+- ${ORIGIN}/managed-follow-ups — Managed patient follow-ups (service): we run a dental clinic's follow-ups for it — new enquiries (lead nurturing), appointment reminders, missed visits, advised treatment (treatment acceptance), check-ups, unfinished treatment and Google reviews — by WhatsApp, or WhatsApp plus phone calls and escalations, inside the clinic's Aumy; quoted after a free clinic audit
 - ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
 - ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
