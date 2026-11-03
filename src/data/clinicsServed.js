@@ -34,7 +34,7 @@
 const clinicsServed = [
   {
     name: 'The Sterling Dental Clinic',
-    city: 'Vasant Vihar, Delhi', // area + city, same format as Omlesh (owner 2026-11-04)
+    city: 'Delhi', // city only on every clinic, for consistency (owner 2026-11-04)
     // Their official logo from the Sterling shoot (2026-10-20), the DARK
     // variant (dark-green + gold ink, transparent) because this strip sits on a
     // white band; the light variant is for dark backgrounds. Owner 2026-10-22.
@@ -50,7 +50,7 @@ const clinicsServed = [
     // Second on purpose: the two Delhi clinics sit side by side in the first row so a Delhi visitor sees them at once
     // (owner 2026-11-04).
     name: "Omlesh's Dentcity",
-    city: 'Rohini, Delhi',
+    city: 'Delhi',
     // Their own logo (white background, which suits this white band).
     logo: '/logos/clinics/omlesh-dentcity.png',
     consent: true, // cleared by Jayesh 2026-11-04 — back it with a permission email (template in onboarding-docket)
