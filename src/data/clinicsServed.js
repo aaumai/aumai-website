@@ -31,6 +31,9 @@
  * and a clinic that withdrew consent could stay named in the static HTML.
  */
 
+// 🚨 OWNER RULE (2026-11-04): once this list has MORE THAN 10 unique clinics, the homepage strip switches from these
+// static rows (today: the two Delhi clinics on row 1, the rest on row 2) to a scrolling logo marquee. Build that switch
+// when you add the 11th clinic. Every clinic shows its city only (no area), the same format for all.
 const clinicsServed = [
   {
     name: 'The Sterling Dental Clinic',
