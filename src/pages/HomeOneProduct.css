@@ -83,7 +83,27 @@
 /* Fit */
 .op .op-fit .ch-h2 { max-width: 760px; margin-left: auto; margin-right: auto; }
 
+/* How it works (/revenue-generator): each part beside its film, and the example day. */
+.op .op-film-note { margin: -6px 0 0; font-size: 14px; color: var(--c-ink-soft); }
+.op .hw-parts { display: grid; gap: 28px; margin-top: 44px; }
+.op .hw-part {
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 36px; align-items: center;
+  background: var(--c-surface); border: 1px solid var(--c-line); padding: 32px;
+}
+.op .hw-part--nofilm { grid-template-columns: 1fr; }
+.op .hw-part-text h3 { margin: 6px 0 10px; }
+.op .hw-film { margin: 0; box-shadow: none; }
+.op .hw-day { list-style: none; margin: 36px 0 0; padding: 0; border-left: 1px solid var(--lux-gold, var(--c-line)); }
+.op .hw-day li { position: relative; display: grid; gap: 4px; padding: 0 0 26px 26px; }
+.op .hw-day li::before {
+  content: ''; position: absolute; left: -5px; top: 7px; width: 9px; height: 9px;
+  background: var(--lux-gold, var(--c-accent)); border-radius: 50%;
+}
+.op .hw-day-when { font-size: 12.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-accent-dark); }
+.op .hw-day-what { font-size: 17px; line-height: 1.6; color: var(--c-ink); }
+
 @media (max-width: 920px) {
+  .op .hw-part { grid-template-columns: 1fr; gap: 22px; padding: 24px 20px; }
   .op .op-three { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
 }
 @media (max-width: 600px) {
