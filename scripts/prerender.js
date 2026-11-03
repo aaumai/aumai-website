@@ -351,8 +351,8 @@ function homeContent() {
         <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(HERO.title)}</h1>
         <p class="ch-hero-sub">${esc(HERO.subLead)}</p>
-        <ul>${HERO.parts.map((p) => '<li>' + esc(p) + '</li>').join('')}</ul>
-        <p>${esc(HERO.subClose)}</p>
+        <ul>${HERO.parts.map((p) => '<li><strong>' + esc(p.name) + '</strong> ' + esc(p.line) + '</li>').join('')}</ul>
+        <p><em>${esc(HERO.lossQuestion)}</em></p>
         <p><strong>${esc(HERO.loss)}</strong></p>
         <p><a href="${HERO.cta.to}">${esc(HERO.cta.label)}</a></p>
         <p>${esc(HERO.ctaNote)}</p>

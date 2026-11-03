@@ -26,6 +26,9 @@ const ICONS = {
   voice: (
     <path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z" fill="currentColor" />
   ),
+  followups: (
+    <path d="M12 3a9 9 0 109 9M21 3v6h-6M12 7v5l3 2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  ),
   paperless: (
     <path d="M6 2h9l5 5v13a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zm8 1.5V8h4.5M8 12h8M8 16h8M8 8h3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   ),
@@ -52,9 +55,9 @@ const Home = () => {
             <h1 className="ch-hero-title">{HERO.title}</h1>
             <p className="ch-hero-sub op-hero-sub">{HERO.subLead}</p>
             <ul className="op-hero-parts">
-              {HERO.parts.map((p) => <li key={p}><Check />{p}</li>)}
+              {HERO.parts.map((p) => <li key={p.name}><Check /><span><strong>{p.name}</strong> {p.line}</span></li>)}
             </ul>
-            <p className="ch-hero-sub op-hero-sub op-hero-close">{HERO.subClose}</p>
+            <p className="op-hero-question">{HERO.lossQuestion}</p>
             <p className="op-hero-loss">{HERO.loss}</p>
             <div className="ch-hero-cta">
               <Link to={HERO.cta.to} className="ch-btn ch-btn-primary">{HERO.cta.label}</Link>
@@ -70,7 +73,7 @@ const Home = () => {
       {/* Dental clinics Aumy serves (consented clinics only): src/data/clinicsServed.js */}
       <ClinicsServed />
 
-      {/* 2. ONE PRODUCT, THREE THINGS */}
+      {/* 2. ONE PRODUCT, FOUR THINGS */}
       <section className="ch-section" id="what-aumy-does" aria-labelledby="op-three-title">
         <div className="ch-container">
           <h2 id="op-three-title" className="ch-h2 op-center">
