@@ -332,10 +332,10 @@ const explainerVideoLd = [EXPL.HERO_VIDEO, ...EXPL.VIDEOS].map((v) => ({
 
 // The five "How we work" steps (owner 2026-10-22): word for word what src/components/HowWeWork.js renders on
 // /revenue-generator and /about (src/data/homeOutcomes.js, HOW).
-function howWeWorkHtml(eyebrow = HO.HOW.eyebrow) {
+function howWeWorkHtml(eyebrow = HO.HOW.eyebrow, titleA = HO.HOW.titleA, titleB = HO.HOW.titleB) {
   return `<section id="how-we-work"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(eyebrow)}</p>
-        <h2>${esc(HO.HOW.titleA)} ${esc(HO.HOW.titleB)}</h2>
+        <h2>${esc(titleA)} ${esc(titleB)}</h2>
         <ol>
           ${HO.HOW.steps.map((st) => '<li><h3>' + esc(st.title) + '</h3><p>' + esc(st.body) + '</p>' + (st.pull ? '<p>“' + esc(st.pull.q) + '” — ' + esc(st.pull.who) + '</p>' : '') + '<p>' + esc(st.exTag) + ': ' + esc(st.ex) + '</p></li>').join('\n          ')}
         </ol>
@@ -695,35 +695,45 @@ const routes = [
   },
   {
     slug: 'revenue-generator',
-    // "How Aumy works" (2026-10-22): leads with the five "How we work" steps. Words: src/data/howItWorks.js and
-    // src/data/homeOutcomes.js (same files as the React page).
+    // "How it works" (owner 2026-11-03): the one-product story. Words: src/data/howItWorks.js (same file as the
+    // React page). VideoObjects only for the films this page plays.
     title: HOW.HOW_SEO.title,
     description: HOW.HOW_SEO.description,
     canonical: `${ORIGIN}/revenue-generator`,
     ogImage: `${ORIGIN}${HO.SEO.shareImage}`,
-    // The module explainer videos play on this page (src/components/HomeExplainers.js); moved from home 2026-10-22.
-    jsonld: [orgLd, ...explainerVideoLd.slice(1)],
+    jsonld: [orgLd, ...explainerVideoLd.filter((v) => HOW.HOW_PARTS.items.some((it) => it.film && v.contentUrl === `${ORIGIN}${it.film.src}`))],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HOW.HOW_HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(HOW.HOW_HERO.title)}</h1>
         <p class="ch-hero-sub">${esc(HOW.HOW_HERO.sub)}</p>
-        <p><a href="${HO.HERO.primary.to}">${esc(HO.HERO.primary.label)}</a> · <a href="${esc(HO.HERO.whatsapp.href)}">${esc(HO.HERO.whatsapp.label)}</a></p>
+        <p><a href="${HOW.HOW_HERO.cta.to}">${esc(HOW.HOW_HERO.cta.label)}</a></p>
+        <p>${esc(HOW.HOW_HERO.ctaNote)}</p>
       </div></section>
-      ${howWeWorkHtml(HOW.HOW_HERO.stepsEyebrow)}
+      <section id="parts"><div class="ch-container ch-narrow">
+        <h2>${esc(HOW.HOW_PARTS.title)} ${esc(HOW.HOW_PARTS.titleB)}</h2>
+        <p>${esc(HOW.HOW_PARTS.filmNote)}</p>
+        ${HOW.HOW_PARTS.items.map((it) => '<h3>' + esc(it.name) + '</h3><p>' + esc(it.line) + '</p><ul>' + it.bullets.map((b) => '<li>' + esc(b) + '</li>').join('') + '</ul>' + (it.film ? '<p><a href="' + it.film.src + '">Watch: ' + esc(it.name) + ' (video)</a></p>' : '')).join('')}
+      </div></section>
+      <section id="a-day"><div class="ch-container ch-narrow">
+        <h2>${esc(HOW.HOW_DAY.title)} ${esc(HOW.HOW_DAY.titleB)}</h2>
+        <p>${esc(HOW.HOW_DAY.lead)}</p>
+        <ol>${HOW.HOW_DAY.steps.map(([w, t]) => '<li><strong>' + esc(w) + '</strong>: ' + esc(t) + '</li>').join('')}</ol>
+      </div></section>
+      ${howWeWorkHtml(HOW.HOW_STEPS.eyebrow, HOW.HOW_STEPS.titleA, HOW.HOW_STEPS.titleB)}
       <section><div class="ch-container ch-narrow">
         <h2>We work for your team, not around it.</h2>
         <ul>
-          ${HOW.HOW_CONTROL.map((c) => `<li><strong>${esc(c.title)}</strong> — ${esc(c.body)}</li>`).join('\n          ')}
+          ${HOW.HOW_CONTROL.map((c) => `<li><strong>${esc(c.title)}</strong> — ${esc(c.body)}</li>`).join('')}
         </ul>
-        <h2>${esc(EXPL.TITLE)}</h2>
-        <ul>
-          ${EXPL.VIDEOS.map((v) => `<li><a href="${v.src}"><strong>${esc(v.name)}</strong> explainer video</a> — ${esc(v.line)}</li>`).join('\n          ')}
-        </ul>
-        <p>${esc(HO.FINAL.modulesLead)} <a href="${HO.FINAL.modulesLink.to}">${esc(HO.FINAL.modulesLink.label)}</a></p>
         <h2>Busy clinics already run on Aumy.</h2>
         <blockquote>“${esc(HOW.HOW_PROOF.quote)}” — ${esc(HOW.HOW_PROOF.who)}</blockquote>
         <p><strong>${esc(HOW.HOW_PROOF.number)}</strong> ${esc(HOW.HOW_PROOF.numberText)} <a href="/#google-reviews">Read what clinic owners say</a></p>
+      </div></section>
+      <section id="free-audit"><div class="ch-container ch-narrow">
+        <h2>${esc(HOW.HOW_FINAL.title)}</h2>
+        <p>${esc(HOW.HOW_FINAL.sub)}</p>
+        <p><a href="${HOW.HOW_FINAL.cta.to}">${esc(HOW.HOW_FINAL.cta.label)}</a></p>
       </div></section>`,
   },
   {
