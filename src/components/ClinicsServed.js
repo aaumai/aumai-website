@@ -42,9 +42,11 @@ export default function ClinicsServed() {
               Dental clinics that run on Aumy
             </h2>
             <ul className="cs-logos">
-              {named.map((c) => (
+              {named.map((c, i) => (
+                <React.Fragment key={c.name}>
+                {/* Owner 2026-11-04: the first two (the Delhi clinics) get a row of their own, the rest the next row. */}
+                {i === 2 && <li className="cs-break" aria-hidden="true" />}
                 <li
-                  key={c.name}
                   className={[
                     'cs-logo',
                     c.logo ? '' : 'cs-logo--text',
@@ -82,6 +84,7 @@ export default function ClinicsServed() {
                     <span className="cs-branches">{c.locations.join(' · ')}</span>
                   )}
                 </li>
+                </React.Fragment>
               ))}
             </ul>
           </>

@@ -47,6 +47,15 @@ const clinicsServed = [
     consent: true, // confirmed by Sterling 2026-09-20
   },
   {
+    // Second on purpose: the two Delhi clinics sit side by side in the first row so a Delhi visitor sees them at once
+    // (owner 2026-11-04).
+    name: "Omlesh's Dentcity",
+    city: 'Rohini, Delhi',
+    // Their own logo (white background, which suits this white band).
+    logo: '/logos/clinics/omlesh-dentcity.png',
+    consent: true, // cleared by Jayesh 2026-11-04 — back it with a permission email (template in onboarding-docket)
+  },
+  {
     // Their PATIENT-FACING brand, which is what their own logo leads with and
     // what their Google listing says ("Dental Solutions Indiranagar"). The
     // tenant in Aumy is filed under the legal entity, RB Enhanced Dental Laser
@@ -94,13 +103,6 @@ const clinicsServed = [
     city: 'Pune',
     logo: '/logos/clinics/vinaykia.png',
     consent: true, // cleared by Jayesh 2026-09-20
-  },
-  {
-    name: "Omlesh's Dentcity",
-    city: 'Rohini, Delhi',
-    // Their own logo (white background, which suits this white band).
-    logo: '/logos/clinics/omlesh-dentcity.png',
-    consent: true, // cleared by Jayesh 2026-11-04 — back it with a permission email (template in onboarding-docket)
   },
 ];
 
