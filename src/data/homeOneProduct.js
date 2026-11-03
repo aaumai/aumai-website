@@ -26,11 +26,16 @@ const AUDIT = { label: 'Show me where my clinic loses patients', to: '/growth-au
 
 const HERO = {
   eyebrow: 'For owners of established dental practices',
-  title: 'Every patient answered, followed up and booked.',
-  // What Aumy is, as a list a busy owner can skim (reviewer, 2026-11-02).
-  subLead: 'Aumy is one product for your dental clinic:',
-  parts: ['AI receptionist on WhatsApp', 'AI receptionist on calls', 'Software that makes your clinic 100% digital and paperless'],
-  subClose: 'And every follow-up, done for you.',
+  title: 'One system that plugs every leak in your dental clinic.',
+  // What Aumy is, as a list a busy owner can skim: bold name, then the line (owner 2026-11-04).
+  subLead: 'Aumy is four things working as one:',
+  parts: [
+    { name: 'AI receptionist on WhatsApp', line: 'answers in seconds, day or night, and books, moves and cancels appointments.' },
+    { name: 'AI receptionist on calls', line: 'picks up the calls your desk can’t get to, even after hours, and books them.' },
+    { name: 'Clinic software', line: 'records, charts, consent forms and bills, so your clinic runs 100% digital.' },
+    { name: 'Every follow-up, done for you', line: 'reminders, missed visits, advised treatment and recalls.' },
+  ],
+  lossQuestion: 'Have you ever counted how many calls your clinic misses in a day, or how many WhatsApps get answered late, after the patient has already booked somewhere else?',
   // Answers the owner's unspoken worry ("does this replace my desk?") up front.
   loss: 'Your front desk stays. Aumy picks up what they can’t get to.',
   cta: AUDIT,
@@ -39,7 +44,7 @@ const HERO = {
 
 const THREE = {
   title: 'Aumy is one product.',
-  titleB: 'It does three things.',
+  titleB: 'It does four things.',
   items: [
     {
       key: 'whatsapp',
