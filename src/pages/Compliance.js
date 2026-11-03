@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { setPageSeo } from '../utils/seo';
 import { TITLE, DESCRIPTION, HEADLINE, SUBTITLE, INTRO, SECTIONS, DISCLAIMER, CONTACT_EMAIL } from '../data/compliance';
+import { Link } from 'react-router-dom';
+import NABH from '../data/nabh';
 import './Page.css';
 
 // Dedicated trust document. Linked from /revenue-generator, /platform-partner,
@@ -42,6 +44,11 @@ const Compliance = () => {
             </ul>
           </section>
         ))}
+
+        <section className="lux-doc-section">
+          <h2>{NABH.COMPLIANCE_BLOCK.title}</h2>
+          <p>{NABH.COMPLIANCE_BLOCK.body} <Link to={NABH.PATH}>{NABH.COMPLIANCE_BLOCK.linkLabel}</Link>.</p>
+        </section>
 
         <p className="lux-doc-disclaimer">{DISCLAIMER}</p>
         <p className="lux-doc-contact">

@@ -32,6 +32,7 @@ const HOME = require('../src/data/homeOneProduct');
 const MODS = require('../src/data/modules');
 // The How to Run Your Clinic video series: hub + one page per live episode (src/data/runYourClinic.js).
 const RYC = require('../src/data/runYourClinic');
+const NABH = require('../src/data/nabh');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -81,6 +82,7 @@ const SITEMAPS = {
     ...growthPosts.map((p) => [`/growth/${p.slug}`, 0.7, 'monthly', p.updated || p.date]),
     ['/platform-partner', 0.7, 'monthly'],
     ['/facebook-instagram', 0.6, 'monthly'],
+    [NABH.PATH, 0.8, 'monthly'],
     ['/compliance', 0.7, 'monthly'],
     ['/about', 0.6, 'monthly'],
     ['/contact', 0.5, 'yearly'],
@@ -177,6 +179,7 @@ ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}$
 - ${ORIGIN}/about — the founder, Jayesh Chaudhari, and why Aumy exists
 - ${ORIGIN}/demos — short, unedited demo videos of Aumy running a clinic
 - ${ORIGIN}/compliance — security and compliance: data isolation, encryption, AWS Mumbai residency, DPDP Act 2023 and ABDM readiness
+- ${ORIGIN}${NABH.PATH} — NABH-ready dental clinic software: UHID, consent forms, estimates, itemised bills and a full change history (NABH accredits clinics, not software)
 - ${ORIGIN}/contact — talk to the Aumy team
 - ${ORIGIN}/podcast — the Dental Growth podcast
 - ${ORIGIN}/ai-receptionist — 24/7 AI receptionist for dental clinics: answers calls & WhatsApp, books appointments
