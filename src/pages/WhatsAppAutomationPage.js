@@ -31,7 +31,7 @@ const WhatsAppAutomationPage = () => {
           <p className="ch-dental-line ch-dental-center">{AI_TRAINED_FOR_DENTISTRY}</p>
           <div style={{ marginTop: 18, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/demos" className="ch-btn ch-btn-primary">See it live on a real clinic&rsquo;s WhatsApp</Link>
-            <Link to="/pricing" className="ch-btn ch-btn-ghost">View pricing</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-ghost">Get a free clinic audit</Link>
           </div>
         </div>
       </section>

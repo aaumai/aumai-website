@@ -15,15 +15,15 @@
  * terms, so each card links OUT to its owner with that keyword as the anchor:
  *   AI receptionist for dental clinics  → /ai-receptionist
  *   WhatsApp automation for clinics      → /whatsapp-automation-for-clinics
- *   dental software India / cost         → /ai-dental-software-india, /pricing
+ *   dental software India / cost         → /ai-dental-software-india
  *   patient journey / follow-ups         → /modules/dental-patient-follow-up (old /ai-patient-engagement 301s there)
  *
  * Every claim is checked against the product code (aum-ehr-api / aum-ehr-web,
  * 2026-10-08). Deliberately NOT claimed: missed call → WhatsApp follow-up,
  * patients paying the clinic online, inventory, languages beyond English /
  * Hindi / Marathi, and any treatment or visit data sent to Meta (clinics send
- * Meta an anonymous lead signal only — health-data rules). No prices here:
- * /pricing owns them.
+ * Meta an anonymous lead signal only — health-data rules). No prices anywhere
+ * on the website (owner 2026-11-02).
  *
  * `module.exports` on purpose: the prerender script is plain Node.
  */
@@ -183,8 +183,7 @@ const FAQS = [
   { q: 'Do I have to change my current dental software?', a: 'No. Aumy Chat, Aumy Voice, Aumy Convert and the patient follow-ups can run alongside the software you use today. If you want one connected platform, we move your data into Aumy Clinic for a one-time fee.' },
   { q: 'Does Aumy Scribe write in the patient’s file on its own?', a: 'No. It prepares the chart from the doctor’s typed note or spoken words, and nothing is saved until the doctor accepts it. The doctor stays in charge of every record.' },
   { q: 'Which languages do Aumy Chat and Aumy Voice speak?', a: 'English, Hindi and Marathi, on WhatsApp and on calls. On WhatsApp the AI replies in the language the patient writes in.' },
-  { q: 'How much does each module cost?', a: 'Aumy Clinic has a starting price on our pricing page. Aumy Chat, Aumy Voice and the follow-ups are priced with you, once we know which modules and how many enquiries your clinic has.' },
-];
+  ];
 
 // ---------------------------------------------------------------------------
 // One page per module at /modules/<id> (owner 2026-10-08: "each card takes the

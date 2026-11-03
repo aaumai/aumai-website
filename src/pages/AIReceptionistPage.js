@@ -80,7 +80,7 @@ const AIReceptionistPage = () => {
             </div>
           ))}
           <div className="ch-center" style={{ textAlign: 'center', marginTop: 26 }}>
-            <Link to="/pricing" className="ch-btn ch-btn-primary">See pricing — everything included</Link>
+            <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get a free clinic audit</Link>
           </div>
         </div>
       </section>

@@ -76,22 +76,7 @@ const HERO_PRODUCTS = [
   { id: 'automate-dental-clinic-operations', name: 'Aumy One', outcome: 'All of it, working as one.' },
 ];
 
-// Lean home (owner 2026-10-12: "make sure we do not lose the seo advantage"): the retired home sections linked
-// to these pages; one link row keeps every one of them reachable from home (page + crawler HTML).
-// 2026-10-22 (outcomes as a service): "All modules" left this row; the home closing band carries the one quiet
-// /modules link instead. The masterclass joined it.
-const HOME_EXPLORE = [
-  { to: '/ai-dental-software-india', label: 'AI dental software in India' },
-  { to: '/ai-receptionist', label: 'AI receptionist for dentists' },
-  { to: '/whatsapp-automation-for-clinics', label: 'WhatsApp automation for clinics' },
-  { to: '/revenue-generator', label: 'How Aumy works' },
-  { to: '/demos', label: 'Watch demos' },
-  { to: '/switch', label: 'Switching software?' },
-  { to: '/pricing', label: 'Pricing' },
-  { to: '/case-studies', label: 'Case studies' },
-  { to: '/growth-audit', label: 'Free clinic audit' },
-  { to: '/growth', label: 'Growth Hub' },
-  { to: '/masterclass', label: 'The Full Chair Method masterclass' },
-];
+// The home "explore" link row (HOME_EXPLORE) was removed 2026-11-02 (one-product home, no pricing): every one
+// of those pages is linked from the footer and from scripts/prerender.js SITE_LINKS on every page.
 
-module.exports = { HERO_PRODUCTS, HOME_EXPLORE, HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };
+module.exports = { HERO_PRODUCTS, HERO_LEAKS_INTRO, HERO_LEAKS, HERO_LEAKS_CLOSE, HERO_ONE_LINE, HERO_MODULES, HERO_OUTCOMES_HEADING, DENTISTS_ONLY, TRAINED_FOR_DENTISTRY, MODULES_LINE, AI_TRAINED_FOR_DENTISTRY, WHY_DENTAL_ONLY, LD_SUFFIX };

@@ -42,27 +42,5 @@
 .site-lux .sia-card { border-radius: 0; }
 .site-lux .ch-home .sia-line { font-family: var(--lux-sans); font-weight: 600; color: var(--lux-navy); }
 
-/* ── Top bar: "1,000 Aumy credits to try each product" ─────────────────── */
-.credits-bar {
-  position: relative; z-index: 2;
-  background: #16324f; color: #fff;
-  font-size: 14px; line-height: 1.4; text-align: center;
-  padding: 8px 0;
-}
-.credits-bar-text { margin: 0; }
-.credits-bar strong { font-weight: 700; color: #fff; }
-.credits-bar-sub { color: rgba(255, 255, 255, 0.82); }
-.credits-bar-link { color: #7fd6c9; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
-a.credits-bar-link:hover, a.credits-bar-link:focus-visible { color: #fff; }
-.credits-bar-whole { display: block; color: #fff; text-decoration: none; }
-.credits-bar-whole:hover, .credits-bar-whole:focus-visible { color: #fff; }
-.credits-bar-whole:hover .credits-bar-link { color: #fff; }
-.credits-bar a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-@media (max-width: 560px) {
-  .credits-bar { font-size: 13px; padding: 7px 0; }
-}
-.site-lux .credits-bar { background: var(--lux-navy); letter-spacing: 0.02em; }
-.site-lux .credits-bar strong { font-weight: 600; }
-.site-lux .credits-bar-link { color: var(--lux-gold-2); }
 /* lux.css recolours every .ch-home link (.ch-home a:not(.ch-btn)); the badges keep white text. */
 .site-lux .ch-home .sia a.app-badge:not(.ch-btn) { color: #fff; text-decoration: none; }

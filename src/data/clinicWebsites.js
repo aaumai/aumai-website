@@ -12,7 +12,7 @@
  * 15 Oct 2026, so there are NO results numbers yet: never add traffic, ranking
  * or enquiry gains here until the monthly report measures them. Sterling agreed
  * to a public "Website by AUM AI" credit; never quote its doctors or use
- * patient photos on this page. No price: there is none in src/data/pricing.js.
+ * patient photos on this page. No price (owner 2026-11-02: no pricing on the website).
  *
  * `module.exports` on purpose: the prerender script is plain Node.
  */
