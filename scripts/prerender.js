@@ -41,6 +41,7 @@ const CW = require('../src/data/clinicWebsites');
 const DSEO = require('../src/data/dentalSeo');
 const DADS = require('../src/data/dentalAds');
 const DMANAGED = require('../src/data/managedFollowUps');
+const NABH = require('../src/data/nabh');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
 // Home explainer videos (owner 2026-10-12): same file as src/components/HomeExplainers.js.
@@ -1042,6 +1043,33 @@ const routes = [
       </div></section>`,
   },
   {
+    slug: 'nabh-dental-clinic-software',
+    title: NABH.TITLE,
+    description: NABH.DESCRIPTION,
+    canonical: `${ORIGIN}${NABH.PATH}`,
+    jsonld: [orgLd, faqPageLd(NABH.FAQS), {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+        { '@type': 'ListItem', position: 2, name: 'NABH-ready dental clinic software', item: `${ORIGIN}${NABH.PATH}` },
+      ],
+    }],
+    content: `
+      <section><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">NABH documentation for dental clinics</p>
+        <h1 class="ch-hero-title">${esc(NABH.H1)}</h1>
+        <p class="ch-hero-sub">${esc(NABH.SUB)}</p>
+        <p><a href="/contact">Book a demo</a> · <a href="/demos">Watch the demo videos</a></p>
+        <h2>${esc(NABH.HEADING)}</h2><p>${esc(NABH.LEAD)}</p>
+        <ul>${NABH.BULLETS.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+        <p>${esc(NABH.FOOTNOTE)}</p>
+        ${NABH.SECTIONS.map((s) => `<h2>${esc(s.h2)}</h2><p>${esc(s.body)}</p>`).join('')}
+        ${faqHtml(NABH.FAQS, 'NABH and dental clinic software: questions answered')}
+        <p><a href="${NABH.MODULE_PATH}">Aumy Clinic: dental clinic management software</a> · <a href="/demos">Watch the demos</a> · <a href="/contact">Book a demo</a> · <a href="/compliance">Security &amp; compliance</a></p>
+      </div></section>`,
+  },
+  {
     slug: 'compliance',
     title: COMP.TITLE,
     description: COMP.DESCRIPTION,
@@ -1054,6 +1082,7 @@ const routes = [
         <p class="ch-hero-sub">${esc(COMP.SUBTITLE)}</p>
         <p>${esc(COMP.INTRO)}</p>
         ${COMP.SECTIONS.map((sec) => `<h2>${esc(sec.title)}</h2>${sec.lead ? `<p>${esc(sec.lead)}</p>` : ''}<ul>${sec.items.map(([k, v]) => `<li>${k ? `<strong>${esc(k)}</strong> ` : ''}${esc(v)}</li>`).join('')}</ul>`).join('')}
+        <h2>${esc(NABH.COMPLIANCE_BLOCK.title)}</h2><p>${esc(NABH.COMPLIANCE_BLOCK.body)} <a href="${NABH.PATH}">${esc(NABH.COMPLIANCE_BLOCK.linkLabel)}</a>.</p>
         <p>${esc(COMP.DISCLAIMER)}</p>
         <p>Questions from your IT or compliance team? Email <a href="mailto:${COMP.CONTACT_EMAIL}">${COMP.CONTACT_EMAIL}</a>.</p>
       </div></section>`,
@@ -1500,6 +1529,7 @@ for (const p of MODS.PAGES) {
         <ul>${p.whoFor.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>
         <h2>What you get</h2>
         <ul>${p.outcomes.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>
+        ${p.id === 'dental-clinic-management-software' ? `<h2>${esc(NABH.HEADING)}</h2><p>${esc(NABH.LEAD)}</p><ul>${NABH.BULLETS.map((b) => `<li>${esc(b)}</li>`).join('')}</ul><p>${esc(NABH.FOOTNOTE)}</p><p><a href="${NABH.PATH}">NABH-ready dental clinic software in India</a></p>` : ''}
         <h2>${p.featured ? 'The modules inside Aumy One' : 'Works even better with'}</h2>
         <ul>
           ${moduleCardsHtml(pairs)}

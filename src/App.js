@@ -29,6 +29,7 @@ import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
 import AIReceptionistPage from './pages/AIReceptionistPage';
 import WhatsAppAutomationPage from './pages/WhatsAppAutomationPage';
+import NabhPage from './pages/NabhPage';
 import AIDentalSoftwareIndiaPage from './pages/AIDentalSoftwareIndiaPage';
 import GrowthHub from './pages/GrowthHub';
 import DemosPage from './pages/DemosPage';
@@ -132,6 +133,7 @@ function App() {
                 <Route path="/modules/:slug" element={<ModuleDetailPage />} />
                 <Route path="/ai-receptionist" element={<AIReceptionistPage />} />
                 <Route path="/whatsapp-automation-for-clinics" element={<WhatsAppAutomationPage />} />
+                <Route path="/nabh-dental-clinic-software" element={<NabhPage />} />
                 {/* The two search themes the site targets (owner 2026-09-18):
                     AI-powered dental clinic operations, and the AI-powered
                     patient journey & engagement. Crawler copy: scripts/prerender.js. */}

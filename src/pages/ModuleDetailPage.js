@@ -4,6 +4,7 @@ import { setPageSeo } from '../utils/seo';
 import { INDIA_WHATSAPP } from '../config/contact';
 import { PAGES, CONNECTED, pageById, OLD_SLUGS } from '../data/modules';
 import { MODULES_LINE } from '../data/positioning';
+import NABH from '../data/nabh';
 import ModuleIcon from '../components/ModuleIcon';
 import StartInApp from '../components/StartInApp';
 import { isSelfServe } from '../data/appStores';
@@ -106,6 +107,20 @@ const ModuleDetailPage = () => {
           </div>
         </div>
       </section>
+
+      {page.id === 'dental-clinic-management-software' && (
+        <section className="ch-section mp-section" id="nabh">
+          <div className="ch-container ch-narrow">
+            <h2 className="ch-h2">{NABH.HEADING}</h2>
+            <p className="ch-sub">{NABH.LEAD}</p>
+            <ul className="md-does mp-list">
+              {NABH.BULLETS.map((b) => <li key={b}><Check /><span>{b}</span></li>)}
+            </ul>
+            <p className="mp-deep">{NABH.FOOTNOTE}</p>
+            <p className="mp-deep"><Link to={NABH.PATH}>NABH-ready dental clinic software in India</Link></p>
+          </div>
+        </section>
+      )}
 
       <section className="ch-section mp-section">
         <div className="ch-container">
