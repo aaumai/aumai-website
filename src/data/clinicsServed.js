@@ -56,6 +56,9 @@ const clinicsServed = [
     city: 'Delhi',
     // Their own logo (white background, which suits this white band).
     logo: '/logos/clinics/omlesh-dentcity.png',
+    // Stacked, nearly square mark: at the standard height its lettering reads small next to the wordmarks, so it takes
+    // the taller slot like Sterling and Dental Solutions (owner 2026-11-04: "looking small compared to others").
+    tall: true,
     consent: true, // cleared by Jayesh 2026-11-04 — back it with a permission email (template in onboarding-docket)
   },
   {
