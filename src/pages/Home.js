@@ -132,7 +132,7 @@ const Home = () => {
           <div className="op-stat">
             <strong>{PROOF.statN}</strong>
             <span>{PROOF.statT}</span>
-            <small>{PROOF.statS}</small>
+            {PROOF.statS && <small>{PROOF.statS}</small>}
           </div>
           <a className="op-reviews-link" href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer">
             {PROOF.reviewsLink} →

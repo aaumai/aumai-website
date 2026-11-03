@@ -14,7 +14,8 @@
  *     Sterling, RB, Vinaykia, Dental Planet Elite). Off everywhere, so never claimed here: lab work ready,
  *     festival greetings, health tips, treatment suggestions;
  *   - the paperless list names real screens of the clinic software only;
- *   - the one number is Sterling's "almost half" (281 of 603, 2–16 Oct 2026, measured on prod), never "2 in 3";
+ *   - the one number is Sterling's "2 out of 3" (owner 2026-11-03: "recently the trend is climbing to 2/3 so keep
+ *     it 2 out of 3"; measured on prod 3 Nov: about half of reminded appointments, steady, so no date or count line);
  *   - "100% digital and paperless" is the owner's own phrase (kept as he wrote it).
  *
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
@@ -106,9 +107,9 @@ const PROOF = {
   quote: 'My only regret? That we didn’t have this years ago.',
   who: 'Dr Priyanka Giroti',
   where: 'The Sterling Dental Clinic, New Delhi · 26 years in practice',
-  statN: 'Almost half',
+  statN: '2 out of 3',
   statT: 'of Sterling’s appointments are now confirmed by the patient on WhatsApp.',
-  statS: '281 of 603 appointments, 2–16 October 2026.',
+  statS: '',
   reviewsLink: 'Read our Google reviews',
 };
 
