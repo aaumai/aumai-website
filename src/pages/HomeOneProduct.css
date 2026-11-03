@@ -10,6 +10,7 @@
 .op .op-hero-parts li { display: flex; gap: 10px; align-items: flex-start; font-size: 18px; font-weight: 500; line-height: 1.45; color: var(--c-ink); }
 .site-lux .op .lux-hero .op-hero-parts li { color: #fff; }
 .site-lux .op .lux-hero .op-hero-parts .op-check { color: var(--lux-gold-2); margin-top: 4px; }
+.site-lux .op .lux-hero .op-hero-parts strong { color: var(--lux-gold-2); font-weight: 600; }
 .op .op-hero-question { margin: 6px 0 26px; max-width: 600px; font-size: 16.5px; line-height: 1.55; font-style: italic; opacity: 0.9; }
 .op .op-hero-loss { margin: -12px 0 30px; font-size: 18.5px; font-weight: 500; color: var(--c-ink); }
 .site-lux .op .lux-hero .op-hero-loss { color: var(--lux-gold-2); }
