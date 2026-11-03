@@ -34,7 +34,7 @@
 const clinicsServed = [
   {
     name: 'The Sterling Dental Clinic',
-    city: 'New Delhi',
+    city: 'Vasant Vihar, Delhi', // area + city, same format as Omlesh (owner 2026-11-04)
     // Their official logo from the Sterling shoot (2026-10-20), the DARK
     // variant (dark-green + gold ink, transparent) because this strip sits on a
     // white band; the light variant is for dark backgrounds. Owner 2026-10-22.
