@@ -95,6 +95,13 @@ const clinicsServed = [
     logo: '/logos/clinics/vinaykia.png',
     consent: true, // cleared by Jayesh 2026-09-20
   },
+  {
+    name: "Omlesh's Dentcity",
+    city: 'Rohini, Delhi',
+    // Their own logo (white background, which suits this white band).
+    logo: '/logos/clinics/omlesh-dentcity.png',
+    consent: true, // cleared by Jayesh 2026-11-04 — back it with a permission email (template in onboarding-docket)
+  },
 ];
 
 /** Only these are ever rendered. */
