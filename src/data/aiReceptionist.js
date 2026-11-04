@@ -7,7 +7,7 @@
  */
 // Owner 2026-10-06: the ONE page that owns "AI receptionist for dental clinics"; the growth article
 // /growth/ai-receptionist-dental-clinic supports it and links here (they were splitting Google's trust).
-// No prices on the website (owner 2026-11-02).
+// Prices live only on /pricing (src/data/pricing.js, owner 2026-11-04); this page links there, no figures.
 
 const TITLE = 'AI Receptionist for Dental Clinics in India | Aumy';
 const DESCRIPTION =
@@ -44,7 +44,7 @@ const FAQS = [
   { q: 'Will patients realise they’re talking to AI — and mind?', a: 'Patients care about getting a helpful answer at 11 pm, not about who typed it. Aumy replies naturally in the patient’s own language and hands anything sensitive to your team immediately.' },
   { q: 'Which languages does it speak?', a: 'It replies in the language the patient writes in — English, Hindi, Marathi and more — switching automatically mid-conversation if the patient does.' },
   { q: 'What happens when the AI doesn’t know an answer?', a: 'It never guesses about clinical matters. Unknown or sensitive questions are handed to your staff with full context, and the patient is told a team member will respond shortly.' },
-  { q: 'How much does an AI receptionist cost for a dental clinic in India?', a: 'It depends on your clinic: how many chairs and doctors, and how many patients write and call. After a free clinic audit we give you one clear monthly number, before anything starts.' },
+  { q: 'How much does an AI receptionist cost for a dental clinic in India?', a: 'Aumy’s AI receptionist on WhatsApp and calls comes in one monthly plan with the clinic software and every patient follow-up, priced in rupees with GST included and a set number of chats and call minutes. The prices are published on aumai.co.in/pricing.' },
   { q: 'How long does setup take?', a: 'Onboarding is done for you — WhatsApp connection, your treatments and FAQs configured in your doctors’ own words. Most clinics are live within a week.' },
 ];
 

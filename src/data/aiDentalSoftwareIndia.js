@@ -14,7 +14,7 @@
  *
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
  */
-// No prices on the website (owner 2026-11-02): no starting price on this page any more.
+// Prices live only on /pricing (src/data/pricing.js, owner 2026-11-04); this page links there, no figures.
 
 const UPDATED = 'October 2026';
 const UPDATED_ISO = '2026-10-06';
@@ -51,7 +51,7 @@ const INDIA = [
   ['Indian languages', 'Replies in the language the patient writes in — English, Hindi, Marathi and more.'],
   ['Data on AWS Mumbai', 'Aumy’s patient database runs in AWS’s Mumbai region (ap-south-1), encrypted in transit and at rest, with role-based access for every staff member.'],
   ['Built on FHIR R4', 'Clinical records are kept in FHIR R4, the international standard for exchanging health records.'],
-  ['Priced for your clinic', 'One clear monthly number in rupees, given after a free clinic audit and before anything starts.'],
+  ['Published prices', 'Two monthly plans in rupees, GST included, and one setup fee, all on aumai.co.in/pricing.'],
   ['Run with you, not handed over', 'A dedicated Aumy expert sets the system up around your doctors, treatments and timings, and reviews it with you every week.'],
 ];
 
@@ -87,7 +87,7 @@ const FAQS = [
   { q: 'Does Aumy include patient intake and digital registration?', a: 'Yes. Patients fill in registration, medical history and consent forms on their phone before they arrive, or on the clinic iPad, and everything lands on their record. It is part of the Clinic OS.' },
   { q: 'Is there a dental patient management system that works on WhatsApp?', a: 'Aumy is one: patient records, appointments and treatment plans in the Clinic OS, with reminders, confirmations and follow-ups sent on the official WhatsApp Business API, and replies landing back on the patient’s record.' },
   { q: 'What is the best AI dental software in India?', a: 'It depends on five things: whether the AI actually acts (books, reschedules, follows up) or only suggests; whether it speaks your patients’ languages; whether it runs on the official WhatsApp Business API; whether it works with the software you already use; and where patient data is stored. Aumy is built for clinics that want the calls, WhatsApp messages, reminders and follow-ups taken off a stretched front desk — in Indian languages, on WhatsApp, with its database in AWS Mumbai — alongside the dental software they already use.' },
-  { q: 'How much does AI dental software cost in India?', a: 'It depends on what the clinic needs: clinic software alone, or the AI receptionist on WhatsApp and calls and the patient follow-ups as well, and on the number of chairs, doctors and patients. Aumy is priced per clinic, in rupees: after a free clinic audit you get one clear monthly number, before anything starts.' },
+  { q: 'How much does AI dental software cost in India?', a: 'Aumy has two monthly plans, priced in rupees with GST included: the clinic software with every patient follow-up, or the same with the AI receptionist on WhatsApp and calls as well. Setup is a one-time fee. The prices are published on aumai.co.in/pricing.' },
   { q: 'Do I have to replace my current dental software?', a: 'No. Aumy runs alongside the practice management software you use today and keeps the data in sync. If you want one platform, Aumy includes a complete dental PMS and migrates your full history for you.' },
   { q: 'Can the AI talk to patients in Hindi and other Indian languages?', a: 'Yes. It replies in the language the patient writes or speaks in — English, Hindi, Marathi and more — and switches automatically mid-conversation.' },
   { q: 'Where is patient data stored, and who can see it?', a: 'Aumy’s patient database runs in AWS’s Mumbai region (ap-south-1), encrypted in transit and at rest, and every staff member sees only what their role allows.' },

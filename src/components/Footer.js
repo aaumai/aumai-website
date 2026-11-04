@@ -39,6 +39,7 @@ const Footer = () => {
     { label: 'WhatsApp Automation', path: '/whatsapp-automation-for-clinics' },
     { label: 'Switching Dental Software?', path: '/switch' },
     { label: 'Watch Demo Videos', path: '/demos' },
+    { label: 'Pricing', path: '/pricing' },
     { label: 'Dental Practice Growth Hub', path: '/growth' },
     { label: 'Podcast — Be a Guest', path: '/podcast' },
     { label: 'Facebook & Instagram Receptionist', path: '/facebook-instagram' },
