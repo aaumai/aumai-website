@@ -33,8 +33,6 @@ const MODS = require('../src/data/modules');
 // The How to Run Your Clinic video series: hub + one page per live episode (src/data/runYourClinic.js).
 const RYC = require('../src/data/runYourClinic');
 const NABH = require('../src/data/nabh');
-// Public price list (owner 2026-11-04): the one copy of the prices.
-const PRICE = require('../src/data/pricing');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -59,8 +57,6 @@ const SITEMAPS = {
     ...CALCULATORS.map((c) => [`/${c.slug}`, 0.8, 'monthly']),
     ['/revenue-generator', 0.9, 'weekly'],
     ['/demos', 0.9, 'weekly'],
-    // Public price list (owner 2026-11-04).
-    ['/pricing', 0.9, 'monthly'],
     ['/growth-audit', 0.9, 'weekly'],
     ['/4c-scorecard', 0.9, 'monthly'],
     // The Full Chair Method information page (owner 2026-10-19). /masterclass/register stays out for now.
@@ -162,7 +158,7 @@ ${HO.HOW.steps.map((st, i) => `${i + 1}. ${st.title} ${st.body}`).join('\n')}
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
 - Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
-- Pricing (${ORIGIN}/pricing): ${PRICE.SUMMARY}
+- Each clinic gets its plan after a free clinic audit (${ORIGIN}/growth-audit); there is no public price list.
 - Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages
@@ -173,7 +169,6 @@ ${HO.HOW.steps.map((st, i) => `${i + 1}. ${st.title} ${st.body}`).join('\n')}
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/revenue-generator — how Aumy works in a dental clinic: the three parts at work (AI receptionist on WhatsApp, AI receptionist on calls, a paperless clinic) and every follow-up, an example day, and the five setup steps from the free clinic audit to live
-- ${ORIGIN}/pricing — Aumy's two monthly plans for dental clinics (GST included), the one-time setup, what's included and FAQs
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
 - ${ORIGIN}/modules — Aumy sold module by module or as one connected system: Aumy Convert (lead nurturing & Meta ads optimisation), Aumy Clinic (dental clinic operating system) with the Aumy Scribe add-on (AI clinical documentation), Aumy Journey (clinic OS with the end-to-end patient journey), Aumy Chat (AI WhatsApp receptionist), Aumy Voice (AI voice receptionist), and Aumy One (the connected dental clinic system)
 ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}${p.addonOf ? ` (add-on to ${p.addonOf})` : ""}. ${p.card}`).join('\n')}

@@ -24,9 +24,8 @@ const { CALCULATORS } = require('../src/data/calculators');
 // clinic that has NOT given permission (or withdraws it) can never survive in
 // the crawler-visible HTML after the app stops showing it.
 const { consentedClinics, servedCities } = require('../src/data/clinicsServed');
-// Public price list (owner 2026-11-04: "yes, publish pricing with 1000 chats and 400 minutes", reversing the
-// 2026-11-02 "no pricing on website at all"): same file as src/pages/PricingPage.js. Prices live ONLY there.
-const PRICE = require('../src/data/pricing');
+// No prices anywhere on the site (owner 2026-11-02: "no pricing on website at all"): /pricing redirects to
+// the free clinic audit (route 'pricing' below), and src/data/pricing.js is gone.
 const ADS = require('../src/data/aiDentalSoftwareIndia');
 // The founder: same words as the About page (src/data/founder.js).
 const FOUNDER = require('../src/data/founder');
@@ -112,7 +111,6 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/revenue-generator', 'How Aumy works'],
   ['/switch', 'Switching dental software'],
   ['/demos', 'Demo videos'],
-  ['/pricing', 'Pricing'],
   ['/growth', 'Growth Hub'],
   ['/masterclass', 'The Full Chair Method masterclass'],
   // Product & services (owner 2026-10-23, managed follow-ups 2026-10-26): the services, as in the header.
@@ -489,71 +487,13 @@ function serviceRoute(D) {
 // ---- routes ---------------------------------------------------------------
 const routes = [
   {
-    // Public price list (owner 2026-11-04). Words and numbers: src/data/pricing.js (same as PricingPage.js).
+    // No pricing on the website (owner 2026-11-02). Old links and search results land on the free clinic audit.
     slug: 'pricing',
-    title: PRICE.SEO.title,
-    description: PRICE.SEO.description,
-    canonical: `${ORIGIN}/pricing`,
-    jsonld: [orgLd, faqPageLd(PRICE.FAQS), {
-      '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: 'Aumy',
-      description: HOME.PRODUCT_DESCRIPTION,
-      brand: { '@type': 'Brand', name: 'Aumy' },
-      url: `${ORIGIN}/pricing`,
-      offers: PRICE.PLANS.map((p) => ({
-        '@type': 'Offer',
-        name: p.name,
-        description: [p.line, p.usage ? `${PRICE.usageLine(p.usage)} ${PRICE.overageLine(p.usage)}` : ''].filter(Boolean).join(' '),
-        price: p.monthly,
-        priceCurrency: 'INR',
-        url: `${ORIGIN}/pricing#${p.id}`,
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
-          price: p.monthly,
-          priceCurrency: 'INR',
-          valueAddedTaxIncluded: true,
-          unitText: 'MONTH',
-        },
-      })),
-    }],
-    content: `
-      <section class="ch-hero"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(PRICE.HERO.eyebrow)}</p>
-        <h1 class="ch-hero-title">${esc(PRICE.HERO.title)}</h1>
-        <p class="ch-hero-sub">${esc(PRICE.HERO.sub)}</p>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        ${PRICE.PLANS.map((p) => `<div id="${p.id}">
-        <h2>${esc(p.name)}: ${esc(PRICE.inr(p.monthly))} ${esc(PRICE.PER_MONTH)} (${esc(PRICE.GST_NOTE)})</h2>
-        <p>${esc(p.line)}</p>
-        <ul>${p.includes.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-        ${p.usage ? `<p><strong>${esc(PRICE.usageLine(p.usage))}</strong> ${esc(PRICE.overageLine(p.usage))}</p>` : ''}
-        </div>`).join('\n        ')}
-        <h2>${esc(PRICE.SETUP.label)}: ${esc(PRICE.SETUP.amountText)}</h2>
-        <p>${esc(PRICE.SETUP.terms)} ${esc(PRICE.SETUP.what)}</p>
-        <p>${esc(PRICE.META_NOTE)}</p>
-        <p><a href="${PRICE.CALL.href}">${esc(PRICE.CALL.label)}</a> · <a href="${PRICE.DEMO.to}">${esc(PRICE.DEMO.label)}</a></p>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        <h2>${esc(PRICE.INCLUDED.title)}</h2>
-        <h3>${esc(PRICE.INCLUDED.software.name)}</h3>
-        <ul>${PRICE.INCLUDED.software.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-        <h3>${esc(PRICE.INCLUDED.followUps.name)}</h3>
-        <p>${esc(PRICE.INCLUDED.followUps.lead)}</p>
-        ${pairsHtml(PRICE.INCLUDED.followUps.rows)}
-        <p>${esc(PRICE.INCLUDED.followUps.note)}</p>
-        <h3>${esc(PRICE.INCLUDED.receptionist.name)}</h3>
-        <p>${esc(PRICE.INCLUDED.receptionist.lead)}</p>
-        <ul>${PRICE.INCLUDED.receptionist.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-      </div></section>
-      <section><div class="ch-container ch-narrow">
-        ${faqHtml(PRICE.FAQS, 'Questions clinics ask')}
-        <p><a href="/refund">Cancellation &amp; Refund policy</a></p>
-        <h2>${esc(PRICE.FINAL.title)}</h2>
-        <p>${esc(PRICE.FINAL.sub)}</p>
-        <p><a href="${PRICE.CALL.href}">${esc(PRICE.CALL.label)}</a> · <a href="${PRICE.DEMO.to}">${esc(PRICE.DEMO.label)}</a></p>
-      </div></section>`,
+    title: 'Free Clinic Audit for Dental Clinics | AUM AI',
+    description: 'Tell us your dental clinic and city. Within 24 hours a free audit reaches you on WhatsApp, prepared and checked by a person.',
+    canonical: `${ORIGIN}/growth-audit`,
+    refresh: '/growth-audit',
+    content: `<section><div class="ch-container ch-narrow"><p>This page has moved: <a href="/growth-audit">get a free clinic audit</a>.</p></div></section>`,
   },
   {
     // /modules — words from src/data/modules.js (same file the React page renders).

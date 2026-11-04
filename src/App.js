@@ -10,7 +10,6 @@ import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import DataDeletion from './pages/DataDeletion';
 import CancellationRefund from './pages/CancellationRefund';
-import PricingPage from './pages/PricingPage';
 import DabbewaalaApp from './pages/DabbewaalaApp';
 import AumaiAnalytics from './pages/AumaiAnalytics';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
@@ -124,10 +123,10 @@ function App() {
                 <Route path="/dental-seo" element={<ServicePage data={DENTAL_SEO} />} />
                 <Route path="/dental-ads" element={<ServicePage data={DENTAL_ADS} />} />
                 <Route path="/managed-follow-ups" element={<ServicePage data={MANAGED_FOLLOW_UPS} />} />
-                {/* Public price list (owner 2026-11-04: "yes, publish pricing with 1000 chats and 400 minutes",
-                    reversing the 2026-11-02 "no pricing on website at all"). Words: src/data/pricing.js
-                    (shared with scripts/prerender.js and scripts/seo-files.js). */}
-                <Route path="/pricing" element={<PricingPage />} />
+                {/* No pricing on the website (owner 2026-11-02). The old URL lands on the free clinic audit,
+                    the site's one lead route; crawlers get a canonical + refresh page (scripts/prerender.js),
+                    and nginx should 301 it (see the PR). */}
+                <Route path="/pricing" element={<Navigate to="/growth-audit" replace />} />
                 {/* Buy one module or the whole connected system (owner 2026-10-08).
                     Words: src/data/modules.js (shared with scripts/prerender.js). */}
                 <Route path="/modules" element={<ModulesPage />} />
