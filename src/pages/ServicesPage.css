@@ -1,0 +1,50 @@
+/* /services (owner 2026-11-05): the three services on one page. Reuses .ch-*, .cw-* and .sv-*;
+   only what those don't have lives here. */
+
+/* ── Hero: the three services as jump links (dark hero) ── */
+.so-index { margin: 0; padding: 28px 28px 20px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(220, 197, 148, 0.35); }
+.so-index-title { margin: 0 0 14px; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lux-gold-2); }
+.so-index ol { list-style: none; margin: 0; padding: 0; }
+.so-index li + li { border-top: 1px solid rgba(220, 197, 148, 0.22); }
+.site-lux .ch-home .so-index a { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; text-decoration: none; color: #fff; }
+.so-index-n { flex: 0 0 auto; font-family: var(--lux-serif); font-size: 22px; line-height: 1.2; color: var(--lux-gold-2); }
+.so-index-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.site-lux .ch-home .so-index-text strong { font-family: var(--lux-serif); font-size: 24px; font-weight: 500; line-height: 1.2; color: #fff; }
+.so-index-text span { font-size: 14.5px; line-height: 1.5; color: rgba(255, 255, 255, 0.72); }
+.site-lux .ch-home .so-index a:hover strong,
+.site-lux .ch-home .so-index a:focus-visible strong { color: var(--lux-gold-2); }
+
+/* ── One service ── */
+.so-service { scroll-margin-top: 90px; }
+.so-service-head { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; margin-bottom: 34px; }
+.so-n { font-family: var(--lux-serif); font-size: clamp(44px, 5vw, 64px); line-height: 1; color: var(--lux-gold); }
+.so-problem { max-width: 820px; margin: 0; font-size: 17px; line-height: 1.65; color: var(--lux-body); }
+.so-problem strong { color: var(--lux-navy); font-weight: 600; }
+.site-lux .ch-home .so-subhead,
+.site-lux .ch-home .cw-goal h3.so-subhead { margin: 0 0 14px; font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lux-bronze); }
+.ch-tint .so-gets { background: #fff; }
+.so-gets .so-measured { margin: 0 0 22px; padding-top: 14px; border-top: 1px solid var(--lux-line); font-size: 14.5px; font-style: italic; }
+.cw-goal .so-more { width: 100%; justify-content: center; text-align: center; }
+
+/* ── How it starts: four steps ── */
+.cw-steps.so-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* ── Closing band: the ghost button on navy ── */
+.site-lux .ch-offer .ch-btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
+.site-lux .ch-offer .ch-btn-ghost:hover { color: var(--lux-gold-2); border-color: var(--lux-gold-2); }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .cw-steps.so-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .so-index { padding: 22px 20px 12px; }
+  .site-lux .ch-home .so-index-text strong { font-size: 21px; }
+  .so-service-head { grid-template-columns: 1fr; gap: 8px; margin-bottom: 24px; }
+  .so-problem { font-size: 16px; }
+  .cw-steps.so-steps { grid-template-columns: 1fr; }
+}
+
+/* Sibling links in the closing band: light on navy (4.5:1+). */
+.site-lux .ch-home.so-page .ch-offer .sv-siblings a { color: rgba(255, 255, 255, 0.86); }
+.site-lux .ch-home.so-page .ch-offer .sv-siblings a:hover { color: #fff; }

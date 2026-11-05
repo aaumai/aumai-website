@@ -8,6 +8,8 @@ import './Footer.css';
 
 // The services, in the header's order (also in scripts/prerender.js SITE_LINKS).
 const SERVICES = [
+  // All three on one page (owner 2026-11-05).
+  { label: 'All Services', path: '/services' },
   { label: 'Managed Follow-Ups', path: '/managed-follow-ups' },
   { label: 'Dental SEO', path: '/dental-seo' },
   { label: 'Dental Websites', path: '/clinic-websites' },

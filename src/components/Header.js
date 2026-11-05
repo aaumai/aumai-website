@@ -4,7 +4,7 @@ import { isMasterclassPath } from '../data/masterclass';
 import './Header.css';
 
 // The menu (owner 2026-11-02: Aumy is ONE product; "the website is very noisy … keep it clean simple").
-// Four plain links plus the one call to action; Home (Aumy) is the logo. No module names, no services
+// Five plain links (Services added 2026-11-05) plus the one call to action; Home (Aumy) is the logo. No module names, no services
 // dropdown and no pricing (owner 2026-11-02: "no pricing on website at all"). The module pages, the
 // services, the Growth Hub, the podcast and the calculators keep their URLs and are linked from the footer
 // and from scripts/prerender.js SITE_LINKS. The group code below stays for any future dropdown.
@@ -13,6 +13,8 @@ const NAV_ITEMS = [
   { path: '/demos', label: 'Watch demos' },
   // The Full Chair Method masterclass (owner 2026-10-19).
   { path: '/masterclass', label: 'Masterclass' },
+  // Dental ads, dental websites and dental SEO on one page (owner 2026-11-05).
+  { path: '/services', label: 'Services' },
   { path: '/contact', label: 'Contact' },
 ];
 

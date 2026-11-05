@@ -41,6 +41,8 @@ const CW = require('../src/data/clinicWebsites');
 const DSEO = require('../src/data/dentalSeo');
 const DADS = require('../src/data/dentalAds');
 const DMANAGED = require('../src/data/managedFollowUps');
+// /services (owner 2026-11-05): dental ads, websites and SEO on one page; same file as src/pages/ServicesPage.js.
+const SVCS = require('../src/data/services');
 const NABH = require('../src/data/nabh');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
@@ -114,6 +116,7 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/growth', 'Growth Hub'],
   ['/masterclass', 'The Full Chair Method masterclass'],
   // Product & services (owner 2026-10-23, managed follow-ups 2026-10-26): the services, as in the header.
+  ['/services', 'Services: dental ads, dental websites and dental SEO'],
   ['/managed-follow-ups', 'Managed patient follow-ups'],
   ['/dental-seo', 'Dental SEO for international patients'],
   ['/clinic-websites', 'Dental websites built for SEO'],
@@ -479,7 +482,88 @@ function serviceRoute(D) {
         <p><a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a> · <a href="/growth-audit">Free clinic audit</a></p>
         <h2>${esc(D.FINAL.title)}</h2>
         <p>${esc(D.FINAL.text)}</p>
-        <p>Also from AUM AI: <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a> · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a> · <a href="/revenue-generator">Aumy, our main product</a></p>
+        <p>Also from AUM AI: <a href="/services">All services</a> · <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a> · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a> · <a href="/revenue-generator">Aumy, our main product</a></p>
+      </div></section>`,
+  };
+}
+
+// /services (owner 2026-11-05): the three services on one page. Every word from src/data/services.js,
+// as on the React page. One Service entry per service (url = its deeper page) + FAQPage. No price.
+function servicesRoute() {
+  const url = `${ORIGIN}${SVCS.PATH}`;
+  const call = `<a href="${SVCS.CTA.primary.href}">${esc(SVCS.CTA.primary.label)}</a> · <a href="${SVCS.CTA.secondary.href}">${esc(SVCS.CTA.secondary.label)}</a>`;
+  return {
+    slug: SVCS.PATH.slice(1),
+    title: SVCS.SEO.title,
+    description: SVCS.SEO.description,
+    canonical: url,
+    jsonld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        '@id': `${url}#services`,
+        name: SVCS.HERO.title,
+        itemListElement: SVCS.SERVICES.map((s, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'Service',
+            '@id': `${url}#${s.id}`,
+            name: s.schema.name,
+            serviceType: s.schema.serviceType,
+            description: `${s.short}. ${s.problem}`,
+            url: `${ORIGIN}${s.link.to}`,
+            provider: { '@id': `${ORIGIN}/#organization` },
+            areaServed: { '@type': 'Country', name: 'India' },
+            audience: { '@type': 'BusinessAudience', audienceType: 'Dental clinics' },
+            hasOfferCatalog: {
+              '@type': 'OfferCatalog',
+              name: `${s.name}: what we do`,
+              itemListElement: s.does.map((d) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: d } })),
+            },
+          },
+        })),
+      },
+      faqPageLd(SVCS.FAQS),
+    ],
+    content: `
+      <section class="ch-hero"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(SVCS.HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(SVCS.HERO.title)}</h1>
+        <p class="ch-hero-sub">${esc(SVCS.HERO.sub)}</p>
+        <p>${call}</p>
+        <p>${esc(SVCS.HERO.note)}</p>
+        <h2>${esc(SVCS.HERO.indexTitle)}</h2>
+        <ol>${SVCS.SERVICES.map((s) => `<li><a href="#${s.id}"><strong>${esc(s.name)}</strong></a> — ${esc(s.short)}</li>`).join('')}</ol>
+      </div></section>
+      ${SVCS.SERVICES.map((s) => `<section id="${s.id}"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(s.n)} · ${esc(s.name)}</p>
+        <h2>${esc(s.title)}</h2>
+        <p><strong>The problem.</strong> ${esc(s.problem)}</p>
+        <h3>What we do</h3>
+        <ul>${s.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
+        <h3>What your clinic gets</h3>
+        <ul>${s.gets.map((g) => `<li>${esc(g)}</li>`).join('')}</ul>
+        <p>${esc(s.measured)}</p>
+        <p><a href="${s.link.to}">${esc(s.link.label)}</a></p>
+      </div></section>`).join('\n      ')}
+      <section id="work"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(SVCS.WORK.eyebrow)}</p>
+        <h2>${esc(SVCS.WORK.title)}</h2>
+        <p>${esc(SVCS.WORK.intro)}</p>
+        ${SVCS.WORK.cases.map((c) => `<h3>${esc(c.name)}${c.place ? `, ${esc(c.place)}` : ''}</h3><p><em>${esc(c.tag)}.</em> ${esc(c.text)}${c.link ? ` <a href="${c.link.href}">${esc(c.link.label)}</a>` : ''}</p>`).join('')}
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(SVCS.STEPS.title)}</h2>
+        <ol>${SVCS.STEPS.items.map((st) => `<li><strong>${esc(st.h)}.</strong> ${esc(st.t)}</li>`).join('')}</ol>
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        ${faqHtml(SVCS.FAQS, 'Questions, answered')}
+      </div></section>
+      <section><div class="ch-container ch-narrow">
+        <h2>${esc(SVCS.FINAL.title)}</h2>
+        <p>${esc(SVCS.FINAL.text)}</p>
+        <p>${call}</p>
       </div></section>`,
   };
 }
@@ -989,6 +1073,7 @@ const routes = [
     content: `<section><div class="ch-container ch-narrow"><p>This page has moved: <a href="${CW.PATH}">${esc(CW.HERO.titleA)} ${esc(CW.HERO.titleB)}</a>.</p></div></section>`,
   })),
   // Services (owner 2026-10-23): public and in the sitemap.
+  servicesRoute(),
   serviceRoute(DSEO),
   serviceRoute(DADS),
   serviceRoute(DMANAGED),

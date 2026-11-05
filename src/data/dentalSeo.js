@@ -88,8 +88,8 @@ const WORK = {
     {
       name: 'Dr Rajat Sachdeva’s dental implant clinic',
       place: 'Ashok Vihar, Delhi',
-      tag: 'Website and SEO · being built',
-      text: 'A new website for dentalimplantindia.co.in, focused on implants and smile makeovers, built to keep every ranking the old site already has.',
+      tag: 'Website and SEO',
+      text: 'We rebuilt dentalimplantindia.co.in around implants and smile makeovers, kept every page address the old site was found for, and look after its SEO and Google profile.',
     },
     {
       name: 'Vinaykia Dental Care',

@@ -22,6 +22,7 @@ import MasterclassRegister from './pages/MasterclassRegister';
 import MasterclassInfo from './pages/MasterclassInfo';
 import ClinicWebsitesPage from './pages/ClinicWebsitesPage';
 import ServicePage from './pages/ServicePage';
+import ServicesPage from './pages/ServicesPage';
 import DENTAL_SEO from './data/dentalSeo';
 import DENTAL_ADS from './data/dentalAds';
 import MANAGED_FOLLOW_UPS from './data/managedFollowUps';
@@ -94,11 +95,12 @@ function App() {
               <Header />
               <Routes>
                 <Route path="/" element={<Home />} />
-                {/* The old US healthcare-IT engineering pages (services, projects,
-                    case studies, engineering partner) were taken down (owner
-                    2026-09-26: a dentist should never read Aumy as an outsourcing
-                    firm). Their URLs land on the home page. Page files stay in code. */}
-                <Route path="/services" element={<Navigate to="/" replace />} />
+                {/* The old US healthcare-IT engineering pages (projects, case studies,
+                    engineering partner) were taken down (owner 2026-09-26: a dentist should
+                    never read Aumy as an outsourcing firm). Their URLs land on the home page.
+                    /services is now the dental services page (owner 2026-11-05): dental ads,
+                    dental websites and dental SEO. */}
+                <Route path="/services" element={<ServicesPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 {/* Legacy health-system-OS Aumy page (pages/AumyProduct.js stays

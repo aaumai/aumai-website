@@ -33,6 +33,8 @@ const MODS = require('../src/data/modules');
 // The How to Run Your Clinic video series: hub + one page per live episode (src/data/runYourClinic.js).
 const RYC = require('../src/data/runYourClinic');
 const NABH = require('../src/data/nabh');
+// /services (owner 2026-11-05): dental ads, websites and SEO on one page (src/data/services.js).
+const SVCS = require('../src/data/services');
 
 const BUILD = path.join(__dirname, '..', 'build');
 const MARKET = process.env.REACT_APP_MARKET || 'in';
@@ -43,7 +45,8 @@ const TODAY = new Date().toISOString().slice(0, 10);
 // often rank first in our own crawl budget.
 const SITEMAPS = {
   // Dental-growth pages only. The legacy engineering/consulting pages
-  // (/services, /case-studies, /insights, /engineering-partner, /aumy)
+  // (/case-studies, /insights, /engineering-partner, /aumy; /services is the
+  // dental services page since 2026-11-05 and is IN)
   // stay routable but are deliberately kept out of the sitemap — the public
   // identity of aumai.co.in is dental clinic growth, nothing else. /about is
   // IN since 2026-09-26: it is now the founder's dental story, not the old
@@ -64,6 +67,7 @@ const SITEMAPS = {
     // Clinic websites built for search (owner 2026-10-19). /websites only redirects here.
     ['/clinic-websites', 0.9, 'monthly'],
     // Services (owner 2026-10-23), under "Product & services" in the header.
+    [SVCS.PATH, 0.9, 'monthly'],
     ['/dental-seo', 0.9, 'monthly'],
     ['/dental-ads', 0.9, 'monthly'],
     ['/managed-follow-ups', 0.9, 'monthly'],
@@ -172,6 +176,7 @@ ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
 - ${ORIGIN}/modules — Aumy sold module by module or as one connected system: Aumy Convert (lead nurturing & Meta ads optimisation), Aumy Clinic (dental clinic operating system) with the Aumy Scribe add-on (AI clinical documentation), Aumy Journey (clinic OS with the end-to-end patient journey), Aumy Chat (AI WhatsApp receptionist), Aumy Voice (AI voice receptionist), and Aumy One (the connected dental clinic system)
 ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}${p.addonOf ? ` (add-on to ${p.addonOf})` : ""}. ${p.card}`).join('\n')}
+- ${ORIGIN}${SVCS.PATH} — Services for established dental clinics, on one page: ${SVCS.SERVICES.map((s) => `${s.name} (${s.short}; ${ORIGIN}${s.link.to})`).join('; ')}. Ad budget paid by the clinic directly to Meta and Google; work: The Sterling Dental Clinic (website and SEO) and Dr Rajat Sachdeva's dental implant clinic (website and SEO), both in Delhi; quoted on a call with Jayesh
 - ${ORIGIN}/dental-seo — Dental SEO for international patients (service): pages overseas patients search for (treatment plus "in Delhi/India", costs, short-stay timelines, the doctor's credentials), Google Business Profile looked after every week (posts, review replies, photos), new articles on a fixed day, rankings kept on a redesign, and a monthly Search Console report by country; work: The Sterling Dental Clinic, New Delhi
 - ${ORIGIN}/clinic-websites — Dental websites (service): clinic websites built for SEO and international patients: treatment, area and dental-tourism pages, weekly blogs, technical SEO and redirects that keep old rankings; case study: sterlingdentalclinic.com
 - ${ORIGIN}/dental-ads — Dental ads, Meta and Google (service): Meta ads for dental clinics on Facebook and Instagram and Google ads for dentists, judged by booked patients rather than leads, with every enquiry answered and followed up in Aumy; monthly report on spend, enquiries, booked visits and cost per booked visit
