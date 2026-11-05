@@ -313,7 +313,7 @@ const filmVideoLd = {
   thumbnailUrl: 'https://i.ytimg.com/vi/ILwh4-h5YAM/maxresdefault.jpg',
   embedUrl: 'https://www.youtube.com/embed/ILwh4-h5YAM',
   contentUrl: 'https://www.youtube.com/watch?v=ILwh4-h5YAM',
-  duration: 'PT57M37S',
+  duration: 'PT57M36S',
   uploadDate: isoDateTime('2026-11-05'),
   publisher: {
     '@type': 'Organization',
