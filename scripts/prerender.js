@@ -303,11 +303,30 @@ const demoVideoLd = {
   },
 };
 
-// Main demo video since 2026-10-20: the full Aumy demo film (leads /demos).
+// Main demo video since 2026-11-05: the full product walkthrough (owner: "full comprehensive demo"; leads the home page and /demos).
 const filmVideoLd = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: 'Aumy full demo: the AI front desk that fills dental chairs (WhatsApp + calls, 24x7)',
+  name: 'Aumy full demo: how an established dental clinic stops losing patients',
+  description:
+    'A full walkthrough of Aumy the way a dental clinic uses it every day: every enquiry answered on WhatsApp and followed up until the patient books, reminders that cut no-shows, missed visits and unfinished treatment brought back, the front desk’s day on one screen, notes, plans, bills and records shared in one tap, and simple reports.',
+  thumbnailUrl: 'https://i.ytimg.com/vi/ILwh4-h5YAM/maxresdefault.jpg',
+  embedUrl: 'https://www.youtube.com/embed/ILwh4-h5YAM',
+  contentUrl: 'https://www.youtube.com/watch?v=ILwh4-h5YAM',
+  duration: 'PT57M37S',
+  uploadDate: isoDateTime('2026-11-05'),
+  publisher: {
+    '@type': 'Organization',
+    name: 'AUM AI',
+    logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` },
+  },
+};
+
+// The 9-minute demo film (2026-10-20), now "a shorter look" on /demos.
+const shortFilmVideoLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'Aumy in 9 minutes: watch Aumy run a dental clinic, start to finish',
   description:
     'A 9-minute walkthrough of Aumy on a demo dental clinic: every WhatsApp enquiry and call answered, bookings confirmed and reminded, missed visits rebooked, advised treatment moved to accepted, lab cases and unfinished treatment tracked, patients brought back, and a weekly report for the owner.',
   thumbnailUrl: 'https://i.ytimg.com/vi/0LE0iwNvcZQ/maxresdefault.jpg',
@@ -1118,12 +1137,12 @@ const routes = [
     description:
       'Short, unedited demos of Aumy running a dental clinic: answering WhatsApp, booking and rescheduling, after-care, care-gap follow-ups and campaigns — the AI-powered patient journey, live.',
     canonical: `${ORIGIN}/demos`,
-    jsonld: [orgLd, filmVideoLd],
+    jsonld: [orgLd, filmVideoLd, shortFilmVideoLd],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">See it, don't take our word for it</p>
         <h1 class="ch-hero-title">Watch Aumy run a clinic — live, unscripted</h1>
-        <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Start with the full 9-minute demo: <a href="https://www.youtube.com/watch?v=0LE0iwNvcZQ">watch Aumy run a dental clinic, start to finish</a>. Prefer to feel it? WhatsApp our live demo clinic on +91 90223 12554 as if you were a patient.</p>
+        <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Start with the full demo: <a href="https://www.youtube.com/watch?v=ILwh4-h5YAM">how an established dental clinic stops losing patients</a> (58 min), or <a href="https://www.youtube.com/watch?v=0LE0iwNvcZQ">a shorter look in 9 minutes</a>. Prefer to feel it? WhatsApp our live demo clinic on +91 90223 12554 as if you were a patient.</p>
         <p><a href="/modules/automate-dental-clinic-operations">Aumy One</a> · <a href="/modules/dental-patient-follow-up">Aumy Journey</a></p>
       </div></section>`,
   },

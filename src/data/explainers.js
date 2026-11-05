@@ -28,11 +28,12 @@ const HERO_VIDEO = {
 };
 
 // The full Aumy demo film (owner 2026-10-20), on YouTube; shown on the home page under the hero and leads /demos.
+// The full product walkthrough since 2026-11-05 (owner: "full comprehensive demo"); the 9-minute film stays on /demos.
 const FULL_DEMO = {
-  youtubeId: '0LE0iwNvcZQ',
-  tag: 'Full demo · 9 min',
-  title: 'Watch Aumy run a dental clinic, start to finish',
-  blurb: 'Every enquiry answered on WhatsApp and phone, appointments confirmed and reminded, missed visits rebooked, advised treatment started, lab cases and unfinished treatment tracked, patients brought back, and a weekly report of what is working.',
+  youtubeId: 'ILwh4-h5YAM',
+  tag: 'Full demo · 58 min',
+  title: 'Aumy full demo: how an established dental clinic stops losing patients',
+  blurb: 'The whole product, the way a dental clinic uses it every day: every enquiry answered on WhatsApp and followed up until the patient books, reminders that cut no-shows, missed visits and unfinished treatment brought back, the front desk’s day on one screen, notes, plans, bills and records shared in one tap, and simple reports.',
 };
 
 const VIDEOS = [
