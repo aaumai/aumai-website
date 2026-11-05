@@ -64,25 +64,44 @@ const VIDEOS = [
 ];
 
 /**
- * The full demo, full width, playing as soon as the page opens (owner 2026-11-05). Browsers only allow autoplay with
- * the sound off, so it starts muted; the visitor turns the sound on in the player.
+ * The full demo, full width at the top (owner 2026-11-05). Click to play: a sharp thumbnail and a big play button; the
+ * visitor starts it, with sound, so YouTube picks a sharp quality (a muted autoplay inside a page started blurred).
  */
 function FeaturedVideo({ video }) {
+  const [playing, setPlaying] = useState(false);
+  const [thumb, setThumb] = useState(`https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`);
   return (
     <div className="dv-featured">
       <div className="dv-frame dv-frame-featured">
-        <iframe
-          src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`}
-          title={video.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+        {playing ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <button
+            type="button"
+            className="dv-thumb dv-thumb-featured"
+            style={{ backgroundImage: `url(${thumb})` }}
+            onClick={() => setPlaying(true)}
+            aria-label={`Play: ${video.title}`}
+          >
+            {/* maxresdefault exists only for HD uploads; fall back to the standard thumbnail if it does not load. */}
+            <img src={thumb} alt="" hidden onError={() => setThumb(`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`)} />
+            <span className="dv-play dv-play-featured">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" aria-hidden="true">
+                <path d="M8 5.5v13l11-6.5-11-6.5z" />
+              </svg>
+            </span>
+          </button>
+        )}
       </div>
       <div className="dv-body dv-featured-body">
         <span className="dv-tag">{video.tag}</span>
         <h2 className="dv-title">{video.title}</h2>
         <p className="dv-blurb">{video.blurb}</p>
-        <p className="dv-sound-hint">Playing with the sound off. Tap the speaker in the video to turn it on.</p>
       </div>
     </div>
   );
