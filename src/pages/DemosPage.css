@@ -181,3 +181,9 @@
   color: var(--c-ink);
 }
 .dv-btn-ghost:hover { border-color: var(--c-accent); color: var(--c-accent-dark); }
+
+/* The full demo: full width above the grid, autoplays muted (owner 2026-11-05). */
+.dv-featured { margin-bottom: 36px; }
+.dv-frame-featured { width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.35); }
+.dv-featured-body { padding: 18px 4px 0; max-width: 860px; }
+.dv-sound-hint { margin-top: 6px; font-size: 13px; color: #64748b; }
