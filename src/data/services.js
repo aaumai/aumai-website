@@ -13,7 +13,8 @@
  * - Ad budget is paid by the clinic straight to Meta and Google, separate from our fee (owner 2026-10-23).
  * - Clients named only with an OK on file: Sterling (agreed to the public "Website by AUM AI" credit;
  *   already the case study on /clinic-websites and /dental-seo) and Dr Rajat Sachdeva (owner 2026-10-23:
- *   "let Dr Rajat be"; site live 2026-11-04). No other client by name.
+ *   "let Dr Rajat be"; site live 2026-11-04) and Vinaykia Dental Care (owner 2026-11-05: "Vinaykia is ok
+ *   put them on the page too"). No other client by name.
  * - Proof stays qualitative: no traffic, ranking, enquiry or ad-result numbers until a monthly report
  *   measures them and the owner clears them.
  * - Copy for established dental practice owners (owner 2026-11-02 persona); never say "premium".
@@ -136,6 +137,12 @@ const WORK = {
       place: 'Ashok Vihar, Delhi',
       tag: 'Website and SEO',
       text: 'We rebuilt dentalimplantindia.co.in around implants and smile makeovers, kept every page address the old site was found for, and look after its SEO and Google profile.',
+    },
+    {
+      name: 'Vinaykia Dental Care',
+      place: 'Somwar Peth, Pune',
+      tag: 'Website and SEO',
+      text: 'We built vinaykiadentalcare.com and run its local SEO for root canal and aligners: two Google profile posts a week, review requests, and a monthly report measured against the baseline we took before launch.',
     },
     {
       name: 'Our own ads, every day',
