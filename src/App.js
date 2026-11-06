@@ -25,6 +25,7 @@ import ServicePage from './pages/ServicePage';
 import ServicesPage from './pages/ServicesPage';
 import DENTAL_SEO from './data/dentalSeo';
 import DENTAL_ADS from './data/dentalAds';
+import VIS from './data/visibility';
 import MANAGED_FOLLOW_UPS from './data/managedFollowUps';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -123,7 +124,8 @@ function App() {
                 {/* Services (owner 2026-10-23): Dental SEO and Dental ads, under "Product & services".
                     Words: src/data/dentalSeo.js and src/data/dentalAds.js (shared with scripts/prerender.js). */}
                 <Route path="/dental-seo" element={<ServicePage data={DENTAL_SEO} />} />
-                <Route path="/dental-ads" element={<ServicePage data={DENTAL_ADS} />} />
+                {/* /dental-ads hidden for now (owner 2026-11-06, src/data/visibility.js): lands on /services. */}
+                <Route path="/dental-ads" element={VIS.HIDE_DENTAL_ADS_PAGE ? <Navigate to="/services" replace /> : <ServicePage data={DENTAL_ADS} />} />
                 <Route path="/managed-follow-ups" element={<ServicePage data={MANAGED_FOLLOW_UPS} />} />
                 {/* No pricing on the website (owner 2026-11-02). The old URL lands on the free clinic audit,
                     the site's one lead route; crawlers get a canonical + refresh page (scripts/prerender.js),

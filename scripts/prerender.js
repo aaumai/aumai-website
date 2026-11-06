@@ -43,6 +43,8 @@ const DADS = require('../src/data/dentalAds');
 const DMANAGED = require('../src/data/managedFollowUps');
 // /services (owner 2026-11-05): dental ads, websites and SEO on one page; same file as src/pages/ServicesPage.js.
 const SVCS = require('../src/data/services');
+// Pages hidden for now (owner 2026-11-06): /dental-ads becomes a noindex stub pointing at /services.
+const VIS = require('../src/data/visibility');
 const NABH = require('../src/data/nabh');
 // /modules: same words as src/pages/ModulesPage.js.
 const MODS = require('../src/data/modules');
@@ -124,7 +126,7 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/compliance', 'Security & compliance'],
   ['/about', 'About the founder'],
   ['/contact', 'Contact'],
-].map(([href, label]) => `<li><a href="${href}">${label.replace(/&/g, '&amp;')}</a></li>`).join('')}</ul></nav>`;
+].filter(([href]) => VIS.showLink(href)).map(([href, label]) => `<li><a href="${href}">${label.replace(/&/g, '&amp;')}</a></li>`).join('')}</ul></nav>`;
 
 function clinicsStripHtml() {
   if (!consentedClinics.length) {
@@ -501,7 +503,7 @@ function serviceRoute(D) {
         <p><a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a> · <a href="/growth-audit">Free clinic audit</a></p>
         <h2>${esc(D.FINAL.title)}</h2>
         <p>${esc(D.FINAL.text)}</p>
-        <p>Also from AUM AI: <a href="/services">All services</a> · <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a> · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a> · <a href="/revenue-generator">Aumy, our main product</a></p>
+        <p>Also from AUM AI: <a href="/services">All services</a> · <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a>${VIS.showLink('/dental-ads') ? ' · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a>' : ''} · <a href="/revenue-generator">Aumy, our main product</a></p>
       </div></section>`,
   };
 }
@@ -531,7 +533,7 @@ function servicesRoute() {
             name: s.schema.name,
             serviceType: s.schema.serviceType,
             description: `${s.short}. ${s.problem}`,
-            url: `${ORIGIN}${s.link.to}`,
+            url: s.link ? `${ORIGIN}${s.link.to}` : `${url}#${s.id}`,
             provider: { '@id': `${ORIGIN}/#organization` },
             areaServed: { '@type': 'Country', name: 'India' },
             audience: { '@type': 'BusinessAudience', audienceType: 'Dental clinics' },
@@ -564,7 +566,7 @@ function servicesRoute() {
         <h3>What your clinic gets</h3>
         <ul>${s.gets.map((g) => `<li>${esc(g)}</li>`).join('')}</ul>
         <p>${esc(s.measured)}</p>
-        <p><a href="${s.link.to}">${esc(s.link.label)}</a></p>
+        ${s.link ? `<p><a href="${s.link.to}">${esc(s.link.label)}</a></p>` : ''}
       </div></section>`).join('\n      ')}
       <section id="work"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(SVCS.WORK.eyebrow)}</p>
@@ -1094,7 +1096,19 @@ const routes = [
   // Services (owner 2026-10-23): public and in the sitemap.
   servicesRoute(),
   serviceRoute(DSEO),
-  serviceRoute(DADS),
+  // /dental-ads hidden for now (owner 2026-11-06, src/data/visibility.js): a noindex stub with a canonical
+  // + meta refresh to /services instead of the page. HIDE_DENTAL_ADS_PAGE = false brings the page back.
+  VIS.HIDE_DENTAL_ADS_PAGE
+    ? {
+      slug: DADS.PATH.slice(1),
+      noindex: true,
+      title: SVCS.SEO.title,
+      description: SVCS.SEO.description,
+      canonical: `${ORIGIN}${SVCS.PATH}`,
+      refresh: SVCS.PATH,
+      content: `<section><div class="ch-container ch-narrow"><p>This page has moved: <a href="${SVCS.PATH}">our services</a>.</p></div></section>`,
+    }
+    : serviceRoute(DADS),
   serviceRoute(DMANAGED),
   // Public and indexable, but out of the sitemap for now (owner 2026-10-18). The
   // price comes from the backend at run time; the default label is written here.

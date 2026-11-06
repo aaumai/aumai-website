@@ -4,6 +4,7 @@ import { isMasterclassPath } from '../data/masterclass';
 import { OFFICES, ICON } from '../config/contact';
 import AppDownload from './AppDownload';
 import { FOOTER_OUTCOMES, FOOTER_TAGLINE } from '../data/homeOutcomes';
+import VIS from '../data/visibility';
 import './Footer.css';
 
 // The services, in the header's order (also in scripts/prerender.js SITE_LINKS).
@@ -14,7 +15,7 @@ const SERVICES = [
   { label: 'Dental SEO', path: '/dental-seo' },
   { label: 'Dental Websites', path: '/clinic-websites' },
   { label: 'Dental Ads (Meta & Google)', path: '/dental-ads' },
-];
+].filter((l) => VIS.showLink(l.path)); // a hidden page (src/data/visibility.js) gets no link
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

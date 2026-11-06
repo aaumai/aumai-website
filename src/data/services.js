@@ -21,6 +21,9 @@
  *
  * `module.exports` on purpose: the prerender script is plain Node.
  */
+// The /dental-ads page can be hidden for now (src/data/visibility.js); the service stays on this page.
+const { showLink } = require('./visibility');
+
 const PATH = '/services';
 const CALL_LINK = 'https://calendar.app.google/tecaeebTBEWSoJnV7';
 const AUDIT_PATH = '/growth-audit';
@@ -66,7 +69,8 @@ const SERVICES = [
       'Your clinic pays Meta and Google directly for the ads. The ad budget is never mixed with our fee.',
     ],
     measured: 'Judged by one number: visits booked from the ads.',
-    link: { to: '/dental-ads', label: 'More on dental ads' },
+    // No link while the /dental-ads page is hidden (owner 2026-11-06, src/data/visibility.js).
+    link: showLink('/dental-ads') ? { to: '/dental-ads', label: 'More on dental ads' } : null,
     schema: { name: 'Dental ads: Meta and Google ads for dental clinics', serviceType: 'Online advertising for dental clinics (Meta and Google ads)' },
   },
   {

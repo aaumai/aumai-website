@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import VIS from '../data/visibility';
 import './HomeClinic.css';
 import './ClinicWebsitesPage.css';
 import './ServicePage.css';
@@ -45,7 +46,7 @@ const SIBLINGS = [
   { to: '/clinic-websites', label: 'Dental websites' },
   { to: '/dental-ads', label: 'Dental ads (Meta & Google)' },
   { to: '/revenue-generator', label: 'Aumy, our main product' },
-];
+].filter((l) => VIS.showLink(l.to)); // a hidden page (src/data/visibility.js) gets no link
 
 const HeroVisual = ({ v }) => {
   if (v.kind === 'devices') {

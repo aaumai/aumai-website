@@ -87,7 +87,7 @@ export default function ServicesPage() {
                 <h3 className="so-subhead">What your clinic gets</h3>
                 <ul className="sv-fit">{s.gets.map((g) => <li key={g}>{g}</li>)}</ul>
                 <p className="so-measured">{s.measured}</p>
-                <Link className="ch-btn ch-btn-ghost so-more" to={s.link.to}>{s.link.label}</Link>
+                {s.link && <Link className="ch-btn ch-btn-ghost so-more" to={s.link.to}>{s.link.label}</Link>}
               </aside>
             </div>
           </div>
@@ -165,7 +165,7 @@ export default function ServicesPage() {
           </div>
           <CapacityLine />
           <nav className="sv-siblings" aria-label="Services">
-            {S.SERVICES.map((s) => <Link key={s.id} to={s.link.to}>{s.name}</Link>)}
+            {S.SERVICES.filter((s) => s.link).map((s) => <Link key={s.id} to={s.link.to}>{s.name}</Link>)}
             <Link to="/revenue-generator">Aumy, our main product</Link>
           </nav>
         </div>
