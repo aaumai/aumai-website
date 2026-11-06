@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
+import CapacityLine from '../components/CapacityLine';
 import S from '../data/services';
 import './HomeClinic.css';
 import './ClinicWebsitesPage.css';
@@ -41,6 +42,7 @@ export default function ServicesPage() {
                 <AuditLink className="ch-btn ch-btn-ghost" />
               </div>
               <p className="ch-hero-trust">{S.HERO.note}</p>
+              <CapacityLine />
             </div>
             <nav className="so-index" aria-label={S.HERO.indexTitle}>
               <p className="so-index-title">{S.HERO.indexTitle}</p>
@@ -161,6 +163,7 @@ export default function ServicesPage() {
             <CallLink className="ch-btn ch-btn-primary" />
             <AuditLink className="ch-btn ch-btn-ghost" />
           </div>
+          <CapacityLine />
           <nav className="sv-siblings" aria-label="Services">
             {S.SERVICES.map((s) => <Link key={s.id} to={s.link.to}>{s.name}</Link>)}
             <Link to="/revenue-generator">Aumy, our main product</Link>

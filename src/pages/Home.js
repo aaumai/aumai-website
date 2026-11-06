@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import ClinicsServed from '../components/ClinicsServed';
 import HeroVideo from '../components/HeroVideo';
+import CapacityLine from '../components/CapacityLine';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
 import { HERO, THREE, FOLLOW_UPS, PROOF, FIT, FINAL, SEO } from '../data/homeOneProduct';
 import './HomeClinic.css';
@@ -63,6 +64,7 @@ const Home = () => {
               <Link to={HERO.cta.to} className="ch-btn ch-btn-primary">{HERO.cta.label}</Link>
             </div>
             <p className="ch-hero-trust">{HERO.ctaNote}</p>
+            <CapacityLine />
           </div>
           <div className="lux-hero-loop">
             <HeroVideo />
@@ -159,6 +161,7 @@ const Home = () => {
           <div className="ch-hero-cta ch-center-cta">
             <Link to={FINAL.cta.to} className="ch-btn ch-btn-primary">{FINAL.cta.label}</Link>
           </div>
+          <CapacityLine />
         </div>
       </section>
     </div>
