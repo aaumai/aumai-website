@@ -118,7 +118,7 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/growth', 'Growth Hub'],
   ['/masterclass', 'The Full Chair Method masterclass'],
   // Product & services (owner 2026-10-23, managed follow-ups 2026-10-26): the services, as in the header.
-  ['/services', 'Services: dental ads, dental websites and dental SEO'],
+  ['/services', VIS.adsText('Services: dental ads, dental websites and dental SEO', 'Services: dental websites and dental SEO')],
   ['/managed-follow-ups', 'Managed patient follow-ups'],
   ['/dental-seo', 'Dental SEO for international patients'],
   ['/clinic-websites', 'Dental websites built for SEO'],

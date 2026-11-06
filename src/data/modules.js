@@ -28,9 +28,15 @@
  * `module.exports` on purpose: the prerender script is plain Node.
  */
 
+// Ads wording hidden for now (owner 2026-11-06, src/data/visibility.js): Aumy Convert reads as plain
+// enquiry follow-up while HIDE_ADS is on. `null` entries in a list are dropped.
+const { adsText } = require('./visibility');
+
 const TITLE = 'Dental Clinic Software Modules — Buy One or All | Aumy'; // 54 chars
-const DESCRIPTION =
-  'Dental clinic software by module: leads & Meta ads, clinic OS, AI notes, patient follow-ups, AI WhatsApp & voice receptionist, or Aumy One for all.'; // 147 chars
+const DESCRIPTION = adsText(
+  'Dental clinic software by module: leads & Meta ads, clinic OS, AI notes, patient follow-ups, AI WhatsApp & voice receptionist, or Aumy One for all.', // 147 chars
+  'Dental clinic software by module: lead follow-up, clinic OS, AI notes, patient follow-ups, AI WhatsApp & voice receptionist, or Aumy One for all.',
+);
 
 const HERO = {
   eyebrow: 'Dental clinic software modules',
@@ -44,16 +50,16 @@ const MODULES = [
     id: 'dental-lead-management',
     icon: 'leads',
     short: 'Aumy Convert',
-    title: 'Lead Nurturing & Meta Ads Optimisation',
-    forWho: 'For clinics running Facebook and Instagram ads.',
-    promise: 'Every enquiry from your ads is answered, followed up and tracked to a booked patient, so you know which ads pay and which don’t.',
+    title: adsText('Lead Nurturing & Meta Ads Optimisation', 'Lead Nurturing & Follow-up'),
+    forWho: adsText('For clinics running Facebook and Instagram ads.', 'For clinics that get more enquiries than the team can follow up.'),
+    promise: adsText('Every enquiry from your ads is answered, followed up and tracked to a booked patient, so you know which ads pay and which don’t.', 'Every enquiry is answered, followed up and tracked to a booked patient, so none is lost.'),
     does: [
-      'Every enquiry from your Facebook and Instagram ads lands in one leads list — nothing sits unread.',
+      adsText('Every enquiry from your Facebook and Instagram ads lands in one leads list — nothing sits unread.', 'Every new enquiry lands in one leads list — nothing sits unread.'),
       'Enquiries that go quiet get polite, well-timed follow-ups until the person books or says no.',
-      'See which campaign each patient came from, and what it cost you per booked patient.',
-      'Meta learns only from your serious enquiries, through an anonymous lead signal; your patients’ health data never leaves the clinic.',
+      adsText('See which campaign each patient came from, and what it cost you per booked patient.', 'See which enquiries became booked patients, and which went quiet.'),
+      adsText('Meta learns only from your serious enquiries, through an anonymous lead signal; your patients’ health data never leaves the clinic.', null),
       'Your Google profile kept working: posts published, and Google reviews answered with a reply drafted for you to approve.',
-    ],
+    ].filter(Boolean),
     addons: ['Aumy Chat', 'Aumy Voice', 'Both'],
     more: { path: '/facebook-instagram', label: 'Facebook & Instagram receptionist' },
   },
@@ -163,8 +169,8 @@ const TABLE = {
   caption: 'Add-on means you can add it to that module if you want it.',
   cols: ['Aumy Convert', 'Aumy Clinic', 'Aumy Journey', 'Aumy Chat', 'Aumy Voice', 'Aumy One'],
   rows: [
-    ['Ad enquiries in one leads list, with follow-up', ['yes', 'no', 'no', 'no', 'no', 'yes']],
-    ['Which ad brought which patient', ['yes', 'no', 'no', 'no', 'no', 'yes']],
+    [adsText('Ad enquiries in one leads list, with follow-up', 'Enquiries in one leads list, with follow-up'), ['yes', 'no', 'no', 'no', 'no', 'yes']],
+    [adsText('Which ad brought which patient', 'Which enquiry became which patient'), ['yes', 'no', 'no', 'no', 'no', 'yes']],
     ['Google profile and review replies', ['yes', 'no', 'no', 'no', 'no', 'yes']],
     ['WhatsApp enquiries answered and booked by AI', ['opt', 'no', 'no', 'yes', 'no', 'yes']],
     ['Phone calls answered and booked by AI', ['opt', 'no', 'no', 'no', 'yes', 'yes']],
@@ -211,27 +217,27 @@ const PAGES = [
     id: 'dental-lead-management',
     icon: 'leads',
     short: 'Aumy Convert',
-    title: 'Lead Nurturing & Meta Ads Optimisation',
+    title: adsText('Lead Nurturing & Meta Ads Optimisation', 'Lead Nurturing & Follow-up'),
     seoTitle: 'Dental Lead Management Software — Aumy Convert',
     h1: 'Aumy Convert: dental lead management',
-    sub: 'Every enquiry from your ads followed up until it becomes a booked patient.',
-    seoDescription: 'Dental lead management software: every Facebook and Instagram ad enquiry answered, followed up and tracked to a booked patient, with cost per patient.',
+    sub: adsText('Every enquiry from your ads followed up until it becomes a booked patient.', 'Every enquiry followed up until it becomes a booked patient.'),
+    seoDescription: adsText('Dental lead management software: every Facebook and Instagram ad enquiry answered, followed up and tracked to a booked patient, with cost per patient.', 'Dental lead management software: every enquiry answered, followed up and tracked to a booked patient.'),
     keyword: 'dental lead management software',
-    card: 'Every ad enquiry followed up and tracked to a booked patient.',
-    intro: `${byId('dental-lead-management').promise} Aumy Convert is dental lead management software for clinics that spend on Facebook and Instagram ads.`,
+    card: adsText('Every ad enquiry followed up and tracked to a booked patient.', 'Every enquiry followed up and tracked to a booked patient.'),
+    intro: `${byId('dental-lead-management').promise} Aumy Convert is dental lead management software for clinics ${adsText('that spend on Facebook and Instagram ads', 'that get more enquiries than the team can follow up')}.`,
     does: byId('dental-lead-management').does,
     whoFor: [
-      'You run Facebook or Instagram ads and enquiries arrive faster than your team can call back.',
+      adsText('You run Facebook or Instagram ads and enquiries arrive faster than your team can call back.', 'Enquiries arrive faster than your team can call back.'),
       'Leads go quiet after the first reply, and nobody has time to keep following up.',
-      'You cannot tell which ad actually brought patients into the chair.',
+      adsText('You cannot tell which ad actually brought patients into the chair.', 'You cannot tell which enquiries actually became patients in the chair.'),
       'You want your Google profile and reviews looked after without a marketing team.',
     ],
     outcomes: [
-      'No enquiry from your ads is left unanswered or forgotten.',
+      adsText('No enquiry from your ads is left unanswered or forgotten.', 'No enquiry is left unanswered or forgotten.'),
       'Your team spends its time on people who want to book, not on chasing a spreadsheet.',
-      'You can see which campaigns bring patients and which only bring clicks, and spend accordingly.',
-      'Meta learns from the enquiries that became real patients, so it can find more people like them.',
-    ],
+      adsText('You can see which campaigns bring patients and which only bring clicks, and spend accordingly.', 'You can see which enquiries become patients and which go quiet.'),
+      adsText('Meta learns from the enquiries that became real patients, so it can find more people like them.', null),
+    ].filter(Boolean),
     addons: byId('dental-lead-management').addons,
     pairs: ['whatsapp-ai-receptionist-for-dentists', 'ai-voice-receptionist-for-dentists', 'dental-patient-follow-up'],
     deep: [{ path: '/facebook-instagram', label: 'Facebook & Instagram receptionist' }],

@@ -7,6 +7,9 @@
  * then copied to public/videos/explainers/. Posters are a frame from each video.
  */
 
+// Aumy Convert's ads wording hidden for now (owner 2026-11-06, src/data/visibility.js).
+const { adsText } = require('./visibility');
+
 const TITLE = 'See each module in under two minutes';
 const SUB = 'A real clinic day, before and after Aumy. Sound on.';
 
@@ -67,11 +70,11 @@ const VIDEOS = [
   {
     moduleId: 'dental-lead-management',
     name: 'Aumy Convert',
-    line: 'Every ad enquiry followed up until it books.',
+    line: adsText('Every ad enquiry followed up until it books.', 'Every enquiry followed up until it books.'),
     src: '/videos/explainers/aumy-convert-explainer.mp4',
     poster: '/videos/explainers/aumy-convert-explainer.jpg',
     duration: 'PT1M48S',
-    description: 'How Aumy Convert answers every ad enquiry in seconds, follows up for weeks and months, shows your team the hottest leads and tells Meta which enquiries turned out serious, so your ads find more like them.',
+    description: adsText('How Aumy Convert answers every ad enquiry in seconds, follows up for weeks and months, shows your team the hottest leads and tells Meta which enquiries turned out serious, so your ads find more like them.', 'How Aumy Convert answers every enquiry in seconds, follows up for weeks and months, and shows your team the hottest leads.'),
   },
 ];
 

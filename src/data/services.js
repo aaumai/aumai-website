@@ -21,8 +21,9 @@
  *
  * `module.exports` on purpose: the prerender script is plain Node.
  */
-// The /dental-ads page can be hidden for now (src/data/visibility.js); the service stays on this page.
-const { showLink } = require('./visibility');
+// Ads hidden for now (owner 2026-11-06, src/data/visibility.js): the /dental-ads link goes, and while
+// HIDE_ADS is on this page shows two services (websites and SEO) with no ads wording.
+const { showLink, adsText, HIDE_ADS } = require('./visibility');
 
 const PATH = '/services';
 const CALL_LINK = 'https://calendar.app.google/tecaeebTBEWSoJnV7';
@@ -34,20 +35,22 @@ const CTA = {
 };
 
 const SEO = {
-  title: 'Dental Ads, Dental Websites and Dental SEO | AUM AI',
-  description:
+  title: adsText('Dental Ads, Dental Websites and Dental SEO | AUM AI', 'Dental Websites and Dental SEO | AUM AI'),
+  description: adsText(
     'Three services for established dental clinics in India: Meta and Google ads that bring implant, aligner and root canal enquiries, fast dental websites that keep your rankings, and dental SEO with your Google Business Profile looked after.',
+    'Two services for established dental clinics in India: fast dental websites that keep your rankings, and dental SEO with your Google Business Profile looked after.',
+  ),
 };
 
 const HERO = {
   eyebrow: 'For owners of established dental practices',
-  title: 'Dental ads, dental websites and dental SEO',
-  sub: 'Patients look for a dentist on Instagram, on Google and on Maps before they ever call. We make sure they find your clinic, like what they see, and get in touch. Each service is run by our team, checked every week, and reported every month against where your clinic started.',
-  note: 'Take one service or all three. Each works on its own.',
-  indexTitle: 'Our three services',
+  title: adsText('Dental ads, dental websites and dental SEO', 'Dental websites and dental SEO'),
+  sub: adsText('Patients look for a dentist on Instagram, on Google and on Maps before they ever call.', 'Patients look for a dentist on Google and on Maps before they ever call.') + ' We make sure they find your clinic, like what they see, and get in touch. Each service is run by our team, checked every week, and reported every month against where your clinic started.',
+  note: adsText('Take one service or all three. Each works on its own.', 'Take one service or both. Each works on its own.'),
+  indexTitle: adsText('Our three services', 'Our two services'),
 };
 
-const SERVICES = [
+const ALL_SERVICES = [
   {
     id: 'dental-ads',
     n: '01',
@@ -123,6 +126,11 @@ const SERVICES = [
   },
 ];
 
+// While ads are hidden (src/data/visibility.js) the dental ads service is left out and the rest renumbered.
+const SERVICES = HIDE_ADS
+  ? ALL_SERVICES.filter((s) => s.id !== 'dental-ads').map((s, i) => Object.assign({}, s, { n: String(i + 1).padStart(2, '0') }))
+  : ALL_SERVICES;
+
 // Proof: only work we actually do, and only clients cleared to be named.
 const WORK = {
   eyebrow: 'Our work',
@@ -154,7 +162,7 @@ const WORK = {
       tag: 'Dental ads',
       text: 'We run Aumy’s own Meta ads to dental clinic owners and review them every morning: what to stop, what to try next and where to move the budget. AUM AI is a Meta Tech Provider.',
     },
-  ],
+  ].filter((c) => !(HIDE_ADS && c.tag === 'Dental ads')),
 };
 
 const STEPS = {
@@ -163,22 +171,22 @@ const STEPS = {
   items: [
     { h: 'A call with Jayesh', t: 'A short call on where your clinic loses patients today and which service fits. Or start with a free clinic audit.' },
     { h: 'A plan for your clinic', t: 'The treatments you want more of, the areas they come from, and what we do first. You approve it.' },
-    { h: 'We run it, every week', t: 'Ads checked, pages improved, Google posts sent to you for a yes, reviews answered.' },
+    { h: 'We run it, every week', t: adsText('Ads checked, pages improved, Google posts sent to you for a yes, reviews answered.', 'Pages improved, Google posts sent to you for a yes, reviews answered.') },
     { h: 'A report every month', t: 'What changed, against where you started, and what we do next.' },
   ],
 };
 
 const FAQS = [
   { q: 'Can we take just one service?', a: 'Yes. Each service works on its own. Start with the one closest to where your clinic loses patients today; the call with Jayesh helps you choose.' },
-  { q: 'Who pays for the ads?', a: 'Your clinic pays Meta and Google directly for the ads. Our fee is separate, and the ad budget is never mixed with it.' },
+  { q: 'Who pays for the ads?', a: 'Your clinic pays Meta and Google directly for the ads. Our fee is separate, and the ad budget is never mixed with it.', ads: true },
   { q: 'Will a new website lose our Google rankings?', a: 'Not when the move is done carefully. Before launch we list every address your old site has, keep it or point it to its new page, and check each one on launch day and in the weeks after.' },
   { q: 'Do we need Aumy to use these services?', a: 'No. Each service works on its own, and enquiries come straight to your team. With Aumy, every enquiry is also answered straight away and followed up until the patient books.' },
   { q: 'Can you promise the first position on Google?', a: 'Nobody honestly can: Google decides. What we promise is the work, every week, and a monthly report that shows what it brought.' },
   { q: 'How much does it cost?', a: 'It depends on your clinic and which services you take, so Jayesh gives you the exact figure on a short call.' },
-];
+].filter((f) => !(HIDE_ADS && f.ads)).map(({ q, a }) => ({ q, a })); // `ads: true` = left out while ads are hidden
 
 const FINAL = {
-  eyebrow: 'Dental ads, websites and SEO by AUM AI',
+  eyebrow: adsText('Dental ads, websites and SEO by AUM AI', 'Dental websites and SEO by AUM AI'),
   title: 'Tell us where your clinic loses patients today.',
   text: 'A short call with Jayesh: which service fits your clinic, what it involves and what it costs.',
 };

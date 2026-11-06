@@ -13,6 +13,9 @@
  * treatment master, recalls / care gaps, perio charting and lab work all exist.
  */
 
+// Aumy Convert's ads wording hidden for now (owner 2026-11-06, src/data/visibility.js).
+const { adsText } = require('./visibility');
+
 const DENTISTS_ONLY = 'Handcrafted only for dentists.';
 
 // Home hero supporting line.
@@ -42,7 +45,7 @@ const LD_SUFFIX = 'Handcrafted only for dentists and trained for dentistry: Aumy
 const HERO_MODULES = [
   { id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat', outcome: 'every WhatsApp answered in seconds, day or night, and the appointment booked into your diary — and all your clinic WhatsApp numbers in one screen that looks just like WhatsApp.' },
   { id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice', outcome: 'every call picked up, even when the desk is busy or the clinic is closed. No patient lost to a missed call.' },
-  { id: 'dental-lead-management', name: 'Aumy Convert', outcome: 'Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.' },
+  { id: 'dental-lead-management', name: 'Aumy Convert', outcome: adsText('Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.', 'Leads Nurturing: every enquiry followed up until they book, and you see which enquiries became real patients.') },
   { id: 'dental-patient-follow-up', name: 'Aumy Journey', outcome: 'fewer no-shows, missed visits rebooked, advised treatments followed up, recalls coming back on time.' },
   { id: 'dental-clinic-management-software', name: 'Aumy Clinic', outcome: 'appointments, records, charting, treatment plans and billing in one place; add Aumy Scribe: speak the note, the chart fills itself.' },
   { id: 'automate-dental-clinic-operations', name: 'Aumy One', outcome: 'one system that includes everything, customised to your clinic’s needs: one patient record, nothing falling between tools.' },
@@ -68,7 +71,7 @@ const HERO_ONE_LINE = 'Or automate your dental clinic operations end to end with
 // Home hero, owner 2026-10-12: "too congested … 1 line outcome after one product title … keep it damn simple".
 // One product, one outcome, one line each. Replaces the leaks list + paragraphs in the hero.
 const HERO_PRODUCTS = [
-  { id: 'dental-lead-management', name: 'Aumy Convert', outcome: 'Every ad enquiry followed up until it books.' },
+  { id: 'dental-lead-management', name: 'Aumy Convert', outcome: adsText('Every ad enquiry followed up until it books.', 'Every enquiry followed up until it books.') },
   { id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat', outcome: 'Every WhatsApp answered in seconds.' },
   { id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice', outcome: 'Every call answered, day and night.' },
   { id: 'dental-patient-follow-up', name: 'Aumy Journey', outcome: 'No-shows rebooked. Treatments finished.' },

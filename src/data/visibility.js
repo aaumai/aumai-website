@@ -1,25 +1,35 @@
 /**
- * Pages hidden for now (owner 2026-11-06, TEMPORARY: "temporarily hide meta ads as a service from my
- * website", then "by hiding I meant just the page").
+ * Ads hidden for now (owner 2026-11-06, TEMPORARY, a few hours: "temporarily hide meta ads as a service
+ * from my website", then "hide all three" while an implant-marketing agency looks at aumai.co.in).
  *
- * HIDE_DENTAL_ADS_PAGE = true hides ONLY the /dental-ads page and every link to it:
- * - the React route redirects to /services (src/App.js);
- * - scripts/prerender.js writes a small noindex page with a canonical + meta refresh to /services,
- *   drops it from the crawler nav, the "Also from AUM AI" line and the /services "More on dental ads" link;
- * - scripts/seo-files.js leaves it out of sitemap.xml and llms.txt;
- * - the footer and the service pages' "other services" links skip it.
- * The dental ads service itself stays on /services (its section, wording, proof, FAQs and schema).
+ * ONE switch: HIDE_ADS. Set it to false, build and deploy, and everything below comes back unchanged.
  *
- * To bring the page back: set HIDE_DENTAL_ADS_PAGE to false, build and deploy. Nothing else changes.
+ * While HIDE_ADS is true:
+ * 1. The /dental-ads page is hidden (HIDE_DENTAL_ADS_PAGE):
+ *    - the React route redirects to /services (src/App.js);
+ *    - scripts/prerender.js writes a small noindex page with a canonical + meta refresh to /services;
+ *    - scripts/seo-files.js leaves it out of sitemap.xml and llms.txt;
+ *    - no link points to it (footer, crawler nav, service-page sibling links, "Also from AUM AI").
+ * 2. /services shows two services, dental websites and dental SEO (src/data/services.js): the dental ads
+ *    service, its proof item, the ads FAQ and the ads wording in the hero, SEO and steps are left out.
+ * 3. Aumy Convert reads as "Lead Nurturing & Follow-up" with plain enquiry follow-up wording, no ads
+ *    optimisation (src/data/modules.js, positioning.js, explainers.js, and llms.txt).
+ * The growth article on Meta ads and the US Business Manager pages are not affected.
  *
  * `module.exports` on purpose: the prerender and seo-files scripts are plain Node.
  */
-const HIDE_DENTAL_ADS_PAGE = true;
+const HIDE_ADS = true;
+
+// The /dental-ads page follows the one switch.
+const HIDE_DENTAL_ADS_PAGE = HIDE_ADS;
 
 const DENTAL_ADS_PATH = '/dental-ads';
 
 // true when a link to `path` may be shown (false only for a hidden page).
 const showLink = (path) => !(HIDE_DENTAL_ADS_PAGE && path === DENTAL_ADS_PATH);
 
-module.exports = { HIDE_DENTAL_ADS_PAGE, DENTAL_ADS_PATH, showLink };
+// The ads wording when ads are shown, the plain wording while they are hidden.
+const adsText = (withAds, withoutAds) => (HIDE_ADS ? withoutAds : withAds);
+
+module.exports = { HIDE_ADS, HIDE_DENTAL_ADS_PAGE, DENTAL_ADS_PATH, showLink, adsText };
 module.exports.default = module.exports;
