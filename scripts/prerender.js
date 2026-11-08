@@ -32,6 +32,10 @@ const FOUNDER = require('../src/data/founder');
 const AIR = require('../src/data/aiReceptionist');
 const WA = require('../src/data/whatsappAutomation');
 const COMP = require('../src/data/compliance');
+// Privacy policy + data deletion (rewritten 2026-11-08 after the Meta Platform Terms audit): same files as
+// src/pages/PrivacyPolicy.js and src/pages/DataDeletion.js, so Meta's checker reads the full text.
+const PRIV = require('../src/data/privacyPolicy');
+const DDEL = require('../src/data/dataDeletion');
 const MC_REFUND = require('../src/data/masterclassRefund');
 // The Full Chair Method information page (owner 2026-10-19): same file as src/pages/MasterclassInfo.js.
 const MC = require('../src/data/masterclass');
@@ -83,7 +87,18 @@ const GR = require('../src/data/googleReviews');
 // Module cards as links to /modules/<id> (home section + "works even better with").
 // `stores`: the home cards also carry the app-store links for the self-serve modules.
 const moduleCardsHtml = (pages, { stores = false } = {}) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}${stores && STORES.isSelfServe(p.id) ? ` ${esc(STORES.START_LINE)}: ${storeLinksHtml(p.short)}` : ''}</li>`).join('\n          ');
-const pairsHtml = (pairs) => `<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('')}</ul>`;
+// Crawler twin of src/components/PolicyBody.js: { p, lead? } / { ul } blocks; [label](href) → link; {CONTACT} → email.
+// A function, not a const: MARKET is declared further down this file.
+const policyContact = () => (MARKET === 'us' ? 'jayesh@aumyai.com' : 'jayesh.chaudhari@aumai.co.in');
+const policyText = (t) => esc(String(t).split('{CONTACT}').join(policyContact()))
+  .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, label, href) => `<a href="${href}">${label}</a>`);
+const policyBlock = (b) => (b.ul
+  ? `<ul>${b.ul.map((it) => `<li>${Array.isArray(it) ? `<strong>${esc(it[0])}</strong> ${policyText(it[1])}` : policyText(it)}</li>`).join('')}</ul>`
+  : `<p>${b.lead ? `<strong>${esc(b.lead)}</strong> ` : ''}${policyText(b.p)}</p>`);
+const policyHtml = (doc) => `<p><strong>Last Updated:</strong> ${esc(doc.LAST_UPDATED)}</p>
+        ${doc.INTRO.map((t) => `<p>${policyText(t)}</p>`).join('')}
+        ${doc.SECTIONS.map((s) => `<h2>${esc(s.title)}</h2>${s.blocks.map(policyBlock).join('')}`).join('\n        ')}`;
+const pairsHtml = (pairs) =>`<ul>${pairs.map(([t, b]) => `<li><strong>${esc(t)}</strong> — ${esc(b)}</li>`).join('')}</ul>`;
 
 const BUILD = path.join(__dirname, '..', 'build');
 // US-market build (REACT_APP_MARKET=us → aumyai.com) prerenders only the US
@@ -1236,15 +1251,32 @@ const routes = [
   },
   {
     slug: 'privacy',
-    title: 'Privacy Policy | AUM AI',
-    description: 'How AUM AI Healthcare Solutions collects, uses and protects personal data across Aumy and aumai.co.in.',
+    title: PRIV.TITLE,
+    description: PRIV.DESCRIPTION,
     canonical: `${ORIGIN}/privacy`,
     content: `
       <section><div class="ch-container ch-narrow">
-        <h1 class="ch-hero-title">Privacy Policy</h1>
-        <p>How AUM AI Healthcare Solutions collects, uses and protects personal data across Aumy and aumai.co.in.</p>
+        <h1 class="ch-hero-title">${esc(PRIV.HEADLINE)}</h1>
+        <p class="ch-hero-sub">${esc(PRIV.SUBTITLE)}</p>
+        ${policyHtml(PRIV)}
+        <h2>${esc(PRIV.CONTACT_HEADING)}</h2>
+        <p>${esc(PRIV.CONTACT_LEAD)}</p>
+        <p><strong>${MARKET === 'us' ? 'AUM AI Healthcare Technology LLC' : 'Aaumai Healthcare Solutions PVT LTD'}</strong><br>Email: <a href="mailto:${policyContact()}">${policyContact()}</a><br>Website: <a href="${ORIGIN}">${ORIGIN}</a></p>
       </div></section>`,
   },
+  // /data-deletion (and its alias /delete-account): the URL given to Meta as the app's data-deletion instructions.
+  ...['data-deletion', 'delete-account'].map((slug) => ({
+    slug,
+    title: DDEL.TITLE,
+    description: DDEL.DESCRIPTION,
+    canonical: `${ORIGIN}/data-deletion`,
+    content: `
+      <section><div class="ch-container ch-narrow">
+        <h1 class="ch-hero-title">${esc(DDEL.HEADLINE)}</h1>
+        <p class="ch-hero-sub">${esc(DDEL.SUBTITLE)}</p>
+        ${policyHtml(DDEL)}
+      </div></section>`,
+  })),
   {
     slug: 'terms',
     title: 'Terms and Conditions | AUM AI',
