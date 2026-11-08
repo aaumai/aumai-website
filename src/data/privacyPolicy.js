@@ -162,7 +162,7 @@ const SECTIONS = [
         ul: [
           ['Clinic data', '(patient records, messages, leads, call recordings, posts and ad data) is kept for as long as the clinic’s Aumy account is active, or as the clinic instructs, and deleted when the clinic asks. We do not delete messages or leads automatically after a fixed period. Clinics must keep medical records for the period the law requires, and that is their decision.'],
           ['Telehealth recordings', 'are deleted automatically after the number of days set for the clinic (90 days unless the clinic changes it).'],
-          ['When a clinic leaves:', 'the clinic can export its data. We then delete or return the clinic’s data within [OWNER TO CONFIRM: number of days; our standard agreement says 30, the data-deletion page said 90] days, except copies the law requires us to keep and backups, which are overwritten in their normal cycle (database backups within 7 days).'],
+          ['When a clinic leaves:', 'the clinic can export its data. We then delete or return the clinic’s data within 30 days, except copies the law requires us to keep and backups, which are overwritten in their normal cycle (database backups within 7 days).'],
           ['Meta and Google access tokens', 'are deleted when the clinic disconnects the account or a Meta deletion request is received (Section 6).'],
           ['Website forms and purchases', 'are kept while we are in touch with you and for our business and tax records. You can ask us to delete them at any time.'],
         ],
@@ -206,7 +206,7 @@ const SECTIONS = [
 ];
 
 const CONTACT_HEADING = '14. Contact';
-const CONTACT_LEAD = 'For questions about this Privacy Policy, or to use your rights under data-protection law, please contact:';
+const CONTACT_LEAD = 'For questions about this Privacy Policy, to use your rights under data-protection law, or to raise a grievance, please contact our Grievance Officer, Jayesh Chaudhari (Founder, AUM AI), who will respond within the time the law requires:';
 
 module.exports = { LAST_UPDATED, TITLE, DESCRIPTION, HEADLINE, SUBTITLE, INTRO, SECTIONS, CONTACT_HEADING, CONTACT_LEAD };
 module.exports.default = module.exports;

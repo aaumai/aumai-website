@@ -69,7 +69,7 @@ const SECTIONS = [
   {
     title: '4. Clinic customers (the whole clinic account)',
     blocks: [
-      { p: 'When a clinic’s service agreement ends, we give the clinic an export of its data on request. We then delete or return the clinic’s data within [OWNER TO CONFIRM: number of days; our standard agreement says 30, this page said 90] days, except where the law requires longer.' },
+      { p: 'When a clinic’s service agreement ends, we give the clinic an export of its data on request. We then delete or return the clinic’s data within 30 days, except where the law requires longer.' },
     ],
   },
   {
