@@ -106,7 +106,7 @@ const SECTIONS = [
           ['Meta Platforms:', 'WhatsApp Business Platform (Cloud API), Facebook, Instagram, Messenger, Lead Ads, Marketing API and Conversions API, as described in Section 6.'],
           ['Razorpay:', 'payments: clinics paying for Aumy, and purchases on our website. We do not see or store full card details.'],
           ['Expo:', 'push notifications to staff phones using the Aumy app.'],
-          ['Email delivery:', '[OWNER TO CONFIRM: name of the email provider used to send account, password and alert emails]. If a clinic connects its own mailbox, Aumy reads and sends that clinic’s email through the clinic’s own email provider.'],
+          ['Email delivery:', 'Google (Gmail, through our Google Workspace account) sends account, password and alert emails. If a clinic connects its own mailbox, Aumy reads and sends that clinic’s email through the clinic’s own email provider.'],
         ],
       },
       { lead: 'AI and your data:', p: 'messages, call audio and transcripts, and the patient and clinic details needed to answer (for example, a patient’s name and upcoming appointments) are sent to the AI provider as they are. We do not remove names or numbers first. Under the terms of AWS Bedrock and Anthropic’s API, they do not use this data to train their models. The Aumy mobile app tells clinic staff about this and asks for their agreement before its AI features are used. Patients who chat with or call a clinic’s AI receptionist are told it is an AI when they ask.' },

@@ -63,7 +63,7 @@ const SECTIONS = [
         ],
       },
       { lead: 'Checking the status:', p: 'Meta shows you the confirmation code and a link to a status page at https://aumy.aumai.co.in/api/v1/whatsapp-automation/meta/data-deletion/status/<confirmation code>. The page shows whether it was a deletion request or an app removal, when we received it and when it was completed. If we held no connection for your login, it says so. It shows no personal data.' },
-      { lead: 'What a Meta request does not cover:', p: 'messages, leads and posts the clinic received through its connected accounts belong to the clinic and stay in its Aumy account (see Section 2). If your connection was made before 8 November 2026, or the status page says we found nothing and you think we hold data from your login, email [{CONTACT}](mailto:{CONTACT}?subject=Meta%20Data%20Deletion) and we will remove it by hand.' },
+      { lead: 'What a Meta request does not cover:', p: 'messages, leads and posts the clinic received through its connected accounts belong to the clinic and stay in its Aumy account (see Section 2). If the status page says we found nothing and you think we still hold data from your login, email [{CONTACT}](mailto:{CONTACT}?subject=Meta%20Data%20Deletion) and we will remove it by hand.' },
     ],
   },
   {
