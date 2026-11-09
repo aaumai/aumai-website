@@ -38,6 +38,14 @@
 .op .op-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15.5px; line-height: 1.5; color: var(--c-ink-soft); }
 .op .op-check { flex: 0 0 auto; margin-top: 3px; color: var(--c-accent-dark); }
 
+/* Your clinic, handled: the whole journey as one ticked list */
+.op .op-handled { list-style: none; max-width: 700px; margin: 36px auto 0; padding: 0; border-top: 1px solid var(--c-line); }
+.op .op-handled li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 4px; border-bottom: 1px solid var(--c-line); font-size: 18px; line-height: 1.5; color: var(--c-ink); }
+.op .op-handled .op-check { margin-top: 5px; }
+.op .op-handled-closing { max-width: 700px; margin: 36px auto 0; text-align: center; font-family: var(--lux-serif, Georgia, serif); font-size: clamp(26px, 3.2vw, 36px); line-height: 1.25; color: var(--c-ink); }
+.op .op-handled-more { margin: 18px 0 0; text-align: center; font-size: 15px; color: var(--c-ink-soft); }
+.op .op-handled-more a { color: var(--c-accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+
 /* Every follow-up, done for you */
 .op .op-fu { list-style: none; margin: 40px 0 0; padding: 0; border-top: 1px solid var(--c-line); }
 .op .op-fu li {
@@ -113,5 +121,6 @@
   .op .op-card { padding: 26px 20px; }
   .op .op-fu li { grid-template-columns: 1fr; gap: 4px; padding: 14px 2px; }
   .op .op-fu-when { font-size: 16px; }
+  .op .op-handled li { font-size: 16.5px; padding: 14px 2px; }
   .op .op-hero-loss { font-size: 17px; }
 }

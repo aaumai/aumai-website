@@ -5,7 +5,7 @@ import ClinicsServed from '../components/ClinicsServed';
 import HeroVideo from '../components/HeroVideo';
 import CapacityLine from '../components/CapacityLine';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
-import { HERO, THREE, FOLLOW_UPS, PROOF, FIT, FINAL, SEO } from '../data/homeOneProduct';
+import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, FINAL, SEO } from '../data/homeOneProduct';
 import './HomeClinic.css';
 import './HomeOneProduct.css';
 
@@ -74,6 +74,21 @@ const Home = () => {
 
       {/* Dental clinics Aumy serves (consented clinics only): src/data/clinicsServed.js */}
       <ClinicsServed />
+
+      {/* END TO END (owner 2026-11-09): the whole patient journey as one ticked list, ads to recall */}
+      <section className="ch-section ch-tint" id="handled" aria-labelledby="op-handled-title">
+        <div className="ch-container ch-narrow">
+          <p className="op-center"><span className="ch-eyebrow">{HANDLED.eyebrow}</span></p>
+          <h2 id="op-handled-title" className="ch-h2 op-center">{HANDLED.title}</h2>
+          <ul className="op-handled">
+            {HANDLED.items.map((t) => <li key={t}><Check /><span>{t}</span></li>)}
+          </ul>
+          <p className="op-handled-closing">{HANDLED.closing}</p>
+          <p className="op-handled-more">
+            {HANDLED.more.text} <Link to={HANDLED.more.to}>{HANDLED.more.label} →</Link>
+          </p>
+        </div>
+      </section>
 
       {/* 2. ONE PRODUCT, FOUR THINGS */}
       <section className="ch-section" id="what-aumy-does" aria-labelledby="op-three-title">

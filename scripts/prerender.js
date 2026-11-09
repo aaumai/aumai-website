@@ -384,7 +384,7 @@ function howWeWorkHtml(eyebrow = HO.HOW.eyebrow, titleA = HO.HOW.titleA, titleB 
 // ---- home (Aumy as ONE product, owner 2026-11-02) ---------------------------
 // Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js.
 function homeContent() {
-  const { HERO, THREE, FOLLOW_UPS, PROOF, FIT, FINAL } = HOME;
+  const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, FINAL } = HOME;
   return `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
@@ -400,6 +400,13 @@ function homeContent() {
       <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Across India</p>
         ${clinicsStripHtml()}
+      </div></section>
+      <section id="handled"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(HANDLED.eyebrow)}</p>
+        <h2>${esc(HANDLED.title)}</h2>
+        <ul>${HANDLED.items.map((t) => '<li>' + esc(t) + '</li>').join('')}</ul>
+        <p><strong>${esc(HANDLED.closing)}</strong></p>
+        <p>${esc(HANDLED.more.text)} <a href="${HANDLED.more.to}">${esc(HANDLED.more.label)}</a></p>
       </div></section>
       <section id="what-aumy-does"><div class="ch-container ch-narrow">
         <h2>${esc(THREE.title)} ${esc(THREE.titleB)}</h2>
