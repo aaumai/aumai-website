@@ -271,12 +271,12 @@ export default function ServicePage({ data: D }) {
         </div>
       </section>
 
-      {/* Works best with Aumy, sold on its own too */}
+      {/* Aumy first: services are for clinics on Aumy (owner 2026-11-09) */}
       <section className="sv-aumy" aria-labelledby={id('aumy')}>
         <div className="ch-container">
           <div className="sv-aumy-inner">
             <div>
-              <span className="ch-eyebrow">With Aumy, or on its own</span>
+              <span className="ch-eyebrow">Aumy comes first</span>
               <h2 id={id('aumy')} className="sv-aumy-title">{D.WITH_AUMY.title}</h2>
               <p>{D.WITH_AUMY.text}</p>
             </div>

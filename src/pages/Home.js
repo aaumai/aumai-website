@@ -75,14 +75,21 @@ const Home = () => {
       {/* Dental clinics Aumy serves (consented clinics only): src/data/clinicsServed.js */}
       <ClinicsServed />
 
-      {/* END TO END (owner 2026-11-09): the whole patient journey as one ticked list, ads to recall */}
+      {/* END TO END, IN TWO STEPS (owner 2026-11-09): first Aumy plugs the leaks, then our team's services,
+          which are for clinics on Aumy */}
       <section className="ch-section ch-tint" id="handled" aria-labelledby="op-handled-title">
         <div className="ch-container ch-narrow">
           <p className="op-center"><span className="ch-eyebrow">{HANDLED.eyebrow}</span></p>
           <h2 id="op-handled-title" className="ch-h2 op-center">{HANDLED.title}</h2>
-          <ul className="op-handled">
-            {HANDLED.items.map((t) => <li key={t}><Check /><span>{t}</span></li>)}
-          </ul>
+          {HANDLED.steps.map((s, i) => (
+            <div key={s.label} className="op-handled-step">
+              <h3 className="op-handled-label"><span className="op-handled-n" aria-hidden="true">{i + 1}</span>{s.label}</h3>
+              <ul className="op-handled">
+                {s.items.map((t) => <li key={t}><Check /><span>{t}</span></li>)}
+              </ul>
+              {s.note && <p className="op-handled-note">{s.note}</p>}
+            </div>
+          ))}
           <p className="op-handled-closing">{HANDLED.closing}</p>
           <p className="op-handled-more">
             {HANDLED.more.text} <Link to={HANDLED.more.to}>{HANDLED.more.label} →</Link>

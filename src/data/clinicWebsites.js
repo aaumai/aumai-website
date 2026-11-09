@@ -24,14 +24,14 @@ const WHATSAPP = { display: '80071 89868', link: 'https://wa.me/918007189868?tex
 const SEO = {
   title: 'Clinic Websites Built for SEO and International Patients | AUM AI',
   description:
-    'Websites for dental and skin clinics, built to bring patients from Google: treatment and area pages, international patient pages, weekly blogs, technical SEO and redirects that keep your rankings. Free website audit.',
+    'Websites for dental clinics, built to bring patients from Google: treatment and area pages, international patient pages, weekly blogs, technical SEO and redirects that keep your rankings. Free website audit.',
 };
 
 const HERO = {
   eyebrow: 'Clinic websites · built for search',
   titleA: 'Clinic websites built to bring patients from search,',
   titleB: 'including international patients',
-  sub: 'For dental and skin clinics. Every treatment, every area you serve and every country your patients fly in from gets its own page, written for the way people search, and launched without losing the Google rankings you already have.',
+  sub: 'For dental clinics that run on Aumy. Every treatment, every area you serve and every country your patients fly in from gets its own page, written for the way people search, and launched without losing the Google rankings you already have.',
   cta: 'Get a website audit',
   trust: 'Free audit. We look at your current site and Search Console, and tell you what is costing you patients.',
   caption: 'sterlingdentalclinic.com · built by AUM AI',
@@ -48,7 +48,7 @@ const PROBLEMS = {
   items: [
     { h: 'Slow', t: 'Cheap shared hosting and heavy themes. The page takes seconds to open on a phone, and the patient goes back to the results.' },
     { h: 'Thin pages', t: 'All treatments on one page, a line each. A patient comparing implants or aligners finds nothing to decide on, and Google finds nothing to rank.' },
-    { h: 'No treatment or area pages', t: 'Patients search “dental implants in Vasant Vihar” or “acne scar treatment near me”. Without a page for that treatment and that area, you are not in the answer.' },
+    { h: 'No treatment or area pages', t: 'Patients search “dental implants in Vasant Vihar” or “root canal treatment near me”. Without a page for that treatment and that area, you are not in the answer.' },
     { h: 'Rankings lost in a redesign', t: 'The new site goes live, the old addresses stop working, and years of Google rankings disappear in a week. It happens on most redesigns.' },
     { h: 'No tracking', t: 'Nobody knows which page brought an enquiry, which country visitors came from, or whether the site is getting better or worse.' },
   ],
@@ -113,9 +113,9 @@ const FAQS = [
   { q: 'Who owns the website?', a: 'Your domain stays yours, and the text, photos and pages made for your clinic are yours. The site is plain static files, so if you ever move on it can be hosted anywhere.' },
   { q: 'Do you host it?', a: 'Yes. We host it on our servers behind Cloudflare, with SSL and daily backups, and we keep it updated. You don’t need to manage any hosting.' },
   { q: 'How long does it take to launch?', a: 'Typically a few weeks, depending mostly on how quickly photos, doctor details and approvals come back. Sterling’s site took about three weeks from the first build to launch.' },
-  { q: 'Does it work with Aumy, or without it?', a: 'Both. With Aumy, every website enquiry lands in the front desk’s queue as a task, so nobody forgets to call back. Without Aumy, enquiries come to your email and WhatsApp.' },
+  { q: 'Do we need Aumy for a website?', a: 'Yes. We build websites only for clinics on Aumy. Every website enquiry lands in your front desk’s list as a task and is followed up until the patient books, so no enquiry the site brings is lost.' },
   { q: 'We already have a website. Will we lose our Google rankings?', a: 'Not if the move is done properly. We list every address your old site has, keep the ones that rank, and redirect the rest with a 301 to the closest new page before the switch. Old blog posts keep their exact addresses.' },
-  { q: 'Is it only for dental clinics?', a: 'No. We build for dental and skin clinics. The method is the same: a page for every treatment, area and country your patients search from.' },
+  { q: 'Is it only for dental clinics?', a: 'Yes. We build for dental clinics, with a page for every treatment, area and country your patients search from.' },
   { q: 'How much does it cost?', a: 'It depends on how many treatments, areas and countries you want to cover, so we quote after the free website audit. WhatsApp 80071 89868 to start.' },
 ];
 
