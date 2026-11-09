@@ -55,7 +55,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: clamp(28px, 5vw, 64px);
+  /* The row break below is a flex item too, so the space between the two rows is twice the row gap. */
+  gap: 22px clamp(28px, 5vw, 64px);
 }
 
 /* Ends the first row after the two Delhi clinics (owner 2026-11-04). */
