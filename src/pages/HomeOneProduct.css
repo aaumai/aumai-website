@@ -159,6 +159,14 @@
 .op .op-handled li:last-child { border-bottom: 0; }
 .op .op-handled .op-check { width: 24px; height: 24px; padding: 5px; margin-top: 1px; border-radius: 50%; background: rgba(184, 151, 90, 0.16); color: var(--lux-bronze, var(--c-accent-dark)); }
 
+/* Two steps (owner 2026-11-09): 1 Aumy plugs the leaks, 2 our team's services for clinics on Aumy. */
+.op .op-handled-step { max-width: 700px; margin: 40px auto 0; }
+.op .op-handled-step + .op-handled-step { margin-top: 34px; }
+.op .op-handled-step .op-handled { margin-top: 16px; }
+.site-lux .op .op-handled-label { display: flex; align-items: center; gap: 12px; margin: 0; font-family: var(--lux-sans, inherit); font-size: 15px; font-weight: 600; line-height: 1.35; letter-spacing: 0.09em; text-transform: uppercase; color: var(--lux-navy-2, var(--c-ink)); }
+.op .op-handled-n { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--lux-navy, var(--c-ink)); color: #fff; font-size: 14px; letter-spacing: 0; }
+.op .op-handled-note { margin: 14px 4px 0; font-size: 15.5px; line-height: 1.5; color: var(--c-ink-soft); }
+
 /* Follow-ups: one card; the last row ("Clinic closed for the night?") closes it in navy. */
 .op .op-fu li { padding: 15px 28px; }
 .op .op-fu li:last-child { border-bottom: 0; }

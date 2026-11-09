@@ -137,19 +137,21 @@ const FIT = {
     'Your Google profile has nobody looking after it every week.',
     'Your website is years old and rarely brings an enquiry.',
     'You want to see, every month, what the work brought.',
+    'Your clinic runs on Aumy, or is starting on it, so every enquiry that search brings is answered.',
   ],
   notFit: 'If you want to be first on Google by next week, we are not the right fit. SEO builds over months, and keeps paying after that.',
 };
 
 const WITH_AUMY = {
   title: 'SEO brings the enquiry. Aumy makes sure it becomes a visit.',
-  text: 'With Aumy, every call, WhatsApp and website enquiry is answered straight away, day or night, and followed up until the patient books. SEO also works on its own: enquiries then come straight to your team.',
+  text: 'With Aumy, every call, WhatsApp and website enquiry is answered straight away, day or night, and followed up until the patient books. That is why we take on SEO only for clinics on Aumy: Aumy goes in first, then the SEO.',
   link: { to: '/revenue-generator', label: 'How Aumy works' },
 };
 
 const FAQS = [
   { q: 'How long before we see results?', a: 'Fixes to your Google profile can show within weeks. Ranking for treatment searches, in India and abroad, usually takes a few months and keeps building after that. Your monthly report shows the change from the day we started.' },
   { q: 'Do we need a new website?', a: 'Not always. The free audit tells you whether your current website can be improved or is holding you back. If you need a new one, we build that too, with a page for every treatment, area and country your patients search from.' },
+  { q: 'Do we need Aumy for SEO?', a: 'Yes. We take on SEO only for clinics on Aumy, so every call, WhatsApp and website enquiry that search brings is answered straight away and followed up until the patient books.' },
   { q: 'Will you post on our Google profile without asking?', a: 'No. Each week’s posts come to you first and go out only after you say yes.' },
   { q: 'Can you promise the first position on Google?', a: 'Nobody honestly can: Google decides. What we promise is the work, every week, and a monthly report that shows what it brought.' },
   { q: 'How much does it cost?', a: 'It depends on how many treatments, areas and countries you want to be found for, so we quote after the free clinic audit. WhatsApp 80071 89868 to start.' },

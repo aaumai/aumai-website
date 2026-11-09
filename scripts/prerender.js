@@ -404,7 +404,7 @@ function homeContent() {
       <section id="handled"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HANDLED.eyebrow)}</p>
         <h2>${esc(HANDLED.title)}</h2>
-        <ul>${HANDLED.items.map((t) => '<li>' + esc(t) + '</li>').join('')}</ul>
+        ${HANDLED.steps.map((s) => '<h3>' + esc(s.label) + '</h3><ul>' + s.items.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul>' + (s.note ? '<p>' + esc(s.note) + '</p>' : '')).join('')}
         <p><strong>${esc(HANDLED.closing)}</strong></p>
         <p>${esc(HANDLED.more.text)} <a href="${HANDLED.more.to}">${esc(HANDLED.more.label)}</a></p>
       </div></section>
@@ -1050,7 +1050,7 @@ const routes = [
         url: `${ORIGIN}${CW.PATH}`,
         provider: { '@id': `${ORIGIN}/#organization` },
         areaServed: { '@type': 'Country', name: 'India' },
-        audience: { '@type': 'BusinessAudience', audienceType: 'Dental and skin clinics' },
+        audience: { '@type': 'BusinessAudience', audienceType: 'Dental clinics' },
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: CW.BUILD.title,

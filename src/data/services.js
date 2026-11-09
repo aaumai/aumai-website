@@ -46,7 +46,8 @@ const HERO = {
   eyebrow: 'For owners of established dental practices',
   title: adsText('Dental ads, dental websites and dental SEO', 'Dental websites and dental SEO'),
   sub: adsText('Patients look for a dentist on Instagram, on Google and on Maps before they ever call.', 'Patients look for a dentist on Google and on Maps before they ever call.') + ' We make sure they find your clinic, like what they see, and get in touch. Each service is run by our team, checked every week, and reported every month against where your clinic started.',
-  note: adsText('Take one service or all three. Each works on its own.', 'Take one service or both. Each works on its own.'),
+  // Services are for clinics on Aumy only (owner 2026-11-09, strategy lock: Aumy first, services second).
+  note: 'For clinics that run on Aumy. Aumy goes in first, so every enquiry these services bring is answered and followed up until it books.',
   indexTitle: adsText('Our three services', 'Our two services'),
 };
 
@@ -169,7 +170,7 @@ const STEPS = {
   eyebrow: 'How it starts',
   title: 'From a call to a report every month',
   items: [
-    { h: 'A call with Jayesh', t: 'A short call on where your clinic loses patients today and which service fits. Or start with a free clinic audit.' },
+    { h: 'A call with Jayesh', t: 'A short call on where your clinic loses patients today. Every clinic starts with Aumy; the call covers which service to add, and when. Or start with a free clinic audit.' },
     { h: 'A plan for your clinic', t: 'The treatments you want more of, the areas they come from, and what we do first. You approve it.' },
     { h: 'We run it, every week', t: adsText('Ads checked, pages improved, Google posts sent to you for a yes, reviews answered.', 'Pages improved, Google posts sent to you for a yes, reviews answered.') },
     { h: 'A report every month', t: 'What changed, against where you started, and what we do next.' },
@@ -177,10 +178,10 @@ const STEPS = {
 };
 
 const FAQS = [
-  { q: 'Can we take just one service?', a: 'Yes. Each service works on its own. Start with the one closest to where your clinic loses patients today; the call with Jayesh helps you choose.' },
+  { q: 'Can we take just one service?', a: adsText('Yes, one or all three, once your clinic runs on Aumy.', 'Yes, one or both, once your clinic runs on Aumy.') + ' Start with the one closest to where your clinic loses patients today; the call with Jayesh helps you choose.' },
   { q: 'Who pays for the ads?', a: 'Your clinic pays Meta and Google directly for the ads. Our fee is separate, and the ad budget is never mixed with it.', ads: true },
   { q: 'Will a new website lose our Google rankings?', a: 'Not when the move is done carefully. Before launch we list every address your old site has, keep it or point it to its new page, and check each one on launch day and in the weeks after.' },
-  { q: 'Do we need Aumy to use these services?', a: 'No. Each service works on its own, and enquiries come straight to your team. With Aumy, every enquiry is also answered straight away and followed up until the patient books.' },
+  { q: 'Do we need Aumy to use these services?', a: adsText('Yes. We run ads, websites and SEO only for clinics on Aumy.', 'Yes. We take on websites and SEO only for clinics on Aumy.') + ' These services bring enquiries, and an enquiry answered late or never followed up is money lost. So Aumy goes in first: every enquiry is answered straight away and followed up until the patient books. The services follow.' },
   { q: 'Can you promise the first position on Google?', a: 'Nobody honestly can: Google decides. What we promise is the work, every week, and a monthly report that shows what it brought.' },
   { q: 'How much does it cost?', a: 'It depends on your clinic and which services you take, so Jayesh gives you the exact figure on a short call.' },
 ].filter((f) => !(HIDE_ADS && f.ads)).map(({ q, a }) => ({ q, a })); // `ads: true` = left out while ads are hidden

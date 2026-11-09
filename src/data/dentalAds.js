@@ -118,7 +118,7 @@ const FIT = {
   items: [
     'You want more patients for a treatment: implants, aligners, braces or smile makeovers.',
     'You have tried ads before and got many leads but few patients.',
-    'You are ready to answer and follow up every enquiry, with Aumy or with your own team.',
+    'Your clinic runs on Aumy, or is starting on it, so every enquiry is answered and followed up.',
     'You want to judge ads by booked visits, not by likes or leads.',
   ],
   notFit: 'If you want the cheapest leads, we are not the right fit. We aim for patients who book.',
@@ -126,14 +126,14 @@ const FIT = {
 
 const WITH_AUMY = {
   title: 'Ads bring the enquiry. Aumy makes sure it becomes a visit.',
-  text: 'With Aumy, every enquiry from an ad is answered straight away, day or night, and followed up until the patient books, and each booked visit is counted against the ad that brought it. Ads also work on their own: enquiries then come straight to your team.',
+  text: 'With Aumy, every enquiry from an ad is answered straight away, day or night, and followed up until the patient books, and each booked visit is counted against the ad that brought it. That is why we run ads only for clinics on Aumy: Aumy goes in first, then the ads.',
   link: { to: '/revenue-generator', label: 'How Aumy works' },
 };
 
 const FAQS = [
   { q: 'How much should we spend on ads?', a: 'It depends on your area and the treatment. We start small, with a budget you choose, and grow it only when the ads bring booked visits. The ad budget is separate from our fee.' },
   { q: 'Meta or Google: which is better for a dental clinic?', a: 'They do different jobs. Google reaches people already searching for a dentist today. Facebook and Instagram reach people nearby before they search, which suits treatments people think about for a while, like implants or aligners. Most clinics do best with both.' },
-  { q: 'Do we need Aumy to run ads with you?', a: 'No. You can take ads on their own, and enquiries come to your team in one list. With Aumy, every enquiry is also answered straight away and followed up until it books, which is where most ad money is otherwise lost.' },
+  { q: 'Do we need Aumy to run ads with you?', a: 'Yes. We run ads only for clinics on Aumy. Most ad money is lost after the click, when an enquiry is answered late or never followed up. With Aumy in first, every enquiry is answered straight away and followed up until it books, and each booked visit is counted against the ad that brought it.' },
   { q: 'How do you know an ad brought a patient?', a: 'Every enquiry is marked with the ad it came from and followed through to the booked visit. You see booked visits for each ad, not just leads.' },
   { q: 'How much does it cost?', a: 'It depends on the treatments and the number of ads, so we quote after the free clinic audit. WhatsApp 80071 89868 to start.' },
 ];

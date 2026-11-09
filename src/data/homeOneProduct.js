@@ -28,25 +28,37 @@ const { HIDE_ADS, adsText } = require('./visibility');
 const AUDIT = { label: 'Show me where my clinic loses patients', to: '/growth-audit' };
 
 // "Your clinic, handled." (owner 2026-11-09: his checklist, on the home page "so clinic sees it and they know
-// we do end to end"; wording agreed the same day). The whole patient journey in one list, in the order a
-// patient lives it. Rules: say what we run, never what we guarantee (no patient numbers, no ranking promise);
-// the closing line is the owner's own, word for word. The first two lines are services our team runs
-// (/services), the rest is Aumy; the ads line is left out while ads are hidden.
+// we do end to end"). Strategy lock the same day ("Aumy first, services second"): the list is two steps, in
+// the order we work with a clinic. Step 1 is Aumy, the way every clinic starts. Step 2 is what our team runs
+// (/services), only for clinics on Aumy. Rules: say what we run, never what we guarantee (no patient numbers,
+// no ranking promise); the closing line is the owner's own, word for word; the ads line is left out while ads
+// are hidden.
 const HANDLED = {
-  eyebrow: adsText('From the first ad to the recall visit', 'From the first enquiry to the recall visit'),
+  eyebrow: 'First the leaks, then the growth',
   title: 'Your clinic, handled.',
-  items: [
-    { ads: true, t: 'New patients from ads, with campaigns run and measured for you' },
-    { t: 'Found on Google and in AI search, with your profile, website and reviews looked after' },
-    { t: 'Every call and WhatsApp answered, even after hours, and booked into your calendar' },
-    { t: 'Appointments confirmed, moved or cancelled when patients ask' },
-    { t: 'Missed visits rebooked' },
-    { t: 'Advised treatment followed up until it’s started' },
-    { t: 'Recalls and follow-up visits booked' },
-  ].filter((it) => !(HIDE_ADS && it.ads)).map((it) => it.t),
+  steps: [
+    {
+      label: 'First, Aumy plugs the leaks',
+      items: [
+        'Every call and WhatsApp answered, even after hours, and booked into your calendar',
+        'Appointments confirmed, moved or cancelled when patients ask',
+        'Missed visits rebooked',
+        'Advised treatment followed up until it’s started',
+        'Recalls and follow-up visits booked',
+      ],
+    },
+    {
+      label: adsText('Then our team runs your ads and Google', 'Then our team looks after Google'),
+      note: 'For clinics on Aumy, so every new enquiry is answered and followed up.',
+      items: [
+        { ads: true, t: 'New patients from ads, with campaigns run and measured for you' },
+        { t: 'Found on Google and in AI search, with your profile, website and reviews looked after' },
+      ].filter((it) => !(HIDE_ADS && it.ads)).map((it) => it.t),
+    },
+  ],
   closing: 'You take care of your patients. We help you grow your clinic.',
   more: {
-    text: adsText('Ads and Google are run for you by our team.', 'Google is looked after for you by our team.'),
+    text: adsText('How our team runs ads, websites and Google:', 'How our team runs websites and Google:'),
     label: 'See our services',
     to: '/services',
   },
