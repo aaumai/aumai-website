@@ -17,8 +17,11 @@
  * The growth article on Meta ads and the US Business Manager pages are not affected.
  *
  * `module.exports` on purpose: the prerender and seo-files scripts are plain Node.
+ *
+ * Shown again (owner 2026-11-09: unhide, with the "Your clinic, handled." list on the home page,
+ * src/data/homeOneProduct.js HANDLED, whose ads line also follows this switch).
  */
-const HIDE_ADS = true;
+const HIDE_ADS = false;
 
 // The /dental-ads page follows the one switch.
 const HIDE_DENTAL_ADS_PAGE = HIDE_ADS;

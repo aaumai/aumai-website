@@ -21,8 +21,36 @@
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
  */
 
+// The ads line of HANDLED follows the one ads switch (src/data/visibility.js).
+const { HIDE_ADS, adsText } = require('./visibility');
+
 // The one next step: the free clinic audit form. First-person, outcome-led label (reviewer, 2026-11-02).
 const AUDIT = { label: 'Show me where my clinic loses patients', to: '/growth-audit' };
+
+// "Your clinic, handled." (owner 2026-11-09: his checklist, on the home page "so clinic sees it and they know
+// we do end to end"; wording agreed the same day). The whole patient journey in one list, in the order a
+// patient lives it. Rules: say what we run, never what we guarantee (no patient numbers, no ranking promise);
+// the closing line is the owner's own, word for word. The first two lines are services our team runs
+// (/services), the rest is Aumy; the ads line is left out while ads are hidden.
+const HANDLED = {
+  eyebrow: adsText('From the first ad to the recall visit', 'From the first enquiry to the recall visit'),
+  title: 'Your clinic, handled.',
+  items: [
+    { ads: true, t: 'New patients from ads, with campaigns run and measured for you' },
+    { t: 'Found on Google and in AI search, with your profile, website and reviews looked after' },
+    { t: 'Every call and WhatsApp answered, even after hours, and booked into your calendar' },
+    { t: 'Appointments confirmed, moved or cancelled when patients ask' },
+    { t: 'Missed visits rebooked' },
+    { t: 'Advised treatment followed up until it’s started' },
+    { t: 'Recalls and follow-up visits booked' },
+  ].filter((it) => !(HIDE_ADS && it.ads)).map((it) => it.t),
+  closing: 'You take care of your patients. We help you grow your clinic.',
+  more: {
+    text: adsText('Ads and Google are run for you by our team.', 'Google is looked after for you by our team.'),
+    label: 'See our services',
+    to: '/services',
+  },
+};
 
 const HERO = {
   eyebrow: 'For owners of established dental practices',
@@ -143,4 +171,4 @@ const ORG_DESCRIPTION =
 const PRODUCT_DESCRIPTION =
   'Aumy is one product for dental clinics in India: an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
 
-module.exports = { AUDIT, HERO, THREE, FOLLOW_UPS, PROOF, FIT, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
+module.exports = { AUDIT, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
