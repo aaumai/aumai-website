@@ -713,3 +713,11 @@
 /* Lean home closing band (owner 2026-10-12): explore links light on the dark band. */
 .site-lux .ch-home .ch-offer .ch-explore a:not(.ch-btn) { color: rgba(255, 255, 255, 0.78); text-decoration: none; }
 .site-lux .ch-home .ch-offer .ch-explore a:not(.ch-btn):hover { color: var(--lux-gold-2); text-decoration: underline; }
+
+/* ── Free clinic audit (/growth-audit), premium polish (owner 2026-11-09). Looks only. ──────────────
+   The headline ran to six lines beside the form; the form is the page's one job, so it gets the card. */
+.site-lux .ch-audit-hero .ch-hero-title { font-size: clamp(34px, 3.5vw, 50px); line-height: 1.12; }
+.site-lux .ch-audit-hero .ch-audit-form {
+  border-top: 2px solid var(--lux-gold);
+  box-shadow: 0 24px 60px rgba(10, 15, 34, 0.1);
+}

@@ -124,3 +124,57 @@
   .op .op-handled li { font-size: 16.5px; padding: 14px 2px; }
   .op .op-hero-loss { font-size: 17px; }
 }
+
+/* ── Premium polish (owner 2026-11-09). Looks only: no words change. ───────────────────────────── */
+
+/* Hero: the question was dark ink on the navy hero (unreadable). Now a serif pull-quote with a gold rule. */
+.site-lux .op .lux-hero .op-hero-question {
+  margin: 16px 0 32px; padding-left: 18px; border-left: 2px solid var(--lux-gold);
+  font-family: var(--lux-serif); font-size: 21px; line-height: 1.45; color: rgba(255, 255, 255, 0.9); opacity: 1;
+}
+
+/* Hero film: a little larger, with a fine gold frame set off from the picture. */
+.site-lux .op .lux-hero .ch-hero-film--vertical {
+  max-width: 372px;
+  outline: 1px solid rgba(220, 197, 148, 0.5); outline-offset: 12px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* Cards and lists sit on white, under one gold hairline, with a soft shadow. */
+.op .op-card, .op .op-handled, .op .op-fu {
+  background: #fff; border: 1px solid var(--lux-line, var(--c-line)); border-top: 2px solid var(--lux-gold, var(--c-accent));
+  box-shadow: 0 18px 44px rgba(10, 15, 34, 0.06);
+}
+.op .op-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+.op .op-card:hover { transform: translateY(-4px); box-shadow: 0 26px 60px rgba(10, 15, 34, 0.12); }
+.op .op-icon { border-radius: 50%; background: rgba(184, 151, 90, 0.14); color: var(--lux-navy-2, var(--c-ink)); }
+
+/* Three cards in one row on wide screens (was two and an orphan). */
+@media (min-width: 1100px) { .op .op-three { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 921px) and (max-width: 1099px) { .op .op-three .op-card:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+
+/* "Your clinic, handled.": ticks in a gold disc, rows inside the card. */
+.op .op-handled { padding: 4px 30px; }
+.op .op-handled li { padding: 17px 0; }
+.op .op-handled li:last-child { border-bottom: 0; }
+.op .op-handled .op-check { width: 24px; height: 24px; padding: 5px; margin-top: 1px; border-radius: 50%; background: rgba(184, 151, 90, 0.16); color: var(--lux-bronze, var(--c-accent-dark)); }
+
+/* Follow-ups: one card; the last row ("Clinic closed for the night?") closes it in navy. */
+.op .op-fu li { padding: 15px 28px; }
+.op .op-fu li:last-child { border-bottom: 0; }
+.op .op-fu li:not(.op-fu-closer):hover { background: var(--lux-ivory, #faf8f4); }
+.site-lux .op .op-fu .op-fu-closer { background: var(--lux-navy); }
+.site-lux .op .op-fu .op-fu-closer .op-fu-when { color: #fff; }
+.site-lux .op .op-fu .op-fu-closer .op-fu-done { color: var(--lux-gold-2); }
+
+@media (max-width: 600px) {
+  .site-lux .op .lux-hero .op-hero-question { font-size: 19px; margin: 12px 0 30px; }
+  .site-lux .op .lux-hero .ch-hero-film--vertical { outline-offset: 8px; }
+  .op .op-handled { padding: 2px 18px; }
+  .op .op-handled li { padding: 14px 0; }
+  .op .op-fu li { padding: 14px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .op .op-card { transition: none; } .op .op-card:hover { transform: none; } }
+
+/* How it works (/revenue-generator): the part cards match the home cards. */
+.op .hw-part { background: #fff; border: 1px solid var(--lux-line, var(--c-line)); border-top: 2px solid var(--lux-gold, var(--c-accent)); box-shadow: 0 18px 44px rgba(10, 15, 34, 0.06); }

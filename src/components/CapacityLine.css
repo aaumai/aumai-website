@@ -1,3 +1,7 @@
 .cap-line { margin: 14px 0 0; max-width: 560px; font-size: 14px; line-height: 1.55; color: #4b5563; }
 .cap-line strong { color: #14213d; font-weight: 600; }
 .ch-center .cap-line, .ch-center-cta + .cap-line { margin-left: auto; margin-right: auto; text-align: center; }
+
+/* On the navy bands (home hero, closing call to action) the line was dark grey on navy: unreadable (9 Nov 2026). */
+.site-lux .ch-home .lux-hero .cap-line, .site-lux .ch-home .ch-offer .cap-line { color: rgba(255, 255, 255, 0.72); }
+.site-lux .ch-home .lux-hero .cap-line strong, .site-lux .ch-home .ch-offer .cap-line strong { color: var(--lux-gold-2); }
