@@ -110,6 +110,15 @@ const clinicsServed = [
     logo: '/logos/clinics/vinaykia.png',
     consent: true, // cleared by Jayesh 2026-09-20
   },
+  {
+    // New client 2026-11-10. Their full name; the wordmark itself reads "SmilesIndia / Family Dentistry".
+    name: 'Smiles India Family Dentistry',
+    city: 'Chennai',
+    // Their site only carries a 175x48 PNG, too small for this strip, so this is a faithful vector redraw of it: same
+    // wordmark (Segoe UI Semibold + Light, outlined), same colours (#6CB33F green, #005DAA blue, grey line), transparent.
+    logo: '/logos/clinics/smiles-india.svg',
+    consent: true, // cleared by Jayesh 2026-11-10 (asked for them on the strip) — back it with the permission email / MSA clause
+  },
 ];
 
 /** Only these are ever rendered. */
