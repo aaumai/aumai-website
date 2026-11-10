@@ -158,10 +158,10 @@ const WORK = {
       text: 'We built vinaykiadentalcare.com and run its local SEO for root canal and aligners: two Google profile posts a week, review requests, and a monthly report measured against the baseline we took before launch.',
     },
     {
-      name: 'Our own ads, every day',
-      place: 'Facebook and Instagram',
+      name: 'The Sterling Dental Clinic',
+      place: 'Vasant Vihar, New Delhi',
       tag: 'Dental ads',
-      text: 'We run Aumy’s own Meta ads to dental clinic owners and review them every morning: what to stop, what to try next and where to move the budget. AUM AI is a Meta Tech Provider.',
+      text: 'We run Sterling’s Meta ads on Facebook and Instagram and review them every morning: what to stop, what to try next and where to move the budget. AUM AI is a Meta Tech Provider.',
     },
   ].filter((c) => !(HIDE_ADS && c.tag === 'Dental ads')),
 };
