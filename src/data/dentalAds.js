@@ -77,10 +77,10 @@ const POINTS = {
 
 const WORK = {
   eyebrow: 'Why clinics trust us with ads',
-  title: 'We do this for ourselves first',
-  intro: 'We don’t publish other clinics’ ad results. Here is what we can show you.',
+  title: 'Dental clinics we run ads for',
+  intro: 'We don’t publish a clinic’s ad results until a monthly report has measured them. Here is what we can show you.',
   cases: [
-    { name: 'We run our own ads every day', tag: 'Facebook and Instagram', text: 'Aumy’s own Meta ads run every day and are reviewed every morning: what to stop, what to try next, where to move the budget.' },
+    { name: 'The Sterling Dental Clinic', place: 'Vasant Vihar, New Delhi', tag: 'Facebook and Instagram', text: 'We run Sterling’s Meta ads and review them every morning: what to stop, what to try next and where to move the budget.' },
     { name: 'Ad enquiries go straight into Aumy', tag: 'Meta Tech Provider', text: 'AUM AI is a Meta Tech Provider, so Facebook, Instagram and WhatsApp enquiries arrive in Aumy and land in your front desk’s list the moment they come in.' },
     { name: 'We wrote the guide on it', tag: 'Growth Hub', text: 'Why ad leads don’t become patients, and the one number to judge ads by, explained for dental clinic owners.', link: { href: ARTICLE.href, label: 'Read the guide', internal: true } },
   ],
