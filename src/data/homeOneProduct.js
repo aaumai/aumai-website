@@ -48,10 +48,10 @@ const HANDLED = {
       ],
     },
     {
-      label: adsText('Then our team runs your ads and Google', 'Then our team looks after Google'),
+      label: adsText('Then our team runs your implant ads and Google', 'Then our team looks after Google'),
       note: 'For clinics on Aumy, so every new enquiry is answered and followed up.',
       items: [
-        { ads: true, t: 'New patients from ads, with campaigns run and measured for you' },
+        { ads: true, t: 'Implant patients from ads, from across India and abroad, with campaigns run and measured for you' },
         { t: 'Found on Google and in AI search, with your profile, website and reviews looked after' },
       ].filter((it) => !(HIDE_ADS && it.ads)).map((it) => it.t),
     },

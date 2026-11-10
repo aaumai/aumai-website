@@ -35,16 +35,16 @@ const CTA = {
 };
 
 const SEO = {
-  title: adsText('Dental Ads, Dental Websites and Dental SEO | AUM AI', 'Dental Websites and Dental SEO | AUM AI'),
+  title: adsText('Dental Implant Ads, Dental Websites and Dental SEO | AUM AI', 'Dental Websites and Dental SEO | AUM AI'),
   description: adsText(
-    'Three services for established dental clinics in India: Meta and Google ads that bring implant, aligner and root canal enquiries, fast dental websites that keep your rankings, and dental SEO with your Google Business Profile looked after.',
+    'Three services for established dental clinics in India: implant ads on Meta and Google that bring implant patients from across India and abroad, fast dental websites that keep your rankings, and dental SEO with your Google Business Profile looked after.',
     'Two services for established dental clinics in India: fast dental websites that keep your rankings, and dental SEO with your Google Business Profile looked after.',
   ),
 };
 
 const HERO = {
   eyebrow: 'For owners of established dental practices',
-  title: adsText('Dental ads, dental websites and dental SEO', 'Dental websites and dental SEO'),
+  title: adsText('Dental implant ads, dental websites and dental SEO', 'Dental websites and dental SEO'),
   sub: adsText('Patients look for a dentist on Instagram, on Google and on Maps before they ever call.', 'Patients look for a dentist on Google and on Maps before they ever call.') + ' We make sure they find your clinic, like what they see, and get in touch. Each service is run by our team, checked every week, and reported every month against where your clinic started.',
   // Services are for clinics on Aumy only (owner 2026-11-09, strategy lock: Aumy first, services second).
   note: 'For clinics that run on Aumy. Aumy goes in first, so every enquiry these services bring is answered and followed up until it books.',
@@ -55,15 +55,16 @@ const ALL_SERVICES = [
   {
     id: 'dental-ads',
     n: '01',
-    name: 'Dental ads',
-    title: 'Dental ads that end in a booked visit',
-    short: 'Meta and Google ads for implants, aligners and root canal treatment',
+    name: 'Implant ads',
+    title: 'Implant ads that end in a booked consultation',
+    short: 'Meta and Google ads for dental implants, for patients from across India and abroad',
     problem:
       'Most clinics that run ads get plenty of leads and very few patients. The money is lost after the click: enquiries answered the next morning, never followed up, and ads judged by cheap leads instead of booked visits.',
     does: [
-      'Facebook, Instagram and Google ads for the treatments you want more of: implants, aligners and root canal treatment.',
-      'A landing page for each ad, about that one treatment, with call and WhatsApp one tap away.',
-      'Every enquiry answered and followed up on WhatsApp until the patient books or says no (with Aumy).',
+      'Facebook, Instagram and Google ads for one treatment only: dental implants. Implant ads are all we run.',
+      'Implant patients from near your clinic, from across India, and from abroad: NRIs and international patients coming for dental treatment.',
+      'A landing page for each ad, about implants, with call and WhatsApp one tap away.',
+      'Every enquiry answered and followed up on WhatsApp, in any time zone, until the patient books or says no (with Aumy).',
       'Ads made from your own clinic’s photos and videos, in plain words and in your clinic’s name.',
       'A review every week: the budget moves to the ads that bring booked visits, the rest are stopped, and new ones are tried.',
     ],
@@ -72,10 +73,10 @@ const ALL_SERVICES = [
       'Every enquiry in one list, with who answered it and what happened next.',
       'Your clinic pays Meta and Google directly for the ads. The ad budget is never mixed with our fee.',
     ],
-    measured: 'Judged by one number: visits booked from the ads.',
+    measured: 'Judged by one number: implant consultations booked from the ads.',
     // No link while the /dental-ads page is hidden (owner 2026-11-06, src/data/visibility.js).
-    link: showLink('/dental-ads') ? { to: '/dental-ads', label: 'More on dental ads' } : null,
-    schema: { name: 'Dental ads: Meta and Google ads for dental clinics', serviceType: 'Online advertising for dental clinics (Meta and Google ads)' },
+    link: showLink('/dental-ads') ? { to: '/dental-ads', label: 'More on implant ads' } : null,
+    schema: { name: 'Dental implant ads: Meta and Google ads for implant patients in India and from abroad', serviceType: 'Online advertising for dental implant clinics (Meta and Google ads)' },
   },
   {
     id: 'dental-websites',
@@ -161,7 +162,7 @@ const WORK = {
       name: 'The Sterling Dental Clinic',
       place: 'Vasant Vihar, New Delhi',
       tag: 'Dental ads',
-      text: 'We run Sterling’s Meta ads on Facebook and Instagram and review them every morning: what to stop, what to try next and where to move the budget. AUM AI is a Meta Tech Provider.',
+      text: 'We run Sterling’s Meta ads for dental implants on Facebook and Instagram and review them every morning: what to stop, what to try next and where to move the budget. AUM AI is a Meta Tech Provider.',
     },
   ].filter((c) => !(HIDE_ADS && c.tag === 'Dental ads')),
 };
@@ -187,7 +188,7 @@ const FAQS = [
 ].filter((f) => !(HIDE_ADS && f.ads)).map(({ q, a }) => ({ q, a })); // `ads: true` = left out while ads are hidden
 
 const FINAL = {
-  eyebrow: adsText('Dental ads, websites and SEO by AUM AI', 'Dental websites and SEO by AUM AI'),
+  eyebrow: adsText('Dental implant ads, websites and SEO by AUM AI', 'Dental websites and SEO by AUM AI'),
   title: 'Tell us where your clinic loses patients today.',
   text: 'A short call with Jayesh: which service fits your clinic, what it involves and what it costs.',
 };

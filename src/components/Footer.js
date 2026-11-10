@@ -14,7 +14,7 @@ const SERVICES = [
   { label: 'Managed Follow-Ups', path: '/managed-follow-ups' },
   { label: 'Dental SEO', path: '/dental-seo' },
   { label: 'Dental Websites', path: '/clinic-websites' },
-  { label: 'Dental Ads (Meta & Google)', path: '/dental-ads' },
+  { label: 'Dental Implant Ads', path: '/dental-ads' },
 ].filter((l) => VIS.showLink(l.path)); // a hidden page (src/data/visibility.js) gets no link
 
 const Footer = () => {

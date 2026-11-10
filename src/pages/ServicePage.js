@@ -44,7 +44,7 @@ const SIBLINGS = [
   { to: '/managed-follow-ups', label: 'Managed follow-ups' },
   { to: '/dental-seo', label: 'Dental SEO' },
   { to: '/clinic-websites', label: 'Dental websites' },
-  { to: '/dental-ads', label: 'Dental ads (Meta & Google)' },
+  { to: '/dental-ads', label: 'Dental implant ads' },
   { to: '/revenue-generator', label: 'Aumy, our main product' },
 ].filter((l) => VIS.showLink(l.to)); // a hidden page (src/data/visibility.js) gets no link
 
