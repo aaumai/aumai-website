@@ -133,11 +133,11 @@ const SITE_LINKS = `<nav aria-label="Aumy"><ul>${[
   ['/growth', 'Growth Hub'],
   ['/masterclass', 'The Full Chair Method masterclass'],
   // Product & services (owner 2026-10-23, managed follow-ups 2026-10-26): the services, as in the header.
-  ['/services', VIS.adsText('Services: dental ads, dental websites and dental SEO', 'Services: dental websites and dental SEO')],
+  ['/services', VIS.adsText('Services: dental implant ads, dental websites and dental SEO', 'Services: dental websites and dental SEO')],
   ['/managed-follow-ups', 'Managed patient follow-ups'],
   ['/dental-seo', 'Dental SEO for international patients'],
   ['/clinic-websites', 'Dental websites built for SEO'],
-  ['/dental-ads', 'Dental ads (Meta & Google)'],
+  ['/dental-ads', 'Dental implant ads (India & dental tourism)'],
   ['/compliance', 'Security & compliance'],
   ['/about', 'About the founder'],
   ['/contact', 'Contact'],
@@ -525,7 +525,7 @@ function serviceRoute(D) {
         <p><a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a> · <a href="/growth-audit">Free clinic audit</a></p>
         <h2>${esc(D.FINAL.title)}</h2>
         <p>${esc(D.FINAL.text)}</p>
-        <p>Also from AUM AI: <a href="/services">All services</a> · <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a>${VIS.showLink('/dental-ads') ? ' · <a href="/dental-ads">Dental ads (Meta &amp; Google)</a>' : ''} · <a href="/revenue-generator">Aumy, our main product</a></p>
+        <p>Also from AUM AI: <a href="/services">All services</a> · <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a>${VIS.showLink('/dental-ads') ? ' · <a href="/dental-ads">Dental implant ads</a>' : ''} · <a href="/revenue-generator">Aumy, our main product</a></p>
       </div></section>`,
   };
 }
