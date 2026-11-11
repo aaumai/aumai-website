@@ -46,72 +46,88 @@
   max-width: 56ch;
 }
 
-/* ── logo state (renders only for clinics that have given permission) ───── */
+/* ── logo state (renders only for clinics that have given permission) ─────
+   Owner 2026-11-11: "the logos are not of the same size and not equally and well spaced"; Sterling and Omlesh sat
+   closer together than the rest. So this is ONE grid:
+     - every column the same width, every gap the same, on every row (row 1's Delhi pair uses the same columns as
+       row 2, it is not a separate centred flex row);
+     - every logo in the SAME fixed-size box (2:1), contained and centred, so no logo is bigger than another because
+       of its file — the files themselves are trimmed to their artwork (no built-in margins);
+     - captions in the area under the box, top-aligned, so a long caption (Dental Planet's branches) never moves a
+       logo; rows keep their natural height (equal-height rows left a big hole under every short caption on a phone).
+   A logo that still reads heavier or lighter than its neighbours gets `scale` in data/clinicsServed.js — never a
+   one-off rule here. Desktop and tablet: 4 columns. Phone: 2 columns. */
 .cs-logos {
+  --cs-cols: 4;
+  --cs-col-max: 210px;
+  --cs-gap-x: clamp(24px, 4vw, 56px);
+  --cs-gap-y: clamp(28px, 3.4vw, 40px);
   list-style: none;
-  margin: 30px 0 0;
+  margin: clamp(30px, 4vw, 44px) 0 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(var(--cs-cols), minmax(0, var(--cs-col-max)));
   justify-content: center;
-  align-items: flex-start;
-  /* The row break below is a flex item too, so the space between the two rows is twice the row gap. */
-  gap: 22px clamp(28px, 5vw, 64px);
+  gap: var(--cs-gap-y) var(--cs-gap-x);
 }
 
-/* Ends the first row after the two Delhi clinics (owner 2026-11-04). */
-.cs-break {
-  flex-basis: 100%;
-  height: 0;
-  margin: 0;
-  padding: 0;
-}
+/* Row 1 = the two Delhi clinics in the two middle columns; the third clinic starts row 2 (owner 2026-11-04). */
+.cs-logo--row1 { grid-column-start: 2; }
+.cs-logo--row2 { grid-column-start: 1; }
 
 .cs-logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  max-width: 200px;
+  min-width: 0;
 }
 
-/* Clinic logos arrive in wildly different weights and colours. Cap the HEIGHT
-   rather than the width so a wordmark and a round crest read as the same size.
-   Barely muted: the section exists to be believed, and the palest mark in the
-   row (a light silver wordmark) drops below legible if these are dimmed the way
-   a long logo wall would be. Three real names earn full strength. */
-.cs-logo img {
-  height: clamp(46px, 6vw, 68px);
-  width: auto;
-  max-width: 100%;
+/* The one box every logo sits in. Its content is positioned against the box itself, so the box's size comes from
+   the column width alone and never from the logo file. */
+.cs-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+}
+
+.cs-box > * {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100% * var(--cs-scale, 1));
+  height: calc(100% * var(--cs-scale, 1));
+  transform: translate(-50%, -50%);
+}
+
+/* Barely muted: the section exists to be believed, and the palest mark (a light silver wordmark) drops below
+   legible if these are dimmed the way a long logo wall would be. */
+.cs-box img {
+  display: block;
   object-fit: contain;
+  object-position: center;
   opacity: 0.95;
   transition: opacity 0.2s ease;
 }
 
 .cs-logo:hover img { opacity: 1; }
 
-/* Stacked wordmarks (several lines of type) lose far more to a height cap than
-   a horizontal mark does — matched on height alone their letters come out
-   visibly smaller than a monogram's. Opt-in via `tall` in the data, so the row
-   is matched by OPTICAL weight rather than by bounding box. */
-.cs-logo--tall img { height: clamp(62px, 8vw, 92px); }
-
-/* A logo that is a MONOGRAM carries no name, so the name is set in type
-   directly beneath it — inside the same fixed slot, which is why the mark is
-   capped smaller here: mark + name together must still fit the 92px the other
-   clinics' artwork uses alone, or this column's city label would drop out of
-   line with the rest of the row. */
+/* A MONOGRAM logo (Dental Planet) carries no name: mark + name share the same box. */
 .cs-markstack {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 6%;
 }
 
-.cs-logo--named img { height: clamp(34px, 4.4vw, 48px); }
+.cs-markstack img {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+}
 
 .cs-wordmark {
+  flex: none;
   font-size: clamp(13px, 1.5vw, 15px);
   font-weight: 800;
   line-height: 1.2;
@@ -120,32 +136,12 @@
   white-space: nowrap;
 }
 
-/* ── nameplate state (consented clinic, logo file not supplied yet) ──────
-   Sized to sit on the same optical line as the logos beside it: matched to the
-   capped logo height so the row keeps one baseline, and set in the page's own
-   ink rather than a grey, so it reads as a considered wordmark instead of a
-   placeholder where an image failed. */
-/* One slot height for every mark, tall enough for the tallest (the stacked
-   wordmark), so all four city labels sit on a single baseline no matter how
-   different the artwork above them is. */
-.cs-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: clamp(62px, 8vw, 92px);
-}
-
-.cs-logo--text {
-  justify-content: center;
-}
-
-/* Weight sits deliberately BELOW the logos beside it. This is the fallback
-   state, and set any heavier the clinic we have no artwork for shouts louder
-   than the two we do — the row would read as if the plainest name mattered
-   most. Same height box, so all three share one baseline. */
+/* Nameplate (consented clinic, logo file not supplied yet): the clinic's name set in type inside the same box.
+   Weight sits deliberately below the logos beside it, so the plainest name never shouts loudest. */
 .cs-name {
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: clamp(14px, 1.6vw, 16px);
   font-weight: 700;
   line-height: 1.25;
@@ -156,39 +152,62 @@
   opacity: 0.78;
 }
 
-.cs-city {
-  font-size: 12.5px;
-  letter-spacing: 0.04em;
-  color: var(--c-ink-soft, #55636e);
+/* Under the box, top-aligned: every city label sits the same distance below its logo box. */
+.cs-caption {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
 }
 
-/* The principal dentist. Set in ink rather than the soft grey — for a clinic
-   whose owner is a recognised name, that name IS the credential, so it reads a
-   step above the location detail under it without competing with the logo. */
+/* A long city line (Dental Planet: "Chain of clinics · Hyderabad") breaks only between its parts, never mid-part
+   and never with a "·" starting a line. */
+.cs-city-part { white-space: nowrap; }
+
+.cs-city {
+  font-size: 12.5px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--c-ink-soft, #55636e);
+  text-wrap: balance;
+}
+
+/* The principal dentist. Set in ink rather than the soft grey — for a clinic whose owner is a recognised name,
+   that name IS the credential, so it reads a step above the location detail under it. */
 .cs-lead {
   margin-top: 4px;
   font-size: 13px;
   font-weight: 650;
+  line-height: 1.35;
   letter-spacing: -0.005em;
   color: var(--c-ink, #16324f);
   opacity: 0.88;
 }
 
-/* Branch names for a multi-location group. Quietest line in the cell, so the
-   hierarchy stays logo → principal → city → branches and the row still scans
-   as one clinic per column rather than a wall of place names. Wide enough for
-   five names to break over two tidy lines. */
+/* Branch names for a multi-location group. Quietest line in the cell, so the hierarchy stays
+   logo → principal → city → branches. */
 .cs-branches {
-  margin-top: -2px;
   font-size: 11.5px;
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--c-ink-soft, #55636e);
   opacity: 0.72;
-  max-width: 230px;
   text-wrap: balance;
 }
 
+/* Phone: 2 columns, same box shape, same gaps; the Delhi pair is simply the first row. */
+@media (max-width: 600px) {
+  .cs-logos {
+    --cs-cols: 2;
+    --cs-col-max: 200px;
+    --cs-gap-x: 20px;
+    --cs-gap-y: 28px;
+  }
+  .cs-logo--row1 { grid-column-start: auto; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .cs-logo img { transition: none; }
+  .cs-box img { transition: none; }
 }
