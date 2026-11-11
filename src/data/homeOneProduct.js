@@ -187,6 +187,11 @@ const START = {
       body: 'Simple and clear, at the desk and on the phone too.',
     },
   ],
+  // Owner 2026-11-11: "Experience the transformation in a month". An invitation, not a promised result.
+  closing: {
+    title: 'Experience the transformation in a month.',
+    line: 'Live in a week, and by the end of the first month your front desk runs on Aumy.',
+  },
 };
 const FINAL = {
   title: 'See where your clinic is losing patients.',
