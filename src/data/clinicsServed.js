@@ -33,7 +33,13 @@
 
 // 🚨 OWNER RULE (2026-11-04): once this list has MORE THAN 10 unique clinics, the homepage strip switches from these
 // static rows (today: the two Delhi clinics on row 1, the rest on row 2) to a scrolling logo marquee. Build that switch
-// when you add the 11th clinic. Every clinic shows its city only (no area), the same format for all.
+// when you add the 11th clinic.
+//
+// 🚨 OWNER RULE (2026-11-11, replaces "city only"): every clinic shows LOCALITY + CITY ("Vasant Vihar, Delhi"), large and
+// clear: visitors recognise the place before the brand ("my neighbour's clinic runs on it"). The locality is the
+// neighbourhood people know, never a street, and it comes ONLY from the clinic's own record (its facility address in
+// Aumy, else its own website / Google listing). Never guess one: if it can't be confirmed, leave `locality` out and the
+// strip shows the city alone.
 //
 // LOGOS (owner 2026-11-11, "not of the same size and not equally spaced"): every logo sits in the SAME fixed 2:1 box
 // on the strip, contained and centred. Before adding a logo, trim the FILE to its artwork (no transparent or white
@@ -43,7 +49,9 @@
 const clinicsServed = [
   {
     name: 'The Sterling Dental Clinic',
-    city: 'Delhi', // city only on every clinic, for consistency (owner 2026-11-04)
+    // Aumy facility address: "16-A, Palam Marg, Block B, Vasant Vihar", New Delhi (checked 2026-11-11).
+    locality: 'Vasant Vihar',
+    city: 'Delhi',
     // Their official logo from the Sterling shoot (2026-10-20), the DARK
     // variant (dark-green + gold ink, transparent) because this strip sits on a
     // white band; the light variant is for dark backgrounds. Owner 2026-10-22.
@@ -54,6 +62,8 @@ const clinicsServed = [
     // Second on purpose: the two Delhi clinics sit side by side in the first row so a Delhi visitor sees them at once
     // (owner 2026-11-04).
     name: "Omlesh's Dentcity",
+    // Aumy facility address: "33, Pocket C-8, Sector-8, Rohini", Delhi (checked 2026-11-11).
+    locality: 'Rohini',
     city: 'Delhi',
     // Their own logo (white background, which suits this white band).
     logo: '/logos/clinics/omlesh-dentcity.png',
@@ -66,6 +76,8 @@ const clinicsServed = [
     // Center LLP — that name belongs on a contract, not on a strip whose job is
     // for a visitor to recognise the clinic.
     name: 'Dental Solutions',
+    // Aumy facility address: "1st Floor, 498, 15th Cross Road, 2nd Stage, Indiranagar", Bengaluru (checked 2026-11-11).
+    locality: 'Indiranagar',
     city: 'Bengaluru',
     logo: '/logos/clinics/rb-enhanced.png',
     consent: true, // cleared by Jayesh 2026-09-20
@@ -100,6 +112,8 @@ const clinicsServed = [
   },
   {
     name: 'Vinaykia Dental Care',
+    // Aumy facility address: "Somwar peth opposite Sujata Mastani", Pune (checked 2026-11-11).
+    locality: 'Somwar Peth',
     city: 'Pune',
     logo: '/logos/clinics/vinaykia.png',
     // Its tooth outline fills the whole box edge to edge, so at full size it reads as the biggest mark on the strip.
@@ -109,6 +123,9 @@ const clinicsServed = [
   {
     // New client 2026-11-10. Their full name; the wordmark itself reads "SmilesIndia / Family Dentistry".
     name: 'Smiles India Family Dentistry',
+    // No address in Aumy yet; their own site (smilesindia.com/contact): "No.2, Third Avenue, Indira Nagar, Adyar,
+    // Chennai – 600 020" (checked 2026-11-11). Adyar is the neighbourhood people know.
+    locality: 'Adyar',
     city: 'Chennai',
     // Their site only carries a 175x48 PNG, too small for this strip, so this is a faithful vector redraw of it: same
     // wordmark (Segoe UI Semibold + Light, outlined), same colours (#6CB33F green, #005DAA blue, grey line), transparent.

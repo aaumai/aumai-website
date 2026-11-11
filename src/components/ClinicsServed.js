@@ -76,8 +76,15 @@ export default function ClinicsServed() {
                     )}
                   </span>
                   <span className="cs-caption">
+                    {/* LOCALITY + CITY (owner 2026-11-11): the place a visitor recognises. Each part is kept whole, so
+                        a narrow column breaks only between "Vasant Vihar," and "Delhi", never inside a name. */}
                     <span className="cs-city">
-                      {c.descriptor ? (
+                      {c.locality ? (
+                        <>
+                          <span className="cs-city-part">{c.locality},</span>{' '}
+                          <span className="cs-city-part">{c.city}</span>
+                        </>
+                      ) : c.descriptor ? (
                         <>
                           <span className="cs-city-part">{c.descriptor} ·</span>{' '}
                           <span className="cs-city-part">{c.city}</span>
@@ -88,7 +95,15 @@ export default function ClinicsServed() {
                     </span>
                     {c.lead && <span className="cs-lead">{c.lead}</span>}
                     {c.locations?.length > 0 && (
-                      <span className="cs-branches">{c.locations.join(' · ')}</span>
+                      // Each branch name kept whole; the " · " separator stays with the name before it, so no line starts with "·".
+                      <span className="cs-branches">
+                        {c.locations.map((loc, j) => (
+                          <React.Fragment key={loc}>
+                            <span className="cs-branch">{j < c.locations.length - 1 ? `${loc} ·` : loc}</span>
+                            {j < c.locations.length - 1 && ' '}
+                          </React.Fragment>
+                        ))}
+                      </span>
                     )}
                   </span>
                 </li>
