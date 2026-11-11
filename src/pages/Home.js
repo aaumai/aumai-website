@@ -54,6 +54,11 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">{HERO.eyebrow}</span>
             <h1 className="ch-hero-title">{HERO.title}</h1>
+            {/* NABH badge (owner 2026-11-11): our own pill, never NABH's artwork. */}
+            <p className="op-badge">
+              <span className="op-badge-pill"><Check />{HERO.badge.label}</span>
+              <span className="op-badge-line">{HERO.badge.line}</span>
+            </p>
             <p className="ch-hero-sub op-hero-sub">{HERO.subLead}</p>
             <ul className="op-hero-parts">
               {HERO.parts.map((p) => <li key={p.name}><Check /><span><strong>{p.name}</strong> {p.line}</span></li>)}

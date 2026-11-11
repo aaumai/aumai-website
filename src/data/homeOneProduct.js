@@ -67,6 +67,9 @@ const HANDLED = {
 const HERO = {
   eyebrow: 'For owners of established dental practices',
   title: 'One system that plugs every leak in your dental clinic.',
+  // Owner 2026-11-11: a small badge under the headline. OUR OWN pill style, never NABH's logo or artwork. The line
+  // names what is built in today (Omlesh's NABH paperwork, live 3 Nov: UHID, visit numbers, the detailed bill).
+  badge: { label: 'NABH Compliant', line: 'UHID, visit numbers and NABH-format bills, built in.' },
   // What Aumy is, as a list a busy owner can skim: bold name, then the line (owner 2026-11-04).
   subLead: 'Aumy is four things working as one:',
   parts: [
