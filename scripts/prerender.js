@@ -424,6 +424,7 @@ function homeContent() {
           ${[...FOLLOW_UPS.rows, FOLLOW_UPS.closer].map(([when, done]) => '<li>' + esc(when) + ' <strong>' + esc(done) + '</strong></li>').join('\n          ')}
         </ul>
         <p>${esc(FOLLOW_UPS.note)}</p>
+        <p><strong>${esc(FOLLOW_UPS.campaigns)}</strong></p>
       </div></section>
       <section id="google-reviews"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(PROOF.eyebrow)}</p>

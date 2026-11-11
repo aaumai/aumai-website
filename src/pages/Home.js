@@ -150,6 +150,7 @@ const Home = () => {
             </li>
           </ul>
           <p className="op-fu-note">{FOLLOW_UPS.note}</p>
+          <p className="op-fu-campaigns">{FOLLOW_UPS.campaigns}</p>
         </div>
       </section>
 
