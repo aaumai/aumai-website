@@ -391,6 +391,7 @@ function homeContent() {
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(HERO.title)}</h1>
+        <p><strong>${esc(HERO.badge.label)}</strong>: ${esc(HERO.badge.line)}</p>
         <p class="ch-hero-sub">${esc(HERO.subLead)}</p>
         <ul>${HERO.parts.map((p) => '<li><strong>' + esc(p.name) + '</strong> ' + esc(p.line) + '</li>').join('')}</ul>
         <p><em>${esc(HERO.lossQuestion)}</em></p>
