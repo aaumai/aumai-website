@@ -147,6 +147,9 @@ const FOLLOW_UPS = {
   ],
   closer: ['Clinic closed for the night?', 'Aumy still books.'],
   note: 'You decide which messages your team approves before they go. A patient who says stop never hears from you again.',
+  // Owner 2026-11-11: the section's last line, big, bold, gold. His words, lightly polished: "Any campaign you want set
+  // up in minutes to do your marketing activities and win patients through camps, events etc".
+  campaigns: 'Any campaign you want, set up in minutes: camps, events and offers that win you patients.',
 };
 
 const PROOF = {

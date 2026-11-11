@@ -75,6 +75,14 @@
 .op .op-fu-closer { background: var(--c-surface); }
 .op .op-fu-closer .op-fu-when { font-weight: 500; }
 .op .op-fu-note { margin: 24px 0 0; text-align: center; font-size: 15px; color: var(--c-ink-soft); }
+/* Campaigns, the section's last line (owner 2026-11-11): big, bold, gold. The site's bronze, deepened a touch towards
+   navy so it reads at 5.1:1 on the tinted band (plain --lux-bronze is 4.4:1 there; --lux-gold only 2.4:1). */
+.op .op-fu-campaigns {
+  margin: 30px auto 0; max-width: 680px; text-align: center; text-wrap: balance;
+  font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em;
+  color: #7d6134;
+  color: color-mix(in srgb, var(--lux-bronze, #8a6a36) 90%, var(--lux-navy, #0a0f22));
+}
 
 /* Proof */
 .op .op-proof { text-align: center; }
