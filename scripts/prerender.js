@@ -441,6 +441,7 @@ function homeContent() {
         <ol>
           ${START.items.map((it) => '<li><h3>' + esc(it.title) + '</h3><p>' + esc(it.body) + '</p></li>').join('\n          ')}
         </ol>
+        <p><strong>${esc(START.closing.title)}</strong> ${esc(START.closing.line)}</p>
       </div></section>
       <section id="free-audit"><div class="ch-container ch-narrow">
         <h2>${esc(FINAL.title)}</h2>

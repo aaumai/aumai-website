@@ -197,6 +197,8 @@ const Home = () => {
               </article>
             ))}
           </div>
+          <p className="op-handled-closing op-start-closing">{START.closing.title}</p>
+          <p className="op-handled-more op-start-more">{START.closing.line}</p>
         </div>
       </section>
 
