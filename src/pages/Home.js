@@ -5,7 +5,7 @@ import ClinicsServed from '../components/ClinicsServed';
 import HeroVideo from '../components/HeroVideo';
 import CapacityLine from '../components/CapacityLine';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
-import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, FINAL, SEO } from '../data/homeOneProduct';
+import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, START, FINAL, SEO } from '../data/homeOneProduct';
 import './HomeClinic.css';
 import './HomeOneProduct.css';
 
@@ -172,6 +172,26 @@ const Home = () => {
         <div className="ch-container ch-narrow op-center">
           <h2 id="op-fit-title" className="ch-h2">{FIT.title}</h2>
           <p className="ch-lead">{FIT.body}</p>
+        </div>
+      </section>
+
+      {/* 5b. SWITCHING TO AUMY (owner 2026-11-11): live in a week, keep or leave your practice software, easy screens.
+          Answers the last question before the call to action: "how hard is it to switch?" */}
+      <section className="ch-section" id="switching" aria-labelledby="op-start-title">
+        <div className="ch-container">
+          <p className="op-center"><span className="ch-eyebrow">{START.eyebrow}</span></p>
+          <h2 id="op-start-title" className="ch-h2 op-center">{START.title}</h2>
+          <div className="op-three op-start">
+            {START.items.map((it, i) => (
+              <article key={it.title} className="op-card">
+                <div className="op-card-top">
+                  <span className="op-num">{i + 1}</span>
+                </div>
+                <h3>{it.title}</h3>
+                <p className="op-card-line">{it.body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

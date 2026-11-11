@@ -163,6 +163,28 @@ const FIT = {
   body: 'Your front desk looks after the patients in the clinic. Aumy looks after everyone else: the enquiries, the calls, the reminders and the follow-ups that slip between busy people.',
 };
 
+// Switching to Aumy (owner 2026-11-11: "we get our clients live within a week; clients can keep their existing PMS or
+// migrate completely to Aumy within a week; easy-to-use screens for doctors and staff"). A supporting section, not a
+// new headline (strategy lock, 9 Nov). Point 2 is the owner's exact wording (11 Nov): ANY practice software, because
+// we migrate from any system through its exports; no system named.
+const START = {
+  eyebrow: 'Switching to Aumy',
+  title: 'Easy to start.',
+  items: [
+    {
+      title: 'Live in a week.',
+      body: 'From signing to your first patient messages in about 7 days.',
+    },
+    {
+      title: 'Keep your practice software, or move fully to Aumy.',
+      body: 'Whatever system you use today, we move your patients, visits, treatments, bills, X-rays and images into Aumy within the week.',
+    },
+    {
+      title: 'Screens your doctors and front desk can use from day one.',
+      body: 'Simple and clear, at the desk and on the phone too.',
+    },
+  ],
+};
 const FINAL = {
   title: 'See where your clinic is losing patients.',
   sub: 'Tell us your clinic and city. Within 24 hours a free audit reaches you on WhatsApp, prepared and checked by a person. No obligation.',
@@ -183,4 +205,4 @@ const ORG_DESCRIPTION =
 const PRODUCT_DESCRIPTION =
   'Aumy is one product for dental clinics in India: an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
 
-module.exports = { AUDIT, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
+module.exports = { AUDIT, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, START, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };

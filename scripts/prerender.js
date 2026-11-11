@@ -386,7 +386,7 @@ function howWeWorkHtml(eyebrow = HO.HOW.eyebrow, titleA = HO.HOW.titleA, titleB 
 // ---- home (Aumy as ONE product, owner 2026-11-02) ---------------------------
 // Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js.
 function homeContent() {
-  const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, FINAL } = HOME;
+  const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, START, FINAL } = HOME;
   return `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
@@ -433,6 +433,13 @@ function homeContent() {
       <section><div class="ch-container ch-narrow">
         <h2>${esc(FIT.title)}</h2>
         <p>${esc(FIT.body)}</p>
+      </div></section>
+      <section id="switching"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(START.eyebrow)}</p>
+        <h2>${esc(START.title)}</h2>
+        <ol>
+          ${START.items.map((it) => '<li><h3>' + esc(it.title) + '</h3><p>' + esc(it.body) + '</p></li>').join('\n          ')}
+        </ol>
       </div></section>
       <section id="free-audit"><div class="ch-container ch-narrow">
         <h2>${esc(FINAL.title)}</h2>

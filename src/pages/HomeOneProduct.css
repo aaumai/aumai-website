@@ -92,6 +92,11 @@
 /* Fit */
 .op .op-fit .ch-h2 { max-width: 760px; margin-left: auto; margin-right: auto; }
 
+/* Switching to Aumy (owner 2026-11-11): the same cards as "one product", three short points. */
+.op .op-start { margin-top: 40px; }
+.op .op-start .op-card-top { margin-bottom: 14px; }
+.op .op-start .op-card-line { margin: 0; font-weight: 400; color: var(--c-ink-soft); }
+
 /* How it works (/revenue-generator): each part beside its film, and the example day. */
 .op .op-film-note { margin: -6px 0 0; font-size: 14px; color: var(--c-ink-soft); }
 .op .hw-parts { display: grid; gap: 28px; margin-top: 44px; }
