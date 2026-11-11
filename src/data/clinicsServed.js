@@ -34,6 +34,12 @@
 // 🚨 OWNER RULE (2026-11-04): once this list has MORE THAN 10 unique clinics, the homepage strip switches from these
 // static rows (today: the two Delhi clinics on row 1, the rest on row 2) to a scrolling logo marquee. Build that switch
 // when you add the 11th clinic. Every clinic shows its city only (no area), the same format for all.
+//
+// LOGOS (owner 2026-11-11, "not of the same size and not equally spaced"): every logo sits in the SAME fixed 2:1 box
+// on the strip, contained and centred. Before adding a logo, trim the FILE to its artwork (no transparent or white
+// margin, SVG viewBox tight to the drawing) — built-in whitespace makes a logo look smaller than its neighbours. If a
+// trimmed logo still reads heavier or lighter than the rest, set `scale` (e.g. 0.9 or 1.1; default 1 fills the box).
+// That one field is the only per-logo size knob; do not add one-off CSS.
 const clinicsServed = [
   {
     name: 'The Sterling Dental Clinic',
@@ -42,11 +48,6 @@ const clinicsServed = [
     // variant (dark-green + gold ink, transparent) because this strip sits on a
     // white band; the light variant is for dark backgrounds. Owner 2026-10-22.
     logo: '/logos/clinics/sterling.svg',
-    // Stacked mark (THE / STERLING / DENTAL CLINIC / PATIENT FIRST). Capped to
-    // the same HEIGHT as a horizontal logo its letters come out visibly smaller,
-    // so it gets the taller cap to sit at the same optical weight as its
-    // neighbours.
-    tall: true,
     consent: true, // confirmed by Sterling 2026-09-20
   },
   {
@@ -56,9 +57,6 @@ const clinicsServed = [
     city: 'Delhi',
     // Their own logo (white background, which suits this white band).
     logo: '/logos/clinics/omlesh-dentcity.png',
-    // Stacked, nearly square mark: at the standard height its lettering reads small next to the wordmarks, so it takes
-    // the taller slot like Sterling and Dental Solutions (owner 2026-11-04: "looking small compared to others").
-    tall: true,
     consent: true, // cleared by Jayesh 2026-11-04 — back it with a permission email (template in onboarding-docket)
   },
   {
@@ -70,10 +68,6 @@ const clinicsServed = [
     name: 'Dental Solutions',
     city: 'Bengaluru',
     logo: '/logos/clinics/rb-enhanced.png',
-    // Three tiers of type, the smallest being the LLP line. At the standard cap
-    // that bottom line is sub-pixel, so it takes the taller slot — same reason
-    // as Sterling.
-    tall: true,
     consent: true, // cleared by Jayesh 2026-09-20
   },
   {
@@ -108,6 +102,8 @@ const clinicsServed = [
     name: 'Vinaykia Dental Care',
     city: 'Pune',
     logo: '/logos/clinics/vinaykia.png',
+    // Its tooth outline fills the whole box edge to edge, so at full size it reads as the biggest mark on the strip.
+    scale: 0.9,
     consent: true, // cleared by Jayesh 2026-09-20
   },
   {

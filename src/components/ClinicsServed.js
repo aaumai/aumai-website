@@ -42,49 +42,56 @@ export default function ClinicsServed() {
               Dental clinics that run on Aumy
             </h2>
             <ul className="cs-logos">
+              {/* One grid, identical columns and gaps on every row (owner 2026-11-11: logos were different sizes and
+                  Sterling/Omlesh sat closer together than the rest). Every logo sits in the SAME fixed-size box,
+                  centred and contained, with its caption in the area beneath, so a long caption never moves a logo.
+                  Row 1 = the two Delhi clinics (owner 2026-11-04): on the 4-column grid they take the two middle
+                  columns, and the third clinic starts row 2 (see .cs-logo--row2 in ClinicsServed.css). */}
               {named.map((c, i) => (
-                <React.Fragment key={c.name}>
-                {/* Owner 2026-11-04: the first two (the Delhi clinics) get a row of their own, the rest the next row. */}
-                {i === 2 && <li className="cs-break" aria-hidden="true" />}
                 <li
+                  key={c.name}
                   className={[
                     'cs-logo',
+                    i === 0 ? 'cs-logo--row1' : '',
+                    i === 2 ? 'cs-logo--row2' : '',
                     c.logo ? '' : 'cs-logo--text',
-                    c.logo && c.tall ? 'cs-logo--tall' : '',
                     c.logo && c.showName ? 'cs-logo--named' : '',
                   ].filter(Boolean).join(' ')}
+                  // Per-logo optical size, from `scale` in data/clinicsServed.js (1 = fills the box). The only knob.
+                  style={c.scale ? { '--cs-scale': c.scale } : undefined}
                 >
-                  {/* Fixed-height slot: marks differ in height (a stacked
-                      wordmark is far taller than a monogram), and without it
-                      each city label would sit at its own logo's baseline.
-                      A clinic whose logo is a MONOGRAM gets its name set in
-                      type INSIDE this slot — the pair still fits the same
-                      height, so the row keeps its one shared city line. */}
-                  <span className="cs-mark">
+                  <span className="cs-box">
                     {c.logo ? (
-                      <span className="cs-markstack">
+                      c.showName ? (
+                        // A MONOGRAM logo carries no name, so the name is set in type under the mark, inside the box.
+                        <span className="cs-markstack">
+                          <img src={c.logo} alt={c.name} loading="lazy" />
+                          <span className="cs-wordmark">{c.name}</span>
+                        </span>
+                      ) : (
                         <img src={c.logo} alt={c.name} loading="lazy" />
-                        {c.showName && <span className="cs-wordmark">{c.name}</span>}
-                      </span>
+                      )
                     ) : (
                       <span className="cs-name">{c.name}</span>
                     )}
                   </span>
-                  {/* City stays directly under the mark for EVERY clinic, so
-                      all the city labels share one line across the row; the
-                      extra detail a group carries hangs below that line rather
-                      than pushing it down. */}
-                  <span className="cs-city">
-                    {c.descriptor ? `${c.descriptor} · ${c.city}` : c.city}
+                  <span className="cs-caption">
+                    <span className="cs-city">
+                      {c.descriptor ? (
+                        <>
+                          <span className="cs-city-part">{c.descriptor} ·</span>{' '}
+                          <span className="cs-city-part">{c.city}</span>
+                        </>
+                      ) : (
+                        c.city
+                      )}
+                    </span>
+                    {c.lead && <span className="cs-lead">{c.lead}</span>}
+                    {c.locations?.length > 0 && (
+                      <span className="cs-branches">{c.locations.join(' · ')}</span>
+                    )}
                   </span>
-                  {c.lead && <span className="cs-lead">{c.lead}</span>}
-                  {c.locations?.length > 0 && (
-                    // Non-breaking space BEFORE each separator so a wrap never
-                    // starts a line with a stray "·".
-                    <span className="cs-branches">{c.locations.join(' · ')}</span>
-                  )}
                 </li>
-                </React.Fragment>
               ))}
             </ul>
           </>
