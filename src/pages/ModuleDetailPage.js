@@ -5,6 +5,7 @@ import { INDIA_WHATSAPP } from '../config/contact';
 import { PAGES, CONNECTED, pageById, OLD_SLUGS } from '../data/modules';
 import { MODULES_LINE } from '../data/positioning';
 import NABH from '../data/nabh';
+import { POOLED } from '../data/proof';
 import ModuleIcon from '../components/ModuleIcon';
 import StartInApp from '../components/StartInApp';
 import { isSelfServe } from '../data/appStores';
@@ -118,6 +119,34 @@ const ModuleDetailPage = () => {
             </ul>
             <p className="mp-deep">{NABH.FOOTNOTE}</p>
             <p className="mp-deep"><Link to={NABH.PATH}>NABH-ready dental clinic software in India</Link></p>
+          </div>
+        </section>
+      )}
+
+      {/* Pooled proof and the page's questions (owner 2026-11-13), from src/data/proof.js and PAGES[].faqs. */}
+      {page.proof && (
+        <section className="ch-section ch-tint mp-section" id="proof">
+          <div className="ch-container ch-narrow">
+            <span className="ch-eyebrow">{POOLED.eyebrow}</span>
+            <h2 className="ch-h2">{POOLED.title}</h2>
+            <ul className="md-does mp-list">
+              {POOLED.items.map((t) => <li key={t}><Check /><span>{t}</span></li>)}
+            </ul>
+            <p className="mp-deep">{POOLED.window}</p>
+          </div>
+        </section>
+      )}
+
+      {page.faqs && page.faqs.length > 0 && (
+        <section className="ch-section mp-section" id="questions">
+          <div className="ch-container ch-narrow">
+            <h2 className="ch-h2">{page.faqTitle}</h2>
+            {page.faqs.map((f) => (
+              <div key={f.q} className="mp-faq">
+                <h3>{f.q}</h3>
+                <p>{f.a}</p>
+              </div>
+            ))}
           </div>
         </section>
       )}

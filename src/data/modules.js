@@ -247,11 +247,40 @@ const PAGES = [
     icon: 'os',
     short: 'Aumy Clinic',
     title: 'Dental Clinic Operating System',
-    seoTitle: 'Dental Clinic Management Software — Aumy Clinic',
+    // Owner 2026-11-13: this page targets "AI dental practice management software" and also covers "dental clinic
+    // management software". The H1 stays as it is.
+    seoTitle: 'AI Dental Practice Management Software · Aumy Clinic',
     h1: 'Aumy Clinic: dental clinic management software',
     sub: 'Your diary, patient records, charting and billing — all in one place.',
-    seoDescription: 'Dental clinic management software: appointments, patient records, tooth charting, treatment plans and billing in one place, for one chair or many branches.',
+    seoDescription: 'Aumy Clinic is AI dental practice management software for India: appointments, records, charting and billing. Dental clinic management software with AI built in.',
     keyword: 'dental clinic management software',
+    ldSubCategory: 'AI dental practice management software / dental clinic management software',
+    ldDescription: 'Aumy Clinic is AI dental practice management software for dental clinics in India, also known as dental clinic management software: appointments and doctor calendars, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms and billing, with AI clinical notes (Aumy Scribe) and Aumy’s AI receptionist booking into the same calendar.',
+    // Pooled proof (src/data/proof.js) and the questions below: shown on the page and in the FAQPage JSON-LD.
+    proof: true,
+    faqTitle: 'AI dental practice management software: questions, answered',
+    faqs: [
+      {
+        q: 'What is dental practice management software?',
+        a: 'Dental practice management software, also called dental clinic management software, is the system a dental clinic runs its day on: the appointment diary and every doctor’s calendar, patient records with tooth charting, X-rays and photos, treatment plans, prescriptions, consent forms, invoices, payments and reports. It replaces registers, Excel sheets and paper files.',
+      },
+      {
+        q: 'What makes Aumy Clinic AI dental practice management software?',
+        a: 'The doctor can type or simply speak a short note, and Aumy Scribe (an add-on) fills the chart for the doctor to accept. Aumy’s AI receptionist answers patients on WhatsApp and calls and books straight into the same calendar, and follow-ups go out on their own from the same patient record.',
+      },
+      {
+        q: 'Can we move our records from our current software?',
+        a: 'Yes. Whatever system you use today, we move your patients, visits, treatments, bills, X-rays and images into Aumy within the week. You can also keep your current practice software and run Aumy alongside it.',
+      },
+      {
+        q: 'Does it work for more than one doctor or branch?',
+        a: 'Yes. One calendar and one patient record across doctors and branches, and a login for each staff member that shows only what their role needs.',
+      },
+      {
+        q: 'How much does dental practice management software from Aumy cost?',
+        a: 'It depends on your clinic: how many chairs, doctors and branches, and what you switch on. After a free clinic audit we give you one clear number, before anything starts.',
+      },
+    ],
     card: 'Appointments, records, charting, treatment plans and billing.',
     intro: `${byId('dental-clinic-management-software').promise} Aumy Clinic is dental clinic management software that runs the whole day, from the front desk to the doctor’s chair.`,
     does: byId('dental-clinic-management-software').does,
@@ -270,6 +299,9 @@ const PAGES = [
     addons: byId('dental-clinic-management-software').addons,
     pairs: ['ai-clinical-notes-for-dentists', 'dental-patient-follow-up', 'whatsapp-ai-receptionist-for-dentists'],
     deep: [
+      // Owner 2026-11-13: home, this page and /ai-receptionist link to each other.
+      { path: '/', label: 'Aumy: AI dental clinic software' },
+      { path: '/ai-receptionist', label: 'AI receptionist for dental clinics' },
       { path: '/ai-dental-software-india', label: 'Dental software in India: how to choose' },
       { path: '/switch', label: 'Moving from your current dental software' },
     ],

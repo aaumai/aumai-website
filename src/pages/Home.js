@@ -5,7 +5,7 @@ import ClinicsServed from '../components/ClinicsServed';
 import HeroVideo from '../components/HeroVideo';
 import CapacityLine from '../components/CapacityLine';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
-import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, START, FINAL, SEO } from '../data/homeOneProduct';
+import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO } from '../data/homeOneProduct';
 import './HomeClinic.css';
 import './HomeOneProduct.css';
 
@@ -54,11 +54,7 @@ const Home = () => {
           <div className="ch-hero-text">
             <span className="ch-eyebrow">{HERO.eyebrow}</span>
             <h1 className="ch-hero-title">{HERO.title}</h1>
-            {/* NABH badge (owner 2026-11-11): our own pill, never NABH's artwork. */}
-            <p className="op-badge">
-              <span className="op-badge-pill"><Check />{HERO.badge.label}</span>
-              <span className="op-badge-line">{HERO.badge.line}</span>
-            </p>
+            {/* The "NABH Compliant" badge was removed on 13 Nov 2026 (owner): NABH accredits clinics, not software. */}
             <p className="ch-hero-sub op-hero-sub">{HERO.subLead}</p>
             <ul className="op-hero-parts">
               {HERO.parts.map((p) => <li key={p.name}><Check /><span><strong>{p.name}</strong> {p.line}</span></li>)}
@@ -173,6 +169,18 @@ const Home = () => {
         </div>
       </section>
 
+      {/* 4b. POOLED PROOF (owner 2026-11-13): approved wording only, src/data/proof.js */}
+      <section className="ch-section op-pooled-section" id="proof" aria-labelledby="op-pooled-title">
+        <div className="ch-container ch-narrow">
+          <p className="op-center"><span className="ch-eyebrow">{POOLED_PROOF.eyebrow}</span></p>
+          <h2 id="op-pooled-title" className="ch-h2 op-center">{POOLED_PROOF.title}</h2>
+          <ul className="op-pooled">
+            {POOLED_PROOF.items.map((t) => <li key={t}><Check /><span>{t}</span></li>)}
+          </ul>
+          <p className="op-pooled-window">{POOLED_PROOF.window}</p>
+        </div>
+      </section>
+
       {/* 5. WHO IT IS FOR */}
       <section className="ch-section ch-tint op-fit" aria-labelledby="op-fit-title">
         <div className="ch-container ch-narrow op-center">
@@ -200,6 +208,30 @@ const Home = () => {
           </div>
           <p className="op-handled-closing op-start-closing">{START.closing.title}</p>
           <p className="op-handled-more op-start-more">{START.closing.line}</p>
+        </div>
+      </section>
+
+      {/* 5c. QUESTIONS (owner 2026-11-13): the search questions, shown here and in the FAQPage JSON-LD,
+          plus the links to the practice-management page and the AI receptionist page. */}
+      <section className="ch-section ch-tint" id="questions" aria-labelledby="op-faq-title">
+        <div className="ch-container ch-narrow">
+          <h2 id="op-faq-title" className="ch-h2 op-center">{FAQ.title}</h2>
+          <div className="op-faq">
+            {FAQ.items.map((f) => (
+              <div key={f.q} className="op-faq-item">
+                <h3>{f.q}</h3>
+                <p>{f.a}</p>
+              </div>
+            ))}
+          </div>
+          <p className="op-handled-more op-faq-links">
+            {FAQ.links.map((l, i) => (
+              <React.Fragment key={l.to}>
+                {i > 0 && ' · '}
+                <Link to={l.to}>{l.label} →</Link>
+              </React.Fragment>
+            ))}
+          </p>
         </div>
       </section>
 

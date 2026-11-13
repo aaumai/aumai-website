@@ -291,6 +291,12 @@
 .ch-hero-film-sound:hover, .ch-hero-film-sound:focus-visible { background: #2563eb; outline: none; }
 .ch-hero-film-play { position: absolute; left: 12px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; min-width: 48px; min-height: 48px; padding: 0 16px 0 12px; border: 0; border-radius: 999px; background: rgba(10, 15, 34, 0.82); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
 .ch-hero-film-play:hover, .ch-hero-film-play:focus-visible { background: #2563eb; outline: 2px solid #fff; outline-offset: 2px; }
+/* Before the first play (13 Nov 2026): the film is not downloaded; one big Play button sits on the poster. */
+.ch-hero-film-start { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 100%; border: 0; padding: 0; background: linear-gradient(180deg, rgba(10, 15, 34, 0) 40%, rgba(10, 15, 34, 0.55) 100%); color: #fff; cursor: pointer; }
+.ch-hero-film-start-icon { display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: rgba(10, 15, 34, 0.82); box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4); padding-left: 4px; }
+.ch-hero-film-start-label { padding: 7px 16px; border-radius: 999px; background: rgba(10, 15, 34, 0.82); font-size: 15px; font-weight: 600; }
+.ch-hero-film-start:hover .ch-hero-film-start-icon, .ch-hero-film-start:focus-visible .ch-hero-film-start-icon { background: #2563eb; }
+.ch-hero-film-start:focus-visible { outline: 3px solid #fff; outline-offset: -3px; }
 .ch-hero-film-caption { padding: 10px 14px 12px; font-size: 13px; line-height: 1.4; color: #cfd6e6; background: #10131c; text-align: center; }
 .ch-explainer { margin: 0; background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius); box-shadow: var(--c-shadow-lg); overflow: hidden; display: flex; flex-direction: column; }
 .ch-explainer video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #10131c; }
