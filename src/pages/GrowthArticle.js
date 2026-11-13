@@ -12,7 +12,8 @@ const GrowthArticle = () => {
 
   useEffect(() => {
     if (post) {
-      document.title = `${post.title} | Aumy Growth Hub`;
+      // Same title as the crawler HTML (scripts/prerender.js), 13 Nov 2026.
+      document.title = `${post.title} | Aumy`;
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute('content', post.description);
     }

@@ -29,8 +29,9 @@ const HERO = {
   close: 'We make sure of it.',
   primary: { label: 'Get a free clinic audit', to: '/growth-audit' },
   whatsapp: { label: 'WhatsApp us · 80071 89868', href: WHATSAPP_LINK },
-  proofNumber: '2 in 3',
-  proofText: 'patients at The Sterling Dental Clinic, Delhi, now confirm their appointment themselves on WhatsApp.',
+  // Not rendered anywhere today; kept in line with the approved proof list (13 Nov 2026).
+  proofNumber: 'Almost half',
+  proofText: 'of appointments at The Sterling Dental Clinic, Delhi, were confirmed by the patient on WhatsApp (47%, 2–16 Oct 2026).',
 };
 
 

@@ -866,27 +866,31 @@ const growthPosts = [
 <p>And when you're ready to run it for every treatment and every patient without the morning reminders: this is exactly what Treatment Care Plans in Aumy do — your doctors define the protocol per treatment, the system delivers it consistently and flags the replies that need a human. The protocol stays yours. The consistency becomes automatic.</p>`,
   },
   {
+    // 13 Nov 2026 (owner): re-angled as "a day in the life" so it stops competing with /ai-receptionist, the ONE page
+    // for "AI receptionist for dental clinics" (Search Console: this post 58 impressions vs the page's 38). URL kept;
+    // it links to /ai-receptionist at the top and the end.
     slug: "ai-receptionist-dental-clinic",
-    title: "What an AI Receptionist Actually Does All Day in an Indian Dental Clinic",
+    title: "A Day at a Dental Clinic Front Desk: Who Answers at 8:47 PM?",
     category: "AI for Dental Clinics",
     date: "2026-08-26",
+    updated: "2026-11-13",
     readingTime: "6 min read",
     author: "Jayesh Chaudhari",
-    excerpt: "An AI receptionist is not a chatbot with a dental logo. Here is an honest hour-by-hour picture of what one actually handles in an Indian dental clinic — and the three jobs that should always stay human.",
-    description: "What an AI receptionist really does in a dental clinic: answering every call and WhatsApp enquiry 24/7, booking appointments, following up on quotes, and handing over to humans at the right moment. An honest breakdown for Indian practice owners.",
+    excerpt: "A day in the life of an Indian dental clinic's front desk: the 9 PM WhatsApp from a patient in pain, the same five questions all day, the follow-ups nobody can track, and the three jobs that should always stay human.",
+    description: "A day in the life of an Indian dental clinic's front desk: the after-hours WhatsApp enquiry, the questions that eat the day, the follow-ups nobody tracks, and the three jobs that always stay human.",
     body: `
-<p><em>Looking for Aumy’s own AI receptionist — features, languages, price and setup? See <a href="/ai-receptionist">AI receptionist for dental clinics</a>.</em></p>
-<p>Every dental clinic owner has heard the phrase "AI receptionist" by now. Most imagine one of two wrong things: a robotic phone voice that infuriates patients, or a website chatbot that answers three canned questions. Neither is what a working AI receptionist actually is — so here is an honest, hour-by-hour picture of what one does in a real Indian dental practice.</p>
+<p><strong>This is a day-in-the-life story.</strong> For what Aumy’s AI receptionist does, the languages it speaks and how setup works, see the main page: <a href="/ai-receptionist">AI receptionist for dental clinics</a>.</p>
+<p>Every dental clinic owner has heard the phrase "AI receptionist" by now. Most imagine one of two wrong things: a robotic phone voice that infuriates patients, or a website bot that answers three canned questions. Neither is what happens at a well-run front desk, so here is an honest picture of one day in a real Indian dental practice.</p>
 
 <h2>8:47 PM on a Tuesday: the moment that matters</h2>
 <p>A woman in Kothrud has had tooth pain since lunch. She finally sits down after dinner, searches "dentist near me", opens three clinics, and messages all three on WhatsApp. Two clinics will reply tomorrow between patients. One replies in four seconds — asks where the pain is, how long it's been hurting, reassures her, and offers 10:30 AM tomorrow. She books. The other two clinics never hear from her again, and never know why.</p>
-<p>That is the entire case for an AI receptionist in one paragraph. Not that it is smarter than your front desk — it isn't. It is simply <em>present</em> for the 60–70% of enquiries that arrive when your front desk is busy, chairside-assisting, at lunch, or asleep.</p>
+<p>That is the entire case for an AI receptionist in one paragraph. Not that it is smarter than your front desk — it isn't. It is simply <em>present</em> for the many enquiries that arrive when your front desk is busy, chairside-assisting, at lunch, or asleep.</p>
 
 <h2>What it handles without help</h2>
 <ul>
   <li><strong>Every first response, instantly.</strong> WhatsApp, Instagram, website, missed calls — answered in seconds, in the patient's language, at any hour.</li>
   <li><strong>Appointment booking.</strong> It reads the actual calendar, offers real slots, books, confirms, and sends reminders. No "we'll call you back".</li>
-  <li><strong>The questions that eat your receptionist's day.</strong> Timings, location, whether you do RCT, what a cleaning broadly involves, do you take that insurance. Sixty percent of inbound messages are these five questions.</li>
+  <li><strong>The questions that eat your receptionist's day.</strong> Timings, location, whether you do RCT, what a cleaning broadly involves, do you take that insurance. A large share of inbound messages are these same few questions.</li>
   <li><strong>Follow-up that never gets forgotten.</strong> The patient who asked about aligners and went quiet gets a gentle nudge in three days, another in a week — until they book or clearly decline. A human front desk simply cannot track forty of these threads.</li>
 </ul>
 
@@ -895,10 +899,12 @@ const growthPosts = [
 <p><strong>The upset patient.</strong> Complaint, billing dispute, a patient in real distress — the right behaviour is a fast, graceful handover to a human, with the full conversation attached so the patient never repeats themselves.</p>
 <p><strong>The judgment call.</strong> "Can you adjust the price?" "Can the doctor see my X-ray first?" These route to the owner or front desk, flagged and waiting — answered by a human, on human time, without the patient having been ignored in the meantime.</p>
 
-<h2>What changes in the numbers</h2>
-<p>Clinics measure the difference in three places: enquiry-to-booking conversion (because speed-to-reply decides who wins the patient), front-desk hours recovered (the repetitive 60% disappears from their day), and after-hours bookings that previously did not exist at all. If you run ads, there's a fourth: every ad rupee finally gets a same-minute response, which is the single biggest determinant of ad ROI for clinics.</p>
+<h2>What changes for the clinic</h2>
+<p>Clinics see the difference in three places: enquiry-to-booking conversion (because speed-to-reply decides who wins the patient), front-desk hours recovered (the repetitive questions leave their day), and after-hours bookings that previously did not exist at all. If you run ads, there's a fourth: every ad rupee finally gets a same-minute response, which is the single biggest determinant of ad ROI for clinics.</p>
 
-<p>This is exactly what Aumy's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's where the patient journey starts — Convert, before Care, Retain and Reactivate — and it works its first night on the job.</p>`,
+<p>This is exactly what Aumy's AI receptionist does across WhatsApp, calls and Instagram — trained on your clinic's own treatments, prices and tone, with a human-handover built into its manners. It's where the patient journey starts — Convert, before Care, Retain and Reactivate — and it works its first night on the job.</p>
+
+<p>See what it does, end to end: <a href="/ai-receptionist">AI receptionist for dental clinics</a>. And how it fits the rest of the clinic: <a href="/">AI dental clinic software</a>.</p>`,
   },
   {
     slug: "patient-follow-up-automation-dental",
@@ -997,216 +1003,181 @@ const growthPosts = [
 <p>Digital marketing for a dental clinic is not a channel problem. It is a sequence: <strong>be findable → be trusted → be instant → be helpful → then amplify.</strong> Aumy automates the machinery under all five — Google profile posting, review generation, instant AI-receptionist responses, follow-up, and ad attribution down to cost per paying patient — so the sequence runs whether or not anyone at the clinic remembers it. It runs on the same connected platform as Convert, Care, Retain and Reactivate — so the patients your marketing brings in don't get lost in the chaos that follows.</p>`,
   },
   {
+    // 13 Nov 2026 (owner): no competitor names and no competitor prices in our copy (rule M16). The URL stays;
+    // the post now explains what to look for instead of comparing named tools and their prices.
     slug: "ai-software-for-dentists-india-cost-comparison",
-    title: "AI Software for Dentists in India: What US Tools Cost vs What Actually Works Here",
+    title: "AI Software for Dentists in India: What to Look For",
     category: "AI for Dental Clinics",
     date: "2026-08-26",
-    readingTime: "7 min read",
+    updated: "2026-11-13",
+    readingTime: "5 min read",
     author: "Jayesh Chaudhari",
     excerpt:
-      "Search \"AI software for dentists\" and Google shows you US tools charging $399\u2013$1,499 a month \u2014 for an AI phone receptionist alone. Here is an honest comparison of what those tools do, what they cost in rupees, and what an Indian clinic actually needs.",
+      "Search \"AI software for dentists\" from India and most results are built for US practices: phone-first, English-only and priced in dollars. Here is what those tools are built around, why that shape rarely fits an Indian dental clinic, and the five questions to ask any AI software.",
     description:
-      "An honest 2026 comparison of AI software for dental clinics: US tools like Dentina AI, TensorLinks and Denti.AI vs what Indian practices actually need \u2014 WhatsApp-first patient communication, Indian languages, and rupee pricing. With a full price table.",
+      "How to judge AI software for a dental clinic in India: why phone-first, English-only tools built for US practices rarely fit, what Indian practices need (WhatsApp first, Indian languages, follow-ups and recalls), and five questions to ask before you buy.",
     body: `
-<p>Type "AI software for dentist" into Google from India and the results are dominated by American products. They look impressive \u2014 and they are, for American practices. But before you request a demo, it is worth understanding three things: what these tools actually do, what they cost once you convert to rupees, and whether they fit how Indian patients actually behave.</p>
+<p>Type "AI software for dentist" into Google from India and the results are dominated by products built for American practices. They look impressive, and for American practices they often are. But before you request a demo, it is worth understanding three things: what these tools actually do, what they are built around, and whether they fit how Indian patients actually behave.</p>
 
-<h2>What the US tools charge (listed pricing, August 2026)</h2>
-<div style="overflow-x:auto">
-<table>
-  <thead><tr><th>Tool</th><th>What it is</th><th>Listed price</th><th>In rupees / month*</th></tr></thead>
-  <tbody>
-    <tr><td><strong>Dentina AI</strong></td><td>AI phone receptionist for dental practices</td><td>$499\u2013$1,499/month</td><td>\u20B942,000\u2013\u20B91,25,000</td></tr>
-    <tr><td><strong>TensorLinks</strong></td><td>AI dental receptionist, books into your PMS</td><td>$399/month + $199 setup</td><td>\u20B933,500 + setup</td></tr>
-    <tr><td><strong>Denti.AI</strong></td><td>AI charting, voice perio &amp; scribe (clinical documentation)</td><td>Pricing on request</td><td>\u2014</td></tr>
-    <tr><td><em>Market range (US)</em></td><td>AI receptionist alone</td><td>$299\u2013$1,500/month</td><td>\u20B925,000\u2013\u20B91,26,000</td></tr>
-  </tbody>
-</table>
-</div>
-<p><em>*Approximate conversion at \u20B984/$; prices are the vendors' publicly listed figures as of August 2026 \u2014 always verify current pricing on their sites.</em></p>
+<h2>What most of these tools are</h2>
+<p>Most "AI for dentists" products fall into two groups. The first is an <strong>AI phone receptionist</strong>: it answers the practice's phone, takes a message or books a slot. The second is <strong>clinical AI</strong>: help writing notes, charting by voice, or reading X-rays. Both are useful jobs. But an AI that answers your <em>phone</em> is one job. Not follow-ups. Not recalls. Not bringing back lapsed patients. Not reviews.</p>
 
-<p>Read that table carefully. The $499/month tier \u2014 roughly <strong>\u20B942,000 a month</strong> \u2014 buys an AI that answers your <em>phone</em>. Not follow-ups. Not recalls. Not reactivation of lapsed patients. Not reviews. One job.</p>
-
-<h2>Why the US price is the US price</h2>
-<p>This is not a scam \u2014 it is a different market. A single new patient in the US is worth $600\u2013$1,200 to a practice, so a $499 tool pays for itself with one saved caller a month. The tools are also built around what US practices need: deep integrations with Dentrix, Eaglesoft and Open Dental, US phone-call culture, and English-only conversations.</p>
+<h2>Why they are built the way they are</h2>
+<p>This is not a criticism. It is a different market. A single new patient is worth far more to a US practice, so a tool that does one job well can pay for itself there with one saved caller a month. The tools are also built around what US practices need: integrations with US practice software, a phone-call culture, and conversations in English.</p>
 
 <h2>Why that shape doesn't fit an Indian clinic</h2>
 <ul>
-  <li><strong>Indian patients live on WhatsApp, not phone calls.</strong> The enquiry that decides your month arrives as a WhatsApp message at 9 PM. A US phone-answering AI never sees it.</li>
-  <li><strong>Language.</strong> Your patients write in Hindi, Marathi, Hinglish \u2014 sometimes all three in one conversation. US tools converse in English.</li>
-  <li><strong>The leak is bigger than the phone.</strong> In every Indian clinic we have audited, unanswered enquiries are only the first leak. The bigger ones are quotes that were never followed up, recalls that never went out, and patients who quietly stopped coming. A receptionist-only tool \u2014 at any price \u2014 touches none of those.</li>
-  <li><strong>Dollar pricing compounds.</strong> \u20B942,000/month is more than many clinics' front-desk salary \u2014 for one-fifth of the job.</li>
+  <li><strong>Indian patients live on WhatsApp, not phone calls.</strong> The enquiry that decides your month arrives as a WhatsApp message at 9 PM. A phone-answering AI never sees it.</li>
+  <li><strong>Language.</strong> Your patients write in Hindi, Marathi, Hinglish, sometimes all three in one conversation. Most tools built for the US converse in English.</li>
+  <li><strong>The leak is bigger than the phone.</strong> In every Indian clinic we have audited, unanswered enquiries are only the first leak. The bigger ones are quotes that were never followed up, recalls that never went out, and patients who quietly stopped coming. A receptionist-only tool, at any price, touches none of those.</li>
+  <li><strong>Dollar pricing.</strong> A tool priced for a US practice can cost more each month than a front-desk salary here, for one part of the job.</li>
 </ul>
 
 <h2>What to actually compare</h2>
-<p>Whatever you evaluate \u2014 US tool, Indian tool, or hiring another front-desk person \u2014 ask the same five questions:</p>
+<p>Whatever you evaluate (a tool built abroad, an Indian tool, or hiring another front-desk person), ask the same five questions:</p>
 <ol>
-  <li>Does it answer <strong>WhatsApp</strong> instantly, in the patient's own language \u2014 or only the phone?</li>
+  <li>Does it answer <strong>WhatsApp</strong> instantly, in the patient's own language, or only the phone?</li>
   <li>Does it <strong>follow up</strong> on treatment plans and quotes until the patient decides?</li>
   <li>Does it run <strong>recalls and reactivation</strong> automatically, or is that still a register nobody opens?</li>
-  <li>Does it grow your <strong>Google reviews</strong> and reply to them?</li>
-  <li>Can it <strong>show you the revenue</strong> it recovered \u2014 bookings and rupees, attributed \u2014 or just call logs?</li>
+  <li>Does it grow your <strong>Google reviews</strong>?</li>
+  <li>Can it <strong>show you what happened to every enquiry</strong>, bookings and all, or just call logs?</li>
 </ol>
 
-<p>For context on where Aumy sits in that table: it is not a receptionist tool but the operating system for a growing dental clinic \u2014 24/7 AI receptionist on WhatsApp and calls, appointments and reminders, treatment-plan follow-ups, after-treatment care, care gaps and reactivation, all working from one patient record. Underneath it runs the whole patient journey: Convert, Care, Retain, Reactivate.</p>\n\n<p>Wondering about Indian point tools instead \u2014 separate WhatsApp platform, voice agent and review tool? <a href="/growth/dental-clinic-software-stack-india-comparison">The stitched-stack comparison is here</a>. For the full picture of AI dental software in India, see <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>.</p>`,
+<p>For context on where Aumy sits: it is not a receptionist-only tool but AI dental clinic software for a growing dental clinic: an AI receptionist on WhatsApp and calls, appointments and reminders, treatment-plan follow-ups, after-treatment care, care gaps and reactivation, all working from one patient record.</p>
+
+<p>Wondering about separate Indian point tools instead (a WhatsApp platform, a voice agent and a review tool)? <a href="/growth/dental-clinic-software-stack-india-comparison">Why a stitched-together stack leaks patients</a>. For the full picture, see <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>, or <a href="/ai-receptionist">the AI receptionist for dental clinics</a>.</p>`,
   },
   {
+    // 13 Nov 2026 (owner): no competitor names and no competitor prices (rule M16). URL kept.
     slug: "dental-clinic-software-stack-india-comparison",
-    title: "The Stitched-Together Stack: What Running a Dental Clinic's Growth Really Costs in India",
+    title: "The Stitched-Together Stack: Why Separate Tools Leak Patients at a Dental Clinic",
     category: "AI for Dental Clinics",
     date: "2026-08-26",
-    readingTime: "8 min read",
+    updated: "2026-11-13",
+    readingTime: "6 min read",
     author: "Jayesh Chaudhari",
     excerpt:
-      "In India today, a clinic that wants WhatsApp automation, a voice agent, review management and Google posting has to buy four or five separate tools \u2014 plus an agency \u2014 and none of them talk to each other. Here is the honest math, tool by tool.",
+      "In India today, a dental clinic that wants WhatsApp automation, a voice agent, review requests and Google posting usually buys four or five separate tools, plus an agency, and none of them talk to each other. Here is where patients fall through the gaps.",
     description:
-      "What it actually costs an Indian dental clinic to assemble patient communication from separate tools \u2014 WhatsApp platforms like WATI/AiSensy, AI receptionists, voice agents, review tools like Famepilot, and a marketing agency \u2014 versus one integrated system. With listed prices.",
+      "Why an Indian dental clinic that assembles patient communication from separate tools (a WhatsApp platform, an AI chat tool, a voice agent, a review tool and an agency) loses patients between them, and five questions that expose the gaps.",
     body: `
-<p>Most Indian dental clinics that get serious about patient communication end up with the same shopping list: something for WhatsApp, something for calls, something for Google reviews, someone for Google posting and ads. Each tool is individually cheap. The combination is where the trouble \u2014 and the real cost \u2014 hides.</p>
+<p>Most Indian dental clinics that get serious about patient communication end up with the same shopping list: something for WhatsApp, something for calls, something for Google reviews, someone for Google posting and ads. Each tool on its own looks cheap. The combination is where the trouble, and the real cost, hides.</p>
 
-<h2>The typical stack, priced (listed pricing, August 2026)</h2>
+<h2>The typical stack</h2>
 <div style="overflow-x:auto">
 <table>
-  <thead><tr><th>Job</th><th>Typical tools in India</th><th>Listed price</th></tr></thead>
+  <thead><tr><th>Job</th><th>What clinics usually buy</th></tr></thead>
   <tbody>
-    <tr><td>WhatsApp campaigns &amp; chatbot</td><td>WATI, AiSensy, Interakt</td><td>\u20B9999\u2013\u20B916,999/mo + per-message fees</td></tr>
-    <tr><td>AI receptionist (chat)</td><td>Various new startups</td><td>\u20B9800\u2013\u20B92,500/mo + usage</td></tr>
-    <tr><td>Voice agent / call handling</td><td>IVR &amp; AI-voice platforms</td><td>\u20B93,000\u2013\u20B98,000/mo or per-minute</td></tr>
-    <tr><td>Review requests &amp; replies</td><td>Famepilot, FiveNudge</td><td>\u20B9499/mo to quote-based</td></tr>
-    <tr><td>Google profile posting, ads &amp; SEO</td><td>A freelancer or agency</td><td>\u20B910,000\u2013\u20B925,000/mo</td></tr>
-    <tr><td>Practice management (records, billing)</td><td>Practo Ray, Clinicia, DocPulse</td><td>\u20B91,000\u2013\u20B92,000/mo</td></tr>
-    <tr><td><strong>Total</strong></td><td><strong>5\u20136 vendors</strong></td><td><strong>\u20B920,000\u2013\u20B940,000+/mo</strong></td></tr>
+    <tr><td>WhatsApp campaigns &amp; chat replies</td><td>A WhatsApp marketing platform, billed per month plus per message</td></tr>
+    <tr><td>AI receptionist (chat)</td><td>A separate chat tool</td></tr>
+    <tr><td>Voice agent / call handling</td><td>An IVR or AI-voice platform, often billed per minute</td></tr>
+    <tr><td>Review requests</td><td>A review tool</td></tr>
+    <tr><td>Google profile posting, ads &amp; SEO</td><td>A freelancer or agency</td></tr>
+    <tr><td>Practice management (records, billing)</td><td>A clinic management system</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>5–6 vendors, 5–6 bills, 5–6 logins</strong></td></tr>
   </tbody>
 </table>
 </div>
-<p><em>Prices are the vendors' publicly listed figures or common market rates as of August 2026 \u2014 verify current pricing with each vendor. All of these are respectable tools at what they individually do.</em></p>
+<p><em>Each of these can be a respectable tool at what it does on its own.</em></p>
 
-<h2>The real cost isn't the money \u2014 it's the gaps between the tools</h2>
+<h2>The real cost isn't the money. It's the gaps between the tools</h2>
 <p>Watch what happens to one patient inside a stitched stack:</p>
 <ul>
-  <li>She messages the clinic on WhatsApp at 9 PM. The WhatsApp platform's chatbot answers from a script \u2014 <strong>it cannot see the appointment calendar</strong>, so it says "our team will call you back".</li>
-  <li>Next day she calls. The voice agent answers \u2014 but <strong>it has never seen her WhatsApp conversation</strong>, so she explains everything again.</li>
-  <li>She visits, has a cleaning, goes home. The review tool doesn't know she visited \u2014 <strong>it works off a list someone at the desk must upload</strong> \u2014 so no review request goes out.</li>
-  <li>Six months later her recall is due. That lives in the PMS \u2014 <strong>which doesn't talk to the WhatsApp tool</strong> \u2014 so the recall register stays a register.</li>
-  <li>The owner asks the obvious question: "What did all this produce?" <strong>Five dashboards, five different answers, none in rupees.</strong></li>
+  <li>She messages the clinic on WhatsApp at 9 PM. The WhatsApp platform answers from a script. <strong>It cannot see the appointment calendar</strong>, so it says "our team will call you back".</li>
+  <li>Next day she calls. The voice agent answers, but <strong>it has never seen her WhatsApp conversation</strong>, so she explains everything again.</li>
+  <li>She visits, has a cleaning, goes home. The review tool doesn't know she visited. <strong>It works off a list someone at the desk must upload</strong>, so no review request goes out.</li>
+  <li>Six months later her recall is due. That lives in the practice software, <strong>which doesn't talk to the WhatsApp tool</strong>, so the recall register stays a register.</li>
+  <li>The owner asks the obvious question: "What did all this produce?" <strong>Five dashboards, five different answers.</strong></li>
 </ul>
 <p>Every gap between two tools is a place where a patient falls through. And every vendor can honestly say "our part worked".</p>
 
 <h2>The five questions that expose the gaps</h2>
 <ol>
   <li>When a patient messages at night, does the reply come from something that can <strong>actually book into the calendar</strong>?</li>
-  <li>Does the call channel and the WhatsApp channel share <strong>one memory</strong> of the patient?</li>
-  <li>Do review requests fire <strong>automatically after a real visit</strong> \u2014 or from an uploaded list?</li>
+  <li>Do the call channel and the WhatsApp channel share <strong>one memory</strong> of the patient?</li>
+  <li>Do review requests go out <strong>automatically after a real visit</strong>, or from an uploaded list?</li>
   <li>Do recalls and reactivation run from your <strong>actual patient records</strong>, without anyone exporting a spreadsheet?</li>
-  <li>Can anyone show you \u2014 in one place, in rupees \u2014 <strong>what the whole system recovered</strong> this month?</li>
+  <li>Can anyone show you, in one place, <strong>what happened to every enquiry</strong> this month?</li>
 </ol>
-<p>A stitched stack fails at least three of these five. Not because the tools are bad \u2014 because they were never designed to know about each other.</p>
+<p>A stitched stack fails at least three of these five. Not because the tools are bad, but because they were never designed to know about each other.</p>
 
 <h2>The integrated alternative</h2>
-<p>This is the reason Aumy is built as <strong>one system rather than a bundle</strong>: the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, triggers after-treatment care from the actual visit, fires the review request to the genuinely happy patient, follows up care gaps and reactivation from real records, posts to your Google profile \u2014 and shows what happened to every enquiry in one dashboard. So a clinic runs one system instead of paying five vendors for overlapping pieces. That's the whole journey \u2014 Convert, Care, Retain, Reactivate \u2014 as one connected system instead of five tools that don't talk to each other.</p>
+<p>This is the reason Aumy is built as <strong>one system rather than a bundle</strong>: AI dental clinic software where the same platform answers the WhatsApp message and the phone call with one shared memory, books into one calendar, sends after-treatment care from the actual visit, asks the happy patient for a review, follows up care gaps and lapsed patients from real records, and shows what happened to every enquiry in one place. So a clinic runs one system instead of paying five vendors for overlapping pieces.</p>
 
-<p>Comparing us with the US tools instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">That comparison is here</a>. New to the category? Start with <a href="/ai-dental-software-india">what AI dental software does in an Indian clinic</a>.</p>`,
+<p>Looking at AI tools built for US practices instead? <a href="/growth/ai-software-for-dentists-india-cost-comparison">What to look for in AI software for dentists</a>. New to the category? Start with <a href="/ai-dental-software-india">what AI dental software does in an Indian clinic</a>, or see <a href="/modules/dental-clinic-management-software">AI dental practice management software</a>.</p>`,
   },
   {
+    // 13 Nov 2026 (owner): no competitor names and no competitor prices (rule M16). URL kept; the post is now a
+    // "how to choose" guide by KIND of dental software, not a named comparison.
     slug: "best-dental-software-india",
-    title: "Best Dental Software in India (2026): An Honest Comparison",
+    title: "Best Dental Software in India (2026): How to Choose",
     category: "AI for Dental Clinics",
     date: "2026-10-06",
-    readingTime: "10 min read",
+    updated: "2026-11-13",
+    readingTime: "8 min read",
     author: "Jayesh Chaudhari",
     excerpt:
-      "Eight options for dental software in India, compared only from each vendor's own website: who it suits, price in rupees, WhatsApp and AI. By AUM AI, makers of Aumy.",
+      "There is no single best dental software in India, only the one that fits how your clinic runs. The questions clinic owners actually ask, the kinds of dental software on offer, and which clinics each kind suits. By AUM AI, makers of Aumy.",
     description:
-      "An honest 2026 comparison of dental software in India: Cliniify, Dentee, MocDoc, Practo Ray, Clinicia, Medecro.ai, Dentobees and more, from each vendor's site.",
+      "How to choose dental software in India in 2026: the seven questions dentists ask, the main kinds of dental clinic software (practice management, AI in the chair, on-premise, systems that also answer and follow up patients) and which clinics each suits.",
     body: `
-<p><strong>Disclosure first:</strong> this article is written by AUM AI, the company behind Aumy, which is also dental software sold in India. We have tried to make it the comparison we would want to read ourselves. Every fact about another product comes from that vendor's own website, checked on 6 October 2026. Where a website does not say something, we write "not stated". That does not mean the product lacks the feature, only that its site does not mention it. We have not used review sites, forums or anyone else's claims. Prices and features change, so confirm them with the vendor before you decide.</p>
+<p><strong>Disclosure first:</strong> this guide is written by AUM AI, the company behind Aumy, which is also dental software sold in India. So we don't rank other products here. Instead, this is the guide we would want to read ourselves: the questions to ask, the kinds of dental software you will meet, and which kind suits which clinic.</p>
 
-<p>There is no single best dental software in India. There is the software that fits how your clinic actually runs. A solo dentist with one chair needs something different from a three-branch group, and a clinic whose phone rings all evening has a different problem from a clinic whose records are still in registers. So we start with how to choose, then go product by product.</p>
+<p>There is no single best dental software in India. There is the software that fits how your clinic actually runs. A solo dentist with one chair needs something different from a three-branch group, and a clinic whose phone rings all evening has a different problem from a clinic whose records are still in registers. So we start with how to choose.</p>
 
 <h2>How to choose: the questions clinic owners actually ask</h2>
 <p>These are the questions we hear from dentists on calls, in their words:</p>
 <ol>
   <li><strong>"Will it send reminders on WhatsApp, or only SMS?"</strong> Most of your patients read WhatsApp, not SMS. Check whether WhatsApp is included in the plan you are buying, and how many messages come with it.</li>
   <li><strong>"Can my staff and my patients use it in Hindi or our language?"</strong> Ask about two things separately: the language of the software your team uses, and the language of the messages your patients receive.</li>
-  <li><strong>"Can you move my data from Practo, or from my Excel sheets?"</strong> Ask exactly what gets moved. Patient names and phone numbers are one thing. Treatment history, notes, X-rays and pending payments are another.</li>
+  <li><strong>"Can you move my data from my current software, or from my Excel sheets?"</strong> Ask exactly what gets moved. Patient names and phone numbers are one thing. Treatment history, notes, X-rays and pending payments are another.</li>
   <li><strong>"What will I pay in rupees, every year?"</strong> Ask for the price per month or per year, whether GST is included, what a second branch costs, and whether there is a setup fee.</li>
   <li><strong>"Does it work for my type of clinic?"</strong> Dental-only software usually has deeper charting and treatment plans. Multi-specialty software suits a polyclinic or a hospital with a dental department.</li>
   <li><strong>"Who answers the phone after 8 PM?"</strong> Most clinic software keeps records and sends reminders. Very little of it answers a patient who calls or messages when the clinic is closed. Decide whether that is a problem you need solved.</li>
   <li><strong>"Can I see my clinic on my phone?"</strong> Check whether there is a doctor app on Android and iOS, and what it can actually do.</li>
 </ol>
 
-<h2>The software, one by one</h2>
-<p>In alphabetical order. Each section says what the vendor's site describes and who we think the product suits.</p>
+<h2>The kinds of dental software you will find</h2>
 
-<h3>Cliniify</h3>
-<p>Cliniify is dental-only. Its site serves dentists and dental hygienists, from solo practices to dental chains, and says it is trusted by 2,200+ dental clinics across India. It lists a digital EMR with a 32-tooth chart, GST invoices linked to treatment plans, automated WhatsApp reminders, inventory and multi-clinic management, and a doctor app, Cliniify Pro, on iOS and Android. Its AI assistant, Axon, is described as listening to the consultation and writing clinical notes, with face recognition to pull up a patient's record, a prescription assistant and documentation in English and 22 regional languages. It offers free data migration from Practo, Dental Plus, Softdent or any CSV file. Pricing is not published: the pricing page asks five questions about your clinic and promises a call within two hours.</p>
-<p><strong>Suits:</strong> a dental clinic or chain that wants AI help in the chair with notes and prescriptions, and a free move off Practo.</p>
+<h3>1. Dental practice management software</h3>
+<p>The system of record: appointments, patient records with a tooth chart, treatment plans, prescriptions, GST invoices, and reminders by SMS or WhatsApp. Many add inventory, lab work, multi-branch management and a doctor app. Some publish their prices; many ask you to book a demo or fill in a form first.</p>
+<p><strong>Suits:</strong> most single clinics and small groups whose front desk keeps up with calls and messages, and who want a clean calendar, charting and billing.</p>
 
-<h3>Dentee</h3>
-<p>Dentee is a dental platform with several parts: a dentist directory for patients, clinic software called Dentee Manage, dental education and a dental store. Dentee Manage lists electronic patient records, appointments with automatic reminders, SMS and email notifications, routine check-up reminders, accounts and cash management, document, inventory and lab management, dental charting and role-based access, with data on Microsoft Azure. There are Dentee for Doctors apps on Android and iOS. The pricing page says the monthly plan is emailed to you after you sign up for a 15-day free trial, with no sign-up fee and unlimited doctors, appointments and records. WhatsApp and AI are not stated.</p>
-<p><strong>Suits:</strong> a clinic that wants a straightforward dental PMS with lab and inventory, and also wants to be listed on a dental directory.</p>
+<h3>2. Multi-specialty clinic software with a dental module</h3>
+<p>Software made for hospitals and clinics of every specialty, with dental as one module. It is usually strong on billing, departments, insurance and integrations, and lighter on dental charting.</p>
+<p><strong>Suits:</strong> a hospital with a dental department, or a polyclinic with several specialties under one roof.</p>
 
-<h3>Dentsoftware</h3>
-<p>Dentsoftware, from Avenger Soft Solutions, works only for dental clinics and dental colleges, and says it serves clients in 25+ countries. It is offered both in the cloud and on-premise, and the on-premise version runs without internet. It lists dental and perio charting, orthodontic and endodontic modules, prescriptions, billing including dental insurance, lab work, expenses, SMS and email reminders and an online booking link. There are three clinic editions (Executive, Plus and Enterprise) and two editions for dental colleges. Prices are not published: you fill in a form and the team contacts you, and there is a 7-day free trial. It imports basic patient details (name, address, phone) from a set Excel format. A mobile app, WhatsApp and AI are not stated.</p>
-<p><strong>Suits:</strong> a clinic that wants software on its own computer that keeps working when the internet drops, specialty charting, or a dental college.</p>
+<h3>3. Software with AI in the chair</h3>
+<p>Here the AI helps the dentist directly: listening to the consultation and writing clinical notes, suggesting prescriptions, or screening X-rays and marking possible problems for the dentist to check. Good X-ray tools present this as a screening aid, not a diagnosis.</p>
+<p><strong>Suits:</strong> a dentist who wants help with notes or with reading X-rays, alongside everyday practice management.</p>
 
-<h3>MocDoc</h3>
-<p>MocDoc is multi-specialty. The Chennai-based company makes software for hospitals, laboratories, pharmacies, clinics, ophthalmology and fertility centres, and a separate dental product. Its dental page is headed "AI-Powered Dental Practice Management System for Clinics". The feature it describes is automated EMR prompts, which suggest entries from lists the clinic sets up in advance. The dental EMR covers extra-oral and intra-oral examination, malocclusion, an interactive tooth chart and treatment planning from the chart. It also lists estimates that convert into bills, insurance and corporate billing, automated SMS confirmations and reminders, multi-chain management and apps for patients, doctors and front-desk staff. Its homepage lists email, SMS and WhatsApp communication. Prices are not published; you book a demo.</p>
-<p><strong>Suits:</strong> a hospital with a dental department, or a multi-location group that wants one system across departments and integrations with ERP software.</p>
+<h3>4. On-premise or offline software</h3>
+<p>Installed on the clinic's own computer, so it keeps working when the internet drops. Usually comes with specialty charting, and some editions are made for dental colleges.</p>
+<p><strong>Suits:</strong> a clinic with unreliable internet, or a dental college.</p>
 
-<h3>Practo Ray</h3>
-<p>Ray is Practo's clinic management software. Its page speaks to doctors and clinics in general, not to dentists in particular. It lists automated appointment SMS that let patients reschedule or cancel, patient history and templates, online payments, integration with Practo.com and the Practo Pro app. The plans page lists two plans. CM Atom is 999 a month on a one-year term, for up to 50 doctors, with 3,000 free SMS. Clinic Management is 1,499 a month on a one-year term, or 999 a month on a four-year term, with unlimited doctors and 8,000 free SMS. The plans page shows these figures without a currency symbol. There is a 15-day trial. Dental charting, WhatsApp and AI are not stated on the pages we checked.</p>
-<p><strong>Suits:</strong> a clinic that already gets patients through its Practo.com listing and wants appointments tied to it.</p>
-
-<h3>Clinicia</h3>
-<p>Clinicia is multi-specialty. Dental is one of about twenty specialties it lists, alongside a dental lab module and an edition for dental colleges, and it says it is used by 40,000+ healthcare professionals. Its dental page describes dental EMR notes (chief complaint, intraoral findings, radiograph observations), stage-wise treatment plans, X-ray and photo attachments, WhatsApp appointment confirmations and reminders, a token and queue system, and an online booking widget for your Google profile, Instagram or website. Pricing is published: Standard at Rs 7,000 and Premium at Rs 8,500 per clinic, with an extra clinic at Rs 3,500 or Rs 4,250. The page does not show the billing period next to these prices. Standard shares messages and documents by SMS and Premium by WhatsApp. Both include unlimited doctors and staff, and patient communication in the local language. There is no setup fee, a free trial, and apps on Android and iOS. AI is not stated.</p>
-<p><strong>Suits:</strong> a clinic that wants published pricing and WhatsApp sharing without a long sales process, or a polyclinic with several specialties under one roof.</p>
-
-<h3>Medecro.ai</h3>
-<p>Medecro.ai says it is dental-first. Its own FAQ says that if you need a general hospital system today, it is probably not the right fit yet. Its AI is X-ray screening: it marks possible caries, periapical radiolucency, bone levels, restorations and impacted teeth on radiographs. It presents this as a screening aid for the dentist and says it does not diagnose. Around that sits clinic software with appointments, patient records, FDI and Universal charting, digital prescriptions, billing, WhatsApp reminders, online booking and a patient app. Its three plans, Starter, Grow and Scale, differ mainly in AI scans per year (20, 1,000 and 3,000) and in multi-location features. When we checked, the pricing page did not show the price figures. It says prices include GST, billing is annual, data migration is free, and onboarding and support are in Hindi and English.</p>
-<p><strong>Suits:</strong> a dentist who wants AI help reading X-rays, alongside everyday practice management.</p>
-
-<h3>Dentobees</h3>
-<p>Dentobees, from Kozhikode, calls itself a dental ERP. It lists dental charting, treatment plans, billing for treatment, lab and pharmacy with full or partial payments, WhatsApp notifications for appointments, tokens, invoices and treatment plans, multi-branch management, staff attendance and salaries, and mobile apps for doctors and patients. Its prices are published on its homepage, excluding GST. Basic is ₹12,000 a year, with 5 doctor and 5 staff logins and 500 WhatsApp message credits. Growth is ₹20,000 a year and adds the mobile app, WhatsApp reminders and follow-ups and Google review collection. Scale is ₹38,000 a year and adds WhatsApp on your own number, six automated WhatsApp flows and an "AI agent for treatment plans". AI appears only as lines in the plan lists ("Basic AI Assistance", "Full AI Feature Access"), with no further description on the pages we checked.</p>
-<p><strong>Suits:</strong> a single clinic or small group that wants a clear yearly price in rupees with WhatsApp built in.</p>
+<h3>5. Software that also answers and follows up patients</h3>
+<p>Practice management plus the front-desk work around it: an AI receptionist that answers WhatsApp and calls and books into the real calendar, reminders and confirmations, follow-ups for advised treatment and missed visits, recalls and review requests. Aumy is in this group.</p>
+<p><strong>Suits:</strong> an established practice where the problem is not the records but the coordination: enquiries that arrive while the team is busy or the clinic is closed, and follow-ups that slip.</p>
 
 <h2>Side by side</h2>
-<p>Facts only, from each vendor's own website on 6 October 2026. "Not stated" means the site does not say, not that the feature is missing.</p>
 <div style="overflow-x:auto">
 <table class="gh-table">
-  <thead><tr><th>Software</th><th>For whom</th><th>Published price</th><th>WhatsApp reminders</th><th>AI (as the vendor describes it)</th><th>Mobile app</th></tr></thead>
+  <thead><tr><th>Kind of software</th><th>Best for</th><th>Ask about</th></tr></thead>
   <tbody>
-    <tr><td><strong>Cliniify</strong></td><td>Dental only</td><td>Not published (custom quote)</td><td>Yes</td><td>Voice-to-clinical-notes assistant, face recognition, prescription assistant</td><td>Yes, iOS &amp; Android</td></tr>
-    <tr><td><strong>Dentee</strong></td><td>Dental only</td><td>Not published (emailed after trial sign-up)</td><td>Not stated (SMS &amp; email)</td><td>Not stated</td><td>Yes, Android &amp; iOS</td></tr>
-    <tr><td><strong>Dentsoftware</strong></td><td>Dental clinics &amp; colleges</td><td>Not published (on request)</td><td>Not stated (SMS &amp; email)</td><td>Not stated</td><td>Not stated</td></tr>
-    <tr><td><strong>MocDoc</strong></td><td>Multi-specialty, with a dental product</td><td>Not published</td><td>WhatsApp listed as a channel; dental page names SMS reminders</td><td>"AI-powered"; automated EMR suggestions</td><td>Yes (patients, doctors, front desk)</td></tr>
-    <tr><td><strong>Practo Ray</strong></td><td>Clinics of all specialties</td><td>999–1,499 a month (no currency symbol shown)</td><td>Not stated (SMS)</td><td>Not stated</td><td>Yes, Practo Pro</td></tr>
-    <tr><td><strong>Clinicia</strong></td><td>Multi-specialty, incl. dental</td><td>Rs 7,000 / Rs 8,500 per clinic (period not shown)</td><td>Yes (Premium plan)</td><td>Not stated</td><td>Yes, Android &amp; iOS</td></tr>
-    <tr><td><strong>Medecro.ai</strong></td><td>Dental-first</td><td>Not shown on pricing page (annual, incl. GST)</td><td>Yes</td><td>X-ray screening support</td><td>Patient app mentioned</td></tr>
-    <tr><td><strong>Dentobees</strong></td><td>Dental only</td><td>₹12,000 / ₹20,000 / ₹38,000 a year + GST</td><td>Yes</td><td>Listed in plans, not described</td><td>Yes, iOS &amp; Android (Growth and Scale)</td></tr>
+    <tr><td><strong>Dental practice management</strong></td><td>Most single clinics and small groups</td><td>WhatsApp included or SMS only; data migration; doctor app</td></tr>
+    <tr><td><strong>Multi-specialty with a dental module</strong></td><td>Hospitals and polyclinics</td><td>Depth of dental charting and treatment plans</td></tr>
+    <tr><td><strong>AI in the chair</strong></td><td>Help with notes or X-rays</td><td>Who checks the AI's output before it is saved</td></tr>
+    <tr><td><strong>On-premise / offline</strong></td><td>Unreliable internet; dental colleges</td><td>Backups, updates and remote access</td></tr>
+    <tr><td><strong>Also answers and follows up patients</strong></td><td>Established practices losing enquiries and follow-ups</td><td>WhatsApp and calls, after hours, real booking, hand-over to staff</td></tr>
   </tbody>
 </table>
 </div>
 
 <h2>Where Aumy fits, honestly</h2>
-<p>Aumy is our product, so weigh this section accordingly. Aumy is dental-only, like several products above, but it starts from a different problem. Most of the software above is a system of record: it keeps the calendar, the chart and the bill, and sends reminders. Aumy is built around the patient journey. It has an AI receptionist that answers patients on WhatsApp (the official WhatsApp Business API, on the clinic's own number) and on phone calls. It books and reschedules against the doctor's real availability, and it handles reminders by message and call, after-care messages and follow-ups. It hands anything clinical or sensitive to your team. Underneath is a complete Clinic OS: appointments and doctor calendars, patient records, X-rays and prescriptions, dental charting and treatment plans, billing, digital registration and consent, and staff logins. Or it can run alongside the dental software you already use. Patient data is stored in AWS's Mumbai region.</p>
-<p>On price, Aumy is not the cheapest option here. It is priced per clinic, after a <a href="/growth-audit">free clinic audit</a>.</p>
-<p><strong>Which clinics are better served by something simpler:</strong> if you are a solo dentist or a small clinic, your receptionist keeps up with the calls and messages, and what you need is a clean calendar, charting, billing and WhatsApp reminders, a simpler practice management system with a published price will probably serve you well. Dentobees, Clinicia and Practo Ray all publish theirs. If AI help reading X-rays or writing notes in the chair is what you want, look at Medecro.ai and Cliniify. If you need an on-premise install, look at Dentsoftware.</p>
-<p>Aumy is worth a conversation when the problem is not the records but the coordination. That means calls and WhatsApp messages that arrive while the team is busy or the clinic is closed, reminders and after-care that depend on someone remembering, and follow-ups that slip. We wrote more about that difference in <a href="/growth/dental-practice-management-software-vs-growth">PMS vs the patient journey</a> and <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>.</p>
-
-<h2>Sources, checked 6 October 2026</h2>
-<p>All facts about other products come only from these vendor pages:</p>
-<ul>
-  <li>Cliniify: <a href="https://cliniify.com/" rel="nofollow noopener" target="_blank">cliniify.com</a> and <a href="https://cliniify.com/pricing" rel="nofollow noopener" target="_blank">cliniify.com/pricing</a></li>
-  <li>Dentee: <a href="https://www.dentee.com/dental-practice-management-software/" rel="nofollow noopener" target="_blank">dentee.com/dental-practice-management-software</a> and <a href="https://www.dentee.com/dental-practice-management-software/plan.html" rel="nofollow noopener" target="_blank">its pricing plan page</a></li>
-  <li>Dentsoftware: <a href="https://www.dentsoftware.com/dental-clinic-software/" rel="nofollow noopener" target="_blank">dentsoftware.com/dental-clinic-software</a> and <a href="https://www.dentsoftware.com/dental-office-software-pricing/" rel="nofollow noopener" target="_blank">dentsoftware.com/dental-office-software-pricing</a></li>
-  <li>MocDoc: <a href="https://mocdoc.com/" rel="nofollow noopener" target="_blank">mocdoc.com</a> and <a href="https://mocdoc.com/dental-clinic-management-software" rel="nofollow noopener" target="_blank">mocdoc.com/dental-clinic-management-software</a></li>
-  <li>Practo Ray: <a href="https://www.practo.com/providers/clinics/ray" rel="nofollow noopener" target="_blank">practo.com/providers/clinics/ray</a> and <a href="https://www.practo.com/providers/clinics/ray/plans" rel="nofollow noopener" target="_blank">practo.com/providers/clinics/ray/plans</a></li>
-  <li>Clinicia: <a href="https://clinicia.com/solution-by-speciality/dentist/" rel="nofollow noopener" target="_blank">clinicia.com/solution-by-speciality/dentist</a> and <a href="https://clinicia.com/pricing/" rel="nofollow noopener" target="_blank">clinicia.com/pricing</a></li>
-  <li>Medecro.ai: <a href="https://medecro.ai/" rel="nofollow noopener" target="_blank">medecro.ai</a> and <a href="https://medecro.ai/pricing" rel="nofollow noopener" target="_blank">medecro.ai/pricing</a></li>
-  <li>Dentobees: <a href="https://www.dentobees.com/" rel="nofollow noopener" target="_blank">dentobees.com</a> (features and pricing)</li>
-  <li>Aumy: <a href="/">aumai.co.in</a></li>
-</ul>
-<p><em>Spotted something out of date or wrong about your product? Write to us and we will correct it.</em></p>`,
+<p>Aumy is our product, so weigh this section accordingly. Aumy is AI dental clinic software, dental-only, and it starts from the patient journey rather than the record. It has an AI receptionist that answers patients on WhatsApp (the official WhatsApp Business API, on the clinic's own number) and on phone calls. It books and reschedules against the doctor's real availability, and it handles reminders, after-care messages and follow-ups. It hands anything clinical or sensitive to your team. Underneath is AI dental practice management: appointments and doctor calendars, patient records, X-rays and prescriptions, dental charting and treatment plans, billing, digital registration and consent, and staff logins. Or it can run alongside the dental software you already use.</p>
+<p>On price, Aumy is not the cheapest kind of software here. It is priced per clinic, after a <a href="/growth-audit">free clinic audit</a>.</p>
+<p><strong>Which clinics are better served by something simpler:</strong> if you are a solo dentist or a small clinic, your receptionist keeps up with the calls and messages, and what you need is a clean calendar, charting, billing and WhatsApp reminders, a simpler practice management system with a published price will probably serve you well. If AI help reading X-rays or writing notes in the chair is what you want, look for software built around that. If you need to work offline, look for an on-premise edition.</p>
+<p>Aumy is worth a conversation when the problem is not the records but the coordination. We wrote more about that difference in <a href="/growth/dental-practice-management-software-vs-growth">PMS vs the patient journey</a>, <a href="/modules/dental-clinic-management-software">AI dental practice management software</a> and <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>.</p>`,
   },
 ];
 

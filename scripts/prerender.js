@@ -60,6 +60,10 @@ const RYC = require('../src/data/runYourClinic');
 const HOW = require('../src/data/howItWorks');
 // Home, Aumy as ONE product (owner 2026-11-02): same file as src/pages/Home.js.
 const HOME = require('../src/data/homeOneProduct');
+// Approved public proof (owner 2026-11-13): one copy, also read by Home.js and ModuleDetailPage.js.
+const PUBLIC_PROOF = require('../src/data/proof');
+// The "page not found" page (13 Nov 2026), same words as src/pages/NotFoundPage.js.
+const NF = require('../src/data/notFound');
 // "Handcrafted only for dentists" (owner 2026-10-08): same words as the React pages.
 const POS = require('../src/data/positioning');
 // Home, outcomes as a service (owner 2026-10-22): same file as src/pages/Home.js.
@@ -73,6 +77,13 @@ const faqPageLd = (faqs) => ({
 });
 // Crawler HTML for the FAQ block and a [title, body] list.
 const faqHtml = (faqs, heading) => `<h2>${esc(heading)}</h2>${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
+// Approved pooled proof (owner 2026-11-13), word for word from src/data/proof.js: home + the Aumy Clinic page.
+const pooledProofHtml = (P) => `<section id="proof"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(P.eyebrow)}</p>
+        <h2>${esc(P.title)}</h2>
+        <ul>${P.items.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
+        <p>${esc(P.window)}</p>
+      </div></section>`;
 // The Aumy app in the stores + the self-serve modules (owner 2026-10-09): same file
 // src/components/StartInApp.js reads. The React app shows only this phone's store;
 // the crawler / no-JS HTML always lists both.
@@ -259,9 +270,10 @@ const dentalSoftwareLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: 'Aumy',
-  alternateName: 'Aumy AI dental software',
+  // Owner 2026-11-13: the two search phrases, "AI dental clinic software" and "AI dental practice management".
+  alternateName: ['Aumy AI dental clinic software', 'Aumy by AUM AI'],
   applicationCategory: 'HealthApplication',
-  applicationSubCategory: 'AI dental software / dental practice management software',
+  applicationSubCategory: 'AI dental clinic software / AI dental practice management software',
   operatingSystem: 'Web, iOS, Android',
   '@id': `${ORIGIN}/#aumy-dental`,
   url: `${ORIGIN}/`,
@@ -386,12 +398,11 @@ function howWeWorkHtml(eyebrow = HO.HOW.eyebrow, titleA = HO.HOW.titleA, titleB 
 // ---- home (Aumy as ONE product, owner 2026-11-02) ---------------------------
 // Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js.
 function homeContent() {
-  const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, START, FINAL } = HOME;
+  const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL } = HOME;
   return `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(HERO.title)}</h1>
-        <p><strong>${esc(HERO.badge.label)}</strong>: ${esc(HERO.badge.line)}</p>
         <p class="ch-hero-sub">${esc(HERO.subLead)}</p>
         <ul>${HERO.parts.map((p) => '<li><strong>' + esc(p.name) + '</strong> ' + esc(p.line) + '</li>').join('')}</ul>
         <p><em>${esc(HERO.lossQuestion)}</em></p>
@@ -432,6 +443,7 @@ function homeContent() {
         <p><strong>${esc(PROOF.statN)}</strong> ${esc(PROOF.statT)} ${esc(PROOF.statS)}</p>
         <p><a href="${GR.GOOGLE_REVIEWS_URL}">${esc(PROOF.reviewsLink)}</a> · ${esc(GR.GOOGLE_RATING)} out of 5 on Google</p>
       </div></section>
+      ${pooledProofHtml(POOLED_PROOF)}
       <section><div class="ch-container ch-narrow">
         <h2>${esc(FIT.title)}</h2>
         <p>${esc(FIT.body)}</p>
@@ -443,6 +455,10 @@ function homeContent() {
           ${START.items.map((it) => '<li><h3>' + esc(it.title) + '</h3><p>' + esc(it.body) + '</p></li>').join('\n          ')}
         </ol>
         <p><strong>${esc(START.closing.title)}</strong> ${esc(START.closing.line)}</p>
+      </div></section>
+      <section id="questions"><div class="ch-container ch-narrow">
+        ${faqHtml(FAQ.items, FAQ.title)}
+        <p>${FAQ.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>
       </div></section>
       <section id="free-audit"><div class="ch-container ch-narrow">
         <h2>${esc(FINAL.title)}</h2>
@@ -736,6 +752,7 @@ const routes = [
         <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
         ${faqHtml(AIR.FAQS, 'AI receptionist questions, answered')}
         <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/growth-audit">Free clinic audit</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat or Aumy Voice on its own</a></p>
+        <p>${AIR.RELATED.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>
       </div></section>`,
   },
   {
@@ -814,7 +831,7 @@ const routes = [
         </ol>
         <h2>AI dental software questions, answered</h2>
         ${ADS.FAQS.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')}
-        <p>Last updated ${esc(ADS.UPDATED)}. Comparing named products? <a href="/growth/best-dental-software-india">Best dental software in India (2026): an honest comparison</a>. See also <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, <a href="/modules/dental-patient-follow-up">Aumy Journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">the modules you can buy on their own</a>.</p>
+        <p>Last updated ${esc(ADS.UPDATED)}. Not sure which kind of software you need? <a href="/growth/best-dental-software-india">Best dental software in India (2026): how to choose</a>. See also <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, <a href="/modules/dental-patient-follow-up">Aumy Journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">the modules you can buy on their own</a>.</p>
         <p><a href="/contact">Talk to us</a></p>
       </div></section>`,
   },
@@ -830,7 +847,8 @@ const routes = [
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}${HOME.SEO.shareImage}`,
     // Only the Sterling film (hero) plays on this page now.
-    jsonld: [orgLd, dentalSoftwareLd, explainerVideoLd[0]],
+    // FAQPage (owner 2026-11-13): the same questions the page shows (HOME.FAQ).
+    jsonld: [orgLd, dentalSoftwareLd, explainerVideoLd[0], faqPageLd(HOME.FAQ.items)],
     content: homeContent(),
   },
   {
@@ -1669,14 +1687,16 @@ for (const p of MODS.PAGES) {
         name: `${p.short}: ${p.title}`,
         url,
         applicationCategory: 'BusinessApplication',
-        applicationSubCategory: p.keyword,
+        applicationSubCategory: p.ldSubCategory || p.keyword,
         operatingSystem: 'Web, Android, iOS',
-        description: `${p.intro} ${POS.LD_SUFFIX}`,
+        description: `${p.ldDescription || p.intro} ${POS.LD_SUFFIX}`,
         featureList: p.does,
         audience: { '@type': 'BusinessAudience', audienceType: 'Dental clinics' },
         isPartOf: { '@id': `${ORIGIN}/#aumy-dental` },
         provider: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
       },
+      // FAQPage only where the page shows the questions (owner 2026-11-13: Aumy Clinic first).
+      ...(p.faqs && p.faqs.length ? [faqPageLd(p.faqs)] : []),
     ],
     content: `
       <nav aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/modules">Modules</a></li><li>${esc(p.short)}</li></ol></nav>
@@ -1699,6 +1719,10 @@ for (const p of MODS.PAGES) {
         <h2>What you get</h2>
         <ul>${p.outcomes.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>
         ${p.id === 'dental-clinic-management-software' ? `<h2>${esc(NABH.HEADING)}</h2><p>${esc(NABH.LEAD)}</p><ul>${NABH.BULLETS.map((b) => `<li>${esc(b)}</li>`).join('')}</ul><p>${esc(NABH.FOOTNOTE)}</p><p><a href="${NABH.PATH}">NABH-ready dental clinic software in India</a></p>` : ''}
+      </div></section>
+      ${p.proof ? pooledProofHtml(PUBLIC_PROOF.POOLED) : ''}
+      ${p.faqs && p.faqs.length ? `<section id="questions"><div class="ch-container ch-narrow">${faqHtml(p.faqs, p.faqTitle)}</div></section>` : ''}
+      <section><div class="ch-container ch-narrow">
         <h2>${p.featured ? 'The modules inside Aumy One' : 'Works even better with'}</h2>
         <ul>
           ${moduleCardsHtml(pairs)}
@@ -1712,6 +1736,22 @@ for (const p of MODS.PAGES) {
       </div></section>`,
   });
 }
+// The "page not found" page (13 Nov 2026): nginx serves build/404.html with a real 404 status for unknown URLs
+// (error_page 404 /404.html). Same words as src/pages/NotFoundPage.js. noindex, and never in the sitemap.
+routes.push({
+  slug: '404',
+  title: NF.NOT_FOUND.title,
+  description: NF.NOT_FOUND.description,
+  canonical: `${ORIGIN}/`,
+  noindex: true,
+  content: `
+      <section><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(NF.NOT_FOUND.eyebrow)}</p>
+        <h1>${esc(NF.NOT_FOUND.h1)}</h1>
+        <p>${esc(NF.NOT_FOUND.body)}</p>
+        <ul>${NF.NOT_FOUND.links.map((l) => `<li><a href="${l.to}">${esc(l.label)}</a></li>`).join('')}</ul>
+      </div></section>`,
+});
 // Old module URLs → keyword URLs (owner 2026-10-08; src/data/modules.js OLD_SLUGS). Not in the sitemap;
 // canonical + meta refresh point crawlers and no-JS visitors at the new page.
 const MODULE_REDIRECTS = MODS.OLD_SLUGS;

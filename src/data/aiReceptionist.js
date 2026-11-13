@@ -48,5 +48,11 @@ const FAQS = [
   { q: 'How long does setup take?', a: 'Onboarding is done for you — WhatsApp connection, your treatments and FAQs configured in your doctors’ own words. Most clinics are live within a week.' },
 ];
 
-module.exports = { TITLE, DESCRIPTION, HERO, MATHS, CAPABILITIES, STAGE, FAQS };
+// Internal links (owner 2026-11-13): home, the Aumy Clinic page and this page link to each other.
+const RELATED = [
+  { to: '/', label: 'Aumy: AI dental clinic software' },
+  { to: '/modules/dental-clinic-management-software', label: 'Aumy Clinic: AI dental practice management software' },
+];
+
+module.exports = { TITLE, DESCRIPTION, HERO, MATHS, CAPABILITIES, STAGE, FAQS, RELATED };
 module.exports.default = module.exports;

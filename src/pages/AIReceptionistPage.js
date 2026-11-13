@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import { TITLE, DESCRIPTION, HERO, MATHS, CAPABILITIES, STAGE, FAQS } from '../data/aiReceptionist';
+import { TITLE, DESCRIPTION, HERO, MATHS, CAPABILITIES, STAGE, FAQS, RELATED } from '../data/aiReceptionist';
 import { AI_TRAINED_FOR_DENTISTRY } from '../data/positioning';
 import './HomeClinic.css';
 
@@ -82,6 +82,15 @@ const AIReceptionistPage = () => {
           <div className="ch-center" style={{ textAlign: 'center', marginTop: 26 }}>
             <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get a free clinic audit</Link>
           </div>
+          {/* Internal links (owner 2026-11-13): home, the Aumy Clinic page and this page link to each other. */}
+          <p style={{ textAlign: 'center', marginTop: 22, color: '#5b6784' }}>
+            {RELATED.map((l, i) => (
+              <React.Fragment key={l.to}>
+                {i > 0 && ' · '}
+                <Link to={l.to}>{l.label}</Link>
+              </React.Fragment>
+            ))}
+          </p>
         </div>
       </section>
     </div>

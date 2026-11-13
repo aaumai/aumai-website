@@ -7,12 +7,14 @@
  * (the existing explainer films, labelled by part, never by module name), an example day, the five setup
  * steps, how the clinic stays in control, proof, and the one call to action (the free clinic audit).
  * No module names, no prices, no plan names. The part names and lines come from src/data/homeOneProduct.js
- * so the two pages never drift. Sterling's "2 in 3" stays here (owner 2026-11-03); the home uses "almost half".
+ * so the two pages never drift. Sterling's figure is the approved "almost half (47%)" from src/data/proof.js
+ * (owner 2026-11-13; the earlier "2 in 3" is not on the approved proof list).
  *
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
  */
 const HOME = require('./homeOneProduct');
 const EXPL = require('./explainers');
+const { STERLING_CONFIRMED } = require('./proof');
 
 const video = (moduleId) => EXPL.VIDEOS.find((v) => v.moduleId === moduleId);
 const part = (key) => HOME.THREE.items.find((it) => it.key === key);
@@ -84,12 +86,12 @@ const HOW_CONTROL = [
 ];
 
 // Proof, real words only: Dr Priyanka's Google review (src/data/googleReviews.js) and Sterling's WhatsApp
-// confirmations ("2 in 3", owner-approved 2026-10-23, kept on this page by the owner on 2026-11-03).
+// confirmations (approved wording from src/data/proof.js; "2 in 3" replaced on 2026-11-13).
 const HOW_PROOF = {
   quote: 'Thank you, Jayesh ji, and your team. You were with us at every step.',
   who: 'Dr Priyanka Giroti, The Sterling Dental Clinic, New Delhi',
-  number: '2 in 3',
-  numberText: 'patients at The Sterling Dental Clinic, Delhi, now confirm their appointment themselves on WhatsApp.',
+  number: STERLING_CONFIRMED.short,
+  numberText: 'of appointments at The Sterling Dental Clinic, Delhi, were confirmed by the patient on WhatsApp: 281 of 603 (47%), measured 2–16 Oct 2026.',
 };
 
 const HOW_FINAL = HOME.FINAL;

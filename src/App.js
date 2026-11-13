@@ -9,6 +9,7 @@ import ShippingPolicy from './pages/ShippingPolicy';
 import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import DataDeletion from './pages/DataDeletion';
+import NotFoundPage from './pages/NotFoundPage';
 import CancellationRefund from './pages/CancellationRefund';
 import DabbewaalaApp from './pages/DabbewaalaApp';
 import AumaiAnalytics from './pages/AumaiAnalytics';
@@ -175,6 +176,8 @@ function App() {
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/data-deletion" element={<DataDeletion />} />
                 <Route path="/delete-account" element={<DataDeletion />} />
+                {/* Unknown URL: a real "not found" page, never the home page (13 Nov 2026; nginx also returns 404). */}
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
               <Footer />
               <WhatsAppFloat />

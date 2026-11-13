@@ -233,3 +233,9 @@
 .site-lux .mh-stretch:focus-visible::after { outline-color: var(--lux-gold); }
 /* lux.css recolours every .ch-home link; the module name keeps the card-title colour. */
 .site-lux .ch-home .mh-card a.mh-stretch:not(.ch-btn) { color: var(--c-ink); text-decoration: none; }
+
+/* Questions on a module page (owner 2026-11-13, Aumy Clinic first): plain pairs separated by hairlines. */
+.mp-faq { padding: 16px 2px; border-bottom: 1px solid var(--c-line); }
+.mp-faq:first-of-type { border-top: 1px solid var(--c-line); margin-top: 18px; }
+.mp-faq h3 { margin: 0 0 6px; font-size: 17.5px; line-height: 1.4; color: var(--c-ink); }
+.mp-faq p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--c-ink-soft); }

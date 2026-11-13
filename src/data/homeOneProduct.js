@@ -14,8 +14,11 @@
  *     Sterling, RB, Vinaykia, Dental Planet Elite). Off everywhere, so never claimed here: lab work ready,
  *     festival greetings, health tips, treatment suggestions;
  *   - the paperless list names real screens of the clinic software only;
- *   - the one number is Sterling's "2 out of 3" (owner 2026-11-03: "recently the trend is climbing to 2/3 so keep
- *     it 2 out of 3"; measured on prod 3 Nov: about half of reminded appointments, steady, so no date or count line);
+ *   - numbers only from the approved proof list (src/data/proof.js, owner 2026-11-13): Sterling's "almost half
+ *     (47%)", dated, and the pooled "across 4 dental clinics on Aumy" figures with their window. The earlier
+ *     "2 out of 3" was replaced on 13 Nov 2026 (not on the approved list, rule N01);
+ *   - module names stay off this page, links included (rule M04-M06): the link to the Aumy Clinic page reads
+ *     "AI dental practice management software";
  *   - "100% digital and paperless" is the owner's own phrase (kept as he wrote it).
  *
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
@@ -23,6 +26,8 @@
 
 // The ads line of HANDLED follows the one ads switch (src/data/visibility.js).
 const { HIDE_ADS, adsText } = require('./visibility');
+// Approved proof, one copy (owner 2026-11-13).
+const { POOLED, STERLING_CONFIRMED } = require('./proof');
 
 // The one next step: the free clinic audit form. First-person, outcome-led label (reviewer, 2026-11-02).
 const AUDIT = { label: 'Show me where my clinic loses patients', to: '/growth-audit' };
@@ -67,9 +72,8 @@ const HANDLED = {
 const HERO = {
   eyebrow: 'For owners of established dental practices',
   title: 'One system that plugs every leak in your dental clinic.',
-  // Owner 2026-11-11: a small badge under the headline. OUR OWN pill style, never NABH's logo or artwork. The line
-  // names what is built in today (Omlesh's NABH paperwork, live 3 Nov: UHID, visit numbers, the detailed bill).
-  badge: { label: 'NABH Compliant', line: 'UHID, visit numbers and NABH-format bills, built in.' },
+  // The "NABH Compliant" badge (11 Nov) was removed on 13 Nov 2026 (owner): NABH accredits clinics, not software.
+  // The NABH paperwork stays described on /nabh-dental-clinic-software and on the Aumy Clinic page.
   // What Aumy is, as a list a busy owner can skim: bold name, then the line (owner 2026-11-04).
   subLead: 'Aumy is four things working as one:',
   parts: [
@@ -158,9 +162,9 @@ const PROOF = {
   quote: 'My only regret? That we didn’t have this years ago.',
   who: 'Dr Priyanka Giroti',
   where: 'The Sterling Dental Clinic, New Delhi · 26 years in practice',
-  statN: '2 out of 3',
-  statT: 'of Sterling’s appointments are now confirmed by the patient on WhatsApp.',
-  statS: '',
+  statN: STERLING_CONFIRMED.short,
+  statT: STERLING_CONFIRMED.line,
+  statS: STERLING_CONFIRMED.window,
   reviewsLink: 'Read our Google reviews',
 };
 
@@ -202,11 +206,53 @@ const FINAL = {
   cta: AUDIT,
 };
 
-// SEO (same strings in scripts/prerender.js slug '' and public/index.html).
+// Pooled proof band (owner 2026-11-13): approved wording only, from src/data/proof.js.
+const POOLED_PROOF = POOLED;
+
+// Search questions (owner 2026-11-13: the home page targets "AI dental clinic software"; the Aumy Clinic page targets
+// "AI dental practice management"). Shown on the page AND in the FAQPage JSON-LD (prerender reads the same list).
+// Answers repeat only what this page already says. No price: the free audit gives the figure.
+const FAQ = {
+  title: 'AI dental clinic software: questions, answered',
+  items: [
+    {
+      q: 'What is AI dental clinic software?',
+      a: 'AI dental clinic software runs a dental clinic’s day (appointments, patient records with tooth charting, treatment plans and billing) and adds AI that does the work the front desk can’t get to: an AI receptionist that answers WhatsApp and calls and books appointments, and follow-ups that go out on their own. Aumy is AI dental clinic software built for dental clinics in India.',
+    },
+    {
+      q: 'What is dental practice management software?',
+      a: 'Dental practice management software, also called dental clinic management software, is the system a dental clinic runs on: the appointment diary, patient records, tooth charting, treatment plans, prescriptions, consent forms, invoices and reports. Aumy includes AI dental practice management, so the same system also answers patients and follows them up.',
+    },
+    {
+      q: 'Does Aumy have an AI receptionist for dental clinics?',
+      a: 'Yes. Aumy’s AI receptionist answers WhatsApp in seconds and picks up the calls your desk can’t get to, day or night. It books, moves and cancels appointments into real free slots, and hands the chat to your team the moment a person is needed.',
+    },
+    {
+      q: 'Does Aumy replace my front desk?',
+      a: 'No. Your front desk stays. Aumy picks up what they can’t get to: the enquiries, the calls, the reminders and the follow-ups that slip between busy people.',
+    },
+    {
+      q: 'Can I keep my current practice software?',
+      a: 'Yes. Keep your practice software, or move fully to Aumy. Whatever system you use today, we move your patients, visits, treatments, bills, X-rays and images into Aumy within the week.',
+    },
+    {
+      q: 'How much does Aumy cost?',
+      a: 'It depends on your clinic: how many chairs and doctors, and what you switch on. After a free clinic audit we give you one clear number, before anything starts.',
+    },
+  ],
+  // Internal links (owner 2026-11-13): home, the Aumy Clinic page and /ai-receptionist link to each other.
+  links: [
+    { to: '/modules/dental-clinic-management-software', label: 'AI dental practice management software' },
+    { to: '/ai-receptionist', label: 'AI receptionist for dental clinics' },
+  ],
+};
+
+// SEO (same strings in scripts/prerender.js slug '' and public/index.html). Owner 2026-11-13: the title targets
+// "AI Dental Clinic Software"; the H1 and the hero stay as they are (no positioning change).
 const SEO = {
-  title: 'Aumy | AI Receptionist, Patient Follow-Ups & Paperless Clinic for Dental Practices in India',
+  title: 'AI Dental Clinic Software in India · Aumy',
   description:
-    'Aumy is one product for dental clinics in India: an AI receptionist on WhatsApp and calls, every patient follow-up done for you, and a 100% digital, paperless clinic. No patient slips through.',
+    'Aumy is AI dental clinic software for India: practice management, appointments, billing and patient records, with an AI receptionist and WhatsApp follow-ups.',
   shareImage: '/og/aumy-stop-losing-patients-1200x630.png',
 };
 
@@ -214,6 +260,6 @@ const SEO = {
 const ORG_DESCRIPTION =
   'AUM AI makes Aumy, one product for dental clinics in India that answers every patient on WhatsApp and calls, follows up every one until they book, and runs the clinic without paper.';
 const PRODUCT_DESCRIPTION =
-  'Aumy is one product for dental clinics in India: an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
+  'Aumy is AI dental clinic software, one product for dental clinics in India: AI dental practice management (appointments, patient records, charting and billing), an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
 
-module.exports = { AUDIT, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, FIT, START, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
+module.exports = { AUDIT, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
