@@ -263,7 +263,7 @@ const Header = () => {
       {/* The "1,000 Aumy credits" bar was removed on every page (owner 2026-11-03: no pricing, trial or credits). */}
       {showLaunchBar && (
         <div className="launch-notice" ref={launchBarRef} role="note">
-          <span className="launch-notice-text">Launching in Dubai soon!</span>
+          <span className="launch-notice-text">Launching in Dubai soon! Being built for DHA and NABIDH requirements.</span>
           <button type="button" className="launch-notice-close" onClick={closeLaunchBar} aria-label="Close this notice">
             <span aria-hidden="true">×</span>
           </button>
