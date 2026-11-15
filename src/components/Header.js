@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { isMasterclassPath } from '../data/masterclass';
 import './Header.css';
 
+const LAUNCH_BAR_KEY = 'aumai_dubai_launch_bar';
+
 // The menu (owner 2026-11-02: Aumy is ONE product; "the website is very noisy … keep it clean simple").
 // Five plain links (Services added 2026-11-05) plus the one call to action; Home (Aumy) is the logo. No module names, no services
 // dropdown and no pricing (owner 2026-11-02: "no pricing on website at all"). The module pages, the
@@ -39,6 +41,28 @@ const Header = () => {
   const location = useLocation();
   const navRef = useRef(null);
   const hoverTimer = useRef(null);
+  // "Launching in Dubai soon!" bar on every page (owner 2026-11-15, an exception to the 9 Nov strategy lock).
+  // Closeable; stays closed for that visitor. Plain text: no link, no dates, no prices.
+  const [showLaunchBar, setShowLaunchBar] = useState(() => {
+    try { return window.localStorage.getItem(LAUNCH_BAR_KEY) !== 'closed'; } catch { return true; }
+  });
+  const launchBarRef = useRef(null);
+
+  // The fixed header grows by the bar's height; .App pads by --notice-h so nothing hides under it.
+  useEffect(() => {
+    const root = document.documentElement;
+    const el = launchBarRef.current;
+    if (!showLaunchBar || !el) { root.style.removeProperty('--notice-h'); return undefined; }
+    const apply = () => root.style.setProperty('--notice-h', `${el.offsetHeight}px`);
+    apply();
+    window.addEventListener('resize', apply);
+    return () => { window.removeEventListener('resize', apply); root.style.removeProperty('--notice-h'); };
+  }, [showLaunchBar]);
+
+  const closeLaunchBar = () => {
+    setShowLaunchBar(false);
+    try { window.localStorage.setItem(LAUNCH_BAR_KEY, 'closed'); } catch { /* private window: closes for this visit only */ }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -237,6 +261,14 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       {/* The "1,000 Aumy credits" bar was removed on every page (owner 2026-11-03: no pricing, trial or credits). */}
+      {showLaunchBar && (
+        <div className="launch-notice" ref={launchBarRef} role="note">
+          <span className="launch-notice-text">Launching in Dubai soon!</span>
+          <button type="button" className="launch-notice-close" onClick={closeLaunchBar} aria-label="Close this notice">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      )}
       <div className="container header-container">
         <div className="header-content">
           <div className="logo">
