@@ -35,6 +35,54 @@
   box-shadow: 0 4px 24px rgba(22, 50, 79, 0.08);
 }
 
+/* "Launching in Dubai soon!" (owner 2026-11-15) — slim navy strip above the navigation, closeable */
+.launch-notice {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #16324f;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  padding: 7px 44px;
+}
+
+.launch-notice-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.launch-notice-close:hover,
+.launch-notice-close:focus-visible {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.12);
+  outline: 2px solid transparent;
+}
+
+.launch-notice-close:focus-visible {
+  box-shadow: 0 0 0 2px #7fd6c9;
+}
+
 /* Onboarding pause notice — slim navy strip above the navigation */
 .onboarding-notice {
   position: relative;
