@@ -1525,6 +1525,20 @@ for (const p of growthPosts) {
         },
         mainEntityOfPage: `${ORIGIN}/growth/${p.slug}`,
       },
+      // An article's own video and FAQ (16 Nov 2026): both are shown in the body, from the same data.
+      ...(p.video ? [{
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: p.video.title,
+        description: p.video.description,
+        thumbnailUrl: `${ORIGIN}${p.video.poster}`,
+        contentUrl: `${ORIGIN}${p.video.src}`,
+        uploadDate: isoDateTime(p.video.uploadDate),
+        duration: p.video.duration,
+        inLanguage: 'en-IN',
+        publisher: { '@type': 'Organization', name: 'AUM AI', logo: { '@type': 'ImageObject', url: `${ORIGIN}${HO.LOGO_URL}` } },
+      }] : []),
+      ...(p.faqs ? [faqPageLd(p.faqs)] : []),
     ],
     content: `
       <article><div class="ch-container ch-narrow">

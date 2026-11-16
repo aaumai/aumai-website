@@ -266,6 +266,27 @@
 }
 .gh-box p { margin: 0; color: var(--c-ink); }
 
+/* Article video (16 Nov 2026): vertical 9:16, centred, about phone width */
+.gh-video {
+  margin: 26px auto 30px;
+  max-width: 420px;
+  text-align: center;
+}
+.gh-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 16px;
+  box-shadow: var(--c-shadow);
+}
+.gh-video figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--c-ink-soft);
+}
+
 /* Formula strip */
 .gh-formula {
   display: flex;

@@ -32,6 +32,49 @@ const GROWTH_CATEGORIES = [
   'After-Treatment Care',
 ];
 
+// Optional per-article video and FAQ (16 Nov 2026). The same data drives the
+// visible HTML (inside `body`, so the React page and the crawler HTML match)
+// and the VideoObject / FAQPage JSON-LD written by scripts/prerender.js.
+const escHtml = (s) =>
+  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// Vertical (9:16) videos: centred, about phone width (.gh-video in GrowthHub.css).
+const articleVideoHtml = (v) => `
+<figure class="gh-video">
+  <video controls preload="metadata" playsinline poster="${v.poster}" width="${v.width}" height="${v.height}" aria-label="Video: ${escHtml(v.title)}">
+    <source src="${v.src}" type="video/mp4">
+  </video>
+  <figcaption>${escHtml(v.caption)}</figcaption>
+</figure>`;
+const articleFaqHtml = (faqs, heading) =>
+  `<h2>${escHtml(heading)}</h2>` + faqs.map((f) => `<h3>${escHtml(f.q)}</h3><p>${escHtml(f.a)}</p>`).join('');
+
+const MONDAY_NUMBERS_VIDEO = {
+  src: '/videos/growth/dental-clinic-numbers-every-monday.mp4',
+  poster: '/videos/growth/dental-clinic-numbers-every-monday.jpg',
+  width: 720,
+  height: 1280,
+  title: '9 numbers every dental clinic owner should check every Monday',
+  caption: 'Watch: the 9 numbers, one by one (4 min 31 s).',
+  description:
+    'A short walk through the 9 numbers a dental clinic owner should check every Monday: money billed and received, billing by treatment, consultations, consultations that went ahead, average bill per patient, billing per doctor hour, next visits booked, new patients, and late cancellations and no-shows.',
+  duration: 'PT4M31S',
+  uploadDate: '2026-11-16',
+};
+const MONDAY_NUMBERS_FAQS = [
+  {
+    q: 'Do I need software to track these numbers?',
+    a: 'No. A simple spreadsheet works. Put the 9 numbers in rows and one column for each week. The hard part is not the sheet. It is getting the numbers out of your appointment book and your bills every single week. That is why most owners stop after a month. Aumy puts all 9 on one screen automatically, from the appointments and bills your team already enters.',
+  },
+  {
+    q: 'Which number should I look at first?',
+    a: 'Start with money billed vs money received, and consultations that went ahead. Both are about patients you have already seen. You do not need a single new enquiry to improve them.',
+  },
+  {
+    q: 'What if one number has a bad week?',
+    a: 'Do not panic over one week. Holidays, festivals and a doctor on leave all move the numbers. Look for a number that moves the same way for two or three weeks in a row. That is the one to work on.',
+  },
+];
+
 const growthPosts = [
   // ------------------------------------------------------------------
   // 1. MISSED CALLS
@@ -1178,6 +1221,101 @@ const growthPosts = [
 <p>On price, Aumy is not the cheapest kind of software here. It is priced per clinic, after a <a href="/growth-audit">free clinic audit</a>.</p>
 <p><strong>Which clinics are better served by something simpler:</strong> if you are a solo dentist or a small clinic, your receptionist keeps up with the calls and messages, and what you need is a clean calendar, charting, billing and WhatsApp reminders, a simpler practice management system with a published price will probably serve you well. If AI help reading X-rays or writing notes in the chair is what you want, look for software built around that. If you need to work offline, look for an on-premise edition.</p>
 <p>Aumy is worth a conversation when the problem is not the records but the coordination. We wrote more about that difference in <a href="/growth/dental-practice-management-software-vs-growth">PMS vs the patient journey</a>, <a href="/modules/dental-clinic-management-software">AI dental practice management software</a> and <a href="/ai-dental-software-india">AI dental software for Indian clinics</a>.</p>`,
+  },
+  {
+    // 16 Nov 2026 (owner): educational post for dental clinic owners in India and Dubai, with the
+    // "9 numbers" video. Simple English. The video shows a real dental clinic's screen without its
+    // name (owner's decision); the text never names a clinic or quotes the video's figures.
+    slug: 'dental-clinic-numbers-to-track-every-monday',
+    title: '9 Numbers Every Dental Clinic Owner Should Check Every Monday',
+    category: 'Clinic Operations',
+    date: '2026-11-16',
+    readingTime: '7 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      'Your collection tells you how much money came in. It does not tell you why. These 9 numbers do. What each one means, why it matters, and what to do when it moves, with a short video.',
+    description:
+      'Collection tells you how much came in, not why. The 9 numbers every dental clinic owner should check every Monday, what each one means, and what to do when it moves.',
+    video: MONDAY_NUMBERS_VIDEO,
+    faqs: MONDAY_NUMBERS_FAQS,
+    body: `
+<p>Many dental clinic owners look at one number: the collection. How much money came in this month.</p>
+<p>That number is important. But it only tells you <em>how much</em> came in. It does not tell you <em>why</em>. When it goes down, you don't know what broke. When it goes up, you don't know what to keep doing.</p>
+<p>These 9 numbers tell you why. Check them every Monday, for last week. Each one takes a minute to read.</p>
+${articleVideoHtml(MONDAY_NUMBERS_VIDEO)}
+
+<h2>The 9 numbers at a glance</h2>
+<ol>
+  <li>Money billed vs money received</li>
+  <li>Billing by treatment</li>
+  <li>Consultations</li>
+  <li>Consultations that went ahead</li>
+  <li>Average bill per patient</li>
+  <li>Billing per hour of doctor time</li>
+  <li>Patients who booked their next visit</li>
+  <li>New patients</li>
+  <li>Late cancellations and no-shows</li>
+</ol>
+
+<h2>1. Money billed vs money received</h2>
+<p><strong>What it is.</strong> Two numbers side by side. The total of the bills you raised last week, and the money that actually came in.</p>
+<p><strong>Why it matters.</strong> The gap between them is money your patients still owe you. A busy week can still leave you short of cash if the gap keeps growing.</p>
+<p><strong>When it moves.</strong> If the gap grows, look at the list of who owes what. Call them this week, not at month end. For long treatments, agree the payment plan at the start and collect at each sitting.</p>
+
+<h2>2. Billing by treatment</h2>
+<p><strong>What it is.</strong> Last week's billing split by treatment: cleanings, fillings, root canals, crowns, implants, aligners and the rest.</p>
+<p><strong>Why it matters.</strong> It shows where your money really comes from. If one or two treatments carry the dental clinic, a slow week for them hurts everything.</p>
+<p><strong>When it moves.</strong> If one treatment drops, ask one question: were fewer patients advised it, or did fewer patients say yes? The fix is different. Fewer advised is a doctor question. Fewer yes is a follow-up question.</p>
+
+<h2>3. Consultations</h2>
+<p><strong>What it is.</strong> How many patients sat in the chair for a consultation last week. A first visit, or a visit for a new problem.</p>
+<p><strong>Why it matters.</strong> Almost every treatment starts with a consultation. If this number falls, billing falls a few weeks later.</p>
+<p><strong>When it moves.</strong> If it drops, look before the consultation. Were all calls and WhatsApp messages answered? Was every enquiry followed up until the patient booked or said no? Compare with the same week last month, not just last week.</p>
+
+<h2>4. Consultations that went ahead</h2>
+<p><strong>What it is.</strong> Of the patients who were advised treatment, how many actually started it. Give it about 30 days, because many patients take a few weeks to decide.</p>
+<p><strong>Why it matters.</strong> These patients have already met your doctor. They trust you. The hard work is done. If they don't go ahead, that is usually not a "no". It is an "I'll think about it" that nobody followed up.</p>
+<p>A simple example, with made-up numbers: say you advise treatment to 10 patients in a week and 4 start. That is 4 out of 10. The other 6 are not lost yet. They are waiting for someone to call.</p>
+<p><strong>When it moves.</strong> If it drops, give one person the job of following up every patient who said "I'll think about it". Here is <a href="/growth/dental-patient-ill-think-about-it">what to send after "I'll think about it"</a>, message by message.</p>
+
+<h2>5. Average bill per patient</h2>
+<p><strong>What it is.</strong> Money billed last week, divided by the number of patients billed.</p>
+<p><strong>Why it matters.</strong> It tells you whether patients get the full treatment they need, or only the quick fix for today's pain. This is not about selling more. It is about patients finishing the treatment the doctor advised.</p>
+<p><strong>When it moves.</strong> If it falls, check two things. Are doctors explaining the full plan, in writing? And are multi-sitting treatments being finished, or stopping halfway? If it jumps, check it is not one big case hiding an otherwise quiet week.</p>
+
+<h2>6. Billing per hour of doctor time</h2>
+<p><strong>What it is.</strong> Money billed, divided by the hours your doctors were available to see patients. Leave out breaks, leave and closed days.</p>
+<p><strong>Why it matters.</strong> A doctor's hour is the one thing you can't make more of. This number shows how well those hours are used. Empty slots, long gaps and late patients all pull it down.</p>
+<p><strong>When it moves.</strong> If it falls, open the diary. Look for empty slots and gaps between patients. Keep a short list of patients who want an earlier date, and call them when a slot opens. If you have visiting doctors, look at this number for each doctor separately.</p>
+
+<h2>7. Patients who booked their next visit</h2>
+<p><strong>What it is.</strong> Of the patients who need to come back (the next sitting, a review, a cleaning in six months), how many left with a date booked.</p>
+<p><strong>Why it matters.</strong> A patient who leaves without a date often doesn't come back. The root canal stays without a crown. The cleaning never happens. Nobody said no. It just slipped.</p>
+<p><strong>When it moves.</strong> If it drops, make one rule at the front desk: no patient leaves without the next date, if they need one. For anyone who left without a date, send a reminder within a week. The same idea, for check-ups, is in <a href="/growth/dental-recall-list-hidden-revenue">your dental recall list</a>.</p>
+
+<h2>8. New patients</h2>
+<p><strong>What it is.</strong> Patients who came to your dental clinic for the first time last week.</p>
+<p><strong>Why it matters.</strong> Every dental clinic loses some patients each year. People move, change jobs, or simply drift away. New patients replace them. This number also tells you if your referrals, your Google profile and your ads are working.</p>
+<p><strong>When it moves.</strong> If it drops, ask where last month's new patients came from: a friend, Google, an ad, or walking past. Then look after the source that works. Ask happy patients for a Google review, and answer every new enquiry the same day.</p>
+
+<h2>9. Late cancellations and no-shows</h2>
+<p><strong>What it is.</strong> Appointments cancelled at the last minute, and patients who simply didn't come.</p>
+<p><strong>Why it matters.</strong> Each one is an empty chair. At short notice you usually can't fill it. The doctor's time is gone.</p>
+<p><strong>When it moves.</strong> If it rises, confirm every appointment the day before, on WhatsApp. Make it easy for patients to move a visit instead of skipping it. Call every no-show the same day and offer a new date. More in <a href="/growth/reduce-dental-appointment-no-shows">how to reduce dental appointment no-shows</a>.</p>
+
+<h2>How to use the 9 numbers every Monday</h2>
+<ol>
+  <li><strong>Check.</strong> Every Monday morning, write down last week's 9 numbers next to the week before.</li>
+  <li><strong>Pick one.</strong> Find the number that moved the wrong way. If two or three did, pick the one closest to patients you have already seen.</li>
+  <li><strong>Fix one thing.</strong> Choose one change for this week and give it to one person. Not five changes. One.</li>
+  <li><strong>Check again.</strong> Next Monday, look at the same number. Did it move? If yes, keep the change. If not, try something else.</li>
+</ol>
+<p>That's it. Fifteen minutes on a Monday. Over a few months, you stop guessing why the collection went up or down. You know.</p>
+
+${articleFaqHtml(MONDAY_NUMBERS_FAQS, 'Questions dental clinic owners ask')}
+
+<h2>See all 9 on one screen</h2>
+<p>In the video above, the 9 numbers come from Aumy, on one screen, updated from the dental clinic's own appointments and bills. Want to see how the rest of Aumy works? <a href="https://youtu.be/ILwh4-h5YAM" target="_blank" rel="noopener noreferrer">Watch the full Aumy demo on YouTube</a>.</p>`,
   },
 ];
 
