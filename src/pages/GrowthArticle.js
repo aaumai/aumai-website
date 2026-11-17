@@ -13,7 +13,7 @@ const GrowthArticle = () => {
   useEffect(() => {
     if (post) {
       // Same title as the crawler HTML (scripts/prerender.js), 13 Nov 2026.
-      document.title = `${post.title} | Aumy`;
+      document.title = post.metaTitle || `${post.title} | Aumy`;
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute('content', post.description);
     }

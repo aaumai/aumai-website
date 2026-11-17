@@ -1500,7 +1500,8 @@ routes.push({
 for (const p of growthPosts) {
   routes.push({
     slug: `growth/${p.slug}`,
-    title: `${p.title} | Aumy`,
+    // A long question title gets a shorter search title (metaTitle, 17 Nov 2026); the H1 stays the question.
+    title: p.metaTitle || `${p.title} | Aumy`,
     description: p.description,
     canonical: `${ORIGIN}/growth/${p.slug}`,
     // Social shares of articles need an image; the dental hero is the site

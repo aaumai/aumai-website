@@ -75,6 +75,57 @@ const MONDAY_NUMBERS_FAQS = [
   },
 ];
 
+// Answer-first articles (owner 17 Nov 2026: "answer-first articles on aumai.co.in/growth, each titled as a
+// question clinic owners actually search", 2 a week, the owner OKs each). Rules: the first two sentences
+// answer the question; no competitor names (M16); no price (P13); every number word for word from the
+// approved proof list (src/data/proof.js, pooled, 14 Oct–12 Nov 2026; re-measure before reuse after 12 Dec 2026).
+// Every product claim was checked against aum-ehr-api origin/main on 17 Nov 2026.
+const PROOF_WINDOW = '14 Oct–12 Nov 2026';
+const AI_RECEPTIONIST_FAQS = [
+  {
+    q: 'Does an AI receptionist replace my front-desk staff?',
+    a: `No. It covers what your team can't: nights, Sundays, lunch hours and the second message that arrives while they are busy with a patient. Your team sees every chat and can take over any conversation with one tap.`,
+  },
+  {
+    q: 'Does the AI book appointments by itself?',
+    a: `Yes. Aumy offers free slots from the doctor's real calendar and books the one the patient picks. A returning patient is booked with their own doctor. If you prefer, your team can confirm each booking the AI makes before it is final, or let the AI answer only while the clinic is closed.`,
+  },
+  {
+    q: "Which languages does Aumy's AI receptionist reply in?",
+    a: `English, Hindi and Marathi. It also listens to the voice notes and looks at the photos patients send.`,
+  },
+  {
+    q: "Can it work on my clinic's existing WhatsApp number?",
+    a: `Yes. Aumy runs on the official WhatsApp Business API on your clinic's own number, so patients keep messaging the number they already know.`,
+  },
+  {
+    q: 'How much does an AI receptionist cost for a dental clinic?',
+    a: `It depends on your clinic's size and what you switch on. Aumy is priced per clinic after a free clinic audit, so you get one clear figure before anything starts.`,
+  },
+];
+const WHATSAPP_REMINDER_FAQS = [
+  {
+    q: 'Are WhatsApp reminders better than SMS for a dental clinic in India?',
+    a: `For most dental clinics, yes. Most patients read WhatsApp more often than SMS, and on WhatsApp they can confirm or move the visit with one tap, in the same chat. With an SMS, changing anything usually means a phone call.`,
+  },
+  {
+    q: 'When should a dental appointment reminder be sent?',
+    a: `The day before, at one fixed time for everyone (for example 1 pm), then a short reminder about 2 hours before the visit. Patients who have not confirmed by the evening get one more nudge. Each clinic sets its own times in Aumy.`,
+  },
+  {
+    q: 'What happens when a patient taps Reschedule?',
+    a: `Aumy's AI offers free slots with the same doctor and moves the appointment when the patient picks one. Anything it can't settle goes to your team, with the chat in front of them.`,
+  },
+  {
+    q: 'Will a patient who cancelled still get reminders?',
+    a: `No. Reminders follow the appointment book. When a visit is cancelled or moved, the reminders for the old time stop.`,
+  },
+  {
+    q: 'How much does WhatsApp reminder software cost for a dental clinic?',
+    a: `It depends on your clinic's size and what you switch on. Aumy is priced per clinic after a free clinic audit, so you get one clear figure before anything starts.`,
+  },
+];
+
 const growthPosts = [
   // ------------------------------------------------------------------
   // 1. MISSED CALLS
@@ -1316,6 +1367,158 @@ ${articleFaqHtml(MONDAY_NUMBERS_FAQS, 'Questions dental clinic owners ask')}
 
 <h2>See all 9 on one screen</h2>
 <p>In the video above, the 9 numbers come from Aumy, on one screen, updated from the dental clinic's own appointments and bills. Want to see how the rest of Aumy works? <a href="https://youtu.be/ILwh4-h5YAM" target="_blank" rel="noopener noreferrer">Watch the full Aumy demo on YouTube</a>.</p>`,
+  },
+  {
+    // 17 Nov 2026, answer-first (week 47). Target question checked by Growganic on 17 Nov: aumai.co.in not cited.
+    // Owner page for the product is /ai-receptionist; this answers the buyer's question and links to it.
+    slug: 'dental-software-ai-receptionist-whatsapp-india',
+    title: 'Which Dental Software in India Has an AI Receptionist That Answers WhatsApp and Books Appointments?',
+    metaTitle: 'Dental Software With a WhatsApp AI Receptionist in India | Aumy',
+    category: 'AI for Dental Clinics',
+    date: '2026-11-17',
+    readingTime: '6 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      'Aumy is dental clinic software made in India whose AI receptionist answers WhatsApp day or night and books into the doctor’s real calendar. The 8 checks to make in any software, what we measured, and who doesn’t need one.',
+    description:
+      'Which dental software in India has an AI receptionist that answers WhatsApp and books real appointments? The short answer, 8 checks, and who it is not for.',
+    faqs: AI_RECEPTIONIST_FAQS,
+    body: `
+<div class="gh-box"><p><strong>Short answer:</strong> Aumy, by AUM AI, is dental clinic software made in India with an AI receptionist that answers patients on WhatsApp, day or night, in English, Hindi or Marathi, and books them into a free slot in the doctor's real calendar. Whichever software you look at, check one thing first: does the AI book the visit itself, or does it only take a name and say "our team will call you back"?</p></div>
+
+<p><strong>Disclosure:</strong> we make Aumy, so weigh this guide with that in mind. We don't name or rank other products here. Instead, here is what to check in any dental software that says it has an AI receptionist on WhatsApp, and which dental clinics actually need one.</p>
+
+<h2>Three things that get called "AI on WhatsApp"</h2>
+<p>When dental software says it "automates WhatsApp", it can mean very different things. Ask which one you are buying.</p>
+<div style="overflow-x:auto">
+<table>
+  <thead><tr><th>What it is</th><th>What the patient gets at 9:30 PM</th><th>What your desk does next morning</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Auto-reply or button menu</strong></td><td>"Thanks for your message. Our timings are 10 am to 8 pm."</td><td>Reads every chat and replies by hand</td></tr>
+    <tr><td><strong>AI that answers, but doesn't book</strong></td><td>A helpful answer, then "our team will call you to fix a time"</td><td>Calls each patient back to book. Some don't pick up.</td></tr>
+    <tr><td><strong>AI receptionist that answers and books</strong></td><td>An answer, free slots to choose from, and a booked appointment</td><td>Sees the booking in the calendar. Nothing to chase.</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Only the third one settles the enquiry while the patient is still holding the phone. The first two move the work to tomorrow morning, when the desk is already busy with the patients in front of them.</p>
+
+<h2>8 checks before you choose</h2>
+<ol>
+  <li><strong>It books into your doctors' real calendar.</strong> The AI should see the same free slots your desk sees, and the booking should land in the same appointment book. A separate "requests" list that someone copies across later is a second job, not a receptionist.</li>
+  <li><strong>It runs on the official WhatsApp Business API, on your clinic's own number.</strong> Patients keep messaging the number they already have saved. Tools that automate the ordinary WhatsApp app put that number at risk.</li>
+  <li><strong>It answers from your clinic's own information.</strong> Timings, doctors, treatments, directions and parking, in your words. Anything clinical, like "is this swelling serious?", should go to your team, not be answered by the AI.</li>
+  <li><strong>It speaks your patients' language.</strong> Patients write in English, Hindi, Marathi and a mix of all three. Many send voice notes and photos. Ask what happens to a voice note.</li>
+  <li><strong>It knows your returning patients.</strong> A patient who already sees Dr. Mehta should be booked with Dr. Mehta, not offered whoever is free. An unknown number should be asked whether they have visited before, so the same patient isn't created twice.</li>
+  <li><strong>Your team can take over any chat.</strong> One tap, and the AI steps back while a person talks. Your team should see every chat, from all your clinic's WhatsApp numbers, in one place.</li>
+  <li><strong>You stay in control while you start.</strong> Can your team confirm each booking the AI makes before it is final? Can the AI answer only while the clinic is closed, if that is all you want?</li>
+  <li><strong>It shows you what happened.</strong> How many enquiries came in, how many were answered after hours, how many booked, and which bookings still stood a week later. If a tool shows only "messages sent", you can't tell whether it helped.</li>
+</ol>
+<p>One more, if your phone rings as much as your WhatsApp: does the same system answer calls, from the same calendar and patient record? In Aumy, that is <a href="/modules/ai-voice-receptionist-for-dentists">Aumy Voice</a>.</p>
+
+<h2>What we measured</h2>
+<div class="gh-box">
+<p><strong>Across 4 dental clinics on Aumy, ${PROOF_WINDOW}:</strong></p>
+<ul>
+  <li>More than 1 in 3 replies sent while the clinic was closed.</li>
+  <li>Median reply under 10 seconds, from the patient's message arriving to Aumy's first reply.</li>
+  <li>105 visits booked by Aumy, still on the book: cancelled, moved and missed visits taken out.</li>
+</ul>
+</div>
+<p>The replies sent after closing time are the enquiries that would otherwise have waited until morning.</p>
+
+<h2>Where Aumy fits, and who it is not for</h2>
+<p><strong>Aumy fits</strong> an established dental practice with a front desk, usually three chairs or more, where WhatsApp fills up faster than the desk can reply and enquiries arrive at night and on Sundays. <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, the AI WhatsApp receptionist, answers and books; your team handles the chats that need a person. Bookings land in Aumy's appointment book, with the reminders and follow-ups on the same patient record. Using other dental software today? See <a href="/switch">moving from your current dental software</a>.</p>
+<p><strong>It is probably not for you if:</strong></p>
+<ul>
+  <li>You run one or two chairs, answer the clinic's WhatsApp yourself, and keep up easily. A simpler practice management system with WhatsApp reminders will serve you well, and our masterclass, <a href="/masterclass">The Full Chair Method</a>, shows how to run your follow-ups yourself.</li>
+  <li>You want an AI that gives clinical advice or diagnoses from a photo. Aumy doesn't. It hands clinical questions to your team.</li>
+  <li>Your desk already replies to every WhatsApp within minutes, evenings and Sundays included. Then the gap is somewhere else, usually follow-ups: see <a href="/growth/dental-lead-follow-up-system">the dental lead follow-up system</a>.</li>
+</ul>
+
+<h2>Test it before you decide</h2>
+<p>The quickest test: WhatsApp our demo dental clinic on +91 80071 89868 and talk to it the way your patients do. Ask about a treatment, ask for an evening slot, then change your mind. Run the same test on any software you are comparing. To put a number on unanswered enquiries in your own clinic, try the <a href="/missed-call-calculator">missed call calculator</a> or the <a href="/lead-followup-calculator">lead follow-up calculator</a>.</p>
+
+${articleFaqHtml(AI_RECEPTIONIST_FAQS, 'Questions dental clinic owners ask')}
+
+<h2>Read next</h2>
+<p><a href="/ai-receptionist">The AI receptionist for dental clinics</a> · <a href="/growth/ai-receptionist-dental-clinic">A day at a dental clinic front desk: who answers at 8:47 PM?</a> · <a href="/growth/best-dental-software-india">Best dental software in India: how to choose</a> · <a href="/growth/dental-software-whatsapp-appointment-reminders-india">WhatsApp appointment reminders that reduce no-shows</a></p>`,
+  },
+  {
+    // 17 Nov 2026, answer-first (week 47). Buyer's question; the how-to is /growth/reduce-dental-appointment-no-shows.
+    slug: 'dental-software-whatsapp-appointment-reminders-india',
+    title: 'Which Dental Software in India Sends WhatsApp Appointment Reminders That Reduce No-Shows?',
+    metaTitle: 'WhatsApp Appointment Reminder Software for Dental Clinics | Aumy',
+    category: 'No-shows & Appointments',
+    date: '2026-11-17',
+    readingTime: '6 min read',
+    author: 'Jayesh Chaudhari',
+    excerpt:
+      'A reminder alone fixes forgetting, not the patient who finds it easier to skip than to call. What to look for in dental software with WhatsApp reminders: one-tap confirm or move, a nudge for the silent ones, missed-visit follow-up.',
+    description:
+      'Which dental software in India sends WhatsApp reminders that cut no-shows? The short answer, the reminder sequence that works, 7 checks, and who it is not for.',
+    faqs: WHATSAPP_REMINDER_FAQS,
+    body: `
+<div class="gh-box"><p><strong>Short answer:</strong> choose dental software that sends reminders on WhatsApp from your clinic's own number, lets the patient confirm or move the visit with one tap, nudges only the patients who stay silent, and follows up anyone who misses. Aumy, by AUM AI, is dental clinic software made in India that does all four, and its AI answers the patients' replies so your desk doesn't have to.</p></div>
+
+<p><strong>Disclosure:</strong> we make Aumy, so weigh this guide with that in mind. We don't name or rank other products here. Instead, here is what to check in any dental software that sends WhatsApp reminders, and which dental clinics need more than a simple reminder.</p>
+
+<h2>Why a reminder alone doesn't stop no-shows</h2>
+<p>Most patients who miss a dental appointment didn't decide to skip it. They forgot, or something came up and cancelling felt harder than simply not coming. We wrote about the reasons in <a href="/growth/reduce-dental-appointment-no-shows">how to reduce dental appointment no-shows</a>.</p>
+<p>A reminder fixes forgetting. It does nothing for the second group, unless the patient can reply and actually change the appointment. So the question to ask is not "does it send reminders?" It is "what happens when the patient answers?"</p>
+
+<h2>The reminder sequence that works</h2>
+<div style="overflow-x:auto">
+<table>
+  <thead><tr><th>When</th><th>What the patient gets</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td><strong>When the visit is booked</strong></td><td>A confirmation with the date, time, doctor and location, and "reply here if anything changes"</td><td>Moving a visit becomes easier than skipping it</td></tr>
+    <tr><td><strong>The day before, at a fixed time</strong></td><td>A reminder with two buttons: Confirm and Reschedule</td><td>One tap to answer</td></tr>
+    <tr><td><strong>The same evening</strong></td><td>One more nudge, only to patients who haven't confirmed or replied</td><td>The silent ones are your likely no-shows</td></tr>
+    <tr><td><strong>About 2 hours before</strong></td><td>A short "see you soon"</td><td>Catches the patient who forgot today</td></tr>
+    <tr><td><strong>After a missed visit</strong></td><td>A friendly message offering a new date</td><td>Brings the patient back before the treatment goes cold</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Each dental clinic picks its own times. Send the day-before reminder at one sensible hour for everyone, not exactly 24 hours before each visit, so reminders don't go out at every hour of the day.</p>
+
+<h2>7 checks before you choose</h2>
+<ol>
+  <li><strong>WhatsApp, from your clinic's own number.</strong> On the official WhatsApp Business API, with message templates approved by Meta. Patients trust a reminder from the number they already have saved.</li>
+  <li><strong>Reminders come from your real appointment book.</strong> Book, move or cancel a visit, and the reminders follow by themselves. Nobody uploads a list, and a patient who cancelled never gets "see you tomorrow".</li>
+  <li><strong>One-tap Confirm and Reschedule, and the tap does something.</strong> A confirmed visit shows as confirmed in the calendar. A reschedule offers real free slots.</li>
+  <li><strong>Typed replies are understood.</strong> Patients don't only tap buttons. They write "can we make it Saturday?" or "stuck in office, 30 minutes late". Ask who reads those replies at 9 PM.</li>
+  <li><strong>A nudge only for the silent ones.</strong> A patient who already confirmed shouldn't get the same reminder twice. The ones who stay quiet should.</li>
+  <li><strong>Missed visits are followed up.</strong> The same day or the next, with a new date offered. A missed visit nobody follows up is how a root canal stays without a crown.</li>
+  <li><strong>The reminder keeps the treatment private.</strong> "Your appointment with Dr. Shah is tomorrow at 6 PM" is enough. Families often share a phone, and the treatment doesn't belong in a reminder.</li>
+</ol>
+<p>Then one more: can you see the result every week, with confirmed, moved, cancelled and missed side by side? It is number 9 in <a href="/growth/dental-clinic-numbers-to-track-every-monday">the 9 numbers to check every Monday</a>.</p>
+
+<h2>What we measured</h2>
+<div class="gh-box">
+<p><strong>Across 4 dental clinics on Aumy, ${PROOF_WINDOW}:</strong></p>
+<ul>
+  <li>751 confirmations, 55 moves, 62 cancellations handled by the AI on WhatsApp.</li>
+  <li>About 1 in 7 missed-visit patients rebooked within 7 days.</li>
+</ul>
+</div>
+<p>A move or a cancellation you hear about is a chair you can offer to someone else. A no-show is a chair you find empty.</p>
+<p>We don't publish a "no-shows cut by X%" figure. No-show rates swing with the season, the treatment mix and doctors' leave, and we haven't measured a before-and-after we would stand behind. We publish what we can count.</p>
+
+<h2>Where Aumy fits, and who it is not for</h2>
+<p><strong>Aumy fits</strong> an established dental practice with a front desk, usually three chairs or more, with a busy diary and nobody free to call every patient the day before or chase every missed visit. Reminders, confirmations and missed-visit follow-ups run from Aumy's appointment book (<a href="/modules/dental-patient-follow-up">Aumy Journey</a>), and the AI receptionist (<a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>) answers the replies, books and moves visits.</p>
+<p><strong>It is probably not for you if:</strong></p>
+<ul>
+  <li>You see few no-shows and your desk already calls every patient the day before. A practice management system with simple WhatsApp reminders may be all you need.</li>
+  <li>You run one or two chairs and manage the diary yourself. Our masterclass, <a href="/masterclass">The Full Chair Method</a>, shows how to run reminders and follow-ups yourself.</li>
+</ul>
+
+<h2>Work out what no-shows cost you</h2>
+<p>Put your own numbers into the <a href="/no-show-calculator">no-show calculator</a>. To see how the AI handles a patient who wants to move a visit, WhatsApp our demo dental clinic on +91 80071 89868: book a visit, then ask to change it.</p>
+
+${articleFaqHtml(WHATSAPP_REMINDER_FAQS, 'Questions dental clinic owners ask')}
+
+<h2>Read next</h2>
+<p><a href="/growth/reduce-dental-appointment-no-shows">How to reduce dental appointment no-shows</a> · <a href="/growth/whatsapp-follow-up-dental-clinics-guide">WhatsApp follow-up for dental clinics: a practical guide</a> · <a href="/growth/dental-software-ai-receptionist-whatsapp-india">Dental software with an AI receptionist on WhatsApp</a> · <a href="/growth/best-dental-software-india">Best dental software in India: how to choose</a></p>`,
   },
 ];
 
