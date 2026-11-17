@@ -125,6 +125,21 @@ const sitemap =
 
 fs.writeFileSync(path.join(BUILD, 'sitemap.xml'), sitemap);
 
+// A sitemap INDEX at a second address (owner 17 Nov 2026). Google Search Console showed
+// "Sitemap could not be read" for /sitemap.xml for days, yet Google never requested the file
+// (14 days of nginx logs; Bing and GPTBot read it daily) — a failure state stuck on that one
+// address. The index points at the same sitemap.xml, so there is still one list of pages; it
+// just gives Search Console a fresh address to read. Both are declared in robots.txt.
+const sitemapIndex =
+  `<?xml version="1.0" encoding="UTF-8"?>\n` +
+  `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  `  <sitemap>\n` +
+  `    <loc>${ORIGIN}/sitemap.xml</loc>\n` +
+  `    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>\n` +
+  `  </sitemap>\n` +
+  `</sitemapindex>\n`;
+fs.writeFileSync(path.join(BUILD, 'sitemap-index.xml'), sitemapIndex);
+
 // Explicitly allow the AI crawlers by name. Several of them ignore a bare
 // `User-agent: *` when deciding whether training/citation access was granted,
 // and being cited by an assistant is now a real referral channel for us.
@@ -139,7 +154,8 @@ const robots =
     .map((ua) => `User-agent: ${ua}\nAllow: /\n`)
     .join('') +
   `\n` +
-  `Sitemap: ${ORIGIN}/sitemap.xml\n`;
+  `Sitemap: ${ORIGIN}/sitemap.xml\n` +
+  `Sitemap: ${ORIGIN}/sitemap-index.xml\n`;
 
 fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 
