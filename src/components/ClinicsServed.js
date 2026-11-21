@@ -43,7 +43,7 @@ export default function ClinicsServed() {
             </h2>
             <ul className="cs-logos">
               {/* One grid, identical columns and gaps on every row (owner 2026-11-11: logos were different sizes and
-                  Sterling/Omlesh sat closer together than the rest). Every logo sits in the SAME fixed-size box,
+                  two of the logos sat closer together than the rest). Every logo sits in the SAME fixed-size box,
                   centred and contained, with its caption in the area beneath, so a long caption never moves a logo.
                   Row 1 = the two Delhi clinics (owner 2026-11-04): on the 4-column grid they take the two middle
                   columns, and the third clinic starts row 2 (see .cs-logo--row2 in ClinicsServed.css). */}

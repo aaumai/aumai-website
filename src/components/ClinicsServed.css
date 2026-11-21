@@ -47,7 +47,7 @@
 }
 
 /* ── logo state (renders only for clinics that have given permission) ─────
-   Owner 2026-11-11: "the logos are not of the same size and not equally and well spaced"; Sterling and Omlesh sat
+   Owner 2026-11-11: "the logos are not of the same size and not equally and well spaced"; two of the logos sat
    closer together than the rest. So this is ONE grid:
      - every column the same width, every gap the same, on every row (row 1's Delhi pair uses the same columns as
        row 2, it is not a separate centred flex row);
