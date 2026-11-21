@@ -19,6 +19,8 @@ const path = require('path');
 // Growth Hub articles: same data file the React app renders from, so the
 // crawler-visible HTML and the client-rendered article can never drift apart.
 const { growthPosts } = require('../src/data/growthPosts');
+// Google "preferred source" link under each article (owner 22 Nov 2026): same file as src/pages/GrowthArticle.js.
+const { preferredSource } = require('../src/data/preferredSource');
 const { CALCULATORS } = require('../src/data/calculators');
 // Clinic trust strip: same consent-gated list the React component renders, so a
 // clinic that has NOT given permission (or withdraws it) can never survive in
@@ -1549,6 +1551,7 @@ for (const p of growthPosts) {
         ${p.body}
         <h2>Want to know what this looks like in your clinic?</h2>
         <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp Aumy</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
+        ${preferredSource ? `<p><a href="${preferredSource.url}">${esc(preferredSource.label)}</a>. ${esc(preferredSource.note)}</p>` : ''}
       </div></article>`,
   });
 }

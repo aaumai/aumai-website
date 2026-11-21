@@ -5,6 +5,7 @@ import { OFFICES, ICON } from '../config/contact';
 import AppDownload from './AppDownload';
 import { FOOTER_OUTCOMES, FOOTER_TAGLINE } from '../data/homeOutcomes';
 import VIS from '../data/visibility';
+import { preferredSource } from '../data/preferredSource';
 import './Footer.css';
 
 // The services, in the header's order (also in scripts/prerender.js SITE_LINKS).
@@ -87,6 +88,12 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
+            {/* Google "preferred source" (owner 22 Nov 2026; India build only, src/data/preferredSource.js). */}
+            {preferredSource && (
+              <a href={preferredSource.url} target="_blank" rel="noopener noreferrer" className="footer-preferred">
+                <span aria-hidden="true">★</span> {preferredSource.label}
+              </a>
+            )}
           </div>
 
           {/* What we fix: outcome links to the module pages */}

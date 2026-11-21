@@ -364,6 +364,31 @@
 .gh-article-cta p { color: var(--c-ink-soft); margin: 0 0 20px; }
 .gh-cta-demo { font-size: 14.5px; margin-top: 18px !important; }
 
+/* Google "preferred source" link (owner 22 Nov 2026): a quiet pill under the CTA card, never a second CTA. */
+.gh-preferred {
+  margin: 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  font-size: 14.5px;
+  color: var(--c-ink-soft);
+}
+.gh-preferred-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+  color: var(--c-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.gh-preferred-link:hover,
+.gh-preferred-link:focus-visible { border-color: var(--c-ink-soft); }
+.gh-preferred-link span { color: #f5a623; }
+
 /* Related */
 .gh-related { margin-top: 56px; }
 .gh-related h3 {

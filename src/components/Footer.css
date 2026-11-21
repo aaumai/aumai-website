@@ -70,6 +70,20 @@
   gap: 12px;
 }
 
+/* Google "preferred source" link (owner 22 Nov 2026) */
+.footer-preferred {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 0.875rem;
+  color: var(--slate-400);
+  text-decoration: none;
+}
+.footer-preferred span { color: #f5a623; }
+.footer-preferred:hover,
+.footer-preferred:focus-visible { color: white; }
+
 .social-icon {
   width: 40px;
   height: 40px;

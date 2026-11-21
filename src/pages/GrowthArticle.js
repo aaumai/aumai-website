@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { growthPosts } from '../data/growthPosts';
+import { preferredSource } from '../data/preferredSource';
 import './GrowthHub.css';
 
 // Article body lives as an HTML string in growthPosts.js so the prerenderer
@@ -92,6 +93,16 @@ const GrowthArticle = () => {
               and hand it to your practice manager.
             </p>
           </div>
+
+          {/* Google "preferred source" (owner 22 Nov 2026): same words as scripts/prerender.js. */}
+          {preferredSource && (
+            <p className="gh-preferred">
+              <a href={preferredSource.url} target="_blank" rel="noopener noreferrer" className="gh-preferred-link">
+                <span aria-hidden="true">★</span> {preferredSource.label}
+              </a>
+              <span className="gh-preferred-note">{preferredSource.note}</span>
+            </p>
+          )}
 
           {related.length > 0 && (
             <div className="gh-related">
