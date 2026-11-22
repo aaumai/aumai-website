@@ -7,8 +7,7 @@
  * then copied to public/videos/explainers/. Posters are a frame from each video.
  */
 
-// Aumy Convert's ads wording hidden for now (owner 2026-11-06, src/data/visibility.js).
-const { adsText } = require('./visibility');
+// 22 Nov 2026 (owner): the Aumy Convert explainer left this list (Convert is no longer sold by name).
 
 const TITLE = 'See each module in under two minutes';
 const SUB = 'A real clinic day, before and after Aumy. Sound on.';
@@ -17,7 +16,7 @@ const SUB = 'A real clinic day, before and after Aumy. Sound on.';
 // Home hero (owner 2026-10-20: "make this hero in our marketing website"): the whole Sterling team on Aumy,
 // upright (9:16). Was the whole-Aumy explainer (aumy-explainer.mp4), which still serves the BM day-3 nurture history.
 const HERO_VIDEO = {
-  moduleId: 'automate-dental-clinic-operations',
+  moduleId: 'dental-patient-follow-up',
   name: 'The Sterling Dental Clinic',
   // Page anchor for this film; Dr Priyanka's hero Google review links "Watch her team's video" to it (googleReviews.js videoId).
   anchorId: 'sterling-video',
@@ -27,7 +26,7 @@ const HERO_VIDEO = {
   duration: 'PT2M10S',
   vertical: true,
   youtube: 'https://youtube.com/shorts/OVR7LEnd96k',
-  description: 'The Sterling Dental Clinic, Delhi (26 years): the founder, the doctor, the CRM and the MIS on moving to Aumy. Almost half of appointments (47%, 2–16 Oct 2026) confirmed by the patient on WhatsApp, no more Google Sheets, and everything the doctor needs on one screen.',
+  description: 'The Sterling Dental Clinic, Delhi (26 years): the founder, the doctor, the CRM and the MIS on moving to Aumy. 2 in 3 patients answered their appointment reminder on WhatsApp (906 of 1,354, 23 Oct–21 Nov 2026), no more Google Sheets, and everything the doctor needs on one screen.',
 };
 
 // The full Aumy demo film (owner 2026-10-20), on YouTube; shown on the home page under the hero and leads /demos.
@@ -66,16 +65,7 @@ const VIDEOS = [
     poster: '/videos/explainers/aumy-journey-explainer.jpg',
     duration: 'PT2M4S',
     description: 'How Aumy Journey answers and nurtures new enquiries, reads every patient reply, rebooks missed visits and follows up advised and planned treatments, recalls, cleanings and patients who have not visited in a long time.',
-  },
-  {
-    moduleId: 'dental-lead-management',
-    name: 'Aumy Convert',
-    line: adsText('Every ad enquiry followed up until it books.', 'Every enquiry followed up until it books.'),
-    src: '/videos/explainers/aumy-convert-explainer.mp4',
-    poster: '/videos/explainers/aumy-convert-explainer.jpg',
-    duration: 'PT1M48S',
-    description: adsText('How Aumy Convert answers every ad enquiry in seconds, follows up for weeks and months, shows your team the hottest leads and tells Meta which enquiries turned out serious, so your ads find more like them.', 'How Aumy Convert answers every enquiry in seconds, follows up for weeks and months, and shows your team the hottest leads.'),
-  },
+  }
 ];
 
 const UPLOAD_DATE = '2026-10-12';

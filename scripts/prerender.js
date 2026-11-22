@@ -661,7 +661,7 @@ const routes = [
     jsonld: [orgLd, faqPageLd(MODS.FAQS), {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: 'Aumy dental clinic software modules',
+      name: 'Aumy: the base plan and its AI receptionist add-ons',
       numberOfItems: MODS.MODULES.length + 1,
       itemListElement: [
         ...MODS.MODULES.map((m, i) => ({
@@ -675,7 +675,7 @@ const routes = [
           '@type': 'ListItem',
           position: MODS.MODULES.length + 1,
           url: `${ORIGIN}/modules#one-system`,
-          name: `${MODS.CONNECTED.short}: ${MODS.CONNECTED.title}`,
+          name: MODS.CONNECTED.title,
           description: MODS.CONNECTED.sub,
         },
       ],
@@ -704,12 +704,12 @@ const routes = [
       <section><div class="ch-container">
         ${MODS.MODULES.map((m, i) => `
         <article id="${m.id}">
-          <p>Module ${i + 1}</p>
+          <p>${i === 0 ? 'The base' : 'Add-on'}</p>
           <h2>${esc(m.short)}: ${esc(m.title)}</h2>
           <p><strong>${esc(m.promise)}</strong></p>
           <p>${esc(m.forWho)}</p>
           <ul>${m.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
-          ${m.scribe ? `<h3>${esc(m.scribe.short)}: ${esc(m.scribe.title)} (add-on)</h3><p>${esc(m.scribe.promise)}</p>` : ""}
+          ${m.scribe ? `<h3>Included: ${esc(m.scribe.short)}: ${esc(m.scribe.title)}</h3><p>${esc(m.scribe.promise)}</p>` : ""}
           <p>Add if you want: ${m.addons.map((a) => `+ ${esc(a)}`).join(" · ")}</p>
           ${STORES.isSelfServe(m.id) ? startInAppHtml(m.short) : ''}
           <p><a href="/modules/${m.id}">Everything about ${esc(m.short)}</a>${m.scribe ? ` · <a href="/modules/ai-clinical-notes-for-dentists">Everything about ${esc(m.scribe.short)}</a>` : ''} · <a href="/contact">Book a demo</a> · <a href="${m.more.path}">${esc(m.more.label)}</a></p>
@@ -717,11 +717,11 @@ const routes = [
       </div></section>
       <section id="one-system"><div class="ch-container">
         <p>${esc(MODS.CONNECTED.eyebrow)}</p>
-        <h2>${esc(MODS.CONNECTED.short)}: ${esc(MODS.CONNECTED.title)}</h2>
+        <h2>${esc(MODS.CONNECTED.title)}</h2>
         <p>${esc(MODS.CONNECTED.sub)}</p>
         <ol>${MODS.CONNECTED.steps.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></li>`).join('')}</ol>
         ${MODS.CONNECTED.why.map(([t, b]) => `<h3>${esc(t)}</h3><p>${esc(b)}</p>`).join('')}
-        <p><a href="/modules/automate-dental-clinic-operations">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
+        <p><a href="/modules/dental-patient-follow-up">See the base plan</a> · <a href="/contact">Book a demo of ${esc(MODS.CONNECTED.short)}</a></p>
       </div></section>
       <section><div class="ch-container">
         <h2>${esc(MODS.TABLE.title)}</h2>
@@ -733,7 +733,7 @@ const routes = [
         </table>
       </div></section>
       <section><div class="ch-container ch-narrow">
-        ${faqHtml(MODS.FAQS, 'Questions clinics ask about the modules')}
+        ${faqHtml(MODS.FAQS, 'Questions clinics ask about Aumy')}
         <p><a href="/contact">Book a demo</a> · <a href="/demos">Watch the demo videos</a></p>
       </div></section>`,
   },
@@ -833,7 +833,7 @@ const routes = [
         </ol>
         <h2>AI dental software questions, answered</h2>
         ${ADS.FAQS.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join('\n        ')}
-        <p>Last updated ${esc(ADS.UPDATED)}. Not sure which kind of software you need? <a href="/growth/best-dental-software-india">Best dental software in India (2026): how to choose</a>. See also <a href="/modules/automate-dental-clinic-operations">Aumy One</a>, <a href="/modules/dental-patient-follow-up">Aumy Journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">the modules you can buy on their own</a>.</p>
+        <p>Last updated ${esc(ADS.UPDATED)}. Not sure which kind of software you need? <a href="/growth/best-dental-software-india">Best dental software in India (2026): how to choose</a>. See also <a href="/modules/dental-patient-follow-up">Clinic OS + Automated Patient Journey</a>, <a href="/switch">switching dental software</a> and <a href="/modules">how Aumy’s parts fit together</a>.</p>
         <p><a href="/contact">Talk to us</a></p>
       </div></section>`,
   },
@@ -1211,7 +1211,7 @@ const routes = [
         <p class="ch-eyebrow">See it, don't take our word for it</p>
         <h1 class="ch-hero-title">Watch Aumy run a clinic — live, unscripted</h1>
         <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Start with the full demo: <a href="https://www.youtube.com/watch?v=ILwh4-h5YAM">how an established dental clinic stops losing patients</a> (58 min), or <a href="https://www.youtube.com/watch?v=0LE0iwNvcZQ">a shorter look in 9 minutes</a>. Prefer to feel it? WhatsApp our live demo clinic on +91 90223 12554 as if you were a patient.</p>
-        <p><a href="/modules/automate-dental-clinic-operations">Aumy One</a> · <a href="/modules/dental-patient-follow-up">Aumy Journey</a></p>
+        <p><a href="/modules/dental-patient-follow-up">Clinic OS + Automated Patient Journey</a> · <a href="/modules">How Aumy’s parts fit together</a></p>
       </div></section>`,
   },
   {
@@ -1285,7 +1285,7 @@ const routes = [
         <p class="ch-eyebrow">Facebook &amp; Instagram</p>
         <h1 class="ch-hero-title">AI receptionist for Facebook &amp; Instagram messages</h1>
         <p class="ch-hero-sub">Enquiries that arrive as Facebook or Instagram messages get the same instant, in-context answer as WhatsApp — and the same booking, follow-up and one-tap human takeover.</p>
-        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/modules/automate-dental-clinic-operations">Aumy One</a></p>
+        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/modules/dental-patient-follow-up">Aumy’s base plan</a></p>
       </div></section>`,
   },
   {
@@ -1741,16 +1741,16 @@ for (const p of MODS.PAGES) {
       ${p.proof ? pooledProofHtml(PUBLIC_PROOF.POOLED) : ''}
       ${p.faqs && p.faqs.length ? `<section id="questions"><div class="ch-container ch-narrow">${faqHtml(p.faqs, p.faqTitle)}</div></section>` : ''}
       <section><div class="ch-container ch-narrow">
-        <h2>${p.featured ? 'The modules inside Aumy One' : 'Works even better with'}</h2>
+        <h2>${p.featured ? 'The parts of Aumy' : 'Works even better with'}</h2>
         <ul>
           ${moduleCardsHtml(pairs)}
         </ul>
         ${p.deep.length ? `<p>Go deeper: ${p.deep.map((d) => `<a href="${d.path}">${esc(d.label)}</a>`).join(' · ')}</p>` : ''}
-        ${p.featured ? '' : `<h2>Or run it all as ${esc(MODS.CONNECTED.short)}: ${esc(MODS.CONNECTED.title)}</h2>
-        <p>${esc(MODS.CONNECTED.sub)} <a href="/modules/automate-dental-clinic-operations">See ${esc(MODS.CONNECTED.short)}</a> · <a href="/modules">Compare all modules</a></p>`}
+        ${p.featured || p.base ? '' : `<h2>${esc(MODS.CONNECTED.title)}</h2>
+        <p>${esc(MODS.CONNECTED.sub)} <a href="/modules/dental-patient-follow-up">See the base plan</a> · <a href="/modules">See how the parts fit</a></p>`}
         <h2>See ${esc(p.short)} working in a dental clinic</h2>
         <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
-        <p>Other modules: ${MODS.PAGES.filter((o) => o.id !== p.id).map((o) => `<a href="/modules/${o.id}">${esc(o.short)}</a>`).join(' · ')}</p>
+        <p>Other parts of Aumy: ${MODS.PAGES.filter((o) => o.id !== p.id).map((o) => `<a href="/modules/${o.id}">${esc(o.short)}</a>`).join(' · ')}</p>
       </div></section>`,
   });
 }

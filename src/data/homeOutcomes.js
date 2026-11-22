@@ -29,9 +29,9 @@ const HERO = {
   close: 'We make sure of it.',
   primary: { label: 'Get a free clinic audit', to: '/growth-audit' },
   whatsapp: { label: 'WhatsApp us · 80071 89868', href: WHATSAPP_LINK },
-  // Not rendered anywhere today; kept in line with the approved proof list (13 Nov 2026).
-  proofNumber: 'Almost half',
-  proofText: 'of appointments at The Sterling Dental Clinic, Delhi, were confirmed by the patient on WhatsApp (47%, 2–16 Oct 2026).',
+  // Not rendered anywhere today; kept in line with the approved proof list (src/data/proof.js, 22 Nov 2026).
+  proofNumber: '2 in 3',
+  proofText: 'of The Sterling Dental Clinic’s patients, Delhi, answered their appointment reminder on WhatsApp (906 of 1,354, 67%, 23 Oct–21 Nov 2026).',
 };
 
 
@@ -94,12 +94,11 @@ const FINAL = {
 
 // Footer column (site-wide): the module pages, linked in outcome words, no product names (owner 2026-10-22).
 const FOOTER_OUTCOMES = [
-  { to: '/modules/dental-lead-management', label: 'Every enquiry followed up' },
   { to: '/modules/whatsapp-ai-receptionist-for-dentists', label: 'Every WhatsApp answered' },
   { to: '/modules/ai-voice-receptionist-for-dentists', label: 'Every call answered' },
   { to: '/modules/dental-patient-follow-up', label: 'No-shows rebooked, treatment finished' },
   { to: '/modules/dental-clinic-management-software', label: 'Records and billing in one place' },
-  { to: '/modules/automate-dental-clinic-operations', label: 'All of it, run together' },
+  { to: '/modules', label: 'All of it, run together' },
 ];
 // One product (owner 2026-11-02).
 const FOOTER_TAGLINE = 'Aumy, one product for dental clinics: an AI receptionist on WhatsApp and calls, every follow-up done for you, and a paperless clinic.';

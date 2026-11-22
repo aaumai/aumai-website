@@ -7,14 +7,14 @@
  * (the existing explainer films, labelled by part, never by module name), an example day, the five setup
  * steps, how the clinic stays in control, proof, and the one call to action (the free clinic audit).
  * No module names, no prices, no plan names. The part names and lines come from src/data/homeOneProduct.js
- * so the two pages never drift. Sterling's figure is the approved "almost half (47%)" from src/data/proof.js
- * (owner 2026-11-13; the earlier "2 in 3" is not on the approved proof list).
+ * so the two pages never drift. Sterling's figure is the approved "2 in 3 answered their reminder" from
+ * src/data/proof.js (owner 2026-11-22, measured 23 Oct–21 Nov 2026; never "confirm").
  *
  * `module.exports` on purpose: prerender.js is plain Node and require()s it.
  */
 const HOME = require('./homeOneProduct');
 const EXPL = require('./explainers');
-const { STERLING_CONFIRMED } = require('./proof');
+const { STERLING_ANSWERED } = require('./proof');
 
 const video = (moduleId) => EXPL.VIDEOS.find((v) => v.moduleId === moduleId);
 const part = (key) => HOME.THREE.items.find((it) => it.key === key);
@@ -86,12 +86,12 @@ const HOW_CONTROL = [
 ];
 
 // Proof, real words only: Dr Priyanka's Google review (src/data/googleReviews.js) and Sterling's WhatsApp
-// confirmations (approved wording from src/data/proof.js; "2 in 3" replaced on 2026-11-13).
+// reminder answers (approved wording from src/data/proof.js, owner 2026-11-22).
 const HOW_PROOF = {
   quote: 'Thank you, Jayesh ji, and your team. You were with us at every step.',
   who: 'Dr Priyanka Giroti, The Sterling Dental Clinic, New Delhi',
-  number: STERLING_CONFIRMED.short,
-  numberText: 'of appointments at The Sterling Dental Clinic, Delhi, were confirmed by the patient on WhatsApp: 281 of 603 (47%), measured 2–16 Oct 2026.',
+  number: STERLING_ANSWERED.short,
+  numberText: 'of The Sterling Dental Clinic’s patients, Delhi, answered their appointment reminder on WhatsApp: 906 of 1,354 (67%), measured 23 Oct–21 Nov 2026.',
 };
 
 const HOW_FINAL = HOME.FINAL;

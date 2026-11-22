@@ -23,7 +23,7 @@ const TRAINED_FOR_DENTISTRY =
   'Aumy is trained for dentistry — it knows dental treatments, tooth numbers, recalls and how a dental clinic’s day runs.';
 
 // /modules intro.
-const MODULES_LINE = 'Every module is handcrafted only for dentists. Aumy is trained for dentistry.';
+const MODULES_LINE = 'Aumy is handcrafted only for dentists and trained for dentistry.';
 
 // /ai-receptionist and /whatsapp-automation-for-clinics.
 const AI_TRAINED_FOR_DENTISTRY = 'Handcrafted only for dentists. Aumy’s AI is trained for dentistry.';

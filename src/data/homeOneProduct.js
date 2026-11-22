@@ -14,9 +14,9 @@
  *     Sterling, RB, Vinaykia, Dental Planet Elite). Off everywhere, so never claimed here: lab work ready,
  *     festival greetings, health tips, treatment suggestions;
  *   - the paperless list names real screens of the clinic software only;
- *   - numbers only from the approved proof list (src/data/proof.js, owner 2026-11-13): Sterling's "almost half
- *     (47%)", dated, and the pooled "across 4 dental clinics on Aumy" figures with their window. The earlier
- *     "2 out of 3" was replaced on 13 Nov 2026 (not on the approved list, rule N01);
+ *   - numbers only from the approved proof list (src/data/proof.js): Sterling's "2 in 3 answered their reminder"
+ *     (owner 2026-11-22, measured 23 Oct–21 Nov 2026; never "confirm") and the pooled "across 4 dental clinics on
+ *     Aumy" figures with their window;
  *   - module names stay off this page, links included (rule M04-M06): the link to the Aumy Clinic page reads
  *     "AI dental practice management software";
  *   - "100% digital and paperless" is the owner's own phrase (kept as he wrote it).
@@ -27,7 +27,7 @@
 // The ads line of HANDLED follows the one ads switch (src/data/visibility.js).
 const { HIDE_ADS, adsText } = require('./visibility');
 // Approved proof, one copy (owner 2026-11-13).
-const { POOLED, STERLING_CONFIRMED } = require('./proof');
+const { POOLED, STERLING_ANSWERED } = require('./proof');
 
 // The one next step: the free clinic audit form. First-person, outcome-led label (reviewer, 2026-11-02).
 const AUDIT = { label: 'Show me where my clinic loses patients', to: '/growth-audit' };
@@ -162,9 +162,9 @@ const PROOF = {
   quote: 'My only regret? That we didn’t have this years ago.',
   who: 'Dr Priyanka Giroti',
   where: 'The Sterling Dental Clinic, New Delhi · 26 years in practice',
-  statN: STERLING_CONFIRMED.short,
-  statT: STERLING_CONFIRMED.line,
-  statS: STERLING_CONFIRMED.window,
+  statN: STERLING_ANSWERED.short,
+  statT: STERLING_ANSWERED.line,
+  statS: STERLING_ANSWERED.window,
   reviewsLink: 'Read our Google reviews',
 };
 

@@ -142,7 +142,7 @@ function App() {
                 {/* The two search themes the site targets (owner 2026-09-18):
                     AI-powered dental clinic operations, and the AI-powered
                     patient journey & engagement. Crawler copy: scripts/prerender.js. */}
-                <Route path="/ai-dental-clinic-operations" element={<Navigate to="/modules/automate-dental-clinic-operations" replace />} />
+                <Route path="/ai-dental-clinic-operations" element={<Navigate to="/modules/dental-patient-follow-up" replace />} />
                 <Route path="/ai-patient-engagement" element={<Navigate to="/modules/dental-patient-follow-up" replace />} />
                 <Route path="/ai-dental-software-india" element={<AIDentalSoftwareIndiaPage />} />
                 <Route path="/growth" element={<GrowthHub />} />

@@ -153,7 +153,7 @@ const ModuleDetailPage = () => {
 
       <section className="ch-section mp-section">
         <div className="ch-container">
-          <h2 className="ch-h2 ch-center">{isOne ? 'The modules inside Aumy One' : 'Works even better with'}</h2>
+          <h2 className="ch-h2 ch-center">{isOne ? 'The parts of Aumy' : 'Works even better with'}</h2>
           <ul className="mh-grid mp-pairs">
             {pairs.map((p) => (
               <li key={p.id}>
@@ -181,19 +181,19 @@ const ModuleDetailPage = () => {
         </div>
       </section>
 
-      {!isOne && (
+      {!isOne && !page.base && (
         <section className="md-connected-section">
           <div className="ch-container">
             <div className="md-connected mp-one-band">
               <div className="md-connected-head">
                 <span className="md-icon md-icon-light"><ModuleIcon name="all" /></span>
-                <span className="md-connected-eyebrow">Or run it all as one</span>
-                <h2 className="md-connected-title">{CONNECTED.short}<span className="md-formal">{CONNECTED.title}</span></h2>
+                <span className="md-connected-eyebrow">{CONNECTED.eyebrow}</span>
+                <h2 className="md-connected-title">{CONNECTED.title}</h2>
                 <p className="md-connected-sub">{CONNECTED.sub}</p>
               </div>
               <div className="md-connected-cta">
-                <Link to="/modules/automate-dental-clinic-operations" className="ch-btn ch-btn-primary">See Aumy One</Link>
-                <Link to="/modules" className="ch-btn ch-btn-ghost ch-ghost-light">Compare all modules</Link>
+                <Link to="/modules/dental-patient-follow-up" className="ch-btn ch-btn-primary">See the base plan</Link>
+                <Link to="/modules" className="ch-btn ch-btn-ghost ch-ghost-light">See how the parts fit</Link>
               </div>
             </div>
           </div>
@@ -209,7 +209,7 @@ const ModuleDetailPage = () => {
             <a href={waLink(page.short)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
           </div>
           <p className="mp-other">
-            Other modules:{' '}
+            Other parts of Aumy:{' '}
             {PAGES.filter((p) => p.id !== page.id).map((p, i) => (
               <React.Fragment key={p.id}>
                 {i > 0 && ' · '}
