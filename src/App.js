@@ -15,6 +15,7 @@ import DabbewaalaApp from './pages/DabbewaalaApp';
 import AumaiAnalytics from './pages/AumaiAnalytics';
 import AumyRevenueGenerator from './pages/AumyRevenueGenerator';
 import GrowthAudit from './pages/GrowthAudit';
+import ApplyPage from './pages/ApplyPage';
 import ScorecardPage from './pages/ScorecardPage';
 import ScorecardAdmin from './pages/ScorecardAdmin';
 import MasterclassPage from './pages/MasterclassPage';
@@ -111,6 +112,8 @@ function App() {
                 <Route path="/aumy" element={<Navigate to="/revenue-generator" replace />} />
                 <Route path="/revenue-generator" element={<AumyRevenueGenerator />} />
                 <Route path="/growth-audit" element={<GrowthAudit />} />
+                {/* Calls with Jayesh are by application (owner 2026-11-22). */}
+                <Route path="/apply" element={<ApplyPage />} />
                 <Route path="/4c-scorecard" element={<ScorecardPage />} />
                 {/* The Full Chair Method (owner 2026-10-19): /masterclass is the public information
                     page; the members area (private, noindex) is /masterclass/sign-in and /masterclass/my. */}

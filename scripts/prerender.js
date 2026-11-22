@@ -97,6 +97,8 @@ const startInAppHtml = (name) => `<p><strong>${esc(STORES.START_LINE)}</strong>:
 // Google reviews (src/data/googleReviews.js): the home links to them. Plain HTML only:
 // NO Review / AggregateRating JSON-LD (self-serving reviews break Google's guidelines).
 const GR = require('../src/data/googleReviews');
+// Calls with Jayesh by application (owner 2026-11-22): same words as src/pages/ApplyPage.js.
+const APPLY = require('../src/data/apply');
 // Module cards as links to /modules/<id> (home section + "works even better with").
 // `stores`: the home cards also carry the app-store links for the self-serve modules.
 const moduleCardsHtml = (pages, { stores = false } = {}) => pages.map((p) => `<li><a href="/modules/${p.id}"><strong>${esc(p.short)}</strong>: ${esc(p.title)}</a> — ${esc(p.card)}${p.addonOf ? ` (add-on to ${esc(p.addonOf)})` : ''}${stores && STORES.isSelfServe(p.id) ? ` ${esc(STORES.START_LINE)}: ${storeLinksHtml(p.short)}` : ''}</li>`).join('\n          ');
@@ -913,6 +915,31 @@ const routes = [
           <li>Where enquiries, follow-ups and appointments slip through the cracks — and what each gap is worth.</li>
         </ul>
         <p>Free. No obligation. Reviewed by a person before it reaches you.</p>
+      </div></section>`,
+  },
+  {
+    slug: APPLY.PATH.slice(1),
+    title: APPLY.SEO.title,
+    description: APPLY.SEO.description,
+    canonical: `${ORIGIN}${APPLY.PATH}`,
+    content: `
+      <section class="ch-hero"><div class="ch-container">
+        <p class="ch-eyebrow">${esc(APPLY.HERO.eyebrow)}</p>
+        <h1 class="ch-hero-title">${esc(APPLY.HERO.title)}</h1>
+        <p class="ch-hero-sub">${esc(APPLY.HERO.sub)}</p>
+        <p><strong>${esc(APPLY.FOR_YOU.title)}</strong></p>
+        <ul>${APPLY.FOR_YOU.items.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
+        <p><strong>${esc(APPLY.HOW.title)}</strong></p>
+        <ol>${APPLY.HOW.steps.map((t) => `<li>${esc(t)}</li>`).join('')}</ol>
+        <p>${esc(APPLY.NOTE)}</p>
+        <h2>The 4 questions</h2>
+        <ol>
+          <li>${esc(APPLY.QUESTIONS.role.replace(/^[0-9]+[.] */, ''))}: ${APPLY.ROLES.map((r) => esc(r.label)).join(' / ')}</li>
+          <li>${esc(APPLY.QUESTIONS.chairs.replace(/^[0-9]+[.] */, ''))}, and ${esc(APPLY.QUESTIONS.newPatients.toLowerCase())}</li>
+          <li>${esc(APPLY.QUESTIONS.enquiry.replace(/^[0-9]+[.] */, ''))}</li>
+          <li>${esc(APPLY.QUESTIONS.timeline.replace(/^[0-9]+[.] */, ''))} ${APPLY.TIMELINES.map((t) => esc(t.label)).join(' / ')}</li>
+        </ol>
+        <p>Plus your name, clinic, city and WhatsApp number. ${esc(APPLY.PRIVACY)}</p>
       </div></section>`,
   },
   {

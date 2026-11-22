@@ -26,11 +26,12 @@
 const { showLink, adsText, HIDE_ADS } = require('./visibility');
 
 const PATH = '/services';
-const CALL_LINK = 'https://calendar.app.google/tecaeebTBEWSoJnV7';
+// Calls with Jayesh are by application (owner 2026-11-22): every call button goes to /apply, never the calendar.
+const CALL_LINK = '/apply';
 const AUDIT_PATH = '/growth-audit';
 
 const CTA = {
-  primary: { label: 'Book a call with Jayesh', href: CALL_LINK },
+  primary: { label: 'Apply for a call with Jayesh', href: CALL_LINK },
   secondary: { label: 'Get a free clinic audit', href: AUDIT_PATH },
 };
 

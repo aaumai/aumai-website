@@ -14,10 +14,8 @@ import './ServicesPage.css';
 
 const ORIGIN = 'https://aumai.co.in';
 
-// The call with Jayesh opens his booking page; the audit is a page on this site.
-const CallLink = ({ className }) => (
-  <a className={className} href={S.CTA.primary.href} target="_blank" rel="noopener noreferrer">{S.CTA.primary.label}</a>
-);
+// The call with Jayesh is by application (/apply, owner 2026-11-22); the audit is a page on this site too.
+const CallLink = ({ className }) => <Link className={className} to={S.CTA.primary.href}>{S.CTA.primary.label}</Link>;
 const AuditLink = ({ className }) => <Link className={className} to={S.CTA.secondary.href}>{S.CTA.secondary.label}</Link>;
 
 export default function ServicesPage() {

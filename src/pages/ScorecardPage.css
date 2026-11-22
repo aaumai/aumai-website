@@ -128,7 +128,7 @@
   .sc-table { font-size: 11.5px } .sc-table td { padding: 4px } .sc-table th { padding: 4px; font-size: 10px }
   .sc-next { gap: 4px }
   .sc-cta { padding: 10px 14px } .sc-cta h3 { font-size: 14px } .sc-cta p { font-size: 12px }
-  .sc-cta::after { content: "Book: calendar.app.google/tecaeebTBEWSoJnV7"; font-size: 12px; font-weight: 700; color: #2563EB }
+  .sc-cta::after { content: "Apply: aumai.co.in/apply"; font-size: 12px; font-weight: 700; color: #2563EB }
   .sc-start-card p, .sc-next { font-size: 12px }
   .sc-cta a { display: none }
   .sc-start-card, .sc-table tr, .sc-cta { break-inside: avoid }

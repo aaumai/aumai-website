@@ -109,4 +109,5 @@ export const SYSTEMS = [
 ];
 
 export const C_COLORS = { Convert: 'convert', Confirm: 'confirm', Care: 'care', 'Come back': 'comeback' };
-export const CALL_LINK = 'https://calendar.app.google/tecaeebTBEWSoJnV7';
+// Calls with Jayesh are by application (owner 2026-11-22).
+export const CALL_LINK = '/apply';

@@ -274,9 +274,9 @@ function Report({ report, onEdit }) {
         <div className="sc-cta">
           <div>
             <h3>Want these systems running for you?</h3>
-            <p>Book a free 15-minute call. Bring this report, and we’ll tell you honestly which systems are worth automating for a clinic your size.</p>
+            <p>Apply for a call with Jayesh. Answer 4 short questions; we reply on WhatsApp within 48 hours, and on the call we’ll tell you honestly which systems are worth automating for a clinic your size.</p>
           </div>
-          <a className="sc-btn" href={CALL_LINK} target="_blank" rel="noopener noreferrer">Book a 15-minute call</a>
+          <a className="sc-btn" href={CALL_LINK}>Apply for a call with Jayesh</a>
         </div>
         <p className="sc-foot">The 4C Scorecard · The Full Chair Method by AUM AI · aumai.co.in/4c-scorecard</p>
       </article>

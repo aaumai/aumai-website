@@ -63,6 +63,7 @@ const SITEMAPS = {
     ['/revenue-generator', 0.9, 'weekly'],
     ['/demos', 0.9, 'weekly'],
     ['/growth-audit', 0.9, 'weekly'],
+    ['/apply', 0.8, 'monthly'],
     ['/4c-scorecard', 0.9, 'monthly'],
     // The Full Chair Method information page (owner 2026-10-19). /masterclass/register stays out for now.
     ['/masterclass', 0.9, 'monthly'],
