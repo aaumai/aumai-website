@@ -128,6 +128,11 @@
 .site-lux .md-connected .ch-btn-ghost:hover { color: var(--lux-gold-2); border-color: var(--lux-gold-2); }
 .site-lux .md-jump .md-jump-all { background: var(--lux-navy-2); border-color: var(--lux-navy-2); color: #fff; }
 .site-lux .md-jump .md-jump-all:hover, .site-lux .md-jump .md-jump-all:focus-visible { background: var(--lux-navy); border-color: var(--lux-gold); color: var(--lux-gold-2); }
+/* lux.css's site-wide link colour (.site-lux .ch-home a:not(...)) outranks the rule above and painted the dark
+   chip's text navy on navy (unreadable, 22 Nov 2026): the doubled class wins it back. */
+.site-lux .ch-home .md-jump a.md-jump-all.md-jump-all { color: #fff; }
+.site-lux .ch-home .md-jump a.md-jump-all.md-jump-all:hover,
+.site-lux .ch-home .md-jump a.md-jump-all.md-jump-all:focus-visible { color: var(--lux-gold-2); }
 .site-lux .md-card { border-top-color: var(--lux-gold); }
 .site-lux .md-card:hover, .site-lux .md-card:focus-within { border-color: var(--lux-gold); border-top-color: var(--lux-gold); }
 .site-lux .md-chip { border-color: var(--lux-line); color: var(--lux-bronze); }

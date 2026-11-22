@@ -353,7 +353,8 @@
 .ch-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .ch-field label { font-size: 14px; font-weight: 600; color: var(--c-ink); }
 .ch-field input,
-.ch-field select {
+.ch-field select,
+.ch-field textarea {
   font-family: inherit;
   font-size: 16px;
   color: var(--c-ink);
@@ -365,11 +366,16 @@
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .ch-field input:focus,
-.ch-field select:focus {
+.ch-field select:focus,
+.ch-field textarea:focus {
   border-color: var(--c-accent);
   box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.12);
 }
-.ch-field input::placeholder { color: #9aa6b2; }
+.ch-field input::placeholder,
+.ch-field textarea::placeholder { color: #9aa6b2; }
+.ch-field textarea { resize: vertical; min-height: 84px; line-height: 1.45; }
+/* Two fields side by side whose labels wrap differently: keep the inputs on one line (the /apply form). */
+.ch-field-row { align-items: end; }
 .ch-audit-submit { width: 100%; }
 .ch-audit-submit:disabled { opacity: 0.7; cursor: default; }
 .ch-form-note { border-radius: 12px; padding: 14px 16px; font-size: 15px; font-weight: 600; }
