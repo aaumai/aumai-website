@@ -13,8 +13,7 @@
  * treatment master, recalls / care gaps, perio charting and lab work all exist.
  */
 
-// Aumy Convert's ads wording hidden for now (owner 2026-11-06, src/data/visibility.js).
-const { adsText } = require('./visibility');
+// Product names (owner 2026-11-22): Clinic OS + Automated Patient Journey, WhatsApp AI receptionist, Voice AI receptionist.
 
 const DENTISTS_ONLY = 'Handcrafted only for dentists.';
 
@@ -43,40 +42,35 @@ const LD_SUFFIX = 'Handcrafted only for dentists and trained for dentistry: Aumy
 // Home hero (owner-approved 2026-10-08): lead line + "What changes in your clinic" outcomes.
 // Read by src/pages/Home.js AND scripts/prerender.js — change here, both follow.
 const HERO_MODULES = [
-  { id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat', outcome: 'every WhatsApp answered in seconds, day or night, and the appointment booked into your diary — and all your clinic WhatsApp numbers in one screen that looks just like WhatsApp.' },
-  { id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice', outcome: 'every call picked up, even when the desk is busy or the clinic is closed. No patient lost to a missed call.' },
-  { id: 'dental-lead-management', name: 'Aumy Convert', outcome: adsText('Leads Nurturing: every enquiry from your ads followed up until they book, and you see which ads bring real patients.', 'Leads Nurturing: every enquiry followed up until they book, and you see which enquiries became real patients.') },
-  { id: 'dental-patient-follow-up', name: 'Aumy Journey', outcome: 'fewer no-shows, missed visits rebooked, advised treatments followed up, recalls coming back on time.' },
-  { id: 'dental-clinic-management-software', name: 'Aumy Clinic', outcome: 'appointments, records, charting, treatment plans and billing in one place; add Aumy Scribe: speak the note, the chart fills itself.' },
-  { id: 'automate-dental-clinic-operations', name: 'Aumy One', outcome: 'one system that includes everything, customised to your clinic’s needs: one patient record, nothing falling between tools.' },
+  { id: 'whatsapp-ai-receptionist-for-dentists', name: 'WhatsApp AI receptionist', outcome: 'every WhatsApp answered in seconds, day or night, and the appointment booked into your diary — and all your clinic WhatsApp numbers in one screen that looks just like WhatsApp.' },
+  { id: 'ai-voice-receptionist-for-dentists', name: 'Voice AI receptionist', outcome: 'every call picked up, even when the desk is busy or the clinic is closed. No patient lost to a missed call.' },
+  { id: 'dental-patient-follow-up', name: 'Clinic OS + Automated Patient Journey', outcome: 'fewer no-shows, missed visits rebooked, advised treatments followed up, recalls coming back on time.' },
+  { id: 'dental-clinic-management-software', name: 'Clinic OS', outcome: 'appointments, records, charting, treatment plans and billing in one place; add Aumy Scribe: speak the note, the chart fills itself.' },
 ];
 const HERO_OUTCOMES_HEADING = 'What changes in your clinic:';
 
 // Home hero, loss framing (owner 2026-10-08: "Stop losing patients … lets sell loss"). Each leak links to the one module that stops it.
 const HERO_LEAKS_INTRO = 'Every dental clinic loses patients somewhere:';
 const HERO_LEAKS = [
-  { leak: 'Leads not followed up — and lost', id: 'dental-lead-management', name: 'Aumy Convert' },
-  { leak: 'Missed calls', id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice' },
-  { leak: 'Slow WhatsApp replies — patients book elsewhere', id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat' },
-  { leak: 'Last-minute cancellations', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
-  { leak: 'No-shows', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
-  { leak: 'Treatments left incomplete', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
-  { leak: 'Treatment advised — and never followed up', id: 'dental-patient-follow-up', name: 'Aumy Journey' },
+  { leak: 'Missed calls', id: 'ai-voice-receptionist-for-dentists', name: 'Voice AI receptionist' },
+  { leak: 'Slow WhatsApp replies — patients book elsewhere', id: 'whatsapp-ai-receptionist-for-dentists', name: 'WhatsApp AI receptionist' },
+  { leak: 'Last-minute cancellations', id: 'dental-patient-follow-up', name: 'Clinic OS + Automated Patient Journey' },
+  { leak: 'No-shows', id: 'dental-patient-follow-up', name: 'Clinic OS + Automated Patient Journey' },
+  { leak: 'Treatments left incomplete', id: 'dental-patient-follow-up', name: 'Clinic OS + Automated Patient Journey' },
+  { leak: 'Treatment advised — and never followed up', id: 'dental-patient-follow-up', name: 'Clinic OS + Automated Patient Journey' },
 ];
-const HERO_LEAKS_CLOSE = 'Aumy stops every one of these leaks. Pick the one costing your clinic most and fix only that — buy only what you need.';
+const HERO_LEAKS_CLOSE = 'Aumy stops every one of these leaks. Start with Clinic OS + Automated Patient Journey, then add the AI receptionists you need.';
 
 // Owner 2026-10-08: the whole-system path, shown after the leaks.
-const HERO_ONE_LINE = 'Or automate your dental clinic operations end to end with Aumy One.';
+const HERO_ONE_LINE = 'One product: Clinic OS + Automated Patient Journey, plus the WhatsApp and Voice AI receptionists.';
 
 // Home hero, owner 2026-10-12: "too congested … 1 line outcome after one product title … keep it damn simple".
 // One product, one outcome, one line each. Replaces the leaks list + paragraphs in the hero.
 const HERO_PRODUCTS = [
-  { id: 'dental-lead-management', name: 'Aumy Convert', outcome: adsText('Every ad enquiry followed up until it books.', 'Every enquiry followed up until it books.') },
-  { id: 'whatsapp-ai-receptionist-for-dentists', name: 'Aumy Chat', outcome: 'Every WhatsApp answered in seconds.' },
-  { id: 'ai-voice-receptionist-for-dentists', name: 'Aumy Voice', outcome: 'Every call answered, day and night.' },
-  { id: 'dental-patient-follow-up', name: 'Aumy Journey', outcome: 'No-shows rebooked. Treatments finished.' },
-  { id: 'dental-clinic-management-software', name: 'Aumy Clinic', outcome: 'Appointments, records and billing in one place.' },
-  { id: 'automate-dental-clinic-operations', name: 'Aumy One', outcome: 'All of it, working as one.' },
+  { id: 'whatsapp-ai-receptionist-for-dentists', name: 'WhatsApp AI receptionist', outcome: 'Every WhatsApp answered in seconds.' },
+  { id: 'ai-voice-receptionist-for-dentists', name: 'Voice AI receptionist', outcome: 'Every call answered, day and night.' },
+  { id: 'dental-patient-follow-up', name: 'Clinic OS + Automated Patient Journey', outcome: 'No-shows rebooked. Treatments finished.' },
+  { id: 'dental-clinic-management-software', name: 'Clinic OS', outcome: 'Appointments, records and billing in one place.' },
 ];
 
 // The home "explore" link row (HOME_EXPLORE) was removed 2026-11-02 (one-product home, no pricing): every one

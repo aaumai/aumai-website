@@ -1413,7 +1413,7 @@ ${articleFaqHtml(MONDAY_NUMBERS_FAQS, 'Questions dental clinic owners ask')}
   <li><strong>You stay in control while you start.</strong> Can your team confirm each booking the AI makes before it is final? Can the AI answer only while the clinic is closed, if that is all you want?</li>
   <li><strong>It shows you what happened.</strong> How many enquiries came in, how many were answered after hours, how many booked, and which bookings still stood a week later. If a tool shows only "messages sent", you can't tell whether it helped.</li>
 </ol>
-<p>One more, if your phone rings as much as your WhatsApp: does the same system answer calls, from the same calendar and patient record? In Aumy, that is <a href="/modules/ai-voice-receptionist-for-dentists">Aumy Voice</a>.</p>
+<p>One more, if your phone rings as much as your WhatsApp: does the same system answer calls, from the same calendar and patient record? In Aumy, that is the <a href="/modules/ai-voice-receptionist-for-dentists">Voice AI receptionist</a>.</p>
 
 <h2>What we measured</h2>
 <div class="gh-box">
@@ -1427,7 +1427,7 @@ ${articleFaqHtml(MONDAY_NUMBERS_FAQS, 'Questions dental clinic owners ask')}
 <p>The replies sent after closing time are the enquiries that would otherwise have waited until morning.</p>
 
 <h2>Where Aumy fits, and who it is not for</h2>
-<p><strong>Aumy fits</strong> an established dental practice with a front desk, usually three chairs or more, where WhatsApp fills up faster than the desk can reply and enquiries arrive at night and on Sundays. <a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>, the AI WhatsApp receptionist, answers and books; your team handles the chats that need a person. Bookings land in Aumy's appointment book, with the reminders and follow-ups on the same patient record. Using other dental software today? See <a href="/switch">moving from your current dental software</a>.</p>
+<p><strong>Aumy fits</strong> an established dental practice with a front desk, usually three chairs or more, where WhatsApp fills up faster than the desk can reply and enquiries arrive at night and on Sundays. The <a href="/modules/whatsapp-ai-receptionist-for-dentists">WhatsApp AI receptionist</a> answers and books; your team handles the chats that need a person. Bookings land in Aumy's appointment book, with the reminders and follow-ups on the same patient record. Using other dental software today? See <a href="/switch">moving from your current dental software</a>.</p>
 <p><strong>It is probably not for you if:</strong></p>
 <ul>
   <li>You run one or two chairs, answer the clinic's WhatsApp yourself, and keep up easily. A simpler practice management system with WhatsApp reminders will serve you well, and our masterclass, <a href="/masterclass">The Full Chair Method</a>, shows how to run your follow-ups yourself.</li>
@@ -1505,7 +1505,7 @@ ${articleFaqHtml(AI_RECEPTIONIST_FAQS, 'Questions dental clinic owners ask')}
 <p>We don't publish a "no-shows cut by X%" figure. No-show rates swing with the season, the treatment mix and doctors' leave, and we haven't measured a before-and-after we would stand behind. We publish what we can count.</p>
 
 <h2>Where Aumy fits, and who it is not for</h2>
-<p><strong>Aumy fits</strong> an established dental practice with a front desk, usually three chairs or more, with a busy diary and nobody free to call every patient the day before or chase every missed visit. Reminders, confirmations and missed-visit follow-ups run from Aumy's appointment book (<a href="/modules/dental-patient-follow-up">Aumy Journey</a>), and the AI receptionist (<a href="/modules/whatsapp-ai-receptionist-for-dentists">Aumy Chat</a>) answers the replies, books and moves visits.</p>
+<p><strong>Aumy fits</strong> an established dental practice with a front desk, usually three chairs or more, with a busy diary and nobody free to call every patient the day before or chase every missed visit. Reminders, confirmations and missed-visit follow-ups run from Aumy's appointment book (<a href="/modules/dental-patient-follow-up">Clinic OS + Automated Patient Journey</a>), and the <a href="/modules/whatsapp-ai-receptionist-for-dentists">WhatsApp AI receptionist</a> answers the replies, books and moves visits.</p>
 <p><strong>It is probably not for you if:</strong></p>
 <ul>
   <li>You see few no-shows and your desk already calls every patient the day before. A practice management system with simple WhatsApp reminders may be all you need.</li>

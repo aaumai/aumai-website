@@ -30,7 +30,7 @@ const NabhPage = () => {
           <p className="ch-hero-sub">{NABH.SUB}</p>
           <div style={{ marginTop: 18, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/contact" className="ch-btn ch-btn-primary">Book a demo</Link>
-            <Link to={NABH.MODULE_PATH} className="ch-btn ch-btn-ghost">See Aumy Clinic</Link>
+            <Link to={NABH.MODULE_PATH} className="ch-btn ch-btn-ghost">See the Clinic OS</Link>
           </div>
         </div>
       </section>

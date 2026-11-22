@@ -9,7 +9,7 @@
 
 // 22 Nov 2026 (owner): the Aumy Convert explainer left this list (Convert is no longer sold by name).
 
-const TITLE = 'See each module in under two minutes';
+const TITLE = 'See each part of Aumy in under two minutes';
 const SUB = 'A real clinic day, before and after Aumy. Sound on.';
 
 // The whole-Aumy film plays in the home hero (owner 2026-10-12: the Aumy loop is retired, this film replaces it).
@@ -41,30 +41,30 @@ const FULL_DEMO = {
 const VIDEOS = [
   {
     moduleId: 'ai-voice-receptionist-for-dentists',
-    name: 'Aumy Voice',
+    name: 'Voice AI receptionist',
     line: 'Every call answered — even when your desk is busy.',
     src: '/videos/explainers/aumy-voice-explainer.mp4',
     poster: '/videos/explainers/aumy-voice-explainer.jpg',
     duration: 'PT1M30S',
-    description: 'How Aumy Voice, the AI voice receptionist for dental clinics, answers the calls your desk cannot pick up, books by your doctors\' free slots and rings your staff for anything urgent.',
+    description: 'How Aumy’s Voice AI receptionist for dental clinics answers the calls your desk cannot pick up, books by your doctors\' free slots and rings your staff for anything urgent.',
   },
   {
     moduleId: 'whatsapp-ai-receptionist-for-dentists',
-    name: 'Aumy Chat',
+    name: 'WhatsApp AI receptionist',
     line: 'Every WhatsApp answered in seconds, day and night.',
     src: '/videos/explainers/aumy-chat-explainer.mp4',
     poster: '/videos/explainers/aumy-chat-explainer.jpg',
     duration: 'PT1M34S',
-    description: 'How Aumy Chat, the AI WhatsApp receptionist for dental clinics, replies in seconds on your own number, understands voice notes and photos, and books real free slots.',
+    description: 'How Aumy’s WhatsApp AI receptionist for dental clinics replies in seconds on your own number, understands voice notes and photos, and books real free slots.',
   },
   {
     moduleId: 'dental-patient-follow-up',
-    name: 'Aumy Journey',
+    name: 'Clinic OS + Automated Patient Journey',
     line: 'Stop your clinic leaking revenue.',
     src: '/videos/explainers/aumy-journey-explainer.mp4',
     poster: '/videos/explainers/aumy-journey-explainer.jpg',
     duration: 'PT2M4S',
-    description: 'How Aumy Journey answers and nurtures new enquiries, reads every patient reply, rebooks missed visits and follows up advised and planned treatments, recalls, cleanings and patients who have not visited in a long time.',
+    description: 'How Aumy’s Clinic OS + Automated Patient Journey answers and nurtures new enquiries, reads every patient reply, rebooks missed visits and follows up advised and planned treatments, recalls, cleanings and patients who have not visited in a long time.',
   }
 ];
 

@@ -79,7 +79,7 @@ const faqPageLd = (faqs) => ({
 });
 // Crawler HTML for the FAQ block and a [title, body] list.
 const faqHtml = (faqs, heading) => `<h2>${esc(heading)}</h2>${faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}`;
-// Approved pooled proof (owner 2026-11-13), word for word from src/data/proof.js: home + the Aumy Clinic page.
+// Approved pooled proof (owner 2026-11-13), word for word from src/data/proof.js: home + the Clinic OS page.
 const pooledProofHtml = (P) => `<section id="proof"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(P.eyebrow)}</p>
         <h2>${esc(P.title)}</h2>
@@ -753,7 +753,7 @@ const routes = [
         <h2>What the AI receptionist does</h2>${pairsHtml(AIR.CAPABILITIES)}
         <h2>${esc(AIR.STAGE.title)}</h2><p>${esc(AIR.STAGE.body)}</p>
         ${faqHtml(AIR.FAQS, 'AI receptionist questions, answered')}
-        <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/growth-audit">Free clinic audit</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat or Aumy Voice on its own</a></p>
+        <p><a href="/whatsapp-automation-for-clinics">WhatsApp automation for clinics</a> · <a href="/growth-audit">Free clinic audit</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">The WhatsApp and Voice AI receptionists, add-ons to the base plan</a></p>
         <p>${AIR.RELATED.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>
       </div></section>`,
   },
@@ -773,7 +773,7 @@ const routes = [
         ${pairsHtml(WA.STAGES)}
         <h2>Not another broadcast tool</h2>${pairsHtml(WA.DIFFERENCE)}
         ${faqHtml(WA.FAQS, 'WhatsApp automation questions, answered')}
-        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/growth-audit">Free clinic audit</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">Buy Aumy Chat on its own</a></p>
+        <p><a href="/ai-receptionist">The AI receptionist</a> · <a href="/growth-audit">Free clinic audit</a> · <a href="/demos">Watch the demos</a> · <a href="/modules">The WhatsApp AI receptionist, an add-on to the base plan</a></p>
       </div></section>`,
   },
   {
@@ -806,7 +806,7 @@ const routes = [
         <h1 class="ch-hero-title">${esc(ADS.HERO.h1)}</h1>
         <p class="ch-hero-sub">${esc(ADS.HERO.sub)}</p>
         <p><a href="/demos">Watch it work, live</a> · <a href="/growth-audit">Get a free clinic audit</a></p>
-        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would — or call +91 22 6423 0581 and wait a couple of rings for Aumy Voice to pick up. (Demo clinic: Lumière Dental.) That live demo is Aumy Chat and Aumy Voice only — for a full Aumy One demo, call us on +91 80071 89868.</p>
+        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would — or call +91 22 6423 0581 and wait a couple of rings for the Voice AI receptionist to pick up. (Demo clinic: Lumière Dental.) That live demo shows the WhatsApp AI receptionist and the Voice AI receptionist only — for a full demo of Aumy, call us on +91 80071 89868.</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>What is AI dental software?</h2>
@@ -1238,7 +1238,7 @@ const routes = [
         <p>${esc(NABH.FOOTNOTE)}</p>
         ${NABH.SECTIONS.map((s) => `<h2>${esc(s.h2)}</h2><p>${esc(s.body)}</p>`).join('')}
         ${faqHtml(NABH.FAQS, 'NABH and dental clinic software: questions answered')}
-        <p><a href="${NABH.MODULE_PATH}">Aumy Clinic: dental clinic management software</a> · <a href="/demos">Watch the demos</a> · <a href="/contact">Book a demo</a> · <a href="/compliance">Security &amp; compliance</a></p>
+        <p><a href="${NABH.MODULE_PATH}">Aumy Clinic OS: dental clinic management software</a> · <a href="/demos">Watch the demos</a> · <a href="/contact">Book a demo</a> · <a href="/compliance">Security &amp; compliance</a></p>
       </div></section>`,
   },
   {
@@ -1713,7 +1713,7 @@ for (const p of MODS.PAGES) {
         isPartOf: { '@id': `${ORIGIN}/#aumy-dental` },
         provider: { '@type': 'Organization', name: 'AUM AI Healthcare Solutions', url: `${ORIGIN}/` },
       },
-      // FAQPage only where the page shows the questions (owner 2026-11-13: Aumy Clinic first).
+      // FAQPage only where the page shows the questions (owner 2026-11-13: the Clinic OS page first).
       ...(p.faqs && p.faqs.length ? [faqPageLd(p.faqs)] : []),
     ],
     content: `

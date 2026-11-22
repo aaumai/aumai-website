@@ -65,7 +65,7 @@ const AIReceptionistPage = () => {
           <p style={{ color: '#5b6784', maxWidth: 640, margin: '8px auto 0' }}>{STAGE.body}</p>
           <div style={{ marginTop: 16 }}>
             <Link to="/whatsapp-automation-for-clinics" className="ch-btn ch-btn-ghost">See the WhatsApp automation behind it</Link>{' '}
-            <Link to="/modules" className="ch-btn ch-btn-ghost">Buy Aumy Chat or Aumy Voice on its own</Link>
+            <Link to="/modules" className="ch-btn ch-btn-ghost">The WhatsApp and Voice AI receptionists</Link>
           </div>
         </div>
       </section>
@@ -82,7 +82,7 @@ const AIReceptionistPage = () => {
           <div className="ch-center" style={{ textAlign: 'center', marginTop: 26 }}>
             <Link to="/growth-audit" className="ch-btn ch-btn-primary">Get a free clinic audit</Link>
           </div>
-          {/* Internal links (owner 2026-11-13): home, the Aumy Clinic page and this page link to each other. */}
+          {/* Internal links (owner 2026-11-13): home, the Clinic OS page and this page link to each other. */}
           <p style={{ textAlign: 'center', marginTop: 22, color: '#5b6784' }}>
             {RELATED.map((l, i) => (
               <React.Fragment key={l.to}>
