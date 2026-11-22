@@ -387,6 +387,31 @@
 /* CTA Button in Nav */
 .nav-cta {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* "Log in" for clinics already on Aumy: a quiet outline next to the main call to action (owner 22 Nov 2026). */
+.nav-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #0a0f22;
+  border: 1px solid rgba(10, 15, 34, 0.28);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.nav-login:hover,
+.nav-login:focus-visible {
+  border-color: #2a9d8f;
+  color: #218779;
 }
 
 .nav-cta .btn {
@@ -620,6 +645,13 @@
 
   .nav-cta {
     margin-top: 24px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-login {
+    padding: 13px 40px;
+    font-size: 1rem;
   }
 
   .nav-cta .btn {

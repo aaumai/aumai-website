@@ -297,6 +297,10 @@ const Header = () => {
               )}
             </ul>
             <div className="nav-cta">
+              {/* Clinics already on Aumy sign in to the app (owner 22 Nov 2026). */}
+              <a href="https://aumy.aumai.co.in/login" className="nav-login" onClick={closeMobileMenu}>
+                Log in
+              </a>
               <Link to="/growth-audit" className="btn btn-primary" onClick={closeMobileMenu}>
                 {/* No "free" on the masterclass pages (owner 2026-10-29). */}
                 {isMasterclassPath(location.pathname) ? 'Clinic Audit' : 'Free Clinic Audit'}

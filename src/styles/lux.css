@@ -338,6 +338,8 @@
   text-transform: uppercase;
   padding: 14px 22px;
 }
+.site-lux .nav-login { border-radius: 0; color: var(--lux-navy); border-color: rgba(10, 15, 34, 0.3); font-size: 11.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 13px 20px; }
+.site-lux .nav-login:hover, .site-lux .nav-login:focus-visible { border-color: var(--lux-gold); color: var(--lux-bronze); }
 .site-lux .nav-cta .btn-primary:hover { background: var(--lux-navy); color: var(--lux-gold-2); box-shadow: none; }
 .site-lux .mobile-menu-toggle { border-radius: 0; background: transparent; border-color: var(--lux-line); }
 .site-lux .mobile-menu-toggle span { background: var(--lux-navy); height: 1px; }
