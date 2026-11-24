@@ -430,7 +430,6 @@ function homeContent() {
             : '<p><strong>' + esc(s.who) + '</strong></p><h3>' + esc(s.label) + '</h3>') + '</li>').join('\n          ')}
         </ol>
         <p>${esc(HANDLED.note)}</p>
-        <p><strong>${esc(HANDLED.closing)}</strong></p>
         <p>${esc(HANDLED.more.text)} <a href="${HANDLED.more.to}">${esc(HANDLED.more.label)}</a></p>
       </div></section>
       <section id="what-aumy-does"><div class="ch-container ch-narrow">

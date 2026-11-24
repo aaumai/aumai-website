@@ -107,7 +107,7 @@ const HANDLED = {
     },
   ],
   note: 'Our team runs steps 2 and 3 only for clinics on Aumy, so every new enquiry is answered and followed up.',
-  closing: 'You take care of your patients. We help you grow your clinic.',
+  // closing line dropped 24 Nov (owner): the line under the headline says it once.
   more: {
     text: adsText('How our team runs ads, websites and Google:', 'How our team runs websites and Google:'),
     label: 'See our services',

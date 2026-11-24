@@ -84,7 +84,6 @@ const Home = () => {
           <p className="ch-lead op-center op-handled-sub">{HANDLED.sub}</p>
           <HandledStory data={HANDLED} Check={Check} icons={ICONS} />
           <p className="op-handled-note op-center">{HANDLED.note}</p>
-          <p className="op-handled-closing">{HANDLED.closing}</p>
           <p className="op-handled-more">
             {HANDLED.more.text} <Link to={HANDLED.more.to}>{HANDLED.more.label} →</Link>
           </p>
