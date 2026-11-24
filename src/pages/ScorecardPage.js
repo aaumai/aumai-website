@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { setPageSeo } from '../utils/seo';
 import { OPTIONS, SYSTEMS, BANDS, bandFor, C_COLORS, CALL_LINK } from '../data/scorecard';
+import { CTA_LABEL } from '../data/apply';
 import './ScorecardPage.css';
 
 // The 4C Scorecard (masterclass self-audit, owner 2026-10-17): 40 statements,
@@ -274,9 +275,9 @@ function Report({ report, onEdit }) {
         <div className="sc-cta">
           <div>
             <h3>Want these systems running for you?</h3>
-            <p>Apply for a call with Jayesh. Answer 4 short questions; we reply on WhatsApp within 48 hours, and on the call we’ll tell you honestly which systems are worth automating for a clinic your size.</p>
+            <p>Book a call with Jayesh: answer 3 short questions and pick a time. On the call we’ll tell you honestly which systems are worth automating for a clinic your size.</p>
           </div>
-          <a className="sc-btn" href={CALL_LINK}>Apply for a call with Jayesh</a>
+          <a className="sc-btn" href={CALL_LINK}>{CTA_LABEL}</a>
         </div>
         <p className="sc-foot">The 4C Scorecard · The Full Chair Method by AUM AI · aumai.co.in/4c-scorecard</p>
       </article>

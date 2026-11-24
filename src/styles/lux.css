@@ -187,6 +187,16 @@
 .site-lux .ch-calc-field input[type='range'] { accent-color: var(--lux-navy-2); }
 .site-lux .ch-calc-value { color: var(--lux-bronze); }
 .site-lux .ch-form-success { background: var(--lux-mist); color: var(--lux-navy); border-color: var(--lux-gold); border-radius: 0; }
+/* /apply: answer pills and the thank-you card, in the same square navy style as the calculator toggles. */
+.site-lux .ch-choices-field legend { font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; }
+.site-lux .ch-choice { border-radius: 0; border: 1px solid var(--lux-line); font-weight: 500; }
+.site-lux .ch-choice input { accent-color: var(--lux-navy-2); }
+.site-lux .ch-choice:hover { border-color: var(--lux-gold); }
+.site-lux .ch-choice.is-on { border-color: var(--lux-navy-2); background: var(--lux-navy-2); color: #fff; }
+.site-lux .ch-choice.is-on input { accent-color: var(--lux-gold); }
+.site-lux .ch-choice:focus-within { box-shadow: 0 0 0 3px rgba(184, 151, 90, 0.16); }
+.site-lux .ch-next-card { border-radius: 0; border: 1px solid var(--lux-line); box-shadow: none; background: #fff; }
+.site-lux .ch-next-title { font-family: var(--lux-serif); font-weight: 400; font-size: 26px; color: var(--lux-navy); }
 
 /* Dark bands: deep navy with a gold glow and gold labels */
 .site-lux .ch-offer,

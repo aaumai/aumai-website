@@ -381,6 +381,41 @@
 .ch-form-note { border-radius: 12px; padding: 14px 16px; font-size: 15px; font-weight: 600; }
 .ch-form-success { background: var(--c-accent-tint); color: var(--c-accent-dark); border: 1px solid rgba(42, 157, 143, 0.3); }
 .ch-form-error { background: #fdf1f0; color: #b3423a; border: 1px solid rgba(179, 66, 58, 0.25); }
+/* /apply: one-tap answers (radio pills) and the thank-you card that replaces the form. */
+.ch-choices-field { border: 0; margin: 0; padding: 0; min-width: 0; }
+.ch-choices-field legend { font-size: 14px; font-weight: 600; color: var(--c-ink); padding: 0; margin-bottom: 8px; }
+.ch-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.ch-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--c-line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.ch-choice input { accent-color: var(--c-accent); width: 18px; height: 18px; margin: 0; cursor: pointer; }
+.ch-choice:hover { border-color: var(--c-accent); }
+.ch-choice.is-on { border-color: var(--c-accent); background: var(--c-accent-tint); color: var(--c-accent-dark); }
+.ch-choice:focus-within { box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.12); }
+.ch-next-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow-lg);
+  padding: 32px 28px;
+  display: grid;
+  gap: 18px;
+}
+.ch-next-title { margin: 0; font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--c-ink); }
+.ch-next-btn { width: 100%; justify-content: center; text-align: center; }
+.ch-next-card .ch-fineprint { margin-top: 0; }
 
 /* LEAK CALCULATOR page */
 .ch-calc-grid { display: grid; grid-template-columns: 1fr 0.95fr; gap: 40px; align-items: start; margin-top: 10px; }
