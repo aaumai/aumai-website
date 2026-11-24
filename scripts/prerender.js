@@ -400,7 +400,8 @@ function howWeWorkHtml(eyebrow = HO.HOW.eyebrow, titleA = HO.HOW.titleA, titleB 
       </div></section>`;
 }
 // ---- home (Aumy as ONE product, owner 2026-11-02) ---------------------------
-// Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js.
+// Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js. "Your clinic, handled." is a scroll
+// story on the page (src/components/HandledStory.js, owner 2026-11-24); here its four stages are plain headings and lists.
 function homeContent() {
   const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL } = HOME;
   return `
@@ -422,8 +423,13 @@ function homeContent() {
       <section id="handled"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HANDLED.eyebrow)}</p>
         <h2>${esc(HANDLED.title)}</h2>
-        ${HANDLED.steps.map((s) => '<h3>' + esc(s.label) + '</h3><ul>' + s.items.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul>' + (s.note ? '<p>' + esc(s.note) + '</p>' : '')).join('')}
-        <p><strong>${esc(HANDLED.closing)}</strong></p>
+        <p>${esc(HANDLED.sub)}</p>
+        <ol>
+          ${HANDLED.stages.map((s) => '<li><p>' + esc(s.kicker) + '</p>' + (s.items.length
+            ? '<h3>' + esc(s.label) + '</h3><p>' + esc(s.line) + '</p><ul>' + s.items.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul>'
+            : '<p><strong>' + esc(s.who) + '</strong></p><h3>' + esc(s.label) + '</h3>') + '</li>').join('\n          ')}
+        </ol>
+        <p>${esc(HANDLED.note)}</p>
         <p>${esc(HANDLED.more.text)} <a href="${HANDLED.more.to}">${esc(HANDLED.more.label)}</a></p>
       </div></section>
       <section id="what-aumy-does"><div class="ch-container ch-narrow">
