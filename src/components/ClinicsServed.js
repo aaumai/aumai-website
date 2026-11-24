@@ -38,8 +38,8 @@ export default function ClinicsServed() {
         {named.length > 0 ? (
           <>
             <h2 id="cs-title" className="cs-title">
-              {/* Owner 2026-11-03: matches the established-practice persona (was "Trusted by growing dental clinics across India."). */}
-              Dental clinics that run on Aumy
+              {/* Owner 2026-11-24: "Trusted by dental clinics" (reads as some of many). 2026-11-03 it was "Dental clinics that run on Aumy"; before that "Trusted by growing dental clinics across India." */}
+              Trusted by dental clinics
             </h2>
             <ul className="cs-logos">
               {/* One grid, identical columns and gaps on every row (owner 2026-11-11: logos were different sizes and

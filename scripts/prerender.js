@@ -174,7 +174,7 @@ function clinicsStripHtml() {
     })
     .join('\n          ');
   // Owner 2026-11-03: same words as src/components/ClinicsServed.js.
-  return `<h2>Dental clinics that run on Aumy</h2>
+  return `<h2>Trusted by dental clinics</h2>
         <ul>
           ${items}
         </ul>`;
