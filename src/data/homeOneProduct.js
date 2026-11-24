@@ -33,34 +33,80 @@ const { POOLED, STERLING_ANSWERED } = require('./proof');
 const AUDIT = { label: 'Show me where my clinic loses patients', to: '/growth-audit' };
 
 // "Your clinic, handled." (owner 2026-11-09: his checklist, on the home page "so clinic sees it and they know
-// we do end to end"). Strategy lock the same day ("Aumy first, services second"): the list is two steps, in
-// the order we work with a clinic. Step 1 is Aumy, the way every clinic starts. Step 2 is what our team runs
-// (/services), only for clinics on Aumy. Rules: say what we run, never what we guarantee (no patient numbers,
-// no ranking promise); the closing line is the owner's own, word for word; the ads line is left out while ads
-// are hidden.
+// we do end to end"). Strategy lock the same day ("Aumy first, services second").
+//
+// Owner 2026-11-24 (picked): keep the headline, add the line "You treat patients. We handle everything else." and
+// tell the whole story as a scroll animation, in THIS order ("first we start with setting up systems and that is
+// aumy"): 1 set up your systems (Aumy, always first) · 2 get found · 3 fill the chairs · 4 the proof. Stages 2 and 3
+// are our team's services, ONLY for clinics on Aumy (strategy lock rule 3): the copy never sells them on their own.
+// Rules: say what we run, never what we guarantee (no patient numbers, no ranking, no "more patients / revenue");
+// the closing line is the owner's own, word for word; the ads line is left out while ads are hidden
+// (src/data/visibility.js). src/components/HandledStory.js draws it; scripts/prerender.js writes the same words.
+
+// The clinic in the stage-4 story: ONE constant, so the name can be changed or removed in one place.
+// Owner 2026-11-24 ~21:00: Dr Priyanka agreed (verbally, to the owner) to be named. Facts only: never "because of
+// Aumy", never words in her mouth. Set to null to go back to the anonymous line ("One of the dental clinics we
+// work with").
+const STORY_CLINIC = {
+  name: 'The Sterling Dental Clinic',
+  city: 'Delhi',
+  doctors: 'Dr Priyanka and Dr Tarun',
+};
+
+const storyProof = (c) => (c
+  ? { who: `${c.name}, ${c.city}`, line: `3 months with Aumy. Now ${c.doctors} are opening their second clinic.` }
+  : { who: 'One of the dental clinics we work with', line: '3 months with Aumy. Now they’re opening their second clinic.' });
+
 const HANDLED = {
-  eyebrow: 'First the leaks, then the growth',
+  eyebrow: 'Aumy first, then the growth',
   title: 'Your clinic, handled.',
-  steps: [
+  sub: 'You treat patients. We handle everything else.',
+  stages: [
     {
-      label: 'First, Aumy plugs the leaks',
+      key: 'systems',
+      kicker: 'Step 1 · Aumy',
+      label: 'Set up your systems',
+      line: 'Every clinic starts here, so every patient who reaches you is answered and followed up.',
       items: [
-        'Every call and WhatsApp answered, even after hours, and booked into your calendar',
-        'Appointments confirmed, moved or cancelled when patients ask',
-        'Missed visits rebooked',
-        'Advised treatment followed up until it’s started',
-        'Recalls and follow-up visits booked',
+        'AI receptionist on WhatsApp and calls: every enquiry answered, even after hours, and booked into your calendar',
+        'Reminders: appointments confirmed, moved or cancelled when patients ask',
+        'Follow-ups: missed visits rebooked, advised treatment followed up until it’s started, recalls booked',
+        'The clinic software: records, charts, consent forms and bills, 100% digital',
       ],
     },
     {
-      label: adsText('Then our team runs your implant ads and Google', 'Then our team looks after Google'),
-      note: 'For clinics on Aumy, so every new enquiry is answered and followed up.',
+      key: 'found',
+      kicker: 'Step 2 · Our team',
+      label: 'Get found',
+      line: 'Once every enquiry is answered, our team helps patients searching for a dentist find you.',
       items: [
-        { ads: true, t: 'Implant patients from ads, from across India and abroad, with campaigns run and measured for you' },
-        { t: 'Found on Google and in AI search, with your profile, website and reviews looked after' },
+        'Your clinic website, built and looked after',
+        'Your Google Business Profile and reviews, kept up to date',
+        'SEO for Google and for AI search answers, worked on every week',
+      ],
+    },
+    {
+      key: 'chairs',
+      kicker: 'Step 3 · Our team',
+      label: 'Fill the chairs',
+      line: adsText(
+        'Then we bring new enquiries in, and help your front desk turn them into booked visits.',
+        'Then we help your front desk turn every enquiry into a booked visit.',
+      ),
+      items: [
+        { ads: true, t: 'Meta ads on Facebook and Instagram, with campaigns run and measured for you' },
+        { t: 'Sales training for your front desk, so enquiries become bookings' },
       ].filter((it) => !(HIDE_ADS && it.ads)).map((it) => it.t),
     },
+    {
+      key: 'proof',
+      kicker: 'The story so far',
+      label: storyProof(STORY_CLINIC).line,
+      who: storyProof(STORY_CLINIC).who,
+      items: [],
+    },
   ],
+  note: 'Our team runs steps 2 and 3 only for clinics on Aumy, so every new enquiry is answered and followed up.',
   closing: 'You take care of your patients. We help you grow your clinic.',
   more: {
     text: adsText('How our team runs ads, websites and Google:', 'How our team runs websites and Google:'),
@@ -262,4 +308,4 @@ const ORG_DESCRIPTION =
 const PRODUCT_DESCRIPTION =
   'Aumy is AI dental clinic software, one product for dental clinics in India: AI dental practice management (appointments, patient records, charting and billing), an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
 
-module.exports = { AUDIT, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
+module.exports = { AUDIT, STORY_CLINIC, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };

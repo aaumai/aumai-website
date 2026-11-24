@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import ClinicsServed from '../components/ClinicsServed';
 import HeroVideo from '../components/HeroVideo';
+import HandledStory from '../components/HandledStory';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
 import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO } from '../data/homeOneProduct';
 import './HomeClinic.css';
@@ -74,21 +75,15 @@ const Home = () => {
       {/* Dental clinics Aumy serves (consented clinics only): src/data/clinicsServed.js */}
       <ClinicsServed />
 
-      {/* END TO END, IN TWO STEPS (owner 2026-11-09): first Aumy plugs the leaks, then our team's services,
-          which are for clinics on Aumy */}
+      {/* END TO END, AS A SCROLL STORY (owner 2026-11-24; two steps since 2026-11-09): 1 Aumy sets up the systems,
+          2 get found, 3 fill the chairs (our team, only for clinics on Aumy), 4 the story so far. */}
       <section className="ch-section ch-tint" id="handled" aria-labelledby="op-handled-title">
-        <div className="ch-container ch-narrow">
+        <div className="ch-container">
           <p className="op-center"><span className="ch-eyebrow">{HANDLED.eyebrow}</span></p>
           <h2 id="op-handled-title" className="ch-h2 op-center">{HANDLED.title}</h2>
-          {HANDLED.steps.map((s, i) => (
-            <div key={s.label} className="op-handled-step">
-              <h3 className="op-handled-label"><span className="op-handled-n" aria-hidden="true">{i + 1}</span>{s.label}</h3>
-              <ul className="op-handled">
-                {s.items.map((t) => <li key={t}><Check /><span>{t}</span></li>)}
-              </ul>
-              {s.note && <p className="op-handled-note">{s.note}</p>}
-            </div>
-          ))}
+          <p className="ch-lead op-center op-handled-sub">{HANDLED.sub}</p>
+          <HandledStory data={HANDLED} Check={Check} icons={ICONS} />
+          <p className="op-handled-note op-center">{HANDLED.note}</p>
           <p className="op-handled-closing">{HANDLED.closing}</p>
           <p className="op-handled-more">
             {HANDLED.more.text} <Link to={HANDLED.more.to}>{HANDLED.more.label} →</Link>

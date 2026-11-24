@@ -1,0 +1,162 @@
+/* "Your clinic, handled." scroll story (owner 2026-11-24). src/components/HandledStory.js.
+   Quiet-luxury tokens from src/styles/lux.css (navy, ivory, gold, Cormorant + DM Sans). Only opacity, transforms and
+   SVG strokes animate, so the layout never shifts. Without `.hs-anim` (no JS, reduced motion) everything is shown. */
+
+.hs {
+  --hs-navy: var(--lux-navy, #0a0f22);
+  --hs-navy-3: var(--lux-navy-3, #17307c);
+  --hs-gold: var(--lux-gold, #b8975a);
+  --hs-gold-2: var(--lux-gold-2, #dcc594);
+  --hs-bronze: var(--lux-bronze, #8a6a36);
+  --hs-line: var(--lux-line, #e2dbcd);
+  --hs-ease: cubic-bezier(0.22, 0.7, 0.2, 1);
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 56px;
+  max-width: 1080px;
+  margin: 44px auto 0;
+}
+
+/* ── The drawing (sticky beside the stages on wide screens) ─────────────────────────── */
+/* The home wrapper clips sideways overflow; `clip` (unlike `hidden`) keeps position: sticky working. */
+.ch-home:has(.hs) { overflow-x: clip; }
+
+/* --hs-top is set by the component: under the fixed header, centred in the space left on wide screens. */
+.hs-visual { position: sticky; top: var(--hs-top, 140px); align-self: start; text-align: center; }
+.hs-svg { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; overflow: visible; }
+.hs-caption {
+  margin: 14px 0 0; min-height: 1.5em; font-family: var(--lux-sans, inherit); font-size: 13px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--hs-bronze); line-height: 1.5;
+}
+
+.hs-guide { fill: none; stroke: var(--hs-line); stroke-width: 1; stroke-dasharray: 2 5; }
+.hs-ring { fill: none; stroke: var(--hs-navy-3); stroke-width: 1.6; stroke-dasharray: 1; stroke-dashoffset: 0; opacity: 0.55; }
+.hs-ring-label {
+  font-family: var(--lux-sans, sans-serif); font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  fill: var(--hs-bronze); paint-order: stroke; stroke: var(--lux-mist, #f3f0e9); stroke-width: 7px; stroke-linejoin: round;
+}
+.hs-node circle { fill: #fff; stroke: var(--hs-line); stroke-width: 1; }
+.hs-node { color: var(--hs-navy-3); }
+.hs-clinic-disc { fill: var(--hs-navy); }
+.hs-clinic { color: var(--hs-gold-2); }
+.hs-halo { fill: none; stroke: var(--hs-gold); stroke-width: 1; opacity: 0.35; }
+.hs-clinic-label {
+  font-family: var(--lux-sans, sans-serif); font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  fill: var(--hs-navy); paint-order: stroke; stroke: var(--lux-mist, #f3f0e9); stroke-width: 6px;
+}
+.hs-dot { fill: var(--hs-gold); opacity: 0; }
+.hs-second { color: var(--hs-gold-2); }
+.hs-second-disc { fill: var(--hs-navy); stroke: var(--hs-gold); stroke-width: 1.5; }
+.hs-link { stroke: var(--hs-gold); stroke-width: 1.4; }
+
+/* Animated state: rings draw in, nodes rise, the current ring turns gold. */
+.hs-anim .hs-ring { stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset 1.3s var(--hs-ease), opacity 0.4s ease, stroke 0.6s ease; }
+.hs-anim .hs-ring-g .hs-node,
+.hs-anim .hs-ring-g .hs-ring-label { opacity: 0; transition: opacity 0.6s ease 0.45s; }
+.hs-anim .hs-second { opacity: 0; transition: opacity 0.8s ease 0.3s; }
+.hs-anim .hs-link { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s var(--hs-ease); }
+.hs-anim .hs-halo { opacity: 0; transition: opacity 0.8s ease; }
+
+.hs-anim[data-reached="0"] .hs-ring-0 .hs-ring,
+.hs-anim[data-reached="1"] .hs-ring-0 .hs-ring, .hs-anim[data-reached="1"] .hs-ring-1 .hs-ring,
+.hs-anim[data-reached="2"] .hs-ring, .hs-anim[data-reached="3"] .hs-ring { stroke-dashoffset: 0; opacity: 0.55; }
+.hs-anim[data-reached="0"] .hs-ring-0 > :not(.hs-ring),
+.hs-anim[data-reached="1"] .hs-ring-0 > :not(.hs-ring), .hs-anim[data-reached="1"] .hs-ring-1 > :not(.hs-ring),
+.hs-anim[data-reached="2"] .hs-ring-g > :not(.hs-ring), .hs-anim[data-reached="3"] .hs-ring-g > :not(.hs-ring) { opacity: 1; }
+.hs-anim[data-reached="0"] .hs-ring-0 .hs-ring,
+.hs-anim[data-reached="1"] .hs-ring-1 .hs-ring,
+.hs-anim[data-reached="2"] .hs-ring-2 .hs-ring { stroke: var(--hs-gold); stroke-width: 2.2; opacity: 1; }
+.hs-anim[data-reached="0"] .hs-ring-0 .hs-node circle,
+.hs-anim[data-reached="1"] .hs-ring-1 .hs-node circle,
+.hs-anim[data-reached="2"] .hs-ring-2 .hs-node circle { stroke: var(--hs-gold); }
+.hs-anim[data-reached="3"] .hs-second { opacity: 1; }
+.hs-anim[data-reached="3"] .hs-link { stroke-dashoffset: 0; transition-delay: 0.2s; }
+.hs-anim[data-reached="3"] .hs-halo { opacity: 0.5; }
+
+/* Stage 3: six enquiries flow in to the clinic, once, each time the stage is reached (under 5 s, no loop). */
+.hs-anim[data-reached="2"] .hs-dot,
+.hs-anim[data-reached="3"] .hs-dot { animation: hs-flow 2.6s var(--hs-ease) 1 both; }
+@keyframes hs-flow {
+  0% { transform: translateX(196px); opacity: 0; }
+  20% { opacity: 1; }
+  85% { opacity: 0.9; }
+  100% { transform: translateX(56px); opacity: 0; }
+}
+
+/* ── The stages ──────────────────────────────────────────────────────────────────────── */
+.hs-track { position: relative; padding-left: 52px; }
+.hs-rail { position: absolute; left: 15px; top: 14px; bottom: 40px; width: 1px; background: var(--hs-line); }
+.hs-rail-fill {
+  position: absolute; inset: 0; background: var(--hs-gold); transform-origin: top;
+  transform: scaleY(var(--hs-p, 1)); transition: transform 0.9s var(--hs-ease);
+}
+.hs-stages { list-style: none; margin: 0; padding: 0; }
+.hs-stage { position: relative; padding: 0 0 56px; }
+.hs-stage:last-child { padding-bottom: 8px; }
+.hs-badge {
+  position: absolute; left: -52px; top: 0; display: inline-flex; align-items: center; justify-content: center;
+  width: 31px; height: 31px; border-radius: 50%; background: var(--hs-navy); color: #fff;
+  font-family: var(--lux-sans, inherit); font-size: 14px; font-weight: 600; line-height: 1;
+  box-shadow: 0 0 0 5px var(--lux-mist, #f3f0e9);
+}
+.hs-proof .hs-badge { background: var(--hs-gold); color: var(--hs-navy); }
+.hs-kicker {
+  margin: 4px 0 6px; font-family: var(--lux-sans, inherit); font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--hs-bronze); line-height: 1.5;
+}
+.site-lux .hs .hs-title {
+  margin: 0; font-family: var(--lux-serif, Georgia, serif); font-weight: 400; font-size: clamp(30px, 3.2vw, 40px);
+  line-height: 1.12; color: var(--hs-navy); letter-spacing: 0;
+}
+.hs-line { margin: 12px 0 0; font-size: 17px; line-height: 1.6; color: var(--lux-body, #4a5163); }
+.hs-items { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--hs-line); }
+.hs-items li {
+  display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--hs-line);
+  font-size: 16px; line-height: 1.5; color: var(--hs-navy);
+}
+.hs .hs-items .op-check {
+  flex: none; width: 22px; height: 22px; padding: 4px; margin-top: 1px; border-radius: 50%;
+  background: rgba(184, 151, 90, 0.16); color: var(--hs-bronze);
+}
+.hs-who { margin: 2px 0 10px; font-size: 16px; font-weight: 600; color: var(--hs-navy); }
+.site-lux .hs .hs-proof-line { font-size: clamp(30px, 3.4vw, 44px); font-style: italic; }
+
+/* Dim until reached; the stage being read is full strength. Transforms only: no layout shift. */
+.hs-anim .hs-stage > :not(.hs-badge) { opacity: 0.22; transform: translateY(14px); transition: opacity 0.7s ease, transform 0.8s var(--hs-ease); }
+.hs-anim .hs-stage .hs-items li { opacity: 0; transform: translateY(8px); transition: opacity 0.6s ease, transform 0.7s var(--hs-ease); }
+.hs-anim .hs-stage.is-on > :not(.hs-badge) { opacity: 1; transform: none; }
+.hs-anim .hs-stage.is-on .hs-items li { opacity: 1; transform: none; transition-delay: var(--hs-d, 0s); }
+.hs-anim .hs-stage.is-on:not(.is-current) > :not(.hs-badge) { opacity: 0.62; }
+.hs-anim .hs-badge { background: #fff; color: var(--hs-navy); border: 1px solid var(--hs-line); transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease; }
+.hs-anim .hs-stage.is-on .hs-badge { background: var(--hs-navy); color: #fff; border-color: var(--hs-navy); }
+.hs-anim .hs-proof.is-on .hs-badge { background: var(--hs-gold); color: var(--hs-navy); border-color: var(--hs-gold); }
+
+/* Desktop pacing: each stage holds the reader for a moment while the drawing changes. */
+@media (min-width: 901px) {
+  .hs-stage { min-height: min(46vh, 440px); }
+  /* The last stage holds the drawing on screen while the second clinic appears. */
+  .hs-stage:last-child { min-height: min(62vh, 460px); }
+}
+
+/* ── Phones and small tablets: the drawing becomes a slim sticky strip above the stages ─ */
+@media (max-width: 900px) {
+  .hs { display: block; max-width: 620px; margin-top: 32px; }
+  .hs-visual {
+    top: var(--hs-top, 72px); z-index: 2; display: flex; align-items: center; gap: 14px; justify-content: flex-start;
+    margin: 0 -16px 28px; padding: 6px 16px; background: var(--lux-mist, #f3f0e9);
+    border-bottom: 1px solid var(--hs-line); box-shadow: 0 10px 18px -16px rgba(10, 15, 34, 0.35);
+  }
+  .hs-svg { width: 84px; max-width: 84px; margin: 0; flex: none; }
+  .hs-ring-label, .hs-clinic-label { display: none; }
+  .hs-caption { margin: 0; text-align: left; font-size: 12.5px; min-width: 0; }
+  .hs-track { padding-left: 46px; }
+  .hs-badge { left: -46px; width: 29px; height: 29px; font-size: 13px; }
+  .hs-rail { left: 14px; }
+  .hs-stage { padding-bottom: 44px; }
+  .hs-line { font-size: 16px; }
+  .hs-items li { font-size: 15.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs *, .hs *::before, .hs *::after { transition: none !important; animation: none !important; }
+}
