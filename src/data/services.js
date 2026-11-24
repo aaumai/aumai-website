@@ -24,14 +24,15 @@
 // Ads hidden for now (owner 2026-11-06, src/data/visibility.js): the /dental-ads link goes, and while
 // HIDE_ADS is on this page shows two services (websites and SEO) with no ads wording.
 const { showLink, adsText, HIDE_ADS } = require('./visibility');
+const { CTA_LABEL } = require('./apply');
 
 const PATH = '/services';
-// Calls with Jayesh are by application (owner 2026-11-22): every call button goes to /apply, never the calendar.
+// Every call button goes to /apply (owner 2026-11-22; the form there leads to a booking button since 24 Nov).
 const CALL_LINK = '/apply';
 const AUDIT_PATH = '/growth-audit';
 
 const CTA = {
-  primary: { label: 'Apply for a call with Jayesh', href: CALL_LINK },
+  primary: { label: CTA_LABEL, href: CALL_LINK },
   secondary: { label: 'Get a free clinic audit', href: AUDIT_PATH },
 };
 

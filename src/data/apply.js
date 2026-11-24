@@ -65,8 +65,8 @@ const THANKS_MASTERCLASS = {
 const BOOK_URL = 'https://bm.aumyai.com/call';
 const MASTERCLASS_URL = 'https://aumai.co.in/masterclass';
 
-// Where every "call with Jayesh" button goes (they all link to /apply).
-const CTA_LABEL = 'Apply for a call with Jayesh';
+// The words on every "call with Jayesh" button (they all link to /apply): services.js and ScorecardPage.js read it.
+const CTA_LABEL = 'Book a call with Jayesh';
 
 module.exports = {
   PATH, SEO, HERO, QUESTIONS, DECISION_OPTIONS, CHAIR_OPTIONS, TIMELINES, SUBMIT, ERROR, PRIVACY,
