@@ -926,20 +926,16 @@ const routes = [
       <section class="ch-hero"><div class="ch-container">
         <p class="ch-eyebrow">${esc(APPLY.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(APPLY.HERO.title)}</h1>
-        <p class="ch-hero-sub">${esc(APPLY.HERO.sub)}</p>
-        <p><strong>${esc(APPLY.FOR_YOU.title)}</strong></p>
-        <ul>${APPLY.FOR_YOU.items.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
-        <p><strong>${esc(APPLY.HOW.title)}</strong></p>
-        <ol>${APPLY.HOW.steps.map((t) => `<li>${esc(t)}</li>`).join('')}</ol>
-        <p>${esc(APPLY.NOTE)}</p>
-        <h2>The 4 questions</h2>
+        <p class="ch-hero-sub">${esc(APPLY.HERO.intro)}</p>
+        <h2>Three short questions</h2>
         <ol>
-          <li>${esc(APPLY.QUESTIONS.role.replace(/^[0-9]+[.] */, ''))}: ${APPLY.ROLES.map((r) => esc(r.label)).join(' / ')}</li>
-          <li>${esc(APPLY.QUESTIONS.chairs.replace(/^[0-9]+[.] */, ''))}, and ${esc(APPLY.QUESTIONS.newPatients.toLowerCase())}</li>
-          <li>${esc(APPLY.QUESTIONS.enquiry.replace(/^[0-9]+[.] */, ''))}</li>
-          <li>${esc(APPLY.QUESTIONS.timeline.replace(/^[0-9]+[.] */, ''))} ${APPLY.TIMELINES.map((t) => esc(t.label)).join(' / ')}</li>
+          <li>${esc(APPLY.QUESTIONS.decision_maker)} ${APPLY.DECISION_OPTIONS.map((o) => esc(o.label)).join(' / ')}</li>
+          <li>${esc(APPLY.QUESTIONS.chairs)} ${APPLY.CHAIR_OPTIONS.map((o) => esc(o.label)).join(' / ')}</li>
+          <li>${esc(APPLY.QUESTIONS.timeline)} ${APPLY.TIMELINES.map((o) => esc(o.label)).join(' / ')}</li>
         </ol>
-        <p>Plus your name, clinic, city and WhatsApp number. ${esc(APPLY.PRIVACY)}</p>
+        <p>Plus your name, clinic, city and WhatsApp number (email optional). ${esc(APPLY.PRIVACY)}</p>
+        <p>${esc(APPLY.THANKS_BOOK.title.replace(/^Thank you[.] */, ''))}</p>
+        <p>${esc(APPLY.THANKS_BOOK.small)}</p>
       </div></section>`,
   },
   {

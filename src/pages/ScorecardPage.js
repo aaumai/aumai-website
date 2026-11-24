@@ -274,7 +274,7 @@ function Report({ report, onEdit }) {
         <div className="sc-cta">
           <div>
             <h3>Want these systems running for you?</h3>
-            <p>Apply for a call with Jayesh. Answer 4 short questions; we reply on WhatsApp within 48 hours, and on the call we’ll tell you honestly which systems are worth automating for a clinic your size.</p>
+            <p>Apply for a call with Jayesh. Answer 3 short questions and pick a time; on the call we’ll tell you honestly which systems are worth automating for a clinic your size.</p>
           </div>
           <a className="sc-btn" href={CALL_LINK}>Apply for a call with Jayesh</a>
         </div>
