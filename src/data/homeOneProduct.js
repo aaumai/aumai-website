@@ -15,7 +15,7 @@
  *     festival greetings, health tips, treatment suggestions;
  *   - the paperless list names real screens of the clinic software only;
  *   - numbers only from the approved proof list (src/data/proof.js): Sterling's "2 in 3 answered their reminder"
- *     (owner 2026-11-22, measured 23 Oct–21 Nov 2026; never "confirm") and the pooled "across 4 dental clinics on
+ *     (owner 2026-11-22, measured 23 Oct–21 Nov 2026; never "confirm") and the pooled "across dental clinics on
  *     Aumy" figures with their window;
  *   - module names stay off this page, links included (rule M04-M06): the link to the Aumy Clinic page reads
  *     "AI dental practice management software";
