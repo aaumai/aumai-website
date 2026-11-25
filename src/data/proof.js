@@ -6,7 +6,7 @@
  *
  * Rules (do not loosen without the founder):
  *   - the public wording below is word for word from the approved list; never round up, never add a figure;
- *   - POOLED: always say "across 4 dental clinics on Aumy" and give the window. No clinic is named.
+ *   - POOLED: always say "across dental clinics on Aumy" (owner 25 Nov 2026: no clinic count; was "across 4") and give the window. No clinic is named.
  *     Re-measure before reuse after 12 Dec 2026 (30 days);
  *   - STERLING (owner 2026-11-22, approved by picker): "2 in 3" of Sterling's patients ANSWERED their appointment
  *     reminder on WhatsApp: 906 of 1,354 (67%), measured 23 Oct–21 Nov 2026 (visit dates) on prod, read-only.
@@ -20,7 +20,7 @@
 
 const POOLED = {
   eyebrow: 'Measured, not promised',
-  title: 'Across 4 dental clinics on Aumy',
+  title: 'Across dental clinics on Aumy',
   window: 'Measured 14 Oct–12 Nov 2026.',
   items: [
     'More than 1 in 3 replies sent while the clinic was closed',

@@ -1417,7 +1417,7 @@ ${articleFaqHtml(MONDAY_NUMBERS_FAQS, 'Questions dental clinic owners ask')}
 
 <h2>What we measured</h2>
 <div class="gh-box">
-<p><strong>Across 4 dental clinics on Aumy, ${PROOF_WINDOW}:</strong></p>
+<p><strong>Across dental clinics on Aumy, ${PROOF_WINDOW}:</strong></p>
 <ul>
   <li>More than 1 in 3 replies sent while the clinic was closed.</li>
   <li>Median reply under 10 seconds, from the patient's message arriving to Aumy's first reply.</li>
@@ -1495,7 +1495,7 @@ ${articleFaqHtml(AI_RECEPTIONIST_FAQS, 'Questions dental clinic owners ask')}
 
 <h2>What we measured</h2>
 <div class="gh-box">
-<p><strong>Across 4 dental clinics on Aumy, ${PROOF_WINDOW}:</strong></p>
+<p><strong>Across dental clinics on Aumy, ${PROOF_WINDOW}:</strong></p>
 <ul>
   <li>751 confirmations, 55 moves, 62 cancellations handled by the AI on WhatsApp.</li>
   <li>About 1 in 7 missed-visit patients rebooked within 7 days.</li>
