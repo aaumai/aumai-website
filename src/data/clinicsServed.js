@@ -32,7 +32,7 @@
  */
 
 // 🚨 OWNER RULE (2026-11-04): once this list has MORE THAN 10 unique clinics, the homepage strip switches from these
-// static rows (today: the two Delhi clinics on row 1, the rest on row 2) to a scrolling logo marquee. Build that switch
+// static rows (since 2026-11-27: rows of 4, a short last row centred; the two Delhi clinics first) to a scrolling logo marquee. Build that switch
 // when you add the 11th clinic.
 //
 // 🚨 OWNER RULE (2026-11-11, replaces "city only"): every clinic shows LOCALITY + CITY ("Vasant Vihar, Delhi"), large and

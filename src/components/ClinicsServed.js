@@ -29,20 +29,15 @@ import './ClinicsServed.css';
  */
 /**
  * Where each logo starts on the grid, in HALF-column tracks (each logo spans two), so a short row can be centred:
- * desktop = 4 columns (8 tracks): row 1 is the two Delhi clinics in the middle, then rows of 4, and a last row with
- * fewer than 4 is centred (2026-11-27, the 7th clinic would otherwise sit alone at the far left). Phone = 2 columns
- * (4 tracks), an odd last logo centred. A start lower than the one before it begins a new row.
+ * desktop = 4 columns (8 tracks): rows of 4, and a last row with fewer than 4 is centred (owner 2026-11-27: "4 on
+ * 1st line and 3 on next"; this replaces the 2026-11-04 Delhi-pair-alone row 1 — the two Delhi clinics still come
+ * first, so they open row 1). Phone = 2 columns (4 tracks), an odd last logo centred. A start lower than the one
+ * before it begins a new row.
  */
 function gridStarts(i, n) {
   const centred = (cols, count, pos) => 1 + (cols - count) + 2 * pos;
-  let desktop;
-  if (i < 2) {
-    desktop = centred(4, Math.min(2, n), i);
-  } else {
-    const k = i - 2;
-    const row = Math.floor(k / 4);
-    desktop = centred(4, Math.min(4, n - 2 - row * 4), k % 4);
-  }
+  const row = Math.floor(i / 4);
+  const desktop = centred(4, Math.min(4, n - row * 4), i % 4);
   const mRow = Math.floor(i / 2);
   const phone = centred(2, Math.min(2, n - mRow * 2), i % 2);
   return { '--cs-start': desktop, '--cs-start-m': phone };
@@ -66,8 +61,8 @@ export default function ClinicsServed() {
               {/* One grid, identical columns and gaps on every row (owner 2026-11-11: logos were different sizes and
                   Sterling/Omlesh sat closer together than the rest). Every logo sits in the SAME fixed-size box,
                   centred and contained, with its caption in the area beneath, so a long caption never moves a logo.
-                  Row 1 = the two Delhi clinics (owner 2026-11-04): on the 4-column grid they take the two middle
-                  columns, the third clinic starts row 2, and a short last row is centred (see gridStarts above). */}
+                  Rows of 4 (owner 2026-11-27: "4 on 1st line and 3 on next"), the two Delhi clinics first, and a
+                  short last row is centred (see gridStarts above). */}
               {named.map((c, i) => (
                 <li
                   key={c.name}
