@@ -27,6 +27,27 @@ import './ClinicsServed.css';
  * No count is printed. The number of clinics is not the proof on offer here;
  * naming real ones is, and a small number argues against us.
  */
+/**
+ * Where each logo starts on the grid, in HALF-column tracks (each logo spans two), so a short row can be centred:
+ * desktop = 4 columns (8 tracks): row 1 is the two Delhi clinics in the middle, then rows of 4, and a last row with
+ * fewer than 4 is centred (2026-11-27, the 7th clinic would otherwise sit alone at the far left). Phone = 2 columns
+ * (4 tracks), an odd last logo centred. A start lower than the one before it begins a new row.
+ */
+function gridStarts(i, n) {
+  const centred = (cols, count, pos) => 1 + (cols - count) + 2 * pos;
+  let desktop;
+  if (i < 2) {
+    desktop = centred(4, Math.min(2, n), i);
+  } else {
+    const k = i - 2;
+    const row = Math.floor(k / 4);
+    desktop = centred(4, Math.min(4, n - 2 - row * 4), k % 4);
+  }
+  const mRow = Math.floor(i / 2);
+  const phone = centred(2, Math.min(2, n - mRow * 2), i % 2);
+  return { '--cs-start': desktop, '--cs-start-m': phone };
+}
+
 export default function ClinicsServed() {
   const named = consentedClinics;
 
@@ -46,19 +67,18 @@ export default function ClinicsServed() {
                   Sterling/Omlesh sat closer together than the rest). Every logo sits in the SAME fixed-size box,
                   centred and contained, with its caption in the area beneath, so a long caption never moves a logo.
                   Row 1 = the two Delhi clinics (owner 2026-11-04): on the 4-column grid they take the two middle
-                  columns, and the third clinic starts row 2 (see .cs-logo--row2 in ClinicsServed.css). */}
+                  columns, the third clinic starts row 2, and a short last row is centred (see gridStarts above). */}
               {named.map((c, i) => (
                 <li
                   key={c.name}
                   className={[
                     'cs-logo',
-                    i === 0 ? 'cs-logo--row1' : '',
-                    i === 2 ? 'cs-logo--row2' : '',
                     c.logo ? '' : 'cs-logo--text',
                     c.logo && c.showName ? 'cs-logo--named' : '',
                   ].filter(Boolean).join(' ')}
-                  // Per-logo optical size, from `scale` in data/clinicsServed.js (1 = fills the box). The only knob.
-                  style={c.scale ? { '--cs-scale': c.scale } : undefined}
+                  // Grid position, plus the per-logo optical size from `scale` in data/clinicsServed.js (1 = fills the
+                  // box; the only size knob).
+                  style={{ ...gridStarts(i, named.length), ...(c.scale ? { '--cs-scale': c.scale } : {}) }}
                 >
                   <span className="cs-box">
                     {c.logo ? (

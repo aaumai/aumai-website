@@ -132,6 +132,21 @@ const clinicsServed = [
     logo: '/logos/clinics/smiles-india.svg',
     consent: true, // cleared by Jayesh 2026-11-10 (asked for them on the strip) — back it with the permission email / MSA clause
   },
+  {
+    // New client 2026-11-27, Dr Jugal Patel's clinic (dentalimplant.studio). The name his own logo and Google listing
+    // lead with. Older names still seen online: "The Dental Implant Studio" (a second Google listing, same address) and
+    // "Dr Patel's Dental Care" (Practo / Justdial, old address).
+    name: 'The Dental & Physiotherapy Studio',
+    // No address in Aumy yet; their own site (dentalimplant.studio, footer): "001, Chabbi Akshay Corner, Akshay Park,
+    // Gokul Road, Hubli – 580030", and the Google listing says "Akshay Park, Manjunath Nagar, Hubballi" (checked
+    // 2026-11-27). Akshay Park is in both; Gokul Road is a road, not a neighbourhood. City as Google and his own bio on
+    // the site write it ("Hubballi"; the footer says "Hubli"), the official name, like Bengaluru above.
+    locality: 'Akshay Park',
+    city: 'Hubballi',
+    // The header logo from their site (350x180 PNG, transparent), trimmed to its artwork.
+    logo: '/logos/clinics/dental-physio-studio.png',
+    consent: true, // cleared by Jayesh 2026-11-27 — back it with a permission email (template in onboarding-docket)
+  },
 ];
 
 /** Only these are ever rendered. */

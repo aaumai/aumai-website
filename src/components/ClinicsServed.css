@@ -66,14 +66,18 @@
   margin: clamp(30px, 4vw, 44px) 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(var(--cs-cols), minmax(0, var(--cs-col-max)));
+  /* Two HALF-column tracks per column (--cs-tracks = 2 × --cs-cols), each logo spanning two, so a short row can be
+     centred (2026-11-27). With the same gap between every track, one logo is exactly one column wide and the gap
+     between logos is unchanged. */
+  --cs-tracks: 8;
+  grid-template-columns: repeat(var(--cs-tracks), minmax(0, calc((var(--cs-col-max) - var(--cs-gap-x)) / 2)));
   justify-content: center;
   gap: var(--cs-gap-y) var(--cs-gap-x);
 }
 
-/* Row 1 = the two Delhi clinics in the two middle columns; the third clinic starts row 2 (owner 2026-11-04). */
-.cs-logo--row1 { grid-column-start: 2; }
-.cs-logo--row2 { grid-column-start: 1; }
+/* Row 1 = the two Delhi clinics in the two middle columns; the third clinic starts row 2 (owner 2026-11-04); a short
+   last row is centred. Each logo's start track is set by the component (gridStarts in ClinicsServed.js). */
+.cs-logo { grid-column: var(--cs-start, auto) / span 2; }
 
 .cs-logo {
   display: flex;
@@ -206,13 +210,14 @@
 @media (max-width: 600px) {
   .cs-logos {
     --cs-cols: 2;
+    --cs-tracks: 4;
     --cs-col-max: 200px;
     --cs-gap-x: 20px;
     --cs-gap-y: 28px;
   }
   .cs-city { font-size: 14.5px; }
   .cs-lead, .cs-branches { font-size: 13px; }
-  .cs-logo--row1 { grid-column-start: auto; }
+  .cs-logo { grid-column: var(--cs-start-m, auto) / span 2; }
 }
 
 @media (prefers-reduced-motion: reduce) {
