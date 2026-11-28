@@ -293,6 +293,39 @@ const FAQ = {
   ],
 };
 
+// "Hear it from Dr Priyanka" (owner 2026-11-28, picked "Section under the hero"): one upright film with an
+// English | हिंदी switch, directly under the hero. src/components/DrPriyankaFilm.js draws it; scripts/prerender.js
+// writes the same words (poster + link). The caption and the line are the owner's wording, keep exactly; no claim
+// beyond them. The film loads only on tap (preload="none"), so it adds nothing to the first page load.
+// Files: public/videos/testimonials/dr-priyanka-miami-{en,hi}.mp4 (720x1280) and -poster.jpg (frame at ~1.5 s).
+const DR_PRIYANKA_FILM = {
+  id: 'dr-priyanka',
+  eyebrow: 'From a dental clinic on Aumy',
+  title: 'Hear it from Dr Priyanka',
+  who: 'Dr Priyanka · The Sterling Dental Clinic, Delhi',
+  line: 'She and Dr Tarun flew to Miami for Thanksgiving. Their clinic didn’t stop.',
+  switchLabel: 'Video language',
+  playLabel: 'Watch her story',
+  // Same destination as every "call with Jayesh" button on the site (src/data/apply.js PATH).
+  cta: { label: 'Book a 20-minute call', to: '/apply' },
+  versions: [
+    {
+      key: 'en',
+      label: 'English',
+      lang: 'en',
+      src: '/videos/testimonials/dr-priyanka-miami-en.mp4',
+      poster: '/videos/testimonials/dr-priyanka-miami-en-poster.jpg',
+    },
+    {
+      key: 'hi',
+      label: 'हिंदी',
+      lang: 'hi',
+      src: '/videos/testimonials/dr-priyanka-miami-hi.mp4',
+      poster: '/videos/testimonials/dr-priyanka-miami-hi-poster.jpg',
+    },
+  ],
+};
+
 // SEO (same strings in scripts/prerender.js slug '' and public/index.html). Owner 2026-11-13: the title targets
 // "AI Dental Clinic Software"; the H1 and the hero stay as they are (no positioning change).
 const SEO = {
@@ -308,4 +341,4 @@ const ORG_DESCRIPTION =
 const PRODUCT_DESCRIPTION =
   'Aumy is AI dental clinic software, one product for dental clinics in India: AI dental practice management (appointments, patient records, charting and billing), an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
 
-module.exports = { AUDIT, STORY_CLINIC, HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
+module.exports = { AUDIT, STORY_CLINIC, HERO, DR_PRIYANKA_FILM, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };

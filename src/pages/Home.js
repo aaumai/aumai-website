@@ -4,6 +4,7 @@ import { setPageSeo } from '../utils/seo';
 import ClinicsServed from '../components/ClinicsServed';
 import HeroVideo from '../components/HeroVideo';
 import HandledStory from '../components/HandledStory';
+import DrPriyankaFilm from '../components/DrPriyankaFilm';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
 import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO } from '../data/homeOneProduct';
 import './HomeClinic.css';
@@ -71,6 +72,10 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* 1b. HEAR IT FROM DR PRIYANKA (owner 2026-11-28, "Section under the hero"): one film, English | हिंदी,
+          loads only on tap. Words: src/data/homeOneProduct.js (DR_PRIYANKA_FILM). */}
+      <DrPriyankaFilm />
 
       {/* Dental clinics Aumy serves (consented clinics only): src/data/clinicsServed.js */}
       <ClinicsServed />

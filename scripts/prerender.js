@@ -404,6 +404,9 @@ function howWeWorkHtml(eyebrow = HO.HOW.eyebrow, titleA = HO.HOW.titleA, titleB 
 // story on the page (src/components/HandledStory.js, owner 2026-11-24); here its four stages are plain headings and lists.
 function homeContent() {
   const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL } = HOME;
+  // "Hear it from Dr Priyanka" (owner 2026-11-28): the section under the hero, here as words + a link to each
+  // film (no poster <img>, so the crawler HTML adds no download before the app mounts).
+  const DRP = HOME.DR_PRIYANKA_FILM;
   return `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
@@ -415,6 +418,14 @@ function homeContent() {
         <p><a href="${HERO.cta.to}">${esc(HERO.cta.label)}</a></p>
         <p>${esc(HERO.ctaNote)}</p>
         <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
+      </div></section>
+      <section id="${DRP.id}"><div class="ch-container ch-narrow">
+        <p class="ch-eyebrow">${esc(DRP.eyebrow)}</p>
+        <h2>${esc(DRP.title)}</h2>
+        <p>${DRP.versions.map((v) => '<a href="' + v.src + '" lang="' + v.lang + '"><strong>Watch: ' + esc(v.label) + '</strong></a>').join(' · ')}</p>
+        <p><strong>${esc(DRP.who)}</strong></p>
+        <p>${esc(DRP.line)}</p>
+        <p><a href="${DRP.cta.to}">${esc(DRP.cta.label)}</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Across India</p>
