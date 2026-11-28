@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import VIS from '../data/visibility';
+import { PATH as APPLY_PATH, CTA_LABEL as CALL_LABEL } from '../data/apply';
 import './HomeClinic.css';
 import './ClinicWebsitesPage.css';
 import './ServicePage.css';
@@ -96,14 +97,8 @@ export default function ServicePage({ data: D }) {
     });
   }, [D]);
 
-  const WaLink = ({ children, className }) => (
-    <a className={className} href={D.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{children}</a>
-  );
-  // The WhatsApp number inside a sentence becomes a link.
-  const withWa = (text) => {
-    const parts = String(text).split(D.WHATSAPP.display);
-    return parts.length < 2 ? text : parts.reduce((acc, p, i) => (i ? [...acc, <WaLink key={i}>{D.WHATSAPP.display}</WaLink>, p] : [p]), []);
-  };
+  // Owner 2026-11-28: no WhatsApp buttons or links anywhere on the site; the one way to talk is the call with Jayesh.
+  const CallLink = () => <Link to={APPLY_PATH}>{CALL_LABEL}</Link>;
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   const onSubmit = async (e) => {
@@ -157,7 +152,7 @@ export default function ServicePage({ data: D }) {
                 <a className="ch-btn ch-btn-primary" href="#audit">{D.HERO.cta}</a>
                 <a className="ch-btn ch-btn-ghost" href={D.HERO.secondary.href}>{D.HERO.secondary.label}</a>
               </div>
-              <p className="cw-wa">or <WaLink>WhatsApp {D.WHATSAPP.display}</WaLink></p>
+              <p className="cw-wa">or <CallLink /></p>
               <p className="ch-hero-trust">{D.HERO.trust}</p>
             </div>
             <HeroVisual v={D.VISUAL} />
@@ -296,7 +291,7 @@ export default function ServicePage({ data: D }) {
             {D.FAQS.map((f) => (
               <details key={f.q} className="ch-faq-item">
                 <summary>{f.q}</summary>
-                <p>{withWa(f.a)}</p>
+                <p>{f.a}</p>
               </details>
             ))}
           </div>
@@ -311,7 +306,7 @@ export default function ServicePage({ data: D }) {
               <span className="ch-eyebrow">Free</span>
               <h2 id={id('audit')} className="ch-h2">{D.AUDIT.title}</h2>
               <p className="ch-lead">{D.AUDIT.intro}</p>
-              <p className="cw-wa cw-wa-dark">Prefer to talk? <WaLink>WhatsApp {D.WHATSAPP.display}</WaLink></p>
+              <p className="cw-wa cw-wa-dark">Prefer to talk? <CallLink /></p>
             </div>
             <form className="ch-audit-form" onSubmit={onSubmit}>
               <div className="ch-field">
@@ -350,7 +345,7 @@ export default function ServicePage({ data: D }) {
               </button>
               <p className="ch-fineprint">{D.AUDIT.fine}</p>
               {status === 'success' && <div className="ch-form-note ch-form-success">{D.AUDIT.done}</div>}
-              {status === 'error' && <div className="ch-form-note ch-form-error">{withWa(D.AUDIT.error)}</div>}
+              {status === 'error' && <div className="ch-form-note ch-form-error">{D.AUDIT.error}</div>}
             </form>
           </div>
         </div>
@@ -363,7 +358,7 @@ export default function ServicePage({ data: D }) {
           <h2 className="ch-offer-title">{D.FINAL.title}</h2>
           <p className="ch-offer-sub">{D.FINAL.text}</p>
           <div className="ch-hero-cta ch-center-cta"><a className="ch-btn ch-btn-primary" href="#audit">{D.HERO.cta}</a></div>
-          <p className="cw-wa"><WaLink>WhatsApp {D.WHATSAPP.display}</WaLink></p>
+          <p className="cw-wa"><CallLink /></p>
           <nav className="sv-siblings" aria-label="Product and services">
             {SIBLINGS.filter((s) => s.to !== D.PATH).map((s) => <Link key={s.to} to={s.to}>{s.label}</Link>)}
           </nav>

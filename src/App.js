@@ -50,7 +50,6 @@ import PlatformPartner from './pages/PlatformPartner';
 import SocialMessaging from './pages/SocialMessaging';
 import Compliance from './pages/Compliance';
 import Analytics from './components/Analytics';
-import WhatsAppFloat from './components/WhatsAppFloat';
 import HomeUS from './pages/HomeUS';
 import BusinessManagerUS from './pages/BusinessManagerUS';
 import './App.css';
@@ -183,7 +182,6 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
               <Footer />
-              <WhatsAppFloat />
             </div>
           }
         />

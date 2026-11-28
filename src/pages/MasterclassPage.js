@@ -453,8 +453,8 @@ export default function MasterclassPage() {
 
           {/* No live Q&A (owner 2026-10-19): questions go to WhatsApp, any time. */}
           <p className="mc-sent mc-wa" style={{ marginTop: 20 }}>
-            {MC.MEMBER_HELP.replace(MC.WHATSAPP.display, '')}
-            <a href={MC.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{MC.WHATSAPP.display}</a>
+            {/* Plain text, no WhatsApp link (owner 2026-11-28: no WhatsApp buttons or links on the site). */}
+            {MC.MEMBER_HELP}
           </p>
 
           <section className="mc-section" aria-labelledby="mc-video-h">

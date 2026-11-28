@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import { INDIA_WHATSAPP } from '../config/contact';
 import { PAGES, CONNECTED, pageById, OLD_SLUGS } from '../data/modules';
 import { MODULES_LINE } from '../data/positioning';
 import NABH from '../data/nabh';
@@ -23,9 +22,6 @@ const Check = () => (
     <path d="M5 13l4 4L19 7" />
   </svg>
 );
-
-const waLink = (what) =>
-  `https://wa.me/${INDIA_WHATSAPP.number}?text=${encodeURIComponent(`Hi, I'd like to know more about ${what} for my clinic.`)}`;
 
 const ModuleDetailPage = () => {
   const { slug } = useParams();
@@ -72,7 +68,6 @@ const ModuleDetailPage = () => {
           {selfServe && <StartInApp moduleName={page.short} variant="hero" />}
           <div className="ch-hero-cta">
             <Link to="/contact" className={`ch-btn ${selfServe ? 'ch-btn-ghost' : 'ch-btn-primary'}`}>Book a demo</Link>
-            <a href={waLink(page.short)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
           </div>
         </div>
       </section>
@@ -203,10 +198,9 @@ const ModuleDetailPage = () => {
       <section className="ch-section ch-tint">
         <div className="ch-container ch-narrow ch-center">
           <h2 className="ch-h2">See {page.short} working in a dental clinic</h2>
-          <p className="ch-sub">A short demo on a call, or message us on WhatsApp — whichever is easier for you.</p>
+          <p className="ch-sub">A short demo on a call.</p>
           <div className="ch-hero-cta ch-center-cta">
             <Link to="/contact" className="ch-btn ch-btn-primary">Book a demo</Link>
-            <a href={waLink(page.short)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
           </div>
           <p className="mp-other">
             Other parts of Aumy:{' '}

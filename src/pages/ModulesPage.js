@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import { INDIA_WHATSAPP } from '../config/contact';
 import { TITLE, DESCRIPTION, HERO, MODULES, CONNECTED, TABLE, FAQS } from '../data/modules';
 import { MODULES_LINE } from '../data/positioning';
 import ModuleIcon from '../components/ModuleIcon';
@@ -25,9 +24,6 @@ const Check = () => (
 
 // Shared module icons (also used by /modules/<id> and the home cards).
 const Icon = ModuleIcon;
-
-const waLink = (what) =>
-  `https://wa.me/${INDIA_WHATSAPP.number}?text=${encodeURIComponent(`Hi, I'd like to know more about Aumy's ${what} for my clinic.`)}`;
 
 const CELL = {
   yes: { text: '✓', label: 'Included', cls: 'md-yes' },
@@ -100,9 +96,6 @@ const ModulesPage = () => {
                 {isSelfServe(m.id) && <StartInApp moduleName={m.short} variant="card" />}
                 <div className="md-cta">
                   <Link to="/contact" className={`ch-btn ${isSelfServe(m.id) ? 'ch-btn-ghost' : 'ch-btn-primary'}`}>Book a demo</Link>
-                  <a href={waLink(m.short)} className="ch-btn ch-btn-ghost" target="_blank" rel="noopener noreferrer">
-                    WhatsApp us
-                  </a>
                 </div>
                 <Link to={`/modules/${m.id}`} className="md-more md-page-link">Everything about {m.short} &rarr;</Link>
                 <Link to={m.more.path} className="md-more">{m.more.label} &rarr;</Link>
@@ -140,9 +133,6 @@ const ModulesPage = () => {
             <div className="md-connected-cta">
               <Link to="/modules/dental-patient-follow-up" className="ch-btn ch-btn-primary">See the base plan</Link>
               <Link to="/contact" className="ch-btn ch-btn-ghost ch-ghost-light">Book a demo of {CONNECTED.short}</Link>
-              <a href={waLink(CONNECTED.short)} className="ch-btn ch-btn-ghost ch-ghost-light" target="_blank" rel="noopener noreferrer">
-                WhatsApp us
-              </a>
             </div>
           </div>
         </div>

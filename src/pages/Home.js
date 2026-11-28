@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import ClinicsServed from '../components/ClinicsServed';
-import HeroVideo from '../components/HeroVideo';
+import HeroStory from '../components/HeroStory';
 import HandledStory from '../components/HandledStory';
 import DrPriyankaFilm from '../components/DrPriyankaFilm';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
@@ -49,26 +49,34 @@ const Home = () => {
 
   return (
     <div className="ch-home ho op">
-      {/* 1. WHAT, WHO, OUTCOME, ONE NEXT STEP — and the Sterling film */}
-      <section className="ch-hero lux-hero">
-        <div className="ch-container ch-hero-grid lux-hero-grid">
-          <div className="ch-hero-text">
+      {/* 1. HERO (owner 2026-11-28, copy + storyboard approved): "Run your clinic without the stress.", three numbered
+          outcomes, one call to action (the call with Jayesh) and the animation (src/components/HeroStory.js).
+          Phone order (owner 28 Nov): words, button, animation, outcomes. Wide screens: words, outcomes, button left; animation right.
+          The Sterling team film that sat here is in git history before this commit (Dr Priyanka's film follows). */}
+      <section className="ch-hero lux-hero hero3">
+        <div className="ch-container hero3-grid">
+          <div className="ch-hero-text hero3-top">
             <span className="ch-eyebrow">{HERO.eyebrow}</span>
             <h1 className="ch-hero-title">{HERO.title}</h1>
-            {/* The "NABH Compliant" badge was removed on 13 Nov 2026 (owner): NABH accredits clinics, not software. */}
-            <p className="ch-hero-sub op-hero-sub">{HERO.subLead}</p>
-            <ul className="op-hero-parts">
-              {HERO.parts.map((p) => <li key={p.name}><Check /><span><strong>{p.name}</strong> {p.line}</span></li>)}
-            </ul>
-            <p className="op-hero-question">{HERO.lossQuestion}</p>
-            <p className="op-hero-loss">{HERO.loss}</p>
+            <p className="ch-hero-sub">{HERO.sub}</p>
+          </div>
+          <div className="hero3-anim">
+            <HeroStory />
+          </div>
+          <ol className="hero3-cards">
+            {HERO.outcomes.map((o, i) => (
+              <li key={o.key} className="hero3-card">
+                <span className="hero3-num" aria-hidden="true">{i + 1}</span>
+                <h2>{o.title}</h2>
+                <p>{o.line}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="hero3-cta">
             <div className="ch-hero-cta">
               <Link to={HERO.cta.to} className="ch-btn ch-btn-primary">{HERO.cta.label}</Link>
             </div>
             <p className="ch-hero-trust">{HERO.ctaNote}</p>
-          </div>
-          <div className="lux-hero-loop">
-            <HeroVideo />
           </div>
         </div>
       </section>

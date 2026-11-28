@@ -21,14 +21,8 @@ import './MasterclassInfo.css';
 
 const C_KEY = { Convert: 'convert', Confirm: 'confirm', Care: 'care', 'Come back': 'comeback' };
 
-const WaLink = ({ children, className }) => (
-  <a className={className} href={MC.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{children}</a>
-);
-// The WhatsApp number inside a sentence becomes a link.
-const withWa = (text) => {
-  const parts = String(text).split(MC.WHATSAPP.display);
-  return parts.length < 2 ? text : parts.reduce((acc, p, i) => (i ? [...acc, <WaLink key={i}>{MC.WHATSAPP.display}</WaLink>, p] : [p]), []);
-};
+// Owner 2026-11-28: no WhatsApp buttons or links anywhere on the site. The kit's 24x7 Q&A is still described (it is
+// part of what buyers get), as plain text.
 
 // Line icons for "What you get", in the order of MC.KIT.items.
 const ICONS = [
@@ -463,7 +457,7 @@ export default function MasterclassInfo() {
             {MC.KIT.items.map((k, i) => (
               <li key={k.h} className={`mi-kit-card${k.wa ? ' mi-kit-wa' : ''}`}>
                 <Icon d={ICONS[i] || ICONS[0]} />
-                <h3>{k.wa ? <WaLink>{k.h}</WaLink> : k.h}</h3>
+                <h3>{k.h}</h3>
                 <p>{k.t}</p>
               </li>
             ))}
@@ -525,7 +519,7 @@ export default function MasterclassInfo() {
             {MC.FAQS.map((f) => (
               <details key={f.q} className="ch-faq-item">
                 <summary>{f.q}</summary>
-                <p>{withWa(live(f.a, L))}</p>
+                <p>{live(f.a, L)}</p>
                 {f.q === 'Can I get a refund?' && <p><Link to="/refund#masterclass">The full refund policy</Link></p>}
               </details>
             ))}
@@ -540,7 +534,6 @@ export default function MasterclassInfo() {
           <h2 className="ch-offer-title">{MC.FINAL.title}</h2>
           <p className="ch-offer-sub">{MC.FINAL.text}</p>
           <div className="ch-hero-cta ch-center-cta">{ctas()}</div>
-          <p className="mi-final-q"><WaLink>{MC.FINAL.questions}</WaLink></p>
           <p className="mi-final-q">Already have an account? <Link to={MC.PATHS.signIn}>Sign in</Link></p>
           <p className="mi-final-q" style={{ fontSize: 13 }}>{MC.MEMBER.licence}</p>
         </div>

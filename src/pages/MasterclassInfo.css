@@ -216,7 +216,6 @@
   .mi-sticky.is-on { transform: none; }
   .site-lux .ch-home .mi-sticky b { color: #fff; font-weight: 500; }
   .site-lux .mi-sticky .ch-btn { padding: 13px 20px; background: var(--lux-gold); border-color: var(--lux-gold); color: var(--lux-navy); }
-  body.mi-sticky-on .wa-float { bottom: 84px; }
 }
 @media (prefers-reduced-motion: reduce) { .mi-sticky { transition: none; } }
 

@@ -52,9 +52,6 @@ const AIDentalSoftwareIndiaPage = () => {
             <Link to="/demos" className="ch-btn ch-btn-primary">Watch it work, live</Link>
             <Link to="/growth-audit" className="ch-btn ch-btn-ghost">Get a free clinic audit</Link>
           </div>
-          <p style={{ ...muted, fontSize: '0.92rem', marginTop: 14 }}>
-            Try it yourself: WhatsApp our demo dental clinic at <strong>+91 90223 12554</strong> and book, reschedule or cancel like a patient would.
-          </p>
         </div>
       </section>
 
