@@ -374,3 +374,13 @@
   .op .hero3-card p { font-size: 15px; line-height: 1.5; }
   .op .hero3-anim .hx { max-width: 440px; }
 }
+
+/* How it works (/revenue-generator), the three steps (owner-approved consistency pass 2026-11-28). */
+.op .hw-step { gap: 20px; }
+.op .hw-step-kicker { display: flex; align-items: center; gap: 12px; margin: 0 0 6px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-accent-dark); }
+.op .hw-step-kicker .op-num { font-size: 30px; line-height: 1; letter-spacing: 0; text-transform: none; }
+.op .hw-step .op-card-line { margin-bottom: 0; }
+.op .hw-step-links { margin: 12px 0 0; text-align: left; }
+.op .hw-films { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.op .hw-step .op-film-note { margin: 0; }
+@media (max-width: 900px) { .op .hw-films { grid-template-columns: 1fr; } }

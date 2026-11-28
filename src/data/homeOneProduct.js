@@ -280,10 +280,12 @@ const START = {
     line: 'Live in a week, and by the end of the first month your front desk runs on Aumy.',
   },
 };
+// The closing band (home and /revenue-generator), owner-approved consistency pass 2026-11-28: the hero's headline,
+// its scarcity line and the call with Jayesh. The free clinic audit (AUDIT) stays live at /growth-audit.
 const FINAL = {
-  title: 'See where your clinic is losing patients.',
-  sub: 'Tell us your clinic and city. Within 24 hours a free audit reaches you on WhatsApp, prepared and checked by a person. No obligation.',
-  cta: AUDIT,
+  title: HERO.title,
+  sub: HERO.ctaNote,
+  cta: HERO.cta,
 };
 
 // Pooled proof band (owner 2026-11-13): approved wording only, from src/data/proof.js.
@@ -367,13 +369,15 @@ const SEO = {
   title: 'AI Dental Clinic Software in India · Aumy',
   description:
     'AI dental clinic software that runs your clinic: every enquiry answered, every follow-up done, and patients finding you on Google and through dental ads.',
-  shareImage: '/og/aumy-stop-losing-patients-1200x630.png',
+  shareImage: '/og/aumy-run-your-clinic-1200x630.png',
 };
 
 // Hidden search data (JSON-LD, llms.txt). public/index.html carries a typed copy of ORG_DESCRIPTION.
+// Rewritten 2026-11-28 (owner-approved consistency pass): Aumy first, then the Google profile and website with the
+// team taught, then ads taught to the staff or run by us. No prices.
 const ORG_DESCRIPTION =
-  'AUM AI makes Aumy, one product for dental clinics in India that answers every patient on WhatsApp and calls, follows up every one until they book, and runs the clinic without paper.';
+  'AUM AI makes Aumy for dental clinics in India. Aumy runs the clinic first: every enquiry answered, every appointment confirmed and every follow-up done, day and night. Then our team sets up the clinic’s Google profile and website and teaches its team to keep them that way, and gives it a dental ads plan, taught to its staff or run by us.';
 const PRODUCT_DESCRIPTION =
-  'Aumy is AI dental clinic software, one product for dental clinics in India: AI dental practice management (appointments, patient records, charting and billing), an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
+  'Aumy is AI dental clinic software for dental clinics in India that runs the clinic: an AI receptionist on WhatsApp and calls answers every enquiry and books it, every appointment is confirmed, and every patient follow-up is done (new enquiries, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), in a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports. For dental clinics on Aumy, our team also sets up the Google Business Profile and website and teaches the clinic’s team to keep them that way, and gives the clinic a dental ads plan, taught to its staff or run by us.';
 
 module.exports = { AUDIT, AUDIT_NOTE, STORY_CLINIC, HERO, DR_PRIYANKA_FILM, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };

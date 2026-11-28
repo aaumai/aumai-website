@@ -10,16 +10,11 @@ import './HomeClinic.css';
 import './HomeOneProduct.css';
 
 /**
- * /revenue-generator — "How it works" in the top menu. 2026-11-03 (owner): the one-product story, the same as
- * the home page. Each of the three parts at work (with its explainer film, labelled by part), the follow-ups,
- * an example day, the five setup steps, staying in control, proof and the one call to action. Words:
- * src/data/howItWorks.js (shared with scripts/prerender.js). The 2026-10-22 version is in git history.
+ * /revenue-generator — "How it works" in the top menu. Since 2026-11-28 (owner-approved consistency pass): the home
+ * hero's three steps in the same words (step 1 with its films), an example day, the five setup steps, staying in
+ * control, proof and the one call to action (the call with Jayesh). Words: src/data/howItWorks.js (shared with
+ * scripts/prerender.js). Earlier versions are in git history.
  */
-const Check = () => (
-  <svg className="op-check" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">
-    <path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
 
 const AumyRevenueGenerator = () => {
   useEffect(() => {
@@ -46,28 +41,43 @@ const AumyRevenueGenerator = () => {
         </div>
       </section>
 
-      {/* THE THREE PARTS (and the follow-ups), each with its film */}
-      <section className="ch-section ch-tint" id="parts" aria-labelledby="hw-parts-title">
+      {/* THE THREE STEPS (owner-approved consistency pass 2026-11-28): the home hero's three outcomes, word for word.
+          Step 1 with its films, steps 2 and 3 with links to the service pages. */}
+      <section className="ch-section ch-tint" id="steps" aria-labelledby="hw-parts-title">
         <div className="ch-container">
           <h2 id="hw-parts-title" className="ch-h2 op-center">{HOW_PARTS.title} <em>{HOW_PARTS.titleB}</em></h2>
-          <p className="op-center op-film-note">{HOW_PARTS.filmNote}</p>
           <div className="hw-parts">
             {HOW_PARTS.items.map((it, i) => (
-              <article key={it.key} className={`hw-part${it.film ? '' : ' hw-part--nofilm'}`}>
+              <article key={it.key} className="hw-part hw-part--nofilm hw-step">
                 <div className="hw-part-text">
-                  <span className="op-num">{i < 3 ? i + 1 : '+'}</span>
-                  <h3>{it.name}</h3>
+                  <p className="hw-step-kicker"><span className="op-num">{i + 1}</span> {it.kicker}</p>
+                  <h3>{it.title}</h3>
                   <p className="op-card-line">{it.line}</p>
-                  <ul className="op-list">
-                    {it.bullets.map((b) => <li key={b}><Check />{b}</li>)}
-                  </ul>
+                  {it.links.length > 0 && (
+                    <p className="op-handled-more hw-step-links">
+                      {it.links.map((l, n) => (
+                        <React.Fragment key={l.to}>
+                          {n > 0 && ' · '}
+                          <Link to={l.to}>{l.label} →</Link>
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  )}
                 </div>
-                {it.film && (
-                  <figure className="ch-explainer hw-film">
-                    <video controls preload="none" playsInline poster={it.film.poster} aria-label={`${it.name}: video`}>
-                      <source src={it.film.src} type="video/mp4" />
-                    </video>
-                  </figure>
+                {it.films.length > 0 && (
+                  <>
+                    <div className="hw-films">
+                      {it.films.map((f) => (
+                        <figure key={f.name} className="ch-explainer hw-film">
+                          <video controls preload="none" playsInline poster={f.film.poster} aria-label={`${f.name}: video`}>
+                            <source src={f.film.src} type="video/mp4" />
+                          </video>
+                          <figcaption><strong>{f.name}</strong></figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                    <p className="op-film-note">{HOW_PARTS.filmNote}</p>
+                  </>
                 )}
               </article>
             ))}

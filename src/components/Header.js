@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { isMasterclassPath } from '../data/masterclass';
+import { PATH as APPLY_PATH, CTA_LABEL as CALL_LABEL } from '../data/apply';
 import './Header.css';
 
 const LAUNCH_BAR_KEY = 'aumai_dubai_launch_bar';
@@ -301,9 +301,9 @@ const Header = () => {
               <a href="https://aumy.aumai.co.in/login" className="nav-login" onClick={closeMobileMenu}>
                 Log in
               </a>
-              <Link to="/growth-audit" className="btn btn-primary" onClick={closeMobileMenu}>
-                {/* No "free" on the masterclass pages (owner 2026-10-29). */}
-                {isMasterclassPath(location.pathname) ? 'Clinic Audit' : 'Free Clinic Audit'}
+              {/* Owner 2026-11-28: one call to action on every page, the call with Jayesh (was the free clinic audit). */}
+              <Link to={APPLY_PATH} className="btn btn-primary" onClick={closeMobileMenu}>
+                {CALL_LABEL}
               </Link>
             </div>
           </nav>

@@ -101,16 +101,18 @@ const FOOTER_OUTCOMES = [
   { to: '/modules', label: 'All of it, run together' },
 ];
 // One product (owner 2026-11-02).
-const FOOTER_TAGLINE = 'Aumy, one product for dental clinics: an AI receptionist on WhatsApp and calls, every follow-up done for you, and a paperless clinic.';
+// Owner-approved consistency pass (2026-11-28): the home hero's headline and sub.
+const FOOTER_TAGLINE = 'Run your clinic without the stress. You do the dentistry. We make sure every patient is looked after, found and followed up.';
 
 // The share image (used by /about, /revenue-generator and others). The HOME's title and description are in
 // src/data/homeOneProduct.js (SEO) since 2026-11-02.
 const SEO = {
   title: 'Aumy | AI Dental Software & AI Receptionist, Run For Your Dental Clinic in India',
   description: 'For dental clinics in India: AI dental software plus a team that runs it with your staff. Every call answered, visits confirmed, treatment finished, patients back.',
-  // Social share card (1200×630, made from the hero; source in AUMY Brand Assets/02-Covers-Banners).
-  shareImage: '/og/aumy-stop-losing-patients-1200x630.png',
-  shareTitle: 'Stop losing patients. We make sure of it. | Aumy for dental clinics',
+  // Social share card (1200×630) with the home headline (2026-11-28; the earlier "Stop losing patients" card stays
+  // in public/og for old shares).
+  shareImage: '/og/aumy-run-your-clinic-1200x630.png',
+  shareTitle: 'Run your clinic without the stress. | Aumy for dental clinics',
 };
 
 // Hidden search data (JSON-LD, llms.txt): one product, no price (owner 2026-11-02), from the home's own file.

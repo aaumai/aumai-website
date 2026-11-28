@@ -15,47 +15,48 @@
 const HOME = require('./homeOneProduct');
 const EXPL = require('./explainers');
 const { STERLING_ANSWERED } = require('./proof');
+const VIS = require('./visibility');
 
 const video = (moduleId) => EXPL.VIDEOS.find((v) => v.moduleId === moduleId);
-const part = (key) => HOME.THREE.items.find((it) => it.key === key);
 
+// Owner-approved consistency pass (2026-11-28): this page tells the home hero's three steps, in the same words
+// (src/data/homeOneProduct.js HERO.outcomes), in order: Aumy first, then being found, then ads. The previous version
+// ("The three parts, at work.") is in git history.
 const HOW_SEO = {
-  title: 'How Aumy Works in Your Dental Clinic | AI Receptionist, Follow-Ups & Paperless Clinic',
+  title: 'How Aumy Works in Your Dental Clinic | Run Your Clinic Without the Stress',
   description:
-    'How Aumy works in a dental clinic in India: an AI receptionist on WhatsApp and calls, every patient follow-up done for you, and a paperless clinic, set up with your team after a free clinic audit.',
+    'How Aumy works in a dental clinic in India, in three steps: every enquiry answered and every follow-up done, patients finding you on Google, and dental ads without an agency.',
 };
 
 const HOW_HERO = {
   eyebrow: 'How it works',
   title: 'How Aumy works in your dental clinic.',
-  sub: 'One product, three parts, set up for you with your team. Here is what each part does, and what a day at your clinic looks like with Aumy.',
-  cta: HOME.AUDIT,
-  ctaNote: HOME.AUDIT_NOTE,
+  sub: HOME.HERO.sub,
+  cta: HOME.HERO.cta,
+  ctaNote: HOME.HERO.ctaNote,
 };
 
-// Each part with the film that shows it (the films keep their own file names; the page labels them by part).
+// The three steps. Step 1 shows Aumy at work in its films (the films keep their own file names; the page labels
+// them by what they show); steps 2 and 3 link to the service pages that explain them.
 // Object.assign, not object spread: Babel turns a spread into an ESM helper import, which makes webpack treat this
 // CommonJS file as an ES module and drop its module.exports ("HOW_SEO is not exported").
+const STEP_EXTRAS = [
+  {
+    films: [
+      { name: 'AI receptionist on WhatsApp', film: video('whatsapp-ai-receptionist-for-dentists') },
+      { name: 'AI receptionist on calls', film: video('ai-voice-receptionist-for-dentists') },
+      { name: 'Every follow-up, done for you', film: video('dental-patient-follow-up') },
+    ],
+    links: [],
+  },
+  { films: [], links: [{ label: 'Dental SEO', to: '/dental-seo' }, { label: 'Dental websites', to: '/clinic-websites' }] },
+  { films: [], links: [{ label: 'Dental ads', to: VIS.DENTAL_ADS_PATH }].filter((l) => VIS.showLink(l.to)) },
+];
 const HOW_PARTS = {
-  title: 'The three parts,',
-  titleB: 'at work.',
-  items: [
-    Object.assign({}, part('whatsapp'), { film: video('whatsapp-ai-receptionist-for-dentists') }),
-    Object.assign({}, part('voice'), { film: video('ai-voice-receptionist-for-dentists') }),
-    Object.assign({}, part('paperless'), { film: null }),
-    {
-      key: 'follow-ups',
-      name: 'And every follow-up, done for you',
-      line: 'New enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups and Google reviews, each followed up on WhatsApp in your clinic’s name.',
-      bullets: [
-        'Every patient gets the message that fits them, at the right time',
-        'Replies come back to your team, in one place',
-        'You decide which messages your team approves before they go',
-      ],
-      film: video('dental-patient-follow-up'),
-    },
-  ],
-  filmNote: 'About 90 seconds each. Sound on.',
+  title: 'Three steps,',
+  titleB: 'in this order.',
+  filmNote: 'Step 1 at work: about 90 seconds each, sound on.',
+  items: HOME.HERO.outcomes.map((o, i) => Object.assign({}, o, { kicker: HOME.HERO.story.steps[i].kicker }, STEP_EXTRAS[i])),
 };
 
 // An example day. Names and times are made up; every step is something Aumy does at live clinics today.
