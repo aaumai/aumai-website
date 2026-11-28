@@ -115,24 +115,58 @@ const HANDLED = {
   },
 };
 
+// The line under every free-clinic-audit button (used by /revenue-generator; the home hero books a call instead).
+const AUDIT_NOTE = 'Free clinic audit, no obligation. On your WhatsApp within 24 hours.';
+
+// Hero: "Run your clinic without the stress." (owner 2026-11-28: copy and storyboard approved, strategy lock reopened
+// for this positioning change). Three outcomes, numbered, no feature lists. Words EXACT as approved; change one only
+// to fix grammar. The eyebrow is the existing "who it is for" line (strategy lock rule 1), kept from the old hero.
+// The previous hero ("One system that plugs every leak in your dental clinic.", four parts, the loss question, the
+// Sterling film) is in git history before this commit.
 const HERO = {
   eyebrow: 'For owners of established dental practices',
-  title: 'One system that plugs every leak in your dental clinic.',
-  // The "NABH Compliant" badge (11 Nov) was removed on 13 Nov 2026 (owner): NABH accredits clinics, not software.
-  // The NABH paperwork stays described on /nabh-dental-clinic-software and on the Aumy Clinic page.
-  // What Aumy is, as a list a busy owner can skim: bold name, then the line (owner 2026-11-04).
-  subLead: 'Aumy is four things working as one:',
-  parts: [
-    { name: 'AI receptionist on WhatsApp', line: 'answers in seconds, day or night, and books, moves and cancels appointments.' },
-    { name: 'AI receptionist on calls', line: 'picks up the calls your desk can’t get to, even after hours, and books them.' },
-    { name: 'Clinic software', line: 'records, charts, consent forms and bills, so your clinic runs 100% digital.' },
-    { name: 'Every follow-up, done for you', line: 'reminders, missed visits, advised treatment and recalls.' },
+  title: 'Run your clinic without the stress.',
+  sub: 'You do the dentistry. We make sure every patient is looked after, found and followed up.',
+  outcomes: [
+    {
+      key: 'runs',
+      title: 'Your clinic runs itself.',
+      line: 'Every enquiry answered, every appointment confirmed, every follow-up done, day and night.',
+    },
+    {
+      key: 'found',
+      title: 'Patients find you for your expertise.',
+      line: 'Your Google profile and website set up to bring patients on their own, and your team taught to keep it that way, with no monthly SEO bills.',
+    },
+    {
+      key: 'ads',
+      title: 'Ads without an agency.',
+      line: 'Our proven dental ads plan, taught to your staff or run by us. A small spend, not a retainer.',
+    },
   ],
-  lossQuestion: 'Have you ever counted how many calls your clinic misses in a day, or how many WhatsApps get answered late, after the patient has already booked somewhere else?',
-  // Answers the owner's unspoken worry ("does this replace my desk?") up front.
-  loss: 'Your front desk stays. Aumy picks up what they can’t get to.',
-  cta: AUDIT,
-  ctaNote: 'Free clinic audit, no obligation. On your WhatsApp within 24 hours.',
+  // Same destination as every "call with Jayesh" button on the site (src/data/apply.js PATH).
+  cta: { label: 'Book a call', to: '/apply' },
+  ctaNote: 'We onboard only 5 clinics a month.',
+  // The hero animation (src/components/HeroStory.js), ~13 s, silent. Storyboard approved by the owner 2026-11-28.
+  // The words drawn inside it; `alt` is what a screen reader hears (the drawing itself is hidden from it).
+  story: {
+    alt: 'A short animation. A dentist treats a patient while a phone answers a new enquiry at 10:47 pm and books it for Tuesday 11:00. Step 1, Aumy set up: reminder sent, missed visit rebooked, crown follow-up done. Step 2: the clinic shows first for “dentist near me”, rated 4.9, and a patient taps Directions. Step 3: an implants enquiry from an ad comes into the clinic. Last: you do the dentistry; Aumy does everything else.',
+    enquiry: { k: 'New enquiry', t: '10:47 pm', done: 'Answered', booked: 'Booked Tue 11:00' },
+    steps: [
+      { kicker: 'Step 1 · Aumy set up', label: 'Operations streamlined', cards: ['Reminder sent', 'Missed visit rebooked', 'Crown follow-up done'] },
+      { kicker: 'Step 2', label: 'Found for your expertise', search: 'dentist near me', clinic: 'Your clinic', rating: '4.9', directions: 'Directions' },
+      { kicker: 'Step 3', label: 'Ads, taught to your team', ad: 'Implants · enquiry' },
+    ],
+    final: {
+      you: 'You: the dentistry.',
+      aumy: 'Aumy: everything else.',
+      call: '2:00 am', callDone: 'Answered',
+      calendar: 'Bookings',
+      ticks: ['Follow-up done', 'Recall booked'],
+    },
+    pause: 'Pause animation',
+    play: 'Play animation',
+  },
 };
 
 const THREE = {
@@ -327,11 +361,12 @@ const DR_PRIYANKA_FILM = {
 };
 
 // SEO (same strings in scripts/prerender.js slug '' and public/index.html). Owner 2026-11-13: the title targets
-// "AI Dental Clinic Software"; the H1 and the hero stay as they are (no positioning change).
+// "AI Dental Clinic Software" (kept). Description rewritten 2026-11-28 for the new hero (owner approved the
+// positioning change): the three outcomes, keyword first.
 const SEO = {
   title: 'AI Dental Clinic Software in India · Aumy',
   description:
-    'Aumy is AI dental clinic software for India: practice management, appointments, billing and patient records, with an AI receptionist and WhatsApp follow-ups.',
+    'AI dental clinic software that runs your clinic: every enquiry answered, every follow-up done, and patients finding you on Google and through dental ads.',
   shareImage: '/og/aumy-stop-losing-patients-1200x630.png',
 };
 
@@ -341,4 +376,4 @@ const ORG_DESCRIPTION =
 const PRODUCT_DESCRIPTION =
   'Aumy is AI dental clinic software, one product for dental clinics in India: AI dental practice management (appointments, patient records, charting and billing), an AI receptionist on WhatsApp, an AI receptionist on calls, every patient follow-up done for the clinic (new enquiries, confirmations, missed appointments, advised and unfinished treatment, check-ups, patients not seen in a year, after-treatment check-ins, payment reminders, Google reviews), and a 100% digital, paperless clinic: appointments, patient records with tooth charting, X-rays, treatment plans, prescriptions, consent forms, invoices and reports.';
 
-module.exports = { AUDIT, STORY_CLINIC, HERO, DR_PRIYANKA_FILM, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };
+module.exports = { AUDIT, AUDIT_NOTE, STORY_CLINIC, HERO, DR_PRIYANKA_FILM, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO, ORG_DESCRIPTION, PRODUCT_DESCRIPTION };

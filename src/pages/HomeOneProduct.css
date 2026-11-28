@@ -311,3 +311,66 @@
   .op .op-film-switch { display: flex; width: max-content; margin: 0 auto 14px; }
   .op .op-film-line { font-size: 30px; }
 }
+
+/* ── Hero, "Run your clinic without the stress." (owner 2026-11-28) ─────────────────────────────────
+   Phone: words, animation, the three outcomes, the button. From 921px: words, outcomes and button on the left,
+   the animation (src/components/HeroStory.js) on the right. Site tokens only. */
+.op .hero3-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "top" "anim" "cards" "cta";
+  gap: 34px;
+}
+.op .hero3-top { grid-area: top; }
+.op .hero3-top .ch-hero-sub { margin-bottom: 0; }
+.op .hero3-anim { grid-area: anim; display: flex; justify-content: center; }
+.op .hero3-cta { grid-area: cta; }
+.op .hero3-cta .ch-hero-trust { margin-top: 14px; }
+.op .hero3-cards { grid-area: cards; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.op .hero3-card {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  column-gap: 14px;
+  row-gap: 4px;
+  padding: 16px 18px 17px 16px;
+  border: 1px solid rgba(220, 197, 148, 0.22);
+  border-left: 2px solid var(--lux-gold, #b8975a);
+  background: rgba(255, 255, 255, 0.035);
+}
+.op .hero3-num { grid-row: 1 / span 2; font-family: var(--lux-serif, Georgia, serif); font-size: 34px; line-height: 1; color: var(--lux-gold-2, #dcc594); }
+.site-lux .op .lux-hero .hero3-card h2 {
+  grid-column: 2; margin: 0;
+  font-family: var(--lux-serif, Georgia, serif); font-size: 24px; font-weight: 500; line-height: 1.2; letter-spacing: 0;
+  color: #fff;
+}
+.op .hero3-card p { grid-column: 2; margin: 0; font-size: 15.5px; line-height: 1.55; color: rgba(255, 255, 255, 0.76); }
+
+@media (min-width: 921px) {
+  .op .hero3-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    grid-template-areas: "top anim" "cards anim" "cta anim";
+    column-gap: 56px;
+    row-gap: 26px;
+    align-items: start;
+  }
+  .op .hero3-anim { align-self: center; }
+}
+@media (max-width: 600px) {
+  .op .hero3-grid { gap: 30px; }
+  .op .hero3-card { grid-template-columns: 28px minmax(0, 1fr); column-gap: 10px; padding: 14px 14px 15px 12px; }
+  .op .hero3-num { font-size: 28px; }
+  .site-lux .op .lux-hero .hero3-card h2 { font-size: 21px; }
+  .op .hero3-card p { font-size: 15px; }
+  .op .hero3-cta .ch-btn { width: 100%; justify-content: center; }
+}
+/* Wide screens: tighter hero so "Book a call" sits inside a 1440 x 900 first screen. */
+@media (min-width: 921px) {
+  .site-lux .op .ch-hero.lux-hero.hero3 { padding: 52px 0 96px; }
+  .site-lux .op .lux-hero.hero3 .ch-hero-title { margin-bottom: 16px; }
+  .op .hero3-grid { row-gap: 22px; }
+  .op .hero3-cards { gap: 10px; }
+  .op .hero3-card { padding: 12px 18px 13px 16px; }
+  .site-lux .op .lux-hero .hero3-card h2 { font-size: 22px; }
+  .op .hero3-card p { font-size: 15px; line-height: 1.5; }
+  .op .hero3-anim .hx { max-width: 440px; }
+}

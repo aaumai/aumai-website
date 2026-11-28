@@ -30,7 +30,7 @@ const HOW_HERO = {
   title: 'How Aumy works in your dental clinic.',
   sub: 'One product, three parts, set up for you with your team. Here is what each part does, and what a day at your clinic looks like with Aumy.',
   cta: HOME.AUDIT,
-  ctaNote: HOME.HERO.ctaNote,
+  ctaNote: HOME.AUDIT_NOTE,
 };
 
 // Each part with the film that shows it (the films keep their own file names; the page labels them by part).

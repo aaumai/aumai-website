@@ -411,13 +411,10 @@ function homeContent() {
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(HERO.title)}</h1>
-        <p class="ch-hero-sub">${esc(HERO.subLead)}</p>
-        <ul>${HERO.parts.map((p) => '<li><strong>' + esc(p.name) + '</strong> ' + esc(p.line) + '</li>').join('')}</ul>
-        <p><em>${esc(HERO.lossQuestion)}</em></p>
-        <p><strong>${esc(HERO.loss)}</strong></p>
+        <p class="ch-hero-sub">${esc(HERO.sub)}</p>
+        <ol>${HERO.outcomes.map((o) => '<li><h2>' + esc(o.title) + '</h2><p>' + esc(o.line) + '</p></li>').join('')}</ol>
         <p><a href="${HERO.cta.to}">${esc(HERO.cta.label)}</a></p>
         <p>${esc(HERO.ctaNote)}</p>
-        <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
       </div></section>
       <section id="${DRP.id}"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(DRP.eyebrow)}</p>
@@ -867,9 +864,9 @@ const routes = [
     description: HOME.SEO.description,
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}${HOME.SEO.shareImage}`,
-    // Only the Sterling film (hero) plays on this page now.
+    // The Sterling film left the hero on 2026-11-28 (the animation took its place), so its VideoObject left too.
     // FAQPage (owner 2026-11-13): the same questions the page shows (HOME.FAQ).
-    jsonld: [orgLd, dentalSoftwareLd, explainerVideoLd[0], faqPageLd(HOME.FAQ.items)],
+    jsonld: [orgLd, dentalSoftwareLd, faqPageLd(HOME.FAQ.items)],
     content: homeContent(),
   },
   {

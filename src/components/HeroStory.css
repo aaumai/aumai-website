@@ -1,0 +1,163 @@
+/* Home hero animation (owner 2026-11-28). src/components/HeroStory.js draws it; this file times it.
+   One loop = 14 s. Percent of the loop: scene 1 0-19 · scene 2 19-36 · scene 3 36-54 · scene 4 54-67 ·
+   scene 5 67-100 (built by 82 %, held to 97 % ≈ 2 s, then fades for the next loop).
+   The STATIC styles below are the final frame; every animation lives inside prefers-reduced-motion: no-preference,
+   so reduced-motion visitors get that frame, still. Site colours only (lux navy, ivory, gold). */
+
+.hx {
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+  margin: 0 auto;
+  aspect-ratio: 400 / 440;
+  background: #f3f0e9;
+  outline: 1px solid rgba(220, 197, 148, 0.5);
+  outline-offset: 10px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
+}
+.hx-svg { display: block; width: 100%; height: 100%; }
+
+/* Words inside the drawing */
+.hx-svg text { font-family: var(--lux-sans, 'DM Sans', system-ui, sans-serif); fill: #0a0f22; }
+.hx-svg .hx-t { font-size: 13px; font-weight: 600; }
+.hx-svg .hx-t-sm { font-size: 12.5px; font-weight: 500; fill: #4a5163; }
+.hx-svg .hx-t-ink { fill: #0a0f22; }
+.hx-svg .hx-t-gold { fill: #8a6a36; }
+.hx-svg .hx-t-white { fill: #fff; font-size: 11.5px; }
+.hx-svg .hx-name { font-family: var(--lux-serif, 'Cormorant Garamond', Georgia, serif); font-size: 18px; font-weight: 600; }
+.hx-svg .hx-kicker { font-size: 10.5px; font-weight: 600; letter-spacing: 2.2px; fill: #8a6a36; }
+.hx-svg .hx-kicker-white { fill: #dcc594; letter-spacing: 1.8px; }
+.hx-svg .hx-label { font-family: var(--lux-serif, 'Cormorant Garamond', Georgia, serif); font-size: 25px; font-weight: 500; }
+.hx-svg .hx-final { font-size: 18px; }
+.hx-svg .hx-em { font-style: italic; fill: #8a6a36; }
+
+/* The final frame: scenes 1-4 hidden, scene 5 shown */
+.hx-svg .hx-s1, .hx-svg .hx-s2, .hx-svg .hx-s3, .hx-svg .hx-l, .hx-svg .hx-ad,
+.hx-svg .hx-flow, .hx-svg .hx-glow2 { opacity: 0; }
+.hx-svg .hx-flow { stroke-dasharray: 100; }
+
+/* Pause / play (only when it moves) */
+.hx-pause {
+  position: absolute; top: 8px; right: 8px; z-index: 1;
+  width: 36px; height: 36px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(10, 15, 34, 0.14); border-radius: 50%;
+  background: rgba(250, 248, 244, 0.92); color: #0a0f22; cursor: pointer;
+  opacity: 0.7; transition: opacity 0.2s ease;
+}
+.hx-pause:hover, .hx-pause:focus-visible { opacity: 1; }
+.hx-pause:focus-visible { outline: 2px solid #b8975a; outline-offset: 2px; }
+
+@media (max-width: 600px) {
+  .hx { outline-offset: 6px; box-shadow: 0 22px 50px rgba(0, 0, 0, 0.4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-pause { display: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hx-svg .hx-s1, .hx-svg .hx-phone, .hx-svg .hx-screen, .hx-svg .hx-chip1, .hx-svg .hx-chip2,
+  .hx-svg .hx-s2, .hx-svg .hx-c2, .hx-svg .hx-t2, .hx-svg .hx-l,
+  .hx-svg .hx-s3, .hx-svg .hx-type, .hx-svg .hx-star, .hx-svg .hx-rate, .hx-svg .hx-dir, .hx-svg .hx-tap,
+  .hx-svg .hx-ad, .hx-svg .hx-flow, .hx-svg .hx-glow2,
+  .hx-svg .hx-div, .hx-svg .hx-you, .hx-svg .hx-aumy, .hx-svg .hx-f1, .hx-svg .hx-f2, .hx-svg .hx-cell, .hx-svg .hx-f3 {
+    animation-duration: 14s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+  /* Elements that scale do so about their own centre */
+  .hx-svg .hx-t2, .hx-svg .hx-star, .hx-svg .hx-dir, .hx-svg .hx-tap, .hx-svg .hx-ad, .hx-svg .hx-glow2 {
+    transform-box: fill-box; transform-origin: center;
+  }
+  .hx-svg .hx-div { transform-box: fill-box; transform-origin: top; }
+
+  /* The dentist's hand moves a little the whole time */
+  .hx-svg .hx-arm {
+    transform-box: view-box; transform-origin: 182px 262px;
+    animation: hx-arm 3.2s ease-in-out infinite;
+  }
+
+  /* Scene 1 */
+  .hx-svg .hx-s1 { animation-name: hx-s1; }
+  .hx-svg .hx-phone { animation-name: hx-phone; }
+  .hx-svg .hx-screen { animation-name: hx-screen; }
+  .hx-svg .hx-chip1 { animation-name: hx-chip1; }
+  .hx-svg .hx-chip2 { animation-name: hx-chip2; }
+  /* Scene 2 */
+  .hx-svg .hx-s2, .hx-svg .hx-l2 { animation-name: hx-s2; }
+  .hx-svg .hx-c2-0 { animation-name: hx-c2-0; }
+  .hx-svg .hx-c2-1 { animation-name: hx-c2-1; }
+  .hx-svg .hx-c2-2 { animation-name: hx-c2-2; }
+  .hx-svg .hx-t2-0 { animation-name: hx-t2-0; }
+  .hx-svg .hx-t2-1 { animation-name: hx-t2-1; }
+  .hx-svg .hx-t2-2 { animation-name: hx-t2-2; }
+  /* Scene 3 */
+  .hx-svg .hx-s3, .hx-svg .hx-l3 { animation-name: hx-s3; }
+  .hx-svg .hx-type { animation-name: hx-type; }
+  .hx-svg .hx-star { animation-name: hx-star; animation-delay: calc(var(--i, 0) * 120ms); }
+  .hx-svg .hx-rate { animation-name: hx-rate; }
+  .hx-svg .hx-dir { animation-name: hx-dir; }
+  .hx-svg .hx-tap { animation-name: hx-tap; }
+  /* Scene 4 */
+  .hx-svg .hx-l4 { animation-name: hx-s4; }
+  .hx-svg .hx-ad { animation-name: hx-ad; }
+  .hx-svg .hx-flow { animation-name: hx-flow; }
+  .hx-svg .hx-glow2 { animation-name: hx-glow2; }
+  /* Scene 5 */
+  .hx-svg .hx-div { animation-name: hx-div; }
+  .hx-svg .hx-you, .hx-svg .hx-aumy { animation-name: hx-you; }
+  .hx-svg .hx-f1 { animation-name: hx-f1; }
+  .hx-svg .hx-f2 { animation-name: hx-f2; }
+  .hx-svg .hx-cell { animation-name: hx-cell; animation-delay: calc(var(--i, 0) * 70ms); }
+  .hx-svg .hx-f3-0 { animation-name: hx-f3-0; }
+  .hx-svg .hx-f3-1 { animation-name: hx-f3-1; }
+
+  /* Paused: by the button, or while scrolled out of view */
+  .hx.is-paused .hx-svg * { animation-play-state: paused; }
+}
+
+@keyframes hx-arm { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-6deg); } }
+
+@keyframes hx-s1 { 0% { opacity: 0; } 3%, 16% { opacity: 1; } 19%, 100% { opacity: 0; } }
+@keyframes hx-phone { 0% { transform: translateY(12px); } 4%, 100% { transform: none; } }
+@keyframes hx-screen { 0%, 3% { opacity: 0; } 6%, 100% { opacity: 1; } }
+@keyframes hx-chip1 { 0%, 4% { opacity: 0; transform: translateY(10px); } 7%, 100% { opacity: 1; transform: none; } }
+@keyframes hx-chip2 { 0%, 10% { opacity: 0; transform: translateY(10px); } 13%, 100% { opacity: 1; transform: none; } }
+
+@keyframes hx-s2 { 0%, 19% { opacity: 0; } 22%, 33% { opacity: 1; } 36%, 100% { opacity: 0; } }
+@keyframes hx-c2-0 { 0%, 19% { opacity: 0; transform: translateX(40px); } 22%, 100% { opacity: 1; transform: none; } }
+@keyframes hx-c2-1 { 0%, 22% { opacity: 0; transform: translateX(40px); } 25%, 100% { opacity: 1; transform: none; } }
+@keyframes hx-c2-2 { 0%, 25% { opacity: 0; transform: translateX(40px); } 28%, 100% { opacity: 1; transform: none; } }
+@keyframes hx-t2-0 { 0%, 22% { opacity: 0; transform: scale(0.3); } 24%, 100% { opacity: 1; transform: none; } }
+@keyframes hx-t2-1 { 0%, 25% { opacity: 0; transform: scale(0.3); } 27%, 100% { opacity: 1; transform: none; } }
+@keyframes hx-t2-2 { 0%, 28% { opacity: 0; transform: scale(0.3); } 30%, 100% { opacity: 1; transform: none; } }
+
+@keyframes hx-s3 { 0%, 36% { opacity: 0; } 39%, 51% { opacity: 1; } 54%, 100% { opacity: 0; } }
+@keyframes hx-type { 0%, 39% { transform: none; } 43%, 100% { transform: translateX(126px); } }
+@keyframes hx-star { 0%, 43% { opacity: 0; transform: scale(0.2); } 44.5%, 100% { opacity: 1; transform: none; } }
+@keyframes hx-rate { 0%, 47.5% { opacity: 0; } 49%, 100% { opacity: 1; } }
+@keyframes hx-dir { 0%, 49% { transform: none; } 49.8% { transform: scale(0.93); } 51%, 100% { transform: none; } }
+@keyframes hx-tap { 0%, 49% { opacity: 0; transform: scale(0.3); } 49.6% { opacity: 0.6; } 52.5%, 100% { opacity: 0; transform: scale(1.9); } }
+
+@keyframes hx-s4 { 0%, 54% { opacity: 0; } 57%, 64% { opacity: 1; } 67%, 100% { opacity: 0; } }
+@keyframes hx-ad {
+  0%, 54% { opacity: 0; transform: translateX(36px); }
+  57%, 59% { opacity: 1; transform: none; }
+  64.5%, 100% { opacity: 0; transform: translate(-150px, 120px) scale(0.2); }
+}
+@keyframes hx-flow {
+  0%, 57% { stroke-dashoffset: 100; opacity: 1; }
+  61.5% { stroke-dashoffset: 0; opacity: 1; }
+  65%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes hx-glow2 { 0%, 61% { opacity: 0; transform: scale(0.5); } 64.5% { opacity: 0.5; transform: none; } 69%, 100% { opacity: 0; transform: scale(1.35); } }
+
+@keyframes hx-div { 0%, 67% { opacity: 0; transform: scaleY(0); } 70%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+@keyframes hx-you { 0%, 68% { opacity: 0; transform: translateY(6px); } 71%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+@keyframes hx-f1 { 0%, 69% { opacity: 0; transform: translateY(10px); } 72%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+@keyframes hx-f2 { 0%, 71% { opacity: 0; transform: translateY(10px); } 73%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+@keyframes hx-cell { 0%, 73% { opacity: 0; } 74.5%, 100% { opacity: 1; } }
+@keyframes hx-f3-0 { 0%, 78% { opacity: 0; transform: translateX(24px); } 80%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+@keyframes hx-f3-1 { 0%, 80% { opacity: 0; transform: translateX(24px); } 82%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
