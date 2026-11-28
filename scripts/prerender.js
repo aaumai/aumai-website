@@ -415,6 +415,7 @@ function homeContent() {
         <ol>${HERO.outcomes.map((o) => '<li><h2>' + esc(o.title) + '</h2><p>' + esc(o.line) + '</p></li>').join('')}</ol>
         <p><a href="${HERO.cta.to}">${esc(HERO.cta.label)}</a></p>
         <p>${esc(HERO.ctaNote)}</p>
+        <p><a href="${EXPL.HERO_VIDEO.src}"><strong>Watch: ${esc(EXPL.HERO_VIDEO.name)} on Aumy</strong></a> — ${esc(EXPL.HERO_VIDEO.line)}</p>
       </div></section>
       <section id="${DRP.id}"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(DRP.eyebrow)}</p>
@@ -845,9 +846,9 @@ const routes = [
     description: HOME.SEO.description,
     canonical: `${ORIGIN}/`,
     ogImage: `${ORIGIN}${HOME.SEO.shareImage}`,
-    // The Sterling film left the hero on 2026-11-28 (the animation took its place), so its VideoObject left too.
+    // The Sterling film is back in the hero (owner 28 Nov), so its VideoObject is back too.
     // FAQPage (owner 2026-11-13): the same questions the page shows (HOME.FAQ).
-    jsonld: [orgLd, dentalSoftwareLd, faqPageLd(HOME.FAQ.items)],
+    jsonld: [orgLd, dentalSoftwareLd, explainerVideoLd[0], faqPageLd(HOME.FAQ.items)],
     content: homeContent(),
   },
   {

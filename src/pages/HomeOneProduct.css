@@ -1,3 +1,7 @@
+/* Animation section (owner 28 Nov: its own place below Dr Priyanka's film). */
+.hero3-story-wrap { max-width: 760px; margin: 0 auto; }
+.hero3-story { margin-top: 20px; }
+
 /* Home, Aumy as one product (owner 2026-11-02). Reads the site's existing tokens (--c-*, --lux-*): no new
    colours, no new fonts. Mobile first, generous white space. */
 
