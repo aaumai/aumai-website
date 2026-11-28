@@ -42,8 +42,8 @@ const HOW = {
   titleB: 'Your team, our framework, every week.',
   steps: [
     {
-      title: 'We look first: the free clinic audit.',
-      body: 'Tell us your clinic and city. Within 24 hours you get your audit on WhatsApp, prepared and checked by a person: where enquiries go unanswered, where visits go empty, what’s waiting to be finished.',
+      title: 'We look first: a 40-minute call with Jayesh.',
+      body: 'Book a time that suits you. On the call we look at your clinic together: where enquiries go unanswered, where visits go empty, what’s waiting to be finished. You leave with a clear, step-by-step plan.',
       exTag: 'Real example',
       ex: 'At one clinic we work with, its own records showed 289 patients advised a treatment in just six weeks who still hadn’t started it. Nobody had counted them, because nobody had sent them an invoice.',
     },

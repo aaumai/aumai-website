@@ -319,7 +319,7 @@ const FAQ = {
     },
     {
       q: 'How much does Aumy cost?',
-      a: 'It depends on your clinic: how many chairs and doctors, and what you switch on. After a free clinic audit we give you one clear number, before anything starts.',
+      a: 'It depends on your clinic: how many chairs and doctors, and what you switch on. A short call with Jayesh gives you the exact figure, before anything starts.',
     },
   ],
   // Internal links (owner 2026-11-13): home, the Aumy Clinic page and /ai-receptionist link to each other.

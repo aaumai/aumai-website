@@ -239,7 +239,7 @@ const PAGES = [
       },
       {
         q: 'How much does dental practice management software from Aumy cost?',
-        a: 'It depends on your clinic: how many chairs, doctors and branches, and what you switch on. After a free clinic audit we give you one clear number, before anything starts.',
+        a: 'It depends on your clinic: how many chairs, doctors and branches, and what you switch on. A short call with Jayesh gives you the exact figure, before anything starts.',
       },
     ],
     card: 'Appointments, records, charting, treatment plans and billing.',
