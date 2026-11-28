@@ -307,7 +307,7 @@ const DR_PRIYANKA_FILM = {
   switchLabel: 'Video language',
   playLabel: 'Watch her story',
   // Same destination as every "call with Jayesh" button on the site (src/data/apply.js PATH).
-  cta: { label: 'Book a 20-minute call', to: '/apply' },
+  cta: { label: 'Book a call with Jayesh', to: '/apply' },
   versions: [
     {
       key: 'en',
