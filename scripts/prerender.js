@@ -400,10 +400,10 @@ function howWeWorkHtml(eyebrow = HO.HOW.eyebrow, titleA = HO.HOW.titleA, titleB 
       </div></section>`;
 }
 // ---- home (Aumy as ONE product, owner 2026-11-02) ---------------------------
-// Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js. "Your clinic, handled." is a scroll
-// story on the page (src/components/HandledStory.js, owner 2026-11-24); here its four stages are plain headings and lists.
+// Word for word what src/pages/Home.js renders, from src/data/homeOneProduct.js. "Your clinic, handled." and "Aumy is one
+// product. It does four things." left the page on 2026-11-28 (the hero tells the three steps now).
 function homeContent() {
-  const { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL } = HOME;
+  const { HERO, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL } = HOME;
   // "Hear it from Dr Priyanka" (owner 2026-11-28): the section under the hero, here as words + a link to each
   // film (no poster <img>, so the crawler HTML adds no download before the app mounts).
   const DRP = HOME.DR_PRIYANKA_FILM;
@@ -427,24 +427,6 @@ function homeContent() {
       <section><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">Across India</p>
         ${clinicsStripHtml()}
-      </div></section>
-      <section id="handled"><div class="ch-container ch-narrow">
-        <p class="ch-eyebrow">${esc(HANDLED.eyebrow)}</p>
-        <h2>${esc(HANDLED.title)}</h2>
-        <p>${esc(HANDLED.sub)}</p>
-        <ol>
-          ${HANDLED.stages.map((s) => '<li><p>' + esc(s.kicker) + '</p>' + (s.items.length
-            ? '<h3>' + esc(s.label) + '</h3><p>' + esc(s.line) + '</p><ul>' + s.items.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul>'
-            : '<p><strong>' + esc(s.who) + '</strong></p><h3>' + esc(s.label) + '</h3>') + '</li>').join('\n          ')}
-        </ol>
-        <p>${esc(HANDLED.note)}</p>
-        <p>${esc(HANDLED.more.text)} <a href="${HANDLED.more.to}">${esc(HANDLED.more.label)}</a></p>
-      </div></section>
-      <section id="what-aumy-does"><div class="ch-container ch-narrow">
-        <h2>${esc(THREE.title)} ${esc(THREE.titleB)}</h2>
-        <ol>
-          ${THREE.items.map((it) => '<li><h3>' + esc(it.name) + '</h3><p>' + esc(it.line) + '</p><ul>' + it.bullets.map((b) => '<li>' + esc(b) + '</li>').join('') + '</ul></li>').join('\n          ')}
-        </ol>
       </div></section>
       <section id="follow-ups"><div class="ch-container ch-narrow">
         <h2>${esc(FOLLOW_UPS.title)} ${esc(FOLLOW_UPS.titleB)}</h2>
@@ -478,7 +460,7 @@ function homeContent() {
         ${faqHtml(FAQ.items, FAQ.title)}
         <p>${FAQ.links.map((l) => `<a href="${l.to}">${esc(l.label)}</a>`).join(' · ')}</p>
       </div></section>
-      <section id="free-audit"><div class="ch-container ch-narrow">
+      <section id="book-a-call"><div class="ch-container ch-narrow">
         <h2>${esc(FINAL.title)}</h2>
         <p>${esc(FINAL.sub)}</p>
         <p><a href="${FINAL.cta.to}">${esc(FINAL.cta.label)}</a></p>
@@ -870,13 +852,13 @@ const routes = [
   },
   {
     slug: 'revenue-generator',
-    // "How it works" (owner 2026-11-03): the one-product story. Words: src/data/howItWorks.js (same file as the
+    // "How it works": the three steps since 2026-11-28 (owner-approved). Words: src/data/howItWorks.js (same file as the
     // React page). VideoObjects only for the films this page plays.
     title: HOW.HOW_SEO.title,
     description: HOW.HOW_SEO.description,
     canonical: `${ORIGIN}/revenue-generator`,
     ogImage: `${ORIGIN}${HO.SEO.shareImage}`,
-    jsonld: [orgLd, ...explainerVideoLd.filter((v) => HOW.HOW_PARTS.items.some((it) => it.film && v.contentUrl === `${ORIGIN}${it.film.src}`))],
+    jsonld: [orgLd, ...explainerVideoLd.filter((v) => HOW.HOW_PARTS.items.some((it) => it.films.some((f) => v.contentUrl === `${ORIGIN}${f.film.src}`)))],
     content: `
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">${esc(HOW.HOW_HERO.eyebrow)}</p>
@@ -885,10 +867,9 @@ const routes = [
         <p><a href="${HOW.HOW_HERO.cta.to}">${esc(HOW.HOW_HERO.cta.label)}</a></p>
         <p>${esc(HOW.HOW_HERO.ctaNote)}</p>
       </div></section>
-      <section id="parts"><div class="ch-container ch-narrow">
+      <section id="steps"><div class="ch-container ch-narrow">
         <h2>${esc(HOW.HOW_PARTS.title)} ${esc(HOW.HOW_PARTS.titleB)}</h2>
-        <p>${esc(HOW.HOW_PARTS.filmNote)}</p>
-        ${HOW.HOW_PARTS.items.map((it) => '<h3>' + esc(it.name) + '</h3><p>' + esc(it.line) + '</p><ul>' + it.bullets.map((b) => '<li>' + esc(b) + '</li>').join('') + '</ul>' + (it.film ? '<p><a href="' + it.film.src + '">Watch: ' + esc(it.name) + ' (video)</a></p>' : '')).join('')}
+        <ol>${HOW.HOW_PARTS.items.map((it) => '<li><p>' + esc(it.kicker) + '</p><h3>' + esc(it.title) + '</h3><p>' + esc(it.line) + '</p>' + (it.films.length ? '<p>' + it.films.map((f) => '<a href="' + f.film.src + '">Watch: ' + esc(f.name) + '</a>').join(' · ') + ' (' + esc(HOW.HOW_PARTS.filmNote) + ')</p>' : '') + (it.links.length ? '<p>' + it.links.map((l) => '<a href="' + l.to + '">' + esc(l.label) + '</a>').join(' · ') + '</p>' : '') + '</li>').join('')}</ol>
       </div></section>
       <section id="a-day"><div class="ch-container ch-narrow">
         <h2>${esc(HOW.HOW_DAY.title)} ${esc(HOW.HOW_DAY.titleB)}</h2>
@@ -905,7 +886,7 @@ const routes = [
         <blockquote>“${esc(HOW.HOW_PROOF.quote)}” — ${esc(HOW.HOW_PROOF.who)}</blockquote>
         <p><strong>${esc(HOW.HOW_PROOF.number)}</strong> ${esc(HOW.HOW_PROOF.numberText)} <a href="/#google-reviews">Read what clinic owners say</a></p>
       </div></section>
-      <section id="free-audit"><div class="ch-container ch-narrow">
+      <section id="book-a-call"><div class="ch-container ch-narrow">
         <h2>${esc(HOW.HOW_FINAL.title)}</h2>
         <p>${esc(HOW.HOW_FINAL.sub)}</p>
         <p><a href="${HOW.HOW_FINAL.cta.to}">${esc(HOW.HOW_FINAL.cta.label)}</a></p>

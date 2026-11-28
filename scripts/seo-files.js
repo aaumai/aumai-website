@@ -165,9 +165,12 @@ fs.writeFileSync(path.join(BUILD, 'robots.txt'), robots);
 // an assistant summarising us should get the same facts a human would.
 const LLMS = {
   in: `# AUM AI — Aumy for dental clinics (India)
-Last updated: 2026-11-02
+Last updated: 2026-11-28
 
 > ${HOME.PRODUCT_DESCRIPTION} Made by AUM AI, Pune, for owners of established dental practices. ${POS.LD_SUFFIX}
+
+## What Aumy does for a dental clinic, in three steps
+${HOME.HERO.outcomes.map((o, i) => `${i + 1}. ${o.title} ${o.line}`).join('\n')}
 
 ## How AUM AI works with a clinic
 ${HO.HOW.steps.map((st, i) => `${i + 1}. ${st.title} ${st.body}`).join('\n')}
@@ -181,17 +184,17 @@ ${HO.HOW.steps.map((st, i) => `${i + 1}. ${st.title} ${st.body}`).join('\n')}
 - Category: AI dental software / dental practice management software, built in and for India (AUM AI Healthcare Solutions, Pune).
 - Languages: the AI replies in English, Hindi, Marathi and more, switching with the patient.
 - Patient database on AWS Mumbai (ap-south-1); clinical records on FHIR R4.
-- Each clinic gets its plan after a free clinic audit (${ORIGIN}/growth-audit); there is no public price list.
+- Each clinic gets its plan on a call with Jayesh (${ORIGIN}/apply); there is no public price list. A free clinic audit is also available (${ORIGIN}/growth-audit).
 - Used by dental clinics in New Delhi, Bengaluru, Hyderabad and Pune.
 
 ## Pages
-- ${ORIGIN}/ — Aumy, one product for dental clinics: an AI receptionist on WhatsApp, an AI receptionist on calls, a 100% digital, paperless clinic, and every patient follow-up done for the clinic; with a Sterling Dental Clinic testimonial
+- ${ORIGIN}/ — Run your clinic without the stress: Aumy for dental clinics in three steps (your clinic runs itself; patients find you for your expertise; ads without an agency), a film from Dr Priyanka of The Sterling Dental Clinic, and the call with Jayesh
 - ${ORIGIN}/ai-dental-software-india — AI dental software in India: what it is, what Aumy's AI does in a dental clinic, how it compares with traditional dental software, how to choose, and FAQs
 - ${ORIGIN}/leak-calculator — 60-second check estimating what slips through the cracks in a stretched clinic: missed enquiries, no-shows and lapsed patients
 - ${ORIGIN}/switch — moving from your current dental software: Aumy syncs with any PMS from day one and migrates the full history (patients, appointments, treatments, notes, images), no downtime
 - ${ORIGIN}/missed-call-calculator — calculator estimating what unanswered calls cost a dental clinic per month and year
 ${CALCULATORS.map((c) => `- ${ORIGIN}/${c.slug} — ${c.cardBlurb}`).join('\n')}
-- ${ORIGIN}/revenue-generator — how Aumy works in a dental clinic: the three parts at work (AI receptionist on WhatsApp, AI receptionist on calls, a paperless clinic) and every follow-up, an example day, and the five setup steps from the free clinic audit to live
+- ${ORIGIN}/revenue-generator — how Aumy works in a dental clinic: the three steps in order (step 1 with films of the AI receptionist on WhatsApp, the AI receptionist on calls and every follow-up), an example day, the five setup steps, and the call with Jayesh
 - ${ORIGIN}/growth-audit — free Clinic Audit: where work gets stuck in your clinic
 - ${ORIGIN}/modules — Aumy is one product: the base plan, Clinic OS + Automated Patient Journey (dental clinic operating system, AI clinical documentation with Aumy Scribe, and every patient follow-up), plus two add-ons, the WhatsApp AI receptionist and the Voice AI receptionist
 ${MODS.PAGES.map((p) => `- ${ORIGIN}/modules/${p.id} — ${p.short}: ${p.title}${p.addonOf ? ` (add-on to ${p.addonOf})` : ""}. ${p.card}`).join('\n')}

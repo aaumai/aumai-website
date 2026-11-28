@@ -100,7 +100,7 @@ const AI_RECEPTIONIST_FAQS = [
   },
   {
     q: 'How much does an AI receptionist cost for a dental clinic?',
-    a: `It depends on your clinic's size and what you switch on. Aumy is priced per clinic after a free clinic audit, so you get one clear figure before anything starts.`,
+    a: `It depends on your clinic's size and what you switch on. Aumy is priced per clinic; a short call with Jayesh gives you the exact figure before anything starts.`,
   },
 ];
 const WHATSAPP_REMINDER_FAQS = [
@@ -122,7 +122,7 @@ const WHATSAPP_REMINDER_FAQS = [
   },
   {
     q: 'How much does WhatsApp reminder software cost for a dental clinic?',
-    a: `It depends on your clinic's size and what you switch on. Aumy is priced per clinic after a free clinic audit, so you get one clear figure before anything starts.`,
+    a: `It depends on your clinic's size and what you switch on. Aumy is priced per clinic; a short call with Jayesh gives you the exact figure before anything starts.`,
   },
 ];
 

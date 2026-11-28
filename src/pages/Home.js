@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import ClinicsServed from '../components/ClinicsServed';
 import HeroStory from '../components/HeroStory';
-import HandledStory from '../components/HandledStory';
 import DrPriyankaFilm from '../components/DrPriyankaFilm';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
-import { HERO, HANDLED, THREE, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO } from '../data/homeOneProduct';
+import { HERO, FOLLOW_UPS, PROOF, POOLED_PROOF, FIT, START, FAQ, FINAL, SEO } from '../data/homeOneProduct';
 import './HomeClinic.css';
 import './HomeOneProduct.css';
 
@@ -20,21 +19,6 @@ const Check = () => (
     <path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-
-const ICONS = {
-  whatsapp: (
-    <path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3zm0 2a7 7 0 11-3.6 13l-.3-.2-2.4.6.6-2.3-.2-.3A7 7 0 0112 5zm-3 3.5c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.2.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a5.6 5.6 0 01-2.8-2.4c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4H9z" fill="currentColor" />
-  ),
-  voice: (
-    <path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z" fill="currentColor" />
-  ),
-  followups: (
-    <path d="M12 3a9 9 0 109 9M21 3v6h-6M12 7v5l3 2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  ),
-  paperless: (
-    <path d="M6 2h9l5 5v13a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zm8 1.5V8h4.5M8 12h8M8 16h8M8 8h3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  ),
-};
 
 const Home = () => {
   useEffect(() => {
@@ -88,48 +72,8 @@ const Home = () => {
       {/* Dental clinics Aumy serves (consented clinics only): src/data/clinicsServed.js */}
       <ClinicsServed />
 
-      {/* END TO END, AS A SCROLL STORY (owner 2026-11-24; two steps since 2026-11-09): 1 Aumy sets up the systems,
-          2 get found, 3 fill the chairs (our team, only for clinics on Aumy), 4 the story so far. */}
-      <section className="ch-section ch-tint" id="handled" aria-labelledby="op-handled-title">
-        <div className="ch-container">
-          <p className="op-center"><span className="ch-eyebrow">{HANDLED.eyebrow}</span></p>
-          <h2 id="op-handled-title" className="ch-h2 op-center">{HANDLED.title}</h2>
-          <p className="ch-lead op-center op-handled-sub">{HANDLED.sub}</p>
-          <HandledStory data={HANDLED} Check={Check} icons={ICONS} />
-          <p className="op-handled-note op-center">{HANDLED.note}</p>
-          <p className="op-handled-more">
-            {HANDLED.more.text} <Link to={HANDLED.more.to}>{HANDLED.more.label} →</Link>
-          </p>
-        </div>
-      </section>
-
-      {/* 2. ONE PRODUCT, FOUR THINGS */}
-      <section className="ch-section" id="what-aumy-does" aria-labelledby="op-three-title">
-        <div className="ch-container">
-          <h2 id="op-three-title" className="ch-h2 op-center">
-            {THREE.title} <em>{THREE.titleB}</em>
-          </h2>
-          <div className="op-three">
-            {THREE.items.map((it, i) => (
-              <article key={it.key} className="op-card">
-                <div className="op-card-top">
-                  <span className="op-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="24" height="24">{ICONS[it.key]}</svg>
-                  </span>
-                  <span className="op-num">{i + 1}</span>
-                </div>
-                <h3>{it.name}</h3>
-                <p className="op-card-line">{it.line}</p>
-                <ul className="op-list">
-                  {it.bullets.map((b) => (
-                    <li key={b}><Check />{b}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* "Your clinic, handled." (scroll story) and "Aumy is one product. It does four things." were removed on
+          2026-11-28 (owner-approved consistency pass): the hero now tells the three steps. Both are in git history. */}
 
       {/* 3. EVERY FOLLOW-UP, DONE FOR YOU (mirrors the ad) */}
       <section className="ch-section ch-tint" id="follow-ups" aria-labelledby="op-fu-title">
@@ -240,8 +184,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 6. ONE CLOSING CALL TO ACTION */}
-      <section className="ch-offer" id="free-audit">
+      {/* 6. ONE CLOSING CALL TO ACTION: the headline again and the call with Jayesh (owner 2026-11-28) */}
+      <section className="ch-offer" id="book-a-call">
         <div className="ch-container ch-center">
           <h2 className="ch-offer-title">{FINAL.title}</h2>
           <p className="ch-offer-sub">{FINAL.sub}</p>
