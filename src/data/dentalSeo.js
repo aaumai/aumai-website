@@ -154,7 +154,7 @@ const FAQS = [
   { q: 'Do we need Aumy for SEO?', a: 'Yes. We take on SEO only for clinics on Aumy, so every call, WhatsApp and website enquiry that search brings is answered straight away and followed up until the patient books.' },
   { q: 'Will you post on our Google profile without asking?', a: 'No. Each week’s posts come to you first and go out only after you say yes.' },
   { q: 'Can you promise the first position on Google?', a: 'Nobody honestly can: Google decides. What we promise is the work, every week, and a monthly report that shows what it brought.' },
-  { q: 'How much does it cost?', a: 'It depends on how many treatments, areas and countries you want to be found for, so we quote after the free clinic audit. WhatsApp 80071 89868 to start.' },
+  { q: 'How much does it cost?', a: 'It depends on how many treatments, areas and countries you want to be found for, so we quote after the free clinic audit. Book a call with Jayesh to start.' },
 ];
 
 const AUDIT = {

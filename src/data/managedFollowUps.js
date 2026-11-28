@@ -138,7 +138,7 @@ const FAQS = [
   { q: 'Will patients know it isn’t our front desk?', a: 'Every message and call is made in your clinic’s name, in the words we agree with you. Anything that needs your clinic, such as a clinical question or a complaint, comes straight to your team.' },
   { q: 'How do you help with treatment acceptance?', a: 'Patients who were advised treatment are followed up with answers to the questions that hold them back, such as time, cost or worry about pain, using the information and payment options your clinic gives us. The decision is always the patient’s.' },
   { q: 'Do we need Aumy?', a: 'Yes. Everything is run inside your clinic’s Aumy, so you can see every message and call. We set it up for you.' },
-  { q: 'How much does it cost?', a: 'It depends on your clinic’s size and how much you hand over, so we quote after the free clinic audit. WhatsApp 80071 89868 to start.' },
+  { q: 'How much does it cost?', a: 'It depends on your clinic’s size and how much you hand over, so we quote after the free clinic audit. Book a call with Jayesh to start.' },
 ];
 
 const AUDIT = {

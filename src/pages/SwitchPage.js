@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
-import { INDIA_WHATSAPP } from '../config/contact';
+import { PATH as APPLY_PATH, CTA_LABEL as CALL_LABEL } from '../data/apply';
 import './HomeClinic.css';
 import './SwitchPage.css';
 
@@ -9,10 +9,6 @@ import './SwitchPage.css';
 // Never names any other software vendor: the fear ("my data is locked in")
 // is universal, and naming a competitor on our own site invites a fight we
 // do not need. The page answers the fear, then shows the five pillars.
-
-const WA_HREF = `https://wa.me/${INDIA_WHATSAPP.number}?text=${encodeURIComponent(
-  "Hi, I'd like to move my clinic to Aumy. Can we talk about keeping my data in sync and migrating it?",
-)}`;
 
 const worries = [
   {
@@ -143,9 +139,7 @@ const SwitchPage = () => {
             clinical notes and images, into Aumy. No downtime. Nothing re-typed.
           </p>
           <div className="ch-hero-cta">
-            <a href={WA_HREF} target="_blank" rel="noopener noreferrer" className="ch-btn ch-btn-primary">
-              Talk to us about moving
-            </a>
+            <Link to={APPLY_PATH} className="ch-btn ch-btn-primary">{CALL_LABEL}</Link>
             <Link to="/contact" className="ch-btn ch-btn-ghost">
               Book a migration call
             </Link>
@@ -289,9 +283,7 @@ const SwitchPage = () => {
             <cite>&mdash; Jayesh, Founder, AUM AI</cite>
           </blockquote>
           <div className="ch-hero-cta ch-center-cta">
-            <a href={WA_HREF} target="_blank" rel="noopener noreferrer" className="ch-btn ch-btn-primary">
-              Talk to us about moving
-            </a>
+            <Link to={APPLY_PATH} className="ch-btn ch-btn-primary">{CALL_LABEL}</Link>
             <Link to="/growth-audit" className="ch-btn ch-btn-ghost">Get a free clinic audit</Link>
           </div>
         </div>

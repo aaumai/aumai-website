@@ -145,7 +145,7 @@ const HERO = {
     },
   ],
   // Same destination as every "call with Jayesh" button on the site (src/data/apply.js PATH).
-  cta: { label: 'Book a call', to: '/apply' },
+  cta: { label: 'Book a call with Jayesh', to: '/apply' },
   ctaNote: 'We onboard only 5 clinics a month.',
   // The hero animation (src/components/HeroStory.js), ~13 s, silent. Storyboard approved by the owner 2026-11-28.
   // The words drawn inside it; `alt` is what a screen reader hears (the drawing itself is hidden from it).

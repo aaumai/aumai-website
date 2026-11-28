@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { growthPosts } from '../data/growthPosts';
 import { preferredSource } from '../data/preferredSource';
+import { PATH as APPLY_PATH, CTA_LABEL as CALL_LABEL } from '../data/apply';
 import './GrowthHub.css';
 
 // Article body lives as an HTML string in growthPosts.js so the prerenderer
@@ -73,20 +74,11 @@ const GrowthArticle = () => {
               <Link to="/growth-audit" className="ch-btn ch-btn-primary">
                 Get my free Clinic Audit
               </Link>
-              {/* Experience beats explanation: the live demo lets a dentist see
-                  the product at 11 pm without committing to a sales call. */}
-              <a
-                href="https://wa.me/918007189868?text=Hi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ch-btn ch-btn-ghost"
-              >
-                Want to see what this actually looks like? WhatsApp Aumy
-              </a>
+              {/* Owner 2026-11-28: no WhatsApp buttons on the site; the one way to talk is the call with Jayesh. */}
+              <Link to={APPLY_PATH} className="ch-btn ch-btn-ghost">{CALL_LABEL}</Link>
             </div>
             <p className="gh-cta-demo">
-              The WhatsApp demo is a live AI receptionist for a demo dental clinic
-              (+91&nbsp;80071&nbsp;89868) — just say hello and watch it answer and book, 24/7. Or{' '}
+              Or{' '}
               <a href="/downloads/dental-clinic-revenue-leak-checklist.pdf" download>
                 download the one-page front-desk checklist
               </a>{' '}

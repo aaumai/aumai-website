@@ -126,7 +126,7 @@ const JOIN = {
   confirmTitle: 'Payment received. We are confirming it',
   confirmHelp: 'You do not need to pay again. The video plays as soon as the payment is confirmed.',
   closed: 'Joining is not open right now',
-  closedText: 'Please check again later. Questions? WhatsApp us any time.',
+  closedText: 'Please check again later.',
 };
 
 // The hero carries the "30 minutes every morning" ad (owner 2026-10-21; 10 → 30

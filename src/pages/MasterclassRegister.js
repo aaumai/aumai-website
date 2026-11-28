@@ -78,9 +78,7 @@ export default function MasterclassRegister() {
         {/* A member who joined for ₹299 already watches: the kit only, for the difference (owner 2026-10-30). */}
         <p className="mc-access">{L.kitUpgrade ? MC.REGISTER.leadUpgrade(L.kit, L.kitTotal, L.entry) : MC.REGISTER.lead}</p>
         <ul className="mc-points">
-          {(L.kitUpgrade ? MC.REGISTER.pointsKitOnly(MC.REGISTER.points) : MC.REGISTER.points).map((p) => <li key={p}>{p.includes(MC.WHATSAPP.display)
-            ? <>{p.split(MC.WHATSAPP.display)[0]}<a href={MC.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{MC.WHATSAPP.display}</a>{p.split(MC.WHATSAPP.display)[1]}</>
-            : p}</li>)}
+          {(L.kitUpgrade ? MC.REGISTER.pointsKitOnly(MC.REGISTER.points) : MC.REGISTER.points).map((p) => <li key={p}>{p}</li>)}
         </ul>
         <p className="mc-help"><Link to={MC.PATHS.info}>See everything the masterclass covers</Link></p>
         {!have && <p className="mc-watch-free"><Link to={`${MC.PATHS.info}#watch`}>{MC.REGISTER.watchLink}</Link></p>}

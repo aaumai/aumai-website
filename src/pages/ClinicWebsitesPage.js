@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import CW from '../data/clinicWebsites';
+import { PATH as APPLY_PATH, CTA_LABEL as CALL_LABEL } from '../data/apply';
 import './HomeClinic.css';
 import './ClinicWebsitesPage.css';
 
@@ -29,14 +31,8 @@ const Icon = ({ d }) => (
 const Pic = ({ img, eager, className }) => (
   <img className={className} src={img.src} width={img.w} height={img.h} alt={img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
 );
-const WaLink = ({ children, className }) => (
-  <a className={className} href={CW.WHATSAPP.link} target="_blank" rel="noopener noreferrer">{children}</a>
-);
-// The WhatsApp number inside a sentence becomes a link.
-const withWa = (text) => {
-  const parts = String(text).split(CW.WHATSAPP.display);
-  return parts.length < 2 ? text : parts.reduce((acc, p, i) => (i ? [...acc, <WaLink key={i}>{CW.WHATSAPP.display}</WaLink>, p] : [p]), []);
-};
+// Owner 2026-11-28: no WhatsApp buttons or links anywhere on the site; the one way to talk is the call with Jayesh.
+const CallLink = () => <Link to={APPLY_PATH}>{CALL_LABEL}</Link>;
 
 // Desktop screenshot in a browser frame, the phone screenshot in front of it.
 const Devices = ({ eager }) => (
@@ -111,7 +107,7 @@ export default function ClinicWebsitesPage() {
                 <a className="ch-btn ch-btn-primary" href="#audit">{CW.HERO.cta}</a>
                 <a className="ch-btn ch-btn-ghost" href="#sterling">See the Sterling website</a>
               </div>
-              <p className="cw-wa">or <WaLink>WhatsApp {CW.WHATSAPP.display}</WaLink></p>
+              <p className="cw-wa">or <CallLink /></p>
               <p className="ch-hero-trust">{CW.HERO.trust}</p>
             </div>
             <figure className="cw-hero-figure">
@@ -222,7 +218,7 @@ export default function ClinicWebsitesPage() {
             {CW.FAQS.map((f) => (
               <details key={f.q} className="ch-faq-item">
                 <summary>{f.q}</summary>
-                <p>{withWa(f.a)}</p>
+                <p>{f.a}</p>
               </details>
             ))}
           </div>
@@ -237,7 +233,7 @@ export default function ClinicWebsitesPage() {
               <span className="ch-eyebrow">Free</span>
               <h2 id="cw-audit" className="ch-h2">{CW.AUDIT.title}</h2>
               <p className="ch-lead">{CW.AUDIT.intro}</p>
-              <p className="cw-wa cw-wa-dark">Prefer to talk? <WaLink>WhatsApp {CW.WHATSAPP.display}</WaLink></p>
+              <p className="cw-wa cw-wa-dark">Prefer to talk? <CallLink /></p>
             </div>
             <form className="ch-audit-form" onSubmit={onSubmit}>
               <div className="ch-field">
@@ -276,7 +272,7 @@ export default function ClinicWebsitesPage() {
               </button>
               <p className="ch-fineprint">{CW.AUDIT.fine}</p>
               {status === 'success' && <div className="ch-form-note ch-form-success">{CW.AUDIT.done}</div>}
-              {status === 'error' && <div className="ch-form-note ch-form-error">{withWa(CW.AUDIT.error)}</div>}
+              {status === 'error' && <div className="ch-form-note ch-form-error">{CW.AUDIT.error}</div>}
             </form>
           </div>
         </div>
@@ -289,7 +285,7 @@ export default function ClinicWebsitesPage() {
           <h2 className="ch-offer-title">{CW.FINAL.title}</h2>
           <p className="ch-offer-sub">{CW.FINAL.text}</p>
           <div className="ch-hero-cta ch-center-cta"><a className="ch-btn ch-btn-primary" href="#audit">{CW.HERO.cta}</a></div>
-          <p className="cw-wa"><WaLink>WhatsApp {CW.WHATSAPP.display}</WaLink></p>
+          <p className="cw-wa"><CallLink /></p>
         </div>
       </section>
     </div>

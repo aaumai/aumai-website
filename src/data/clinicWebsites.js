@@ -116,7 +116,7 @@ const FAQS = [
   { q: 'Do we need Aumy for a website?', a: 'Yes. We build websites only for clinics on Aumy. Every website enquiry lands in your front desk’s list as a task and is followed up until the patient books, so no enquiry the site brings is lost.' },
   { q: 'We already have a website. Will we lose our Google rankings?', a: 'Not if the move is done properly. We list every address your old site has, keep the ones that rank, and redirect the rest with a 301 to the closest new page before the switch. Old blog posts keep their exact addresses.' },
   { q: 'Is it only for dental clinics?', a: 'Yes. We build for dental clinics, with a page for every treatment, area and country your patients search from.' },
-  { q: 'How much does it cost?', a: 'It depends on how many treatments, areas and countries you want to cover, so we quote after the free website audit. WhatsApp 80071 89868 to start.' },
+  { q: 'How much does it cost?', a: 'It depends on how many treatments, areas and countries you want to cover, so we quote after the free website audit. Book a call with Jayesh to start.' },
 ];
 
 const AUDIT = {

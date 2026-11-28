@@ -142,7 +142,7 @@ const FAQS = [
   { q: 'How much should we spend on ads?', a: 'It depends on your area and on where you want patients from. We start small, with a budget you choose, and grow it only when the ads bring booked consultations. The ad budget is separate from our fee.' },
   { q: 'Meta or Google: which is better for implants?', a: 'They do different jobs. Google reaches people already searching for implants. Facebook and Instagram reach people before they search, which suits implants, a treatment people think about for a while. Most clinics do best with both.' },
   { q: 'Do we need Aumy to run ads with you?', a: 'Yes. We run ads only for clinics on Aumy. Most ad money is lost after the click, when an enquiry is answered late or never followed up. With Aumy in first, every enquiry is answered straight away and followed up until it books, and each booked visit is counted against the ad that brought it.' },
-  { q: 'How much does it cost?', a: 'It depends on where you want patients from and the number of ads, so we quote after the free clinic audit. WhatsApp 80071 89868 to start.' },
+  { q: 'How much does it cost?', a: 'It depends on where you want patients from and the number of ads, so we quote after the free clinic audit. Book a call with Jayesh to start.' },
 ];
 
 const AUDIT = {

@@ -521,7 +521,7 @@ function serviceRoute(D) {
         <p class="ch-eyebrow">${esc(D.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(D.HERO.title)}</h1>
         <p class="ch-hero-sub">${esc(D.HERO.sub)}</p>
-        <p><a href="#audit">${esc(D.HERO.cta)}</a> · <a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a></p>
+        <p><a href="#audit">${esc(D.HERO.cta)}</a> · <a href="/apply">Book a call with Jayesh</a></p>
         <p>${esc(D.HERO.trust)}</p>
         ${D.VISUAL.kind === 'devices'
           ? `<p><img src="${D.VISUAL.desktop.src}" width="${D.VISUAL.desktop.w}" height="${D.VISUAL.desktop.h}" alt="${esc(D.VISUAL.desktop.alt)}"></p><p>${esc(D.VISUAL.caption)}</p>`
@@ -568,7 +568,7 @@ function serviceRoute(D) {
       <section id="audit"><div class="ch-container ch-narrow">
         <h2>${esc(D.AUDIT.title)}</h2>
         <p>${esc(D.AUDIT.intro)}</p>
-        <p><a href="${D.WHATSAPP.link}">WhatsApp ${esc(D.WHATSAPP.display)}</a> · <a href="/growth-audit">Free clinic audit</a></p>
+        <p><a href="/apply">Book a call with Jayesh</a> · <a href="/growth-audit">Free clinic audit</a></p>
         <h2>${esc(D.FINAL.title)}</h2>
         <p>${esc(D.FINAL.text)}</p>
         <p>Also from AUM AI: <a href="/services">All services</a> · <a href="/managed-follow-ups">Managed follow-ups</a> · <a href="/dental-seo">Dental SEO</a> · <a href="/clinic-websites">Dental websites</a>${VIS.showLink('/dental-ads') ? ' · <a href="/dental-ads">Dental implant ads</a>' : ''} · <a href="/revenue-generator">Aumy, our main product</a></p>
@@ -822,7 +822,6 @@ const routes = [
         <h1 class="ch-hero-title">${esc(ADS.HERO.h1)}</h1>
         <p class="ch-hero-sub">${esc(ADS.HERO.sub)}</p>
         <p><a href="/demos">Watch it work, live</a> · <a href="/growth-audit">Get a free clinic audit</a></p>
-        <p>Try it yourself: WhatsApp our demo dental clinic at +91 90223 12554 and book, reschedule or cancel like a patient would — or call +91 22 6423 0581 and wait a couple of rings for the Voice AI receptionist to pick up. (Demo clinic: Lumière Dental.) That live demo shows the WhatsApp AI receptionist and the Voice AI receptionist only — for a full demo of Aumy, call us on +91 80071 89868.</p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>What is AI dental software?</h2>
@@ -1049,7 +1048,7 @@ const routes = [
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.KIT.title)}</h2>
         <p>${esc(MC.KIT.intro)}</p>
-        <ul>${MC.KIT.items.map((k) => `<li><strong>${k.wa ? `<a href="${MC.WHATSAPP.link}">${esc(k.h)}</a>` : esc(k.h)}.</strong> ${esc(k.t)}</li>`).join('')}</ul>
+        <ul>${MC.KIT.items.map((k) => `<li><strong>${esc(k.h)}.</strong> ${esc(k.t)}</li>`).join('')}</ul>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>${esc(MC.EXPECT.title)}</h2>
@@ -1075,7 +1074,6 @@ const routes = [
         <h2>${esc(MC.FINAL.title)}</h2>
         <p>${esc(MC.FINAL.text)}</p>
         <p><a href="#watch">${esc(MC.CTA.watch)}</a> · <a href="${MC.PATHS.register}">${esc(MC.CTA.kit)}</a></p>
-        <p><a href="${MC.WHATSAPP.link}">${esc(MC.FINAL.questions)}</a></p>
         <p>${esc(MC.MEMBER.licence)}</p>
       </div></section>`,
   },
@@ -1134,7 +1132,7 @@ const routes = [
         <p class="ch-eyebrow">${esc(CW.HERO.eyebrow)}</p>
         <h1 class="ch-hero-title">${esc(CW.HERO.titleA)} ${esc(CW.HERO.titleB)}</h1>
         <p class="ch-hero-sub">${esc(CW.HERO.sub)}</p>
-        <p><a href="#audit">${esc(CW.HERO.cta)}</a> · <a href="${CW.WHATSAPP.link}">WhatsApp ${esc(CW.WHATSAPP.display)}</a></p>
+        <p><a href="#audit">${esc(CW.HERO.cta)}</a> · <a href="/apply">Book a call with Jayesh</a></p>
         <p>${esc(CW.HERO.trust)}</p>
         <p><img src="${CW.IMG.desktop.src}" width="${CW.IMG.desktop.w}" height="${CW.IMG.desktop.h}" alt="${esc(CW.IMG.desktop.alt)}"></p>
       </div></section>
@@ -1170,7 +1168,7 @@ const routes = [
       <section id="audit"><div class="ch-container ch-narrow">
         <h2>${esc(CW.AUDIT.title)}</h2>
         <p>${esc(CW.AUDIT.intro)}</p>
-        <p><a href="${CW.WHATSAPP.link}">WhatsApp ${esc(CW.WHATSAPP.display)}</a></p>
+        <p><a href="/apply">Book a call with Jayesh</a></p>
         <h2>${esc(CW.FINAL.title)}</h2>
         <p>${esc(CW.FINAL.text)}</p>
       </div></section>`,
@@ -1247,7 +1245,7 @@ const routes = [
       <section class="ch-hero"><div class="ch-container ch-narrow">
         <p class="ch-eyebrow">See it, don't take our word for it</p>
         <h1 class="ch-hero-title">Watch Aumy run a clinic — live, unscripted</h1>
-        <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Start with the full demo: <a href="https://www.youtube.com/watch?v=ILwh4-h5YAM">how an established dental clinic stops losing patients</a> (58 min), or <a href="https://www.youtube.com/watch?v=0LE0iwNvcZQ">a shorter look in 9 minutes</a>. Prefer to feel it? WhatsApp our live demo clinic on +91 90223 12554 as if you were a patient.</p>
+        <p class="ch-hero-sub">Short, unedited demos of the live product: answering a real clinic's WhatsApp, booking, rescheduling, after-care and follow-ups. Start with the full demo: <a href="https://www.youtube.com/watch?v=ILwh4-h5YAM">how an established dental clinic stops losing patients</a> (58 min), or <a href="https://www.youtube.com/watch?v=0LE0iwNvcZQ">a shorter look in 9 minutes</a>.</p>
         <p><a href="/modules/dental-patient-follow-up">Clinic OS + Automated Patient Journey</a> · <a href="/modules">How Aumy’s parts fit together</a></p>
       </div></section>`,
   },
@@ -1587,7 +1585,7 @@ for (const p of growthPosts) {
         <p>${esc(p.author)} · ${p.date}${p.updated ? ` · Updated ${p.updated}` : ''} · ${esc(p.readingTime)}</p>
         ${p.body}
         <h2>Want to know what this looks like in your clinic?</h2>
-        <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. Want to see what this actually looks like? <a href="https://wa.me/918007189868?text=Hi">WhatsApp Aumy</a> — a live AI receptionist for a demo dental clinic (+91 80071 89868), any time, no sales call.</p>
+        <p>Get a free Clinic Audit: where work gets stuck in your clinic and enquiries, appointments and returning patients slip through the cracks — and what each gap is worth. <a href="/growth-audit">Get my free Clinic Audit</a> · <a href="/leak-calculator">Run the 60-second check</a>. <a href="/apply">Book a call with Jayesh</a>.</p>
         ${preferredSource ? `<p><a href="${preferredSource.url}">${esc(preferredSource.label)}</a>. ${esc(preferredSource.note)}</p>` : ''}
       </div></article>`,
   });
@@ -1713,8 +1711,6 @@ for (const ep of RYC.liveEpisodes()) {
 
 // ---- One page per Aumy module: /modules/<id> (owner 2026-10-08) ------------
 // Same words as src/pages/ModuleDetailPage.js (PAGES in src/data/modules.js).
-// INDIA_WHATSAPP.number in src/config/contact.js (ESM, so not require-able here).
-const MODS_WA = '918007189868';
 for (const p of MODS.PAGES) {
   const url = `${ORIGIN}/modules/${p.id}`;
   const pairs = p.pairs.map(MODS.pageById).filter(Boolean);
@@ -1763,7 +1759,7 @@ for (const p of MODS.PAGES) {
         <p class="ch-hero-sub">${esc(p.intro)}</p>
         <p>${esc(POS.MODULES_LINE)}</p>
         ${STORES.isSelfServe(p.id) ? startInAppHtml(p.short) : ''}
-        <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
+        <p><a href="/contact">Book a demo</a></p>
       </div></section>
       <section><div class="ch-container ch-narrow">
         <h2>${p.featured ? 'How it works, from enquiry to recall' : 'What it does'}</h2>
@@ -1786,7 +1782,7 @@ for (const p of MODS.PAGES) {
         ${p.featured || p.base ? '' : `<h2>${esc(MODS.CONNECTED.title)}</h2>
         <p>${esc(MODS.CONNECTED.sub)} <a href="/modules/dental-patient-follow-up">See the base plan</a> · <a href="/modules">See how the parts fit</a></p>`}
         <h2>See ${esc(p.short)} working in a dental clinic</h2>
-        <p><a href="/contact">Book a demo</a> · <a href="https://wa.me/${MODS_WA}">WhatsApp us</a></p>
+        <p><a href="/contact">Book a demo</a></p>
         <p>Other parts of Aumy: ${MODS.PAGES.filter((o) => o.id !== p.id).map((o) => `<a href="/modules/${o.id}">${esc(o.short)}</a>`).join(' · ')}</p>
       </div></section>`,
   });

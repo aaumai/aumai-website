@@ -313,12 +313,12 @@
 }
 
 /* ── Hero, "Run your clinic without the stress." (owner 2026-11-28) ─────────────────────────────────
-   Phone: words, animation, the three outcomes, the button. From 921px: words, outcomes and button on the left,
+   Phone (owner 28 Nov): words, the button, the animation, the three outcomes. From 921px: words, outcomes and button on the left,
    the animation (src/components/HeroStory.js) on the right. Site tokens only. */
 .op .hero3-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "top" "anim" "cards" "cta";
+  grid-template-areas: "top" "cta" "anim" "cards";
   gap: 34px;
 }
 .op .hero3-top { grid-area: top; }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { GROWTH_CATEGORIES, growthPosts } from '../data/growthPosts';
 import { CALCULATORS } from '../data/calculators';
 import { HUB_PATH, SERIES } from '../data/runYourClinic';
+import { PATH as APPLY_PATH, CTA_LABEL as CALL_LABEL } from '../data/apply';
 import './GrowthHub.css';
 
 // Hub for the dental-growth content engine (strategy doc:
@@ -171,14 +172,7 @@ const GrowthHub = () => {
             <Link to="/growth-audit" className="ch-btn ch-btn-primary">
               Get my free Clinic Audit
             </Link>
-            <a
-              href="https://wa.me/918007189868?text=Hi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ch-btn ch-btn-ghost ch-ghost-light"
-            >
-              See it live — WhatsApp Aumy now
-            </a>
+            <Link to={APPLY_PATH} className="ch-btn ch-btn-ghost ch-ghost-light">{CALL_LABEL}</Link>
             <Link to="/leak-calculator" className="ch-btn ch-btn-ghost ch-ghost-light">
               Try the 60-second check
             </Link>

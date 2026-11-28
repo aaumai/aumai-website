@@ -51,7 +51,7 @@ const Home = () => {
     <div className="ch-home ho op">
       {/* 1. HERO (owner 2026-11-28, copy + storyboard approved): "Run your clinic without the stress.", three numbered
           outcomes, one call to action (the call with Jayesh) and the animation (src/components/HeroStory.js).
-          Phone order: words, animation, outcomes, button. Wide screens: words, outcomes, button left; animation right.
+          Phone order (owner 28 Nov): words, button, animation, outcomes. Wide screens: words, outcomes, button left; animation right.
           The Sterling team film that sat here is in git history before this commit (Dr Priyanka's film follows). */}
       <section className="ch-hero lux-hero hero3">
         <div className="ch-container hero3-grid">
