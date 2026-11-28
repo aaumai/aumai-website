@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { setPageSeo } from '../utils/seo';
 import ClinicsServed from '../components/ClinicsServed';
+import HeroVideo from '../components/HeroVideo';
 import HeroStory from '../components/HeroStory';
 import DrPriyankaFilm from '../components/DrPriyankaFilm';
 import { GOOGLE_REVIEWS_URL } from '../data/googleReviews';
@@ -36,7 +37,8 @@ const Home = () => {
       {/* 1. HERO (owner 2026-11-28, copy + storyboard approved): "Run your clinic without the stress.", three numbered
           outcomes, one call to action (the call with Jayesh) and the animation (src/components/HeroStory.js).
           Phone order (owner 28 Nov): words, button, animation, outcomes. Wide screens: words, outcomes, button left; animation right.
-          The Sterling team film that sat here is in git history before this commit (Dr Priyanka's film follows). */}
+          The Sterling team film with Dr Priyanka stays in the hero (owner 28 Nov: "put it back immediately");
+          the animation has its own section below Dr Priyanka's film. */}
       <section className="ch-hero lux-hero hero3">
         <div className="ch-container hero3-grid">
           <div className="ch-hero-text hero3-top">
@@ -45,7 +47,7 @@ const Home = () => {
             <p className="ch-hero-sub">{HERO.sub}</p>
           </div>
           <div className="hero3-anim">
-            <HeroStory />
+            <HeroVideo />
           </div>
           <ol className="hero3-cards">
             {HERO.outcomes.map((o, i) => (
@@ -68,6 +70,16 @@ const Home = () => {
       {/* 1b. HEAR IT FROM DR PRIYANKA (owner 2026-11-28, "Section under the hero"): one film, English | हिंदी,
           loads only on tap. Words: src/data/homeOneProduct.js (DR_PRIYANKA_FILM). */}
       <DrPriyankaFilm />
+
+      {/* 1c. HOW IT WORKS, the animation (owner 28 Nov: "find a separate place for the animation"). */}
+      <section className="ch-section hero3-story-section" id="how-it-works" aria-labelledby="op-story-title">
+        <div className="ch-container hero3-story-wrap">
+          <h2 id="op-story-title" className="ch-h2 op-center">How it works</h2>
+          <div className="hero3-story">
+            <HeroStory />
+          </div>
+        </div>
+      </section>
 
       {/* Dental clinics Aumy serves (consented clinics only): src/data/clinicsServed.js */}
       <ClinicsServed />
